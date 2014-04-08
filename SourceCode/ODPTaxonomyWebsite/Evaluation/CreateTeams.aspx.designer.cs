@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ODPTaxonomyWebsite.Account
+namespace ODPTaxonomyWebsite.Evaluation
 {
 
 
-    public partial class ChangePasswordSuccess
+    public partial class CreateTeams
     {
     }
 }

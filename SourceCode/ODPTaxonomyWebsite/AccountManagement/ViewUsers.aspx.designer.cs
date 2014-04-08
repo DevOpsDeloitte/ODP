@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ODPTaxonomyWebsite
+namespace ODPTaxonomyWebsite.AccountManagement
 {
 
 
-    public partial class About
+    public partial class ViewUsers
     {
     }
 }

@@ -5,9 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace ODPTaxonomyWebsite.Account
+namespace ODPTaxonomyWebsite.Evaluation
 {
-    public partial class ChangePasswordSuccess : System.Web.UI.Page
+    public partial class ViewAbstract : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
