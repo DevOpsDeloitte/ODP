@@ -1,0 +1,5 @@
+C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyDAL_TT\bin\Debug\ODPTaxonomyDAL_TT.dll.config
+C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyDAL_TT\bin\Debug\ODPTaxonomyDAL_TT.dll
+C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyDAL_TT\bin\Debug\ODPTaxonomyDAL_TT.pdb
+C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyDAL_TT\obj\Debug\ODPTaxonomyDAL_TT.dll
+C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyDAL_TT\obj\Debug\ODPTaxonomyDAL_TT.pdb

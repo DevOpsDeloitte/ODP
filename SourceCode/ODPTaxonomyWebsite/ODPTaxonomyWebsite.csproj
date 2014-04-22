@@ -62,7 +62,9 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -128,9 +130,20 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
+    <Folder Include="log\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ODPTaxonomyDAL_TT\ODPTaxonomyDAL_TT.csproj">
+      <Project>{D3B28058-2182-41A6-9C85-3105F700F24A}</Project>
+      <Name>ODPTaxonomyDAL_TT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ODPTaxonomyUtility_TT\ODPTaxonomyUtility_TT.csproj">
+      <Project>{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}</Project>
+      <Name>ODPTaxonomyUtility_TT</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
