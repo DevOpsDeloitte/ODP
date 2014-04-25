@@ -36,7 +36,7 @@
                         <asp:MenuItem NavigateUrl="~/Evaluation/ViewAbstractList.aspx" Text="View Abstract List"/>
                         <asp:MenuItem NavigateUrl="~/AccountManagement/EditProfile.aspx" Text="Edit Profile"/>
                         <asp:MenuItem NavigateUrl="~/Evaluation/ViewAbstract.aspx" Text="View Abstract"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/CreateTeams.aspx" Text="Create Teams"/>
+                        <asp:MenuItem NavigateUrl="~/Evaluation/ManageTeams.aspx" Text="Manage Teams"/>
                     </Items>
                 </asp:Menu>
             </div>
