@@ -1,4 +1,0 @@
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyUtility_TT\bin\Debug\ODPTaxonomyUtility_TT.dll
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyUtility_TT\bin\Debug\ODPTaxonomyUtility_TT.pdb
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyUtility_TT\obj\Debug\ODPTaxonomyUtility_TT.dll
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyUtility_TT\obj\Debug\ODPTaxonomyUtility_TT.pdb
