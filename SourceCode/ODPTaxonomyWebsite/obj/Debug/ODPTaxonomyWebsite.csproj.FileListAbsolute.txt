@@ -1,9 +1,0 @@
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\bin\ODPTaxonomyWebsite.dll
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\bin\ODPTaxonomyWebsite.pdb
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\obj\Debug\ODPTaxonomyWebsite.dll
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\obj\Debug\ODPTaxonomyWebsite.pdb
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\obj\Debug\ODPTaxonomyWebsite.csprojResolveAssemblyReference.cache
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\bin\ODPTaxonomyDAL_TT.dll
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\bin\ODPTaxonomyDAL_TT.pdb
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\bin\ODPTaxonomyUtility_TT.dll
-C:\WEB\ProductionWeb\ODP_Taxonomy\Projects\ODPTaxonomy\ODPTaxonomyWebsite\bin\ODPTaxonomyUtility_TT.pdb
