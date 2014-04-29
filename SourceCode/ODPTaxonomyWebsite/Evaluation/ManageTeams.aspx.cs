@@ -238,6 +238,53 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         #region EventHandlers
 
+        protected void DeleteTeam_Click(object sender, EventArgs e)
+        {
+            bool isLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
+            if (isLoggedIn)
+            {
+                //Get the reference of the clicked button.
+                Button button = (sender as Button);
+
+                //Get the command argument
+                string commandArgument = button.CommandArgument;
+                int teamId = -1;
+                tbl_Team team = null;
+
+                if (Int32.TryParse(commandArgument, out teamId))
+                {
+                    MembershipUser userCurrent = Membership.GetUser();
+                    string userCurrentName = userCurrent.UserName;
+                    System.Guid userCurrentId = Common.GetCurrentUserId(connString, userCurrentName);
+
+                    if (!String.IsNullOrEmpty(connString))
+                    {
+                        using (DataDataContext db = new DataDataContext(connString))
+                        {
+                            var matches = from t in db.tbl_Teams
+                                          where t.TeamID == teamId
+                                          select t;
+                            team = matches.First();
+
+                            if (team != null)
+                            {
+                                team.StatusID = (int)ODPTaxonomyDAL_TT.Status.Deleted;
+                                team.UpdatedBy = userCurrentId;
+                                team.UpdatedDateTime = DateTime.Now;
+                                db.SubmitChanges();
+                            }
+                        }
+
+                        //Reload Page Data
+                        Response.Redirect("ManageTeams.aspx", true);
+
+                    }
+
+                }
+            }
+            
+        }
+
         protected void rp_teams_OnItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             HiddenField hf_teamID = e.Item.FindControl("hf_teamID") as HiddenField;
@@ -318,8 +365,6 @@ namespace ODPTaxonomyWebsite.Evaluation
                                     {
                                         currentUser = new tbl_aspnet_User();
                                         currentUser.UserId = userId;
-                                        currentUser.UserFirstName = "";
-                                        currentUser.UserLastName = "";
                                         currentUser.UserName = initials;
                                         listUsers.Add(currentUser);
                                         membersCheckedCount++;

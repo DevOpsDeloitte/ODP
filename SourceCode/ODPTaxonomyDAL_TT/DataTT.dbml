@@ -12,7 +12,7 @@
       <Column Name="UserFirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="UserLastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Association Name="tbl_aspnet_User_tbl_aspnet_UsersInRole" Member="tbl_aspnet_UsersInRoles" Storage="_aspnet_UsersInRoles" ThisKey="UserId" OtherKey="UserId" Type="tbl_aspnet_UsersInRole" />
-      <Association Name="tbl_aspnet_User_aspnet_Membership" Member="tbl_aspnet_Membership" ThisKey="UserId" OtherKey="UserId" Type="tbl_aspnet_Membership" Cardinality="One" />
+      <Association Name="tbl_aspnet_User_tbl_aspnet_Membership" Member="tbl_aspnet_Membership" ThisKey="UserId" OtherKey="UserId" Type="tbl_aspnet_Membership" Cardinality="One" />
     </Type>
   </Table>
   <Table Name="dbo.aspnet_UsersInRoles" Member="tbl_aspnet_UsersInRoles">
@@ -23,40 +23,24 @@
       <Association Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole" Member="tbl_aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="tbl_aspnet_Role" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Team" Member="tbl_Teams">
-    <Type Name="tbl_Team">
-      <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TeamCode" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="TeamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Createdby" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="UpdatedBy" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="UpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Team_tbl_TeamUser" Member="tbl_TeamUsers" Storage="_TeamUsers" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_TeamUser" />
-      <Association Name="tbl_TeamType_tbl_Team" Member="tbl_TeamType" Storage="_TeamType" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="tbl_TeamType" IsForeignKey="true" />
-      <Association Name="tbl_Status_tbl_Team" Member="tbl_Status" Storage="_Status" ThisKey="StatusID" OtherKey="StatusID" Type="tbl_Status" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.TeamType" Member="tbl_TeamTypes">
     <Type Name="tbl_TeamType">
       <Column Name="TeamTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TeamType" Member="TeamType1" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Association Name="tbl_TeamType_tbl_Team" Member="tbl_Teams" Storage="_Teams" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="tbl_Team" />
+      <Association Name="tbl_TeamType_Team" Member="tbl_Teams" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="tbl_Team" />
     </Type>
   </Table>
   <Table Name="dbo.TeamUser" Member="tbl_TeamUsers">
     <Type Name="tbl_TeamUser">
       <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="tbl_Team_tbl_TeamUser" Member="tbl_Team" Storage="_Team" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Team" IsForeignKey="true" />
+      <Association Name="Team_tbl_TeamUser" Member="tbl_Team" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Team" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Status" Member="tbl_Status">
     <Type Name="tbl_Status">
       <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Status" Member="Status1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Association Name="tbl_Status_tbl_Team" Member="tbl_Teams" Storage="_Teams" ThisKey="StatusID" OtherKey="StatusID" Type="tbl_Team" />
     </Type>
   </Table>
   <Table Name="dbo.aspnet_Roles" Member="tbl_aspnet_Roles">
@@ -92,7 +76,21 @@
       <Column Name="FailedPasswordAnswerAttemptCount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="FailedPasswordAnswerAttemptWindowStart" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="Comment" Type="System.String" DbType="NText" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="tbl_aspnet_User_aspnet_Membership" Member="tbl_aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="tbl_aspnet_User" IsForeignKey="true" />
+      <Association Name="tbl_aspnet_User_tbl_aspnet_Membership" Member="tbl_aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="tbl_aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Team" Member="tbl_Teams">
+    <Type Name="tbl_Team">
+      <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TeamCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TeamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Createdby" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Team_tbl_TeamUser" Member="tbl_TeamUsers" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_TeamUser" />
+      <Association Name="tbl_TeamType_Team" Member="tbl_TeamType" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="tbl_TeamType" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

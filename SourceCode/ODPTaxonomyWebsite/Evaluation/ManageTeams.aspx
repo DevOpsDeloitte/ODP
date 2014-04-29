@@ -54,7 +54,7 @@
                     </asp:Repeater>
                 </td>
                 <td><asp:HiddenField runat="server" ID="hf_teamID" Value='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
-                <asp:Button runat="server" ID="btn_deleteTeam" Text="Delete Team" />
+                <asp:Button runat="server" ID="btn_deleteTeam" OnClick="DeleteTeam_Click" Text="Delete Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
                 </td>
             </tr>
         </ItemTemplate>
