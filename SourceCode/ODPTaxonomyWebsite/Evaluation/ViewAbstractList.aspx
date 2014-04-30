@@ -3,10 +3,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        View Abstract List
+        View Abstract List as 
+        <asp:DropDownList runat="server" ID="ViewDDL" 
+        OnSelectedIndexChanged="ViewDDLIndexChangedHandle"
+        AutoPostBack="true" />
     </h2>
-    <p>
-        <asp:Button runat="server" ID="btn_print" Text="Upload Coder Notes (Scanned)" />&nbsp;&nbsp;
-        Stop Evaluation Process: <asp:Button runat="server" ID="btn_code" Text="Abstract Override" />&nbsp;&nbsp;
-    </p>
 </asp:Content>
