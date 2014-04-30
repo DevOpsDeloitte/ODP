@@ -42,7 +42,9 @@ namespace ODPTaxonomyWebsite.Evaluation
                     lbl_Error.Visible = false;
                     lbl_messageUsers.Text = "";
                     lbl_messageUsers.Visible = false;
-                    btn_saveteam.Visible = true;
+                    btn_saveteam.Visible = false;
+                    gc_noTeam.Visible = false;
+                    gc_noUsers.Visible = false;
 
                     //Check current user's role
                     bool isLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
@@ -121,7 +123,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                 if (doLoadData)
                 {
-
+                    btn_saveteam.Visible = true;
                     LoadUsers(list_roles, teamTypeID);
                     LoadTeams(teamTypeID);
                 }
@@ -164,9 +166,10 @@ namespace ODPTaxonomyWebsite.Evaluation
                 }
                 else
                 {
-                    lbl_messageUsers.Text = "No users are currently evailable for you to select for a new team.";
-                    lbl_messageUsers.Visible = true;
+                    //lbl_messageUsers.Text = "No users are currently evailable for you to select for a new team.";
+                    //lbl_messageUsers.Visible = true;
                     btn_saveteam.Visible = false;
+                    gc_noUsers.Visible = true;
                 }
             }
 
@@ -229,7 +232,10 @@ namespace ODPTaxonomyWebsite.Evaluation
                     rpt_teams.DataSource = list_teams;
                     rpt_teams.DataBind();
                 }
-
+                else
+                {
+                    gc_noTeam.Visible = true;
+                }
                 
             }
         }

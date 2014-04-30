@@ -10,6 +10,9 @@
     <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers"></asp:Label>
     </p>
     <asp:HiddenField runat="server" ID="hf_teamTypeId" />
+    <h3>Users evailable for team to pick up</h3>
+    <p runat="server" id="gc_noUsers">No users are currently evailable for you to select for a new team.</p>
+    <p></p>
     <asp:Repeater runat="server" ID="rpt_users">
         <HeaderTemplate>
             <table class="teamUsers">
@@ -34,7 +37,12 @@
     <p>
     <asp:Button runat="server" ID="btn_saveteam" Text="Save Team" 
         onclick="btn_saveteam_Click" /></p>
+
+
         <p></p>
+        <p></p>
+        <h3>Active Teams</h3>
+        <p runat="server" id="gc_noTeam">No Active Teams currently exist.</p>
         <p></p>
         <asp:Repeater runat="server" ID="rpt_teams" OnItemDataBound="rp_teams_OnItemDataBound">
         <HeaderTemplate>
