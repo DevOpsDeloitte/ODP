@@ -22,6 +22,7 @@
             <tr>
                 <td><%# DataBinder.Eval(Container.DataItem, "UserFirstName") %>&nbsp;<%# DataBinder.Eval(Container.DataItem, "UserLastName") %></td>
                 <td><asp:HiddenField runat="server" ID="hf_userID" Value='<%# DataBinder.Eval(Container.DataItem, "UserId")%>' />
+                <asp:HiddenField runat="server" ID="hf_userInitials" Value='<%# GetUserInitials(DataBinder.Eval(Container.DataItem, "UserFirstName"), DataBinder.Eval(Container.DataItem, "UserLastName"))%>' />
                 <asp:CheckBox runat="server" ID='checkbox' Checked="false" />
                 </td>
             </tr>
@@ -45,9 +46,15 @@
         </HeaderTemplate>
         <ItemTemplate>
             <tr>
-                <td>Placeholder: <%# DataBinder.Eval(Container.DataItem, "TeamID")%></td>
+                <td><%# DataBinder.Eval(Container.DataItem, "TeamCode")%>:<br />
+                    <asp:Repeater runat="server" ID="rpt_teamMembers">
+                        <ItemTemplate>
+                            <%# DataBinder.Eval(Container.DataItem, "UserFirstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "UserLastName")%><br />
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </td>
                 <td><asp:HiddenField runat="server" ID="hf_teamID" Value='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
-                <asp:Button runat="server" ID="btn_deleteTeam" Text="Delete Team" />
+                <asp:Button runat="server" ID="btn_deleteTeam" OnClick="DeleteTeam_Click" Text="Delete Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
                 </td>
             </tr>
         </ItemTemplate>

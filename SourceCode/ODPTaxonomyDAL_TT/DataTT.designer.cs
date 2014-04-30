@@ -23,114 +23,136 @@ namespace ODPTaxonomyDAL_TT
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_DEV")]
-	public partial class DataTTDataContext : System.Data.Linq.DataContext
+	public partial class DataDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void Insertaspnet_User(aspnet_User instance);
-    partial void Updateaspnet_User(aspnet_User instance);
-    partial void Deleteaspnet_User(aspnet_User instance);
-    partial void Insertaspnet_UsersInRole(aspnet_UsersInRole instance);
-    partial void Updateaspnet_UsersInRole(aspnet_UsersInRole instance);
-    partial void Deleteaspnet_UsersInRole(aspnet_UsersInRole instance);
-    partial void InsertTeam(Team instance);
-    partial void UpdateTeam(Team instance);
-    partial void DeleteTeam(Team instance);
-    partial void InsertTeamType(TeamType instance);
-    partial void UpdateTeamType(TeamType instance);
-    partial void DeleteTeamType(TeamType instance);
-    partial void InsertTeamUser(TeamUser instance);
-    partial void UpdateTeamUser(TeamUser instance);
-    partial void DeleteTeamUser(TeamUser instance);
-    partial void InsertStatus(Status instance);
-    partial void UpdateStatus(Status instance);
-    partial void DeleteStatus(Status instance);
+    partial void Inserttbl_aspnet_User(tbl_aspnet_User instance);
+    partial void Updatetbl_aspnet_User(tbl_aspnet_User instance);
+    partial void Deletetbl_aspnet_User(tbl_aspnet_User instance);
+    partial void Inserttbl_aspnet_UsersInRole(tbl_aspnet_UsersInRole instance);
+    partial void Updatetbl_aspnet_UsersInRole(tbl_aspnet_UsersInRole instance);
+    partial void Deletetbl_aspnet_UsersInRole(tbl_aspnet_UsersInRole instance);
+    partial void Inserttbl_TeamType(tbl_TeamType instance);
+    partial void Updatetbl_TeamType(tbl_TeamType instance);
+    partial void Deletetbl_TeamType(tbl_TeamType instance);
+    partial void Inserttbl_TeamUser(tbl_TeamUser instance);
+    partial void Updatetbl_TeamUser(tbl_TeamUser instance);
+    partial void Deletetbl_TeamUser(tbl_TeamUser instance);
+    partial void Inserttbl_Status(tbl_Status instance);
+    partial void Updatetbl_Status(tbl_Status instance);
+    partial void Deletetbl_Status(tbl_Status instance);
+    partial void Inserttbl_aspnet_Role(tbl_aspnet_Role instance);
+    partial void Updatetbl_aspnet_Role(tbl_aspnet_Role instance);
+    partial void Deletetbl_aspnet_Role(tbl_aspnet_Role instance);
+    partial void Inserttbl_aspnet_Membership(tbl_aspnet_Membership instance);
+    partial void Updatetbl_aspnet_Membership(tbl_aspnet_Membership instance);
+    partial void Deletetbl_aspnet_Membership(tbl_aspnet_Membership instance);
+    partial void Inserttbl_Team(tbl_Team instance);
+    partial void Updatetbl_Team(tbl_Team instance);
+    partial void Deletetbl_Team(tbl_Team instance);
     #endregion
 		
-		public DataTTDataContext() : 
+		public DataDataContext() : 
 				base(global::ODPTaxonomyDAL_TT.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataTTDataContext(string connection) : 
+		public DataDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataTTDataContext(System.Data.IDbConnection connection) : 
+		public DataDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataTTDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DataDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataTTDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DataDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<aspnet_User> aspnet_Users
+		public System.Data.Linq.Table<tbl_aspnet_User> tbl_aspnet_Users
 		{
 			get
 			{
-				return this.GetTable<aspnet_User>();
+				return this.GetTable<tbl_aspnet_User>();
 			}
 		}
 		
-		public System.Data.Linq.Table<aspnet_UsersInRole> aspnet_UsersInRoles
+		public System.Data.Linq.Table<tbl_aspnet_UsersInRole> tbl_aspnet_UsersInRoles
 		{
 			get
 			{
-				return this.GetTable<aspnet_UsersInRole>();
+				return this.GetTable<tbl_aspnet_UsersInRole>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Team> Teams
+		public System.Data.Linq.Table<tbl_TeamType> tbl_TeamTypes
 		{
 			get
 			{
-				return this.GetTable<Team>();
+				return this.GetTable<tbl_TeamType>();
 			}
 		}
 		
-		public System.Data.Linq.Table<TeamType> TeamTypes
+		public System.Data.Linq.Table<tbl_TeamUser> tbl_TeamUsers
 		{
 			get
 			{
-				return this.GetTable<TeamType>();
+				return this.GetTable<tbl_TeamUser>();
 			}
 		}
 		
-		public System.Data.Linq.Table<TeamUser> TeamUsers
+		public System.Data.Linq.Table<tbl_Status> tbl_Status
 		{
 			get
 			{
-				return this.GetTable<TeamUser>();
+				return this.GetTable<tbl_Status>();
 			}
 		}
 		
-		public System.Data.Linq.Table<Status> Status
+		public System.Data.Linq.Table<tbl_aspnet_Role> tbl_aspnet_Roles
 		{
 			get
 			{
-				return this.GetTable<Status>();
+				return this.GetTable<tbl_aspnet_Role>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_aspnet_Membership> tbl_aspnet_Memberships
+		{
+			get
+			{
+				return this.GetTable<tbl_aspnet_Membership>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_Team> tbl_Teams
+		{
+			get
+			{
+				return this.GetTable<tbl_Team>();
 			}
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Users")]
-	public partial class aspnet_User : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class tbl_aspnet_User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -153,7 +175,9 @@ namespace ODPTaxonomyDAL_TT
 		
 		private string _UserLastName;
 		
-		private EntitySet<aspnet_UsersInRole> _aspnet_UsersInRoles;
+		private EntitySet<tbl_aspnet_UsersInRole> _aspnet_UsersInRoles;
+		
+		private EntityRef<tbl_aspnet_Membership> _tbl_aspnet_Membership;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -179,9 +203,10 @@ namespace ODPTaxonomyDAL_TT
     partial void OnUserLastNameChanged();
     #endregion
 		
-		public aspnet_User()
+		public tbl_aspnet_User()
 		{
-			this._aspnet_UsersInRoles = new EntitySet<aspnet_UsersInRole>(new Action<aspnet_UsersInRole>(this.attach_aspnet_UsersInRoles), new Action<aspnet_UsersInRole>(this.detach_aspnet_UsersInRoles));
+			this._aspnet_UsersInRoles = new EntitySet<tbl_aspnet_UsersInRole>(new Action<tbl_aspnet_UsersInRole>(this.attach_aspnet_UsersInRoles), new Action<tbl_aspnet_UsersInRole>(this.detach_aspnet_UsersInRoles));
+			this._tbl_aspnet_Membership = default(EntityRef<tbl_aspnet_Membership>);
 			OnCreated();
 		}
 		
@@ -365,8 +390,8 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_aspnet_UsersInRole", Storage="_aspnet_UsersInRoles", ThisKey="UserId", OtherKey="UserId")]
-		public EntitySet<aspnet_UsersInRole> aspnet_UsersInRoles
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_User_tbl_aspnet_UsersInRole", Storage="_aspnet_UsersInRoles", ThisKey="UserId", OtherKey="UserId")]
+		public EntitySet<tbl_aspnet_UsersInRole> tbl_aspnet_UsersInRoles
 		{
 			get
 			{
@@ -375,6 +400,35 @@ namespace ODPTaxonomyDAL_TT
 			set
 			{
 				this._aspnet_UsersInRoles.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_User_tbl_aspnet_Membership", Storage="_tbl_aspnet_Membership", ThisKey="UserId", OtherKey="UserId", IsUnique=true, IsForeignKey=false)]
+		public tbl_aspnet_Membership tbl_aspnet_Membership
+		{
+			get
+			{
+				return this._tbl_aspnet_Membership.Entity;
+			}
+			set
+			{
+				tbl_aspnet_Membership previousValue = this._tbl_aspnet_Membership.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_aspnet_Membership.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_aspnet_Membership.Entity = null;
+						previousValue.tbl_aspnet_User = null;
+					}
+					this._tbl_aspnet_Membership.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_aspnet_User = this;
+					}
+					this.SendPropertyChanged("tbl_aspnet_Membership");
+				}
 			}
 		}
 		
@@ -398,21 +452,21 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		private void attach_aspnet_UsersInRoles(aspnet_UsersInRole entity)
+		private void attach_aspnet_UsersInRoles(tbl_aspnet_UsersInRole entity)
 		{
 			this.SendPropertyChanging();
-			entity.aspnet_User = this;
+			entity.tbl_aspnet_User = this;
 		}
 		
-		private void detach_aspnet_UsersInRoles(aspnet_UsersInRole entity)
+		private void detach_aspnet_UsersInRoles(tbl_aspnet_UsersInRole entity)
 		{
 			this.SendPropertyChanging();
-			entity.aspnet_User = null;
+			entity.tbl_aspnet_User = null;
 		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_UsersInRoles")]
-	public partial class aspnet_UsersInRole : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class tbl_aspnet_UsersInRole : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -421,7 +475,9 @@ namespace ODPTaxonomyDAL_TT
 		
 		private System.Guid _RoleId;
 		
-		private EntityRef<aspnet_User> _aspnet_User;
+		private EntityRef<tbl_aspnet_User> _aspnet_User;
+		
+		private EntityRef<tbl_aspnet_Role> _tbl_aspnet_Role;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -433,9 +489,10 @@ namespace ODPTaxonomyDAL_TT
     partial void OnRoleIdChanged();
     #endregion
 		
-		public aspnet_UsersInRole()
+		public tbl_aspnet_UsersInRole()
 		{
-			this._aspnet_User = default(EntityRef<aspnet_User>);
+			this._aspnet_User = default(EntityRef<tbl_aspnet_User>);
+			this._tbl_aspnet_Role = default(EntityRef<tbl_aspnet_Role>);
 			OnCreated();
 		}
 		
@@ -474,6 +531,10 @@ namespace ODPTaxonomyDAL_TT
 			{
 				if ((this._RoleId != value))
 				{
+					if (this._tbl_aspnet_Role.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnRoleIdChanging(value);
 					this.SendPropertyChanging();
 					this._RoleId = value;
@@ -483,8 +544,8 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_User_aspnet_UsersInRole", Storage="_aspnet_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
-		public aspnet_User aspnet_User
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_User_tbl_aspnet_UsersInRole", Storage="_aspnet_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public tbl_aspnet_User tbl_aspnet_User
 		{
 			get
 			{
@@ -492,7 +553,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 			set
 			{
-				aspnet_User previousValue = this._aspnet_User.Entity;
+				tbl_aspnet_User previousValue = this._aspnet_User.Entity;
 				if (((previousValue != value) 
 							|| (this._aspnet_User.HasLoadedOrAssignedValue == false)))
 				{
@@ -500,19 +561,1149 @@ namespace ODPTaxonomyDAL_TT
 					if ((previousValue != null))
 					{
 						this._aspnet_User.Entity = null;
-						previousValue.aspnet_UsersInRoles.Remove(this);
+						previousValue.tbl_aspnet_UsersInRoles.Remove(this);
 					}
 					this._aspnet_User.Entity = value;
 					if ((value != null))
 					{
-						value.aspnet_UsersInRoles.Add(this);
+						value.tbl_aspnet_UsersInRoles.Add(this);
 						this._UserId = value.UserId;
 					}
 					else
 					{
 						this._UserId = default(System.Guid);
 					}
-					this.SendPropertyChanged("aspnet_User");
+					this.SendPropertyChanged("tbl_aspnet_User");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_Role", ThisKey="RoleId", OtherKey="RoleId", IsForeignKey=true)]
+		public tbl_aspnet_Role tbl_aspnet_Role
+		{
+			get
+			{
+				return this._tbl_aspnet_Role.Entity;
+			}
+			set
+			{
+				tbl_aspnet_Role previousValue = this._tbl_aspnet_Role.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_aspnet_Role.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_aspnet_Role.Entity = null;
+						previousValue.tbl_aspnet_UsersInRoles.Remove(this);
+					}
+					this._tbl_aspnet_Role.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_aspnet_UsersInRoles.Add(this);
+						this._RoleId = value.RoleId;
+					}
+					else
+					{
+						this._RoleId = default(System.Guid);
+					}
+					this.SendPropertyChanged("tbl_aspnet_Role");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TeamType")]
+	public partial class tbl_TeamType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TeamTypeID;
+		
+		private string _TeamType1;
+		
+		private EntitySet<tbl_Team> _tbl_Teams;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTeamTypeIDChanging(int value);
+    partial void OnTeamTypeIDChanged();
+    partial void OnTeamType1Changing(string value);
+    partial void OnTeamType1Changed();
+    #endregion
+		
+		public tbl_TeamType()
+		{
+			this._tbl_Teams = new EntitySet<tbl_Team>(new Action<tbl_Team>(this.attach_tbl_Teams), new Action<tbl_Team>(this.detach_tbl_Teams));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TeamTypeID
+		{
+			get
+			{
+				return this._TeamTypeID;
+			}
+			set
+			{
+				if ((this._TeamTypeID != value))
+				{
+					this.OnTeamTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamTypeID = value;
+					this.SendPropertyChanged("TeamTypeID");
+					this.OnTeamTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="TeamType", Storage="_TeamType1", DbType="NVarChar(10)")]
+		public string TeamType1
+		{
+			get
+			{
+				return this._TeamType1;
+			}
+			set
+			{
+				if ((this._TeamType1 != value))
+				{
+					this.OnTeamType1Changing(value);
+					this.SendPropertyChanging();
+					this._TeamType1 = value;
+					this.SendPropertyChanged("TeamType1");
+					this.OnTeamType1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_Team", Storage="_tbl_Teams", ThisKey="TeamTypeID", OtherKey="TeamTypeID")]
+		public EntitySet<tbl_Team> tbl_Teams
+		{
+			get
+			{
+				return this._tbl_Teams;
+			}
+			set
+			{
+				this._tbl_Teams.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_Teams(tbl_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TeamType = this;
+		}
+		
+		private void detach_tbl_Teams(tbl_Team entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_TeamType = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TeamUser")]
+	public partial class tbl_TeamUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TeamID;
+		
+		private System.Guid _UserId;
+		
+		private EntityRef<tbl_Team> _tbl_Team;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTeamIDChanging(int value);
+    partial void OnTeamIDChanged();
+    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanged();
+    #endregion
+		
+		public tbl_TeamUser()
+		{
+			this._tbl_Team = default(EntityRef<tbl_Team>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int TeamID
+		{
+			get
+			{
+				return this._TeamID;
+			}
+			set
+			{
+				if ((this._TeamID != value))
+				{
+					if (this._tbl_Team.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTeamIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamID = value;
+					this.SendPropertyChanged("TeamID");
+					this.OnTeamIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_tbl_TeamUser", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
+		public tbl_Team tbl_Team
+		{
+			get
+			{
+				return this._tbl_Team.Entity;
+			}
+			set
+			{
+				tbl_Team previousValue = this._tbl_Team.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Team.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Team.Entity = null;
+						previousValue.tbl_TeamUsers.Remove(this);
+					}
+					this._tbl_Team.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_TeamUsers.Add(this);
+						this._TeamID = value.TeamID;
+					}
+					else
+					{
+						this._TeamID = default(int);
+					}
+					this.SendPropertyChanged("tbl_Team");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Status")]
+	public partial class tbl_Status : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _StatusID;
+		
+		private string _Status1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnStatusIDChanging(int value);
+    partial void OnStatusIDChanged();
+    partial void OnStatus1Changing(string value);
+    partial void OnStatus1Changed();
+    #endregion
+		
+		public tbl_Status()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					this.OnStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._StatusID = value;
+					this.SendPropertyChanged("StatusID");
+					this.OnStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Status", Storage="_Status1", DbType="VarChar(20)")]
+		public string Status1
+		{
+			get
+			{
+				return this._Status1;
+			}
+			set
+			{
+				if ((this._Status1 != value))
+				{
+					this.OnStatus1Changing(value);
+					this.SendPropertyChanging();
+					this._Status1 = value;
+					this.SendPropertyChanged("Status1");
+					this.OnStatus1Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Roles")]
+	public partial class tbl_aspnet_Role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ApplicationId;
+		
+		private System.Guid _RoleId;
+		
+		private string _RoleName;
+		
+		private string _LoweredRoleName;
+		
+		private string _Description;
+		
+		private EntitySet<tbl_aspnet_UsersInRole> _tbl_aspnet_UsersInRoles;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnApplicationIdChanging(System.Guid value);
+    partial void OnApplicationIdChanged();
+    partial void OnRoleIdChanging(System.Guid value);
+    partial void OnRoleIdChanged();
+    partial void OnRoleNameChanging(string value);
+    partial void OnRoleNameChanged();
+    partial void OnLoweredRoleNameChanging(string value);
+    partial void OnLoweredRoleNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public tbl_aspnet_Role()
+		{
+			this._tbl_aspnet_UsersInRoles = new EntitySet<tbl_aspnet_UsersInRole>(new Action<tbl_aspnet_UsersInRole>(this.attach_tbl_aspnet_UsersInRoles), new Action<tbl_aspnet_UsersInRole>(this.detach_tbl_aspnet_UsersInRoles));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid ApplicationId
+		{
+			get
+			{
+				return this._ApplicationId;
+			}
+			set
+			{
+				if ((this._ApplicationId != value))
+				{
+					this.OnApplicationIdChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicationId = value;
+					this.SendPropertyChanged("ApplicationId");
+					this.OnApplicationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid RoleId
+		{
+			get
+			{
+				return this._RoleId;
+			}
+			set
+			{
+				if ((this._RoleId != value))
+				{
+					this.OnRoleIdChanging(value);
+					this.SendPropertyChanging();
+					this._RoleId = value;
+					this.SendPropertyChanged("RoleId");
+					this.OnRoleIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string RoleName
+		{
+			get
+			{
+				return this._RoleName;
+			}
+			set
+			{
+				if ((this._RoleName != value))
+				{
+					this.OnRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._RoleName = value;
+					this.SendPropertyChanged("RoleName");
+					this.OnRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoweredRoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string LoweredRoleName
+		{
+			get
+			{
+				return this._LoweredRoleName;
+			}
+			set
+			{
+				if ((this._LoweredRoleName != value))
+				{
+					this.OnLoweredRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._LoweredRoleName = value;
+					this.SendPropertyChanged("LoweredRoleName");
+					this.OnLoweredRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(256)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_UsersInRoles", ThisKey="RoleId", OtherKey="RoleId")]
+		public EntitySet<tbl_aspnet_UsersInRole> tbl_aspnet_UsersInRoles
+		{
+			get
+			{
+				return this._tbl_aspnet_UsersInRoles;
+			}
+			set
+			{
+				this._tbl_aspnet_UsersInRoles.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_aspnet_UsersInRoles(tbl_aspnet_UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_aspnet_Role = this;
+		}
+		
+		private void detach_tbl_aspnet_UsersInRoles(tbl_aspnet_UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_aspnet_Role = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Membership")]
+	public partial class tbl_aspnet_Membership : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ApplicationId;
+		
+		private System.Guid _UserId;
+		
+		private string _Password;
+		
+		private int _PasswordFormat;
+		
+		private string _PasswordSalt;
+		
+		private string _MobilePIN;
+		
+		private string _Email;
+		
+		private string _LoweredEmail;
+		
+		private string _PasswordQuestion;
+		
+		private string _PasswordAnswer;
+		
+		private bool _IsApproved;
+		
+		private bool _IsLockedOut;
+		
+		private System.DateTime _CreateDate;
+		
+		private System.DateTime _LastLoginDate;
+		
+		private System.DateTime _LastPasswordChangedDate;
+		
+		private System.DateTime _LastLockoutDate;
+		
+		private int _FailedPasswordAttemptCount;
+		
+		private System.DateTime _FailedPasswordAttemptWindowStart;
+		
+		private int _FailedPasswordAnswerAttemptCount;
+		
+		private System.DateTime _FailedPasswordAnswerAttemptWindowStart;
+		
+		private string _Comment;
+		
+		private EntityRef<tbl_aspnet_User> _tbl_aspnet_User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnApplicationIdChanging(System.Guid value);
+    partial void OnApplicationIdChanged();
+    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanged();
+    partial void OnPasswordChanging(string value);
+    partial void OnPasswordChanged();
+    partial void OnPasswordFormatChanging(int value);
+    partial void OnPasswordFormatChanged();
+    partial void OnPasswordSaltChanging(string value);
+    partial void OnPasswordSaltChanged();
+    partial void OnMobilePINChanging(string value);
+    partial void OnMobilePINChanged();
+    partial void OnEmailChanging(string value);
+    partial void OnEmailChanged();
+    partial void OnLoweredEmailChanging(string value);
+    partial void OnLoweredEmailChanged();
+    partial void OnPasswordQuestionChanging(string value);
+    partial void OnPasswordQuestionChanged();
+    partial void OnPasswordAnswerChanging(string value);
+    partial void OnPasswordAnswerChanged();
+    partial void OnIsApprovedChanging(bool value);
+    partial void OnIsApprovedChanged();
+    partial void OnIsLockedOutChanging(bool value);
+    partial void OnIsLockedOutChanged();
+    partial void OnCreateDateChanging(System.DateTime value);
+    partial void OnCreateDateChanged();
+    partial void OnLastLoginDateChanging(System.DateTime value);
+    partial void OnLastLoginDateChanged();
+    partial void OnLastPasswordChangedDateChanging(System.DateTime value);
+    partial void OnLastPasswordChangedDateChanged();
+    partial void OnLastLockoutDateChanging(System.DateTime value);
+    partial void OnLastLockoutDateChanged();
+    partial void OnFailedPasswordAttemptCountChanging(int value);
+    partial void OnFailedPasswordAttemptCountChanged();
+    partial void OnFailedPasswordAttemptWindowStartChanging(System.DateTime value);
+    partial void OnFailedPasswordAttemptWindowStartChanged();
+    partial void OnFailedPasswordAnswerAttemptCountChanging(int value);
+    partial void OnFailedPasswordAnswerAttemptCountChanged();
+    partial void OnFailedPasswordAnswerAttemptWindowStartChanging(System.DateTime value);
+    partial void OnFailedPasswordAnswerAttemptWindowStartChanged();
+    partial void OnCommentChanging(string value);
+    partial void OnCommentChanged();
+    #endregion
+		
+		public tbl_aspnet_Membership()
+		{
+			this._tbl_aspnet_User = default(EntityRef<tbl_aspnet_User>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid ApplicationId
+		{
+			get
+			{
+				return this._ApplicationId;
+			}
+			set
+			{
+				if ((this._ApplicationId != value))
+				{
+					this.OnApplicationIdChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicationId = value;
+					this.SendPropertyChanged("ApplicationId");
+					this.OnApplicationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._tbl_aspnet_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Password", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string Password
+		{
+			get
+			{
+				return this._Password;
+			}
+			set
+			{
+				if ((this._Password != value))
+				{
+					this.OnPasswordChanging(value);
+					this.SendPropertyChanging();
+					this._Password = value;
+					this.SendPropertyChanged("Password");
+					this.OnPasswordChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordFormat", DbType="Int NOT NULL")]
+		public int PasswordFormat
+		{
+			get
+			{
+				return this._PasswordFormat;
+			}
+			set
+			{
+				if ((this._PasswordFormat != value))
+				{
+					this.OnPasswordFormatChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordFormat = value;
+					this.SendPropertyChanged("PasswordFormat");
+					this.OnPasswordFormatChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordSalt", DbType="NVarChar(128) NOT NULL", CanBeNull=false)]
+		public string PasswordSalt
+		{
+			get
+			{
+				return this._PasswordSalt;
+			}
+			set
+			{
+				if ((this._PasswordSalt != value))
+				{
+					this.OnPasswordSaltChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordSalt = value;
+					this.SendPropertyChanged("PasswordSalt");
+					this.OnPasswordSaltChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MobilePIN", DbType="NVarChar(16)")]
+		public string MobilePIN
+		{
+			get
+			{
+				return this._MobilePIN;
+			}
+			set
+			{
+				if ((this._MobilePIN != value))
+				{
+					this.OnMobilePINChanging(value);
+					this.SendPropertyChanging();
+					this._MobilePIN = value;
+					this.SendPropertyChanged("MobilePIN");
+					this.OnMobilePINChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(256)")]
+		public string Email
+		{
+			get
+			{
+				return this._Email;
+			}
+			set
+			{
+				if ((this._Email != value))
+				{
+					this.OnEmailChanging(value);
+					this.SendPropertyChanging();
+					this._Email = value;
+					this.SendPropertyChanged("Email");
+					this.OnEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoweredEmail", DbType="NVarChar(256)")]
+		public string LoweredEmail
+		{
+			get
+			{
+				return this._LoweredEmail;
+			}
+			set
+			{
+				if ((this._LoweredEmail != value))
+				{
+					this.OnLoweredEmailChanging(value);
+					this.SendPropertyChanging();
+					this._LoweredEmail = value;
+					this.SendPropertyChanged("LoweredEmail");
+					this.OnLoweredEmailChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordQuestion", DbType="NVarChar(256)")]
+		public string PasswordQuestion
+		{
+			get
+			{
+				return this._PasswordQuestion;
+			}
+			set
+			{
+				if ((this._PasswordQuestion != value))
+				{
+					this.OnPasswordQuestionChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordQuestion = value;
+					this.SendPropertyChanged("PasswordQuestion");
+					this.OnPasswordQuestionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PasswordAnswer", DbType="NVarChar(128)")]
+		public string PasswordAnswer
+		{
+			get
+			{
+				return this._PasswordAnswer;
+			}
+			set
+			{
+				if ((this._PasswordAnswer != value))
+				{
+					this.OnPasswordAnswerChanging(value);
+					this.SendPropertyChanging();
+					this._PasswordAnswer = value;
+					this.SendPropertyChanged("PasswordAnswer");
+					this.OnPasswordAnswerChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsApproved", DbType="Bit NOT NULL")]
+		public bool IsApproved
+		{
+			get
+			{
+				return this._IsApproved;
+			}
+			set
+			{
+				if ((this._IsApproved != value))
+				{
+					this.OnIsApprovedChanging(value);
+					this.SendPropertyChanging();
+					this._IsApproved = value;
+					this.SendPropertyChanged("IsApproved");
+					this.OnIsApprovedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsLockedOut", DbType="Bit NOT NULL")]
+		public bool IsLockedOut
+		{
+			get
+			{
+				return this._IsLockedOut;
+			}
+			set
+			{
+				if ((this._IsLockedOut != value))
+				{
+					this.OnIsLockedOutChanging(value);
+					this.SendPropertyChanging();
+					this._IsLockedOut = value;
+					this.SendPropertyChanged("IsLockedOut");
+					this.OnIsLockedOutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreateDate", DbType="DateTime NOT NULL")]
+		public System.DateTime CreateDate
+		{
+			get
+			{
+				return this._CreateDate;
+			}
+			set
+			{
+				if ((this._CreateDate != value))
+				{
+					this.OnCreateDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreateDate = value;
+					this.SendPropertyChanged("CreateDate");
+					this.OnCreateDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastLoginDate", DbType="DateTime NOT NULL")]
+		public System.DateTime LastLoginDate
+		{
+			get
+			{
+				return this._LastLoginDate;
+			}
+			set
+			{
+				if ((this._LastLoginDate != value))
+				{
+					this.OnLastLoginDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastLoginDate = value;
+					this.SendPropertyChanged("LastLoginDate");
+					this.OnLastLoginDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastPasswordChangedDate", DbType="DateTime NOT NULL")]
+		public System.DateTime LastPasswordChangedDate
+		{
+			get
+			{
+				return this._LastPasswordChangedDate;
+			}
+			set
+			{
+				if ((this._LastPasswordChangedDate != value))
+				{
+					this.OnLastPasswordChangedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastPasswordChangedDate = value;
+					this.SendPropertyChanged("LastPasswordChangedDate");
+					this.OnLastPasswordChangedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastLockoutDate", DbType="DateTime NOT NULL")]
+		public System.DateTime LastLockoutDate
+		{
+			get
+			{
+				return this._LastLockoutDate;
+			}
+			set
+			{
+				if ((this._LastLockoutDate != value))
+				{
+					this.OnLastLockoutDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastLockoutDate = value;
+					this.SendPropertyChanged("LastLockoutDate");
+					this.OnLastLockoutDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FailedPasswordAttemptCount", DbType="Int NOT NULL")]
+		public int FailedPasswordAttemptCount
+		{
+			get
+			{
+				return this._FailedPasswordAttemptCount;
+			}
+			set
+			{
+				if ((this._FailedPasswordAttemptCount != value))
+				{
+					this.OnFailedPasswordAttemptCountChanging(value);
+					this.SendPropertyChanging();
+					this._FailedPasswordAttemptCount = value;
+					this.SendPropertyChanged("FailedPasswordAttemptCount");
+					this.OnFailedPasswordAttemptCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FailedPasswordAttemptWindowStart", DbType="DateTime NOT NULL")]
+		public System.DateTime FailedPasswordAttemptWindowStart
+		{
+			get
+			{
+				return this._FailedPasswordAttemptWindowStart;
+			}
+			set
+			{
+				if ((this._FailedPasswordAttemptWindowStart != value))
+				{
+					this.OnFailedPasswordAttemptWindowStartChanging(value);
+					this.SendPropertyChanging();
+					this._FailedPasswordAttemptWindowStart = value;
+					this.SendPropertyChanged("FailedPasswordAttemptWindowStart");
+					this.OnFailedPasswordAttemptWindowStartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FailedPasswordAnswerAttemptCount", DbType="Int NOT NULL")]
+		public int FailedPasswordAnswerAttemptCount
+		{
+			get
+			{
+				return this._FailedPasswordAnswerAttemptCount;
+			}
+			set
+			{
+				if ((this._FailedPasswordAnswerAttemptCount != value))
+				{
+					this.OnFailedPasswordAnswerAttemptCountChanging(value);
+					this.SendPropertyChanging();
+					this._FailedPasswordAnswerAttemptCount = value;
+					this.SendPropertyChanged("FailedPasswordAnswerAttemptCount");
+					this.OnFailedPasswordAnswerAttemptCountChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FailedPasswordAnswerAttemptWindowStart", DbType="DateTime NOT NULL")]
+		public System.DateTime FailedPasswordAnswerAttemptWindowStart
+		{
+			get
+			{
+				return this._FailedPasswordAnswerAttemptWindowStart;
+			}
+			set
+			{
+				if ((this._FailedPasswordAnswerAttemptWindowStart != value))
+				{
+					this.OnFailedPasswordAnswerAttemptWindowStartChanging(value);
+					this.SendPropertyChanging();
+					this._FailedPasswordAnswerAttemptWindowStart = value;
+					this.SendPropertyChanged("FailedPasswordAnswerAttemptWindowStart");
+					this.OnFailedPasswordAnswerAttemptWindowStartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comment", DbType="NText", UpdateCheck=UpdateCheck.Never)]
+		public string Comment
+		{
+			get
+			{
+				return this._Comment;
+			}
+			set
+			{
+				if ((this._Comment != value))
+				{
+					this.OnCommentChanging(value);
+					this.SendPropertyChanging();
+					this._Comment = value;
+					this.SendPropertyChanged("Comment");
+					this.OnCommentChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_User_tbl_aspnet_Membership", Storage="_tbl_aspnet_User", ThisKey="UserId", OtherKey="UserId", IsForeignKey=true)]
+		public tbl_aspnet_User tbl_aspnet_User
+		{
+			get
+			{
+				return this._tbl_aspnet_User.Entity;
+			}
+			set
+			{
+				tbl_aspnet_User previousValue = this._tbl_aspnet_User.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_aspnet_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_aspnet_User.Entity = null;
+						previousValue.tbl_aspnet_Membership = null;
+					}
+					this._tbl_aspnet_User.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_aspnet_Membership = this;
+						this._UserId = value.UserId;
+					}
+					else
+					{
+						this._UserId = default(System.Guid);
+					}
+					this.SendPropertyChanged("tbl_aspnet_User");
 				}
 			}
 		}
@@ -539,7 +1730,7 @@ namespace ODPTaxonomyDAL_TT
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Team")]
-	public partial class Team : INotifyPropertyChanging, INotifyPropertyChanged
+	public partial class tbl_Team : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -556,15 +1747,13 @@ namespace ODPTaxonomyDAL_TT
 		
 		private System.Nullable<System.Guid> _Createdby;
 		
-		private string _UpdatedBy;
+		private System.Nullable<System.Guid> _UpdatedBy;
 		
 		private System.Nullable<System.DateTime> _UpdatedDateTime;
 		
-		private EntitySet<TeamUser> _TeamUsers;
+		private EntitySet<tbl_TeamUser> _tbl_TeamUsers;
 		
-		private EntityRef<TeamType> _TeamType;
-		
-		private EntityRef<Status> _Status;
+		private EntityRef<tbl_TeamType> _tbl_TeamType;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -582,17 +1771,16 @@ namespace ODPTaxonomyDAL_TT
     partial void OnCreatedDateTimeChanged();
     partial void OnCreatedbyChanging(System.Nullable<System.Guid> value);
     partial void OnCreatedbyChanged();
-    partial void OnUpdatedByChanging(string value);
+    partial void OnUpdatedByChanging(System.Nullable<System.Guid> value);
     partial void OnUpdatedByChanged();
     partial void OnUpdatedDateTimeChanging(System.Nullable<System.DateTime> value);
     partial void OnUpdatedDateTimeChanged();
     #endregion
 		
-		public Team()
+		public tbl_Team()
 		{
-			this._TeamUsers = new EntitySet<TeamUser>(new Action<TeamUser>(this.attach_TeamUsers), new Action<TeamUser>(this.detach_TeamUsers));
-			this._TeamType = default(EntityRef<TeamType>);
-			this._Status = default(EntityRef<Status>);
+			this._tbl_TeamUsers = new EntitySet<tbl_TeamUser>(new Action<tbl_TeamUser>(this.attach_tbl_TeamUsers), new Action<tbl_TeamUser>(this.detach_tbl_TeamUsers));
+			this._tbl_TeamType = default(EntityRef<tbl_TeamType>);
 			OnCreated();
 		}
 		
@@ -616,7 +1804,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamCode", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamCode", DbType="NVarChar(50)")]
 		public string TeamCode
 		{
 			get
@@ -647,7 +1835,7 @@ namespace ODPTaxonomyDAL_TT
 			{
 				if ((this._TeamTypeID != value))
 				{
-					if (this._TeamType.HasLoadedOrAssignedValue)
+					if (this._tbl_TeamType.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
@@ -671,10 +1859,6 @@ namespace ODPTaxonomyDAL_TT
 			{
 				if ((this._StatusID != value))
 				{
-					if (this._Status.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
 					this.OnStatusIDChanging(value);
 					this.SendPropertyChanging();
 					this._StatusID = value;
@@ -724,8 +1908,8 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedBy", DbType="VarChar(100)")]
-		public string UpdatedBy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UpdatedBy
 		{
 			get
 			{
@@ -764,83 +1948,49 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_TeamUser", Storage="_TeamUsers", ThisKey="TeamID", OtherKey="TeamID")]
-		public EntitySet<TeamUser> TeamUsers
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_tbl_TeamUser", Storage="_tbl_TeamUsers", ThisKey="TeamID", OtherKey="TeamID")]
+		public EntitySet<tbl_TeamUser> tbl_TeamUsers
 		{
 			get
 			{
-				return this._TeamUsers;
+				return this._tbl_TeamUsers;
 			}
 			set
 			{
-				this._TeamUsers.Assign(value);
+				this._tbl_TeamUsers.Assign(value);
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamType_Team", Storage="_TeamType", ThisKey="TeamTypeID", OtherKey="TeamTypeID", IsForeignKey=true)]
-		public TeamType TeamType
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_Team", Storage="_tbl_TeamType", ThisKey="TeamTypeID", OtherKey="TeamTypeID", IsForeignKey=true)]
+		public tbl_TeamType tbl_TeamType
 		{
 			get
 			{
-				return this._TeamType.Entity;
+				return this._tbl_TeamType.Entity;
 			}
 			set
 			{
-				TeamType previousValue = this._TeamType.Entity;
+				tbl_TeamType previousValue = this._tbl_TeamType.Entity;
 				if (((previousValue != value) 
-							|| (this._TeamType.HasLoadedOrAssignedValue == false)))
+							|| (this._tbl_TeamType.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._TeamType.Entity = null;
-						previousValue.Teams.Remove(this);
+						this._tbl_TeamType.Entity = null;
+						previousValue.tbl_Teams.Remove(this);
 					}
-					this._TeamType.Entity = value;
+					this._tbl_TeamType.Entity = value;
 					if ((value != null))
 					{
-						value.Teams.Add(this);
+						value.tbl_Teams.Add(this);
 						this._TeamTypeID = value.TeamTypeID;
 					}
 					else
 					{
 						this._TeamTypeID = default(Nullable<int>);
 					}
-					this.SendPropertyChanged("TeamType");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Team", Storage="_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
-		public Status Status
-		{
-			get
-			{
-				return this._Status.Entity;
-			}
-			set
-			{
-				Status previousValue = this._Status.Entity;
-				if (((previousValue != value) 
-							|| (this._Status.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Status.Entity = null;
-						previousValue.Teams.Remove(this);
-					}
-					this._Status.Entity = value;
-					if ((value != null))
-					{
-						value.Teams.Add(this);
-						this._StatusID = value.StatusID;
-					}
-					else
-					{
-						this._StatusID = default(int);
-					}
-					this.SendPropertyChanged("Status");
+					this.SendPropertyChanged("tbl_TeamType");
 				}
 			}
 		}
@@ -865,371 +2015,16 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		private void attach_TeamUsers(TeamUser entity)
+		private void attach_tbl_TeamUsers(tbl_TeamUser entity)
 		{
 			this.SendPropertyChanging();
-			entity.Team = this;
+			entity.tbl_Team = this;
 		}
 		
-		private void detach_TeamUsers(TeamUser entity)
+		private void detach_tbl_TeamUsers(tbl_TeamUser entity)
 		{
 			this.SendPropertyChanging();
-			entity.Team = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TeamType")]
-	public partial class TeamType : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TeamTypeID;
-		
-		private string _TeamType1;
-		
-		private EntitySet<Team> _Teams;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTeamTypeIDChanging(int value);
-    partial void OnTeamTypeIDChanged();
-    partial void OnTeamType1Changing(string value);
-    partial void OnTeamType1Changed();
-    #endregion
-		
-		public TeamType()
-		{
-			this._Teams = new EntitySet<Team>(new Action<Team>(this.attach_Teams), new Action<Team>(this.detach_Teams));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamTypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TeamTypeID
-		{
-			get
-			{
-				return this._TeamTypeID;
-			}
-			set
-			{
-				if ((this._TeamTypeID != value))
-				{
-					this.OnTeamTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._TeamTypeID = value;
-					this.SendPropertyChanged("TeamTypeID");
-					this.OnTeamTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="TeamType", Storage="_TeamType1", DbType="NVarChar(10)")]
-		public string TeamType1
-		{
-			get
-			{
-				return this._TeamType1;
-			}
-			set
-			{
-				if ((this._TeamType1 != value))
-				{
-					this.OnTeamType1Changing(value);
-					this.SendPropertyChanging();
-					this._TeamType1 = value;
-					this.SendPropertyChanged("TeamType1");
-					this.OnTeamType1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="TeamType_Team", Storage="_Teams", ThisKey="TeamTypeID", OtherKey="TeamTypeID")]
-		public EntitySet<Team> Teams
-		{
-			get
-			{
-				return this._Teams;
-			}
-			set
-			{
-				this._Teams.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Teams(Team entity)
-		{
-			this.SendPropertyChanging();
-			entity.TeamType = this;
-		}
-		
-		private void detach_Teams(Team entity)
-		{
-			this.SendPropertyChanging();
-			entity.TeamType = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TeamUser")]
-	public partial class TeamUser : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TeamID;
-		
-		private System.Guid _UserId;
-		
-		private EntityRef<Team> _Team;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTeamIDChanging(int value);
-    partial void OnTeamIDChanged();
-    partial void OnUserIdChanging(System.Guid value);
-    partial void OnUserIdChanged();
-    #endregion
-		
-		public TeamUser()
-		{
-			this._Team = default(EntityRef<Team>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int TeamID
-		{
-			get
-			{
-				return this._TeamID;
-			}
-			set
-			{
-				if ((this._TeamID != value))
-				{
-					if (this._Team.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTeamIDChanging(value);
-					this.SendPropertyChanging();
-					this._TeamID = value;
-					this.SendPropertyChanged("TeamID");
-					this.OnTeamIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_TeamUser", Storage="_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
-		public Team Team
-		{
-			get
-			{
-				return this._Team.Entity;
-			}
-			set
-			{
-				Team previousValue = this._Team.Entity;
-				if (((previousValue != value) 
-							|| (this._Team.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Team.Entity = null;
-						previousValue.TeamUsers.Remove(this);
-					}
-					this._Team.Entity = value;
-					if ((value != null))
-					{
-						value.TeamUsers.Add(this);
-						this._TeamID = value.TeamID;
-					}
-					else
-					{
-						this._TeamID = default(int);
-					}
-					this.SendPropertyChanged("Team");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Status")]
-	public partial class Status : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _StatusID;
-		
-		private string _Status1;
-		
-		private EntitySet<Team> _Teams;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnStatusIDChanging(int value);
-    partial void OnStatusIDChanged();
-    partial void OnStatus1Changing(string value);
-    partial void OnStatus1Changed();
-    #endregion
-		
-		public Status()
-		{
-			this._Teams = new EntitySet<Team>(new Action<Team>(this.attach_Teams), new Action<Team>(this.detach_Teams));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int StatusID
-		{
-			get
-			{
-				return this._StatusID;
-			}
-			set
-			{
-				if ((this._StatusID != value))
-				{
-					this.OnStatusIDChanging(value);
-					this.SendPropertyChanging();
-					this._StatusID = value;
-					this.SendPropertyChanged("StatusID");
-					this.OnStatusIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Status", Storage="_Status1", DbType="VarChar(20)")]
-		public string Status1
-		{
-			get
-			{
-				return this._Status1;
-			}
-			set
-			{
-				if ((this._Status1 != value))
-				{
-					this.OnStatus1Changing(value);
-					this.SendPropertyChanging();
-					this._Status1 = value;
-					this.SendPropertyChanged("Status1");
-					this.OnStatus1Changed();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Team", Storage="_Teams", ThisKey="StatusID", OtherKey="StatusID")]
-		public EntitySet<Team> Teams
-		{
-			get
-			{
-				return this._Teams;
-			}
-			set
-			{
-				this._Teams.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Teams(Team entity)
-		{
-			this.SendPropertyChanging();
-			entity.Status = this;
-		}
-		
-		private void detach_Teams(Team entity)
-		{
-			this.SendPropertyChanging();
-			entity.Status = null;
+			entity.tbl_Team = null;
 		}
 	}
 }
