@@ -276,7 +276,7 @@ div.accountInfo
     color: white;
 }
 
-.failureNotification
+.errorMessage
 {
     font-size: 1.2em;
     color: Red;
