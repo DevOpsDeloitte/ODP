@@ -62,7 +62,7 @@
     <Content Include="bin\ODPTaxonomyWebsite.dll" />
     <Content Include="bin\ODPTaxonomyWebsite.pdb" />
     <Content Include="ErrorPage.html" />
-    <Content Include="Evaluation\AbstractViews\CoderSupervisorView.ascx" />
+    <Content Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx" />
     <Content Include="AccountManagement\ViewUsers.aspx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
@@ -92,11 +92,11 @@
       <DependentUpon>ChangePassword.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Evaluation\AbstractViews\CoderSupervisorView.ascx.cs">
+    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx.cs">
       <DependentUpon>CoderSupervisorView.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Evaluation\AbstractViews\CoderSupervisorView.ascx.designer.cs">
+    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx.designer.cs">
       <DependentUpon>CoderSupervisorView.ascx</DependentUpon>
     </Compile>
     <Compile Include="AccountManagement\ChangePassword.aspx.designer.cs">

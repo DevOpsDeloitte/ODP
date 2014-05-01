@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ODPTaxonomyDAL_JY
 {
-    public enum AbstractStatus
+    public enum AbstractStatusType
     {
         CONSENSUS_COMPLETE_1N = 6
     }

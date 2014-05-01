@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ODPTaxonomyWebsite.Evaluation.AbstractViews {
+namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews {
     
     
     public partial class CoderSupervisorView {

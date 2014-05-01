@@ -36,6 +36,9 @@ namespace ODPTaxonomyDAL_JY
     partial void InsertAbstractStatusChangeHistory(AbstractStatusChangeHistory instance);
     partial void UpdateAbstractStatusChangeHistory(AbstractStatusChangeHistory instance);
     partial void DeleteAbstractStatusChangeHistory(AbstractStatusChangeHistory instance);
+    partial void InsertAbstractStatus(AbstractStatus instance);
+    partial void UpdateAbstractStatus(AbstractStatus instance);
+    partial void DeleteAbstractStatus(AbstractStatus instance);
     #endregion
 		
 		public DataJYDataContext() : 
@@ -81,6 +84,14 @@ namespace ODPTaxonomyDAL_JY
 			get
 			{
 				return this.GetTable<AbstractStatusChangeHistory>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AbstractStatus> AbstractStatus
+		{
+			get
+			{
+				return this.GetTable<AbstractStatus>();
 			}
 		}
 	}
@@ -603,6 +614,8 @@ namespace ODPTaxonomyDAL_JY
 		
 		private EntityRef<Abstract> _Abstract;
 		
+		private EntityRef<AbstractStatus> _AbstractStatus;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -624,6 +637,7 @@ namespace ODPTaxonomyDAL_JY
 		public AbstractStatusChangeHistory()
 		{
 			this._Abstract = default(EntityRef<Abstract>);
+			this._AbstractStatus = default(EntityRef<AbstractStatus>);
 			OnCreated();
 		}
 		
@@ -702,6 +716,10 @@ namespace ODPTaxonomyDAL_JY
 			{
 				if ((this._AbstractStatusID != value))
 				{
+					if (this._AbstractStatus.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnAbstractStatusIDChanging(value);
 					this.SendPropertyChanging();
 					this._AbstractStatusID = value;
@@ -785,6 +803,40 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AbstractStatus_AbstractStatusChangeHistory", Storage="_AbstractStatus", ThisKey="AbstractStatusID", OtherKey="AbstractStatusID", IsForeignKey=true)]
+		public AbstractStatus AbstractStatus
+		{
+			get
+			{
+				return this._AbstractStatus.Entity;
+			}
+			set
+			{
+				AbstractStatus previousValue = this._AbstractStatus.Entity;
+				if (((previousValue != value) 
+							|| (this._AbstractStatus.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._AbstractStatus.Entity = null;
+						previousValue.AbstractStatusChangeHistories.Remove(this);
+					}
+					this._AbstractStatus.Entity = value;
+					if ((value != null))
+					{
+						value.AbstractStatusChangeHistories.Add(this);
+						this._AbstractStatusID = value.AbstractStatusID;
+					}
+					else
+					{
+						this._AbstractStatusID = default(int);
+					}
+					this.SendPropertyChanged("AbstractStatus");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -803,6 +855,168 @@ namespace ODPTaxonomyDAL_JY
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AbstractStatus")]
+	public partial class AbstractStatus : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AbstractStatusID;
+		
+		private string _AbstractStatusCode;
+		
+		private string _AbstractStatusDescription;
+		
+		private System.Nullable<int> _StatusID;
+		
+		private EntitySet<AbstractStatusChangeHistory> _AbstractStatusChangeHistories;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAbstractStatusIDChanging(int value);
+    partial void OnAbstractStatusIDChanged();
+    partial void OnAbstractStatusCodeChanging(string value);
+    partial void OnAbstractStatusCodeChanged();
+    partial void OnAbstractStatusDescriptionChanging(string value);
+    partial void OnAbstractStatusDescriptionChanged();
+    partial void OnStatusIDChanging(System.Nullable<int> value);
+    partial void OnStatusIDChanged();
+    #endregion
+		
+		public AbstractStatus()
+		{
+			this._AbstractStatusChangeHistories = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractStatusID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AbstractStatusID
+		{
+			get
+			{
+				return this._AbstractStatusID;
+			}
+			set
+			{
+				if ((this._AbstractStatusID != value))
+				{
+					this.OnAbstractStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractStatusID = value;
+					this.SendPropertyChanged("AbstractStatusID");
+					this.OnAbstractStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractStatusCode", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string AbstractStatusCode
+		{
+			get
+			{
+				return this._AbstractStatusCode;
+			}
+			set
+			{
+				if ((this._AbstractStatusCode != value))
+				{
+					this.OnAbstractStatusCodeChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractStatusCode = value;
+					this.SendPropertyChanged("AbstractStatusCode");
+					this.OnAbstractStatusCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractStatusDescription", DbType="NVarChar(255)")]
+		public string AbstractStatusDescription
+		{
+			get
+			{
+				return this._AbstractStatusDescription;
+			}
+			set
+			{
+				if ((this._AbstractStatusDescription != value))
+				{
+					this.OnAbstractStatusDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractStatusDescription = value;
+					this.SendPropertyChanged("AbstractStatusDescription");
+					this.OnAbstractStatusDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int")]
+		public System.Nullable<int> StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					this.OnStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._StatusID = value;
+					this.SendPropertyChanged("StatusID");
+					this.OnStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="AbstractStatus_AbstractStatusChangeHistory", Storage="_AbstractStatusChangeHistories", ThisKey="AbstractStatusID", OtherKey="AbstractStatusID")]
+		public EntitySet<AbstractStatusChangeHistory> AbstractStatusChangeHistories
+		{
+			get
+			{
+				return this._AbstractStatusChangeHistories;
+			}
+			set
+			{
+				this._AbstractStatusChangeHistories.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_AbstractStatusChangeHistories(AbstractStatusChangeHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.AbstractStatus = this;
+		}
+		
+		private void detach_AbstractStatusChangeHistories(AbstractStatusChangeHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.AbstractStatus = null;
 		}
 	}
 }

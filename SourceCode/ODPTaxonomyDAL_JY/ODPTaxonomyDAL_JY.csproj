@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractListView_CoderSupervisorModel.cs" />
-    <Compile Include="AbstractStatus.cs" />
+    <Compile Include="AbstractStatusType.cs" />
     <Compile Include="DataJY.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

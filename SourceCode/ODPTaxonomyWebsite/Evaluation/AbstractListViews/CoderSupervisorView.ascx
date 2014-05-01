@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CoderSupervisorView.ascx.cs"
-    Inherits="ODPTaxonomyWebsite.Evaluation.AbstractViews.CoderSupervisorView" %>
+    Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView" %>
 <asp:GridView runat="server" ID="AbstractView" AutoGenerateColumns="false" GridLines="None"
     CssClass="AbstractViewTable">
     <Columns>

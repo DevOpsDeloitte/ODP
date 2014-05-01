@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using ODPTaxonomyDAL_TT;
-using ODPTaxonomyWebsite.Evaluation.AbstractViews;
+using ODPTaxonomyWebsite.Evaluation.AbstractListViews;
 
 namespace ODPTaxonomyWebsite.Evaluation
 {
@@ -55,7 +55,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             switch (view)
             {
                 case "CoderSupervisor":
-                    CoderSupervisorView abstractView = LoadControl("~/Evaluation/AbstractViews/CoderSupervisorView.ascx") as CoderSupervisorView;
+                    CoderSupervisorView abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView.ascx") as CoderSupervisorView;
                     AbstractViewPlaceHolder.Controls.Add(abstractView);
                     break;
                 default:
