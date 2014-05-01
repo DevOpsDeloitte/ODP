@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyDAL_TT", "ODPTax
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyUtility_TT", "ODPTaxonomyUtility_TT\ODPTaxonomyUtility_TT.csproj", "{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyDAL_JY", "ODPTaxonomyDAL_JY\ODPTaxonomyDAL_JY.csproj", "{FC11E5F7-FE17-481E-9F8A-32FDCD097F21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC11E5F7-FE17-481E-9F8A-32FDCD097F21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC11E5F7-FE17-481E-9F8A-32FDCD097F21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC11E5F7-FE17-481E-9F8A-32FDCD097F21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC11E5F7-FE17-481E-9F8A-32FDCD097F21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

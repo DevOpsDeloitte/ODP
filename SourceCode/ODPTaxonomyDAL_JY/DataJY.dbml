@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="DataJYDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=dexxa-pc\sqlexpress;Initial Catalog=ODP_Taxonomy_DEV;Integrated Security=True" SettingsObjectName="ODPTaxonomyDAL_JY.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Abstract" Member="Abstracts">
+    <Type Name="Abstract">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AdministeringIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Abstract" Member="Abstract1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractProjTeamPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activity" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupportYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>

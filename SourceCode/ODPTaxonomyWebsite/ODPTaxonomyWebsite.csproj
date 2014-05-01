@@ -54,6 +54,7 @@
   <ItemGroup>
     <Content Include="404-error.html" />
     <Content Include="ErrorPage.html" />
+    <Content Include="Evaluation\AbstractViews\CoderSupervisorView.ascx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="AccountManagement\ViewUsers.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
@@ -77,6 +78,13 @@
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Evaluation\AbstractViews\CoderSupervisorView.ascx.cs">
+      <DependentUpon>CoderSupervisorView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractViews\CoderSupervisorView.ascx.designer.cs">
+      <DependentUpon>CoderSupervisorView.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\ManageTeams.aspx.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -140,6 +148,10 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ODPTaxonomyDAL_JY\ODPTaxonomyDAL_JY.csproj">
+      <Project>{FC11E5F7-FE17-481E-9F8A-32FDCD097F21}</Project>
+      <Name>ODPTaxonomyDAL_JY</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ODPTaxonomyDAL_TT\ODPTaxonomyDAL_TT.csproj">
       <Project>{D3B28058-2182-41A6-9C85-3105F700F24A}</Project>
       <Name>ODPTaxonomyDAL_TT</Name>
