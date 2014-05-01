@@ -1,0 +1,20 @@
+﻿.AbstractViewTable
+{
+    width: 100%;
+}
+
+.AbstractViewTable tr th, .AbstractViewTable tr td
+{
+    padding: 3px 5px;
+    border:1px solid #c3c3c3;
+}
+
+.AbstractViewTable tr th
+{
+    font-weight: bold;
+}
+
+.AbstractViewTable tr:hover td
+{
+    background:#c3c3c3;
+}

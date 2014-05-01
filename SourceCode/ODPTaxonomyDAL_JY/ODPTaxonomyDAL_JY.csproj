@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
-    <Compile Include="DataAbstractContext.cs" />
+    <Compile Include="AbstractListView_CoderSupervisorModel.cs" />
+    <Compile Include="AbstractStatus.cs" />
     <Compile Include="DataJY.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

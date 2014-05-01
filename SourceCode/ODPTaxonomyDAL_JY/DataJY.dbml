@@ -20,6 +20,18 @@
       <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Association Name="Abstract_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractStatusChangeHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories">
+    <Type Name="AbstractStatusChangeHistory">
+      <Column Name="AbstractStatusChangeHistoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EvaluationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AbstractStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="Abstract_AbstractStatusChangeHistory" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

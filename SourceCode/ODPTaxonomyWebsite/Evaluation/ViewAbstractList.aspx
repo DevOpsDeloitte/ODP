@@ -9,7 +9,5 @@
         <asp:DropDownList runat="server" ID="ViewDDL" OnSelectedIndexChanged="ViewDDLIndexChangedHandle"
             AutoPostBack="true" />
     </h2>
-    <div>
-        <asp:PlaceHolder runat="server" ID="AbstractViewPlaceHolder" />
-    </div>
+    <asp:PlaceHolder runat="server" ID="AbstractViewPlaceHolder" />
 </asp:Content>
