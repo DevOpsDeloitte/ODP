@@ -7,6 +7,7 @@
     </h2>
     <p>
     <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error"></asp:Label>
+    <asp:Panel runat="server" ID="pnl_content">
     <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers"></asp:Label>
     </p>
     <asp:HiddenField runat="server" ID="hf_teamTypeId" />
@@ -54,7 +55,7 @@
         </HeaderTemplate>
         <ItemTemplate>
             <tr>
-                <td><%# DataBinder.Eval(Container.DataItem, "TeamCode")%>:<br />
+                <td><!--<%# DataBinder.Eval(Container.DataItem, "TeamCode")%>:<br />-->
                     <asp:Repeater runat="server" ID="rpt_teamMembers">
                         <ItemTemplate>
                             <%# DataBinder.Eval(Container.DataItem, "UserFirstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "UserLastName")%><br />
@@ -70,4 +71,5 @@
             </table>
         </FooterTemplate>
     </asp:Repeater>
+    </asp:Panel>
 </asp:Content>
