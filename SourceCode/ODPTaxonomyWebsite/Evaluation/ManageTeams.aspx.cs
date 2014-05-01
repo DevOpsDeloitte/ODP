@@ -119,6 +119,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 {
                     lbl_Error.Text = "You are not allowed to manage Teams.";
                     lbl_Error.Visible = true;
+                    pnl_content.Visible = false;
                 }
 
                 if (doLoadData)
