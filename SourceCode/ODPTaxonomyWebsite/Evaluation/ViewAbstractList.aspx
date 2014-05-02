@@ -5,7 +5,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
-        View Abstract List as
+        View Abstract List
         <asp:DropDownList runat="server" ID="ViewDDL" OnSelectedIndexChanged="ViewDDLIndexChangedHandle"
             AutoPostBack="true" />
     </h2>

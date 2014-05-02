@@ -39,6 +39,15 @@ namespace ODPTaxonomyDAL_JY
     partial void InsertAbstractStatus(AbstractStatus instance);
     partial void UpdateAbstractStatus(AbstractStatus instance);
     partial void DeleteAbstractStatus(AbstractStatus instance);
+    partial void InsertSubmission(Submission instance);
+    partial void UpdateSubmission(Submission instance);
+    partial void DeleteSubmission(Submission instance);
+    partial void InsertEvaluation(Evaluation instance);
+    partial void UpdateEvaluation(Evaluation instance);
+    partial void DeleteEvaluation(Evaluation instance);
+    partial void Insertaspnet_User(aspnet_User instance);
+    partial void Updateaspnet_User(aspnet_User instance);
+    partial void Deleteaspnet_User(aspnet_User instance);
     #endregion
 		
 		public DataJYDataContext() : 
@@ -94,6 +103,30 @@ namespace ODPTaxonomyDAL_JY
 				return this.GetTable<AbstractStatus>();
 			}
 		}
+		
+		public System.Data.Linq.Table<Submission> Submissions
+		{
+			get
+			{
+				return this.GetTable<Submission>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Evaluation> Evaluations
+		{
+			get
+			{
+				return this.GetTable<Evaluation>();
+			}
+		}
+		
+		public System.Data.Linq.Table<aspnet_User> aspnet_Users
+		{
+			get
+			{
+				return this.GetTable<aspnet_User>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Abstract")]
@@ -140,6 +173,10 @@ namespace ODPTaxonomyDAL_JY
 		
 		private EntitySet<AbstractStatusChangeHistory> _AbstractStatusChangeHistories;
 		
+		private EntitySet<Evaluation> _Evaluations;
+		
+		private EntitySet<Evaluation> _Evaluations1;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -185,6 +222,8 @@ namespace ODPTaxonomyDAL_JY
 		public Abstract()
 		{
 			this._AbstractStatusChangeHistories = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories));
+			this._Evaluations = new EntitySet<Evaluation>(new Action<Evaluation>(this.attach_Evaluations), new Action<Evaluation>(this.detach_Evaluations));
+			this._Evaluations1 = new EntitySet<Evaluation>(new Action<Evaluation>(this.attach_Evaluations1), new Action<Evaluation>(this.detach_Evaluations1));
 			OnCreated();
 		}
 		
@@ -561,6 +600,32 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_Evaluation", Storage="_Evaluations", ThisKey="AbstractID", OtherKey="AbstractID")]
+		public EntitySet<Evaluation> Evaluations
+		{
+			get
+			{
+				return this._Evaluations;
+			}
+			set
+			{
+				this._Evaluations.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_Evaluation1", Storage="_Evaluations1", ThisKey="AbstractID", OtherKey="AbstractID")]
+		public EntitySet<Evaluation> Evaluations1
+		{
+			get
+			{
+				return this._Evaluations1;
+			}
+			set
+			{
+				this._Evaluations1.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -592,6 +657,30 @@ namespace ODPTaxonomyDAL_JY
 			this.SendPropertyChanging();
 			entity.Abstract = null;
 		}
+		
+		private void attach_Evaluations(Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract = this;
+		}
+		
+		private void detach_Evaluations(Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract = null;
+		}
+		
+		private void attach_Evaluations1(Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract1 = this;
+		}
+		
+		private void detach_Evaluations1(Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract1 = null;
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AbstractStatusChangeHistory")]
@@ -616,6 +705,10 @@ namespace ODPTaxonomyDAL_JY
 		
 		private EntityRef<AbstractStatus> _AbstractStatus;
 		
+		private EntityRef<Evaluation> _Evaluation;
+		
+		private EntityRef<Evaluation> _Evaluation1;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -638,6 +731,8 @@ namespace ODPTaxonomyDAL_JY
 		{
 			this._Abstract = default(EntityRef<Abstract>);
 			this._AbstractStatus = default(EntityRef<AbstractStatus>);
+			this._Evaluation = default(EntityRef<Evaluation>);
+			this._Evaluation1 = default(EntityRef<Evaluation>);
 			OnCreated();
 		}
 		
@@ -696,6 +791,10 @@ namespace ODPTaxonomyDAL_JY
 			{
 				if ((this._EvaluationId != value))
 				{
+					if ((this._Evaluation.HasLoadedOrAssignedValue || this._Evaluation1.HasLoadedOrAssignedValue))
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnEvaluationIdChanging(value);
 					this.SendPropertyChanging();
 					this._EvaluationId = value;
@@ -833,6 +932,74 @@ namespace ODPTaxonomyDAL_JY
 						this._AbstractStatusID = default(int);
 					}
 					this.SendPropertyChanged("AbstractStatus");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_AbstractStatusChangeHistory", Storage="_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
+		public Evaluation Evaluation
+		{
+			get
+			{
+				return this._Evaluation.Entity;
+			}
+			set
+			{
+				Evaluation previousValue = this._Evaluation.Entity;
+				if (((previousValue != value) 
+							|| (this._Evaluation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Evaluation.Entity = null;
+						previousValue.AbstractStatusChangeHistories.Remove(this);
+					}
+					this._Evaluation.Entity = value;
+					if ((value != null))
+					{
+						value.AbstractStatusChangeHistories.Add(this);
+						this._EvaluationId = value.EvaluationId;
+					}
+					else
+					{
+						this._EvaluationId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Evaluation");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_AbstractStatusChangeHistory1", Storage="_Evaluation1", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
+		public Evaluation Evaluation1
+		{
+			get
+			{
+				return this._Evaluation1.Entity;
+			}
+			set
+			{
+				Evaluation previousValue = this._Evaluation1.Entity;
+				if (((previousValue != value) 
+							|| (this._Evaluation1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Evaluation1.Entity = null;
+						previousValue.AbstractStatusChangeHistories1.Remove(this);
+					}
+					this._Evaluation1.Entity = value;
+					if ((value != null))
+					{
+						value.AbstractStatusChangeHistories1.Add(this);
+						this._EvaluationId = value.EvaluationId;
+					}
+					else
+					{
+						this._EvaluationId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Evaluation1");
 				}
 			}
 		}
@@ -1017,6 +1184,1043 @@ namespace ODPTaxonomyDAL_JY
 		{
 			this.SendPropertyChanging();
 			entity.AbstractStatus = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Submission")]
+	public partial class Submission : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SubmissionID;
+		
+		private System.Nullable<int> _EvaluationId;
+		
+		private System.Nullable<System.Guid> _UserId;
+		
+		private System.Nullable<short> _SubmissionTypeId;
+		
+		private string _comments;
+		
+		private bool _UnableToCode;
+		
+		private System.Nullable<System.DateTime> _SubmissionDateTime;
+		
+		private System.Nullable<int> _StatusID;
+		
+		private System.Nullable<System.Guid> _UpdatedBy;
+		
+		private System.Nullable<System.DateTime> _UpdatedDate;
+		
+		private EntityRef<Evaluation> _Evaluation;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSubmissionIDChanging(int value);
+    partial void OnSubmissionIDChanged();
+    partial void OnEvaluationIdChanging(System.Nullable<int> value);
+    partial void OnEvaluationIdChanged();
+    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUserIdChanged();
+    partial void OnSubmissionTypeIdChanging(System.Nullable<short> value);
+    partial void OnSubmissionTypeIdChanged();
+    partial void OncommentsChanging(string value);
+    partial void OncommentsChanged();
+    partial void OnUnableToCodeChanging(bool value);
+    partial void OnUnableToCodeChanged();
+    partial void OnSubmissionDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnSubmissionDateTimeChanged();
+    partial void OnStatusIDChanging(System.Nullable<int> value);
+    partial void OnStatusIDChanged();
+    partial void OnUpdatedByChanging(System.Nullable<System.Guid> value);
+    partial void OnUpdatedByChanged();
+    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedDateChanged();
+    #endregion
+		
+		public Submission()
+		{
+			this._Evaluation = default(EntityRef<Evaluation>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SubmissionID
+		{
+			get
+			{
+				return this._SubmissionID;
+			}
+			set
+			{
+				if ((this._SubmissionID != value))
+				{
+					this.OnSubmissionIDChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionID = value;
+					this.SendPropertyChanged("SubmissionID");
+					this.OnSubmissionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationId", DbType="Int")]
+		public System.Nullable<int> EvaluationId
+		{
+			get
+			{
+				return this._EvaluationId;
+			}
+			set
+			{
+				if ((this._EvaluationId != value))
+				{
+					if (this._Evaluation.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEvaluationIdChanging(value);
+					this.SendPropertyChanging();
+					this._EvaluationId = value;
+					this.SendPropertyChanged("EvaluationId");
+					this.OnEvaluationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionTypeId", DbType="SmallInt")]
+		public System.Nullable<short> SubmissionTypeId
+		{
+			get
+			{
+				return this._SubmissionTypeId;
+			}
+			set
+			{
+				if ((this._SubmissionTypeId != value))
+				{
+					this.OnSubmissionTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionTypeId = value;
+					this.SendPropertyChanged("SubmissionTypeId");
+					this.OnSubmissionTypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_comments", DbType="NVarChar(MAX)")]
+		public string comments
+		{
+			get
+			{
+				return this._comments;
+			}
+			set
+			{
+				if ((this._comments != value))
+				{
+					this.OncommentsChanging(value);
+					this.SendPropertyChanging();
+					this._comments = value;
+					this.SendPropertyChanged("comments");
+					this.OncommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnableToCode", DbType="Bit NOT NULL")]
+		public bool UnableToCode
+		{
+			get
+			{
+				return this._UnableToCode;
+			}
+			set
+			{
+				if ((this._UnableToCode != value))
+				{
+					this.OnUnableToCodeChanging(value);
+					this.SendPropertyChanging();
+					this._UnableToCode = value;
+					this.SendPropertyChanged("UnableToCode");
+					this.OnUnableToCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionDateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> SubmissionDateTime
+		{
+			get
+			{
+				return this._SubmissionDateTime;
+			}
+			set
+			{
+				if ((this._SubmissionDateTime != value))
+				{
+					this.OnSubmissionDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionDateTime = value;
+					this.SendPropertyChanged("SubmissionDateTime");
+					this.OnSubmissionDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int")]
+		public System.Nullable<int> StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					this.OnStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._StatusID = value;
+					this.SendPropertyChanged("StatusID");
+					this.OnStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UpdatedBy
+		{
+			get
+			{
+				return this._UpdatedBy;
+			}
+			set
+			{
+				if ((this._UpdatedBy != value))
+				{
+					this.OnUpdatedByChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedBy = value;
+					this.SendPropertyChanged("UpdatedBy");
+					this.OnUpdatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdatedDate
+		{
+			get
+			{
+				return this._UpdatedDate;
+			}
+			set
+			{
+				if ((this._UpdatedDate != value))
+				{
+					this.OnUpdatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedDate = value;
+					this.SendPropertyChanged("UpdatedDate");
+					this.OnUpdatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_Submission", Storage="_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
+		public Evaluation Evaluation
+		{
+			get
+			{
+				return this._Evaluation.Entity;
+			}
+			set
+			{
+				Evaluation previousValue = this._Evaluation.Entity;
+				if (((previousValue != value) 
+							|| (this._Evaluation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Evaluation.Entity = null;
+						previousValue.Submissions.Remove(this);
+					}
+					this._Evaluation.Entity = value;
+					if ((value != null))
+					{
+						value.Submissions.Add(this);
+						this._EvaluationId = value.EvaluationId;
+					}
+					else
+					{
+						this._EvaluationId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Evaluation");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Evaluation")]
+	public partial class Evaluation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _EvaluationId;
+		
+		private System.Nullable<System.Guid> _ConsensusStartedBy;
+		
+		private System.Nullable<int> _TeamID;
+		
+		private System.Nullable<int> _AbstractID;
+		
+		private bool _IsComplete;
+		
+		private System.Nullable<System.DateTime> _DateTimeStarted;
+		
+		private System.Nullable<System.DateTime> _DateTimeEnded;
+		
+		private System.Nullable<short> _EvaluationTypeId;
+		
+		private bool _IsStopped;
+		
+		private System.Nullable<System.Guid> _StoppedBy;
+		
+		private System.Nullable<System.DateTime> _StoppedDateTime;
+		
+		private EntitySet<AbstractStatusChangeHistory> _AbstractStatusChangeHistories;
+		
+		private EntitySet<AbstractStatusChangeHistory> _AbstractStatusChangeHistories1;
+		
+		private EntitySet<Submission> _Submissions;
+		
+		private EntityRef<Abstract> _Abstract;
+		
+		private EntityRef<Abstract> _Abstract1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnEvaluationIdChanging(int value);
+    partial void OnEvaluationIdChanged();
+    partial void OnConsensusStartedByChanging(System.Nullable<System.Guid> value);
+    partial void OnConsensusStartedByChanged();
+    partial void OnTeamIDChanging(System.Nullable<int> value);
+    partial void OnTeamIDChanged();
+    partial void OnAbstractIDChanging(System.Nullable<int> value);
+    partial void OnAbstractIDChanged();
+    partial void OnIsCompleteChanging(bool value);
+    partial void OnIsCompleteChanged();
+    partial void OnDateTimeStartedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateTimeStartedChanged();
+    partial void OnDateTimeEndedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateTimeEndedChanged();
+    partial void OnEvaluationTypeIdChanging(System.Nullable<short> value);
+    partial void OnEvaluationTypeIdChanged();
+    partial void OnIsStoppedChanging(bool value);
+    partial void OnIsStoppedChanged();
+    partial void OnStoppedByChanging(System.Nullable<System.Guid> value);
+    partial void OnStoppedByChanged();
+    partial void OnStoppedDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnStoppedDateTimeChanged();
+    #endregion
+		
+		public Evaluation()
+		{
+			this._AbstractStatusChangeHistories = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories));
+			this._AbstractStatusChangeHistories1 = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories1), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories1));
+			this._Submissions = new EntitySet<Submission>(new Action<Submission>(this.attach_Submissions), new Action<Submission>(this.detach_Submissions));
+			this._Abstract = default(EntityRef<Abstract>);
+			this._Abstract1 = default(EntityRef<Abstract>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int EvaluationId
+		{
+			get
+			{
+				return this._EvaluationId;
+			}
+			set
+			{
+				if ((this._EvaluationId != value))
+				{
+					this.OnEvaluationIdChanging(value);
+					this.SendPropertyChanging();
+					this._EvaluationId = value;
+					this.SendPropertyChanged("EvaluationId");
+					this.OnEvaluationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConsensusStartedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> ConsensusStartedBy
+		{
+			get
+			{
+				return this._ConsensusStartedBy;
+			}
+			set
+			{
+				if ((this._ConsensusStartedBy != value))
+				{
+					this.OnConsensusStartedByChanging(value);
+					this.SendPropertyChanging();
+					this._ConsensusStartedBy = value;
+					this.SendPropertyChanged("ConsensusStartedBy");
+					this.OnConsensusStartedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamID", DbType="Int")]
+		public System.Nullable<int> TeamID
+		{
+			get
+			{
+				return this._TeamID;
+			}
+			set
+			{
+				if ((this._TeamID != value))
+				{
+					this.OnTeamIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamID = value;
+					this.SendPropertyChanged("TeamID");
+					this.OnTeamIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					if ((this._Abstract.HasLoadedOrAssignedValue || this._Abstract1.HasLoadedOrAssignedValue))
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAbstractIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractID = value;
+					this.SendPropertyChanged("AbstractID");
+					this.OnAbstractIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsComplete", DbType="Bit NOT NULL")]
+		public bool IsComplete
+		{
+			get
+			{
+				return this._IsComplete;
+			}
+			set
+			{
+				if ((this._IsComplete != value))
+				{
+					this.OnIsCompleteChanging(value);
+					this.SendPropertyChanging();
+					this._IsComplete = value;
+					this.SendPropertyChanged("IsComplete");
+					this.OnIsCompleteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateTimeStarted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateTimeStarted
+		{
+			get
+			{
+				return this._DateTimeStarted;
+			}
+			set
+			{
+				if ((this._DateTimeStarted != value))
+				{
+					this.OnDateTimeStartedChanging(value);
+					this.SendPropertyChanging();
+					this._DateTimeStarted = value;
+					this.SendPropertyChanged("DateTimeStarted");
+					this.OnDateTimeStartedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateTimeEnded", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateTimeEnded
+		{
+			get
+			{
+				return this._DateTimeEnded;
+			}
+			set
+			{
+				if ((this._DateTimeEnded != value))
+				{
+					this.OnDateTimeEndedChanging(value);
+					this.SendPropertyChanging();
+					this._DateTimeEnded = value;
+					this.SendPropertyChanged("DateTimeEnded");
+					this.OnDateTimeEndedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationTypeId", DbType="SmallInt")]
+		public System.Nullable<short> EvaluationTypeId
+		{
+			get
+			{
+				return this._EvaluationTypeId;
+			}
+			set
+			{
+				if ((this._EvaluationTypeId != value))
+				{
+					this.OnEvaluationTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._EvaluationTypeId = value;
+					this.SendPropertyChanged("EvaluationTypeId");
+					this.OnEvaluationTypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsStopped", DbType="Bit NOT NULL")]
+		public bool IsStopped
+		{
+			get
+			{
+				return this._IsStopped;
+			}
+			set
+			{
+				if ((this._IsStopped != value))
+				{
+					this.OnIsStoppedChanging(value);
+					this.SendPropertyChanging();
+					this._IsStopped = value;
+					this.SendPropertyChanged("IsStopped");
+					this.OnIsStoppedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoppedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> StoppedBy
+		{
+			get
+			{
+				return this._StoppedBy;
+			}
+			set
+			{
+				if ((this._StoppedBy != value))
+				{
+					this.OnStoppedByChanging(value);
+					this.SendPropertyChanging();
+					this._StoppedBy = value;
+					this.SendPropertyChanged("StoppedBy");
+					this.OnStoppedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoppedDateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> StoppedDateTime
+		{
+			get
+			{
+				return this._StoppedDateTime;
+			}
+			set
+			{
+				if ((this._StoppedDateTime != value))
+				{
+					this.OnStoppedDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._StoppedDateTime = value;
+					this.SendPropertyChanged("StoppedDateTime");
+					this.OnStoppedDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_AbstractStatusChangeHistory", Storage="_AbstractStatusChangeHistories", ThisKey="EvaluationId", OtherKey="EvaluationId")]
+		public EntitySet<AbstractStatusChangeHistory> AbstractStatusChangeHistories
+		{
+			get
+			{
+				return this._AbstractStatusChangeHistories;
+			}
+			set
+			{
+				this._AbstractStatusChangeHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_AbstractStatusChangeHistory1", Storage="_AbstractStatusChangeHistories1", ThisKey="EvaluationId", OtherKey="EvaluationId")]
+		public EntitySet<AbstractStatusChangeHistory> AbstractStatusChangeHistories1
+		{
+			get
+			{
+				return this._AbstractStatusChangeHistories1;
+			}
+			set
+			{
+				this._AbstractStatusChangeHistories1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_Submission", Storage="_Submissions", ThisKey="EvaluationId", OtherKey="EvaluationId")]
+		public EntitySet<Submission> Submissions
+		{
+			get
+			{
+				return this._Submissions;
+			}
+			set
+			{
+				this._Submissions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_Evaluation", Storage="_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		public Abstract Abstract
+		{
+			get
+			{
+				return this._Abstract.Entity;
+			}
+			set
+			{
+				Abstract previousValue = this._Abstract.Entity;
+				if (((previousValue != value) 
+							|| (this._Abstract.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Abstract.Entity = null;
+						previousValue.Evaluations.Remove(this);
+					}
+					this._Abstract.Entity = value;
+					if ((value != null))
+					{
+						value.Evaluations.Add(this);
+						this._AbstractID = value.AbstractID;
+					}
+					else
+					{
+						this._AbstractID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Abstract");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_Evaluation1", Storage="_Abstract1", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		public Abstract Abstract1
+		{
+			get
+			{
+				return this._Abstract1.Entity;
+			}
+			set
+			{
+				Abstract previousValue = this._Abstract1.Entity;
+				if (((previousValue != value) 
+							|| (this._Abstract1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Abstract1.Entity = null;
+						previousValue.Evaluations1.Remove(this);
+					}
+					this._Abstract1.Entity = value;
+					if ((value != null))
+					{
+						value.Evaluations1.Add(this);
+						this._AbstractID = value.AbstractID;
+					}
+					else
+					{
+						this._AbstractID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Abstract1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_AbstractStatusChangeHistories(AbstractStatusChangeHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation = this;
+		}
+		
+		private void detach_AbstractStatusChangeHistories(AbstractStatusChangeHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation = null;
+		}
+		
+		private void attach_AbstractStatusChangeHistories1(AbstractStatusChangeHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation1 = this;
+		}
+		
+		private void detach_AbstractStatusChangeHistories1(AbstractStatusChangeHistory entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation1 = null;
+		}
+		
+		private void attach_Submissions(Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation = this;
+		}
+		
+		private void detach_Submissions(Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Users")]
+	public partial class aspnet_User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ApplicationId;
+		
+		private System.Guid _UserId;
+		
+		private string _UserName;
+		
+		private string _LoweredUserName;
+		
+		private string _MobileAlias;
+		
+		private bool _IsAnonymous;
+		
+		private System.DateTime _LastActivityDate;
+		
+		private string _UserFirstName;
+		
+		private string _UserLastName;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnApplicationIdChanging(System.Guid value);
+    partial void OnApplicationIdChanged();
+    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnLoweredUserNameChanging(string value);
+    partial void OnLoweredUserNameChanged();
+    partial void OnMobileAliasChanging(string value);
+    partial void OnMobileAliasChanged();
+    partial void OnIsAnonymousChanging(bool value);
+    partial void OnIsAnonymousChanged();
+    partial void OnLastActivityDateChanging(System.DateTime value);
+    partial void OnLastActivityDateChanged();
+    partial void OnUserFirstNameChanging(string value);
+    partial void OnUserFirstNameChanged();
+    partial void OnUserLastNameChanging(string value);
+    partial void OnUserLastNameChanged();
+    #endregion
+		
+		public aspnet_User()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid ApplicationId
+		{
+			get
+			{
+				return this._ApplicationId;
+			}
+			set
+			{
+				if ((this._ApplicationId != value))
+				{
+					this.OnApplicationIdChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicationId = value;
+					this.SendPropertyChanged("ApplicationId");
+					this.OnApplicationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoweredUserName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string LoweredUserName
+		{
+			get
+			{
+				return this._LoweredUserName;
+			}
+			set
+			{
+				if ((this._LoweredUserName != value))
+				{
+					this.OnLoweredUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._LoweredUserName = value;
+					this.SendPropertyChanged("LoweredUserName");
+					this.OnLoweredUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MobileAlias", DbType="NVarChar(16)")]
+		public string MobileAlias
+		{
+			get
+			{
+				return this._MobileAlias;
+			}
+			set
+			{
+				if ((this._MobileAlias != value))
+				{
+					this.OnMobileAliasChanging(value);
+					this.SendPropertyChanging();
+					this._MobileAlias = value;
+					this.SendPropertyChanged("MobileAlias");
+					this.OnMobileAliasChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsAnonymous", DbType="Bit NOT NULL")]
+		public bool IsAnonymous
+		{
+			get
+			{
+				return this._IsAnonymous;
+			}
+			set
+			{
+				if ((this._IsAnonymous != value))
+				{
+					this.OnIsAnonymousChanging(value);
+					this.SendPropertyChanging();
+					this._IsAnonymous = value;
+					this.SendPropertyChanged("IsAnonymous");
+					this.OnIsAnonymousChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastActivityDate", DbType="DateTime NOT NULL")]
+		public System.DateTime LastActivityDate
+		{
+			get
+			{
+				return this._LastActivityDate;
+			}
+			set
+			{
+				if ((this._LastActivityDate != value))
+				{
+					this.OnLastActivityDateChanging(value);
+					this.SendPropertyChanging();
+					this._LastActivityDate = value;
+					this.SendPropertyChanged("LastActivityDate");
+					this.OnLastActivityDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserFirstName", DbType="NVarChar(50)")]
+		public string UserFirstName
+		{
+			get
+			{
+				return this._UserFirstName;
+			}
+			set
+			{
+				if ((this._UserFirstName != value))
+				{
+					this.OnUserFirstNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserFirstName = value;
+					this.SendPropertyChanged("UserFirstName");
+					this.OnUserFirstNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserLastName", DbType="NVarChar(50)")]
+		public string UserLastName
+		{
+			get
+			{
+				return this._UserLastName;
+			}
+			set
+			{
+				if ((this._UserLastName != value))
+				{
+					this.OnUserLastNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserLastName = value;
+					this.SendPropertyChanged("UserLastName");
+					this.OnUserLastNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

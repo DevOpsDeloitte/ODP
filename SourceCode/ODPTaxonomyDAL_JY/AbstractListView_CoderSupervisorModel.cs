@@ -11,6 +11,10 @@ namespace ODPTaxonomyDAL_JY
 
         public int? ApplicationID { get; set; }
 
+        public int? SubmissionID { get; set; }
+
+        public int? EvaluationID { get; set; }
+
         private string _ProjectTitle;
         public string ProjectTitle
         {
@@ -26,7 +30,10 @@ namespace ODPTaxonomyDAL_JY
             }
         }
 
+        public int AbstractStatusID { get; set; }
         public string AbstractStatusCode { get; set; }
         public DateTime? StatusDate { get; set; }
+
+        public string Comment { get; set; }
     }
 }
