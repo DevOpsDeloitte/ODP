@@ -28,6 +28,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                                  join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                                  join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
                                  join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
+                                 join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
+                                 from scn in evscn.DefaultIfEmpty()
                                  where (
                                      // 1N Consensus complete status with notes uploaded
                                     h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
@@ -52,7 +54,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                                      StatusDate = h.CreatedDate,
                                      SubmissionID = sb.SubmissionID,
                                      EvaluationID = h.EvaluationId,
-                                     Comment = sb.comments
+                                     Comment = sb.comments,
+                                     AbstractScan = scn.FileName
                                  }).ToList();
 
                 for (int i = 0; i < abstracts.Count; i++)
@@ -94,10 +97,10 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
                         if (coderEvaluations != null)
                         {
-                            abstracts.InsertRange(i+1, coderEvaluations);
+                            abstracts.InsertRange(i + 1, coderEvaluations);
                         }
 
-                        // Insert Coder Consesus row
+                        // Inserts Coder Consesus row
                         var coderConsensus = (from a in db.Abstracts
                                               /* get status */
                                               join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
@@ -137,6 +140,27 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             catch (Exception exp)
             {
                 Utils.LogError(exp);
+            }
+        }
+
+        protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
+        {
+            AbstractListView_CoderSupervisorModel item = e.Row.DataItem as AbstractListView_CoderSupervisorModel;
+            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
+
+            if (item != null && AbstractScanLink != null)
+            {
+                if (!string.IsNullOrEmpty(item.AbstractScan))
+                {
+                    AbstractScanLink.Text = "Scanned File";
+                    AbstractScanLink.ToolTip = item.AbstractScan;
+                    AbstractScanLink.NavigateUrl = "#";
+                    AbstractScanLink.Visible = true;
+                }
+                else
+                {
+                    AbstractScanLink.Visible = false;
+                }
             }
         }
     }

@@ -48,6 +48,9 @@ namespace ODPTaxonomyDAL_JY
     partial void Insertaspnet_User(aspnet_User instance);
     partial void Updateaspnet_User(aspnet_User instance);
     partial void Deleteaspnet_User(aspnet_User instance);
+    partial void InsertAbstractScan(AbstractScan instance);
+    partial void UpdateAbstractScan(AbstractScan instance);
+    partial void DeleteAbstractScan(AbstractScan instance);
     #endregion
 		
 		public DataJYDataContext() : 
@@ -125,6 +128,14 @@ namespace ODPTaxonomyDAL_JY
 			get
 			{
 				return this.GetTable<aspnet_User>();
+			}
+		}
+		
+		public System.Data.Linq.Table<AbstractScan> AbstractScans
+		{
+			get
+			{
+				return this.GetTable<AbstractScan>();
 			}
 		}
 	}
@@ -1540,6 +1551,8 @@ namespace ODPTaxonomyDAL_JY
 		
 		private EntitySet<Submission> _Submissions;
 		
+		private EntitySet<AbstractScan> _AbstractScans;
+		
 		private EntityRef<Abstract> _Abstract;
 		
 		private EntityRef<Abstract> _Abstract1;
@@ -1577,6 +1590,7 @@ namespace ODPTaxonomyDAL_JY
 			this._AbstractStatusChangeHistories = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories));
 			this._AbstractStatusChangeHistories1 = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories1), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories1));
 			this._Submissions = new EntitySet<Submission>(new Action<Submission>(this.attach_Submissions), new Action<Submission>(this.detach_Submissions));
+			this._AbstractScans = new EntitySet<AbstractScan>(new Action<AbstractScan>(this.attach_AbstractScans), new Action<AbstractScan>(this.detach_AbstractScans));
 			this._Abstract = default(EntityRef<Abstract>);
 			this._Abstract1 = default(EntityRef<Abstract>);
 			OnCreated();
@@ -1845,6 +1859,19 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_AbstractScan", Storage="_AbstractScans", ThisKey="EvaluationId", OtherKey="EvaluationId")]
+		public EntitySet<AbstractScan> AbstractScans
+		{
+			get
+			{
+				return this._AbstractScans;
+			}
+			set
+			{
+				this._AbstractScans.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_Evaluation", Storage="_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
 		public Abstract Abstract
 		{
@@ -1964,6 +1991,18 @@ namespace ODPTaxonomyDAL_JY
 		}
 		
 		private void detach_Submissions(Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation = null;
+		}
+		
+		private void attach_AbstractScans(AbstractScan entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation = this;
+		}
+		
+		private void detach_AbstractScans(AbstractScan entity)
 		{
 			this.SendPropertyChanging();
 			entity.Evaluation = null;
@@ -2199,6 +2238,205 @@ namespace ODPTaxonomyDAL_JY
 					this._UserLastName = value;
 					this.SendPropertyChanged("UserLastName");
 					this.OnUserLastNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AbstractScan")]
+	public partial class AbstractScan : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AbstractScanID;
+		
+		private int _EvaluationId;
+		
+		private string _FileName;
+		
+		private System.Nullable<System.Guid> _UploadedBy;
+		
+		private System.Nullable<System.DateTime> _UploadedDateTime;
+		
+		private EntityRef<Evaluation> _Evaluation;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAbstractScanIDChanging(int value);
+    partial void OnAbstractScanIDChanged();
+    partial void OnEvaluationIdChanging(int value);
+    partial void OnEvaluationIdChanged();
+    partial void OnFileNameChanging(string value);
+    partial void OnFileNameChanged();
+    partial void OnUploadedByChanging(System.Nullable<System.Guid> value);
+    partial void OnUploadedByChanged();
+    partial void OnUploadedDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnUploadedDateTimeChanged();
+    #endregion
+		
+		public AbstractScan()
+		{
+			this._Evaluation = default(EntityRef<Evaluation>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractScanID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AbstractScanID
+		{
+			get
+			{
+				return this._AbstractScanID;
+			}
+			set
+			{
+				if ((this._AbstractScanID != value))
+				{
+					this.OnAbstractScanIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractScanID = value;
+					this.SendPropertyChanged("AbstractScanID");
+					this.OnAbstractScanIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationId", DbType="Int NOT NULL")]
+		public int EvaluationId
+		{
+			get
+			{
+				return this._EvaluationId;
+			}
+			set
+			{
+				if ((this._EvaluationId != value))
+				{
+					if (this._Evaluation.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEvaluationIdChanging(value);
+					this.SendPropertyChanging();
+					this._EvaluationId = value;
+					this.SendPropertyChanged("EvaluationId");
+					this.OnEvaluationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="NVarChar(200) NOT NULL", CanBeNull=false)]
+		public string FileName
+		{
+			get
+			{
+				return this._FileName;
+			}
+			set
+			{
+				if ((this._FileName != value))
+				{
+					this.OnFileNameChanging(value);
+					this.SendPropertyChanging();
+					this._FileName = value;
+					this.SendPropertyChanged("FileName");
+					this.OnFileNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UploadedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UploadedBy
+		{
+			get
+			{
+				return this._UploadedBy;
+			}
+			set
+			{
+				if ((this._UploadedBy != value))
+				{
+					this.OnUploadedByChanging(value);
+					this.SendPropertyChanging();
+					this._UploadedBy = value;
+					this.SendPropertyChanged("UploadedBy");
+					this.OnUploadedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UploadedDateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UploadedDateTime
+		{
+			get
+			{
+				return this._UploadedDateTime;
+			}
+			set
+			{
+				if ((this._UploadedDateTime != value))
+				{
+					this.OnUploadedDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._UploadedDateTime = value;
+					this.SendPropertyChanged("UploadedDateTime");
+					this.OnUploadedDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_AbstractScan", Storage="_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
+		public Evaluation Evaluation
+		{
+			get
+			{
+				return this._Evaluation.Entity;
+			}
+			set
+			{
+				Evaluation previousValue = this._Evaluation.Entity;
+				if (((previousValue != value) 
+							|| (this._Evaluation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Evaluation.Entity = null;
+						previousValue.AbstractScans.Remove(this);
+					}
+					this._Evaluation.Entity = value;
+					if ((value != null))
+					{
+						value.AbstractScans.Add(this);
+						this._EvaluationId = value.EvaluationId;
+					}
+					else
+					{
+						this._EvaluationId = default(int);
+					}
+					this.SendPropertyChanged("Evaluation");
 				}
 			}
 		}

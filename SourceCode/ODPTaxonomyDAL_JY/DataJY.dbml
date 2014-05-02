@@ -79,6 +79,7 @@
       <Association Name="Evaluation_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="AbstractStatusChangeHistory" />
       <Association Name="Evaluation_AbstractStatusChangeHistory1" Member="AbstractStatusChangeHistories1" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="AbstractStatusChangeHistory" />
       <Association Name="Evaluation_Submission" Member="Submissions" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Submission" />
+      <Association Name="Evaluation_AbstractScan" Member="AbstractScans" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="AbstractScan" />
       <Association Name="Abstract_Evaluation" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
       <Association Name="Abstract_Evaluation1" Member="Abstract1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
     </Type>
@@ -94,6 +95,16 @@
       <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="UserFirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="UserLastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AbstractScan" Member="AbstractScans">
+    <Type Name="AbstractScan">
+      <Column Name="AbstractScanID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EvaluationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="UploadedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UploadedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Evaluation_AbstractScan" Member="Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Evaluation" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
