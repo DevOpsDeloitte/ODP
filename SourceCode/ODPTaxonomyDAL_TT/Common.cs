@@ -14,6 +14,25 @@ namespace ODPTaxonomyDAL_TT
 
     }
 
+    public enum AbstractStatusID
+    {
+        _0 = 1,
+        _1 = 2,
+        _1A = 3,
+        _1B = 4,
+        _1U = 5,
+        _1N = 6,
+        _2 = 7,
+        _2A = 8,
+        _2B = 9,
+        _2C = 10,
+        _2U = 11,
+        _2N = 12,
+        _3 = 13,
+        _4 = 14,
+        _5 = 15
+    }
+
     public enum TeamType
     {
         Coder = 1,
