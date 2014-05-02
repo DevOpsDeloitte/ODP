@@ -63,7 +63,7 @@
                     </asp:Repeater>
                 </td>
                 <td><asp:HiddenField runat="server" ID="hf_teamID" Value='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
-                <asp:Button runat="server" ID="btn_deleteTeam" OnClick="DeleteTeam_Click" OnClientClick="return confirm('Are you certain you want to delete this team?');" Text="Delete Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
+                <asp:Button runat="server" ID="btn_deleteTeam" OnClick="DeleteTeam_Click" OnClientClick="return confirm('Are you sure you would like to Remove Team?');" Text="Remove Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
                 </td>
             </tr>
         </ItemTemplate>
