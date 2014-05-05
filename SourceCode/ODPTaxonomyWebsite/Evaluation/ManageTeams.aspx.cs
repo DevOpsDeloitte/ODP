@@ -155,6 +155,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                                   join ur in db.tbl_aspnet_UsersInRoles on u.UserId equals ur.UserId
                                   join r in db.tbl_aspnet_Roles on ur.RoleId equals r.RoleId
                                   where roles.Contains(r.RoleName) && !list_teamUsers.Contains(u.UserId) && m.IsApproved
+                                  orderby u.UserFirstName, u.UserLastName
                                   select u;
                     list_users = matches.ToList<tbl_aspnet_User>();
                 }
@@ -198,6 +199,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                                     join tu in db.tbl_TeamUsers on t.TeamID equals tu.TeamID
                                     join u in db.tbl_aspnet_Users on tu.UserId equals u.UserId
                                     where (t.StatusID == (int)ODPTaxonomyDAL_TT.Status.Active) && (t.TeamTypeID == teamTypeID)
+                                    orderby t.TeamID, u.UserFirstName, u.UserLastName
                                     select new { t.TeamID, u.UserId, u.UserName, u.UserLastName, u.UserFirstName};
 
                     foreach (var i in matches_2)
@@ -257,6 +259,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 string commandArgument = button.CommandArgument;
                 int teamId = -1;
                 tbl_Team team = null;
+                bool isActivelyWorking = true;
 
                 if (Int32.TryParse(commandArgument, out teamId))
                 {
@@ -266,24 +269,44 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                     if (!String.IsNullOrEmpty(connString))
                     {
+                        //Check if  Team to be deleted is currently working on any Abstract
                         using (DataDataContext db = new DataDataContext(connString))
                         {
-                            var matches = from t in db.tbl_Teams
-                                          where t.TeamID == teamId
-                                          select t;
-                            team = matches.First();
-
-                            if (team != null)
-                            {
-                                team.StatusID = (int)ODPTaxonomyDAL_TT.Status.Deleted;
-                                team.UpdatedBy = userCurrentId;
-                                team.UpdatedDateTime = DateTime.Now;
-                                db.SubmitChanges();
-                            }
+                            var matches = from ev in db.tbl_Evaluations
+                                          where ev.TeamID == teamId && ev.IsComplete == false && ev.IsStopped == false
+                                          select ev;
+                            isActivelyWorking = matches.Any();
                         }
 
-                        //Reload Page Data
-                        Response.Redirect("ManageTeams.aspx", true);
+                        if (isActivelyWorking)
+                        {
+                            lbl_messageUsers.Visible = true;
+                            lbl_messageUsers.Text = "The team could NOT be deleted as it is currently working on abstract evaluation.";
+                            
+                        }
+                        else
+                        {
+                            //OK to Delete the team
+                            using (DataDataContext db = new DataDataContext(connString))
+                            {
+                                var matches = from t in db.tbl_Teams
+                                              where t.TeamID == teamId
+                                              select t;
+                                team = matches.First();
+
+                                if (team != null)
+                                {
+                                    team.StatusID = (int)ODPTaxonomyDAL_TT.Status.Deleted;
+                                    team.UpdatedBy = userCurrentId;
+                                    team.UpdatedDateTime = DateTime.Now;
+                                    db.SubmitChanges();
+                                }
+                            }
+
+                            //Reload Page Data
+                            Response.Redirect("ManageTeams.aspx", true);
+                        }
+                        
 
                     }
 

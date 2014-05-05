@@ -53,26 +53,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="404-error.html" />
-    <Content Include="AccountManagement\ChangePassword.aspx" />
-    <Content Include="AccountManagement\EditProfile.aspx" />
-    <Content Include="bin\ODPTaxonomyAccountDAL.dll" />
-    <Content Include="bin\ODPTaxonomyAccountDAL.pdb" />
-    <Content Include="bin\ODPTaxonomyUtility_TT.dll" />
-    <Content Include="bin\ODPTaxonomyUtility_TT.pdb" />
-    <Content Include="bin\ODPTaxonomyWebsite.dll" />
-    <Content Include="bin\ODPTaxonomyWebsite.pdb" />
     <Content Include="ErrorPage.html" />
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx" />
     <Content Include="AccountManagement\ViewUsers.aspx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
-    <Content Include="ForgotPassword.aspx" />
-    <Content Include="Global.asax" />
     <Content Include="Login.aspx" />
     <Content Include="Styles\AbstractListView.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -88,8 +79,8 @@
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountManagement\ChangePassword.aspx.cs">
-      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    <Compile Include="Evaluation\ManageTeams.aspx.cs">
+      <DependentUpon>ManageTeams.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx.cs">
@@ -98,16 +89,6 @@
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx.designer.cs">
       <DependentUpon>CoderSupervisorView.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="AccountManagement\ChangePassword.aspx.designer.cs">
-      <DependentUpon>ChangePassword.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="AccountManagement\EditProfile.aspx.cs">
-      <DependentUpon>EditProfile.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AccountManagement\EditProfile.aspx.designer.cs">
-      <DependentUpon>EditProfile.aspx</DependentUpon>
     </Compile>
     <Compile Include="AccountManagement\ViewUsers.aspx.cs">
       <DependentUpon>ViewUsers.aspx</DependentUpon>
@@ -144,13 +125,6 @@
     <Compile Include="Evaluation\ViewAbstractList.aspx.designer.cs">
       <DependentUpon>ViewAbstractList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ForgotPassword.aspx.cs">
-      <DependentUpon>ForgotPassword.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ForgotPassword.aspx.designer.cs">
-      <DependentUpon>ForgotPassword.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -179,9 +153,9 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ODPTaxonomyAccountDAL\ODPTaxonomyAccountDAL.csproj">
-      <Project>{9D2949A2-EE38-4C9E-A0EB-7B16B17EA6BD}</Project>
-      <Name>ODPTaxonomyAccountDAL</Name>
+    <ProjectReference Include="..\ODPTaxonomyDAL_TT\ODPTaxonomyDAL_TT.csproj">
+      <Project>{D3B28058-2182-41A6-9C85-3105F700F24A}</Project>
+      <Name>ODPTaxonomyDAL_TT</Name>
     </ProjectReference>
     <ProjectReference Include="..\ODPTaxonomyDAL_JY\ODPTaxonomyDAL_JY.csproj">
       <Project>{FC11E5F7-FE17-481E-9F8A-32FDCD097F21}</Project>
@@ -197,7 +171,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AccountManagement\Web.config" />
     <Content Include="Web.Dev.config">
       <SubType>Designer</SubType>
     </Content>
@@ -213,21 +186,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Web.Test.config">
-      <SubType>Designer</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.Test.Debug.config">
-      <DependentUpon>Web.Test.Config</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.Test.Release.config">
-      <DependentUpon>Web.Test.Config</DependentUpon>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Web.Demo.config">
       <SubType>Designer</SubType>
     </Content>
@@ -240,6 +198,22 @@
   <ItemGroup>
     <Content Include="Web.Demo.Release.config">
       <DependentUpon>Web.Demo.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Test.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Test.Debug.config">
+      <DependentUpon>Web.Test.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Test.Release.config">
+      <DependentUpon>Web.Test.config</DependentUpon>
+    </Content>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

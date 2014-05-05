@@ -54,6 +54,9 @@ namespace ODPTaxonomyDAL_TT
     partial void Inserttbl_Team(tbl_Team instance);
     partial void Updatetbl_Team(tbl_Team instance);
     partial void Deletetbl_Team(tbl_Team instance);
+    partial void Inserttbl_Evaluation(tbl_Evaluation instance);
+    partial void Updatetbl_Evaluation(tbl_Evaluation instance);
+    partial void Deletetbl_Evaluation(tbl_Evaluation instance);
     #endregion
 		
 		public DataDataContext() : 
@@ -147,6 +150,14 @@ namespace ODPTaxonomyDAL_TT
 			get
 			{
 				return this.GetTable<tbl_Team>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_Evaluation> tbl_Evaluations
+		{
+			get
+			{
+				return this.GetTable<tbl_Evaluation>();
 			}
 		}
 	}
@@ -701,7 +712,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_Team", Storage="_tbl_Teams", ThisKey="TeamTypeID", OtherKey="TeamTypeID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_tbl_Team", Storage="_tbl_Teams", ThisKey="TeamTypeID", OtherKey="TeamTypeID")]
 		public EntitySet<tbl_Team> tbl_Teams
 		{
 			get
@@ -819,7 +830,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_tbl_TeamUser", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_tbl_TeamUser", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
 		public tbl_Team tbl_Team
 		{
 			get
@@ -1753,6 +1764,8 @@ namespace ODPTaxonomyDAL_TT
 		
 		private EntitySet<tbl_TeamUser> _tbl_TeamUsers;
 		
+		private EntitySet<tbl_Evaluation> _tbl_Evaluations;
+		
 		private EntityRef<tbl_TeamType> _tbl_TeamType;
 		
     #region Extensibility Method Definitions
@@ -1780,6 +1793,7 @@ namespace ODPTaxonomyDAL_TT
 		public tbl_Team()
 		{
 			this._tbl_TeamUsers = new EntitySet<tbl_TeamUser>(new Action<tbl_TeamUser>(this.attach_tbl_TeamUsers), new Action<tbl_TeamUser>(this.detach_tbl_TeamUsers));
+			this._tbl_Evaluations = new EntitySet<tbl_Evaluation>(new Action<tbl_Evaluation>(this.attach_tbl_Evaluations), new Action<tbl_Evaluation>(this.detach_tbl_Evaluations));
 			this._tbl_TeamType = default(EntityRef<tbl_TeamType>);
 			OnCreated();
 		}
@@ -1948,7 +1962,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_tbl_TeamUser", Storage="_tbl_TeamUsers", ThisKey="TeamID", OtherKey="TeamID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_tbl_TeamUser", Storage="_tbl_TeamUsers", ThisKey="TeamID", OtherKey="TeamID")]
 		public EntitySet<tbl_TeamUser> tbl_TeamUsers
 		{
 			get
@@ -1961,7 +1975,20 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_Team", Storage="_tbl_TeamType", ThisKey="TeamTypeID", OtherKey="TeamTypeID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_Evaluation", Storage="_tbl_Evaluations", ThisKey="TeamID", OtherKey="TeamID")]
+		public EntitySet<tbl_Evaluation> tbl_Evaluations
+		{
+			get
+			{
+				return this._tbl_Evaluations;
+			}
+			set
+			{
+				this._tbl_Evaluations.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_tbl_Team", Storage="_tbl_TeamType", ThisKey="TeamTypeID", OtherKey="TeamTypeID", IsForeignKey=true)]
 		public tbl_TeamType tbl_TeamType
 		{
 			get
@@ -2025,6 +2052,361 @@ namespace ODPTaxonomyDAL_TT
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Team = null;
+		}
+		
+		private void attach_tbl_Evaluations(tbl_Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Team = this;
+		}
+		
+		private void detach_tbl_Evaluations(tbl_Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Team = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Evaluation")]
+	public partial class tbl_Evaluation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _EvaluationId;
+		
+		private System.Nullable<System.Guid> _ConsensusStartedBy;
+		
+		private System.Nullable<int> _TeamID;
+		
+		private System.Nullable<int> _AbstractID;
+		
+		private bool _IsComplete;
+		
+		private System.Nullable<System.DateTime> _DateTimeStarted;
+		
+		private System.Nullable<System.DateTime> _DateTimeEnded;
+		
+		private System.Nullable<short> _EvaluationTypeId;
+		
+		private bool _IsStopped;
+		
+		private System.Nullable<System.Guid> _StoppedBy;
+		
+		private System.Nullable<System.DateTime> _StoppedDateTime;
+		
+		private EntityRef<tbl_Team> _tbl_Team;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnEvaluationIdChanging(int value);
+    partial void OnEvaluationIdChanged();
+    partial void OnConsensusStartedByChanging(System.Nullable<System.Guid> value);
+    partial void OnConsensusStartedByChanged();
+    partial void OnTeamIDChanging(System.Nullable<int> value);
+    partial void OnTeamIDChanged();
+    partial void OnAbstractIDChanging(System.Nullable<int> value);
+    partial void OnAbstractIDChanged();
+    partial void OnIsCompleteChanging(bool value);
+    partial void OnIsCompleteChanged();
+    partial void OnDateTimeStartedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateTimeStartedChanged();
+    partial void OnDateTimeEndedChanging(System.Nullable<System.DateTime> value);
+    partial void OnDateTimeEndedChanged();
+    partial void OnEvaluationTypeIdChanging(System.Nullable<short> value);
+    partial void OnEvaluationTypeIdChanged();
+    partial void OnIsStoppedChanging(bool value);
+    partial void OnIsStoppedChanged();
+    partial void OnStoppedByChanging(System.Nullable<System.Guid> value);
+    partial void OnStoppedByChanged();
+    partial void OnStoppedDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnStoppedDateTimeChanged();
+    #endregion
+		
+		public tbl_Evaluation()
+		{
+			this._tbl_Team = default(EntityRef<tbl_Team>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationId", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int EvaluationId
+		{
+			get
+			{
+				return this._EvaluationId;
+			}
+			set
+			{
+				if ((this._EvaluationId != value))
+				{
+					this.OnEvaluationIdChanging(value);
+					this.SendPropertyChanging();
+					this._EvaluationId = value;
+					this.SendPropertyChanged("EvaluationId");
+					this.OnEvaluationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConsensusStartedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> ConsensusStartedBy
+		{
+			get
+			{
+				return this._ConsensusStartedBy;
+			}
+			set
+			{
+				if ((this._ConsensusStartedBy != value))
+				{
+					this.OnConsensusStartedByChanging(value);
+					this.SendPropertyChanging();
+					this._ConsensusStartedBy = value;
+					this.SendPropertyChanged("ConsensusStartedBy");
+					this.OnConsensusStartedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamID", DbType="Int")]
+		public System.Nullable<int> TeamID
+		{
+			get
+			{
+				return this._TeamID;
+			}
+			set
+			{
+				if ((this._TeamID != value))
+				{
+					if (this._tbl_Team.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTeamIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamID = value;
+					this.SendPropertyChanged("TeamID");
+					this.OnTeamIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this.OnAbstractIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractID = value;
+					this.SendPropertyChanged("AbstractID");
+					this.OnAbstractIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsComplete", DbType="Bit NOT NULL")]
+		public bool IsComplete
+		{
+			get
+			{
+				return this._IsComplete;
+			}
+			set
+			{
+				if ((this._IsComplete != value))
+				{
+					this.OnIsCompleteChanging(value);
+					this.SendPropertyChanging();
+					this._IsComplete = value;
+					this.SendPropertyChanged("IsComplete");
+					this.OnIsCompleteChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateTimeStarted", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateTimeStarted
+		{
+			get
+			{
+				return this._DateTimeStarted;
+			}
+			set
+			{
+				if ((this._DateTimeStarted != value))
+				{
+					this.OnDateTimeStartedChanging(value);
+					this.SendPropertyChanging();
+					this._DateTimeStarted = value;
+					this.SendPropertyChanged("DateTimeStarted");
+					this.OnDateTimeStartedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateTimeEnded", DbType="DateTime")]
+		public System.Nullable<System.DateTime> DateTimeEnded
+		{
+			get
+			{
+				return this._DateTimeEnded;
+			}
+			set
+			{
+				if ((this._DateTimeEnded != value))
+				{
+					this.OnDateTimeEndedChanging(value);
+					this.SendPropertyChanging();
+					this._DateTimeEnded = value;
+					this.SendPropertyChanged("DateTimeEnded");
+					this.OnDateTimeEndedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationTypeId", DbType="SmallInt")]
+		public System.Nullable<short> EvaluationTypeId
+		{
+			get
+			{
+				return this._EvaluationTypeId;
+			}
+			set
+			{
+				if ((this._EvaluationTypeId != value))
+				{
+					this.OnEvaluationTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._EvaluationTypeId = value;
+					this.SendPropertyChanged("EvaluationTypeId");
+					this.OnEvaluationTypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IsStopped", DbType="Bit NOT NULL")]
+		public bool IsStopped
+		{
+			get
+			{
+				return this._IsStopped;
+			}
+			set
+			{
+				if ((this._IsStopped != value))
+				{
+					this.OnIsStoppedChanging(value);
+					this.SendPropertyChanging();
+					this._IsStopped = value;
+					this.SendPropertyChanged("IsStopped");
+					this.OnIsStoppedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoppedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> StoppedBy
+		{
+			get
+			{
+				return this._StoppedBy;
+			}
+			set
+			{
+				if ((this._StoppedBy != value))
+				{
+					this.OnStoppedByChanging(value);
+					this.SendPropertyChanging();
+					this._StoppedBy = value;
+					this.SendPropertyChanged("StoppedBy");
+					this.OnStoppedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StoppedDateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> StoppedDateTime
+		{
+			get
+			{
+				return this._StoppedDateTime;
+			}
+			set
+			{
+				if ((this._StoppedDateTime != value))
+				{
+					this.OnStoppedDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._StoppedDateTime = value;
+					this.SendPropertyChanged("StoppedDateTime");
+					this.OnStoppedDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_Evaluation", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
+		public tbl_Team tbl_Team
+		{
+			get
+			{
+				return this._tbl_Team.Entity;
+			}
+			set
+			{
+				tbl_Team previousValue = this._tbl_Team.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Team.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Team.Entity = null;
+						previousValue.tbl_Evaluations.Remove(this);
+					}
+					this._tbl_Team.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Evaluations.Add(this);
+						this._TeamID = value.TeamID;
+					}
+					else
+					{
+						this._TeamID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_Team");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
