@@ -54,8 +54,9 @@
   <ItemGroup>
     <Content Include="404-error.html" />
     <Content Include="ErrorPage.html" />
-    <Content Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx" />
+    <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx" />
     <Content Include="AccountManagement\ViewUsers.aspx" />
+    <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
@@ -80,12 +81,13 @@
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx.cs">
-      <DependentUpon>CoderSupervisorView.ascx</DependentUpon>
+    <Compile Include="Evaluation\AbstractListViews\AbstractGridView.cs" />
+    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx.cs">
+      <DependentUpon>CoderSupervisorView_Coded.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx.designer.cs">
-      <DependentUpon>CoderSupervisorView.ascx</DependentUpon>
+    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx.designer.cs">
+      <DependentUpon>CoderSupervisorView_Coded.ascx</DependentUpon>
     </Compile>
     <Compile Include="AccountManagement\ViewUsers.aspx.cs">
       <DependentUpon>ViewUsers.aspx</DependentUpon>
@@ -100,6 +102,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx.cs">
+      <DependentUpon>CoderSupervisorView_Open.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx.designer.cs">
+      <DependentUpon>CoderSupervisorView_Open.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\ManageTeams.aspx.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>

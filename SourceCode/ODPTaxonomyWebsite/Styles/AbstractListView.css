@@ -14,7 +14,7 @@
     font-weight: bold;
 }
 
-.AbstractViewTable tr:hover td
+.AbstractViewTable tr.data-row:hover td
 {
-    background:#c3c3c3;
+    background:#dadada;
 }

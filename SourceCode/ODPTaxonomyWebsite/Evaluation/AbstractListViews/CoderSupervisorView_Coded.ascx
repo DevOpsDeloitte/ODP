@@ -1,11 +1,12 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CoderSupervisorView.ascx.cs"
-    Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CoderSupervisorView_Coded.ascx.cs"
+    Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView_Coded" %>
+<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
+    Assembly="ODPTaxonomyWebsite" %>
 <h2>
-    View Coded Abstracts List</h2>
-<asp:GridView runat="server" ID="AbstractView" AutoGenerateColumns="false" GridLines="None"
-    CssClass="AbstractViewTable" OnRowDataBound="AbstractListRowBindingHandle">
+    View Coded Abstracts</h2>
+<odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
+    GridLines="None" CssClass="AbstractViewTable" OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>
-        <asp:BoundField DataField="AbstractID" HeaderText="ID" />
         <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" />
         <asp:BoundField DataField="StatusDate" HeaderText="Status Date" />
         <asp:TemplateField HeaderText="Title">
@@ -26,4 +27,5 @@
         <asp:TemplateField HeaderText="F"></asp:TemplateField>
         <asp:TemplateField HeaderText="G"></asp:TemplateField>
     </Columns>
-</asp:GridView>
+    <RowStyle CssClass="data-row" />
+</odp:AbstractGridView>

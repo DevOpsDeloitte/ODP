@@ -10,7 +10,7 @@ using System.Configuration;
 
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
-    public partial class CoderSupervisorView : System.Web.UI.UserControl
+    public partial class CoderSupervisorView_Coded : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -134,8 +134,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     }
                 }
 
-                AbstractView.DataSource = abstracts;
-                AbstractView.DataBind();
+                AbstractViewGridView.DataSource = abstracts;
+                AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
             {

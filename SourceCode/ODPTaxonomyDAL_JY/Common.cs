@@ -7,6 +7,7 @@ namespace ODPTaxonomyDAL_JY
 {
     public enum AbstractStatusEnum
     {
+        OPEN = 1,
         CODED_BY_CODER = 3,
         CONSENSUS_COMPLETE_1B = 4,
         CONSENSUS_COMPLETE_WITH_NOTES_1N = 6

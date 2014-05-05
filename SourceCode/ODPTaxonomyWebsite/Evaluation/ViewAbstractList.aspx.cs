@@ -20,33 +20,71 @@ namespace ODPTaxonomyWebsite.Evaluation
             if (!IsPostBack)
             {
                 LoadViewDropDownData(roles);
+
+                if (roles.Count == 1)
+                {
+                    RenderAbstractListView(roles[0]);
+                }
+            }
+            else
+            {
+                string selectedView = ViewDDL.SelectedValue;
+                int selectedSubview = SubviewDDL.SelectedIndex;
+
+                if (!string.IsNullOrEmpty(selectedView))
+                {
+                    if (roles.Contains(selectedView))
+                    {
+                        LoadSubviewDropDownData(selectedView, selectedSubview);
+                        RenderAbstractListView(selectedView);
+                    }
+                }
             }
         }
 
         /**
          * Loads data for select a view dropdown
          */
-        private void LoadViewDropDownData(List<string> roles)
+        protected void LoadViewDropDownData(List<string> roles)
         {
-            ViewDDL.Items.Clear();
-            ViewDDL.Items.Add(new ListItem("Select a view", ""));
-            foreach (string role in roles)
+            if (roles.Count > 1)
             {
-                ViewDDL.Items.Add(new ListItem(role + " view", role));
+                ViewDDL.Items.Clear();
+                ViewDDL.Items.Add(new ListItem("Select a view", ""));
+                foreach (string role in roles)
+                {
+                    ViewDDL.Items.Add(new ListItem(role + " view", role));
+                }
+                ViewDDL.Visible = true;
+            }
+            else
+            {
+                ViewDDL.Visible = false;
             }
         }
 
-        protected void ViewDDLIndexChangedHandle(object sender, EventArgs e)
+        protected void LoadSubviewDropDownData(string role, int selectedIndex = -1)
         {
-            string[] roles = Roles.GetRolesForUser();
-            string selectedView = ViewDDL.SelectedValue;
-
-            if (!string.IsNullOrEmpty(selectedView))
+            SubviewDDL.Items.Clear();
+            switch (role)
             {
-                if (roles.Contains(selectedView))
-                {
-                    RenderAbstractListView(selectedView);
-                }
+                case "CoderSupervisor":
+                    SubviewLabel.Text = "Abstract Types:";
+                    SubviewLabel.Visible = true;
+
+                    SubviewDDL.Items.Add(new ListItem("Coded Abstracts", "coded"));
+                    SubviewDDL.Items.Add(new ListItem("Open Abstracts", "open"));
+
+                    if (selectedIndex > -1)
+                    {
+                        SubviewDDL.SelectedIndex = selectedIndex;
+                    }
+
+                    SubviewDDL.Visible = true;
+                    break;
+                default:
+                    SubviewDDL.Visible = false;
+                    break;
             }
         }
 
@@ -55,8 +93,16 @@ namespace ODPTaxonomyWebsite.Evaluation
             switch (view)
             {
                 case "CoderSupervisor":
-                    CoderSupervisorView abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView.ascx") as CoderSupervisorView;
-                    AbstractViewPlaceHolder.Controls.Add(abstractView);
+                    if (SubviewDDL.SelectedValue == "coded")
+                    {
+                        CoderSupervisorView_Coded abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Coded.ascx") as CoderSupervisorView_Coded;
+                        AbstractViewPlaceHolder.Controls.Add(abstractView);
+                    }
+                    else
+                    {
+                        CoderSupervisorView_Open abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Open.ascx") as CoderSupervisorView_Open;
+                        AbstractViewPlaceHolder.Controls.Add(abstractView);
+                    }
                     break;
                 default:
                     break;
