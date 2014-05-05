@@ -59,6 +59,7 @@
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
+    <Content Include="ForgotPassword.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Styles\AbstractListView.css" />
     <Content Include="Styles\Site.css" />
@@ -79,10 +80,6 @@
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Evaluation\ManageTeams.aspx.cs">
-      <DependentUpon>ManageTeams.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView.ascx.cs">
       <DependentUpon>CoderSupervisorView.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -124,6 +121,13 @@
     </Compile>
     <Compile Include="Evaluation\ViewAbstractList.aspx.designer.cs">
       <DependentUpon>ViewAbstractList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
