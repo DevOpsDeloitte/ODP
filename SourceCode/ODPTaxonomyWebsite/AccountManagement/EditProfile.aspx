@@ -10,6 +10,9 @@
 <asp:Label ID="lbl_error_message" CssClass="errorMessage" runat="server" Visible="false" />
 
 <asp:Panel ID="pnl_edit_profile" runat="server">
+
+<asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error occurred.  Please fix." />
+
 <table>
     <tr>
         <td><asp:Label ID="lbl_fname" runat="server" AssociatedControlID="txt_fname" Text="First Name: " /></td>
@@ -32,9 +35,13 @@
             <asp:RequiredFieldValidator ID="reqval_email" runat="server" Display="Dynamic" ErrorMessage="Email Address is required." ControlToValidate="txt_email" CssClass="errorMessage" />
             <asp:RegularExpressionValidator ID="regex_email" runat="server" Display="Dynamic" ErrorMessage="Email Address format is invalid." ControlToValidate="txt_email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="errorMessage" />
         </td>
+    </tr>
     <tr>
-        <td colspan="2">
+        <td>
             <asp:Button ID="btn_save_profile" runat="server" OnClick="btn_saveProfile_OnClick" CausesValidation="true" Text="Save" />
+        </td>
+        <td>
+            <asp:Button ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" CausesValidation="false" Text="Cancel" />
         </td>
     </tr>
 </table>

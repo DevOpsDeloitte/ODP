@@ -23,10 +23,10 @@ namespace ODPTaxonomyWebsite.AccountManagement
 
                     Guid l_userID = (Guid)l_user.ProviderUserKey;
 
-                    select_userProfileResult rec;
+                    select_userByIDResult rec;
                     using (AccountDataLinqDataContext db = new AccountDataLinqDataContext(AccountDAL.connString))
                     {
-                        rec = (select_userProfileResult)db.select_userProfile(l_userID).SingleOrDefault();
+                        rec = (select_userByIDResult)db.select_userByID(l_userID).SingleOrDefault();
                     }
 
                     txt_fname.Text = rec.UserFirstName;
@@ -53,7 +53,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
 
                 using (AccountDataLinqDataContext db = new AccountDataLinqDataContext(AccountDAL.connString))
                 {
-                    l_intReturn = db.update_userProfile(l_userID, l_fname, l_lname);
+                    l_intReturn = db.update_userProfileByID(l_userID, l_fname, l_lname);
                 }
 
                 if (l_intReturn == 0)
@@ -76,10 +76,10 @@ namespace ODPTaxonomyWebsite.AccountManagement
 
         }
 
-        //protected void btn_cancel_OnClick(object sender, EventArgs e)
-        //{
-        //    Response.Redirect("~/default.aspx");
-        //}
+        protected void btn_cancel_OnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
+        }
 
         protected void HandlePageError(string message)
         {
