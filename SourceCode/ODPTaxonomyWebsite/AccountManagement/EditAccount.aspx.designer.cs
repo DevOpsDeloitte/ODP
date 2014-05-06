@@ -22,13 +22,13 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         protected global::System.Web.UI.WebControls.Literal ltl_page_title;
         
         /// <summary>
-        /// pnl_confirmation control.
+        /// lbl_confirmation_message control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_confirmation;
+        protected global::System.Web.UI.WebControls.Label lbl_confirmation_message;
         
         /// <summary>
         /// lbl_error_message control.
@@ -56,6 +56,15 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary valsum_errors;
+        
+        /// <summary>
+        /// pnl_username control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_username;
         
         /// <summary>
         /// lbl_username control.
@@ -139,13 +148,13 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         protected global::System.Web.UI.WebControls.Label lbl_Email;
         
         /// <summary>
-        /// txt_Email control.
+        /// txt_email control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_Email;
+        protected global::System.Web.UI.WebControls.TextBox txt_email;
         
         /// <summary>
         /// reqval_email control.
@@ -184,6 +193,15 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         protected global::System.Web.UI.WebControls.CheckBoxList cbl_roles;
         
         /// <summary>
+        /// cusval_roles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cusval_roles;
+        
+        /// <summary>
         /// lbl_new_password control.
         /// </summary>
         /// <remarks>
@@ -200,6 +218,15 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_new_password;
+        
+        /// <summary>
+        /// reqval_newPassword control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqval_newPassword;
         
         /// <summary>
         /// regval_newPassword control.
@@ -227,6 +254,15 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_confirm_password;
+        
+        /// <summary>
+        /// reqval_NewPasswordConfirm control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqval_NewPasswordConfirm;
         
         /// <summary>
         /// regval_NewPasswordConfirm control.

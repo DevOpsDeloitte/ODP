@@ -10,6 +10,10 @@
 </asp:Panel>
 
 <asp:Panel ID="pnl_change_password" runat="server">
+
+<asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
+
+
 <table>
     <tr>
         <td><asp:Label ID="lbl_new_password" runat="server" Text="New Password:" AssociatedControlID="txt_new_password" /></td>

@@ -11,7 +11,7 @@
 
 <asp:Panel ID="pnl_edit_profile" runat="server">
 
-<asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error occurred.  Please fix." />
+<asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
 
 <table>
     <tr>

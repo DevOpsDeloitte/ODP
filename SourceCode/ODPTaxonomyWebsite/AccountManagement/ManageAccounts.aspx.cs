@@ -151,7 +151,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
 
         protected void lnkbtn_createAccount_OnClick(object sender, EventArgs e)
         {
-            Session["AM_Action"] = "CREATE";
+            Session["AM_Action"] = "ADD";
             Response.Redirect("EditAccount.aspx");
         }
 
