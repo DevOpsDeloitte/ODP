@@ -12,7 +12,7 @@
     <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers"></asp:Label>
     </p>
     <asp:HiddenField runat="server" ID="hf_teamTypeId" />
-    <h3>Users evailable for team to pick up</h3>
+    <h3>Users available for team to pick up</h3>
     <p runat="server" id="gc_noUsers">No users are currently available for you to select for a new team.</p>
     <p></p>
     <asp:Repeater runat="server" ID="rpt_users">
