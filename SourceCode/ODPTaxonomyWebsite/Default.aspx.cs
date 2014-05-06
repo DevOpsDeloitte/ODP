@@ -158,19 +158,7 @@ namespace ODPTaxonomyWebsite
             }   
         }
 
-        protected void btn_viewAbstract_odpSup_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Session["CurrentRole"] = role_odpSup;
-                Response.Redirect("Evaluation/ViewAbstract.aspx", false);
-            }
-            catch (Exception ex)
-            {
-                Utils.LogError(ex);
-                throw new Exception("An error has occured on button click.");
-            }   
-        }
+        
         //Admin
         protected void btn_manageUserAccounts_admin_Click(object sender, EventArgs e)
         {
@@ -234,7 +222,8 @@ namespace ODPTaxonomyWebsite
                         lbl_messageUsers.Text = messUserNotInTeam;
                     }
                 }
-                else if (Roles.IsUserInRole(userCurrent.UserName, role_coderSup))
+                
+                if (Roles.IsUserInRole(userCurrent.UserName, role_coderSup))
                 {
                     //Coder Supervisor
                     pnl_coderSup.Visible = true;
@@ -249,30 +238,26 @@ namespace ODPTaxonomyWebsite
                     else
                     {
                         btn_viewAbstract_coderSup.Visible = false;
-                        lbl_messageUsers.Visible = true;
-                        lbl_messageUsers.Text = messUserNotInTeam;
+                        //lbl_messageUsers.Visible = true;
+                        //lbl_messageUsers.Text = messUserNotInTeam;
                     }
                 }
-                else if (Roles.IsUserInRole(userCurrent.UserName, role_odp))
+                if (Roles.IsUserInRole(userCurrent.UserName, role_odp))
                 {
                     //ODP Staff
                     pnl_odp.Visible = true;
                 }
-                else if (Roles.IsUserInRole(userCurrent.UserName, role_odpSup))
+                if (Roles.IsUserInRole(userCurrent.UserName, role_odpSup))
                 {
                     //ODP Supervisor
                     pnl_odpSup.Visible = true;
                 }
-                else if (Roles.IsUserInRole(userCurrent.UserName, role_admin))
+                if (Roles.IsUserInRole(userCurrent.UserName, role_admin))
                 {
                     //Admin
                     pnl_admin.Visible = true;
                 }
-                else
-                {
-                    lbl_messageUsers.Visible = true;
-                    lbl_messageUsers.Text = "No actions available for you.";
-                }
+                
             }
             
         }
