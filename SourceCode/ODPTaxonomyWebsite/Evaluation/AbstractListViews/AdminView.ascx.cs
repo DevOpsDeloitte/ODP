@@ -4,24 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 using ODPTaxonomyDAL_JY;
 using ODPTaxonomyUtility_TT;
-using System.Configuration;
 
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
-    public partial class CoderSupervisorView_Coded : System.Web.UI.UserControl
+    public partial class AdminView : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            AbstractListViewData data = new AbstractListViewData(connString);
+            DataJYDataContext db = new DataJYDataContext(connString);
+
+            List<AbstractListRow> abstracts = new List<AbstractListRow>();
+
             try
             {
-                string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-                AbstractListViewData data = new AbstractListViewData(connString);
-                DataJYDataContext db = new DataJYDataContext(connString);
-
-                List<AbstractListRow> abstracts = new List<AbstractListRow>();
-
                 /**
                  * Grabs abstract and other related data
                  */
@@ -73,20 +73,15 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                         parentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
                         parentAbstracts[i].EvaluationID != null)
                     {
-                        // Inserts Coder Evaluation rows, latest 3 only
-                        var coderEvaluations = data.GetCoderEvaluations_1A(parentAbstracts[i].AbstractID);
-                        abstracts.AddRange(coderEvaluations);
-
-                        // ODP Staff consensus row
-                        var odpStaffConsensus = data.GetODPStaffConsensus_2B(parentAbstracts[i].AbstractID);
-                        abstracts.AddRange(odpStaffConsensus);
-
                         // ODP Staff vs Coder consensus row
                         var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(parentAbstracts[i].AbstractID);
                         abstracts.AddRange(odpStaffCoderConsensus);
+
+                        // ODP Consensus
+                        var odpConsensus = data.GetODPConsensusWithNotes_2N(parentAbstracts[i].AbstractID);
+                        abstracts.AddRange(odpConsensus);
                     }
                 }
-
                 AbstractViewGridView.DataSource = abstracts;
                 AbstractViewGridView.DataBind();
             }

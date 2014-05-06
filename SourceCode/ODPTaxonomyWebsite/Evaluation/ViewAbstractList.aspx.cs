@@ -109,6 +109,9 @@ namespace ODPTaxonomyWebsite.Evaluation
 
             switch (view)
             {
+                case "Admin":
+                    abstractView = LoadControl("~/Evaluation/AbstractListViews/AdminView.ascx") as AdminView;
+                    break;
                 case "CoderSupervisor":
                     if (SubviewDDL.SelectedValue == "coded")
                     {

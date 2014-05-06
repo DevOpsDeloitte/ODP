@@ -13,7 +13,8 @@ namespace ODPTaxonomyDAL_JY
         CONSENSUS_COMPLETE_1B = 4,
         CONSENSUS_COMPLETE_WITH_NOTES_1N = 6,
         ODP_STAFF_CONSENSUS_2B = 9,
-        ODP_STAFF_AND_CODER_CONSENSUS_2C = 10
+        ODP_STAFF_AND_CODER_CONSENSUS_2C = 10,
+        ODP_CONSENSUS_WITH_NOTES_2N = 12
     }
 
     public enum SubmissionTypeEnum

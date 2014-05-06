@@ -54,6 +54,7 @@
   <ItemGroup>
     <Content Include="404-error.html" />
     <Content Include="ErrorPage.html" />
+    <Content Include="Evaluation\AbstractListViews\AdminView.ascx" />
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx" />
     <Content Include="AccountManagement\ViewUsers.aspx" />
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx" />
@@ -63,6 +64,7 @@
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
     <Content Include="ForgotPassword.aspx" />
+    <Content Include="Images\clip.png" />
     <Content Include="Login.aspx" />
     <Content Include="Styles\AbstractListView.css" />
     <Content Include="Styles\Site.css" />
@@ -84,6 +86,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Evaluation\AbstractListViews\AbstractGridView.cs" />
+    <Compile Include="Evaluation\AbstractListViews\AdminView.ascx.cs">
+      <DependentUpon>AdminView.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\AdminView.ascx.designer.cs">
+      <DependentUpon>AdminView.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx.cs">
       <DependentUpon>CoderSupervisorView_Coded.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -175,7 +184,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
     <Folder Include="log\" />
   </ItemGroup>
   <ItemGroup>

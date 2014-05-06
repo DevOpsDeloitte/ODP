@@ -6,7 +6,7 @@
 .AbstractViewTable tr th, .AbstractViewTable tr td
 {
     padding: 3px 5px;
-    border:1px solid #c3c3c3;
+    border: 1px solid #c3c3c3;
 }
 
 .AbstractViewTable tr th
@@ -16,5 +16,18 @@
 
 .AbstractViewTable tr.data-row:hover td
 {
-    background:#dadada;
+    background: #dadada;
+}
+
+.title-wrapper
+{
+    padding:0 15px 0 0;
+    position: relative;
+}
+
+.has-file .scan-file
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
