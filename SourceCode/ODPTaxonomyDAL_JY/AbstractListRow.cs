@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ODPTaxonomyDAL_JY
 {
-    public class AbstractListView_CoderSupervisorModel
+    public class AbstractListRow
     {
         public int AbstractID { get; set; }
         public int? ApplicationID { get; set; }

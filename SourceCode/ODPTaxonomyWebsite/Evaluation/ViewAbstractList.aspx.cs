@@ -82,7 +82,22 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                     SubviewDDL.Visible = true;
                     break;
+                case "ODPStaffSupervisor":
+                    SubviewLabel.Text = "Abstract Types:";
+                    SubviewLabel.Visible = true;
+
+                    SubviewDDL.Items.Add(new ListItem("Open Abstracts", "open"));
+                    SubviewDDL.Items.Add(new ListItem("Abstract Review", "review"));
+
+                    if (selectedIndex > -1)
+                    {
+                        SubviewDDL.SelectedIndex = selectedIndex;
+                    }
+
+                    SubviewDDL.Visible = true;
+                    break;
                 default:
+                    SubviewLabel.Visible = false;
                     SubviewDDL.Visible = false;
                     break;
             }
@@ -90,22 +105,37 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         protected void RenderAbstractListView(string view)
         {
+            Control abstractView = null;
+
             switch (view)
             {
                 case "CoderSupervisor":
                     if (SubviewDDL.SelectedValue == "coded")
                     {
-                        CoderSupervisorView_Coded abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Coded.ascx") as CoderSupervisorView_Coded;
-                        AbstractViewPlaceHolder.Controls.Add(abstractView);
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Coded.ascx") as CoderSupervisorView_Coded;
                     }
-                    else
+                    else if (SubviewDDL.SelectedValue == "open")
                     {
-                        CoderSupervisorView_Open abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Open.ascx") as CoderSupervisorView_Open;
-                        AbstractViewPlaceHolder.Controls.Add(abstractView);
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Open.ascx") as CoderSupervisorView_Open;
+                    }
+                    break;
+                case "ODPStaffSupervisor":
+                    if (SubviewDDL.SelectedValue == "open")
+                    {
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Open.ascx") as ODPSupervisorView_Open;
+                    }
+                    else if (SubviewDDL.SelectedValue == "review")
+                    {
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Review.ascx") as ODPSupervisorView_Review;
                     }
                     break;
                 default:
                     break;
+            }
+
+            if (abstractView != null)
+            {
+                AbstractViewPlaceHolder.Controls.Add(abstractView);
             }
         }
     }

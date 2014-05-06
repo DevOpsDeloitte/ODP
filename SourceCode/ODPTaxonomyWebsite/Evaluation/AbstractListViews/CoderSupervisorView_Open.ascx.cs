@@ -28,15 +28,18 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                                  join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                                  where (
                                      // 1N Consensus complete status with notes uploaded
-                                    h.AbstractStatusID == (int)AbstractStatusEnum.OPEN &&
+                                    (h.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1 ||
+                                    h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A) &&
                                      // Make sure the history is the latest one
                                     h.CreatedDate == db.AbstractStatusChangeHistories
-                                     .Where(h2 => h2.AbstractID == a.AbstractID && h2.AbstractStatusID == (int)AbstractStatusEnum.OPEN)
+                                     .Where(h2 => h2.AbstractID == a.AbstractID && (
+                                         h2.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1) ||
+                                         h2.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A)
                                      .Select(h2 => h2.CreatedDate).Max()
                                      )
                                  orderby h.CreatedDate descending
                                  orderby a.ProjectTitle ascending
-                                 select new AbstractListView_CoderSupervisorModel
+                                 select new AbstractListRow
                                  {
                                      AbstractID = a.AbstractID,
                                      ProjectTitle = a.ProjectTitle,

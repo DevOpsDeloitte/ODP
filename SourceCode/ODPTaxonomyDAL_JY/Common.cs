@@ -7,10 +7,13 @@ namespace ODPTaxonomyDAL_JY
 {
     public enum AbstractStatusEnum
     {
-        OPEN = 1,
-        CODED_BY_CODER = 3,
+        OPEN_0 = 1,
+        RETRIEVED_FOR_CODING_1 = 2,
+        CODED_BY_CODER_1A = 3,
         CONSENSUS_COMPLETE_1B = 4,
-        CONSENSUS_COMPLETE_WITH_NOTES_1N = 6
+        CONSENSUS_COMPLETE_WITH_NOTES_1N = 6,
+        ODP_STAFF_CONSENSUS_2B = 9,
+        ODP_STAFF_AND_CODER_CONSENSUS_2C = 10
     }
 
     public enum SubmissionTypeEnum
