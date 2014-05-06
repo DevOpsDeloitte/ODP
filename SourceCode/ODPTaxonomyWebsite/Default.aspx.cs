@@ -64,7 +64,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_coder;
-                Response.Redirect("Evaluation/ViewAbstract.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstract.aspx", false);
             }
             catch (Exception ex)
             {
@@ -79,7 +79,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_coderSup;
-                Response.Redirect("Evaluation/ManageTeams.aspx", false);
+                Response.Redirect("/Evaluation/ManageTeams.aspx", false);
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_coderSup;
-                Response.Redirect("Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
             }
             catch (Exception ex)
             {
@@ -107,7 +107,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_coderSup;
-                Response.Redirect("Evaluation/ViewAbstract.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstract.aspx", false);
             }
             catch (Exception ex)
             {
@@ -121,7 +121,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_odp;
-                Response.Redirect("Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
             }
             catch (Exception ex)
             {
@@ -135,7 +135,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_odpSup;
-                Response.Redirect("Evaluation/ManageTeams.aspx", false);
+                Response.Redirect("/Evaluation/ManageTeams.aspx", false);
             }
             catch (Exception ex)
             {
@@ -149,7 +149,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_odpSup;
-                Response.Redirect("Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
             }
             catch (Exception ex)
             {
@@ -165,7 +165,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_admin;
-                Response.Redirect("AccountManagement/ManageAccounts.aspx", false);
+                Response.Redirect("/AccountManagement/ManageAccounts.aspx", false);
             }
             catch (Exception ex)
             {
@@ -179,7 +179,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_admin;
-                Response.Redirect("Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
             }
             catch (Exception ex)
             {
@@ -207,7 +207,7 @@ namespace ODPTaxonomyWebsite
                 {
                     //Coder
                     pnl_coder.Visible = true;
-                    //Checking Abstarct Coding Option Evailuability
+                    //Checking Abstract Coding Option Evailuability
                     teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.Coder;
                     bool userIsInTeam = Common.UserIsInTeam(connString, teamTypeID, userId);
                     if (userIsInTeam)

@@ -155,8 +155,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                                   join ur in db.tbl_aspnet_UsersInRoles on u.UserId equals ur.UserId
                                   join r in db.tbl_aspnet_Roles on ur.RoleId equals r.RoleId
                                   where roles.Contains(r.RoleName) && !list_teamUsers.Contains(u.UserId) && m.IsApproved
-                                  orderby u.UserFirstName, u.UserLastName
-                                   select u).Distinct();
+                                  select u).Distinct().OrderBy(e => e.UserFirstName).ThenBy(e => e.UserLastName);
                     list_users = matches.ToList<tbl_aspnet_User>();
                 }
 
