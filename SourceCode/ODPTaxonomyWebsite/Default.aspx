@@ -43,5 +43,6 @@
         <h3>Role: Coder</h3>
         <p><asp:Button runat="server" Text="View/Code Abstract" 
             ID="btn_viewAbstract_coder" onclick="btn_viewAbstract_coder_Click" /></p>
+        <p><asp:Label runat="server" CssClass="regularMessage" ID="lbl_messCoder" Visible="false"></asp:Label></p>
     </asp:Panel>
 </asp:Content>
