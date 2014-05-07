@@ -5,6 +5,7 @@
     <h2>
         View Abstract
     </h2>
+    <p><asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="true"></asp:Label></p>
     <p>
         <asp:Button runat="server" ID="btn_print" Text="Print Abstract" />&nbsp;&nbsp;
         <asp:Button runat="server" ID="btn_code" Text="Code Abstract" />&nbsp;&nbsp;

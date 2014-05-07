@@ -7,14 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace ODPTaxonomyWebsite.Evaluation
 {
-    public partial class ViewAbstractList : System.Web.UI.Page
+    public partial class Evaluation : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["CurrentRole"] != null)
-            {
-                lbl_messageUsers.Text = "Your Current Role: " + Session["CurrentRole"].ToString();
-            }
+
         }
     }
 }

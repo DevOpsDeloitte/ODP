@@ -217,7 +217,7 @@ namespace ODPTaxonomyWebsite
                     else
                     {
                         btn_viewAbstract_coder.Visible = false;
-
+                        pnl_coder.Visible = false;
                     }
                 }
 

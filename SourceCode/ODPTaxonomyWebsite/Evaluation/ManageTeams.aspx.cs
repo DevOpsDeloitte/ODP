@@ -333,11 +333,14 @@ namespace ODPTaxonomyWebsite.Evaluation
             {
                 if (Int32.TryParse(hf_teamID.Value.ToString(), out teamID))
                 {
-                    currentUserList = dic_teamUsers[teamID];
-                    if (rpt_teamMembers != null)
+                    if (dic_teamUsers.ContainsKey(teamID))
                     {
-                        rpt_teamMembers.DataSource = currentUserList;
-                        rpt_teamMembers.DataBind();
+                        currentUserList = dic_teamUsers[teamID];
+                        if (rpt_teamMembers != null)
+                        {
+                            rpt_teamMembers.DataSource = currentUserList;
+                            rpt_teamMembers.DataBind();
+                        }
                     }
                 }
             }
