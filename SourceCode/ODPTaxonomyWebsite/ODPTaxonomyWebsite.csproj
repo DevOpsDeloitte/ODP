@@ -58,6 +58,8 @@
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx" />
     <Content Include="AccountManagement\ViewUsers.aspx" />
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Review.ascx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
@@ -120,6 +122,20 @@
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx.designer.cs">
       <DependentUpon>CoderSupervisorView_Open.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx.cs">
+      <DependentUpon>ODPStaffMemberView_Default.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx.designer.cs">
+      <DependentUpon>ODPStaffMemberView_Default.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx.cs">
+      <DependentUpon>ODPStaffMemberView_Review.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx.designer.cs">
+      <DependentUpon>ODPStaffMemberView_Review.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx.cs">
       <DependentUpon>ODPSupervisorView_Open.ascx</DependentUpon>

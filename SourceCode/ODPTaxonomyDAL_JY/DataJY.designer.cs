@@ -51,6 +51,9 @@ namespace ODPTaxonomyDAL_JY
     partial void InsertAbstractScan(AbstractScan instance);
     partial void UpdateAbstractScan(AbstractScan instance);
     partial void DeleteAbstractScan(AbstractScan instance);
+    partial void InsertAbstractReviewList(AbstractReviewList instance);
+    partial void UpdateAbstractReviewList(AbstractReviewList instance);
+    partial void DeleteAbstractReviewList(AbstractReviewList instance);
     #endregion
 		
 		public DataJYDataContext() : 
@@ -138,6 +141,14 @@ namespace ODPTaxonomyDAL_JY
 				return this.GetTable<AbstractScan>();
 			}
 		}
+		
+		public System.Data.Linq.Table<AbstractReviewList> AbstractReviewLists
+		{
+			get
+			{
+				return this.GetTable<AbstractReviewList>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Abstract")]
@@ -188,6 +199,10 @@ namespace ODPTaxonomyDAL_JY
 		
 		private EntitySet<Evaluation> _Evaluations1;
 		
+		private EntitySet<AbstractReviewList> _AbstractReviewLists;
+		
+		private EntitySet<AbstractReviewList> _AbstractReviewLists1;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -235,6 +250,8 @@ namespace ODPTaxonomyDAL_JY
 			this._AbstractStatusChangeHistories = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories));
 			this._Evaluations = new EntitySet<Evaluation>(new Action<Evaluation>(this.attach_Evaluations), new Action<Evaluation>(this.detach_Evaluations));
 			this._Evaluations1 = new EntitySet<Evaluation>(new Action<Evaluation>(this.attach_Evaluations1), new Action<Evaluation>(this.detach_Evaluations1));
+			this._AbstractReviewLists = new EntitySet<AbstractReviewList>(new Action<AbstractReviewList>(this.attach_AbstractReviewLists), new Action<AbstractReviewList>(this.detach_AbstractReviewLists));
+			this._AbstractReviewLists1 = new EntitySet<AbstractReviewList>(new Action<AbstractReviewList>(this.attach_AbstractReviewLists1), new Action<AbstractReviewList>(this.detach_AbstractReviewLists1));
 			OnCreated();
 		}
 		
@@ -637,6 +654,32 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_AbstractReviewList", Storage="_AbstractReviewLists", ThisKey="AbstractID", OtherKey="AbstractID")]
+		public EntitySet<AbstractReviewList> AbstractReviewLists
+		{
+			get
+			{
+				return this._AbstractReviewLists;
+			}
+			set
+			{
+				this._AbstractReviewLists.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_AbstractReviewList1", Storage="_AbstractReviewLists1", ThisKey="AbstractID", OtherKey="AbstractID")]
+		public EntitySet<AbstractReviewList> AbstractReviewLists1
+		{
+			get
+			{
+				return this._AbstractReviewLists1;
+			}
+			set
+			{
+				this._AbstractReviewLists1.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -688,6 +731,30 @@ namespace ODPTaxonomyDAL_JY
 		}
 		
 		private void detach_Evaluations1(Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract1 = null;
+		}
+		
+		private void attach_AbstractReviewLists(AbstractReviewList entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract = this;
+		}
+		
+		private void detach_AbstractReviewLists(AbstractReviewList entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract = null;
+		}
+		
+		private void attach_AbstractReviewLists1(AbstractReviewList entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract1 = this;
+		}
+		
+		private void detach_AbstractReviewLists1(AbstractReviewList entity)
 		{
 			this.SendPropertyChanging();
 			entity.Abstract1 = null;
@@ -2437,6 +2504,218 @@ namespace ODPTaxonomyDAL_JY
 						this._EvaluationId = default(int);
 					}
 					this.SendPropertyChanged("Evaluation");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.AbstractReviewList")]
+	public partial class AbstractReviewList : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AbstractReviewListID;
+		
+		private int _AbstractID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<System.Guid> _CreatedBy;
+		
+		private EntityRef<Abstract> _Abstract;
+		
+		private EntityRef<Abstract> _Abstract1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAbstractReviewListIDChanging(int value);
+    partial void OnAbstractReviewListIDChanged();
+    partial void OnAbstractIDChanging(int value);
+    partial void OnAbstractIDChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnCreatedByChanging(System.Nullable<System.Guid> value);
+    partial void OnCreatedByChanged();
+    #endregion
+		
+		public AbstractReviewList()
+		{
+			this._Abstract = default(EntityRef<Abstract>);
+			this._Abstract1 = default(EntityRef<Abstract>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractReviewListID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AbstractReviewListID
+		{
+			get
+			{
+				return this._AbstractReviewListID;
+			}
+			set
+			{
+				if ((this._AbstractReviewListID != value))
+				{
+					this.OnAbstractReviewListIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractReviewListID = value;
+					this.SendPropertyChanged("AbstractReviewListID");
+					this.OnAbstractReviewListIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
+		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					if ((this._Abstract.HasLoadedOrAssignedValue || this._Abstract1.HasLoadedOrAssignedValue))
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAbstractIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractID = value;
+					this.SendPropertyChanged("AbstractID");
+					this.OnAbstractIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_AbstractReviewList", Storage="_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		public Abstract Abstract
+		{
+			get
+			{
+				return this._Abstract.Entity;
+			}
+			set
+			{
+				Abstract previousValue = this._Abstract.Entity;
+				if (((previousValue != value) 
+							|| (this._Abstract.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Abstract.Entity = null;
+						previousValue.AbstractReviewLists.Remove(this);
+					}
+					this._Abstract.Entity = value;
+					if ((value != null))
+					{
+						value.AbstractReviewLists.Add(this);
+						this._AbstractID = value.AbstractID;
+					}
+					else
+					{
+						this._AbstractID = default(int);
+					}
+					this.SendPropertyChanged("Abstract");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_AbstractReviewList1", Storage="_Abstract1", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		public Abstract Abstract1
+		{
+			get
+			{
+				return this._Abstract1.Entity;
+			}
+			set
+			{
+				Abstract previousValue = this._Abstract1.Entity;
+				if (((previousValue != value) 
+							|| (this._Abstract1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Abstract1.Entity = null;
+						previousValue.AbstractReviewLists1.Remove(this);
+					}
+					this._Abstract1.Entity = value;
+					if ((value != null))
+					{
+						value.AbstractReviewLists1.Add(this);
+						this._AbstractID = value.AbstractID;
+					}
+					else
+					{
+						this._AbstractID = default(int);
+					}
+					this.SendPropertyChanged("Abstract1");
 				}
 			}
 		}

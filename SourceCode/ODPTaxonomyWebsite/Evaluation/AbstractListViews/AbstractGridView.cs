@@ -18,6 +18,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             this.RowStyle.CssClass = "data-row";
 
             this.PageIndexChanging += new GridViewPageEventHandler(this.PageIndexChangingHandler);
+
+            this.EmptyDataText = "No Abstracts";
         }
 
         protected void PageIndexChangingHandler(object sender, GridViewPageEventArgs e)

@@ -30,5 +30,4 @@
         <asp:TemplateField HeaderText="F"></asp:TemplateField>
         <asp:TemplateField HeaderText="G"></asp:TemplateField>
     </Columns>
-    <RowStyle CssClass="data-row" />
 </odp:AbstractGridView>

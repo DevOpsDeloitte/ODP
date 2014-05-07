@@ -82,6 +82,20 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                     SubviewDDL.Visible = true;
                     break;
+                case "ODPStaffMember":
+                    SubviewLabel.Text = "Abstract Types:";
+                    SubviewLabel.Visible = true;
+
+                    SubviewDDL.Items.Add(new ListItem("Default", ""));
+                    SubviewDDL.Items.Add(new ListItem("In Review List", "review"));
+
+                    if (selectedIndex > -1)
+                    {
+                        SubviewDDL.SelectedIndex = selectedIndex;
+                    }
+
+                    SubviewDDL.Visible = true;
+                    break;
                 case "ODPStaffSupervisor":
                     SubviewLabel.Text = "Abstract Types:";
                     SubviewLabel.Visible = true;
@@ -96,6 +110,8 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                     SubviewDDL.Visible = true;
                     break;
+
+                case "Admin":
                 default:
                     SubviewLabel.Visible = false;
                     SubviewDDL.Visible = false;
@@ -130,6 +146,16 @@ namespace ODPTaxonomyWebsite.Evaluation
                     else if (SubviewDDL.SelectedValue == "review")
                     {
                         abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Review.ascx") as ODPSupervisorView_Review;
+                    }
+                    break;
+                case "ODPStaffMember":
+                    if (SubviewDDL.SelectedValue == "review")
+                    {
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Review.ascx") as ODPStaffMemberView_Review;
+                    }
+                    else
+                    {
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Default.ascx") as ODPStaffMemberView_Default;
                     }
                     break;
                 default:

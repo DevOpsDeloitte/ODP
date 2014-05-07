@@ -1,9 +1,8 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CoderSupervisorView_Coded.ascx.cs"
-    Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView_Coded" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Default.ascx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Default" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
     Assembly="ODPTaxonomyWebsite" %>
 <h2>
-    View Coded Abstracts</h2>
+    View Abstracts</h2>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable" OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>
@@ -15,7 +14,7 @@
                     <span>
                         <%#Eval("ProjectTitle") %></span>
                     <asp:HyperLink runat="server" ID="AbstractScanLink" CssClass="scan-file">
-                        <asp:Image runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment" />
+                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment" />
                     </asp:HyperLink>
                 </asp:Panel>
             </ItemTemplate>
