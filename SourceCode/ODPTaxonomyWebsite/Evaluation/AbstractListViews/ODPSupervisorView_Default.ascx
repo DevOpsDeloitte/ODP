@@ -1,8 +1,8 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPSupervisorView_Open.ascx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Open" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPSupervisorView_Default.ascx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Default" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
     Assembly="ODPTaxonomyWebsite" %>
 <h2>
-    View Open Abstracts</h2>
+    View Coded Abstracts</h2>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable" OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>

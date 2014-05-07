@@ -10,7 +10,7 @@
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews {
     
     
-    public partial class ODPSupervisorView_Open {
+    public partial class ODPSupervisorView_Default {
         
         /// <summary>
         /// AbstractViewGridView control.

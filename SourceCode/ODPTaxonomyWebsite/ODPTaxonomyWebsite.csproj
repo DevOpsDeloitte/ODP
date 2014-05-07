@@ -60,8 +60,8 @@
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx" />
-    <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Review.ascx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
@@ -137,19 +137,19 @@
     <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx.designer.cs">
       <DependentUpon>ODPStaffMemberView_Review.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx.cs">
+      <DependentUpon>ODPSupervisorView_Default.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx.designer.cs">
+      <DependentUpon>ODPSupervisorView_Default.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx.cs">
       <DependentUpon>ODPSupervisorView_Open.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx.designer.cs">
       <DependentUpon>ODPSupervisorView_Open.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Review.ascx.cs">
-      <DependentUpon>ODPSupervisorView_Review.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Review.ascx.designer.cs">
-      <DependentUpon>ODPSupervisorView_Review.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\ManageTeams.aspx.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>

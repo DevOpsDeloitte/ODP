@@ -28,7 +28,15 @@ namespace ODPTaxonomyWebsite.Evaluation
             }
             else
             {
-                string selectedView = ViewDDL.SelectedValue;
+                var targetID = Request.Form["__EVENTTARGET"];
+                // check if we are changing main view
+                // if we are, reset the subview
+                if (targetID.Contains("MainviewDDL"))
+                {
+                    SubviewDDL.SelectedIndex = -1;
+                }
+
+                string selectedView = MainviewDDL.SelectedValue;
                 int selectedSubview = SubviewDDL.SelectedIndex;
 
                 if (!string.IsNullOrEmpty(selectedView))
@@ -49,17 +57,17 @@ namespace ODPTaxonomyWebsite.Evaluation
         {
             if (roles.Count > 1)
             {
-                ViewDDL.Items.Clear();
-                ViewDDL.Items.Add(new ListItem("Select a view", ""));
+                MainviewDDL.Items.Clear();
+                MainviewDDL.Items.Add(new ListItem("Select a view", ""));
                 foreach (string role in roles)
                 {
-                    ViewDDL.Items.Add(new ListItem(role + " view", role));
+                    MainviewDDL.Items.Add(new ListItem(role + " view", role));
                 }
-                ViewDDL.Visible = true;
+                MainviewDDL.Visible = true;
             }
             else
             {
-                ViewDDL.Visible = false;
+                MainviewDDL.Visible = false;
             }
         }
 
@@ -86,7 +94,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     SubviewLabel.Text = "Abstract Types:";
                     SubviewLabel.Visible = true;
 
-                    SubviewDDL.Items.Add(new ListItem("Default", ""));
+                    SubviewDDL.Items.Add(new ListItem("Default View", ""));
                     SubviewDDL.Items.Add(new ListItem("In Review List", "review"));
 
                     if (selectedIndex > -1)
@@ -100,8 +108,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                     SubviewLabel.Text = "Abstract Types:";
                     SubviewLabel.Visible = true;
 
-                    SubviewDDL.Items.Add(new ListItem("Open Abstracts", "open"));
-                    SubviewDDL.Items.Add(new ListItem("Abstract Review", "review"));
+                    SubviewDDL.Items.Add(new ListItem("Default View", ""));
+                    SubviewDDL.Items.Add(new ListItem("Open Abstract", "open"));
 
                     if (selectedIndex > -1)
                     {
@@ -143,9 +151,9 @@ namespace ODPTaxonomyWebsite.Evaluation
                     {
                         abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Open.ascx") as ODPSupervisorView_Open;
                     }
-                    else if (SubviewDDL.SelectedValue == "review")
+                    else
                     {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Review.ascx") as ODPSupervisorView_Review;
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Default.ascx") as ODPSupervisorView_Default;
                     }
                     break;
                 case "ODPStaffMember":

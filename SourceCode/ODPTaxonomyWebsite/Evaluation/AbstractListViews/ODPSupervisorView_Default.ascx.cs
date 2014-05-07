@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 using ODPTaxonomyDAL_JY;
 using ODPTaxonomyUtility_TT;
-using System.Configuration;
 
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
-    public partial class ODPSupervisorView_Open : System.Web.UI.UserControl
+    public partial class ODPSupervisorView_Default : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,15 +34,13 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                                        join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
                                        from scn in evscn.DefaultIfEmpty()
                                        where (
-                                           // 2 or 2A
-                                          (h.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 ||
-                                          h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A) &&
+                                           // 1N or greater
+                                          h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
                                            // Make sure the history is the latest one
                                           h.CreatedDate == db.AbstractStatusChangeHistories
                                            .Where(h2 => h2.AbstractID == a.AbstractID &&
-                                               (h.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 ||
-                                                h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A)
-                                                )
+                                               h2.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N
+                                               )
                                            .Select(h2 => h2.CreatedDate).Max() &&
                                            // Make sure this evaluation is coder's evaluation, not ODP's
                                           ev.EvaluationTypeId == (int)EvaluationTypeEnum.CODER_EVALUATION &&
@@ -64,6 +62,32 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                                            Comment = sb.comments,
                                            AbstractScan = scn.FileName
                                        }).ToList();
+
+                for (int i = 0; i < parentAbstracts.Count; i++)
+                {
+                    abstracts.Add(parentAbstracts[i]);
+
+                    if ((parentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
+                        parentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
+                        parentAbstracts[i].EvaluationID != null)
+                    {
+                        // Inserts Coder Evaluation rows, latest 3 only
+                        var coderEvaluations = data.GetCoderEvaluations_1A(parentAbstracts[i].AbstractID);
+                        abstracts.AddRange(coderEvaluations);
+
+                        // Insert ODP Evaluation rows, latest 3 only
+                        var odpEvaluations = data.GetODPStaffEvaluations_2A(parentAbstracts[i].AbstractID);
+                        abstracts.AddRange(odpEvaluations);
+                        
+                        // ODP Staff consensus row
+                        var odpStaffConsensus = data.GetODPStaffConsensus_2B(parentAbstracts[i].AbstractID);
+                        abstracts.AddRange(odpStaffConsensus);
+
+                        // ODP Staff vs Coder consensus row
+                        var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(parentAbstracts[i].AbstractID);
+                        abstracts.AddRange(odpStaffCoderConsensus);
+                    }
+                }
 
                 AbstractViewGridView.DataSource = abstracts;
                 AbstractViewGridView.DataBind();

@@ -13,13 +13,13 @@ namespace ODPTaxonomyWebsite.Evaluation {
     public partial class ViewAbstractList {
         
         /// <summary>
-        /// ViewDDL control.
+        /// MainviewDDL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ViewDDL;
+        protected global::System.Web.UI.WebControls.DropDownList MainviewDDL;
         
         /// <summary>
         /// SubviewLabel control.
