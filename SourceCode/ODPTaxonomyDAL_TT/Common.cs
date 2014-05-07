@@ -60,6 +60,20 @@ namespace ODPTaxonomyDAL_TT
             get;
         }
 
+        public static bool UserIsInTeam(string connString, int teamTypeID, Guid userId)
+        {
+            bool isInTeam = false;
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from t in db.tbl_Teams
+                              join tu in db.tbl_TeamUsers on t.TeamID equals tu.TeamID
+                              where (t.StatusID == (int)ODPTaxonomyDAL_TT.Status.Active) && (t.TeamTypeID == teamTypeID) && (tu.UserId == userId)
+                              select t.TeamID;
+                isInTeam = matches.Any();
+            }
+            return isInTeam;
+        }
+
         public static Guid GetCurrentUserId(string connString, string userCurrentName)
         {
             Guid userCurrentId = Guid.Empty;

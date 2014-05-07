@@ -331,3 +331,10 @@ div.accountInfo
     top:28px;
     visibility:hidden;
 }
+.menuItems li 
+{
+    background-color: #465C71;
+    color:#fff;
+    text-align:left;
+    
+}

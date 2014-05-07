@@ -6,13 +6,14 @@
         Manage Teams
     </h2>
     <p>
-    <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error"></asp:Label>
+    <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error"></asp:Label></p>
     <asp:Panel runat="server" ID="pnl_content">
+    <p>
     <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers"></asp:Label>
     </p>
     <asp:HiddenField runat="server" ID="hf_teamTypeId" />
-    <h3>Users evailable for team to pick up</h3>
-    <p runat="server" id="gc_noUsers">No users are currently evailable for you to select for a new team.</p>
+    <h3>Users available for team to pick up</h3>
+    <p runat="server" id="gc_noUsers">No users are currently available for you to select for a new team.</p>
     <p></p>
     <asp:Repeater runat="server" ID="rpt_users">
         <HeaderTemplate>

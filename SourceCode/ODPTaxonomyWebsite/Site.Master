@@ -34,22 +34,38 @@
                     <a href="" onclick="showMenu(); return false;" class="navigationBtn">Navigation</a>
                     <ul class="menuItems" id="menuItems">
                         <li><a href="/Default.aspx">Home</a></li>
-                        <li><a href="/AccountManagement/ViewUsers.aspx">View Users</a></li>
-                        <li><a href="/Evaluation/ViewAbstractList.aspx">View Abstract List</a></li>
-                        <li><a href="/Evaluation/ViewAbstract.aspx">View Abstract</a></li>
-                        <li><a href="/Evaluation/ManageTeams.aspx">Manage Teams</a></li>	
+                        <li runat="server" visible="false" id="pnl_admin">Role: Admin
+                            <ul>                                
+                                <li><asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" /></li>
+                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" /></li>                                
+                            </ul>
+                        </li>
+                        <li runat="server" visible="false" id="pnl_odpSup">Role: ODP Suprvisor
+                            <ul>
+                                <li><asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></li>
+                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" /></li>                                
+                            </ul>
+                        </li>
+                        <li runat="server" visible="false" id="pnl_odp">Role: ODP Staff Member
+                            <ul>
+                                <li><asp:LinkButton OnClick="btn_viewAbstractList_odp_Click" runat="server" ID="btn_viewAbstractList_odp" Text="View Abstract List" /></li>
+                            </ul>
+                        </li>
+                        <li runat="server" visible="false" id="pnl_coderSup">Role: Coder Supervisor
+                            <ul>
+                                <li><asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" /></li>
+                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /></li> 
+                                <li><asp:LinkButton OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" /></li>                               
+                            </ul>
+                        </li>
+                        <li runat="server" visible="false" id="pnl_coder">Role: Coder
+                            <ul>
+                                <li><asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" /></li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
-                <!--
-                <asp:Menu ID="NavigationMenu" Visible="false" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/AccountManagement/ViewUsers.aspx" Text="View Users"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/ViewAbstractList.aspx" Text="View Abstract List"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/ViewAbstract.aspx" Text="View Abstract"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/ManageTeams.aspx" Text="Manage Teams"/>
-                    </Items>
-                </asp:Menu>-->
+                
             </div>
         </div>
         <div class="main">
