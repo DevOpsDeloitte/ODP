@@ -213,13 +213,13 @@ namespace ODPTaxonomyWebsite
                     if (userIsInTeam)
                     {
                         btn_viewAbstract_coder.Visible = true;
-                        lbl_messageUsers.Visible = false;
+                        lbl_messCoder.Visible = false;
                     }
                     else
                     {
                         btn_viewAbstract_coder.Visible = false;
-                        lbl_messageUsers.Visible = true;
-                        lbl_messageUsers.Text = messUserNotInTeam;
+                        lbl_messCoder.Visible = true;
+                        lbl_messCoder.Text = messUserNotInTeam;
                     }
                 }
                 
