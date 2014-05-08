@@ -11,32 +11,40 @@
 
 <asp:Panel ID="pnl_change_password" runat="server">
 
-<asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
+<p>
+    Password must be:
+    <ul>
+        <li>Minimum of 8 characters.</li>
+        <li>Must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character, and 1 number.</li>
+    </ul>
+</p>
 
+<asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
 
 <table>
     <tr>
-        <td><asp:Label ID="lbl_new_password" runat="server" Text="New Password:" AssociatedControlID="txt_new_password" /></td>
+        <td><asp:Label ID="lbl_new_password" runat="server" Text="*Password:" AssociatedControlID="txt_new_password" /></td>
         <td>
             <asp:TextBox ID="txt_new_password" runat="server" TextMode="Password" MaxLength="50"  />
             <asp:RequiredFieldValidator ID="reqval_newPassword" runat="server" ErrorMessage="Password is required." Display="Dynamic" ControlToValidate="txt_new_password"  CssClass="errorMessage" />
             <asp:RegularExpressionValidator ID="regval_newPassword" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" Display="Dynamic" CssClass="errorMessage" 
-                ErrorMessage="Password must be at least 8 characters in length, one uppercase letter, one lowercase letter, one number, and one special characters." ControlToValidate="txt_new_password" />
+                ErrorMessage="Password does not meet requirements, please enter a new password." ControlToValidate="txt_new_password" />
         </td>
     </tr>
     <tr>
-        <td><asp:Label ID="lbl_confirm_password" runat="server" Text="Confirm New Password:" AssociatedControlID="txt_confirm_password" /></td>
+        <td><asp:Label ID="lbl_confirm_password" runat="server" Text="*Confirm Password:" AssociatedControlID="txt_confirm_password" /></td>
         <td>
             <asp:TextBox ID="txt_confirm_password" runat="server" TextMode="Password" MaxLength="50"  />
             <asp:RequiredFieldValidator ID="reqval_NewPasswordConfirm" runat="server" ErrorMessage="Confirm password is required." Display="Dynamic" ControlToValidate="txt_confirm_password"  CssClass="errorMessage" />
             <asp:RegularExpressionValidator ID="regval_NewPasswordConfirm" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" Display="Dynamic" CssClass="errorMessage"
-                ErrorMessage="Password must be at least 8 characters in length, one uppercase letter, one lowercase letter, one number, and one special characters." ControlToValidate="txt_confirm_password" />
-            <asp:CompareValidator ID="cmpval_password" runat="server" ErrorMessage="Password must be the same." CssClass="errorMessage" Display="Dynamic" ControlToCompare="txt_new_password" ControlToValidate="txt_confirm_password" />
+                ErrorMessage="Password does not meet requirements, please enter a new password." ControlToValidate="txt_confirm_password" />
+            <asp:CompareValidator ID="cmpval_password" runat="server" ErrorMessage="Passwords do not match, please reenter the password." CssClass="errorMessage" Display="Dynamic" ControlToCompare="txt_new_password" ControlToValidate="txt_confirm_password" />
         </td>
     </tr>
     <tr>
-        <td colspan="2">
+        <td>
             <asp:Button id="btn_change_password" runat="server" OnClick="btn_changePassword_OnClick" Text="Change Password" />
+            <asp:Button ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
         </td>
     </tr>
 </table>

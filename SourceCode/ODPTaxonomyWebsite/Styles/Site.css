@@ -276,12 +276,6 @@ div.accountInfo
     color: white;
 }
 
-.errorMessage
-{
-    font-size: 1.2em;
-    color: Red;
-}
-
 .bold
 {
     font-weight: bold;

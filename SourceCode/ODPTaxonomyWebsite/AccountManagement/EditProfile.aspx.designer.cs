@@ -13,6 +13,15 @@ namespace ODPTaxonomyWebsite.AccountManagement {
     public partial class EditProfile {
         
         /// <summary>
+        /// btn_change_password control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_change_password;
+        
+        /// <summary>
         /// pnl_confirmation control.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,51 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator regex_email;
+        
+        /// <summary>
+        /// lbl_confirm_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_confirm_email;
+        
+        /// <summary>
+        /// txt_confirm_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_confirm_email;
+        
+        /// <summary>
+        /// reqval_confirm_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqval_confirm_email;
+        
+        /// <summary>
+        /// regex_confirm_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regex_confirm_email;
+        
+        /// <summary>
+        /// cmpval_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cmpval_email;
         
         /// <summary>
         /// btn_save_profile control.

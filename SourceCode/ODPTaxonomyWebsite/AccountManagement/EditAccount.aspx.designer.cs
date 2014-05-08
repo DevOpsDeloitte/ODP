@@ -175,6 +175,51 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         protected global::System.Web.UI.WebControls.RegularExpressionValidator regex_email;
         
         /// <summary>
+        /// lbl_confirm_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_confirm_email;
+        
+        /// <summary>
+        /// txt_confirm_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_confirm_email;
+        
+        /// <summary>
+        /// reqval_confirm_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqval_confirm_email;
+        
+        /// <summary>
+        /// regex_confirm_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator regex_confirm_email;
+        
+        /// <summary>
+        /// cmpval_email control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cmpval_email;
+        
+        /// <summary>
         /// lbl_roles control.
         /// </summary>
         /// <remarks>
@@ -184,22 +229,49 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         protected global::System.Web.UI.WebControls.Label lbl_roles;
         
         /// <summary>
-        /// cbl_roles control.
+        /// cbx_Admin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cbl_roles;
+        protected global::System.Web.UI.WebControls.CheckBox cbx_Admin;
         
         /// <summary>
-        /// cusval_roles control.
+        /// cbx_ODPStaffSupervisor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CustomValidator cusval_roles;
+        protected global::System.Web.UI.WebControls.CheckBox cbx_ODPStaffSupervisor;
+        
+        /// <summary>
+        /// cbx_ODPStaffMember control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbx_ODPStaffMember;
+        
+        /// <summary>
+        /// cbx_CoderSupervisor control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbx_CoderSupervisor;
+        
+        /// <summary>
+        /// cbx_Coder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbx_Coder;
         
         /// <summary>
         /// lbl_new_password control.

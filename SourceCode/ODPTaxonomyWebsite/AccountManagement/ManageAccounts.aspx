@@ -8,7 +8,7 @@
 
     <asp:Label ID="lbl_error_message" CssClass="errorMessage" runat="server" Visible="false" />
 
-    <asp:LinkButton ID="lnkbtn_create_account" runat="server" Text="Create Account" OnClick="lnkbtn_createAccount_OnClick" />
+    <asp:LinkButton ID="lnkbtn_create_account" runat="server" Text="Create New Account" OnClick="lnkbtn_createAccount_OnClick" />
 
     <asp:GridView ID="gvw_users" runat="server" AutoGenerateColumns="false"
         AllowPaging="true" PageSize="25" OnPageIndexChanging="gvw_users_OnPageIndexChanging"

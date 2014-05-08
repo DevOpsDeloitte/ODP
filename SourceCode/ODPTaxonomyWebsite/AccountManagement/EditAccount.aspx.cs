@@ -25,16 +25,18 @@ namespace ODPTaxonomyWebsite.AccountManagement
                     }
                     else
                     {
-                        LoadRoles();
                         string l_action = Session["AM_Action"].ToString().ToUpper();
                         ViewState["Action"] = l_action;
 
                         if (l_action == "ADD")
                         {
                             // add user; hide userid
+                            ltl_page_title.Text = "Create Account";
                             pnl_username.Visible = false;
                             reqval_newPassword.Enabled = true;
                             reqval_NewPasswordConfirm.Enabled = true;
+                            reqval_confirm_email.Enabled = true;
+
                             rdl_activeYN.Items.FindByValue("1").Selected = true;
 
                         }
@@ -76,6 +78,8 @@ namespace ODPTaxonomyWebsite.AccountManagement
             txt_firstName.Text = rec.UserFirstName;
             txt_lastName.Text = rec.UserLastName;
             txt_email.Text = rec.Email;
+            ViewState["Email"] = rec.Email;
+
             string l_activeYN;
             l_activeYN = rec.IsApproved.ToString().ToUpper() == "TRUE" ? "1" : "0";
             ViewState["ActiveYN"] = l_activeYN;
@@ -85,10 +89,23 @@ namespace ODPTaxonomyWebsite.AccountManagement
             string[] l_rolesForUser = Roles.GetRolesForUser(l_username);
             foreach (string role in l_rolesForUser)
             {
-                ListItem li = cbl_roles.Items.FindByValue(role);
-                if (li != null)
+                switch (role.ToLower())
                 {
-                    li.Selected = true;
+                    case "admin":
+                        cbx_Admin.Checked = true;
+                        break;
+                    case "odpstaffsupervisor":
+                        cbx_ODPStaffSupervisor.Checked = true;
+                        break;
+                    case "odpstaffmember":
+                        cbx_ODPStaffMember.Checked = true;
+                        break;
+                    case "codersupervisor":
+                        cbx_CoderSupervisor.Checked = true;
+                        break;
+                    case "coder":
+                        cbx_Coder.Checked = true;
+                        break;
                 }
             }
         }
@@ -128,13 +145,16 @@ namespace ODPTaxonomyWebsite.AccountManagement
 
         }
 
-        protected void LoadRoles()
+        string GetEmail()
         {
-            using (AccountDataLinqDataContext db = new AccountDataLinqDataContext(AccountDAL.connString))
+            string s = "";
+            if (ViewState["Email"] != null)
             {
-                cbl_roles.DataSource = db.select_roles();
-                cbl_roles.DataBind();                   
+                s = ViewState["Email"].ToString();
             }
+
+            return s;
+
         }
 
         protected void btn_cancel_OnClick(object sender, EventArgs e)
@@ -162,13 +182,22 @@ namespace ODPTaxonomyWebsite.AccountManagement
                     {
                         // get roles list
                         string l_roleList = "";
-                        for (int i = 0; i < cbl_roles.Items.Count; i++)
-                        {
-                            if (cbl_roles.Items[i].Selected)
-                            {
-                                l_roleList += cbl_roles.Items[i].Value + ",";
-                            }
-                        }
+
+                        if (cbx_Admin.Checked)
+                            l_roleList +=  "Admin,";
+
+                        if (cbx_ODPStaffSupervisor.Checked)
+                            l_roleList += "ODPStaffSupervisor,";
+
+                        if (cbx_ODPStaffMember.Checked)
+                            l_roleList += "ODPStaffMember,";
+
+                        if (cbx_CoderSupervisor.Checked)
+                            l_roleList += "CoderSupervisor,";
+
+                        if (cbx_Coder.Checked)
+                            l_roleList += "Coder";
+
                         l_roleList = l_roleList.TrimEnd(',');
                 
                         // create new user
@@ -215,23 +244,11 @@ namespace ODPTaxonomyWebsite.AccountManagement
                             Membership.UpdateUser(updateUser);
 
                             // remove/add roles as appropriate
-                            foreach (ListItem role in cbl_roles.Items)
-                            {
-                                if (role.Selected)
-                                {
-                                    if (!Roles.IsUserInRole(updateUser.UserName, role.Value))
-                                    {
-                                        Roles.AddUserToRole(updateUser.UserName, role.Value);
-                                    }
-                                }
-                                else
-                                {
-                                    if (Roles.IsUserInRole(updateUser.UserName, role.Value))
-                                    {
-                                        Roles.RemoveUserFromRole(updateUser.UserName, role.Value);
-                                    }
-                                }
-                            }
+                            setRoles(cbx_Admin, updateUser.UserName, "Admin");
+                            setRoles(cbx_ODPStaffSupervisor, updateUser.UserName, "ODPStaffSupervisor");
+                            setRoles(cbx_ODPStaffMember, updateUser.UserName, "ODPStaffMember");
+                            setRoles(cbx_CoderSupervisor, updateUser.UserName, "CoderSupervisor");
+                            setRoles(cbx_Coder, updateUser.UserName, "Coder");                          
 
                             // successfully save
                             lbl_confirmation_message.Visible = true;
@@ -246,9 +263,58 @@ namespace ODPTaxonomyWebsite.AccountManagement
             }
         }
 
+        protected void setRoles(CheckBox cbx, string username, string role)
+        {
+            if (cbx.Checked)
+            {
+                if (!Roles.IsUserInRole(username, role))
+                {
+                    Roles.AddUserToRole(username, role);
+                }
+            }
+            else
+            {
+                if (Roles.IsUserInRole(username, role))
+                {
+                    Roles.RemoveUserFromRole(username, role);
+                }
+            }
+        }
+
         protected bool isValidForm()
         {
             bool l_isValid = true;
+
+            //check if email changed, if so need to confirm email
+            string l_oldEmail = GetEmail();
+            string l_newEmail = txt_email.Text.Trim().ToString();
+            string l_confirmEmail = txt_confirm_email.Text.Trim().ToString();
+
+            // if create, confirm email required
+            if (GetAction() == "ADD")
+            {
+                if ((!String.IsNullOrEmpty(l_newEmail)) && (String.IsNullOrEmpty(l_confirmEmail)))
+                {
+                    CustomValidator cv = new CustomValidator();
+                    cv.IsValid = false;
+                    cv.ErrorMessage = "Confirm Email is required.";
+                    this.Page.Validators.Add(cv);
+                    l_isValid = false;
+                }
+            }
+            else
+            {
+                //edit, if change changed, confirm email is required
+                if ((l_oldEmail != l_newEmail) && (String.IsNullOrEmpty(l_confirmEmail)))
+                {
+                    CustomValidator cv = new CustomValidator();
+                    cv.IsValid = false;
+                    cv.ErrorMessage = "Confirm Email is required.";
+                    this.Page.Validators.Add(cv);
+                    l_isValid = false;
+                }
+            }
+
 
             //check password; if enter one, need to enter the other
             string l_newpassword = txt_new_password.Text;
@@ -273,43 +339,34 @@ namespace ODPTaxonomyWebsite.AccountManagement
             }
 
             // check roles
-            if (cbl_roles.SelectedIndex == -1)
-            {
-                CustomValidator cv = new CustomValidator();
-                cv.IsValid = false;
-                cv.ErrorMessage = "Select at least one role.";
-                this.Page.Validators.Add(cv);
-                l_isValid = false;
-            }
-
             bool isAdmin = false;
             bool isODPSupervisor = false;
             bool isODPStaff = false;
             bool isCoderSupervisor = false;
             bool isCoder = false;
 
-            for (int i = 0; i < cbl_roles.Items.Count; i++)
+            if (cbx_Admin.Checked)
+                isAdmin = true;
+
+            if (cbx_ODPStaffSupervisor.Checked)
+                isODPSupervisor = true;
+
+            if (cbx_ODPStaffMember.Checked)
+                isODPStaff = true;
+
+            if (cbx_CoderSupervisor.Checked)
+                isCoderSupervisor = true;
+
+            if (cbx_Coder.Checked)
+                isCoder = true;
+
+            if (!isAdmin && !isODPSupervisor && !isODPStaff && !isCoderSupervisor && !isCoder)
             {
-                if (cbl_roles.Items[i].Selected)
-                {
-                    switch (cbl_roles.Items[i].Value.ToLower()){
-                        case "admin":
-                            isAdmin = true;
-                            break;
-                        case "odpstaffsupervisor":
-                            isODPSupervisor = true;
-                            break;
-                        case "odpstaffmember":
-                            isODPStaff = true;
-                            break;
-                        case "codersupervisor":
-                            isCoderSupervisor = true;
-                            break;
-                        case "coder":
-                            isCoder = true;
-                            break;
-                    }
-                }
+                CustomValidator cv = new CustomValidator();
+                cv.IsValid = false;
+                cv.ErrorMessage = "Select at least one role.";
+                this.Page.Validators.Add(cv);
+                l_isValid = false;
             }
 
             if ((isAdmin) && (isCoder || isCoderSupervisor))

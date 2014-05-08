@@ -40,40 +40,69 @@ namespace ODPTaxonomyWebsite.AccountManagement
             }
         }
 
+        protected void btn_changePassword_OnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AccountManagement/ChangePassword.aspx");
+        }
+
         protected void btn_saveProfile_OnClick(object sender, EventArgs e)
         {
             try
             {
-                MembershipUser l_user = Membership.GetUser(User.Identity.Name);
-                Guid l_userID = (Guid)l_user.ProviderUserKey;
+                if (Page.IsValid && isValidForm()) {
+                    MembershipUser l_user = Membership.GetUser(User.Identity.Name);
+                    Guid l_userID = (Guid)l_user.ProviderUserKey;
 
-                int l_intReturn;
-                string l_fname = txt_fname.Text.Trim();
-                string l_lname = txt_lname.Text.Trim();
+                    int l_intReturn;
+                    string l_fname = txt_fname.Text.Trim();
+                    string l_lname = txt_lname.Text.Trim();
 
-                using (AccountDataLinqDataContext db = new AccountDataLinqDataContext(AccountDAL.connString))
-                {
-                    l_intReturn = db.update_userProfileByID(l_userID, l_fname, l_lname);
-                }
+                    using (AccountDataLinqDataContext db = new AccountDataLinqDataContext(AccountDAL.connString))
+                    {
+                        l_intReturn = db.update_userProfileByID(l_userID, l_fname, l_lname);
+                    }
 
-                if (l_intReturn == 0)
-                {
-                    HandlePageError("Error updating profile.  Please try again.");
-                }
-                else
-                {
-                    l_user.Email = txt_email.Text;
-                    Membership.UpdateUser(l_user);
+                    if (l_intReturn == 0)
+                    {
+                        HandlePageError("Error updating profile.  Please try again.");
+                    }
+                    else
+                    {
+                        l_user.Email = txt_email.Text;
+                        Membership.UpdateUser(l_user);
 
-                    pnl_confirmation.Visible = true;
-                    pnl_edit_profile.Visible = false;
+                        pnl_confirmation.Visible = true;
+                        pnl_edit_profile.Visible = false;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 Utils.LogError(ex);
             }
+        }
 
+        protected bool isValidForm()
+        {
+            bool l_isValid = true;
+
+            //check if email changed, if so need to confirm email
+            MembershipUser l_user = Membership.GetUser(User.Identity.Name);
+            string l_oldEmail = l_user.Email;
+            string l_newEmail = txt_email.Text.Trim().ToString();
+            string l_confirmEmail = txt_confirm_email.Text.Trim().ToString();
+
+            //if change changed, confirm email is required
+            if ((l_oldEmail != l_newEmail) && (String.IsNullOrEmpty(l_confirmEmail)))
+            {
+                CustomValidator cv = new CustomValidator();
+                cv.IsValid = false;
+                cv.ErrorMessage = "Confirm Email is required.";
+                this.Page.Validators.Add(cv);
+                l_isValid = false;
+            }
+
+            return l_isValid;
         }
 
         protected void btn_cancel_OnClick(object sender, EventArgs e)

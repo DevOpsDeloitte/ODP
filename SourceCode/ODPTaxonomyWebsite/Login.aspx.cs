@@ -25,14 +25,18 @@ namespace ODPTaxonomyWebsite.Account
                 {
                     MembershipUser user = Membership.GetUser(l_username);
 
-                    // check if user is locked out, if so
+                    // check if user is locked out, if so unlock
                     if (user.IsLockedOut)
                     {
                         user.UnlockUser();
                     }
-                    
-                    bool isPasswordReset = user.Comment.ToString() == "reset" ? true : false;
 
+                    bool isPasswordReset = false;
+
+                    if (!(user.Comment == null))
+                        isPasswordReset = user.Comment.ToString() == "reset" ? true : false;
+
+                    
                     if (isPasswordReset)
                     {
                         FormsAuthentication.SetAuthCookie(l_username, false);

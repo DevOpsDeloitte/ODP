@@ -3,26 +3,53 @@
 
 <script language="javascript" type="text/javascript">
 
-    function CheckRoleList(source, arguments) {
-        arguments.IsValid = IsCheckBoxChecked() ? true : false;
+    function EnableDisableRole(rolegroup) {
+        // get checkboxes
+        var objAdmin = document.getElementById("<%=cbx_Admin.ClientID %>");
+        var objODPSuper = document.getElementById("<%=cbx_ODPStaffSupervisor.ClientID %>");
+        var objODPStaff = document.getElementById("<%= cbx_ODPStaffMember.ClientID%>");
+        var objCoderSuper = document.getElementById("<%=cbx_CoderSupervisor.ClientID %>");
+        var objCoder = document.getElementById("<%=cbx_Coder.ClientID %>");
 
-    }
+        // get checked state
+        var isAdmin = objAdmin.checked;
+        var isODPSuper = objODPSuper.checked;
+        var isODPStaff = objODPStaff.checked;
+        var isCoderSuper = objCoderSuper.checked;
+        var isCoder = objCoder.checked;
 
-    function IsCheckBoxChecked() {
-        var isChecked = false;
-        var list = document.getElementById('<%= cbl_roles.ClientID %>');
-        if (list != null) {
-            for (var i = 0; i < list.rows.length; i++) {
-                for (var j = 0; j < list.rows[i].cells.length; j++) {
-                    var listControl = list.rows[i].cells[j].childNodes[0];
-                    if (listControl.checked) {
-                        isChecked = true;
-                    }
-                }
+        // if admin, ODPStaffSupervisor, ODPStaffMember is checked, disable coder
+        if (rolegroup == "admin") {
+            // check state of other item in the group
+            if (isAdmin || isODPSuper || isODPStaff) {
+                objCoderSuper.checked = false;
+                objCoderSuper.disabled = true;
+
+                objCoder.checked = false;
+                objCoder.disabled = true;
+            }
+            else {
+                objCoderSuper.disabled = false;
+                objCoder.disabled = false;
             }
         }
-        return isChecked;
+        else {
+            if (isCoder || isCoderSuper) {
+                objAdmin.checked = false;
+                objAdmin.disabled = true;
 
+                objODPSuper.checked = false;
+                objODPSuper.disabled = true;
+
+                objODPStaff.checked = false;
+                objODPStaff.disabled = true;
+            }
+            else {
+                objAdmin.disabled = false;
+                objODPSuper.disabled = false;
+                objODPStaff.disabled = false;
+            }
+        }
     }
 </script>
 
@@ -68,7 +95,7 @@
             <asp:RequiredFieldValidator ID="reqval_lname" runat="server" Display="Dynamic" CssClass="errorMessage" ControlToValidate="txt_lastname" ErrorMessage="Last Name is required." />
         </td>
     </tr>
-     <tr>
+    <tr>
         <td>
             <asp:Label ID="lbl_Email" runat="server" Text="*Email:" AssociatedControlID="txt_email" />
         </td>
@@ -79,21 +106,44 @@
         </td>
     </tr>
     <tr>
-        <td valign="top">
-            <asp:Label ID="lbl_roles" runat="server" AssociatedControlID="cbl_roles" Text="*Role(s):" />
+        <td>
+            <asp:Label ID="lbl_confirm_email" runat="server" Text="*Confirm Email:" AssociatedControlID="txt_confirm_email" />
         </td>
         <td>
-            <asp:CheckBoxList ID="cbl_roles" runat="server" DataTextField="RoleDesc" DataValueField="RoleName" />
-            <asp:CustomValidator ID="cusval_roles" runat="server" ErrorMessage="Select at least one role." CssClass="errorMessage" Display="Dynamic" ClientValidationFunction="CheckRoleList" />
+            <asp:TextBox ID="txt_confirm_email" runat="server" />
+            <asp:RequiredFieldValidator ID="reqval_confirm_email" runat="server" Display="Dynamic" CssClass="errorMessage" ControlToValidate="txt_confirm_email" ErrorMessage="Confirm Email is required." Enabled="false" />
+            <asp:RegularExpressionValidator ID="regex_confirm_email" runat="server" Display="Dynamic" ErrorMessage="Confirm Email Address format is invalid." ControlToValidate="txt_confirm_email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="errorMessage" />
+            <asp:CompareValidator ID="cmpval_email" runat="server" ErrorMessage="Emails do not match, please reenter the email." CssClass="errorMessage" Display="Dynamic" ControlToCompare="txt_email" ControlToValidate="txt_confirm_email" />
         </td>
     </tr>
-        <tr>
+    <tr>
+        <td valign="top">
+            <asp:Label ID="lbl_roles" runat="server" Text="*Role(s):" />
+        </td>
+        <td>
+            <asp:CheckBox ID="cbx_Admin" runat="server" Text="Admin" onclick="EnableDisableRole('admin')" /><br />
+            <asp:CheckBox ID="cbx_ODPStaffSupervisor" runat="server" Text="ODP Supervisor" onclick="EnableDisableRole('admin')"  /><br />
+            <asp:CheckBox ID="cbx_ODPStaffMember" runat="server" Text="ODP Staff" onclick="EnableDisableRole('admin')"  /><br />
+            <asp:CheckBox ID="cbx_CoderSupervisor" runat="server" Text="Coder Supervisor" onclick="EnableDisableRole('coder')"  /><br />
+            <asp:CheckBox ID="cbx_Coder" runat="server" Text="Coder" onclick="EnableDisableRole('coder')" /><br />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            Password must be:
+            <ul>
+                <li>Minimum of 8 characters.</li>
+                <li>Must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character, and 1 number.</li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
         <td><asp:Label ID="lbl_new_password" runat="server" Text="*Password:" AssociatedControlID="txt_new_password" /></td>
         <td>
             <asp:TextBox ID="txt_new_password" runat="server" TextMode="Password" MaxLength="50"  />
             <asp:RequiredFieldValidator ID="reqval_newPassword" runat="server" ErrorMessage="Password is required." Display="Dynamic" ControlToValidate="txt_new_password"  CssClass="errorMessage" Enabled="false" />
             <asp:RegularExpressionValidator ID="regval_newPassword" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" Display="Dynamic" CssClass="errorMessage" 
-                ErrorMessage="Password must be at least 8 characters in length, one uppercase letter, one lowercase letter, one number, and one special characters." ControlToValidate="txt_new_password" />
+                ErrorMessage="Password does not meet requirements, please enter a new password." ControlToValidate="txt_new_password" />
         </td>
     </tr>
     <tr>
@@ -102,8 +152,8 @@
             <asp:TextBox ID="txt_confirm_password" runat="server" TextMode="Password" MaxLength="50"  />
             <asp:RequiredFieldValidator ID="reqval_NewPasswordConfirm" runat="server" ErrorMessage="Confirm password is required." Display="Dynamic" ControlToValidate="txt_confirm_password"  CssClass="errorMessage" Enabled="false" />
             <asp:RegularExpressionValidator ID="regval_NewPasswordConfirm" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" Display="Dynamic" CssClass="errorMessage"
-                ErrorMessage="Password must be at least 8 characters in length, one uppercase letter, one lowercase letter, one number, and one special characters." ControlToValidate="txt_confirm_password" />
-            <asp:CompareValidator ID="cmpval_password" runat="server" ErrorMessage="Password must be the same." CssClass="errorMessage" Display="Dynamic" ControlToCompare="txt_new_password" ControlToValidate="txt_confirm_password" />
+                ErrorMessage="Password does not meet requirements, please enter a new password." ControlToValidate="txt_confirm_password" />
+            <asp:CompareValidator ID="cmpval_password" runat="server" ErrorMessage="Passwords do not match, please reenter the password." CssClass="errorMessage" Display="Dynamic" ControlToCompare="txt_new_password" ControlToValidate="txt_confirm_password" />
         </td>
     </tr>
     <tr>

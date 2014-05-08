@@ -3,6 +3,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
+<asp:Button ID="btn_change_password" runat="server" CausesValidation="false" OnClick="btn_changePassword_OnClick" Text="Change Password" />
+
 <asp:Panel ID="pnl_confirmation" runat="server" Visible="false">
     Profile successfully saved.
 </asp:Panel>
@@ -15,25 +17,36 @@
 
 <table>
     <tr>
-        <td><asp:Label ID="lbl_fname" runat="server" AssociatedControlID="txt_fname" Text="First Name: " /></td>
+        <td><asp:Label ID="lbl_fname" runat="server" AssociatedControlID="txt_fname" Text="*First Name: " /></td>
         <td>
             <asp:TextBox ID="txt_fname" runat="server" MaxLength="50" />
-            <asp:RequiredFieldValidator ID="reqval_firstName" runat="server" Display="Dynamic" ErrorMessage="First Name is required." ControlToValidate="txt_fname" />
+            <asp:RequiredFieldValidator ID="reqval_firstName" runat="server" Display="Dynamic" ErrorMessage="First Name is required." ControlToValidate="txt_fname" CssClass="errorMessage" />
         </td>
     </tr>
     <tr>
-        <td><asp:Label ID="lbl_lname" runat="server" AssociatedControlID="txt_lname" Text="Last Name: " /></td>
+        <td><asp:Label ID="lbl_lname" runat="server" AssociatedControlID="txt_lname" Text="*Last Name: " /></td>
         <td>
             <asp:TextBox ID="txt_lname" runat="server" MaxLength="50" />
-            <asp:RequiredFieldValidator ID="reqval_lastName" runat="server" Display="Dynamic" ErrorMessage="Last Name is required." ControlToValidate="txt_lname" />
+            <asp:RequiredFieldValidator ID="reqval_lastName" runat="server" Display="Dynamic" ErrorMessage="Last Name is required." ControlToValidate="txt_lname" CssClass="errorMessage" />
         </td>
     </tr>
     <tr>
-        <td><asp:Label ID="lbl_email" runat="server" AssociatedControlID="txt_email" Text="Email Address: " /></td>
+        <td><asp:Label ID="lbl_email" runat="server" AssociatedControlID="txt_email" Text="*Email Address: " /></td>
         <td>
             <asp:TextBox ID="txt_email" runat="server" MaxLength="50" />
             <asp:RequiredFieldValidator ID="reqval_email" runat="server" Display="Dynamic" ErrorMessage="Email Address is required." ControlToValidate="txt_email" CssClass="errorMessage" />
             <asp:RegularExpressionValidator ID="regex_email" runat="server" Display="Dynamic" ErrorMessage="Email Address format is invalid." ControlToValidate="txt_email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="errorMessage" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <asp:Label ID="lbl_confirm_email" runat="server" Text="*Confirm Email:" AssociatedControlID="txt_confirm_email" />
+        </td>
+        <td>
+            <asp:TextBox ID="txt_confirm_email" runat="server" />
+            <asp:RequiredFieldValidator ID="reqval_confirm_email" runat="server" Display="Dynamic" CssClass="errorMessage" ControlToValidate="txt_confirm_email" ErrorMessage="Confirm Email is required." Enabled="false" />
+            <asp:RegularExpressionValidator ID="regex_confirm_email" runat="server" Display="Dynamic" ErrorMessage="Confirm Email Address format is invalid." ControlToValidate="txt_confirm_email" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" CssClass="errorMessage" />
+            <asp:CompareValidator ID="cmpval_email" runat="server" ErrorMessage="Emails do not match, please reenter the email." CssClass="errorMessage" Display="Dynamic" ControlToCompare="txt_email" ControlToValidate="txt_confirm_email" />
         </td>
     </tr>
     <tr>
