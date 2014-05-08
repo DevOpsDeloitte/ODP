@@ -87,6 +87,9 @@
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\AbstractListViews\AbstractGridView.cs" />
     <Compile Include="Evaluation\AbstractListViews\AdminView.ascx.cs">
       <DependentUpon>AdminView.ascx</DependentUpon>
@@ -112,9 +115,6 @@
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx.cs">
       <DependentUpon>CoderSupervisorView_Open.ascx</DependentUpon>
