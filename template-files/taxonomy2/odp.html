@@ -5,68 +5,63 @@
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
 
-    <!-- Basic Page Needs
+	<!-- Basic Page Needs
   ================================================== -->
-    <meta charset="utf-8">
+	<meta charset="utf-8">
     <title>ODP Taxonomy</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-    <!-- Mobile Specific Metas
+	<!-- Mobile Specific Metas
   ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- CSS
+	<!-- CSS
   ================================================== -->
-    <link rel="stylesheet" href="stylesheets/base.css">
-    <link rel="stylesheet" href="stylesheets/skeleton.css">
-    <link rel="stylesheet" href="stylesheets/layout.css">
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
     <link rel="stylesheet" href="stylesheets/alertify.css">    
     <link rel="stylesheet" href="stylesheets/line/tax.css">
 
-    <!-- Favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
 </head>
-<body class="cbp-spmenu-push">
+<body>
 
 
 
 <!-- Primary Page Layout
 ================================================== -->
-<div id="header_container">
-    <div id="header">
-    <button id="showLeftPush" class="button">Menu</button>
-        <div class="buttons">
-        <a class="button" href="#" id="confirm">Save</a>
-        <a class="button" href="#">Unable to Code</a>
-        <a class="button" href="#">Print</a>
-        </div>
-    </div>
-</div>
-        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-            <a href="#study-focus">Study Focus</a>
-            <a href="#entities-studied">Entities Studied</a>
-            <a href="#study-setting">Study Setting</a>
-            <a href="#population-focus">Population focus</a>
-            <a href="#study-design-purpose">Study Design/Purpose</a>
-            <a href="#prevention-research-category">Prevention Research Category</a>
-        </nav>
 
 <div class="container">
- 
-    <div class="sixteen columns title"> 
+    <div class="sixteen columns header"> 
         <h1 class="center">Prevention Taxonomy Form</h1>
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN</span>
         <span class="subtitle">(TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
 
-    <div class="sixteen columns"> 
+    <div class="nav">
+        <ul>
+            <li><a href="#study-focus">Study Focus</a></li>
+            <li><a href="#entities-studied">Entities Studied</a></li>
+            <li><a href="#study-setting">Study Setting</a></li>
+            <li><a href="#population-focus">Population focus</a></li>
+            <li><a href="#study-design-puCODERose">Study Design/PuCODERose</a></li>
+            <li><a href="#prevention-research-category">Prevention Research Category</a></li>
+            <li><a class="button" href="#" id="confirm">Save</a></li>
+            <li><input type="checkbox"><label>Unable to Code</label></li>
+            <li><input type="checkbox"><label>Toggle Unanswered</label></li>
+        </ul>
+    </div>
+
+	<div class="sixteen columns"> 
 
         <table class="bordered zebra-striped" id="study-focus" class="study-focus">
             <caption>A. Study Focus</caption>
@@ -81,25 +76,14 @@
             <tbody>
                     <tr>
                             <td scope="row">1. Alcohol</td>
-                            <td class="box-three issue-three">
-                            <input type="checkbox"><label></label>
-                            <div class="coders"><ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                            </td>
+                            <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                             <td class="box-three"><input type="checkbox"><label></label></td>
-                            <td class="box-three issue-two">
-                             <input type="checkbox"><label></label>
-                             <div class="coders"><ul><li class="coder-number">2</li><li></li><li>JS</li><li>RP</li></ul></div>
-                             </td>
+                            <td class="box-three issue-two"><input type="checkbox"><label>2 - ODP</label></td>
                     </tr>
                     <tr>
                              <td scope="row">2. Alzheimer’s disease</td>
-                             <td class="box-three issue-one">
-                             <input type="checkbox"><label></label>
-                             <div class="coders"><ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             </td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
                     <tr class="disabled">
@@ -110,20 +94,14 @@
                     </tr>
                     <tr>
                              <td scope="row">4. Blood disorder</td>
-                             <td class="box-three issue-one"><div class="coders">
-                             <ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
-                             <td class="box-three issue-one"><div class="coders">
-                             <ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
                     <tr>
                              <td scope="row">5. Blood Pressure</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
                     <tr class="disabled">
@@ -141,32 +119,24 @@
                     <tr>
                              <td scope="row">8. Cholesterol</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
                     <tr>
                              <td scope="row">9. Diabetes</td>
-                            <td class="box-three issue-two"><div class="coders">
-                             <ul><li class="coder-number">2</li><li></li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-two"><input type="checkbox"><label>2 - ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
                     <tr>
                              <td scope="row">10. Diet/Nutrition</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-one"><div class="coders">
-                             <ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
                     <tr>
                              <td scope="row">11. Education/Counseling</td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
@@ -178,9 +148,7 @@
                     </tr>
                     <tr>
                              <td scope="row">13. Gastrointestinal disease</td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
@@ -192,12 +160,8 @@
                     </tr>
                     <tr>
                              <td scope="row">15. Healthcare delivery </td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
-                             <td class="box-three issue-one"><div class="coders">
-                             <ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
                     <tr class="disabled">
@@ -210,26 +174,18 @@
                              <td scope="row">17. HR quality of life</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                     </tr>  
                     <tr>
                              <td scope="row">18. Infectious disease</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-one"><div class="coders">
-                             <ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr>
                              <td scope="row">19. Kidney disease</td>
-                            <td class="box-three issue-two"><div class="coders">
-                             <ul><li class="coder-number">2</li><li></li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
-                            <td class="box-three issue-two"><div class="coders">
-                             <ul><li class="coder-number">2</li><li></li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-two"><input type="checkbox"><label>2 - ODP</label></td>
+                            <td class="box-three issue-two"><input type="checkbox"><label>2 - ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr class="disabled">
@@ -241,17 +197,13 @@
                     <tr>
                              <td scope="row">21. Maternal &amp; child health</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr>
                              <td scope="row">22. Medication/device</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-one"><div class="coders">
-                             <ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>
                     <tr class="disabled">
@@ -269,9 +221,7 @@
                     <tr>
                              <td scope="row">25.  Mortality</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-one"><div class="coders">
-                             <ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr class="disabled">
@@ -313,9 +263,7 @@
                     <tr>
                              <td scope="row">32. Pneumonia/influenza</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr class="disabled">
@@ -333,9 +281,7 @@
                     <tr>
                              <td scope="row">35. Stroke</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr class="disabled">
@@ -353,9 +299,7 @@
                     <tr>
                              <td scope="row">37. Suicide</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr class="disabled">
@@ -373,9 +317,7 @@
                     <tr>
                              <td scope="row">40. Unintentional injuries </td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                             <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr class="disabled">
@@ -387,16 +329,12 @@
                     <tr>
                              <td scope="row">42. Violence</td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
-                            <td class="box-three issue-two"><div class="coders">
-                             <ul><li class="coder-number">2</li><li></li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-two"><input type="checkbox"><label>2 - ODP</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
                     <tr>
                              <td scope="row">43. Other or unclear</td>
-                             <td class="box-three issue-one"><div class="coders">
-                             <ul><li class="coder-number">1</li><li></li><li></li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                             <td class="box-three issue-one"><input type="checkbox"><label>1 - CODER</label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                     </tr>  
@@ -415,15 +353,11 @@
                     </tr>
                     <tr>
                             <td scope="row">2. Cells/cell lines </td>
-                            <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                     </tr>
                     <tr>
                             <td scope="row">3. Genes/genetics</td>
-                            <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                     </tr>
                     <tr class="disabled">
                             <td scope="row">4. Human subjects</td> <td class="box-one">
@@ -456,9 +390,7 @@
                     </tr>
                     <tr>
                             <td scope="row">2. Healthcare (e.g., clinic, hospital)</td> 
-                            <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                     </tr>
                     <tr class="disabled">
                             <td scope="row">3. Research clinic or laboratory</td> 
@@ -479,9 +411,7 @@
             <tbody>
                     <tr>
                             <td scope="row">1. Incarcerated/institutionalized</td> 
-                            <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                     </tr>
                     <tr class="disabled">
                             <td scope="row">2. LGBTI</td> 
@@ -489,9 +419,7 @@
                     </tr>
                     <tr>
                             <td scope="row">3. Low SES</td> 
-                            <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                     </tr>                    
                     <tr class="disabled">
                             <td scope="row">4. Military/veterans</td> 
@@ -528,8 +456,8 @@
             </tbody>
         </table>
  
-        <table class="bordered zebra-striped" id="study-design-purpose" class="study-design-purpose">
-            <caption>E. Study Design/Purpose</caption>
+        <table class="bordered zebra-striped" id="study-design-puCODERose" class="study-design-puCODERose">
+            <caption>E. Study Design/PuCODERose</caption>
             <thead>
 
             </thead>
@@ -540,9 +468,7 @@
                     </tr>
                     <tr>
                             <td scope="row">2.  Methods research</td> 
-                            <td class="box-three issue-three"><div class="coders">
-                             <ul><li class="coder-number">3</li><li>DW</li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-three"><input type="checkbox"><label>3 - CODER ODP</label></td>
                     </tr>
                     <tr class="disabled">
                             <td scope="row">3.  Non-randomized intervention study </td> 
@@ -595,9 +521,7 @@
                     </tr>
                     <tr>
                             <td scope="row">6. Other or unclear </td> 
-                            <td class="box-three issue-two"><div class="coders">
-                             <ul><li class="coder-number">2</li><li></li><li>JS</li><li>RP</li></ul></div>
-                             <input type="checkbox"><label></label></td>
+                            <td class="box-three issue-two"><input type="checkbox"><label>2 - ODP</label></td>
                     </tr>                              
             </tbody>
         </table>
@@ -614,23 +538,12 @@
 <script src="js/jquery.js"></script>
 <script src="js/icheck.js"></script>
 <script src="js/alertify.js"></script>
-<script src="js/classie.js"></script>
 
     <!--[if lt IE 9]>
         <script src="js/html5.js"></script>
     <![endif]-->
 
-
-<!--Toggle-->
-<script type="text/javascript">
-    $( "#toggle-unanswered" ).click(function() {
-        $('tr.disabled').toggle();
-        $(this).toggleClass( "active" );
-    });
-</script>
-
-<!--ICheck-->
-<script type="text/javascript">
+<script>
 $(document).ready(function(){
   $('input').each(function(){
     var self = $(this),
@@ -647,8 +560,7 @@ $(document).ready(function(){
 });
 </script>
 
-<!--Scroll for anchors-->
-<script type="text/javascript">
+<script>
 $(function() {
   $('a[href*=#]:not([href=#])').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
@@ -665,8 +577,7 @@ $(function() {
 });
 </script>
 
-<!--Alertify-->
-<script type="text/javascript">
+<script>
 function reset () {
 
             alertify.set({
@@ -683,7 +594,7 @@ $("#confirm").on( 'click', function () {
             reset();
             alertify.confirm("Please confirm this", function (e) {
                 if (e) {
-                    window.location.href = "confirm.html";
+                    window.location.replace("index.html");
                 } else {
                     alertify.error("You've clicked Cancel");
                 }
@@ -691,24 +602,5 @@ $("#confirm").on( 'click', function () {
             return false;
         });
 </script>
-        <script>
-            var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-                showLeftPush = document.getElementById( 'showLeftPush' ),
-                body = document.body;
-
-            showLeftPush.onclick = function() {
-                classie.toggle( this, 'active' );
-                classie.toggle( body, 'cbp-spmenu-push-toright' );
-                classie.toggle( menuLeft, 'cbp-spmenu-open' );
-                disableOther( 'showLeftPush' );
-            };
-
-            function disableOther( button ) {
-
-                if( button !== 'showLeftPush' ) {
-                    classie.toggle( showLeftPush, 'disabled' );
-                }
-            }
-        </script>
 </body>
 </html>

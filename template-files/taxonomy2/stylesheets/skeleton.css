@@ -23,7 +23,7 @@
 
     .container                                  { position: relative; width: 960px; margin: 0 auto; padding: 0; }
     .container .column,
-    .container .columns                         { float: left; display: inline; margin-right: 10px; margin-left: 10px; }
+    .container .columns                         { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
     .row                                        { margin-bottom: 20px; }
 
     /* Nested Column Classes */
@@ -79,7 +79,7 @@
     @media only screen and (min-width: 768px) and (max-width: 959px) {
         .container                                  { width: 768px; }
         .container .column,
-        .container .columns                         { margin-right: 10px; margin-left: 10px;  }
+        .container .columns                         { margin-left: 10px; margin-right: 10px;  }
         .column.alpha, .columns.alpha               { margin-left: 0; margin-right: 10px; }
         .column.omega, .columns.omega               { margin-right: 0; margin-left: 10px; }
         .alpha.omega                                { margin-left: 0; margin-right: 0; }
@@ -180,7 +180,7 @@
     /* Note: Design for a width of 480px */
 
     @media only screen and (min-width: 480px) and (max-width: 767px) {
-        .container { width: 480px; }
+        .container { width: 420px; }
         .container .columns,
         .container .column { margin: 0; }
 
@@ -202,7 +202,7 @@
         .container .fifteen.columns,
         .container .sixteen.columns,
         .container .one-third.column,
-        .container .two-thirds.column { width: 480px; }
+        .container .two-thirds.column { width: 420px; }
     }
 
 
@@ -240,53 +240,52 @@
       width: 0;
       height: 0;
     }
-    
+	
 /* #Tables
-================================================== */   
+================================================== */	
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    
-    table th, table td {
-        font-size: 13px;
-        line-height: 18px;
-        text-align: left;
-        padding: 6px 10px;
-    }
-    
-    table td {
-        vertical-align: top;
-        border-top: solid 1px #ddd;
-        position: relative;
-    }
-    
-    table th {
-        padding-top: 9px;
-        font-weight: bold;
-        vertical-align: middle;
-    }
-    
-    table.condensed th, table.condensed td {
-        padding: 5px 5px 4px;
-    }
-    
-    table.bordered {
-        border-collapse: separate;
-        border: solid 1px #ddd;
-        -webkit-border-radius: 2px;
-        -moz-border-radius: 2px;
-        border-radius: 2px;
-    }
-    
-    table.bordered th + th,
-    table.bordered th + td,
-    table.bordered td + td {
-        border-left: solid 1px #ddd;
-    }
-    
-    .zebra-striped tbody tr:nth-child(odd) td,
-    .zebra-striped tbody tr:nth-child(odd) th {
-        background: #f5f5f5;
-    }
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+	
+	table th, table td {
+		padding: 10px 10px 9px;
+		font-size: 13px;
+		line-height: 18px;
+		text-align: left;
+	}
+	
+	table td {
+		vertical-align: top;
+		border-top: solid 1px #ddd;
+	}
+	
+	table th {
+		padding-top: 9px;
+		font-weight: bold;
+		vertical-align: middle;
+	}
+	
+	table.condensed th, table.condensed td {
+		padding: 5px 5px 4px;
+	}
+	
+	table.bordered {
+		border-collapse: separate;
+		border: solid 1px #ddd;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+	}
+	
+	table.bordered th + th,
+	table.bordered th + td,
+	table.bordered td + td {
+		border-left: solid 1px #ddd;
+	}
+	
+	.zebra-striped tbody tr:nth-child(odd) td,
+	.zebra-striped tbody tr:nth-child(odd) th {
+		background: #f5f5f5;
+	}

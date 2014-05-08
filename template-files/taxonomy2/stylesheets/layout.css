@@ -1,0 +1,116 @@
+/*
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+/* Table of Content
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+
+/* #Site Styles
+================================================== */
+
+body { background: #95a5aa; /* Old browsers */
+background: -moz-linear-gradient(top,  #95a5aa 0%, #d9dee0 35%, #ffffff 61%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#95a5aa), color-stop(35%,#d9dee0), color-stop(61%,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #95a5aa 0%,#d9dee0 35%,#ffffff 61%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #95a5aa 0%,#d9dee0 35%,#ffffff 61%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #95a5aa 0%,#d9dee0 35%,#ffffff 61%); /* IE10+ */
+background: linear-gradient(to bottom,  #95a5aa 0%,#d9dee0 35%,#ffffff 61%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#95a5aa', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */ 
+}
+
+h1 { color: #fff; }
+.subtitle { display: block; font-size: 1.2em; text-align: center; color: #fff; }
+.center { text-align: center; }
+.hidden { display:none;}
+
+.header {margin: 20px}
+
+.nav { position: fixed; left: 4px; padding: 10px 20px; border: 1px solid #7D9EB1; top: 120px; z-index: 999; width: 150px; background: #EEE; background: rgba(215, 225, 235, 0.5); }
+.nav ul li { padding: 0 0 8px 0; border-bottom: 1px solid #7D9EB1 }
+ .nav ul li a { text-decoration: none; }
+.nav .button { background: #3489B9; color: #fff; font-weight: bold; width: 100%; padding: 8px 0; text-align: center; font-size: 14px; }
+	.nav .button:hover { background: #185475; }
+
+table { margin-bottom: 30px; width: 100%; background: #fff; -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1);
+box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); }
+table td {position: relative;}
+table td[scope="row"] { width: 25%; }	
+caption { text-align: left; font-weight: bold; padding: 14px 12px; font-size: 17px }
+table.zebra-striped tbody tr.disabled td { color: #E4E4E4; background-color: #FFFFFF; }
+table tbody th.box-three, table tbody td.box-three { margin: 0; width: 25%; padding: 0; height: 20px; }
+table tbody th.box-one, table tbody td.box-one { margin: 0; width: 75%; padding: 0; height: 20px; }
+#toggle-unanswered:hover, #toggle-unanswered.active:hover {background: #24AA7A; color:#FFF;}
+#toggle-unanswered.active {background: #1b7e5a; color:#FFF;}
+
+.reset-x {
+position: absolute;
+display:none;
+top: 0;
+left: 0;
+z-index: 10;
+width: 15%;
+height: 20px;
+text-align: center;
+background: rgba(0,0,0,.3);
+color: #fff;
+font-family: Verdana;
+padding: 8px 0px;
+font-size: 13px;
+line-height: 18px;
+cursor: pointer;
+}
+
+.reset-x:hover {background: rgba(0,0,0,.9);}
+
+table td.issue-one:hover .reset-x,
+table td.issue-two:hover .reset-x,
+table td.issue-three:hover .reset-x {display:block;}
+
+/* #Page Styles
+================================================== */
+
+/* #Media Queries
+================================================== */
+
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) {}
+
+
+/* #Font-Face
+================================================== */
+/* 	This is the proper syntax for an @font-face file
+		Just create a "fonts" folder at the root,
+		copy your FontName into code below and remove
+		comment brackets */
+
+/*	@font-face {
+	    font-family: 'FontName';
+	    src: url('../fonts/FontName.eot');
+	    src: url('../fonts/FontName.eot?iefix') format('eot'),
+	         url('../fonts/FontName.woff') format('woff'),
+	         url('../fonts/FontName.ttf') format('truetype'),
+	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
+	    font-weight: normal;
+	    font-style: normal; }
+*/

@@ -32,32 +32,38 @@
 	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
 </head>
-<body>
+<body class="cbp-spmenu-push">
 
 
 
 <!-- Primary Page Layout
 ================================================== -->
+<div id="header_container">
+    <div id="header">
+    <button id="showLeftPush" class="button">Menu</button>
+        <div class="buttons">
+        <a class="button" href="#" id="confirm">Save</a>
+        <a class="button" href="#">Unable to Code</a>
+        <a class="button" href="#">Print</a>
+        </div>
+    </div>
+</div>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+            <a href="#study-focus">Study Focus</a>
+            <a href="#entities-studied">Entities Studied</a>
+            <a href="#study-setting">Study Setting</a>
+            <a href="#population-focus">Population focus</a>
+            <a href="#study-design-purpose">Study Design/Purpose</a>
+            <a href="#prevention-research-category">Prevention Research Category</a>
+        </nav>
 
 <div class="container">
-    <div class="sixteen columns header"> 
+ 
+    <div class="sixteen columns title"> 
         <h1 class="center">Prevention Taxonomy Form</h1>
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN</span>
         <span class="subtitle">(TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
-    </div>
-
-    <div class="nav">
-        <ul>
-            <li><a href="#study-focus">Study Focus</a></li>
-            <li><a href="#entities-studied">Entities Studied</a></li>
-            <li><a href="#study-setting">Study Setting</a></li>
-            <li><a href="#population-focus">Population focus</a></li>
-            <li><a href="#study-design-purpose">Study Design/Purpose</a></li>
-            <li><a href="#prevention-research-category">Prevention Research Category</a></li>
-            <li><a class="button" href="#" id="confirm">Save</a></li>
-            <li><input type="checkbox"><label>Unable to Code</label></li>
-        </ul>
     </div>
 
 	<div class="sixteen columns"> 
@@ -502,6 +508,7 @@
 <script src="js/jquery.js"></script>
 <script src="js/icheck.js"></script>
 <script src="js/alertify.js"></script>
+<script src="js/classie.js"></script>
 
     <!--[if lt IE 9]>
         <script src="js/html5.js"></script>
@@ -549,7 +556,7 @@ function reset () {
 
             alertify.set({
                 labels : {
-                    ok     : "OK",
+                    ok     : "nK",
                     cancel : "Cancel"
                 },
                 delay : 5000,
@@ -569,5 +576,24 @@ $("#confirm").on( 'click', function () {
             return false;
         });
 </script>
+        <script>
+            var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+                showLeftPush = document.getElementById( 'showLeftPush' ),
+                body = document.body;
+
+            showLeftPush.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toright' );
+                classie.toggle( menuLeft, 'cbp-spmenu-open' );
+                disableOther( 'showLeftPush' );
+            };
+
+            function disableOther( button ) {
+
+                if( button !== 'showLeftPush' ) {
+                    classie.toggle( showLeftPush, 'disabled' );
+                }
+            }
+        </script>
 </body>
 </html>

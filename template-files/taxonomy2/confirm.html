@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>ODP Taxonomy</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<link rel="stylesheet" href="stylesheets/base.css">
+	<link rel="stylesheet" href="stylesheets/skeleton.css">
+	<link rel="stylesheet" href="stylesheets/layout.css">
+    <link rel="stylesheet" href="stylesheets/alertify.css">    
+    <link rel="stylesheet" href="stylesheets/line/tax.css">
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+
+</head>
+<body>
+
+
+
+<!-- Primary Page Layout
+================================================== -->
+
+<div class="container">
+    <div class="sixteen columns header"> 
+        <h1 class="center">Prevention Taxonomy Form</h1>
+        <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN</span>
+        <span class="subtitle">(TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
+        <span class="subtitle">See accompanying protocol for definitions and examples</span>
+    </div>
+
+
+
+
+</div><!-- container -->
+
+
+<!-- End Document
+================================================== -->
+
+<!-- JS
+================================================== -->
+<script src="js/jquery.js"></script>
+<script src="js/icheck.js"></script>
+<script src="js/alertify.js"></script>
+
+    <!--[if lt IE 9]>
+        <script src="js/html5.js"></script>
+    <![endif]-->
+
+<script>
+$(document).ready(function(){
+  $('input').each(function(){
+    var self = $(this),
+      label = self.next(),
+      label_text = label.text();
+
+    label.remove();
+    self.iCheck({
+      checkboxClass: 'icheckbox_line-tax',
+      radioClass: 'iradio_line-tax',
+      insert: '<div class="icheck_line-icon"></div>' + label_text
+    });
+  });
+});
+</script>
+<script>
+$(function() {
+  $('a[href*=#]:not([href=#])').click(function() {
+    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+      var target = $(this.hash);
+      target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+      if (target.length) {
+        $('html,body').animate({
+          scrollTop: target.offset().top
+        }, 1000);
+        return false;
+      }
+    }
+  });
+});
+</script>
+<script>
+function reset () {
+
+            alertify.set({
+                labels : {
+                    ok     : "OK",
+                    cancel : "Cancel"
+                },
+                delay : 5000,
+                buttonReverse : true,
+                buttonFocus   : "none"
+            });
+        }
+$("#confirm").on( 'click', function () {
+            reset();
+            alertify.confirm("Please confirm this", function (e) {
+                if (e) {
+                    window.location.replace("revise.html");
+                } else {
+                    alertify.error("You've clicked Cancel");
+                }
+            });
+            return false;
+        });
+</script>
+</body>
+</html>

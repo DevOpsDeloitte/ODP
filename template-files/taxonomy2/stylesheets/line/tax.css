@@ -1,0 +1,34 @@
+/* iCheck plugin Line skin, tax
+----------------------------------- */
+.icheckbox_line-tax, .iradio_line-tax { position: relative; display: block; line-height: 17px; cursor: pointer; margin: 0; width: 96%; height: 98%; background: none; font-size: 11px; text-align: right; padding: 1% 2%; -webkit-box-shadow:inset 1px 1px 2px 2px rgba(0,0,0,.05);
+box-shadow:inset 1px 1px 2px 2px rgba(0,0,0,.05); }
+
+.issue-three .icheckbox_line-tax, .issue-two .icheckbox_line-tax, .issue-one .icheckbox_line-tax, .icheckbox_line-tax.checked {color: #fff;}
+
+
+.icheckbox_line-tax .icheck_line-icon, .iradio_line-tax .icheck_line-icon { position: absolute; top: 50%; left: 13px; width: 13px; height: 11px; margin: -5px 0 0 0; padding: 0; overflow: hidden; /*background: url(line.png) no-repeat; for reference*/ border: none; }
+
+.issue-three .icheckbox_line-tax { background: #05CE4D; } 
+.issue-two .icheckbox_line-tax { background: #D66C0B; }
+.issue-one .icheckbox_line-tax { background: #9B0202; }
+
+
+.nav .icheckbox_line-tax { color: #000; text-align: center; padding: 8px 0; font-size: 13px; width: 100%; background: #fff; }
+.nav .icheckbox_line-tax.checked, .nav .icheckbox_line-tax:hover { color: #fff; }
+
+.icheckbox_line-tax.hover, .icheckbox_line-tax.checked.hover, .iradio_line-tax.hover { background: #24AA7A; }
+
+
+.icheckbox_line-tax.checked, .iradio_line-tax.checked { background: #1b7e5a }
+.icheckbox_line-tax.checked .icheck_line-icon, .iradio_line-tax.checked .icheck_line-icon { background-position: -15px 0 }
+
+
+.icheckbox_line-tax.disabled, .iradio_line-tax.disabled { background: #89E6C4; cursor: default; }
+.icheckbox_line-tax.disabled .icheck_line-icon, .iradio_line-tax.disabled .icheck_line-icon { background: none }
+.icheckbox_line-tax.checked.disabled, .iradio_line-tax.checked.disabled { background: #89E6C4 }
+.icheckbox_line-tax.checked.disabled .icheck_line-icon, .iradio_line-tax.checked.disabled .icheck_line-icon { background-position: -45px 0 }
+
+/* HiDPI support */
+@media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) { 
+    .icheckbox_line-tax .icheck_line-icon, .iradio_line-tax .icheck_line-icon { background-image: url(line@2x.png); -webkit-background-size: 60px 13px; background-size: 60px 13px; }
+}
