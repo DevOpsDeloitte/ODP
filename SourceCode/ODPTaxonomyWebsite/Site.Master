@@ -5,7 +5,6 @@
 <head runat="server">
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
-   
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -30,16 +29,42 @@
                 </asp:LoginView>
             </div>
             <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/AccountManagement/ManageAccounts.aspx" Text="Manage Accounts"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/ViewAbstractList.aspx" Text="View Abstract List"/>
-                        <asp:MenuItem NavigateUrl="~/AccountManagement/EditProfile.aspx" Text="Edit Profile"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/ViewAbstract.aspx" Text="View Abstract"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/CreateTeams.aspx" Text="Create Teams"/>
-                    </Items>
-                </asp:Menu>
+                <div class="menu" style="height:25px;">                    
+                    <a href="" onclick="showMenu(); return false;" class="navigationBtn">Navigation</a>
+                    <ul class="menuItems" id="menuItems">
+                        <li><a href="/Default.aspx">Home</a></li>
+                        <li runat="server" visible="false" id="pnl_admin">Role: Admin
+                            <ul>                                
+                                <li><asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" /></li>
+                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" /></li>                                
+                            </ul>
+                        </li>
+                        <li runat="server" visible="false" id="pnl_odpSup">Role: ODP Suprvisor
+                            <ul>
+                                <li><asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></li>
+                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" /></li>                                
+                            </ul>
+                        </li>
+                        <li runat="server" visible="false" id="pnl_odp">Role: ODP Staff Member
+                            <ul>
+                                <li><asp:LinkButton OnClick="btn_viewAbstractList_odp_Click" runat="server" ID="btn_viewAbstractList_odp" Text="View Abstract List" /></li>
+                            </ul>
+                        </li>
+                        <li runat="server" visible="false" id="pnl_coderSup">Role: Coder Supervisor
+                            <ul>
+                                <li><asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" /></li>
+                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /></li> 
+                                <li><asp:LinkButton OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" /></li>                               
+                            </ul>
+                        </li>
+                        <li runat="server" visible="false" id="pnl_coder">Role: Coder
+                            <ul>
+                                <li><asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" /></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
             </div>
         </div>
         <div class="main">
@@ -52,5 +77,20 @@
         
     </div>
     </form>
+    <script type="text/javascript">
+        <!--
+        function showMenu() {
+            var menuItems = document.getElementById("menuItems");
+            if (menuItems) {
+                if (menuItems.style.visibility == "visible") {
+                    menuItems.style.visibility = "hidden";
+                }
+                else {
+                    menuItems.style.visibility = "visible";
+                }
+            }
+        }
+        //-->
+    </script>
 </body>
 </html>
