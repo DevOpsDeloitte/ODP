@@ -29,29 +29,22 @@
 </head>
 <body class="cbp-spmenu-push">
         <div id="header_container">
-
+            <div class="header">
                 <button id="showLeftPush" class="button">Menu</button>
-                        <div class="loginDisplay">
-                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                    <AnonymousTemplate>
-                        [ <a href="~/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
-                    </AnonymousTemplate>
-                    <LoggedInTemplate>
-                        Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
-                    </LoggedInTemplate>
-                </asp:LoginView>
+                <div class="login-display">
+                    <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                        <AnonymousTemplate>
+                            <a href="~/Login.aspx" ID="HeadLoginStatus" runat="server" class="button">Log In</a>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                            [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>    
         </div>
 
-        </div>
-        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-            <a href="#study-focus">Study Focus</a>
-            <a href="#entities-studied">Entities Studied</a>
-            <a href="#study-setting">Study Setting</a>
-            <a href="#population-focus">Population focus</a>
-            <a href="#study-design-purpose">Study Design/Purpose</a>
-            <a href="#prevention-research-category">Prevention Research Category</a>
-        </nav>
 <div class="container">
     <form runat="server">
         
@@ -61,45 +54,26 @@
             <span class="subtitle">LOGIN</span>
             <span class="subtitle">Please enter your user name and password.</span>
         </div>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 
-        <div class="clear hideSkiplink">
-                <div class="menu">                    
-                    <a href="" onclick="showMenu(); return false;" class="navigationBtn">Navigation</a>
-                    <ul class="menuItems" id="menuItems">
-                        <li><a href="/Default.aspx">Home</a></li>
-                        <li runat="server" visible="false" id="pnl_admin">Role: Admin
-                            <ul>                                
-                                <li><asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" /></li>
-                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" /></li>                                
-                            </ul>
-                        </li>
-                        <li runat="server" visible="false" id="pnl_odpSup">Role: ODP Suprvisor
-                            <ul>
-                                <li><asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></li>
-                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" /></li>                                
-                            </ul>
-                        </li>
-                        <li runat="server" visible="false" id="pnl_odp">Role: ODP Staff Member
-                            <ul>
-                                <li><asp:LinkButton OnClick="btn_viewAbstractList_odp_Click" runat="server" ID="btn_viewAbstractList_odp" Text="View Abstract List" /></li>
-                            </ul>
-                        </li>
-                        <li runat="server" visible="false" id="pnl_coderSup">Role: Coder Supervisor
-                            <ul>
-                                <li><asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" /></li>
-                                <li><asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /></li> 
-                                <li><asp:LinkButton OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" /></li>                               
-                            </ul>
-                        </li>
-                        <li runat="server" visible="false" id="pnl_coder">Role: Coder
-                            <ul>
-                                <li><asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" /></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                
-        </div>
+                        <a href="/Default.aspx">Home</a>
+                        <div runat="server" visible="false" id="pnl_admin">Role: Admin</div>
+                            <asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" />
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" />                                
+                       
+                        <div runat="server" visible="false" id="pnl_odpSup">Role: ODP Suprvisor</div>
+                            <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></a>
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" />
+                        <div runat="server" visible="false" id="pnl_odp">Role: ODP Staff Member</div>
+                            <asp:LinkButton OnClick="btn_viewAbstractList_odp_Click" runat="server" ID="btn_viewAbstractList_odp" Text="View Abstract List" />
+                        <div runat="server" visible="false" id="pnl_coderSup">Role: Coder Supervisor</div>
+                            <asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" />
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /> 
+                            <asp:LinkButton OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" />
+                        <div runat="server" visible="false" id="pnl_coder">Role: Coder</div>
+                        <asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" />
+        </nav>                
+
         <div class="sixteen columns">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         </div>
