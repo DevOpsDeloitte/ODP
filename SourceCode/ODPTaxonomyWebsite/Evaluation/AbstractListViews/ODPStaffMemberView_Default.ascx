@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Default.ascx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Default" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Default.ascx.cs"
+    Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Default" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
     Assembly="ODPTaxonomyWebsite" %>
 <h2>
@@ -11,8 +12,8 @@
         <asp:TemplateField HeaderText="Title" SortExpression="Title">
             <ItemTemplate>
                 <asp:Panel runat="server" ID="TitleWrapper" CssClass="title-wrapper">
-                    <span>
-                        <%#Eval("ProjectTitle") %></span>
+                    <a href='ViewAbstract.aspx?AbstractID=<%#Eval("AbstractID") %>'><span>
+                        <%#Eval("ProjectTitle") %></span></a>
                     <asp:HyperLink runat="server" ID="AbstractScanLink" CssClass="scan-file">
                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment" />
                     </asp:HyperLink>
