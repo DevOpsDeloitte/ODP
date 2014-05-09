@@ -19,12 +19,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             try
             {
-                /**
-                 * Grabs abstracts
-                 */
                 var parentAbstracts = GetTableData();
 
-                AbstractViewGridView.DataSource = ProcessTabelData(parentAbstracts);
+                AbstractViewGridView.DataSource = ProcessTableData(parentAbstracts);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -33,7 +30,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> GetTableData(string sort = "date", SortDirection direction = SortDirection.Ascending)
+        protected List<AbstractListRow> GetTableData(string sort = "Date", SortDirection direction = SortDirection.Ascending)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -62,8 +59,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            // Make sure this submission is coder consensus, NOT individual coder evaluation
                           sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_CONSENSUS
                            )
-                       orderby h.CreatedDate descending
-                       orderby a.ProjectTitle ascending
                        select new AbstractListRow
                        {
                            AbstractID = a.AbstractID,
@@ -112,7 +107,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> ProcessTabelData(List<AbstractListRow> ParentAbstracts)
+        protected List<AbstractListRow> ProcessTableData(List<AbstractListRow> ParentAbstracts)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             AbstractListViewData data = new AbstractListViewData(connString);
@@ -189,7 +184,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             var abstracts = GetTableData(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = ProcessTabelData(abstracts);
+            AbstractViewGridView.DataSource = ProcessTableData(abstracts);
             AbstractViewGridView.DataBind();
         }
     }

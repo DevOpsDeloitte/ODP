@@ -22,7 +22,10 @@ namespace ODPTaxonomyDAL_JY
     public enum SubmissionTypeEnum
     {
         CODER_EVALUATION = 1,
-        CODER_CONSENSUS = 2
+        CODER_CONSENSUS = 2,
+        ODP_STAFF_EVALUATION = 3,
+        ODP_STAFF_CONSENSUS = 4,
+        ODP_STAFF_COMPARISON = 5
     }
 
     public enum EvaluationTypeEnum
