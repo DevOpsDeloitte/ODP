@@ -1,15 +1,41 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ODPTaxonomyWebsite.SiteMaster" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
-    <title></title>
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>ODP Taxonomy</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- CSS
+  ================================================== -->  
+    <link href="~/Styles/base.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/skeleton.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/layout.css" rel="Stylesheet" type="text/css" />
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Styles/AbstractListView.css" rel="Stylesheet" type="text/css" />
+ 
+     <!-- ASP
+  ================================================== -->     
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
+    
+    <!-- Favicons
+  ================================================== -->
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <link rel="apple-touch-icon" href="~/Images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Images/apple-touch-icon-114x114.png">
 </head>
-<body>
+
+<body  class="cbp-spmenu-push">
     <form runat="server">
     <div class="page">
         <div class="header">
