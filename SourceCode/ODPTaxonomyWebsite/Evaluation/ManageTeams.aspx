@@ -6,13 +6,14 @@
         Manage Teams
     </h2>
     <p>
-    <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error"></asp:Label>
+    <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error"></asp:Label></p>
     <asp:Panel runat="server" ID="pnl_content">
+    <p>
     <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers"></asp:Label>
     </p>
     <asp:HiddenField runat="server" ID="hf_teamTypeId" />
-    <h3>Users evailable for team to pick up</h3>
-    <p runat="server" id="gc_noUsers">No users are currently evailable for you to select for a new team.</p>
+    <h3>Users available for team to pick up</h3>
+    <p runat="server" id="gc_noUsers">No users are currently available for you to select for a new team.</p>
     <p></p>
     <asp:Repeater runat="server" ID="rpt_users">
         <HeaderTemplate>
@@ -63,7 +64,7 @@
                     </asp:Repeater>
                 </td>
                 <td><asp:HiddenField runat="server" ID="hf_teamID" Value='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
-                <asp:Button runat="server" ID="btn_deleteTeam" OnClick="DeleteTeam_Click" Text="Delete Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
+                <asp:Button runat="server" ID="btn_deleteTeam" OnClick="DeleteTeam_Click" OnClientClick="return confirm('Are you sure you would like to Remove Team?');" Text="Remove Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
                 </td>
             </tr>
         </ItemTemplate>

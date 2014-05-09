@@ -13,21 +13,39 @@ namespace ODPTaxonomyWebsite.Evaluation {
     public partial class ViewAbstractList {
         
         /// <summary>
-        /// btn_print control.
+        /// MainviewDDL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_print;
+        protected global::System.Web.UI.WebControls.DropDownList MainviewDDL;
         
         /// <summary>
-        /// btn_code control.
+        /// SubviewLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_code;
+        protected global::System.Web.UI.WebControls.Label SubviewLabel;
+        
+        /// <summary>
+        /// SubviewDDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList SubviewDDL;
+        
+        /// <summary>
+        /// AbstractViewPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder AbstractViewPlaceHolder;
     }
 }

@@ -5,63 +5,68 @@
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
 
-	<!-- Basic Page Needs
+    <!-- Basic Page Needs
   ================================================== -->
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <title>ODP Taxonomy</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-	<!-- Mobile Specific Metas
+    <!-- Mobile Specific Metas
   ================================================== -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-	<!-- CSS
+    <!-- CSS
   ================================================== -->
-	<link rel="stylesheet" href="stylesheets/base.css">
-	<link rel="stylesheet" href="stylesheets/skeleton.css">
-	<link rel="stylesheet" href="stylesheets/layout.css">
+    <link rel="stylesheet" href="stylesheets/base.css">
+    <link rel="stylesheet" href="stylesheets/skeleton.css">
+    <link rel="stylesheet" href="stylesheets/layout.css">
     <link rel="stylesheet" href="stylesheets/alertify.css">    
     <link rel="stylesheet" href="stylesheets/line/tax.css">
 
-	<!-- Favicons
-	================================================== -->
-	<link rel="shortcut icon" href="images/favicon.ico">
-	<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	<link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-	<link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
 
 </head>
-<body>
+<body class="cbp-spmenu-push">
 
 
 
 <!-- Primary Page Layout
 ================================================== -->
+<div id="header_container">
+    <div id="header">
+    <button id="showLeftPush" class="button">Menu</button>
+        <div class="buttons">
+        <a class="button" href="#" id="confirm">Save</a>
+        <a class="button" href="#">Unable to Code</a>
+        <a class="button" href="#">Print</a>
+        </div>
+    </div>
+</div>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+            <a href="#study-focus">Study Focus</a>
+            <a href="#entities-studied">Entities Studied</a>
+            <a href="#study-setting">Study Setting</a>
+            <a href="#population-focus">Population focus</a>
+            <a href="#study-design-purpose">Study Design/Purpose</a>
+            <a href="#prevention-research-category">Prevention Research Category</a>
+        </nav>
 
 <div class="container">
-    <div class="sixteen columns header"> 
+ 
+    <div class="sixteen columns title"> 
         <h1 class="center">Prevention Taxonomy Form</h1>
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN</span>
         <span class="subtitle">(TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
 
-    <div class="nav">
-        <ul>
-            <li><a href="#study-focus">Study Focus</a></li>
-            <li><a href="#entities-studied">Entities Studied</a></li>
-            <li><a href="#study-setting">Study Setting</a></li>
-            <li><a href="#population-focus">Population focus</a></li>
-            <li><a href="#study-design-purpose">Study Design/Purpose</a></li>
-            <li><a href="#prevention-research-category">Prevention Research Category</a></li>
-            <li><a class="button" href="#" id="confirm">Save</a></li>
-            <li><input type="checkbox"><label>Unable to Code</label></li>
-            <!--<li><div id="toggle-unanswered" class="icheckbox_line-tax">Toggle Unanswered</div></li>-->
-        </ul>
-    </div>
-
-	<div class="sixteen columns"> 
+    <div class="sixteen columns"> 
 
         <table class="bordered zebra-striped" id="study-focus" class="study-focus">
             <caption>A. Study Focus</caption>
@@ -609,6 +614,7 @@
 <script src="js/jquery.js"></script>
 <script src="js/icheck.js"></script>
 <script src="js/alertify.js"></script>
+<script src="js/classie.js"></script>
 
     <!--[if lt IE 9]>
         <script src="js/html5.js"></script>
@@ -685,6 +691,24 @@ $("#confirm").on( 'click', function () {
             return false;
         });
 </script>
+        <script>
+            var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+                showLeftPush = document.getElementById( 'showLeftPush' ),
+                body = document.body;
 
+            showLeftPush.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toright' );
+                classie.toggle( menuLeft, 'cbp-spmenu-open' );
+                disableOther( 'showLeftPush' );
+            };
+
+            function disableOther( button ) {
+
+                if( button !== 'showLeftPush' ) {
+                    classie.toggle( showLeftPush, 'disabled' );
+                }
+            }
+        </script>
 </body>
 </html>
