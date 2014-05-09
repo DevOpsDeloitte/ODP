@@ -49,10 +49,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                           h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A) &&
                            // Make sure the history is the latest one
                           h.CreatedDate == db.AbstractStatusChangeHistories
-                           .Where(h2 => h2.AbstractID == a.AbstractID &&
-                               (h.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 ||
-                                h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A)
-                                )
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max() &&
                            // Make sure this evaluation is ODP's
                           ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&

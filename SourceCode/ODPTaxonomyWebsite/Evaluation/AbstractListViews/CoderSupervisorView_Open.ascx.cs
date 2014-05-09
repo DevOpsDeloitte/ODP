@@ -48,9 +48,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                           h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A) &&
                            // Make sure the history is the latest one
                           h.CreatedDate == db.AbstractStatusChangeHistories
-                           .Where(h2 => h2.AbstractID == a.AbstractID && (
-                               h2.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1) ||
-                               h2.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A)
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max()
                            )
                        select new AbstractListRow

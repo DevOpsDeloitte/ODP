@@ -60,10 +60,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                           h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
                            // Make sure the history is the latest one
                           h.CreatedDate == db.AbstractStatusChangeHistories
-                           .Where(h2 => h2.AbstractID == a.AbstractID && (
-                               h2.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                               h2.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B
-                               ))
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max() &&
                            // Make sure this evaluation is coder's evaluation, not ODP's
                           ev.EvaluationTypeId == (int)EvaluationTypeEnum.CODER_EVALUATION &&
