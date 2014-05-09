@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
 using ODPTaxonomyDAL_JY;
 using ODPTaxonomyUtility_TT;
+using System.Configuration;
 
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
-    public partial class ODPStaffMemberView_Review : System.Web.UI.UserControl
+    public partial class ODPStaffMemberView_Review_Uncoded : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -45,17 +45,11 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
                        from scn in evscn.DefaultIfEmpty()
                        where (
-                           // 1B or 1N Consensus complete status with/without notes uploaded
-                          (h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID <= (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C ||
-                          h.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N) &&
-                           // Make sure the history is the latest one
+                          h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
                           h.CreatedDate == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max() &&
-                           // Make sure this evaluation is coder's evaluation, not ODP's
                           ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                           // Make sure this submission is coder consensus, NOT individual coder evaluation
                           sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_EVALUATION
                            )
                        select new AbstractListRow

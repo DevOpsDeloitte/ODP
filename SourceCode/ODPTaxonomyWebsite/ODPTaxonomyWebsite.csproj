@@ -63,6 +63,7 @@
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
@@ -160,6 +161,13 @@
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx.designer.cs">
       <DependentUpon>ODPStaffMemberView_Review.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx.cs">
+      <DependentUpon>ODPStaffMemberView_Review_Uncoded.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx.designer.cs">
+      <DependentUpon>ODPStaffMemberView_Review_Uncoded.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx.cs">
       <DependentUpon>ODPSupervisorView_Default.ascx</DependentUpon>
