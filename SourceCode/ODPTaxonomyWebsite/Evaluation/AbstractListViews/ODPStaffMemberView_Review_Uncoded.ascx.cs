@@ -4,35 +4,24 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
-
 using ODPTaxonomyDAL_JY;
 using ODPTaxonomyUtility_TT;
+using System.Configuration;
 
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
-    public partial class ODPStaffMemberView_Default : System.Web.UI.UserControl
+    public partial class ODPStaffMemberView_Review_Uncoded : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
             // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
 
-            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-            AbstractListViewData data = new AbstractListViewData(connString);
-            DataJYDataContext db = new DataJYDataContext(connString);
-
-            List<AbstractListRow> abstracts = new List<AbstractListRow>();
-
             try
             {
-                /**
-                 * Grabs abstract and other related data
-                 */
                 var parentAbstracts = GetTableData();
 
-
-                AbstractViewGridView.DataSource = ProcessTableData(parentAbstracts);
+                AbstractViewGridView.DataSource = parentAbstracts;
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -52,16 +41,16 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                        join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
                        join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
+                       join rv in db.AbstractReviewLists on a.AbstractID equals rv.AbstractID
                        join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
                        from scn in evscn.DefaultIfEmpty()
                        where (
-                          (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
+                          h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
                           h.CreatedDate == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max() &&
                           ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                          sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_CONSENSUS
+                          sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_EVALUATION
                            )
                        select new AbstractListRow
                        {
@@ -109,34 +98,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     }
 
             }
-        }
-
-        protected List<AbstractListRow> ProcessTableData(List<AbstractListRow> ParentAbstracts)
-        {
-            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-            AbstractListViewData data = new AbstractListViewData(connString);
-
-            List<AbstractListRow> abstracts = new List<AbstractListRow>();
-
-            for (int i = 0; i < ParentAbstracts.Count; i++)
-            {
-                abstracts.Add(ParentAbstracts[i]);
-
-                if ((ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                    ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
-                    ParentAbstracts[i].EvaluationID != null)
-                {
-                    // ODP Staff vs Coder consensus row
-                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);
-                    abstracts.AddRange(odpStaffCoderConsensus);
-
-                    // ODP Consensus
-                    var odpConsensus = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID);
-                    abstracts.AddRange(odpConsensus);
-                }
-            }
-
-            return abstracts;
         }
 
         protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
@@ -188,7 +149,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             var abstracts = GetTableData(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = ProcessTableData(abstracts);
+            AbstractViewGridView.DataSource = abstracts;
             AbstractViewGridView.DataBind();
         }
     }
