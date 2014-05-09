@@ -44,15 +44,11 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
                        from scn in evscn.DefaultIfEmpty()
                        where (
-                           // 1N or greater
                           h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
-                           // Make sure the history is the latest one
                           h.CreatedDate == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max() &&
-                           // Make sure this evaluation is ODP's
                           ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                           // Make sure this submission is consensus, NOT evaluation
                           sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_CONSENSUS
                            )
                        select new AbstractListRow

@@ -43,10 +43,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                        where (
-                           // 1N Consensus complete status with notes uploaded
                           (h.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1 ||
                           h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A) &&
-                           // Make sure the history is the latest one
                           h.CreatedDate == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max()
