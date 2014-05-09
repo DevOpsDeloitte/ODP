@@ -90,13 +90,6 @@ namespace ODPTaxonomyAccountDAL
 			return ((ISingleResult<select_userByUserNameResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_roles")]
-		public ISingleResult<select_rolesResult> select_roles()
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<select_rolesResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_activeTeamByUserName")]
 		public ISingleResult<select_activeTeamByUserNameResult> select_activeTeamByUserName([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="VarChar(200)")] string userName)
 		{
@@ -474,68 +467,6 @@ namespace ODPTaxonomyAccountDAL
 				if ((this._IsApproved != value))
 				{
 					this._IsApproved = value;
-				}
-			}
-		}
-	}
-	
-	public partial class select_rolesResult
-	{
-		
-		private System.Guid _RoleId;
-		
-		private string _RoleName;
-		
-		private string _RoleDesc;
-		
-		public select_rolesResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid RoleId
-		{
-			get
-			{
-				return this._RoleId;
-			}
-			set
-			{
-				if ((this._RoleId != value))
-				{
-					this._RoleId = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string RoleName
-		{
-			get
-			{
-				return this._RoleName;
-			}
-			set
-			{
-				if ((this._RoleName != value))
-				{
-					this._RoleName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleDesc", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string RoleDesc
-		{
-			get
-			{
-				return this._RoleDesc;
-			}
-			set
-			{
-				if ((this._RoleDesc != value))
-				{
-					this._RoleDesc = value;
 				}
 			}
 		}
