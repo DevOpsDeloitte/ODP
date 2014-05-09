@@ -63,6 +63,9 @@
                                 <li><asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" /></li>
                             </ul>
                         </li>
+                        <li>
+                            <asp:HyperLink runat="server" Text="Edit Profile" NavigateUrl="~/AccountManagement/EditProfile.aspx"></asp:HyperLink>
+                        </li>
                     </ul>
                 </div>
                 
