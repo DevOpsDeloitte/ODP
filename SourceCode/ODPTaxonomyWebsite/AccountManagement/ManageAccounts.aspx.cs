@@ -117,7 +117,6 @@ namespace ODPTaxonomyWebsite.AccountManagement
             
         }
 
-
         protected void gvw_users_OnSorting(object sender, GridViewSortEventArgs e)
         {
             string l_sortExpression = e.SortExpression;

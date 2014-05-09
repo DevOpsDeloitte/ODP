@@ -2,9 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        Manage Accounts
-    </h2>
+    <h2>Manage Accounts</h2>
 
     <asp:Label ID="lbl_error_message" CssClass="errorMessage" runat="server" Visible="false" />
 
