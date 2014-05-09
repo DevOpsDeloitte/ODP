@@ -5,7 +5,6 @@
 <head runat="server">
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
-    <link href="~/Styles/AbstractListView.css" rel="Stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -25,7 +24,7 @@
                     </AnonymousTemplate>
                     <LoggedInTemplate>
                         Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/> ]
                     </LoggedInTemplate>
                 </asp:LoginView>
             </div>

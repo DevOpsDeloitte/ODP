@@ -1,16 +1,80 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="AccountDataLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=1sql234;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyAccountDAL.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString" Provider="System.Data.SqlClient" />
-  <Function Name="dbo.update_userProfile" Method="update_userProfile">
+  <Function Name="dbo.select_users" Method="select_users">
+    <Parameter Name="SortBy" Parameter="sortBy" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="SortDirection" Parameter="sortDirection" Type="System.String" DbType="VarChar(4)" />
+    <ElementType Name="select_usersResult">
+      <Column Name="UserID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="UserFirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserLastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="IsLockedOut" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.update_userProfileByID" Method="update_userProfileByID">
     <Parameter Name="UserId" Parameter="userId" Type="System.Guid" DbType="UniqueIdentifier" />
     <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(50)" />
     <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.select_userProfile" Method="select_userProfile">
-    <Parameter Name="UserId" Parameter="userId" Type="System.Guid" DbType="UniqueIdentifier" />
-    <ElementType Name="select_userProfileResult">
+  <Function Name="dbo.select_userByID" Method="select_userByID">
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <ElementType Name="select_userByIDResult">
+      <Column Name="userid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
       <Column Name="UserFirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="UserLastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.select_userByUserName" Method="select_userByUserName">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="VarChar(200)" />
+    <ElementType Name="select_userByUserNameResult">
+      <Column Name="userid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="UserFirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserLastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.select_activeTeamByUserName" Method="select_activeTeamByUserName">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="VarChar(200)" />
+    <ElementType Name="select_activeTeamByUserNameResult">
+      <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TeamCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TeamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Createdby" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TeamID1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId1" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserFirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserLastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.create_user" Method="create_user">
+    <Parameter Name="FirstName" Parameter="firstName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="LastName" Parameter="lastName" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="NVarChar(256)" />
+    <Parameter Name="ClearTextPassword" Parameter="clearTextPassword" Type="System.String" DbType="NVarChar(128)" />
+    <Parameter Name="IsApproved" Parameter="isApproved" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="roleList" Type="System.String" DbType="NVarChar(500)" />
+    <Parameter Name="UserNameOutput" Parameter="userNameOutput" Type="System.String" DbType="NVarChar(256)" Direction="InOut" />
+    <ElementType Name="create_userResult">
+      <Column Name="Name" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

@@ -29,6 +29,15 @@ namespace ODPTaxonomyWebsite
 
         #region EventHandlers
 
+        protected void HeadLoginStatus_OnLoggingOut(object sender, LoginCancelEventArgs e)
+        {
+            Session["AM_PageIndex"] = null;
+            Session["AM_SortExpression"] = null;
+            Session["AM_SortDirection"] = null;
+            Session["AM_UserName"] = null;
+            Session["AM_Action"] = null;
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
