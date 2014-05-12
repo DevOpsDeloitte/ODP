@@ -14,6 +14,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             this.AutoGenerateColumns = false;
             this.AllowPaging = true;
             this.PageSize = 10;
+            this.AllowSorting = true;
 
             this.RowStyle.CssClass = "data-row";
 

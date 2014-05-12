@@ -6,13 +6,13 @@
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable" OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>
-        <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" />
-        <asp:BoundField DataField="StatusDate" HeaderText="Status Date" />
-        <asp:TemplateField HeaderText="Title">
+        <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" SortExpression="ApplicationID" />
+        <asp:BoundField DataField="StatusDate" HeaderText="Status Date" SortExpression="Date" />
+        <asp:TemplateField HeaderText="Title" SortExpression="Title">
             <ItemTemplate>
                 <asp:Panel runat="server" ID="TitleWrapper" CssClass="title-wrapper">
-                    <span>
-                        <%#Eval("ProjectTitle") %></span>
+                    <a href='ViewAbstract.aspx?AbstractID=<%#Eval("AbstractID") %>'><span>
+                        <%#Eval("ProjectTitle") %></span></a>
                     <asp:HyperLink runat="server" ID="AbstractScanLink" CssClass="scan-file">
                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment" />
                     </asp:HyperLink>
