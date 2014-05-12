@@ -11,8 +11,8 @@
         <asp:TemplateField HeaderText="Title">
             <ItemTemplate>
                 <asp:Panel runat="server" ID="TitleWrapper" CssClass="title-wrapper">
-                    <span>
-                        <%#Eval("ProjectTitle") %></span>
+                    <a href='ViewAbstract.aspx?AbstractID=<%#Eval("AbstractID") %>'><span>
+                        <%#Eval("ProjectTitle") %></span></a>
                     <asp:HyperLink runat="server" ID="AbstractScanLink" CssClass="scan-file">
                         <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment" />
                     </asp:HyperLink>

@@ -96,6 +96,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                     SubviewDDL.Items.Add(new ListItem("Default View", ""));
                     SubviewDDL.Items.Add(new ListItem("In Review List", "review"));
+                    SubviewDDL.Items.Add(new ListItem("In Review List - Uncoded Only", "uncoded"));
 
                     if (selectedIndex > -1)
                     {
@@ -160,6 +161,10 @@ namespace ODPTaxonomyWebsite.Evaluation
                     if (SubviewDDL.SelectedValue == "review")
                     {
                         abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Review.ascx") as ODPStaffMemberView_Review;
+                    }
+                    else if (SubviewDDL.SelectedValue == "uncoded")
+                    {
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Review_Uncoded.ascx") as ODPStaffMemberView_Review_Uncoded;
                     }
                     else
                     {
