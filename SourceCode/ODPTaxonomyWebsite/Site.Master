@@ -1,56 +1,127 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ODPTaxonomyWebsite.SiteMaster" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head runat="server">
-    <title></title>
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>ODP Taxonomy</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- CSS
+  ================================================== -->  
+    <link href="~/Styles/base.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/skeleton.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/layout.css" rel="Stylesheet" type="text/css" />
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
-   
+    <link href="~/Styles/AbstractListView.css" rel="Stylesheet" type="text/css" />
+
+     <!-- ASP
+  ================================================== -->     
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
-    <form runat="server">
-    <div class="page">
-        <div class="header">
-            <div class="title">
-                <h1>
-                    ODP Taxonomy
-                </h1>
-            </div>
-            <div class="loginDisplay">
-                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                    <AnonymousTemplate>
-                        [ <a href="~/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
-                    </AnonymousTemplate>
-                    <LoggedInTemplate>
-                        Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/> ]
-                    </LoggedInTemplate>
-                </asp:LoginView>
-            </div>
-            <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="~/Default.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="~/AccountManagement/ManageAccounts.aspx" Text="Manage Accounts"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/ViewAbstractList.aspx" Text="View Abstract List"/>
-                        <asp:MenuItem NavigateUrl="~/AccountManagement/EditProfile.aspx" Text="Edit Profile"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/ViewAbstract.aspx" Text="View Abstract"/>
-                        <asp:MenuItem NavigateUrl="~/Evaluation/CreateTeams.aspx" Text="Create Teams"/>
-                    </Items>
-                </asp:Menu>
-            </div>
+<body class="cbp-spmenu-push">
+<form id="Form1" runat="server">
+        <div id="header_container">
+            <div class="header">
+                <button id="showLeftPush" class="button">Menu</button>
+                <div class="login-display">
+                    <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                        <AnonymousTemplate>
+                            <a href="~/Login.aspx" ID="HeadLoginStatus" runat="server" class="button">Log In</a>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
+                            [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/> ]
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>    
         </div>
-        <div class="main">
+
+<div class="container">
+    
+        
+
+        <div class="sixteen columns title"> 
+            <h1 class="center">ODP Taxonomy</h1>
+            <span class="subtitle">LOGIN</span>
+            <span class="subtitle">Please enter your user name and password.</span>
+        </div>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+
+                        <a href="/Default.aspx">Home</a>
+                        <div runat="server" visible="false" id="pnl_admin">Role: Admin</div>
+                            <asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" />
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" />                                
+                       
+                        <div runat="server" visible="false" id="pnl_odpSup">Role: ODP Suprvisor</div>
+                            <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></a>
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" />
+                        <div runat="server" visible="false" id="pnl_odp">Role: ODP Staff Member</div>
+                            <asp:LinkButton OnClick="btn_viewAbstractList_odp_Click" runat="server" ID="btn_viewAbstractList_odp" Text="View Abstract List" />
+                        <div runat="server" visible="false" id="pnl_coderSup">Role: Coder Supervisor</div>
+                            <asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" />
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /> 
+                            <asp:LinkButton OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" />
+                        <div runat="server" visible="false" id="pnl_coder">Role: Coder</div>
+                        <asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" />
+        </nav>                
+
+        <div class="sixteen columns">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         </div>
-        <div class="clear">
-        </div>
+
+
+
+    
     </div>
-    <div class="footer">
-        
-    </div>
-    </form>
+
+<!-- JS
+================================================== -->
+<script src="Scripts/jquery.js"></script>
+<script src="Scripts/classie.js"></script>   
+        <script type="text/javascript">
+                <!--
+                function showMenu() {
+                    var menuItems = document.getElementById("menuItems");
+                    if (menuItems) {
+                        if (menuItems.style.visibility == "visible") {
+                            menuItems.style.visibility = "hidden";
+                        }
+                        else {
+                            menuItems.style.visibility = "visible";
+                        }
+                    }
+                }
+                //-->
+        </script>
+        <script>
+            var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+                showLeftPush = document.getElementById( 'showLeftPush' ),
+                body = document.body;
+
+            showLeftPush.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( body, 'cbp-spmenu-push-toright' );
+                classie.toggle( menuLeft, 'cbp-spmenu-open' );
+                disableOther( 'showLeftPush' );
+            };
+
+            function disableOther( button ) {
+
+                if( button !== 'showLeftPush' ) {
+                    classie.toggle( showLeftPush, 'disabled' );
+                }
+            }
+        </script>
+</form>
 </body>
 </html>
