@@ -1,5 +1,4 @@
-﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeBehind="Login.aspx.cs" Inherits="ODPTaxonomyWebsite.Account.Login" %>
+﻿<%@ Page Title="Log In" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="ODPTaxonomyWebsite.Account.Login" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
