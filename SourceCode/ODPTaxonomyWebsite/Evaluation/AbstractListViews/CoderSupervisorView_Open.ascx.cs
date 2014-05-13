@@ -24,6 +24,11 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
                 var abstracts = GetTableData();
 
+                foreach (AbstractListRow abs in abstracts)
+                {
+                    abs.FillKappaValues();
+                }
+
                 AbstractViewGridView.DataSource = abstracts;
                 AbstractViewGridView.DataBind();
             }

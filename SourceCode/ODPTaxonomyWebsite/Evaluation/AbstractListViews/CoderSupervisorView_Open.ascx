@@ -20,14 +20,14 @@
                 </asp:Panel>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField HeaderText="A1"></asp:TemplateField>
-        <asp:TemplateField HeaderText="A2"></asp:TemplateField>
-        <asp:TemplateField HeaderText="A3"></asp:TemplateField>
-        <asp:TemplateField HeaderText="B"></asp:TemplateField>
-        <asp:TemplateField HeaderText="C"></asp:TemplateField>
-        <asp:TemplateField HeaderText="D"></asp:TemplateField>
-        <asp:TemplateField HeaderText="E"></asp:TemplateField>
-        <asp:TemplateField HeaderText="F"></asp:TemplateField>
-        <asp:TemplateField HeaderText="G"></asp:TemplateField>
+        <asp:BoundField HeaderText="A1" DataField="A1"></asp:BoundField>
+        <asp:BoundField HeaderText="A2" DataField="A2"></asp:BoundField>
+        <asp:BoundField HeaderText="A3" DataField="A3"></asp:BoundField>
+        <asp:BoundField HeaderText="B" DataField="B"></asp:BoundField>
+        <asp:BoundField HeaderText="C" DataField="C"></asp:BoundField>
+        <asp:BoundField HeaderText="D" DataField="D"></asp:BoundField>
+        <asp:BoundField HeaderText="E" DataField="E"></asp:BoundField>
+        <asp:BoundField HeaderText="F" DataField="F"></asp:BoundField>
+        <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
     </Columns>
 </odp:AbstractGridView> 

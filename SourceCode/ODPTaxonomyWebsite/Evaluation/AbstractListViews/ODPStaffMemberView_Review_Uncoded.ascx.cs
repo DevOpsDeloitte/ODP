@@ -21,6 +21,11 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             {
                 var parentAbstracts = GetTableData();
 
+                foreach (AbstractListRow abs in parentAbstracts)
+                {
+                    abs.FillKappaValues();
+                }
+
                 AbstractViewGridView.DataSource = parentAbstracts;
                 AbstractViewGridView.DataBind();
             }
@@ -63,7 +68,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            SubmissionID = sb.SubmissionID,
                            EvaluationID = h.EvaluationId,
                            Comment = sb.comments,
-                           AbstractScan = scn.FileName
+                           AbstractScan = scn.FileName,
+                           UnableToCode = sb.UnableToCode
                        };
 
             switch (sort)
