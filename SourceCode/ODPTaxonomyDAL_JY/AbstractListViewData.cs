@@ -51,7 +51,9 @@ namespace ODPTaxonomyDAL_JY
                                         StatusDate = sb.SubmissionDateTime,
                                         SubmissionID = sb.SubmissionID,
                                         EvaluationID = h.EvaluationId,
-                                        Comment = sb.comments
+                                        Comment = sb.comments,
+                                        TeamID = ev.TeamID,
+                                        UserID = sb.UserId
                                     }).Take(3).ToList();
 
             return coderEvaluations;
@@ -87,7 +89,9 @@ namespace ODPTaxonomyDAL_JY
                                         StatusDate = sb.SubmissionDateTime,
                                         SubmissionID = sb.SubmissionID,
                                         EvaluationID = h.EvaluationId,
-                                        Comment = sb.comments
+                                        Comment = sb.comments,
+                                        TeamID = ev.TeamID,
+                                        UserID = sb.UserId
                                     }).Take(3).ToList();
 
             return staffEvaluations;
@@ -222,6 +226,15 @@ namespace ODPTaxonomyDAL_JY
             return (from k in db.KappaDatas
                     where k.AbstractID == AbstractID && k.KappaTypeID == KappaTypeID
                     select k).FirstOrDefault();
+        }
+
+        public string GetKappaCoderAlias(Guid UserID, int TeamID)
+        {
+            var query = from ku in db.KappaUserIdentifies
+                        where ku.UserId == UserID && ku.TeamID == TeamID
+                        select ku.UserAlias;
+
+            return query.FirstOrDefault();
         }
     }
 }

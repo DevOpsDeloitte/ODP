@@ -136,4 +136,13 @@
       <Association Name="Abstract_KappaData" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.KappaUserIdentify" Member="KappaUserIdentifies">
+    <Type Name="KappaUserIdentify">
+      <Column Name="KappaUserIdentifyID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TeamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="UserAlias" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

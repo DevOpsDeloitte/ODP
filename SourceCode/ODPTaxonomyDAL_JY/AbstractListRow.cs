@@ -25,6 +25,9 @@ namespace ODPTaxonomyDAL_JY
             }
         }
 
+        public int? TeamID { get; set; }
+        public Guid? UserID { get; set; }
+
         public int? SubmissionID { get; set; }
         public string Comment { get; set; }
 
@@ -64,8 +67,57 @@ namespace ODPTaxonomyDAL_JY
             {
                 kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_COMPARISON_K1);
             }
+            else if (this.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B)
+            {
+                kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
+            }
+            else if (this.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C)
+            {
+                kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_CONSENSUS_VS_ODP_CONSENSUS_K9);
+            }
             else if (this.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A)
             {
+                string KappaCoderAlias = data.GetKappaCoderAlias((Guid)this.UserID, (int)this.TeamID);
+
+                if (!string.IsNullOrEmpty(KappaCoderAlias))
+                {
+                    switch (KappaCoderAlias)
+                    {
+                        case "CdrA":
+                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_A_VS_CONSENSUS_K2);
+                            break;
+                        case "CdrB":
+                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_B_VS_CONSENSUS_K3);
+                            break;
+                        case "CdrC":
+                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_C_VS_CONSENSUS_K4);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            else if (this.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A)
+            {
+                string KappaCoderAlias = data.GetKappaCoderAlias((Guid)this.UserID, (int)this.TeamID);
+
+                if (!string.IsNullOrEmpty(KappaCoderAlias))
+                {
+                    switch (KappaCoderAlias)
+                    {
+                        case "CdrA":
+                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_A_VS_CONSENSUS_K6);
+                            break;
+                        case "CdrB":
+                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_B_VS_CONSENSUS_K7);
+                            break;
+                        case "CdrC":
+                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_C_VS_CONSENSUS_K8);
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
 
             if (kappa != null)

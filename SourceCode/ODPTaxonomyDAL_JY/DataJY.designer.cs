@@ -57,6 +57,9 @@ namespace ODPTaxonomyDAL_JY
     partial void InsertKappaData(KappaData instance);
     partial void UpdateKappaData(KappaData instance);
     partial void DeleteKappaData(KappaData instance);
+    partial void InsertKappaUserIdentify(KappaUserIdentify instance);
+    partial void UpdateKappaUserIdentify(KappaUserIdentify instance);
+    partial void DeleteKappaUserIdentify(KappaUserIdentify instance);
     #endregion
 		
 		public DataJYDataContext() : 
@@ -158,6 +161,14 @@ namespace ODPTaxonomyDAL_JY
 			get
 			{
 				return this.GetTable<KappaData>();
+			}
+		}
+		
+		public System.Data.Linq.Table<KappaUserIdentify> KappaUserIdentifies
+		{
+			get
+			{
+				return this.GetTable<KappaUserIdentify>();
 			}
 		}
 	}
@@ -3098,6 +3109,164 @@ namespace ODPTaxonomyDAL_JY
 						this._AbstractID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Abstract");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KappaUserIdentify")]
+	public partial class KappaUserIdentify : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _KappaUserIdentifyID;
+		
+		private System.Nullable<int> _TeamID;
+		
+		private System.Nullable<System.Guid> _UserId;
+		
+		private string _UserName;
+		
+		private string _UserAlias;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnKappaUserIdentifyIDChanging(int value);
+    partial void OnKappaUserIdentifyIDChanged();
+    partial void OnTeamIDChanging(System.Nullable<int> value);
+    partial void OnTeamIDChanged();
+    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUserIdChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnUserAliasChanging(string value);
+    partial void OnUserAliasChanged();
+    #endregion
+		
+		public KappaUserIdentify()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaUserIdentifyID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int KappaUserIdentifyID
+		{
+			get
+			{
+				return this._KappaUserIdentifyID;
+			}
+			set
+			{
+				if ((this._KappaUserIdentifyID != value))
+				{
+					this.OnKappaUserIdentifyIDChanging(value);
+					this.SendPropertyChanging();
+					this._KappaUserIdentifyID = value;
+					this.SendPropertyChanged("KappaUserIdentifyID");
+					this.OnKappaUserIdentifyIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamID", DbType="Int")]
+		public System.Nullable<int> TeamID
+		{
+			get
+			{
+				return this._TeamID;
+			}
+			set
+			{
+				if ((this._TeamID != value))
+				{
+					this.OnTeamIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamID = value;
+					this.SendPropertyChanged("TeamID");
+					this.OnTeamIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256)")]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserAlias", DbType="NVarChar(50)")]
+		public string UserAlias
+		{
+			get
+			{
+				return this._UserAlias;
+			}
+			set
+			{
+				if ((this._UserAlias != value))
+				{
+					this.OnUserAliasChanging(value);
+					this.SendPropertyChanging();
+					this._UserAlias = value;
+					this.SendPropertyChanged("UserAlias");
+					this.OnUserAliasChanged();
 				}
 			}
 		}

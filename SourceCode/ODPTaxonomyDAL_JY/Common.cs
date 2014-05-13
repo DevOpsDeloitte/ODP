@@ -46,4 +46,10 @@ namespace ODPTaxonomyDAL_JY
         ODP_STAFF_C_VS_CONSENSUS_K8 = 8,
         CODER_CONSENSUS_VS_ODP_CONSENSUS_K9 = 9
     }
+
+    public enum TeamTypeEnum
+    {
+        Coder = 1,
+        ODP_STAFF = 2
+    }
 }
