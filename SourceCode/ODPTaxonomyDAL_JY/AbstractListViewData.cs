@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 
 namespace ODPTaxonomyDAL_JY
 {
     public class AbstractListViewData
     {
         private DataJYDataContext db;
+
+        public AbstractListViewData()
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            db = new DataJYDataContext(connString);
+        }
 
         public AbstractListViewData(string ConnStr)
         {
@@ -208,6 +215,13 @@ namespace ODPTaxonomyDAL_JY
                                 }).ToList();
 
             return odpConsensus;
+        }
+
+        public KappaData GetKappaData(int AbstractID, int KappaTypeID)
+        {
+            return (from k in db.KappaDatas
+                    where k.AbstractID == AbstractID && k.KappaTypeID == KappaTypeID
+                    select k).FirstOrDefault();
         }
     }
 }

@@ -33,4 +33,17 @@ namespace ODPTaxonomyDAL_JY
         CODER_EVALUATION = 1,
         ODP_EVALUATION = 2
     }
+
+    public enum KappaTypeEnum
+    {
+        CODER_COMPARISON_K1 = 1,
+        CODER_A_VS_CONSENSUS_K2 = 2,
+        CODER_B_VS_CONSENSUS_K3 = 3,
+        CODER_C_VS_CONSENSUS_K4 = 4,
+        ODP_STAFF_COMPARISON_K5 = 5,
+        ODP_STAFF_A_VS_CONSENSUS_K6 = 6,
+        ODP_STAFF_B_VS_CONSENSUS_K7 = 7,
+        ODP_STAFF_C_VS_CONSENSUS_K8 = 8,
+        CODER_CONSENSUS_VS_ODP_CONSENSUS_K9 = 9
+    }
 }

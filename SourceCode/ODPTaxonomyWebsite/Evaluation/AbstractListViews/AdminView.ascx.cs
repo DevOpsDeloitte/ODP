@@ -20,7 +20,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             try
             {
                 var parentAbstracts = GetTableData();
-
+                                
                 AbstractViewGridView.DataSource = ProcessTableData(parentAbstracts);
                 AbstractViewGridView.DataBind();
             }
@@ -63,7 +63,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            SubmissionID = sb.SubmissionID,
                            EvaluationID = h.EvaluationId,
                            Comment = sb.comments,
-                           AbstractScan = scn.FileName
+                           AbstractScan = scn.FileName,
+                           UnableToCode = sb.UnableToCode
                        };
 
             switch (sort)
@@ -102,9 +103,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
         protected List<AbstractListRow> ProcessTableData(List<AbstractListRow> ParentAbstracts)
         {
-            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-            AbstractListViewData data = new AbstractListViewData(connString);
-
+            AbstractListViewData data = new AbstractListViewData();
             List<AbstractListRow> abstracts = new List<AbstractListRow>();
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
@@ -123,6 +122,11 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     var odpConsensus = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(odpConsensus);
                 }
+            }
+
+            foreach (AbstractListRow abs in abstracts)
+            {
+                abs.FillKappaValues();
             }
 
             return abstracts;

@@ -25,6 +25,7 @@
       <Association Name="Abstract_Evaluation1" Member="Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
       <Association Name="Abstract_AbstractReviewList" Member="AbstractReviewLists" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractReviewList" />
       <Association Name="Abstract_AbstractReviewList1" Member="AbstractReviewLists1" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractReviewList" />
+      <Association Name="Abstract_KappaData" Member="KappaDatas" ThisKey="AbstractID" OtherKey="AbstractID" Type="KappaData" />
     </Type>
   </Table>
   <Table Name="dbo.AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories">
@@ -117,6 +118,22 @@
       <Column Name="CreatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Association Name="Abstract_AbstractReviewList" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
       <Association Name="Abstract_AbstractReviewList1" Member="Abstract1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.KappaData" Member="KappaDatas">
+    <Type Name="KappaData">
+      <Column Name="KappaDataID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KappaTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="B" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="C" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Association Name="Abstract_KappaData" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
