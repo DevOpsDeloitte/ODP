@@ -25,6 +25,30 @@ namespace ODPTaxonomyWebsite.Evaluation
                 {
                     RenderAbstractListView(roles[0]);
                 }
+
+                // set pager size
+                if (HttpContext.Current.Request.Cookies["Pager"] != null)
+                {
+                    int TempPagerSize;
+
+                    if (int.TryParse(HttpContext.Current.Request.Cookies["Pager"]["Size"].ToString(), out TempPagerSize))
+                    {
+                        switch (TempPagerSize)
+                        {
+                            case 25:
+                                PagerSizeDDL.SelectedIndex = 0;
+                                break;
+                            case 50:
+                                PagerSizeDDL.SelectedIndex = 1;
+                                break;
+                            case 100:
+                                PagerSizeDDL.SelectedIndex = 2;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
             }
             else
             {
@@ -89,6 +113,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
 
                     SubviewDDL.Visible = true;
+                    SubviewPanel.Visible = true;
                     break;
                 case "ODPStaffMember":
                     SubviewLabel.Text = "Abstract Types:";
@@ -104,6 +129,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
 
                     SubviewDDL.Visible = true;
+                    SubviewPanel.Visible = true;
                     break;
                 case "ODPStaffSupervisor":
                     SubviewLabel.Text = "Abstract Types:";
@@ -118,12 +144,14 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
 
                     SubviewDDL.Visible = true;
+                    SubviewPanel.Visible = true;
                     break;
 
                 case "Admin":
                 default:
                     SubviewLabel.Visible = false;
                     SubviewDDL.Visible = false;
+                    SubviewPanel.Visible = false;
                     break;
             }
         }
@@ -178,6 +206,29 @@ namespace ODPTaxonomyWebsite.Evaluation
             if (abstractView != null)
             {
                 AbstractViewPlaceHolder.Controls.Add(abstractView);
+            }
+        }
+
+        protected void PagerSizeChangeHandler(object sender, EventArgs e)
+        {
+            int NewPagerSize;
+
+            if (int.TryParse(PagerSizeDDL.SelectedValue, out NewPagerSize))
+            {
+                switch (NewPagerSize)
+                {
+                    case 25:
+                    case 50:
+                    case 100:
+                        HttpCookie PagerCookie = new HttpCookie("Pager");
+                        PagerCookie["size"] = NewPagerSize.ToString();
+                        PagerCookie.Expires = DateTime.Now.AddYears(1);
+
+                        Response.Cookies.Add(PagerCookie);
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }
