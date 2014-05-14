@@ -61,7 +61,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            ApplicationID = a.ApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
-                           StatusDate = h.CreatedDate
+                           StatusDate = h.CreatedDate,
+                           IsParent = true
                        };
 
             switch (sort)
