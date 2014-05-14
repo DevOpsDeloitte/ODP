@@ -30,7 +30,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                  * Grabs abstract and other related data
                  */
                 var parentAbstracts = GetTableData();
-                
+
                 AbstractViewGridView.DataSource = ProcessTableData(parentAbstracts);
                 AbstractViewGridView.DataBind();
             }
@@ -55,7 +55,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        from scn in evscn.DefaultIfEmpty()
                        where (
                           (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
+                          h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C) &&
                           h.CreatedDate == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max() &&
@@ -74,7 +74,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            EvaluationID = h.EvaluationId,
                            Comment = sb.comments,
                            AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode
+                           UnableToCode = sb.UnableToCode,
+                           IsParent = true
                        };
 
             switch (sort)
@@ -121,9 +122,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             {
                 abstracts.Add(ParentAbstracts[i]);
 
-                if ((ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                    ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
-                    ParentAbstracts[i].EvaluationID != null)
+                if (ParentAbstracts[i].IsParent)
                 {
                     // ODP Staff vs Coder consensus row
                     var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);

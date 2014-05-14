@@ -64,7 +64,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            EvaluationID = h.EvaluationId,
                            Comment = sb.comments,
                            AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode
+                           UnableToCode = sb.UnableToCode,
+                           IsParent = true
                        };
 
             switch (sort)
@@ -111,9 +112,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             {
                 abstracts.Add(ParentAbstracts[i]);
 
-                if ((ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                    ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
-                    ParentAbstracts[i].EvaluationID != null)
+                if (ParentAbstracts[i].IsParent)
                 {
                     // Inserts Coder Evaluation rows, latest 3 only
                     var coderEvaluations = data.GetCoderEvaluations_1A(ParentAbstracts[i].AbstractID);

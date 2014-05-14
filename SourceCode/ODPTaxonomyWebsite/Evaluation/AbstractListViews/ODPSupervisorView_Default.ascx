@@ -6,9 +6,10 @@
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable" OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>
-        <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" />
-        <asp:BoundField DataField="StatusDate" HeaderText="Status Date" />
-        <asp:TemplateField HeaderText="Title">
+    <asp:BoundField DataField="AbstractID" HeaderText="ID" />
+        <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" SortExpression="ApplicationID" />
+        <asp:BoundField DataField="StatusDate" HeaderText="Status Date" SortExpression="Date" />
+        <asp:TemplateField HeaderText="Title" SortExpression="Title">
             <ItemTemplate>
                 <asp:Panel runat="server" ID="TitleWrapper" CssClass="title-wrapper">
                     <a href='ViewAbstract.aspx?AbstractID=<%#Eval("AbstractID") %>'><span>
