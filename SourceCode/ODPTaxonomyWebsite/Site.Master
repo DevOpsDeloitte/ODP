@@ -26,6 +26,13 @@
   ================================================== -->     
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
+    
+    <!-- Favicons
+  ================================================== -->
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <link rel="apple-touch-icon" href="~/Images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Images/apple-touch-icon-114x114.png">
 </head>
 <body class="cbp-spmenu-push">
 <form id="Form1" runat="server">
