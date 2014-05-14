@@ -29,18 +29,21 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#95a5aa', end
 }
 
 h1 { color: #fff; }
-.subtitle { display: block; font-size: 1.2em; text-align: center; color: #fff; }
+.title { display: block; font-size: 2em; text-align: center; color: #fff; text-transform: uppercase; }
+.subtitle { display: block; font-size: 1.5em; font-weight: bold; text-align: center; color: rgba(47, 85, 124, 1); margin-top: 12px }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; margin: 20px auto; display: block }
 .hidden { display:none;}
-.button, a.button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: none; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; }
-	.button:hover { background: #eee; color: #666; }
-
+.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; }
+	.container .button:hover { background: #eee; color: #666; border: 1px solid #CFCFCF; }
+	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
 .container { padding-top: 80px; margin:0 auto; }
+.center { text-align: center; margin: 10px; }
+.right { float: right; margin: 10px 20px; } .left { float: left; margin: 10px 20px; }
 
-
-table { margin-bottom: 30px; background: #fff; -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1);
-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1);
-width: 98%; }
+table { margin-bottom: 30px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); width: 98%; background: #fff; }
+table.form { background: transparent; box-shadow: none; -webkit-box-shadow: none;}
+	table.form td:first-child { width: 15%; margin: 0; padding: 10px; height: 10px; vertical-align: top; }
+	table.form td.form-button { padding: 0; }
 table td[scope="row"] { width: 25%; }	
 caption { text-align: left; font-weight: bold; font-size: 17px; padding: 14px 12px; }
 table.zebra-striped tbody tr#disabled td { color: #E4E4E4; background-color: #FFFFFF; }
@@ -51,10 +54,15 @@ table .coders { position: absolute; z-index: 9; color: #FFF; right: 4px; top: 6p
 	table .issue-four .coders li, table .issue-five .coders li, table .issue-six .coders li { background: rgba(0, 0, 0, 0.15); margin: 0 1px; text-align: center; width: 40px; float: left; width: 40px; min-height: 1px; text-align: center; -webkit-border-radius: 2px 2px 2px 2px; border-radius: 2px 2px 2px 2px; }
 		table .coders li.coder-number { background: none; width: 8px; }
 
+table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -webkit-box-shadow: none; }
+	table#MainContent_rdl_activeYN td { padding: 0}
+
+input[type="checkbox"] + label, input[type="radio"] + label { display: inline;}
+
 /* Sticky Header */
 #header_container { background:rgba(47, 85, 124, 0.9); height:60px; position:fixed; width:100%; top:0; z-index: 999; }
 .header{ margin: 15px 24px; width:95%; }
-.header .button { background: #FFF; display: inline-block; }
+.header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; }
  .header .button:hover { background: #eee; border: 1px solid #eee; }
 .login-display { color: #fff; float: right;  }
 
@@ -73,13 +81,14 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 
 .sub-title { margin-bottom: 20px; }
 
+/* Menu */
 .nav { position: fixed; left: 4px; padding: 10px 20px; border: 1px solid #7D9EB1; top: 120px; z-index: 999; width: 150px; background: #EEE; background: rgba(215, 225, 235, 0.5); }
 .nav ul li { border-bottom: 1px solid #7D9EB1; padding: 0 0 8px 0; }
  .nav ul li a { text-decoration: none; }
 .nav .button { width: 100%; }
 
+.nav-role { padding: 10px 8px; background: #fff; font-size: 1.2em; }
 
-/* Menu */
 .cbp-spmenu { background: #E5E5E5; -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.3);	box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2); position: fixed; }
 .cbp-spmenu a {	margin: 0; color: #002247;  font-weight: bold; padding: 1em; border-bottom: 1px solid #c6cedc; text-decoration: none; display: block;
 	background: #ffffff; /* Old browsers */

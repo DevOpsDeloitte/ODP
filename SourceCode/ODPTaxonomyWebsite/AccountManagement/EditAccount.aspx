@@ -66,7 +66,7 @@
 
 <asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
 
-<table>
+<table class="form">
     <asp:Panel ID="pnl_username" runat="server">
     <tr>
         <td>
@@ -168,12 +168,12 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <asp:Button ID="btn_save" runat="server" OnClick="btn_save_OnClick" Text="Save" />
+        <td class="form-button">
+            <asp:Button class="button" ID="btn_save" runat="server" OnClick="btn_save_OnClick" Text="Save" />
         </td>
         <td>
-            <asp:Button ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
-        </td>
+            <asp:Button class="button" ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
+        </td class="form-button">
     </tr>
 </table>
 </asp:Panel>

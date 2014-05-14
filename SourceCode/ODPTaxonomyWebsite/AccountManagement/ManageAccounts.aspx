@@ -2,13 +2,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>Manage Accounts</h2>
+    <div class="sixteen columns sub-title"> 
+            <span class="title">MANAGE ACCOUNTS</span>
+    </div>
 
     <asp:Label ID="lbl_error_message" CssClass="errorMessage" runat="server" Visible="false" />
 
-    <asp:LinkButton ID="lnkbtn_create_account" runat="server" Text="Create New Account" OnClick="lnkbtn_createAccount_OnClick" />
+    <asp:LinkButton class="button right" ID="lnkbtn_create_account" runat="server" Text="Create New Account" OnClick="lnkbtn_createAccount_OnClick" />
 
-    <asp:GridView ID="gvw_users" runat="server" AutoGenerateColumns="false"
+    <asp:GridView ID="gvw_users" class="bordered zebra-striped" runat="server" AutoGenerateColumns="false"
         AllowPaging="true" PageSize="25" OnPageIndexChanging="gvw_users_OnPageIndexChanging"
         AllowSorting="true" OnSorting="gvw_users_OnSorting" 
         OnRowEditing="gvw_users_OnRowEditing" >
