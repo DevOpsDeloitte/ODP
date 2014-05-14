@@ -81,8 +81,8 @@
 
 <!-- JS
 ================================================== -->
-<script src="Scripts/jquery.js"></script>
-<script src="Scripts/classie.js"></script>   
+<script src="/Scripts/jquery.js"></script>
+<script src="/Scripts/classie.js"></script>   
         <script type="text/javascript">
                 <!--
             function showMenu() {
