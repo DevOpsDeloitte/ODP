@@ -16,6 +16,8 @@
 
 /* #Site Styles
 ================================================== */
+html, body {
+min-height: 100%; }
 body { background: #95a5aa; /* Old browsers */
 background: -moz-linear-gradient(top,  #95a5aa 0%, #d9dee0 45%, #ffffff 71%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#95a5aa), color-stop(45%,#d9dee0), color-stop(71%,#ffffff)); /* Chrome,Safari4+ */
