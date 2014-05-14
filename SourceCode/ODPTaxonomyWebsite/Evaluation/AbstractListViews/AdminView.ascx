@@ -20,14 +20,14 @@
             </ItemTemplate>
         </asp:TemplateField>
         <asp:BoundField DataField="Comment" HeaderText="Comment" />
-        <asp:BoundField HeaderText="A1" DataField="A1" SortExpression="A1"></asp:BoundField>
-        <asp:BoundField HeaderText="A2" DataField="A2" SortExpression="A2"></asp:BoundField>
-        <asp:BoundField HeaderText="A3" DataField="A3" SortExpression="A3"></asp:BoundField>
-        <asp:BoundField HeaderText="B" DataField="B" SortExpression="B"></asp:BoundField>
-        <asp:BoundField HeaderText="C" DataField="C" SortExpression="C"></asp:BoundField>
-        <asp:BoundField HeaderText="D" DataField="D" SortExpression="D"></asp:BoundField>
-        <asp:BoundField HeaderText="E" DataField="E" SortExpression="E"></asp:BoundField>
-        <asp:BoundField HeaderText="F" DataField="F" SortExpression="F"></asp:BoundField>
+        <asp:BoundField HeaderText="A1" DataField="A1"></asp:BoundField>
+        <asp:BoundField HeaderText="A2" DataField="A2"></asp:BoundField>
+        <asp:BoundField HeaderText="A3" DataField="A3"></asp:BoundField>
+        <asp:BoundField HeaderText="B" DataField="B"></asp:BoundField>
+        <asp:BoundField HeaderText="C" DataField="C"></asp:BoundField>
+        <asp:BoundField HeaderText="D" DataField="D"></asp:BoundField>
+        <asp:BoundField HeaderText="E" DataField="E"></asp:BoundField>
+        <asp:BoundField HeaderText="F" DataField="F"></asp:BoundField>
         <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
     </Columns>
 </odp:AbstractGridView>

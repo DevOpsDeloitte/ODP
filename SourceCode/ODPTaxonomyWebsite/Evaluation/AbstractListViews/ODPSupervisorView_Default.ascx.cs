@@ -30,7 +30,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> GetTableData(string sort = "Date", SortDirection direction = SortDirection.Ascending)
+        protected List<AbstractListRow> GetTableData(string sort = "", SortDirection direction = SortDirection.Ascending)
         {
             DataJYDataContext db = new DataJYDataContext();
 
@@ -44,11 +44,15 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        from scn in evscn.DefaultIfEmpty()
                        where (
                           h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
+                           /**
+                            * Get the latest history and make sure we start listing at 1N
+                            */
                           h.CreatedDate == db.AbstractStatusChangeHistories
-                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                           .Where(h2 => h2.AbstractID == a.AbstractID &&
+                               h2.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N)
                            .Select(h2 => h2.CreatedDate).Max() &&
-                          ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                          sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_CONSENSUS
+                          ev.EvaluationTypeId == (int)EvaluationTypeEnum.CODER_EVALUATION &&
+                          sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_CONSENSUS
                            )
                        select new AbstractListRow
                        {
@@ -87,7 +91,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                         return data.OrderByDescending(d => d.ProjectTitle).ToList();
                     }
                 case "Date":
-                default:
                     if (direction == SortDirection.Ascending)
                     {
                         return data.OrderBy(d => d.StatusDate).ToList();
@@ -96,6 +99,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     {
                         return data.OrderByDescending(d => d.StatusDate).ToList();
                     }
+                default:
+                    return data.OrderByDescending(d => d.StatusDate).ToList();
             }
         }
 
@@ -115,14 +120,14 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     var coderEvaluations = data.GetCoderEvaluations_1A(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(coderEvaluations);
 
+                    // ODP Staff consensus row
+                    var odpStaffConsensusNotes = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID);
+                    abstracts.AddRange(odpStaffConsensusNotes);
+
                     // Insert ODP Evaluation rows, latest 3 only
                     var odpEvaluations = data.GetODPStaffEvaluations_2A(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(odpEvaluations);
-
-                    // ODP Staff consensus row
-                    var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID);
-                    abstracts.AddRange(odpStaffConsensus);
-
+                    
                     // ODP Staff vs Coder consensus row
                     var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(odpStaffCoderConsensus);

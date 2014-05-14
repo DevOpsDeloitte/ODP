@@ -73,11 +73,13 @@ namespace ODPTaxonomyDAL_JY
                 string specifier = "#.##";
                 KappaData kappa = null;
 
-                if (this.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B)
+                if (this.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B ||
+                    this.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N)
                 {
                     kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_COMPARISON_K1);
                 }
-                else if (this.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B)
+                else if (this.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B ||
+                    this.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N)
                 {
                     kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
                 }
