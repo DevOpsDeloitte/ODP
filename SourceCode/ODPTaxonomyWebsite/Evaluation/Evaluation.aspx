@@ -5,4 +5,5 @@
     <h2>
         Evaluation Form
     </h2>
+    <p><asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label></p>
 </asp:Content>

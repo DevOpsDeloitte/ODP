@@ -13,57 +13,30 @@ namespace ODPTaxonomyWebsite.Evaluation {
     public partial class ViewAbstractList {
         
         /// <summary>
-        /// MainviewDDL control.
+        /// lbl_messageUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList MainviewDDL;
+        protected global::System.Web.UI.WebControls.Label lbl_messageUsers;
         
         /// <summary>
-        /// SubviewPanel control.
+        /// btn_print control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel SubviewPanel;
+        protected global::System.Web.UI.WebControls.Button btn_print;
         
         /// <summary>
-        /// SubviewLabel control.
+        /// btn_code control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SubviewLabel;
-        
-        /// <summary>
-        /// SubviewDDL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList SubviewDDL;
-        
-        /// <summary>
-        /// PagerSizeDDL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PagerSizeDDL;
-        
-        /// <summary>
-        /// AbstractViewPlaceHolder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder AbstractViewPlaceHolder;
+        protected global::System.Web.UI.WebControls.Button btn_code;
     }
 }
