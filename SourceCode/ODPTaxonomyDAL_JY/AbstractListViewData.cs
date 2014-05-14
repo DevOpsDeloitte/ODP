@@ -30,6 +30,8 @@ namespace ODPTaxonomyDAL_JY
                                     join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
                                     join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
                                     join u in db.aspnet_Users on sb.UserId equals u.UserId
+                                    join ki in db.KappaUserIdentifies on
+                                        new { ev.TeamID, u.UserId } equals new { ki.TeamID, UserId = ki.UserId.Value }
                                     where (
                                         // Parent abstract
                                         a.AbstractID == ParentAbstractID &&
@@ -40,7 +42,7 @@ namespace ODPTaxonomyDAL_JY
                                         // Make sure this submission is coder evaluation
                                         sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_EVALUATION
                                     )
-                                    orderby sb.SubmissionDateTime descending
+                                    orderby ki.UserAlias
                                     select new AbstractListRow
                                     {
                                         AbstractID = a.AbstractID,
@@ -68,6 +70,8 @@ namespace ODPTaxonomyDAL_JY
                                     join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
                                     join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
                                     join u in db.aspnet_Users on sb.UserId equals u.UserId
+                                    join ki in db.KappaUserIdentifies on
+                                        new { ev.TeamID, u.UserId } equals new { ki.TeamID, UserId = ki.UserId.Value }
                                     where (
                                         // Parent abstract
                                         a.AbstractID == ParentAbstractID &&
@@ -78,7 +82,7 @@ namespace ODPTaxonomyDAL_JY
                                         // Make sure this submission is coder evaluation
                                         sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_EVALUATION
                                     )
-                                    orderby sb.SubmissionDateTime descending
+                                    orderby ki.UserAlias
                                     select new AbstractListRow
                                     {
                                         AbstractID = a.AbstractID,

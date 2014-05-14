@@ -64,7 +64,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                                  EvaluationID = h.EvaluationId,
                                  Comment = sb.comments,
                                  AbstractScan = scn.FileName,
-                                 UnableToCode = sb.UnableToCode
+                                 UnableToCode = sb.UnableToCode,
+                                 IsParent = true
                              }).ToList();
 
             foreach (AbstractListRow abs in abstracts)
@@ -115,9 +116,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             {
                 abstracts.Add(ParentAbstracts[i]);
 
-                if ((ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                    ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
-                    ParentAbstracts[i].EvaluationID != null)
+                if (ParentAbstracts[i].IsParent)
                 {
                     // ODP Staff vs Coder consensus row
                     var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);

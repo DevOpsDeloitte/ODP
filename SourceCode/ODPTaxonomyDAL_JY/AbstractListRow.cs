@@ -7,6 +7,11 @@ namespace ODPTaxonomyDAL_JY
 {
     public class AbstractListRow
     {
+        /**
+         * Determine if a row is a parent row
+         */
+        public bool IsParent { get; set; }
+
         public int AbstractID { get; set; }
         public int? ApplicationID { get; set; }
 
@@ -55,6 +60,7 @@ namespace ODPTaxonomyDAL_JY
         public AbstractListRow()
         {
             this.KappaDone = false;
+            this.IsParent = false;
         }
 
         public void FillKappaValues()
@@ -109,13 +115,13 @@ namespace ODPTaxonomyDAL_JY
                     {
                         switch (KappaCoderAlias)
                         {
-                            case "CdrA":
+                            case "ODPA":
                                 kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_A_VS_CONSENSUS_K6);
                                 break;
-                            case "CdrB":
+                            case "ODPB":
                                 kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_B_VS_CONSENSUS_K7);
                                 break;
-                            case "CdrC":
+                            case "ODPC":
                                 kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_C_VS_CONSENSUS_K8);
                                 break;
                             default:

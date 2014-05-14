@@ -70,7 +70,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            EvaluationID = h.EvaluationId,
                            Comment = sb.comments,
                            AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode
+                           UnableToCode = sb.UnableToCode,
+                           IsParent = true
                        };
 
             switch (sort)

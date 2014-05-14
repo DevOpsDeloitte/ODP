@@ -37,8 +37,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
         protected List<AbstractListRow> GetTableData(string sort = "Date", SortDirection direction = SortDirection.Ascending)
         {
-            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-            DataJYDataContext db = new DataJYDataContext(connString);
+            DataJYDataContext db = new DataJYDataContext();
 
             var data = from a in db.Abstracts
                        /* get status */
@@ -69,7 +68,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            EvaluationID = h.EvaluationId,
                            Comment = sb.comments,
                            AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode
+                           UnableToCode = sb.UnableToCode,
+                           IsParent = true
                        };
 
             switch (sort)

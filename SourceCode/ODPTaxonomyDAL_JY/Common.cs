@@ -16,7 +16,10 @@ namespace ODPTaxonomyDAL_JY
         CODED_BY_ODP_STAFF_2A = 8,
         ODP_STAFF_CONSENSUS_2B = 9,
         ODP_STAFF_AND_CODER_CONSENSUS_2C = 10,
-        ODP_CONSENSUS_WITH_NOTES_2N = 12
+        ODP_CONSENSUS_WITH_NOTES_2N = 12,
+        CLOSED_3 = 13,
+        DATA_EXPORTED_4 = 14,
+        REOPEN_FOR_REVIEW_BY_ODP = 15
     }
 
     public enum SubmissionTypeEnum
