@@ -5,8 +5,10 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false" DisplayRememberMe="false" PasswordRecoveryText="Forgot Password" >
         <LayoutTemplate>
-            
-            
+        <div class="sixteen columns sub-title"> 
+            <span class="subtitle">LOGIN</span>
+            <span class="subtitle">Please enter your user name and password.</span>
+        </div>
                 <fieldset class="login">
                     <legend>Account Information</legend>
                     <span class="errorMessage">
