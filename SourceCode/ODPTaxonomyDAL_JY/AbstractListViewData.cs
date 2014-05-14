@@ -2,12 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 
 namespace ODPTaxonomyDAL_JY
 {
     public class AbstractListViewData
     {
         private DataJYDataContext db;
+
+        public AbstractListViewData()
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            db = new DataJYDataContext(connString);
+        }
 
         public AbstractListViewData(string ConnStr)
         {
@@ -44,7 +51,9 @@ namespace ODPTaxonomyDAL_JY
                                         StatusDate = sb.SubmissionDateTime,
                                         SubmissionID = sb.SubmissionID,
                                         EvaluationID = h.EvaluationId,
-                                        Comment = sb.comments
+                                        Comment = sb.comments,
+                                        TeamID = ev.TeamID,
+                                        UserID = sb.UserId
                                     }).Take(3).ToList();
 
             return coderEvaluations;
@@ -80,7 +89,9 @@ namespace ODPTaxonomyDAL_JY
                                         StatusDate = sb.SubmissionDateTime,
                                         SubmissionID = sb.SubmissionID,
                                         EvaluationID = h.EvaluationId,
-                                        Comment = sb.comments
+                                        Comment = sb.comments,
+                                        TeamID = ev.TeamID,
+                                        UserID = sb.UserId
                                     }).Take(3).ToList();
 
             return staffEvaluations;
@@ -208,6 +219,22 @@ namespace ODPTaxonomyDAL_JY
                                 }).ToList();
 
             return odpConsensus;
+        }
+
+        public KappaData GetKappaData(int AbstractID, int KappaTypeID)
+        {
+            return (from k in db.KappaDatas
+                    where k.AbstractID == AbstractID && k.KappaTypeID == KappaTypeID
+                    select k).FirstOrDefault();
+        }
+
+        public string GetKappaCoderAlias(Guid UserID, int TeamID)
+        {
+            var query = from ku in db.KappaUserIdentifies
+                        where ku.UserId == UserID && ku.TeamID == TeamID
+                        select ku.UserAlias;
+
+            return query.FirstOrDefault();
         }
     }
 }
