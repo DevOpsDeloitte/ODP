@@ -16,7 +16,6 @@
 
 /* #Site Styles
 ================================================== */
-html, body { height: 100% }
 body { background: #95a5aa; /* Old browsers */
 background: -moz-linear-gradient(top,  #95a5aa 0%, #d9dee0 45%, #ffffff 71%); /* FF3.6+ */
 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#95a5aa), color-stop(45%,#d9dee0), color-stop(71%,#ffffff)); /* Chrome,Safari4+ */
@@ -52,10 +51,10 @@ table .coders { position: absolute; z-index: 9; color: #FFF; right: 4px; top: 6p
 
 /* Sticky Header */
 #header_container { background:rgba(47, 85, 124, 0.9); height:60px; position:fixed; width:100%; top:0; z-index: 999; }
-.header{ margin:0 auto; width:95%; }
-.header .button { background: #FFF; float: left; margin: 15px 4px; }
+.header{ margin: 15px 24px; width:95%; }
+.header .button { background: #FFF; display: inline-block; }
  .header .button:hover { background: #eee; border: 1px solid #eee; }
-.login-display { float: right; }
+.login-display { color: #fff; float: right;  }
 
 /* #Login
 ================================================== */
@@ -70,7 +69,7 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 #toggle-unanswered:hover { background: #24AA7A; }
 #toggle-unanswered.active { background: #1B7E5A; color: #FFF; }
 
-.title {margin: 20px}
+.sub-title { margin-bottom: 20px; }
 
 .nav { position: fixed; left: 4px; padding: 10px 20px; border: 1px solid #7D9EB1; top: 120px; z-index: 999; width: 150px; background: #EEE; background: rgba(215, 225, 235, 0.5); }
 .nav ul li { border-bottom: 1px solid #7D9EB1; padding: 0 0 8px 0; }
@@ -100,7 +99,7 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 .cbp-spmenu-left {	left: -240px; }
 .cbp-spmenu-left.cbp-spmenu-open {	left: 0px; }
 
-.cbp-spmenu-push { overflow-x: hidden; position: relative; left: 0; }
+.cbp-spmenu-push { overflow-x: hidden; left: 0; position: relative; }
 .cbp-spmenu-push #header_container { left: 0; }
 .cbp-spmenu-push-toright, .cbp-spmenu-push-toright #header_container { left: 240px; }
 .cbp-spmenu,
