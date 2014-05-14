@@ -23,79 +23,94 @@ namespace ODPTaxonomyDAL_JY
 
         public List<AbstractListRow> GetCoderEvaluations_1A(int ParentAbstractID)
         {
-            var coderEvaluations = (from a in db.Abstracts
-                                    /* get status */
-                                    join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
-                                    join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                                    join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
-                                    join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
-                                    join u in db.aspnet_Users on sb.UserId equals u.UserId
-                                    where (
-                                        // Parent abstract
-                                        a.AbstractID == ParentAbstractID &&
-                                        // 1A Coded by coder
-                                        h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A &&
-                                        // Make sure this evaluation is coder's evaluation, not ODP's
-                                        ev.EvaluationTypeId == (int)EvaluationTypeEnum.CODER_EVALUATION &&
-                                        // Make sure this submission is coder evaluation
-                                        sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_EVALUATION
-                                    )
-                                    orderby sb.SubmissionDateTime descending
-                                    select new AbstractListRow
-                                    {
-                                        AbstractID = a.AbstractID,
-                                        ProjectTitle = "Coder: " + u.UserName,
-                                        ApplicationID = null,
-                                        AbstractStatusID = s.AbstractStatusID,
-                                        AbstractStatusCode = s.AbstractStatusCode,
-                                        StatusDate = sb.SubmissionDateTime,
-                                        SubmissionID = sb.SubmissionID,
-                                        EvaluationID = h.EvaluationId,
-                                        Comment = sb.comments,
-                                        TeamID = ev.TeamID,
-                                        UserID = sb.UserId
-                                    }).Take(3).ToList();
+            var query = from a in db.Abstracts
+                        /* get status */
+                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                        join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
+                        join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
+                        join u in db.aspnet_Users on sb.UserId equals u.UserId
+                        join ki in db.KappaUserIdentifies on
+                            new { ev.TeamID, u.UserId } equals new { ki.TeamID, UserId = ki.UserId.Value }
+                        where (
+                            // Parent abstract
+                            a.AbstractID == ParentAbstractID &&
+                            // 1A Coded by coder
+                            h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A &&
+                            // Make sure this evaluation is coder's evaluation, not ODP's
+                            ev.EvaluationTypeId == (int)EvaluationTypeEnum.CODER_EVALUATION &&
+                            // Make sure this submission is coder evaluation
+                            sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_EVALUATION &&
+                            h.AbstractStatusChangeHistoryID == (
+                                (from h2 in db.AbstractStatusChangeHistories
+                                 where h2.AbstractID == a.AbstractID &&
+                                 h2.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A
+                                 select h2.AbstractStatusChangeHistoryID).Max()
+                            )
+                        )
+                        orderby ki.UserAlias
+                        select new AbstractListRow
+                        {
+                            AbstractID = a.AbstractID,
+                            ProjectTitle = "Coder: " + u.UserName,
+                            ApplicationID = null,
+                            AbstractStatusID = s.AbstractStatusID,
+                            AbstractStatusCode = s.AbstractStatusCode,
+                            StatusDate = sb.SubmissionDateTime,
+                            SubmissionID = sb.SubmissionID,
+                            EvaluationID = h.EvaluationId,
+                            Comment = sb.comments,
+                            TeamID = ev.TeamID,
+                            UserID = sb.UserId
+                        };
 
-            return coderEvaluations;
+            return query.Take(3).ToList();
         }
 
         public List<AbstractListRow> GetODPStaffEvaluations_2A(int ParentAbstractID)
         {
-            var staffEvaluations = (from a in db.Abstracts
-                                    /* get status */
-                                    join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
-                                    join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                                    join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
-                                    join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
-                                    join u in db.aspnet_Users on sb.UserId equals u.UserId
-                                    where (
-                                        // Parent abstract
-                                        a.AbstractID == ParentAbstractID &&
-                                        // 2A Coded by odp staff
-                                        h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A &&
-                                        // Make sure this evaluation is odp's evaluation
-                                        ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                                        // Make sure this submission is coder evaluation
-                                        sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_EVALUATION
-                                    )
-                                    orderby sb.SubmissionDateTime descending
-                                    select new AbstractListRow
-                                    {
-                                        AbstractID = a.AbstractID,
-                                        ProjectTitle = "Coder: " + u.UserName,
-                                        ApplicationID = null,
-                                        AbstractStatusID = s.AbstractStatusID,
-                                        AbstractStatusCode = s.AbstractStatusCode,
-                                        StatusDate = sb.SubmissionDateTime,
-                                        SubmissionID = sb.SubmissionID,
-                                        EvaluationID = h.EvaluationId,
-                                        Comment = sb.comments,
-                                        TeamID = ev.TeamID,
-                                        UserID = sb.UserId
-                                    }).Take(3).ToList();
+            var query = from a in db.Abstracts
+                        /* get status */
+                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                        join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
+                        join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
+                        join u in db.aspnet_Users on sb.UserId equals u.UserId
+                        join ki in db.KappaUserIdentifies on
+                            new { ev.TeamID, u.UserId } equals new { ki.TeamID, UserId = ki.UserId.Value }
+                        where (
+                            // Parent abstract
+                            a.AbstractID == ParentAbstractID &&
+                            // 2A Coded by odp staff
+                            h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A &&
+                            // Make sure this evaluation is odp's evaluation
+                            ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
+                            // Make sure this submission is coder evaluation
+                            sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_EVALUATION &&
+                            h.AbstractStatusChangeHistoryID == (
+                                (from h2 in db.AbstractStatusChangeHistories
+                                 where h2.AbstractID == a.AbstractID &&
+                                 h2.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A
+                                 select h2.AbstractStatusChangeHistoryID).Max()
+                            )
+                        )
+                        orderby ki.UserAlias
+                        select new AbstractListRow
+                        {
+                            AbstractID = a.AbstractID,
+                            ProjectTitle = "ODP Coder: " + u.UserName,
+                            ApplicationID = null,
+                            AbstractStatusID = s.AbstractStatusID,
+                            AbstractStatusCode = s.AbstractStatusCode,
+                            StatusDate = sb.SubmissionDateTime,
+                            SubmissionID = sb.SubmissionID,
+                            EvaluationID = h.EvaluationId,
+                            Comment = sb.comments,
+                            TeamID = ev.TeamID,
+                            UserID = sb.UserId
+                        };
 
-            return staffEvaluations;
-
+            return query.Take(3).ToList();
         }
 
         public List<AbstractListRow> GetODPStaffConsensus_2B(int ParentAbstractID)
@@ -120,7 +135,7 @@ namespace ODPTaxonomyDAL_JY
                                          // Make sure this evaluation is coder's evaluation, not ODP's
                                          ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
                                          // Make sure this submission is coder evaluation
-                                         sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_CONSENSUS
+                                         sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_CONSENSUS
                                      )
                                      orderby sb.SubmissionDateTime descending
                                      select new AbstractListRow
@@ -161,7 +176,7 @@ namespace ODPTaxonomyDAL_JY
                                               // Make sure this evaluation is coder's evaluation, not ODP's
                                               ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
                                               // Make sure this submission is coder evaluation
-                                              sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_CONSENSUS
+                                              sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_CONSENSUS
                                           )
                                           orderby sb.SubmissionDateTime descending
                                           select new AbstractListRow
@@ -182,43 +197,43 @@ namespace ODPTaxonomyDAL_JY
 
         public List<AbstractListRow> GetODPConsensusWithNotes_2N(int ParentAbstractID)
         {
-            var odpConsensus = (from a in db.Abstracts
-                                /* get status */
-                                join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
-                                join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                                join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
-                                join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
-                                join u in db.aspnet_Users on sb.UserId equals u.UserId
-                                where (
-                                    // Parent abstract
-                                    a.AbstractID == ParentAbstractID &&
-                                    // ODP consensus
-                                    h.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N &&
-                                    // Make sure the history is the latest one
-                                    h.CreatedDate == db.AbstractStatusChangeHistories
-                                    .Where(h2 => h2.AbstractID == a.AbstractID &&
-                                        h2.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N)
-                                    .Select(h2 => h2.CreatedDate).Max() &&
-                                    // Make sure this evaluation is coder's evaluation, not ODP's
-                                    ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                                    // Make sure this submission is coder evaluation
-                                    sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_CONSENSUS
-                                )
-                                orderby sb.SubmissionDateTime descending
-                                select new AbstractListRow
-                                {
-                                    AbstractID = a.AbstractID,
-                                    ProjectTitle = "ODP Staff",
-                                    ApplicationID = null,
-                                    AbstractStatusID = s.AbstractStatusID,
-                                    AbstractStatusCode = s.AbstractStatusCode,
-                                    StatusDate = sb.SubmissionDateTime,
-                                    SubmissionID = sb.SubmissionID,
-                                    EvaluationID = h.EvaluationId,
-                                    Comment = sb.comments
-                                }).ToList();
+            var query = from a in db.Abstracts
+                        /* get status */
+                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                        join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
+                        join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
+                        join u in db.aspnet_Users on sb.UserId equals u.UserId
+                        where (
+                            // Parent abstract
+                            a.AbstractID == ParentAbstractID &&
+                            // ODP consensus
+                            h.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N &&
+                            // Make sure the history is the latest one
+                            h.CreatedDate == db.AbstractStatusChangeHistories
+                            .Where(h2 => h2.AbstractID == a.AbstractID &&
+                                h2.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N)
+                            .Select(h2 => h2.CreatedDate).Max() &&
+                            // Make sure this evaluation is coder's evaluation, not ODP's
+                            ev.EvaluationTypeId == (int)EvaluationTypeEnum.CODER_EVALUATION &&
+                            // Make sure this submission is coder evaluation
+                            sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_CONSENSUS
+                        )
+                        orderby sb.SubmissionDateTime descending
+                        select new AbstractListRow
+                        {
+                            AbstractID = a.AbstractID,
+                            ProjectTitle = "ODP Staff",
+                            ApplicationID = null,
+                            AbstractStatusID = s.AbstractStatusID,
+                            AbstractStatusCode = s.AbstractStatusCode,
+                            StatusDate = sb.SubmissionDateTime,
+                            SubmissionID = sb.SubmissionID,
+                            EvaluationID = h.EvaluationId,
+                            Comment = sb.comments
+                        };
 
-            return odpConsensus;
+            return query.ToList();
         }
 
         public KappaData GetKappaData(int AbstractID, int KappaTypeID)

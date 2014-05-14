@@ -50,9 +50,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
                        from scn in evscn.DefaultIfEmpty()
                        where (
-                          (h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID <= (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C ||
-                          h.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N) &&
+                          (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
+                          h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C) &&
                           h.CreatedDate == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max() &&
@@ -71,7 +70,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            EvaluationID = h.EvaluationId,
                            Comment = sb.comments,
                            AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode
+                           UnableToCode = sb.UnableToCode,
+                           IsParent = true
                        };
 
             switch (sort)

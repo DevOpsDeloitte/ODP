@@ -230,6 +230,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                         break;
                 }
             }
+
+            Response.Redirect("~/Evaluation/ViewAbstractList.aspx");
         }
     }
 }
