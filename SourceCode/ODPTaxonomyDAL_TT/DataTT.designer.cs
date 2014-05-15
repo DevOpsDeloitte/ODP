@@ -78,6 +78,9 @@ namespace ODPTaxonomyDAL_TT
     partial void Inserttbl_A_StudyFocus(tbl_A_StudyFocus instance);
     partial void Updatetbl_A_StudyFocus(tbl_A_StudyFocus instance);
     partial void Deletetbl_A_StudyFocus(tbl_A_StudyFocus instance);
+    partial void InserttbL_Submission(tbL_Submission instance);
+    partial void UpdatetbL_Submission(tbL_Submission instance);
+    partial void DeletetbL_Submission(tbL_Submission instance);
     #endregion
 		
 		public DataDataContext() : 
@@ -236,6 +239,28 @@ namespace ODPTaxonomyDAL_TT
 			{
 				return this.GetTable<tbl_A_StudyFocus>();
 			}
+		}
+		
+		public System.Data.Linq.Table<tbL_Submission> tbL_Submissions
+		{
+			get
+			{
+				return this.GetTable<tbL_Submission>();
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
+		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StudyFocusID", DbType="Int")] System.Nullable<int> studyFocusID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID, studyFocusID);
+			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstract_status_tt")]
+		public ISingleResult<select_abstract_status_ttResult> select_abstract_status_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="Int")] System.Nullable<int> abstractID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
+			return ((ISingleResult<select_abstract_status_ttResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -974,6 +999,10 @@ namespace ODPTaxonomyDAL_TT
 		
 		private EntitySet<tbl_A_StudyFocus> _A_StudyFocus;
 		
+		private EntitySet<tbL_Submission> _Submissions;
+		
+		private EntitySet<tbL_Submission> _tbL_Submissions;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -987,6 +1016,8 @@ namespace ODPTaxonomyDAL_TT
 		public tbl_Status()
 		{
 			this._A_StudyFocus = new EntitySet<tbl_A_StudyFocus>(new Action<tbl_A_StudyFocus>(this.attach_A_StudyFocus), new Action<tbl_A_StudyFocus>(this.detach_A_StudyFocus));
+			this._Submissions = new EntitySet<tbL_Submission>(new Action<tbL_Submission>(this.attach_Submissions), new Action<tbL_Submission>(this.detach_Submissions));
+			this._tbL_Submissions = new EntitySet<tbL_Submission>(new Action<tbL_Submission>(this.attach_tbL_Submissions), new Action<tbL_Submission>(this.detach_tbL_Submissions));
 			OnCreated();
 		}
 		
@@ -1030,7 +1061,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_A_StudyFocus", Storage="_A_StudyFocus", ThisKey="StatusID", OtherKey="StatusID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_A_StudyFocus", Storage="_A_StudyFocus", ThisKey="StatusID", OtherKey="StatusID")]
 		public EntitySet<tbl_A_StudyFocus> tbl_A_StudyFocus
 		{
 			get
@@ -1040,6 +1071,32 @@ namespace ODPTaxonomyDAL_TT
 			set
 			{
 				this._A_StudyFocus.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_Submission", Storage="_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
+		public EntitySet<tbL_Submission> Submissions
+		{
+			get
+			{
+				return this._Submissions;
+			}
+			set
+			{
+				this._Submissions.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_Submission1", Storage="_tbL_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
+		public EntitySet<tbL_Submission> tbL_Submissions
+		{
+			get
+			{
+				return this._tbL_Submissions;
+			}
+			set
+			{
+				this._tbL_Submissions.Assign(value);
 			}
 		}
 		
@@ -1073,6 +1130,30 @@ namespace ODPTaxonomyDAL_TT
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Status = null;
+		}
+		
+		private void attach_Submissions(tbL_Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Status = this;
+		}
+		
+		private void detach_Submissions(tbL_Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Status = null;
+		}
+		
+		private void attach_tbL_Submissions(tbL_Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Status1 = this;
+		}
+		
+		private void detach_tbL_Submissions(tbL_Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Status1 = null;
 		}
 	}
 	
@@ -2206,6 +2287,8 @@ namespace ODPTaxonomyDAL_TT
 		
 		private EntitySet<tbl_AbstractStatusChangeHistory> _tbl_AbstractStatusChangeHistories;
 		
+		private EntitySet<tbL_Submission> _tbL_Submissions;
+		
 		private EntityRef<tbl_Team> _tbl_Team;
 		
 		private EntityRef<tbl_Abstract> _Abstract;
@@ -2247,6 +2330,7 @@ namespace ODPTaxonomyDAL_TT
 			this._tbl_AbstractScans = new EntitySet<tbl_AbstractScan>(new Action<tbl_AbstractScan>(this.attach_tbl_AbstractScans), new Action<tbl_AbstractScan>(this.detach_tbl_AbstractScans));
 			this._AbstractStatusChangeHistories = new EntitySet<tbl_AbstractStatusChangeHistory>(new Action<tbl_AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories), new Action<tbl_AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories));
 			this._tbl_AbstractStatusChangeHistories = new EntitySet<tbl_AbstractStatusChangeHistory>(new Action<tbl_AbstractStatusChangeHistory>(this.attach_tbl_AbstractStatusChangeHistories), new Action<tbl_AbstractStatusChangeHistory>(this.detach_tbl_AbstractStatusChangeHistories));
+			this._tbL_Submissions = new EntitySet<tbL_Submission>(new Action<tbL_Submission>(this.attach_tbL_Submissions), new Action<tbL_Submission>(this.detach_tbL_Submissions));
 			this._tbl_Team = default(EntityRef<tbl_Team>);
 			this._Abstract = default(EntityRef<tbl_Abstract>);
 			this._tbl_Abstract = default(EntityRef<tbl_Abstract>);
@@ -2525,6 +2609,19 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_Submission", Storage="_tbL_Submissions", ThisKey="EvaluationId", OtherKey="EvaluationId")]
+		public EntitySet<tbL_Submission> tbL_Submissions
+		{
+			get
+			{
+				return this._tbL_Submissions;
+			}
+			set
+			{
+				this._tbL_Submissions.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_tbl_Evaluation", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
 		public tbl_Team tbl_Team
 		{
@@ -2715,6 +2812,18 @@ namespace ODPTaxonomyDAL_TT
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Evaluation1 = null;
+		}
+		
+		private void attach_tbL_Submissions(tbL_Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Evaluation = this;
+		}
+		
+		private void detach_tbL_Submissions(tbL_Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Evaluation = null;
 		}
 	}
 	
@@ -4116,7 +4225,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="A_StudyFocus_tbl_AbstractTopic", Storage="_A_StudyFocus", ThisKey="StudyFocusID", OtherKey="StudyFocusID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_A_StudyFocus_tbl_AbstractTopic", Storage="_A_StudyFocus", ThisKey="StudyFocusID", OtherKey="StudyFocusID", IsForeignKey=true)]
 		public tbl_A_StudyFocus tbl_A_StudyFocus
 		{
 			get
@@ -4528,7 +4637,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="A_StudyFocus_tbl_AbstractTopic", Storage="_tbl_AbstractTopics", ThisKey="StudyFocusID", OtherKey="StudyFocusID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_A_StudyFocus_tbl_AbstractTopic", Storage="_tbl_AbstractTopics", ThisKey="StudyFocusID", OtherKey="StudyFocusID")]
 		public EntitySet<tbl_AbstractTopic> tbl_AbstractTopics
 		{
 			get
@@ -4541,7 +4650,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_A_StudyFocus", Storage="_tbl_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_A_StudyFocus", Storage="_tbl_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
 		public tbl_Status tbl_Status
 		{
 			get
@@ -4605,6 +4714,455 @@ namespace ODPTaxonomyDAL_TT
 		{
 			this.SendPropertyChanging();
 			entity.tbl_A_StudyFocus = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Submission")]
+	public partial class tbL_Submission : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SubmissionID;
+		
+		private System.Nullable<int> _EvaluationId;
+		
+		private System.Nullable<System.Guid> _UserId;
+		
+		private System.Nullable<short> _SubmissionTypeId;
+		
+		private string _Comments;
+		
+		private bool _UnableToCode;
+		
+		private System.Nullable<System.DateTime> _SubmissionDateTime;
+		
+		private System.Nullable<int> _StatusID;
+		
+		private System.Nullable<System.Guid> _UpdatedBy;
+		
+		private System.Nullable<System.DateTime> _UpdatedDate;
+		
+		private EntityRef<tbl_Evaluation> _tbl_Evaluation;
+		
+		private EntityRef<tbl_Status> _tbl_Status;
+		
+		private EntityRef<tbl_Status> _tbl_Status1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSubmissionIDChanging(int value);
+    partial void OnSubmissionIDChanged();
+    partial void OnEvaluationIdChanging(System.Nullable<int> value);
+    partial void OnEvaluationIdChanged();
+    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUserIdChanged();
+    partial void OnSubmissionTypeIdChanging(System.Nullable<short> value);
+    partial void OnSubmissionTypeIdChanged();
+    partial void OnCommentsChanging(string value);
+    partial void OnCommentsChanged();
+    partial void OnUnableToCodeChanging(bool value);
+    partial void OnUnableToCodeChanged();
+    partial void OnSubmissionDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnSubmissionDateTimeChanged();
+    partial void OnStatusIDChanging(System.Nullable<int> value);
+    partial void OnStatusIDChanged();
+    partial void OnUpdatedByChanging(System.Nullable<System.Guid> value);
+    partial void OnUpdatedByChanged();
+    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedDateChanged();
+    #endregion
+		
+		public tbL_Submission()
+		{
+			this._tbl_Evaluation = default(EntityRef<tbl_Evaluation>);
+			this._tbl_Status = default(EntityRef<tbl_Status>);
+			this._tbl_Status1 = default(EntityRef<tbl_Status>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SubmissionID
+		{
+			get
+			{
+				return this._SubmissionID;
+			}
+			set
+			{
+				if ((this._SubmissionID != value))
+				{
+					this.OnSubmissionIDChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionID = value;
+					this.SendPropertyChanged("SubmissionID");
+					this.OnSubmissionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationId", DbType="Int")]
+		public System.Nullable<int> EvaluationId
+		{
+			get
+			{
+				return this._EvaluationId;
+			}
+			set
+			{
+				if ((this._EvaluationId != value))
+				{
+					if (this._tbl_Evaluation.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEvaluationIdChanging(value);
+					this.SendPropertyChanging();
+					this._EvaluationId = value;
+					this.SendPropertyChanged("EvaluationId");
+					this.OnEvaluationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionTypeId", DbType="SmallInt")]
+		public System.Nullable<short> SubmissionTypeId
+		{
+			get
+			{
+				return this._SubmissionTypeId;
+			}
+			set
+			{
+				if ((this._SubmissionTypeId != value))
+				{
+					this.OnSubmissionTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionTypeId = value;
+					this.SendPropertyChanged("SubmissionTypeId");
+					this.OnSubmissionTypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comments", DbType="NVarChar(MAX)")]
+		public string Comments
+		{
+			get
+			{
+				return this._Comments;
+			}
+			set
+			{
+				if ((this._Comments != value))
+				{
+					this.OnCommentsChanging(value);
+					this.SendPropertyChanging();
+					this._Comments = value;
+					this.SendPropertyChanged("Comments");
+					this.OnCommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnableToCode", DbType="Bit NOT NULL")]
+		public bool UnableToCode
+		{
+			get
+			{
+				return this._UnableToCode;
+			}
+			set
+			{
+				if ((this._UnableToCode != value))
+				{
+					this.OnUnableToCodeChanging(value);
+					this.SendPropertyChanging();
+					this._UnableToCode = value;
+					this.SendPropertyChanged("UnableToCode");
+					this.OnUnableToCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionDateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> SubmissionDateTime
+		{
+			get
+			{
+				return this._SubmissionDateTime;
+			}
+			set
+			{
+				if ((this._SubmissionDateTime != value))
+				{
+					this.OnSubmissionDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionDateTime = value;
+					this.SendPropertyChanged("SubmissionDateTime");
+					this.OnSubmissionDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int")]
+		public System.Nullable<int> StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					if ((this._tbl_Status.HasLoadedOrAssignedValue || this._tbl_Status1.HasLoadedOrAssignedValue))
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._StatusID = value;
+					this.SendPropertyChanged("StatusID");
+					this.OnStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UpdatedBy
+		{
+			get
+			{
+				return this._UpdatedBy;
+			}
+			set
+			{
+				if ((this._UpdatedBy != value))
+				{
+					this.OnUpdatedByChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedBy = value;
+					this.SendPropertyChanged("UpdatedBy");
+					this.OnUpdatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdatedDate
+		{
+			get
+			{
+				return this._UpdatedDate;
+			}
+			set
+			{
+				if ((this._UpdatedDate != value))
+				{
+					this.OnUpdatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedDate = value;
+					this.SendPropertyChanged("UpdatedDate");
+					this.OnUpdatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_Submission", Storage="_tbl_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
+		public tbl_Evaluation tbl_Evaluation
+		{
+			get
+			{
+				return this._tbl_Evaluation.Entity;
+			}
+			set
+			{
+				tbl_Evaluation previousValue = this._tbl_Evaluation.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Evaluation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Evaluation.Entity = null;
+						previousValue.tbL_Submissions.Remove(this);
+					}
+					this._tbl_Evaluation.Entity = value;
+					if ((value != null))
+					{
+						value.tbL_Submissions.Add(this);
+						this._EvaluationId = value.EvaluationId;
+					}
+					else
+					{
+						this._EvaluationId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_Evaluation");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_Submission", Storage="_tbl_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		public tbl_Status tbl_Status
+		{
+			get
+			{
+				return this._tbl_Status.Entity;
+			}
+			set
+			{
+				tbl_Status previousValue = this._tbl_Status.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Status.Entity = null;
+						previousValue.Submissions.Remove(this);
+					}
+					this._tbl_Status.Entity = value;
+					if ((value != null))
+					{
+						value.Submissions.Add(this);
+						this._StatusID = value.StatusID;
+					}
+					else
+					{
+						this._StatusID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_Status");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_Submission1", Storage="_tbl_Status1", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		public tbl_Status tbl_Status1
+		{
+			get
+			{
+				return this._tbl_Status1.Entity;
+			}
+			set
+			{
+				tbl_Status previousValue = this._tbl_Status1.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Status1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Status1.Entity = null;
+						previousValue.tbL_Submissions.Remove(this);
+					}
+					this._tbl_Status1.Entity = value;
+					if ((value != null))
+					{
+						value.tbL_Submissions.Add(this);
+						this._StatusID = value.StatusID;
+					}
+					else
+					{
+						this._StatusID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_Status1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	public partial class select_abstracts_coding_ttResult
+	{
+		
+		private int _AbstractID;
+		
+		public select_abstracts_coding_ttResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
+		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this._AbstractID = value;
+				}
+			}
+		}
+	}
+	
+	public partial class select_abstract_status_ttResult
+	{
+		
+		private int _AbstractStatusID;
+		
+		public select_abstract_status_ttResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractStatusID", DbType="Int NOT NULL")]
+		public int AbstractStatusID
+		{
+			get
+			{
+				return this._AbstractStatusID;
+			}
+			set
+			{
+				if ((this._AbstractStatusID != value))
+				{
+					this._AbstractStatusID = value;
+				}
+			}
 		}
 	}
 }

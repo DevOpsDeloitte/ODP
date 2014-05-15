@@ -28,6 +28,7 @@ namespace ODPTaxonomyDAL_TT
 
     public enum AbstractStatusID
     {
+        none = 0,
         _0 = 1,
         _1 = 2,
         _1A = 3,
@@ -108,6 +109,39 @@ namespace ODPTaxonomyDAL_TT
             return teamId;
         }
 
+        public static void OverrideAbstract(string connString, int evaluationId, int abstractId, Guid userId, int abstractStatusId)
+        {
+            tbl_Evaluation evaluation = null;
+            List<tbL_Submission> submissions = null;
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            history.AbstractID = abstractId;
+            history.AbstractStatusID = abstractStatusId;
+            history.CreatedDate = DateTime.Now;
+            history.CreatedBy = userId;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    evaluation = (from e in db.tbl_Evaluations
+                                  where e.EvaluationId == evaluationId
+                                  select e).First();
+                    submissions = (from s in db.tbL_Submissions
+                                   where s.EvaluationId == evaluationId
+                                   select s).ToList<tbL_Submission>();
+
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw new Exception("An error has occured while overriding abstract.");
+                }                               
+                              
+            }
+        }
+
+
         public static int StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId)
         {
             int evaluationId = -1;
@@ -171,20 +205,42 @@ namespace ODPTaxonomyDAL_TT
             return evaluationId;
         }
 
-        //public static tbl_Abstract GetAbstractByAbstractId(string connString, int abstractId)
-        //{
-        //    tbl_Abstract abstr = null;
+        public static AbstractStatusID GetAbstractStatus(string connString, int abstractId)
+        {
+            AbstractStatusID statusId = AbstractStatusID.none;
+            int id = -1;
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = db.select_abstract_status_tt(abstractId);
+                id = matches.First().AbstractStatusID;
+                foreach (AbstractStatusID i in Enum.GetValues(typeof(AbstractStatusID)))
+                {
+                    if ((int)i == id)
+                    {
+                        statusId = i;
+                        break;
+                    }
+                }
 
-        //    using (DataDataContext db = new DataDataContext(connString))
-        //    {
-        //        var matches = from a in db.tbl_Abstracts
-        //                      where a.AbstractID == abstractId
-        //                      select a;
-        //        abstr = matches.ToList<tbl_Abstract>().First();
-        //    }
+            }
 
-        //    return abstr;
-        //}
+            return statusId;
+        }
+
+        public static tbl_Abstract GetAbstractByAbstractId(string connString, int abstractId)
+        {
+            tbl_Abstract abstr = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from a in db.tbl_Abstracts
+                              where a.AbstractID == abstractId
+                              select a;
+                abstr = matches.ToList<tbl_Abstract>().First();
+            }
+
+            return abstr;
+        }
 
         public static tbl_Abstract GetAbstract_CoderEvaluation(string connString, out string message)
         {
@@ -219,13 +275,12 @@ namespace ODPTaxonomyDAL_TT
                 {
                     foreach (int i in topics)
                     {
-                        var matches = from at in db.tbl_AbstractTopics
-                                      join sh in db.tbl_AbstractStatusChangeHistories on at.AbstractID equals sh.AbstractID
-                                      where sh.AbstractStatusID == (int)AbstractStatusID._0 && at.StudyFocusID == i
-                                      select at.AbstractID;
+                        
+                        var matches = db.select_abstracts_coding_tt((int)AbstractStatusID._0, i);
+
                         foreach (var item in matches)
                         {
-                            abstracts.Add(item);
+                            abstracts.Add(item.AbstractID);
                         }
 
                         index++;
@@ -270,30 +325,35 @@ namespace ODPTaxonomyDAL_TT
             return abstr;
         }
 
+        
+        public static int? GetEvaluationIdForAbstract(string connString, int abstractId)
+        {
+            int? evaluationId = null;
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from e in db.tbl_Evaluations
+                              where e.IsStopped == false && e.IsComplete == false && e.AbstractID == abstractId
+                              select e.EvaluationId;
+                foreach (var i in matches)
+                {
+                    evaluationId = i;
+                }
+            }
+
+            return evaluationId;
+        }
+
 
         public static ViewAbstractData GetEvaluationData(string connString, int teamId, int evaluationTypeId)
         {
-            ViewAbstractData data = null;
-            List<int> abstractStatusIds = new List<int>();
-
-            if (evaluationTypeId == (int)EvaluationType.CoderEvaluation)
-            {
-                abstractStatusIds.Add((int)AbstractStatusID._1);
-                abstractStatusIds.Add((int)AbstractStatusID._1A);
-            }
-
-            if (evaluationTypeId == (int)EvaluationType.ODPEvaluation)
-            {
-                abstractStatusIds.Add((int)AbstractStatusID._2);
-                abstractStatusIds.Add((int)AbstractStatusID._2A);
-            }
+            ViewAbstractData data = null;            
 
             using (DataDataContext db = new DataDataContext(connString))
             {
                 var matches = from e in db.tbl_Evaluations
                               join a in db.tbl_Abstracts on e.AbstractID equals a.AbstractID
-                              join sh in db.tbl_AbstractStatusChangeHistories on a.AbstractID equals sh.AbstractID
-                              where abstractStatusIds.Contains(sh.AbstractStatusID) && e.TeamID == teamId && e.EvaluationTypeId == evaluationTypeId
+                              where e.TeamID == teamId && e.EvaluationTypeId == evaluationTypeId && e.IsStopped == false 
+                                && e.IsComplete == false 
                               select new { e.EvaluationId, a };
                 foreach (var i in matches)
                 {

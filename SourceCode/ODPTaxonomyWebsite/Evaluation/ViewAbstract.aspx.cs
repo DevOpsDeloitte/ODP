@@ -28,6 +28,8 @@ namespace ODPTaxonomyWebsite.Evaluation
         private string currentRole = null;
         private string messUserNotInTeam = "You have not been added to a team at this time. Once you are on a team, refresh this page and you can begin.";
         private string messNoCurrentRole = "Your current role is not identified. You will be redirected to the homepage in 10 seconds.";
+        private string messStatusIsChanged = "You are not allowed to override as the abstract's status was changed.";
+        private string messOverrideSuccess = "Abstract override successful, please ask effected coders to log out and log back in.";
 
         #endregion
 
@@ -56,6 +58,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                         if (Session["CurrentRole"] != null)
                         {
                             currentRole = Session["CurrentRole"].ToString();
+                            hf_currentRole.Value = currentRole;
                             LoadData(currentRole);
                         }
                         else
@@ -71,6 +74,98 @@ namespace ODPTaxonomyWebsite.Evaluation
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured while loading page data.");
+            }
+        }
+
+        protected void btn_code_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("Evaluation.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on code button click.");
+            }
+        }
+
+        protected void btn_override_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int abstractId = -1;
+                int evaluationId = -1;
+                int abstractStatusId = -1;
+                currentRole = hf_currentRole.Value;
+                AbstractStatusID currentStatus = AbstractStatusID.none;
+                Guid userId = Guid.Empty;
+                if (Guid.TryParse(hf_userId.Value, out userId))
+                {
+                    //Check abstract's status again - it could be changed
+                    if (Int32.TryParse(hf_abstractId.Value, out abstractId))
+                    {
+                        currentStatus = Common.GetAbstractStatus(connString, abstractId);
+                        if (currentRole == role_coderSup)
+                        {
+                            if (currentStatus == AbstractStatusID._1 || currentStatus == AbstractStatusID._1A)
+                            {
+                                if (Int32.TryParse(hf_evaluationId.Value, out evaluationId))
+                                {
+                                    abstractStatusId = (int)AbstractStatusID._0;
+
+                                    lbl_messageUsers.Visible = true;
+                                    lbl_messageUsers.Text = messOverrideSuccess;
+                                }
+                                else
+                                {
+                                    throw new Exception("Evaluation ID either was not saved between page postbacks Or could not be parssed.");
+                                }
+                            }
+                            else
+                            {
+                                lbl_messageUsers.Visible = true;
+                                lbl_messageUsers.Text = messStatusIsChanged;
+                            }
+                        }
+
+                        if (currentRole == role_odpSup)
+                        {
+                            if (currentStatus == AbstractStatusID._2 || currentStatus == AbstractStatusID._2A)
+                            {
+                                if (Int32.TryParse(hf_evaluationId.Value, out evaluationId))
+                                {
+                                    abstractStatusId = (int)AbstractStatusID._1N;
+
+                                    lbl_messageUsers.Visible = true;
+                                    lbl_messageUsers.Text = messOverrideSuccess;
+                                }
+                                else
+                                {
+                                    throw new Exception("Evaluation ID either was not saved between page postbacks Or could not be parssed.");
+                                }
+                            }
+                            else
+                            {
+                                lbl_messageUsers.Visible = true;
+                                lbl_messageUsers.Text = messStatusIsChanged;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Abstract's ID either was not saved between page postbacks Or could not be parssed.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("User ID either was not saved between page postbacks Or could not be parssed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on override button click.");
             }
         }
 
@@ -91,7 +186,11 @@ namespace ODPTaxonomyWebsite.Evaluation
             DateTime time = DateTime.Now;             
             string format = "MM/d/yyyy";
             userId.InnerText = userCurrentName;
-            date.InnerText = time.ToString(format);  
+            date.InnerText = time.ToString(format);
+
+            pnl_printBtns.Visible = true;
+            pnl_abstract.Visible = true;
+            pnl_extraData.Visible = true;
         }
 
         private void GetAbstract_CoderEvaluation(Guid userId)
@@ -146,9 +245,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     values.UserId = userId;
                     Session["ViewAbstractToEvaluation"] = values;
 
-                    pnl_printBtns.Visible = true;
-                    pnl_abstract.Visible = true;
-                    pnl_extraData.Visible = true;
+                    btn_code.Visible = true;
                 }
                 
             }
@@ -161,17 +258,43 @@ namespace ODPTaxonomyWebsite.Evaluation
             
         }
 
+        private int? GetAbstractIDToView()
+        {
+            int id = -1;
+            int? abstractId = null;
+            if (Request.QueryString["AbstractID"] != null)
+            {
+                if (Int32.TryParse(Request.QueryString["AbstractID"].ToString(), out id))
+                {
+                    abstractId = id;
+                }
+            }
+
+            return abstractId;
+
+        }
+
+        
+
         private void LoadData(string currentRole)
         {
             if (!String.IsNullOrEmpty(currentRole))
             {
                 MembershipUser userCurrent = Membership.GetUser();
+                int? abstractId = null;
+                int? evaluationId = null;
+                int i_abstractId = -1;
+                int i_evaluationId = -1;
+                bool isViewMode = false;
+                tbl_Abstract abstr = null;
+                AbstractStatusID currentStatus = AbstractStatusID.none;
                 
                 if (userCurrent != null)
                 {
                     userCurrentName = userCurrent.UserName;
                 }
                 Guid userId = Common.GetCurrentUserId(connString, userCurrentName);
+                hf_userId.Value = userId.ToString();
 
                 //Coder
                 if (currentRole == role_coder)
@@ -182,7 +305,47 @@ namespace ODPTaxonomyWebsite.Evaluation
                 //Coder Sup
                 if (currentRole == role_coderSup)
                 {
-                    //Check User's intentions /Evaluation/ViewAbstract.aspx?AbstractID=1
+                    //Check User's intentions: /Evaluation/ViewAbstract.aspx?AbstractID=1
+                    abstractId = GetAbstractIDToView();
+                    if (abstractId != null)
+                    {
+                        i_abstractId = (int)abstractId;
+                        isViewMode = true;
+                    }
+
+                    if (isViewMode)
+                    {
+                        //user wants to review
+                        abstr = Common.GetAbstractByAbstractId(connString, i_abstractId);
+                        if (abstr != null)
+                        {
+                            //Display abstract on screen 
+                            LoadAbstract(abstr);
+                            hf_abstractId.Value = i_abstractId.ToString();
+                            //Get Evaluation ID for the current Abstract
+                            evaluationId = Common.GetEvaluationIdForAbstract(connString, i_abstractId);
+                            if (evaluationId != null)
+                            {
+                                i_evaluationId = (int)evaluationId;
+                                hf_evaluationId.Value = i_evaluationId.ToString();
+                            }
+                            //Check abstract's status
+                            currentStatus = Common.GetAbstractStatus(connString, i_abstractId);
+                            if (currentStatus == AbstractStatusID._1 || currentStatus == AbstractStatusID._1A)
+                            {
+                                //Override action is available
+                                pnl_overrideBtns.Visible = true;
+                                btn_override.Visible = true;
+                                
+                            }
+                        }
+                    }
+                    else
+                    {
+                        //user wants to do coding
+                        GetAbstract_CoderEvaluation(userId);
+                        btn_code.Visible = true;
+                    }
                 }
 
                 //ODP Staff
@@ -208,18 +371,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         #endregion
 
-        protected void btn_code_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Response.Redirect("Evaluation.aspx", false);
-            }
-            catch (Exception ex)
-            {
-                Utils.LogError(ex);
-                throw new Exception("An error has occured while loading page data.");
-            }
-        }
+        
 
     }
 }
