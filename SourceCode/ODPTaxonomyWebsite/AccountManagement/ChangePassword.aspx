@@ -11,17 +11,17 @@
 
 <asp:Panel ID="pnl_change_password" runat="server">
 
-<p>
+<div class="eight columns white"> 
     Password must be:
-    <ul>
+    <ol>
         <li>Minimum of 8 characters.</li>
         <li>Must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character, and 1 number.</li>
-    </ul>
-</p>
+    </ol>
+</div>
 
 <asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
 
-<table>
+<table class="form">
     <tr>
         <td><asp:Label ID="lbl_new_password" runat="server" Text="*Password:" AssociatedControlID="txt_new_password" /></td>
         <td>
@@ -43,8 +43,8 @@
     </tr>
     <tr>
         <td>
-            <asp:Button id="btn_change_password" runat="server" OnClick="btn_changePassword_OnClick" Text="Change Password" />
-            <asp:Button ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
+            <asp:Button class="button" id="btn_change_password" runat="server" OnClick="btn_changePassword_OnClick" Text="Change Password" />
+            <asp:Button class="button no" id="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
         </td>
     </tr>
 </table>

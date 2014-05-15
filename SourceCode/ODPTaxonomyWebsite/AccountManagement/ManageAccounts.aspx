@@ -10,10 +10,10 @@
 
     <asp:LinkButton class="button right" ID="lnkbtn_create_account" runat="server" Text="Create New Account" OnClick="lnkbtn_createAccount_OnClick" />
 
-    <asp:GridView ID="gvw_users" class="bordered zebra-striped" runat="server" AutoGenerateColumns="false"
+    <asp:GridView ID="gvw_users" class="bordered zebra-striped persist-area" runat="server" AutoGenerateColumns="false"
         AllowPaging="true" PageSize="25" OnPageIndexChanging="gvw_users_OnPageIndexChanging"
         AllowSorting="true" OnSorting="gvw_users_OnSorting" 
-        OnRowEditing="gvw_users_OnRowEditing" >
+        OnRowEditing="gvw_users_OnRowEditing" HeaderStyle-CssClass="persist-header" >
         <Columns>
             <asp:BoundField HeaderText="User ID" DataField="UserName" SortExpression="UserName" />
             <asp:BoundField HeaderText="First Name" DataField="UserFirstName" SortExpression="UserFirstName" />

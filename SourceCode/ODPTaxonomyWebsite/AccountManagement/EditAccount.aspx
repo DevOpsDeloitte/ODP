@@ -55,7 +55,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<h2><asp:Literal ID="ltl_page_title" runat="server" Text="Edit Account" /></h2>
+<span class="title"><asp:Literal ID="ltl_page_title" runat="server" Text="Edit Account" /></span>
 
 
 <asp:Label ID="lbl_confirmation_message" runat="server" Visible = "false" Text="User account successfully saved." />
@@ -169,11 +169,11 @@
     </tr>
     <tr>
         <td class="form-button">
-            <asp:Button class="button" ID="btn_save" runat="server" OnClick="btn_save_OnClick" Text="Save" />
+            <asp:Button class="button yes" ID="btn_save" runat="server" OnClick="btn_save_OnClick" Text="Save" />
         </td>
-        <td>
-            <asp:Button class="button" ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
-        </td class="form-button">
+        <td class="form-button">
+            <asp:Button class="button no" ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
+        </td>
     </tr>
 </table>
 </asp:Panel>
