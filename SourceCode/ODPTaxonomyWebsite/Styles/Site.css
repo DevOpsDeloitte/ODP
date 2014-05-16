@@ -38,6 +38,12 @@ first child of the left and right table columns */
     float:left;
     width:300px;
 }
+#pnl_uploadNotes
+{
+    clear:both;
+    width:200px;
+    margin:10px 0px 10px 200px;
+}
 #pnl_overrideBtns
 {
     float:left;
@@ -60,6 +66,11 @@ first child of the left and right table columns */
 #pnl_extraData
 {
     clear:both;
+}
+.viewSubmissionLink
+{
+    display:block;
+    
 }
 
 /*Tatiana's Styles: End */

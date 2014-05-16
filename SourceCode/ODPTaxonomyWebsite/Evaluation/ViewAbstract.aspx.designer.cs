@@ -31,13 +31,22 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.HiddenField hf_abstractId;
         
         /// <summary>
-        /// hf_evaluationId control.
+        /// hf_evaluationId_coder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hf_evaluationId;
+        protected global::System.Web.UI.WebControls.HiddenField hf_evaluationId_coder;
+        
+        /// <summary>
+        /// hf_evaluationId_odp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_evaluationId_odp;
         
         /// <summary>
         /// hf_currentRole control.
@@ -103,15 +112,6 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.Button btn_override;
         
         /// <summary>
-        /// btn_notes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_notes;
-        
-        /// <summary>
         /// pnl_odpValues control.
         /// </summary>
         /// <remarks>
@@ -121,6 +121,33 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.Panel pnl_odpValues;
         
         /// <summary>
+        /// link_odpConsensus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_odpConsensus;
+        
+        /// <summary>
+        /// link_odpNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_odpNotes;
+        
+        /// <summary>
+        /// rpt_odpSubmissions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_odpSubmissions;
+        
+        /// <summary>
         /// pnl_coderValues control.
         /// </summary>
         /// <remarks>
@@ -128,6 +155,60 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_coderValues;
+        
+        /// <summary>
+        /// link_coderConsensus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_coderConsensus;
+        
+        /// <summary>
+        /// link_coderNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_coderNotes;
+        
+        /// <summary>
+        /// rpt_coderSubmissions control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rpt_coderSubmissions;
+        
+        /// <summary>
+        /// pnl_uploadNotes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_uploadNotes;
+        
+        /// <summary>
+        /// btn_notes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_notes;
+        
+        /// <summary>
+        /// fu_notes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fu_notes;
         
         /// <summary>
         /// pnl_extraData control.

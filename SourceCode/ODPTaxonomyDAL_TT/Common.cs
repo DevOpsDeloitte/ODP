@@ -109,6 +109,63 @@ namespace ODPTaxonomyDAL_TT
             return teamId;
         }
 
+        public static string GetAbstractScan(string connString, int evaluationId)
+        {
+            string fileName = null;
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from s in db.tbl_AbstractScans
+                              where s.EvaluationId == evaluationId
+                              select s.FileName;
+                fileName = matches.FirstOrDefault();
+            }
+
+            return fileName;
+        }
+
+        public static void UploadNotes(string connString, int evaluationId, Guid userId)
+        {
+
+            tbl_AbstractScan scan = null;            
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from s in db.tbl_AbstractScans
+                              where s.EvaluationId == evaluationId
+                              select s;
+                scan = matches.FirstOrDefault();
+                scan.UploadedBy = userId;
+                scan.UploadedDateTime = DateTime.Now;
+
+                db.SubmitChanges();
+            }
+        }
+
+        public static void UploadNotes(string connString, int evaluationId, int abstractId, Guid userId, int abstractStatusId, string fileName)
+        {
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            history.AbstractID = abstractId;
+            history.AbstractStatusID = abstractStatusId;
+            history.CreatedDate = DateTime.Now;
+            history.CreatedBy = userId;
+            history.EvaluationId = evaluationId;
+
+            tbl_AbstractScan scan = new tbl_AbstractScan();
+            scan.EvaluationId = evaluationId;
+            scan.FileName = fileName;
+            scan.UploadedBy = userId;
+            scan.UploadedDateTime = DateTime.Now;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                db.tbl_AbstractScans.InsertOnSubmit(scan);
+                db.SubmitChanges();
+            }
+        }
+
+
         public static void OverrideAbstract(string connString, int evaluationId, int abstractId, Guid userId, int abstractStatusId)
         {
             tbl_Evaluation evaluation = null;
@@ -119,6 +176,7 @@ namespace ODPTaxonomyDAL_TT
             history.AbstractStatusID = abstractStatusId;
             history.CreatedDate = DateTime.Now;
             history.CreatedBy = userId;
+            history.EvaluationId = evaluationId;
 
             using (DataDataContext db = new DataDataContext(connString))
             {
@@ -126,11 +184,25 @@ namespace ODPTaxonomyDAL_TT
                 {
                     evaluation = (from e in db.tbl_Evaluations
                                   where e.EvaluationId == evaluationId
-                                  select e).First();
+                                  select e).FirstOrDefault();
                     submissions = (from s in db.tbL_Submissions
                                    where s.EvaluationId == evaluationId
                                    select s).ToList<tbL_Submission>();
 
+                    db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+
+                    evaluation.IsStopped = true;
+                    evaluation.StoppedBy = userId;
+                    evaluation.StoppedDateTime = DateTime.Now;
+
+                    foreach (var s in submissions)
+                    {
+                        s.StatusID = (int)Status.Deleted;
+                        s.UpdatedBy = userId;
+                        s.UpdatedDate = DateTime.Now;
+                    }
+
+                    db.SubmitChanges();
                 }
                 catch (Exception ex)
                 {
@@ -236,7 +308,7 @@ namespace ODPTaxonomyDAL_TT
                 var matches = from a in db.tbl_Abstracts
                               where a.AbstractID == abstractId
                               select a;
-                abstr = matches.ToList<tbl_Abstract>().First();
+                abstr = matches.ToList<tbl_Abstract>().FirstOrDefault();
             }
 
             return abstr;
@@ -326,13 +398,13 @@ namespace ODPTaxonomyDAL_TT
         }
 
         
-        public static int? GetEvaluationIdForAbstract(string connString, int abstractId)
+        public static int? GetEvaluationIdForAbstract(string connString, int abstractId, EvaluationType type)
         {
             int? evaluationId = null;
             using (DataDataContext db = new DataDataContext(connString))
             {
                 var matches = from e in db.tbl_Evaluations
-                              where e.IsStopped == false && e.IsComplete == false && e.AbstractID == abstractId
+                              where e.IsStopped == false && e.IsComplete == false && e.AbstractID == abstractId && e.EvaluationTypeId == (int)type
                               select e.EvaluationId;
                 foreach (var i in matches)
                 {

@@ -9,6 +9,8 @@ using System.Configuration;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Text;
+using System.Net;
+using System.ComponentModel;
 using ODPTaxonomyDAL_TT;
 using ODPTaxonomyUtility_TT;
 using ODPTaxonomyCommon;
@@ -30,6 +32,11 @@ namespace ODPTaxonomyWebsite.Evaluation
         private string messNoCurrentRole = "Your current role is not identified. You will be redirected to the homepage in 10 seconds.";
         private string messStatusIsChanged = "You are not allowed to override as the abstract's status was changed.";
         private string messOverrideSuccess = "Abstract override successful, please ask effected coders to log out and log back in.";
+        private string messUploadNotesSuccess = "Upload Notes successful, please ask effected coders to log out and log back in.";
+        private string messMaxSizeExceeded = "The file size exceeded 8M maximum allowed.";
+        private string messNoFile = "Please select the file to upload.";
+        private string messWrongFileType = "Only PDF files are allowed to upload.";
+        private int maxLen = 8388608;
 
         #endregion
 
@@ -89,6 +96,143 @@ namespace ODPTaxonomyWebsite.Evaluation
                 throw new Exception("An error has occured on code button click.");
             }
         }
+        protected void btn_notes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string fileName = null;
+                int abstractId = -1;
+                int evaluationId = -1;
+                int abstractStatusId = -1;
+                currentRole = hf_currentRole.Value;
+                AbstractStatusID currentStatus = AbstractStatusID.none;
+                Guid userId = Guid.Empty;
+                bool uploadSuccess = false;
+                if (Guid.TryParse(hf_userId.Value, out userId))
+                {
+                    //Check abstract's status again - it could be changed
+                    if (Int32.TryParse(hf_abstractId.Value, out abstractId))
+                    {
+                        currentStatus = Common.GetAbstractStatus(connString, abstractId);
+                        if (currentRole == role_coderSup)
+                        {
+                            if (currentStatus == AbstractStatusID._1B || currentStatus == AbstractStatusID._1N)
+                            {
+                                if (Int32.TryParse(hf_evaluationId_coder.Value, out evaluationId))
+                                {
+                                    fileName = Common.GetAbstractScan(connString, evaluationId);
+
+                                    if (!String.IsNullOrEmpty(fileName))
+                                    {
+                                        //Overwrite file on hard drive
+                                        UploadNotes(fileName, abstractId, evaluationId, EvaluationType.CoderEvaluation, out uploadSuccess);
+                                        if (uploadSuccess)
+                                        {
+                                            //Update date and user in database table
+                                            Common.UploadNotes(connString, evaluationId, userId);
+
+                                            lbl_messageUsers.Visible = true;
+                                            lbl_messageUsers.Text = messUploadNotesSuccess;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //Save file
+                                        fileName = UploadNotes(null, abstractId, evaluationId, EvaluationType.CoderEvaluation, out uploadSuccess);
+                                        if (uploadSuccess)
+                                        {
+                                            //Save data to database
+                                            abstractStatusId = (int)AbstractStatusID._1N;
+                                            Common.UploadNotes(connString, evaluationId, abstractId, userId, abstractStatusId, fileName);
+                                            //regenerate links for coderSup - a new link should appear
+
+                                            lbl_messageUsers.Visible = true;
+                                            lbl_messageUsers.Text = messUploadNotesSuccess;
+                                        }
+                                    }                                    
+                                    
+                                    
+                                    
+                                }
+                                else
+                                {
+                                    throw new Exception("Evaluation ID either was not saved between page postbacks Or could not be parssed.");
+                                }
+                            }
+                            else
+                            {
+                                lbl_messageUsers.Visible = true;
+                                lbl_messageUsers.Text = messStatusIsChanged;
+                            }
+                        }
+
+                        if (currentRole == role_odpSup)
+                        {
+                            if (currentStatus == AbstractStatusID._2C || currentStatus == AbstractStatusID._2N)
+                            {
+                                if (Int32.TryParse(hf_evaluationId_odp.Value, out evaluationId))
+                                {
+                                    fileName = Common.GetAbstractScan(connString, evaluationId);
+
+                                    if (!String.IsNullOrEmpty(fileName))
+                                    {
+                                        //Overwrite file on hard drive
+                                        UploadNotes(fileName, abstractId, evaluationId, EvaluationType.ODPEvaluation, out uploadSuccess);
+                                        if (uploadSuccess)
+                                        {
+                                            //Update date and user in database table
+                                            Common.UploadNotes(connString, evaluationId, userId);
+
+                                            lbl_messageUsers.Visible = true;
+                                            lbl_messageUsers.Text = messUploadNotesSuccess;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        //Save file
+                                        fileName = UploadNotes(null, abstractId, evaluationId, EvaluationType.ODPEvaluation, out uploadSuccess);
+                                        if (uploadSuccess)
+                                        {
+                                            //Save data to database
+                                            abstractStatusId = (int)AbstractStatusID._2N;
+                                            Common.UploadNotes(connString, evaluationId, abstractId, userId, abstractStatusId, fileName);
+                                            //regenerate links for odpSup - a new link should appear
+
+                                            lbl_messageUsers.Visible = true;
+                                            lbl_messageUsers.Text = messUploadNotesSuccess;
+                                        }
+                                    }                
+                                    
+                                }
+                                else
+                                {
+                                    throw new Exception("Evaluation ID either was not saved between page postbacks Or could not be parssed.");
+                                }
+                            }
+                            else
+                            {
+                                lbl_messageUsers.Visible = true;
+                                lbl_messageUsers.Text = messStatusIsChanged;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Abstract's ID either was not saved between page postbacks Or could not be parssed.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("User ID either was not saved between page postbacks Or could not be parssed.");
+                }
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on upload notes button click.");
+            }
+        }
+
 
         protected void btn_override_Click(object sender, EventArgs e)
         {
@@ -110,12 +254,17 @@ namespace ODPTaxonomyWebsite.Evaluation
                         {
                             if (currentStatus == AbstractStatusID._1 || currentStatus == AbstractStatusID._1A)
                             {
-                                if (Int32.TryParse(hf_evaluationId.Value, out evaluationId))
+                                if (Int32.TryParse(hf_evaluationId_coder.Value, out evaluationId))
                                 {
                                     abstractStatusId = (int)AbstractStatusID._0;
+                                    Common.OverrideAbstract(connString, evaluationId, abstractId, userId, abstractStatusId);
 
                                     lbl_messageUsers.Visible = true;
                                     lbl_messageUsers.Text = messOverrideSuccess;
+                                    pnl_printBtns.Visible = false;
+                                    pnl_overrideBtns.Visible = false;
+                                    pnl_extraData.Visible = false;
+                                    pnl_abstract.Visible = false;
                                 }
                                 else
                                 {
@@ -133,12 +282,17 @@ namespace ODPTaxonomyWebsite.Evaluation
                         {
                             if (currentStatus == AbstractStatusID._2 || currentStatus == AbstractStatusID._2A)
                             {
-                                if (Int32.TryParse(hf_evaluationId.Value, out evaluationId))
+                                if (Int32.TryParse(hf_evaluationId_coder.Value, out evaluationId))
                                 {
                                     abstractStatusId = (int)AbstractStatusID._1N;
+                                    Common.OverrideAbstract(connString, evaluationId, abstractId, userId, abstractStatusId);
 
                                     lbl_messageUsers.Visible = true;
                                     lbl_messageUsers.Text = messOverrideSuccess;
+                                    pnl_printBtns.Visible = false;
+                                    pnl_overrideBtns.Visible = false;
+                                    pnl_extraData.Visible = false;
+                                    pnl_abstract.Visible = false;
                                 }
                                 else
                                 {
@@ -169,9 +323,136 @@ namespace ODPTaxonomyWebsite.Evaluation
             }
         }
 
+
+
+        
+
+
+        protected void link_Notes_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string fileName = (sender as LinkButton).CommandArgument;
+                string fName = Request.PhysicalApplicationPath + "notes\\" + fileName;
+                Response.Clear();
+                Response.BufferOutput = false;
+                Response.ContentType = "application/pdf";
+                Response.AddHeader("content-disposition", "filename=" + fileName);
+                //Response.Flush();   
+                Response.TransmitFile(fName);
+                Response.End();
+
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on download notes link click.");
+            }
+        }
+
+
         #endregion
 
         #region Methods
+
+        private void GenerateLinks(EvaluationType type, int evaluationId, int abstractId)
+        {
+            if (type == EvaluationType.CoderEvaluation)
+            {
+                string fileName = Common.GetAbstractScan(connString, evaluationId);
+                link_coderNotes.CommandArgument = fileName;
+            }
+
+            if (type == EvaluationType.ODPEvaluation)
+            {
+
+            }
+        }
+
+
+        private string UploadNotes(string fileName, int abstractId, int evaluationId, EvaluationType type, out bool uploadSuccess)
+        {
+            string fileName_new = "";
+            StringBuilder sb = new StringBuilder();
+            string sType = type.ToString();
+            uploadSuccess = false;
+            string path = "";
+            string fileExtention = "";
+            string name = "";
+            int dotPos = -1;
+            int size = 0;
+            string fileType = "";
+            
+            //Save file 
+            if (fu_notes.PostedFile != null)
+            {
+                HttpPostedFile myFile = fu_notes.PostedFile;
+                fileType = myFile.ContentType.ToLower();
+                size = myFile.ContentLength;
+
+                if (size > maxLen)
+                {
+                    lbl_messageUsers.Visible = true;
+                    lbl_messageUsers.Text = messMaxSizeExceeded;
+                }
+                else
+                {
+                    if (size > 0)
+                    {
+                        if (fileType == "application/pdf")
+                        {
+                            name = myFile.FileName;
+                            dotPos = name.LastIndexOf(".");
+                            if (dotPos > -1)
+                            {
+                                fileExtention = name.Substring(dotPos + 1);
+
+                                if (!String.IsNullOrEmpty(fileName))
+                                {
+                                    fileName_new = fileName;
+                                }
+                                else
+                                {
+                                    sb.Append("notesFor_");
+                                    sb.Append(abstractId);
+                                    sb.Append("_");
+                                    sb.Append(sType);
+                                    sb.Append("_");
+                                    sb.Append(evaluationId);
+                                    sb.Append(".");
+                                    sb.Append(fileExtention);
+                                    fileName_new = sb.ToString();
+                                }
+
+                                path = Request.PhysicalApplicationPath + "notes\\" + fileName_new;
+                                myFile.SaveAs(path);
+                                uploadSuccess = true;
+                                lbl_messageUsers.Visible = false;
+                            }
+                        }
+                        else
+                        {
+                            lbl_messageUsers.Visible = true;
+                            lbl_messageUsers.Text = messWrongFileType;
+                        }
+                        
+                    }
+                    else
+                    {
+                        lbl_messageUsers.Visible = true;
+                        lbl_messageUsers.Text = messNoFile;
+                    }
+                    
+                }
+            }
+            else
+            {
+                lbl_messageUsers.Visible = true;
+                lbl_messageUsers.Text = messNoFile;
+            }
+
+            return fileName_new;
+        }
 
         private void LoadAbstract(tbl_Abstract abstr)
         {
@@ -282,9 +563,11 @@ namespace ODPTaxonomyWebsite.Evaluation
             {
                 MembershipUser userCurrent = Membership.GetUser();
                 int? abstractId = null;
-                int? evaluationId = null;
+                int? evaluationId_coder = null;
+                int? evaluationId_odp = null;
                 int i_abstractId = -1;
-                int i_evaluationId = -1;
+                int i_evaluationId_coder = -1;
+                int i_evaluationId_odp = -1;
                 bool isViewMode = false;
                 tbl_Abstract abstr = null;
                 AbstractStatusID currentStatus = AbstractStatusID.none;
@@ -323,19 +606,33 @@ namespace ODPTaxonomyWebsite.Evaluation
                             LoadAbstract(abstr);
                             hf_abstractId.Value = i_abstractId.ToString();
                             //Get Evaluation ID for the current Abstract
-                            evaluationId = Common.GetEvaluationIdForAbstract(connString, i_abstractId);
-                            if (evaluationId != null)
+                            evaluationId_coder = Common.GetEvaluationIdForAbstract(connString, i_abstractId, EvaluationType.CoderEvaluation);
+                            if (evaluationId_coder != null)
                             {
-                                i_evaluationId = (int)evaluationId;
-                                hf_evaluationId.Value = i_evaluationId.ToString();
+                                i_evaluationId_coder = (int)evaluationId_coder;
+                                hf_evaluationId_coder.Value = i_evaluationId_coder.ToString();
                             }
                             //Check abstract's status
                             currentStatus = Common.GetAbstractStatus(connString, i_abstractId);
                             if (currentStatus == AbstractStatusID._1 || currentStatus == AbstractStatusID._1A)
                             {
                                 //Override action is available
-                                pnl_overrideBtns.Visible = true;
-                                btn_override.Visible = true;
+                                pnl_overrideBtns.Visible = true;                                                             
+                            }
+
+                            if (currentStatus == AbstractStatusID._1B || currentStatus == AbstractStatusID._1N)
+                            {
+                                //Upload Notes action is available
+                                pnl_uploadNotes.Visible = true;
+
+                                GenerateLinks(EvaluationType.CoderEvaluation, i_evaluationId_coder, i_abstractId);
+                                evaluationId_odp = Common.GetEvaluationIdForAbstract(connString, i_abstractId, EvaluationType.ODPEvaluation);
+                                if (evaluationId_odp != null)
+                                {
+                                    i_evaluationId_odp = (int)evaluationId_odp;
+                                    GenerateLinks(EvaluationType.ODPEvaluation, i_evaluationId_odp, i_abstractId);
+                                }
+                                
                                 
                             }
                         }
@@ -370,6 +667,10 @@ namespace ODPTaxonomyWebsite.Evaluation
         }
 
         #endregion
+
+        
+
+        
 
         
 

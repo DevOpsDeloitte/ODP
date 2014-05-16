@@ -179,6 +179,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
     <Folder Include="log\" />
+    <Folder Include="notes\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />

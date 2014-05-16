@@ -7,7 +7,8 @@
     </h2>
     <p><asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label></p>
     <asp:HiddenField runat="server" ID="hf_abstractId" />
-    <asp:HiddenField runat="server" ID="hf_evaluationId" />
+    <asp:HiddenField runat="server" ID="hf_evaluationId_coder" />
+    <asp:HiddenField runat="server" ID="hf_evaluationId_odp" />
     <asp:HiddenField runat="server" ID="hf_currentRole" />
     <asp:HiddenField runat="server" ID="hf_userId" />
     <asp:Panel runat="server" ID="pnl_printBtns" ClientIDMode="Static" Visible="false">
@@ -16,16 +17,38 @@
             onclick="btn_code_Click" Visible="false" />&nbsp;&nbsp;
     </asp:Panel>
     <asp:Panel runat="server" ID="pnl_overrideBtns" ClientIDMode="Static" Visible="false">
-        <asp:Button runat="server" ID="btn_override" Text="Abstract Override" Visible="false" 
+        <asp:Button runat="server" ID="btn_override" Text="Abstract Override" Visible="true" 
             onclick="btn_override_Click" 
             OnClientClick="return confirm('You are about to force close this abstract. Would you like to proceed?');" /><br /><br />
-        <asp:Button runat="server" ID="btn_notes" Text="Upload Notes" Visible="false" />&nbsp;&nbsp;
+        
     </asp:Panel>
-    <asp:Panel runat="server" ID="pnl_odpValues" ClientIDMode="Static" Visible="false">
-        Placeholder: ODP Staff Values
+    
+    <asp:Panel runat="server" ID="pnl_odpValues" ClientIDMode="Static" Visible="true">
+        <asp:LinkButton runat="server" ID="link_odpConsensus" CssClass="viewSubmissionLink">ODP Consensus</asp:LinkButton>
+        <asp:LinkButton runat="server" ID="link_odpNotes" CssClass="viewSubmissionLink"  
+            onclick="link_Notes_Click" CommandArgument='notesFor_16_CoderEvaluation_10.pdf'>ODP Notes(PDF)</asp:LinkButton>
+        <asp:Repeater runat="server" ID="rpt_odpSubmissions">
+            <ItemTemplate>
+                <asp:LinkButton runat="server" ID="link_Submission" Text='ID: Selections' CssClass="viewSubmissionLink"></asp:LinkButton>
+            </ItemTemplate>
+        </asp:Repeater>
     </asp:Panel>
-    <asp:Panel runat="server" ID="pnl_coderValues" ClientIDMode="Static" Visible="false">
-        Placeholder: Coder Values
+
+    <asp:Panel runat="server" ID="pnl_coderValues" ClientIDMode="Static" Visible="true">        
+        <asp:LinkButton runat="server" ID="link_coderConsensus" CssClass="viewSubmissionLink">Code Consensus</asp:LinkButton>
+        <asp:LinkButton runat="server" ID="link_coderNotes" CssClass="viewSubmissionLink"  
+            onclick="link_Notes_Click" CommandArgument=''>Coder Notes(PDF)</asp:LinkButton>
+        <asp:Repeater runat="server" ID="rpt_coderSubmissions">
+            <ItemTemplate>
+                <asp:LinkButton runat="server" ID="link_Submission" Text='ID: Selections' CssClass="viewSubmissionLink"></asp:LinkButton>
+            </ItemTemplate>
+        </asp:Repeater>
+    </asp:Panel>
+
+    <asp:Panel runat="server" ID="pnl_uploadNotes" ClientIDMode="Static" Visible="false">
+        <asp:Button runat="server" ID="btn_notes" Text="Upload Notes" Visible="true" 
+            onclick="btn_notes_Click" /><br />
+        <asp:FileUpload runat="server" ID="fu_notes" />
     </asp:Panel>
     <asp:Panel runat="server" ID="pnl_extraData" ClientIDMode="Static" Visible="false">
         <p>User ID: <span runat="server" id="userId"></span></p>
