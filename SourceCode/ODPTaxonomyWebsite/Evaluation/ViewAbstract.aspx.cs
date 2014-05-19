@@ -88,7 +88,30 @@ namespace ODPTaxonomyWebsite.Evaluation
         {
             try
             {
-                Response.Redirect("Evaluation.aspx", false);
+                int submissionTypeId = -1;
+                int evaluationId = -1;
+                Guid userId = Guid.Empty;
+
+                if (Guid.TryParse(hf_userId.Value, out userId))
+                {
+                    if (Int32.TryParse(hf_evaluationId.Value, out evaluationId))
+                    {
+                        if (Int32.TryParse(hf_submissionTypeId.Value, out submissionTypeId))
+                        {
+                            //Store userId, submissionTypeId and evaluationId in Session. These values are used on Submission page.
+                            ViewAbstractToEvaluation values = new ViewAbstractToEvaluation();
+                            values.ViewMode = Mode.code;
+                            values.EvaluationId = evaluationId;
+                            values.SubmissionTypeId = submissionTypeId;
+                            values.UserId = userId;
+                            Session["ViewAbstractToEvaluation"] = values;
+
+                            Response.Redirect("Evaluation.aspx", false);
+                        }
+                    }
+                }
+
+                
             }
             catch (Exception ex)
             {
@@ -145,6 +168,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                                             abstractStatusId = (int)AbstractStatusID._1N;
                                             Common.UploadNotes(connString, evaluationId, abstractId, userId, abstractStatusId, fileName);
                                             //regenerate links for coderSup - a new link should appear
+                                            GenerateLinks(EvaluationType.CoderEvaluation, evaluationId, abstractId);
 
                                             lbl_messageUsers.Visible = true;
                                             lbl_messageUsers.Text = messUploadNotesSuccess;
@@ -197,6 +221,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                                             abstractStatusId = (int)AbstractStatusID._2N;
                                             Common.UploadNotes(connString, evaluationId, abstractId, userId, abstractStatusId, fileName);
                                             //regenerate links for odpSup - a new link should appear
+                                            GenerateLinks(EvaluationType.ODPEvaluation, evaluationId, abstractId);
 
                                             lbl_messageUsers.Visible = true;
                                             lbl_messageUsers.Text = messUploadNotesSuccess;
@@ -282,7 +307,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                         {
                             if (currentStatus == AbstractStatusID._2 || currentStatus == AbstractStatusID._2A)
                             {
-                                if (Int32.TryParse(hf_evaluationId_coder.Value, out evaluationId))
+                                if (Int32.TryParse(hf_evaluationId_odp.Value, out evaluationId))
                                 {
                                     abstractStatusId = (int)AbstractStatusID._1N;
                                     Common.OverrideAbstract(connString, evaluationId, abstractId, userId, abstractStatusId);
@@ -323,7 +348,44 @@ namespace ODPTaxonomyWebsite.Evaluation
             }
         }
 
+        protected void link_Submission_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ViewAbstractToEvaluation submissionData = new ViewAbstractToEvaluation();
+                int evaluationId;
+                Guid userId;
+                int submissionTypeId;
+                string[] arr;
+                string arg = (sender as LinkButton).CommandArgument;
+                arr = arg.Split(new char[]{';'});
+                
+                if (arr.Count() > 2)
+                {
+                    if (Int32.TryParse(arr[0], out evaluationId))
+                    {
+                        if (Int32.TryParse(arr[1], out submissionTypeId))
+                        {
+                            if (Guid.TryParse(arr[2].ToString(), out userId))
+                            {
+                                submissionData.EvaluationId = evaluationId;
+                                submissionData.SubmissionTypeId = submissionTypeId;
+                                submissionData.UserId = userId;
+                                submissionData.ViewMode = Mode.view;
+                                Session["ViewAbstractToEvaluation"] = submissionData;
+                                Response.Redirect("Evaluation.aspx", false);
+                            }
+                        }
+                    }
+                }
 
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on submission link click.");
+            }
+        }
 
         
 
@@ -355,17 +417,122 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         #region Methods
 
+        public string GetValue(object o1, object o2,  object o3)
+        {
+            string value = "";
+            StringBuilder sb = new StringBuilder();
+
+            if (o1 != null)
+            {
+                sb.Append(o1.ToString());
+                sb.Append(";");
+            }
+            if(o2 != null)
+            {
+                sb.Append(o2.ToString());
+                sb.Append(";");
+            }
+            if (o3 != null)
+            {
+                sb.Append(o3.ToString());
+            }
+
+            value = sb.ToString();
+
+            return value;
+        }
+
         private void GenerateLinks(EvaluationType type, int evaluationId, int abstractId)
         {
+            List<SubmissionLinkData> submissions_coder = null;
+            List<SubmissionLinkData> coders = new List<SubmissionLinkData>();
+            
             if (type == EvaluationType.CoderEvaluation)
             {
+                pnl_coderValues.Visible = true;
                 string fileName = Common.GetAbstractScan(connString, evaluationId);
-                link_coderNotes.CommandArgument = fileName;
+                if (!String.IsNullOrEmpty(fileName))
+                {
+                    link_coderNotes.CommandArgument = fileName;
+                    link_coderNotes.Visible = true;
+                }
+
+                submissions_coder = Common.GetSubmissions(connString, evaluationId);
+                if (submissions_coder != null)
+                {
+                    if (submissions_coder.Count > 0)
+                    {
+                        var matches = submissions_coder.Where(x => x.SubmissionTypeId == (int)SubmissionTypeId.CoderConsensus).Select(x => x);
+                        foreach (var i in matches)
+                        {
+                            link_coderConsensus.CommandArgument = i.EvaluationId + ";" + i.SubmissionTypeId + ";" + i.UserId;
+                            link_coderConsensus.Visible = true;
+                        }
+
+                        matches = submissions_coder.Where(x => x.SubmissionTypeId == (int)SubmissionTypeId.CoderEvaluation).Select(x => x);
+                        foreach (var i in matches)
+                        {
+                            coders.Add(i);
+                        }
+
+                        if (coders.Count > 0)
+                        {
+                            rpt_coderSubmissions.DataSource = coders;
+                            rpt_coderSubmissions.DataBind();
+                            
+                        }
+
+                    }
+                } 
+
             }
 
             if (type == EvaluationType.ODPEvaluation)
             {
+                pnl_odpValues.Visible = true;
+                string fileName = Common.GetAbstractScan(connString, evaluationId);
+                if (!String.IsNullOrEmpty(fileName))
+                {
+                    link_odpNotes.CommandArgument = fileName;
+                    link_odpNotes.Visible = true;
+                }
 
+                submissions_coder = Common.GetSubmissions(connString, evaluationId);
+                if (submissions_coder != null)
+                {
+                    if (submissions_coder.Count > 0)
+                    {
+                        //Consensus link
+                        var matches = submissions_coder.Where(x => x.SubmissionTypeId == (int)SubmissionTypeId.ODPStaffMemberConsensus).Select(x => x);
+                        foreach (var i in matches)
+                        {
+                            link_odpConsensus.CommandArgument = i.EvaluationId + ";" + i.SubmissionTypeId + ";" + i.UserId;
+                            link_odpConsensus.Visible = true;
+                        }
+                        //Compare link
+                        matches = submissions_coder.Where(x => x.SubmissionTypeId == (int)SubmissionTypeId.ODPStaffMemberComparison).Select(x => x);
+                        foreach (var i in matches)
+                        {
+                            link_odpCompare.CommandArgument = i.EvaluationId + ";" + i.SubmissionTypeId + ";" + i.UserId;
+                            link_odpCompare.Visible = true;
+                        }
+
+                        //Evaluation links
+                        matches = submissions_coder.Where(x => x.SubmissionTypeId == (int)SubmissionTypeId.ODPStaffMembersEvaluation).Select(x => x);
+                        foreach (var i in matches)
+                        {
+                            coders.Add(i);
+                        }
+
+                        if (coders.Count > 0)
+                        {
+                            rpt_odpSubmissions.DataSource = coders;
+                            rpt_odpSubmissions.DataBind();
+
+                        }
+
+                    }
+                } 
             }
         }
 
@@ -474,7 +641,52 @@ namespace ODPTaxonomyWebsite.Evaluation
             pnl_extraData.Visible = true;
         }
 
-        private void GetAbstract_CoderEvaluation(Guid userId)
+        private void GetAbstract_OdpEvaluation(Guid userId, int evaluationTypeId, int abstractId)
+        {
+            int evaluationId = -1;
+            int teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.Coder;
+            tbl_Abstract abstr = null;
+
+            //Check if user is in a Team
+            int? teamId = Common.GetTeamIdForUser(connString, teamTypeID, userId);
+            if (teamId != null)
+            {
+                //Check if Evaluation has started already
+                int i_teamId = (int)teamId;
+
+                ViewAbstractData evaluationData = Common.GetEvaluationData(connString, i_teamId, evaluationTypeId);
+                if (evaluationData != null)
+                {
+                    evaluationId = evaluationData.EvaluationId;
+                    abstr = evaluationData.Abstract;
+                }
+                else //Evaluation has NOT started yet
+                {
+                    //Start Evaluation process
+                    evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId);
+                }
+
+                if (abstr != null)
+                {
+                    //Display abstract on screen 
+                    LoadAbstract(abstr);
+
+                    hf_evaluationId.Value = evaluationId.ToString();
+                    hf_userId.Value = userId.ToString();
+                    hf_submissionTypeId.Value = ((int)SubmissionTypeId.ODPStaffMembersEvaluation).ToString();
+
+                    btn_code.Visible = true;
+                }
+
+            }
+            else
+            {
+                lbl_messageUsers.Visible = true;
+                lbl_messageUsers.Text = messUserNotInTeam;
+            }         
+        }
+
+        private void GetAbstract_CoderEvaluation(Guid userId, int evaluationTypeId)
         {
             string message = "";
             int abstractId = -1;
@@ -488,7 +700,6 @@ namespace ODPTaxonomyWebsite.Evaluation
             {
                 //Check if Evaluation has started already
                 int i_teamId = (int)teamId;
-                int evaluationTypeId = (int)ODPTaxonomyDAL_TT.EvaluationType.CoderEvaluation;
                 
                 ViewAbstractData evaluationData = Common.GetEvaluationData(connString, i_teamId, evaluationTypeId);
                 if (evaluationData != null)
@@ -518,14 +729,11 @@ namespace ODPTaxonomyWebsite.Evaluation
                 {
                     //Display abstract on screen 
                     LoadAbstract(abstr);
-                    //Store UserId and EvaluationId in Session. These values are passed to Submission page later.
-                    ViewAbstractToEvaluation values = new ViewAbstractToEvaluation();
-                    values.ViewMode = Mode.code;
-                    values.EvaluationId = evaluationId;
-                    values.SubmissionTypeId = (int)SubmissionTypeId.CoderEvaluation;
-                    values.UserId = userId;
-                    Session["ViewAbstractToEvaluation"] = values;
 
+                    hf_evaluationId.Value = evaluationId.ToString();
+                    hf_userId.Value = userId.ToString();
+                    hf_submissionTypeId.Value = ((int)SubmissionTypeId.CoderEvaluation).ToString();
+                    
                     btn_code.Visible = true;
                 }
                 
@@ -571,6 +779,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 bool isViewMode = false;
                 tbl_Abstract abstr = null;
                 AbstractStatusID currentStatus = AbstractStatusID.none;
+                int evaluationTypeId = -1; 
                 
                 if (userCurrent != null)
                 {
@@ -582,7 +791,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                 //Coder
                 if (currentRole == role_coder)
                 {
-                    GetAbstract_CoderEvaluation(userId);
+                    evaluationTypeId = (int)ODPTaxonomyDAL_TT.EvaluationType.CoderEvaluation;
+                    GetAbstract_CoderEvaluation(userId, evaluationTypeId);
                 }
 
                 //Coder Sup
@@ -605,7 +815,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                             //Display abstract on screen 
                             LoadAbstract(abstr);
                             hf_abstractId.Value = i_abstractId.ToString();
-                            //Get Evaluation ID for the current Abstract
+                            //Get Evaluation ID of type CoderEvaluation for the current Abstract
                             evaluationId_coder = Common.GetEvaluationIdForAbstract(connString, i_abstractId, EvaluationType.CoderEvaluation);
                             if (evaluationId_coder != null)
                             {
@@ -623,24 +833,29 @@ namespace ODPTaxonomyWebsite.Evaluation
                             if (currentStatus == AbstractStatusID._1B || currentStatus == AbstractStatusID._1N)
                             {
                                 //Upload Notes action is available
-                                pnl_uploadNotes.Visible = true;
+                                pnl_uploadNotes.Visible = true;                                                           
+                                
+                            }
 
+                            if ((int)currentStatus >= (int)AbstractStatusID._1B)
+                            {
+                                //Generate links to Evaluation page for submission review
                                 GenerateLinks(EvaluationType.CoderEvaluation, i_evaluationId_coder, i_abstractId);
                                 evaluationId_odp = Common.GetEvaluationIdForAbstract(connString, i_abstractId, EvaluationType.ODPEvaluation);
                                 if (evaluationId_odp != null)
                                 {
                                     i_evaluationId_odp = (int)evaluationId_odp;
+                                    hf_evaluationId_odp.Value = i_evaluationId_odp.ToString();
                                     GenerateLinks(EvaluationType.ODPEvaluation, i_evaluationId_odp, i_abstractId);
-                                }
-                                
-                                
+                                }   
                             }
                         }
                     }
                     else
                     {
                         //user wants to do coding
-                        GetAbstract_CoderEvaluation(userId);
+                        evaluationTypeId = (int)ODPTaxonomyDAL_TT.EvaluationType.CoderEvaluation;
+                        GetAbstract_CoderEvaluation(userId, evaluationTypeId);
                         btn_code.Visible = true;
                     }
                 }
@@ -648,19 +863,94 @@ namespace ODPTaxonomyWebsite.Evaluation
                 //ODP Staff
                 if (currentRole == role_odp)
                 {
+                    //Check AbstractID parameter
+                    abstractId = GetAbstractIDToView();
+                    if (abstractId != null)
+                    {
+                        i_abstractId = (int)abstractId;
+                        //Check abstract's status
+                        currentStatus = Common.GetAbstractStatus(connString, i_abstractId);
+                        if (((int)currentStatus >= (int)AbstractStatusID._1N) && ((int)currentStatus <= (int)AbstractStatusID._2B))
+                        {
+                            isViewMode = false;
+                        }
+                        else
+                        {
+                            isViewMode = true;
+                        }
+                        
+                    }
 
+
+                    if (isViewMode)
+                    {
+                        //Show Abstract
+                        abstr = Common.GetAbstractByAbstractId(connString, i_abstractId);
+                        if (abstr != null)
+                        {
+                            //Display abstract on screen 
+                            LoadAbstract(abstr);
+                            hf_abstractId.Value = i_abstractId.ToString();
+                        }
+                    }
+                    else
+                    {
+                        //user can do coding
+                        GetAbstract_OdpEvaluation(userId, (int)EvaluationType.ODPEvaluation, i_abstractId);
+                        btn_code.Visible = true;
+                    }
+
+                    //Generate links if available
+                    abstr = Common.GetAbstractByAbstractId(connString, i_abstractId);
+                    //Get Evaluation ID of type CoderEvaluation for the current Abstract
+                    evaluationId_coder = Common.GetEvaluationIdForAbstract(connString, i_abstractId, EvaluationType.CoderEvaluation);
+                    if (evaluationId_coder != null)
+                    {
+                        i_evaluationId_coder = (int)evaluationId_coder;
+                        hf_evaluationId_coder.Value = i_evaluationId_coder.ToString();
+                    }
+
+                    if ((int)currentStatus >= (int)AbstractStatusID._1B)
+                    {
+                        //Generate links to Evaluation page for submission review
+                        GenerateLinks(EvaluationType.CoderEvaluation, i_evaluationId_coder, i_abstractId);
+                        evaluationId_odp = Common.GetEvaluationIdForAbstract(connString, i_abstractId, EvaluationType.ODPEvaluation);
+                        if (evaluationId_odp != null)
+                        {
+                            i_evaluationId_odp = (int)evaluationId_odp;
+                            hf_evaluationId_odp.Value = i_evaluationId_odp.ToString();
+                            GenerateLinks(EvaluationType.ODPEvaluation, i_evaluationId_odp, i_abstractId);
+                        }
+                    }
+                    
                 }
 
                 //ODP Sup
                 if (currentRole == role_odpSup)
                 {
-
+                    
                 }
 
                 //Admin
                 if (currentRole == role_admin)
                 {
+                    abstractId = GetAbstractIDToView();
+                    if (abstractId != null)
+                    {
+                        i_abstractId = (int)abstractId;
+                        isViewMode = true;
+                    }
 
+                    if (isViewMode)
+                    {
+                        //user wants to review
+                        abstr = Common.GetAbstractByAbstractId(connString, i_abstractId);
+                        if (abstr != null)
+                        {
+                            //Display abstract on screen 
+                            LoadAbstract(abstr);
+                        }
+                    }
                 }
 
             }

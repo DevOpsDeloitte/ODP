@@ -22,8 +22,8 @@ namespace ODPTaxonomyDAL_TT
         CoderEvaluation = 1,
         CoderConsensus = 2,
         ODPStaffMembersEvaluation = 3,
-        ODPStaffMemberConsensus = 1,
-        ODPStaffMemberComparison = 1
+        ODPStaffMemberConsensus = 4,
+        ODPStaffMemberComparison = 5
     }
 
     public enum AbstractStatusID
@@ -165,6 +165,34 @@ namespace ODPTaxonomyDAL_TT
             }
         }
 
+        public static List<SubmissionLinkData> GetSubmissions(string connString, int evaluationId)
+        {
+            Guid userId = Guid.Empty;
+            int submissionTypeId = -1;
+            List<SubmissionLinkData> data = new List<SubmissionLinkData>();
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from s in db.tbL_Submissions
+                              join u in db.tbl_aspnet_Users on s.UserId equals u.UserId
+                              where s.EvaluationId == evaluationId
+                              select new {s.EvaluationId, s.UserId, s.SubmissionTypeId, u.UserName};
+                foreach(var i in matches)
+                {
+                    if (i.UserId != null)
+                    {
+                        userId = (Guid)i.UserId;
+                        if (i.SubmissionTypeId != null)
+                        {
+                            submissionTypeId = (int)i.SubmissionTypeId;
+                            data.Add(new SubmissionLinkData((int)i.EvaluationId, userId, submissionTypeId, i.UserName));
+                        }
+                    }
+                    
+                }
+            }
+            return data;
+        }
 
         public static void OverrideAbstract(string connString, int evaluationId, int abstractId, Guid userId, int abstractStatusId)
         {
@@ -404,7 +432,7 @@ namespace ODPTaxonomyDAL_TT
             using (DataDataContext db = new DataDataContext(connString))
             {
                 var matches = from e in db.tbl_Evaluations
-                              where e.IsStopped == false && e.IsComplete == false && e.AbstractID == abstractId && e.EvaluationTypeId == (int)type
+                              where e.AbstractID == abstractId && e.EvaluationTypeId == (int)type
                               select e.EvaluationId;
                 foreach (var i in matches)
                 {

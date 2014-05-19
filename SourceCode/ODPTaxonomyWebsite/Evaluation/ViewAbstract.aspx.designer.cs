@@ -67,6 +67,24 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.HiddenField hf_userId;
         
         /// <summary>
+        /// hf_evaluationId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_evaluationId;
+        
+        /// <summary>
+        /// hf_submissionTypeId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_submissionTypeId;
+        
+        /// <summary>
         /// pnl_printBtns control.
         /// </summary>
         /// <remarks>
@@ -119,6 +137,15 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_odpValues;
+        
+        /// <summary>
+        /// link_odpCompare control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton link_odpCompare;
         
         /// <summary>
         /// link_odpConsensus control.

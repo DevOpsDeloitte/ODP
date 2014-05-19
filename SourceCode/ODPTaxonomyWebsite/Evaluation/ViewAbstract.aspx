@@ -11,6 +11,8 @@
     <asp:HiddenField runat="server" ID="hf_evaluationId_odp" />
     <asp:HiddenField runat="server" ID="hf_currentRole" />
     <asp:HiddenField runat="server" ID="hf_userId" />
+    <asp:HiddenField runat="server" ID="hf_evaluationId" />
+    <asp:HiddenField runat="server" ID="hf_submissionTypeId" />
     <asp:Panel runat="server" ID="pnl_printBtns" ClientIDMode="Static" Visible="false">
         <asp:Button runat="server" ID="btn_print" Text="Print Abstract" Visible="true" />&nbsp;&nbsp;
         <asp:Button runat="server" ID="btn_code" Text="Code Abstract" 
@@ -23,24 +25,30 @@
         
     </asp:Panel>
     
-    <asp:Panel runat="server" ID="pnl_odpValues" ClientIDMode="Static" Visible="true">
-        <asp:LinkButton runat="server" ID="link_odpConsensus" CssClass="viewSubmissionLink">ODP Consensus</asp:LinkButton>
-        <asp:LinkButton runat="server" ID="link_odpNotes" CssClass="viewSubmissionLink"  
-            onclick="link_Notes_Click" CommandArgument='notesFor_16_CoderEvaluation_10.pdf'>ODP Notes(PDF)</asp:LinkButton>
+    <asp:Panel runat="server" ID="pnl_odpValues" ClientIDMode="Static" Visible="false">
+    <asp:LinkButton runat="server" ID="link_odpCompare" CssClass="viewSubmissionLink"  onclick="link_Submission_Click"
+         CommandArgument='' Visible="false">ODP vs. Coder Compare</asp:LinkButton>
+        <asp:LinkButton runat="server" ID="link_odpConsensus" CssClass="viewSubmissionLink"  onclick="link_Submission_Click"
+         CommandArgument='' Visible="false">ODP Consensus</asp:LinkButton>
+        <asp:LinkButton runat="server" ID="link_odpNotes" CssClass="viewSubmissionLink" Visible="false"  
+            onclick="link_Notes_Click" CommandArgument=''>ODP Notes(PDF)</asp:LinkButton>
         <asp:Repeater runat="server" ID="rpt_odpSubmissions">
             <ItemTemplate>
-                <asp:LinkButton runat="server" ID="link_Submission" Text='ID: Selections' CssClass="viewSubmissionLink"></asp:LinkButton>
+                <asp:LinkButton runat="server" ID="link_Submission"  CommandArgument='<%# GetValue(DataBinder.Eval(Container.DataItem, "EvaluationId"), DataBinder.Eval(Container.DataItem, "SubmissionTypeId"), DataBinder.Eval(Container.DataItem, "UserId"))%>' 
+                 CssClass="viewSubmissionLink"  onclick="link_Submission_Click">ID: <%# DataBinder.Eval(Container.DataItem, "UserName")%> Selections</asp:LinkButton>
             </ItemTemplate>
         </asp:Repeater>
     </asp:Panel>
 
-    <asp:Panel runat="server" ID="pnl_coderValues" ClientIDMode="Static" Visible="true">        
-        <asp:LinkButton runat="server" ID="link_coderConsensus" CssClass="viewSubmissionLink">Code Consensus</asp:LinkButton>
-        <asp:LinkButton runat="server" ID="link_coderNotes" CssClass="viewSubmissionLink"  
+    <asp:Panel runat="server" ID="pnl_coderValues" ClientIDMode="Static" Visible="false">        
+        <asp:LinkButton runat="server" ID="link_coderConsensus" CssClass="viewSubmissionLink" onclick="link_Submission_Click" 
+            CommandArgument='' Visible="false">Code Consensus</asp:LinkButton>
+        <asp:LinkButton runat="server" ID="link_coderNotes" CssClass="viewSubmissionLink" Visible="false"  
             onclick="link_Notes_Click" CommandArgument=''>Coder Notes(PDF)</asp:LinkButton>
         <asp:Repeater runat="server" ID="rpt_coderSubmissions">
             <ItemTemplate>
-                <asp:LinkButton runat="server" ID="link_Submission" Text='ID: Selections' CssClass="viewSubmissionLink"></asp:LinkButton>
+                <asp:LinkButton runat="server" ID="link_Submission"  CommandArgument='<%# GetValue(DataBinder.Eval(Container.DataItem, "EvaluationId"), DataBinder.Eval(Container.DataItem, "SubmissionTypeId"), DataBinder.Eval(Container.DataItem, "UserId"))%>' 
+                 CssClass="viewSubmissionLink"  onclick="link_Submission_Click">ID: <%# DataBinder.Eval(Container.DataItem, "UserName")%> Selections</asp:LinkButton>                 
             </ItemTemplate>
         </asp:Repeater>
     </asp:Panel>
