@@ -644,7 +644,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         private void GetAbstract_OdpEvaluation(Guid userId, int evaluationTypeId, int abstractId)
         {
             int evaluationId = -1;
-            int teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.Coder;
+            int teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.ODPStaff;
             tbl_Abstract abstr = null;
 
             //Check if user is in a Team
