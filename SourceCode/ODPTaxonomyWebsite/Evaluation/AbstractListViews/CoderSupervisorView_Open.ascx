@@ -4,7 +4,7 @@
     Assembly="ODPTaxonomyWebsite" %>
 <h2>
     View Open Abstracts</h2>
-<odp:AbstractGridView runat="server" ID="AbstractViewGridView" CssClass="AbstractViewTable"
+<odp:AbstractGridView runat="server" ID="AbstractViewGridView bordered zebra-striped" CssClass="AbstractViewTable"
     OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>
         <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" SortExpression="ApplicationID" />
