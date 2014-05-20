@@ -55,7 +55,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<h2><asp:Literal ID="ltl_page_title" runat="server" Text="Edit Account" /></h2>
+<span class="title"><asp:Literal ID="ltl_page_title" runat="server" Text="Edit Account" /></span>
 
 
 <asp:Label ID="lbl_confirmation_message" runat="server" Visible = "false" Text="User account successfully saved." />
@@ -66,7 +66,7 @@
 
 <asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
 
-<table>
+<table class="form">
     <asp:Panel ID="pnl_username" runat="server">
     <tr>
         <td>
@@ -168,11 +168,11 @@
         </td>
     </tr>
     <tr>
-        <td>
-            <asp:Button ID="btn_save" runat="server" OnClick="btn_save_OnClick" Text="Save" />
+        <td class="form-button">
+            <asp:Button class="button yes" ID="btn_save" runat="server" OnClick="btn_save_OnClick" Text="Save" />
         </td>
-        <td>
-            <asp:Button ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
+        <td class="form-button">
+            <asp:Button class="button no" ID="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
         </td>
     </tr>
 </table>
