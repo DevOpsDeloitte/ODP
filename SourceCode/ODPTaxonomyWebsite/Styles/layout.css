@@ -28,7 +28,7 @@ background: linear-gradient(to bottom,  #456777 0%,#c2cdd1 46%,#ffffff 71%); /* 
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#456777', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 
-h1 { color: #fff; }
+h1 { color: #fff; position: absolute; top: 10px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
 .title { display: block; font-size: 2em; text-align: center; color: #fff; text-transform: uppercase; }
 .subtitle { display: block; font-size: 1.5em; font-weight: bold; text-align: center; margin-top: 12px; color: #fff; }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; margin: 20px auto; display: block }
@@ -68,9 +68,9 @@ input[type="checkbox"] + label, input[type="radio"] + label, label + select { di
 /* Sticky Header */
 #header_container { background:rgba(47, 85, 124, 0.9); height:60px; position:fixed; width:100%; top:0; z-index: 999; }
 .header{ margin: 15px 24px; width:95%; }
-.header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; }
+.header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; position: relative; z-index: 2; }
  .header .button:hover { background: #eee; border: 1px solid #eee; }
-.login-display { color: #fff; float: right;  }
+.login-display { color: #fff; position: absolute; top: 14px; right: 14px;  }
 
 /* #Login
 ================================================== */
