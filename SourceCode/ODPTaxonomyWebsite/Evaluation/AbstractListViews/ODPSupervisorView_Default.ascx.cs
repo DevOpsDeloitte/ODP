@@ -32,7 +32,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
         protected List<AbstractListRow> GetTableData(string sort = "", SortDirection direction = SortDirection.Ascending)
         {
-            DataJYDataContext db = new DataJYDataContext();
+            string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connStr);
 
             var data = from a in db.Abstracts
                        /* get status */
