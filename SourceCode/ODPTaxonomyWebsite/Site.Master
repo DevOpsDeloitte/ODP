@@ -38,7 +38,9 @@
 <form id="Form1" runat="server">
         <div id="header_container">
             <div class="header">
+            <h1>ODP Taxonomy</h1>
                 <a href="#" id="showLeftPush" class="button">Menu</a>
+                
                 <div class="login-display">
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <AnonymousTemplate>
@@ -55,7 +57,7 @@
 
 <div class="container">
        <div class="sixteen columns title"> 
-            <h1 class="center">ODP Taxonomy</h1>
+            
         </div>
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 

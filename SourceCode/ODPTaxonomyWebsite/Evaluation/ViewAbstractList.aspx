@@ -4,8 +4,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         View Abstract List
-        <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" />
+        
     </h2>
+    <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" />
     <div>
         <asp:Panel runat="server" ID="SubviewPanel" Visible="false">
             <h3>
@@ -14,11 +15,11 @@
             </h3>
         </asp:Panel>
         <div class="pager-size-wrapper">
-            <asp:Label runat="server" AssociatedControlID="PagerSizeDDL">Show:</asp:Label>
+            <asp:Label runat="server" AssociatedControlID="PagerSizeDDL"></asp:Label>
             <asp:DropDownList runat="server" ID="PagerSizeDDL" AutoPostBack="true" OnSelectedIndexChanged="PagerSizeChangeHandler">
-                <asp:ListItem Value="25" Text="25 Results" />
-                <asp:ListItem Value="50" Text="50 Results" />
-                <asp:ListItem Value="100" Text="100 Results" />
+                <asp:ListItem Value="25" Text="Show: 25 Results" />
+                <asp:ListItem Value="50" Text="Show: 50 Results" />
+                <asp:ListItem Value="100" Text="Show: 100 Results" />
             </asp:DropDownList>
         </div>
         <asp:PlaceHolder runat="server" ID="AbstractViewPlaceHolder" />
