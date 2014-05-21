@@ -101,10 +101,10 @@ namespace ODPTaxonomyWebsite.Evaluation
             if (roles.Count > 1)
             {
                 MainviewDDL.Items.Clear();
-                MainviewDDL.Items.Add(new ListItem("Select a view", ""));
+                MainviewDDL.Items.Add(new ListItem("Select a View", ""));
                 foreach (string role in roles)
                 {
-                    ListItem item = new ListItem(role + " view", role);
+                    ListItem item = new ListItem(role + " View", role);
                     item.Selected = SelectedView == role;
 
                     MainviewDDL.Items.Add(item);
