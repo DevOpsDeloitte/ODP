@@ -72,6 +72,12 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            UnableToCode = sb.UnableToCode
                        };
 
+            if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
+            {
+                sort = AbstractViewGridView.Attributes["CurrentSortExp"];
+                direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
+            }
+
             switch (sort)
             {
                 case "ApplicationID":
