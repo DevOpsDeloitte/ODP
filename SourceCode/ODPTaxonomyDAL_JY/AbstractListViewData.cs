@@ -48,7 +48,7 @@ namespace ODPTaxonomyDAL_JY
                                  select h2.AbstractStatusChangeHistoryID).Max()
                             )
                         )
-                        orderby ki.UserAlias
+                        orderby sb.SubmissionDateTime descending
                         select new AbstractListRow
                         {
                             AbstractID = a.AbstractID,
@@ -61,10 +61,11 @@ namespace ODPTaxonomyDAL_JY
                             EvaluationID = h.EvaluationId,
                             Comment = sb.comments,
                             TeamID = ev.TeamID,
-                            UserID = sb.UserId
+                            UserID = sb.UserId,
+                            KappaCoderAlias = ki.UserAlias
                         };
 
-            return query.Take(3).ToList();
+            return query.Take(3).OrderBy(i => i.KappaCoderAlias).ToList();
         }
 
         public List<AbstractListRow> GetODPStaffEvaluations_2A(int ParentAbstractID)
@@ -94,7 +95,7 @@ namespace ODPTaxonomyDAL_JY
                                  select h2.AbstractStatusChangeHistoryID).Max()
                             )
                         )
-                        orderby ki.UserAlias
+                        orderby sb.SubmissionDateTime descending
                         select new AbstractListRow
                         {
                             AbstractID = a.AbstractID,
@@ -107,10 +108,11 @@ namespace ODPTaxonomyDAL_JY
                             EvaluationID = h.EvaluationId,
                             Comment = sb.comments,
                             TeamID = ev.TeamID,
-                            UserID = sb.UserId
+                            UserID = sb.UserId,
+                            KappaCoderAlias = ki.UserAlias
                         };
 
-            return query.Take(3).ToList();
+            return query.Take(3).OrderBy(i => i.KappaCoderAlias).ToList();
         }
 
         public List<AbstractListRow> GetODPStaffConsensus_2B(int ParentAbstractID)

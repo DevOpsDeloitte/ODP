@@ -54,6 +54,7 @@ namespace ODPTaxonomyDAL_JY
         public bool UnableToCode { get; set; }
 
         private bool KappaDone;
+        public string KappaCoderAlias { get; set; }
         public string A1 { get; set; }
         public string A2 { get; set; }
         public string A3 { get; set; }

@@ -121,6 +121,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     var coderEvaluations = data.GetCoderEvaluations_1A(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(coderEvaluations);
 
+                    var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID);
+                    abstracts.AddRange(odpStaffConsensus);
+
                     // ODP Staff consensus row
                     var odpStaffConsensusNotes = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(odpStaffConsensusNotes);
