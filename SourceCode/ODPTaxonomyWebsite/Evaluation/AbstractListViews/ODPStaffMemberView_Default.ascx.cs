@@ -55,7 +55,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        from scn in evscn.DefaultIfEmpty()
                        where (
                           (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C) &&
+                          h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B) &&
                           h.CreatedDate == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.CreatedDate).Max() &&
@@ -127,6 +127,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     // ODP Staff vs Coder consensus row
                     var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(odpStaffCoderConsensus);
+
+                    var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID);
+                    abstracts.AddRange(odpStaffConsensus);
 
                     // ODP Consensus
                     var odpConsensus = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID);

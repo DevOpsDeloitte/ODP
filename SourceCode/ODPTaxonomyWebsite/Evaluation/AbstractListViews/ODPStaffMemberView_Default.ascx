@@ -8,7 +8,7 @@
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped" OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>
         <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" SortExpression="ApplicationID" />
-        <asp:BoundField DataField="StatusDate" HeaderText="Status Date" SortExpression="Date" />
+        <asp:BoundField DataField="StatusDateDisplay" HeaderText="Status Date" SortExpression="Date" />
         <asp:TemplateField HeaderText="Title" SortExpression="Title">
             <ItemTemplate>
                 <asp:Panel runat="server" ID="TitleWrapper" CssClass="title-wrapper">

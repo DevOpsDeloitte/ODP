@@ -41,12 +41,20 @@ namespace ODPTaxonomyDAL_JY
         public int AbstractStatusID { get; set; }
         public string AbstractStatusCode { get; set; }
         public DateTime? StatusDate { get; set; }
+        public string StatusDateDisplay
+        {
+            get
+            {
+                return this.StatusDate != null ? this.StatusDate.Value.ToString("d") : "";
+            }
+        }
 
         public string AbstractScan { get; set; }
 
         public bool UnableToCode { get; set; }
 
         private bool KappaDone;
+        public string KappaCoderAlias { get; set; }
         public string A1 { get; set; }
         public string A2 { get; set; }
         public string A3 { get; set; }
@@ -142,7 +150,7 @@ namespace ODPTaxonomyDAL_JY
                     this.D = ((decimal)(kappa.D)).ToString(specifier);
                     this.E = ((decimal)(kappa.E)).ToString(specifier);
                     this.F = ((decimal)(kappa.F)).ToString(specifier);
-                    this.G = this.UnableToCode ? "Y" : "N";
+                    this.G = this.UnableToCode ? "Y" : "";
                 }
 
                 this.KappaDone = true;

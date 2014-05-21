@@ -13,12 +13,12 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews {
     public partial class CoderSupervisorView_Open {
         
         /// <summary>
-        /// AbstractViewGridView bordered zebra-striped control.
+        /// AbstractViewGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.AbstractGridView AbstractViewGridView bordered zebra-striped;
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.AbstractGridView AbstractViewGridView;
     }
 }

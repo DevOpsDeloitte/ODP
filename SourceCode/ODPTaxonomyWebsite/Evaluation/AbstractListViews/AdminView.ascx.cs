@@ -16,12 +16,12 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
         {
             // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
-
+            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(this.AbstractListRowCreatedHandler);
             try
             {
                 var parentAbstracts = GetTableData();
 
-                AbstractViewGridView.DataSource = ProcessTableData(parentAbstracts);
+                AbstractViewGridView.DataSource = parentAbstracts;
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -35,42 +35,40 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
 
-            var abstracts = (from a in db.Abstracts
-                             /* get status */
-                             join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
-                             join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                             join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
-                             join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
-                             join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
-                             from scn in evscn.DefaultIfEmpty()
-                             where (
-                                (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                                h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
-                                h.CreatedDate == db.AbstractStatusChangeHistories
-                                 .Where(h2 => h2.AbstractID == a.AbstractID)
-                                 .Select(h2 => h2.CreatedDate).Max() &&
-                                ev.EvaluationTypeId == (int)EvaluationTypeEnum.CODER_EVALUATION &&
-                                sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_CONSENSUS
-                                 )
-                             select new AbstractListRow
-                             {
-                                 AbstractID = a.AbstractID,
-                                 ProjectTitle = a.ProjectTitle,
-                                 ApplicationID = a.ApplicationID,
-                                 AbstractStatusID = s.AbstractStatusID,
-                                 AbstractStatusCode = s.AbstractStatusCode,
-                                 StatusDate = h.CreatedDate,
-                                 SubmissionID = sb.SubmissionID,
-                                 EvaluationID = h.EvaluationId,
-                                 Comment = sb.comments,
-                                 AbstractScan = scn.FileName,
-                                 UnableToCode = sb.UnableToCode,
-                                 IsParent = true
-                             }).ToList();
+            var data = from a in db.Abstracts
+                       /* get status */
+                       join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                       join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                       join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
+                       from scn in evscn.DefaultIfEmpty()
+                       where (
+                          h.CreatedDate == db.AbstractStatusChangeHistories
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                           .Select(h2 => h2.CreatedDate).Max()
+                           )
+                       select new AbstractListRow
+                       {
+                           AbstractID = a.AbstractID,
+                           ProjectTitle = a.ProjectTitle,
+                           ApplicationID = a.ApplicationID,
+                           AbstractStatusID = s.AbstractStatusID,
+                           AbstractStatusCode = s.AbstractStatusCode,
+                           StatusDate = h.CreatedDate,
+                           EvaluationID = h.EvaluationId,
+                           AbstractScan = scn.FileName,
+                           IsParent = true
+                       };
 
+            List<AbstractListRow> abstracts = data.ToList();
             foreach (AbstractListRow abs in abstracts)
             {
                 abs.FillKappaValues();
+            }
+
+            if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
+            {
+                sort = AbstractViewGridView.Attributes["CurrentSortExp"];
+                direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
             }
 
             switch (sort)
@@ -187,6 +185,34 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             AbstractViewGridView.DataSource = ProcessTableData(abstracts);
             AbstractViewGridView.DataBind();
+        }
+
+        protected void AbstractListRowCreatedHandler(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                foreach (TableCell tc in e.Row.Cells)
+                {
+                    if (tc.HasControls())
+                    {
+                        if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
+                        {
+                            LinkButton headerLink = (LinkButton)tc.Controls[0];
+
+                            if (AbstractViewGridView.Attributes["CurrentSortExp"] == headerLink.CommandArgument)
+                            {
+                                tc.CssClass += " sorted ";
+                                tc.CssClass += AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? "ascending " : "descending ";
+                            }
+
+                            tc.CssClass = tc.CssClass.Trim();
+                        }
+                        else
+                        {
+                        }
+                    }
+                }
+            }
         }
     }
 }
