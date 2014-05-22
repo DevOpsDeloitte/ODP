@@ -41,8 +41,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        where (
                           h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
                           h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
-                           .Where(h2 => h2.AbstractID == a.AbstractID &&
-                               h2.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N)
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
                            )
                        select new AbstractListRow
