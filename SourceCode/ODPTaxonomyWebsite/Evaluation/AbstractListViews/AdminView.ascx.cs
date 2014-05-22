@@ -21,7 +21,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             {
                 var parentAbstracts = GetTableData();
 
-                AbstractViewGridView.DataSource = parentAbstracts;
+                AbstractViewGridView.DataSource = ProcessTableData(parentAbstracts);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -36,15 +36,12 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             DataJYDataContext db = new DataJYDataContext(connString);
 
             var data = from a in db.Abstracts
-                       /* get status */
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                       join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
-                       from scn in evscn.DefaultIfEmpty()
                        where (
-                          h.CreatedDate == db.AbstractStatusChangeHistories
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
-                           .Select(h2 => h2.CreatedDate).Max()
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
                            )
                        select new AbstractListRow
                        {
@@ -55,15 +52,11 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
                            EvaluationID = h.EvaluationId,
-                           AbstractScan = scn.FileName,
+                           KappaType = KappaTypeEnum.CODER_COMPARISON_K1,
                            IsParent = true
                        };
 
             List<AbstractListRow> abstracts = data.ToList();
-            foreach (AbstractListRow abs in abstracts)
-            {
-                abs.GetKappaValues();
-            }
 
             if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
             {
@@ -103,6 +96,45 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     }
 
             }
+        }
+
+        protected List<AbstractListRow> ProcessTableData(List<AbstractListRow> ParentAbstracts)
+        {
+            AbstractListViewData data = new AbstractListViewData();
+
+            List<AbstractListRow> abstracts = new List<AbstractListRow>();
+
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+                abstracts.Add(ParentAbstracts[i]);
+
+                if (ParentAbstracts[i].IsParent)
+                {
+                    ParentAbstracts[i].GetComment();
+                    ParentAbstracts[i].GetAbstractScan();
+
+                    var odpStaffConsensusNotes = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID, KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
+                    if (odpStaffConsensusNotes.Count > 0)
+                    {
+                        abstracts.AddRange(odpStaffConsensusNotes);
+                    }
+                    else
+                    {
+                        var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID, KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
+                        abstracts.AddRange(odpStaffConsensus);
+                    }
+
+                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID, KappaTypeEnum.CODER_CONSENSUS_VS_ODP_CONSENSUS_K9);
+                    abstracts.AddRange(odpStaffCoderConsensus);
+                }
+            }
+
+            foreach (AbstractListRow abs in abstracts)
+            {
+                abs.GetKappaValues();
+            }
+
+            return abstracts;
         }
 
         protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)

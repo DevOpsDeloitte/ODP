@@ -19,9 +19,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             try
             {
-                string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-                DataJYDataContext db = new DataJYDataContext(connString);
-
                 var abstracts = GetTableData();
 
                 AbstractViewGridView.DataSource = ProcessTableData(abstracts);
