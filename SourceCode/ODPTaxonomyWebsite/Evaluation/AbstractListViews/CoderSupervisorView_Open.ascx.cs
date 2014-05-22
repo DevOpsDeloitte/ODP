@@ -24,12 +24,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
                 var abstracts = GetTableData();
 
-                foreach (AbstractListRow abs in abstracts)
-                {
-                    abs.GetKappaValues();
-                }
-
-                AbstractViewGridView.DataSource = abstracts;
+                AbstractViewGridView.DataSource = ProcessTableData(abstracts);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -44,15 +39,14 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             DataJYDataContext db = new DataJYDataContext(connString);
 
             var data = from a in db.Abstracts
-                       /* get status */
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                        where (
                           (h.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1 ||
                           h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A) &&
-                          h.CreatedDate == db.AbstractStatusChangeHistories
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
-                           .Select(h2 => h2.CreatedDate).Max()
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
                            )
                        select new AbstractListRow
                        {
@@ -62,6 +56,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
+                           KappaType = KappaTypeEnum.CODER_COMPARISON_K1,
                            IsParent = true
                        };
 
@@ -103,6 +98,32 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     }
 
             }
+        }
+
+
+        protected List<AbstractListRow> ProcessTableData(List<AbstractListRow> ParentAbstracts)
+        {
+            AbstractListViewData data = new AbstractListViewData();
+
+            List<AbstractListRow> abstracts = new List<AbstractListRow>();
+
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+                abstracts.Add(ParentAbstracts[i]);
+
+                if (ParentAbstracts[i].IsParent)
+                {
+                    ParentAbstracts[i].GetComment();
+                    ParentAbstracts[i].GetAbstractScan();
+                }
+            }
+
+            foreach (AbstractListRow abs in abstracts)
+            {
+                abs.GetKappaValues();
+            }
+
+            return abstracts;
         }
 
         protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)

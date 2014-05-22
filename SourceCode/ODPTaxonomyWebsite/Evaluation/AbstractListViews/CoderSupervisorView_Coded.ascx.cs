@@ -36,21 +36,17 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             DataJYDataContext db = new DataJYDataContext(connString);
 
             var data = from a in db.Abstracts
-                       /* get status */
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                       join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
-                       join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
-                       join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
-                       from scn in evscn.DefaultIfEmpty()
                        where (
-                          (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
-                          h.CreatedDate == db.AbstractStatusChangeHistories
+                          (
+                          (h.AbstractStatusID >= (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1 && 
+                           h.AbstractStatusID <= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N) ||
+                          (h.AbstractStatusID >=(int) AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C)
+                          ) &&
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
-                           .Select(h2 => h2.CreatedDate).Max() &&
-                          ev.EvaluationTypeId == (int)EvaluationTypeEnum.CODER_EVALUATION &&
-                          sb.SubmissionTypeId == (int)SubmissionTypeEnum.CODER_CONSENSUS
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
                            )
                        select new AbstractListRow
                        {
@@ -60,11 +56,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
-                           SubmissionID = sb.SubmissionID,
                            EvaluationID = h.EvaluationId,
-                           Comment = sb.comments,
-                           AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode,
+                           KappaType = KappaTypeEnum.CODER_COMPARISON_K1,
                            IsParent = true
                        };
 
@@ -120,15 +113,23 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
                 if (ParentAbstracts[i].IsParent)
                 {
-                    // Inserts Coder Evaluation rows, latest 3 only
+                    ParentAbstracts[i].GetComment();
+                    ParentAbstracts[i].GetAbstractScan();
+
                     var coderEvaluations = data.GetCoderEvaluations_1A(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(coderEvaluations);
 
-                    // ODP Staff consensus row
-                    var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID,KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
-                    abstracts.AddRange(odpStaffConsensus);
+                    var odpStaffConsensusNotes = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID, KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
+                    if (odpStaffConsensusNotes.Count > 0)
+                    {
+                        abstracts.AddRange(odpStaffConsensusNotes);
+                    }
+                    else
+                    {
+                        var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID, KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
+                        abstracts.AddRange(odpStaffConsensus);
+                    }
 
-                    // ODP Staff vs Coder consensus row
                     var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID,KappaTypeEnum.CODER_CONSENSUS_VS_ODP_CONSENSUS_K9);
                     abstracts.AddRange(odpStaffCoderConsensus);
                 }
