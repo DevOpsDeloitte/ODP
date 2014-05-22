@@ -105,35 +105,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> ProcessTableData(List<AbstractListRow> ParentAbstracts)
-        {
-            AbstractListViewData data = new AbstractListViewData();
-            List<AbstractListRow> abstracts = new List<AbstractListRow>();
-
-            for (int i = 0; i < ParentAbstracts.Count; i++)
-            {
-                abstracts.Add(ParentAbstracts[i]);
-
-                if (ParentAbstracts[i].IsParent)
-                {
-                    // ODP Staff vs Coder consensus row
-                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);
-                    abstracts.AddRange(odpStaffCoderConsensus);
-
-                    // ODP Consensus
-                    var odpConsensus = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID);
-                    abstracts.AddRange(odpConsensus);
-                }
-            }
-
-            foreach (AbstractListRow abs in abstracts)
-            {
-                abs.FillKappaValues();
-            }
-
-            return abstracts;
-        }
-
         protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
         {
             AbstractListRow item = e.Row.DataItem as AbstractListRow;
@@ -183,7 +154,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             var abstracts = GetTableData(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = ProcessTableData(abstracts);
+            AbstractViewGridView.DataSource = abstracts;
             AbstractViewGridView.DataBind();
         }
 
