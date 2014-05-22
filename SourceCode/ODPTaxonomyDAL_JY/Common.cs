@@ -24,6 +24,7 @@ namespace ODPTaxonomyDAL_JY
 
     public enum SubmissionTypeEnum
     {
+        NA = 0,
         CODER_EVALUATION = 1,
         CODER_CONSENSUS = 2,
         ODP_STAFF_EVALUATION = 3,

@@ -110,6 +110,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
                 if (ParentAbstracts[i].IsParent)
                 {
+                    ParentAbstracts[i].GetComment();
+                    ParentAbstracts[i].GetAbstractScan();
+
                     // Inserts Coder Evaluation rows, latest 3 only
                     var coderEvaluations = data.GetCoderEvaluations_1A(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(coderEvaluations);
@@ -137,7 +140,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             foreach (AbstractListRow abs in abstracts)
             {
-                abs.FillKappaValues();
+                abs.GetKappaValues();
             }
 
             return abstracts;

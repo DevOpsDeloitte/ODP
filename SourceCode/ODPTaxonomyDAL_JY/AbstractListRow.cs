@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 
 namespace ODPTaxonomyDAL_JY
 {
@@ -53,7 +54,6 @@ namespace ODPTaxonomyDAL_JY
 
         public bool UnableToCode { get; set; }
 
-        private bool KappaDone;
         public string KappaCoderAlias { get; set; }
         public KappaTypeEnum KappaType { get; set; }
         public string A1 { get; set; }
@@ -68,33 +68,83 @@ namespace ODPTaxonomyDAL_JY
 
         public AbstractListRow()
         {
-            this.KappaDone = false;
             this.IsParent = false;
         }
 
-        public void FillKappaValues()
+        public void GetKappaValues()
         {
-            if (!this.KappaDone)
+            AbstractListViewData data = new AbstractListViewData();
+
+            string specifier = "#.##";
+            KappaData kappa = data.GetKappaData(this.AbstractID, this.KappaType);
+
+            if (kappa != null)
             {
-                AbstractListViewData data = new AbstractListViewData();
+                this.A1 = ((decimal)(kappa.A1)).ToString(specifier);
+                this.A2 = ((decimal)(kappa.A2)).ToString(specifier);
+                this.A3 = ((decimal)(kappa.A3)).ToString(specifier);
+                this.B = ((decimal)(kappa.B)).ToString(specifier);
+                this.C = ((decimal)(kappa.C)).ToString(specifier);
+                this.D = ((decimal)(kappa.D)).ToString(specifier);
+                this.E = ((decimal)(kappa.E)).ToString(specifier);
+                this.F = ((decimal)(kappa.F)).ToString(specifier);
+                this.G = this.UnableToCode ? "Y" : "";
+            }
+        }
 
-                string specifier = "#.##";
-                KappaData kappa = data.GetKappaData(this.AbstractID,this.KappaType);
+        public SubmissionTypeEnum GetSubmissionType()
+        {
+            SubmissionTypeEnum SubmissionType = SubmissionTypeEnum.NA;
 
-                if (kappa != null)
-                {
-                    this.A1 = ((decimal)(kappa.A1)).ToString(specifier);
-                    this.A2 = ((decimal)(kappa.A2)).ToString(specifier);
-                    this.A3 = ((decimal)(kappa.A3)).ToString(specifier);
-                    this.B = ((decimal)(kappa.B)).ToString(specifier);
-                    this.C = ((decimal)(kappa.C)).ToString(specifier);
-                    this.D = ((decimal)(kappa.D)).ToString(specifier);
-                    this.E = ((decimal)(kappa.E)).ToString(specifier);
-                    this.F = ((decimal)(kappa.F)).ToString(specifier);
-                    this.G = this.UnableToCode ? "Y" : "";
-                }
+            switch ((AbstractStatusEnum)this.AbstractStatusID)
+            {
+                case AbstractStatusEnum.CODED_BY_CODER_1A:
+                    SubmissionType = SubmissionTypeEnum.CODER_EVALUATION;
+                    break;
+                case AbstractStatusEnum.CODED_BY_ODP_STAFF_2A:
+                    SubmissionType = SubmissionTypeEnum.ODP_STAFF_EVALUATION;
+                    break;
+                case AbstractStatusEnum.CONSENSUS_COMPLETE_1B:
+                case AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N:
+                    SubmissionType = SubmissionTypeEnum.CODER_CONSENSUS;
+                    break;
+                case AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N:
+                case AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B:
+                    SubmissionType = SubmissionTypeEnum.ODP_STAFF_CONSENSUS;
+                    break;
+                default:
+                    break;
+            }
 
-                this.KappaDone = true;
+            return SubmissionType;
+        }
+
+        public void GetComment()
+        {
+            if (this.EvaluationID != null)
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                DataJYDataContext db = new DataJYDataContext(connStr);
+
+                SubmissionTypeEnum SubmissionType = GetSubmissionType();
+
+                this.Comment = (from s in db.Submissions
+                                where s.EvaluationId == this.EvaluationID &&
+                                s.SubmissionTypeId == (int)SubmissionType
+                                select s.comments).FirstOrDefault();
+            }
+        }
+
+        public void GetAbstractScan()
+        {
+            if (this.EvaluationID != null)
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                DataJYDataContext db = new DataJYDataContext(connStr);
+
+                this.AbstractScan = (from s in db.AbstractScans
+                                     where s.EvaluationId == this.EvaluationID
+                                     select s.FileName).FirstOrDefault();
             }
         }
     }

@@ -62,7 +62,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             List<AbstractListRow> abstracts = data.ToList();
             foreach (AbstractListRow abs in abstracts)
             {
-                abs.FillKappaValues();
+                abs.GetKappaValues();
             }
 
             if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)

@@ -145,7 +145,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             foreach (AbstractListRow abs in abstracts)
             {
-                abs.FillKappaValues();
+                abs.GetKappaValues();
             }
 
             return abstracts;
