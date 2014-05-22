@@ -21,12 +21,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             {
                 var parentAbstracts = GetTableData();
 
-                foreach (AbstractListRow abs in parentAbstracts)
-                {
-                    abs.GetKappaValues();
-                }
-
-                AbstractViewGridView.DataSource = parentAbstracts;
+                AbstractViewGridView.DataSource = ProcessTableData(parentAbstracts);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -41,22 +36,15 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             DataJYDataContext db = new DataJYDataContext(connString);
 
             var data = from a in db.Abstracts
-                       /* get status */
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                       join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
-                       join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
                        join rv in db.AbstractReviewLists on a.AbstractID equals rv.AbstractID
-                       join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
-                       from scn in evscn.DefaultIfEmpty()
                        where (
                           (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C) &&
-                          h.CreatedDate == db.AbstractStatusChangeHistories
+                          h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B) &&
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
-                           .Select(h2 => h2.CreatedDate).Max() &&
-                          ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                          sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_EVALUATION
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
                            )
                        select new AbstractListRow
                        {
@@ -66,11 +54,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
-                           SubmissionID = sb.SubmissionID,
                            EvaluationID = h.EvaluationId,
-                           Comment = sb.comments,
-                           AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode,
+                           KappaType = KappaTypeEnum.CODER_COMPARISON_K1,
                            IsParent = true
                        };
 
@@ -112,6 +97,32 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     }
 
             }
+        }
+
+
+        protected List<AbstractListRow> ProcessTableData(List<AbstractListRow> ParentAbstracts)
+        {
+            AbstractListViewData data = new AbstractListViewData();
+
+            List<AbstractListRow> abstracts = new List<AbstractListRow>();
+
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+                abstracts.Add(ParentAbstracts[i]);
+
+                if (ParentAbstracts[i].IsParent)
+                {
+                    ParentAbstracts[i].GetComment();
+                    ParentAbstracts[i].GetAbstractScan();
+                }
+            }
+
+            foreach (AbstractListRow abs in abstracts)
+            {
+                abs.GetKappaValues();
+            }
+
+            return abstracts;
         }
 
         protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
