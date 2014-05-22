@@ -40,7 +40,8 @@
 ================================================== -->
 <div id="header_container">
     <div id="header">
-    <button id="showLeftPush" class="button">Menu</button>
+    <a id="showLeftPush" class="button">Menu</a>
+    Show/Hide Right Slide Menu</a>
         <div class="buttons">
         <a class="button" href="#" id="confirm">Save</a>
         <a class="button" href="#">Unable to Code</a>
@@ -48,7 +49,7 @@
         </div>
     </div>
 </div>
-        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="menuLeft">
             <a href="#study-focus">Study Focus</a>
             <a href="#entities-studied">Entities Studied</a>
             <a href="#study-setting">Study Setting</a>
@@ -56,6 +57,16 @@
             <a href="#study-design-purpose">Study Design/Purpose</a>
             <a href="#prevention-research-category">Prevention Research Category</a>
         </nav>
+        <div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="menuRight">
+            <div>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.
+
+My money's in that office, right? If she start giving me some bullshit about it ain't there, and we got to go someplace else and get it, I'm gonna shoot you in the head then and there. Then I'm gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when I'm talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?
+
+Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows. Some pilots get picked and become television programs. Some don't, become nothing. She starred in one of the ones that became nothing.
+
+<a id="tips"></a>Normally, both your asses would be dead as fucking fried chicken, but you happen to pull this shit while I'm in a transitional period so I don't wanna kill you, I wanna help you. But I can't give you this case, it don't belong to me. Besides, I've already been through too much shit this morning over this case to hand it over to your dumb ass.
+</div>
+        </div>
 
 <div class="container">
  
@@ -80,7 +91,7 @@
             </thead>
             <tbody>
                     <tr>
-                            <td scope="row">1. Alcohol</td>
+                            <td scope="row"><a href="#tips" id="showRight">1. Alcohol</a></td>
                              <td class="box-three"><input type="checkbox" disabled><label></label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
                              <td class="box-three"><input type="checkbox"><label></label></td>
@@ -577,8 +588,8 @@ $("#confirm").on( 'click', function () {
         });
 </script>
 <script>
-            var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-                showLeftPush = document.getElementById( 'showLeftPush' ),
+            var showLeftPush = document.getElementById( 'showLeftPush' ),
+                showRight = document.getElementById( 'showRight' ),
                 body = document.body;
 
             showLeftPush.onclick = function() {
@@ -588,12 +599,13 @@ $("#confirm").on( 'click', function () {
                 disableOther( 'showLeftPush' );
             };
 
-            function disableOther( button ) {
+            showRight.onclick = function() {
+                classie.toggle( this, 'active' );
+                classie.toggle( menuRight, 'cbp-spmenu-open' );
+                disableOther( 'showRight' );
+            };
 
-                if( button !== 'showLeftPush' ) {
-                    classie.toggle( showLeftPush, 'disabled' );
-                }
-            }
+
 </script>
 </body>
 </html>
