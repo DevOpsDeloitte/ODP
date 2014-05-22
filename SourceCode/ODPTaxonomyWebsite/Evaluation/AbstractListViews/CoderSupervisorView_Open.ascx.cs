@@ -26,7 +26,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
                 foreach (AbstractListRow abs in abstracts)
                 {
-                    abs.FillKappaValues();
+                    abs.GetKappaValues();
                 }
 
                 AbstractViewGridView.DataSource = abstracts;

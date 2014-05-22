@@ -131,21 +131,21 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 if (ParentAbstracts[i].IsParent)
                 {
                     // ODP Staff vs Coder consensus row
-                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);
+                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID, KappaTypeEnum.CODER_CONSENSUS_VS_ODP_CONSENSUS_K9);
                     abstracts.AddRange(odpStaffCoderConsensus);
 
-                    var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID);
+                    var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID, KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
                     abstracts.AddRange(odpStaffConsensus);
 
                     // ODP Consensus
-                    var odpConsensus = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID);
+                    var odpConsensus = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID, KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
                     abstracts.AddRange(odpConsensus);
                 }
             }
 
             foreach (AbstractListRow abs in abstracts)
             {
-                abs.FillKappaValues();
+                abs.GetKappaValues();
             }
 
             return abstracts;

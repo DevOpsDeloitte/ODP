@@ -23,7 +23,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
                 foreach (AbstractListRow abs in parentAbstracts)
                 {
-                    abs.FillKappaValues();
+                    abs.GetKappaValues();
                 }
 
                 AbstractViewGridView.DataSource = parentAbstracts;

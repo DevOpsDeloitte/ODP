@@ -125,18 +125,18 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     abstracts.AddRange(coderEvaluations);
 
                     // ODP Staff consensus row
-                    var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID);
+                    var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID,KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
                     abstracts.AddRange(odpStaffConsensus);
 
                     // ODP Staff vs Coder consensus row
-                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);
+                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID,KappaTypeEnum.CODER_CONSENSUS_VS_ODP_CONSENSUS_K9);
                     abstracts.AddRange(odpStaffCoderConsensus);
                 }
             }
 
             foreach (AbstractListRow abs in abstracts)
             {
-                abs.FillKappaValues();
+                abs.GetKappaValues();
             }
 
             return abstracts;

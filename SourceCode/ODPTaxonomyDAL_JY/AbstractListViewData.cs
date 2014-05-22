@@ -65,7 +65,15 @@ namespace ODPTaxonomyDAL_JY
                             KappaCoderAlias = ki.UserAlias
                         };
 
-            return query.Take(3).OrderBy(i => i.KappaCoderAlias).ToList();
+            List<AbstractListRow> abstracts = query.Take(3).OrderBy(i => i.KappaCoderAlias).ToList();
+            for (int i = (int)KappaTypeEnum.CODER_A_VS_CONSENSUS_K2, j = 0;
+                i <= (int)KappaTypeEnum.CODER_C_VS_CONSENSUS_K4 && j < abstracts.Count;
+                i++, j++)
+            {
+                abstracts[j].KappaType = (KappaTypeEnum)i;
+            }
+
+            return abstracts;
         }
 
         public List<AbstractListRow> GetODPStaffEvaluations_2A(int ParentAbstractID)
@@ -112,10 +120,17 @@ namespace ODPTaxonomyDAL_JY
                             KappaCoderAlias = ki.UserAlias
                         };
 
-            return query.Take(3).OrderBy(i => i.KappaCoderAlias).ToList();
+            List<AbstractListRow> abstracts = query.Take(3).OrderBy(i => i.KappaCoderAlias).ToList();
+            for (int i = (int)KappaTypeEnum.ODP_STAFF_A_VS_CONSENSUS_K6, j = 0;
+                i <= (int)KappaTypeEnum.ODP_STAFF_C_VS_CONSENSUS_K8 && j < abstracts.Count;
+                i++, j++)
+            {
+                abstracts[j].KappaType = (KappaTypeEnum)i;
+            }
+            return abstracts;
         }
 
-        public List<AbstractListRow> GetODPStaffConsensus_2B(int ParentAbstractID)
+        public List<AbstractListRow> GetODPStaffConsensus_2B(int ParentAbstractID, KappaTypeEnum KappaType)
         {
             var data = from a in db.Abstracts
                        /* get status */
@@ -150,13 +165,14 @@ namespace ODPTaxonomyDAL_JY
                            StatusDate = sb.SubmissionDateTime,
                            SubmissionID = sb.SubmissionID,
                            EvaluationID = h.EvaluationId,
-                           Comment = sb.comments
+                           Comment = sb.comments,
+                           KappaType = KappaType
                        };
 
             return data.ToList();
         }
 
-        public List<AbstractListRow> GetODPStaffAndCoderConsensus_2C(int ParentAbstractID)
+        public List<AbstractListRow> GetODPStaffAndCoderConsensus_2C(int ParentAbstractID, KappaTypeEnum KappaType)
         {
             var odpStaffCoderConsensus = (from a in db.Abstracts
                                           /* get status */
@@ -191,13 +207,14 @@ namespace ODPTaxonomyDAL_JY
                                               StatusDate = sb.SubmissionDateTime,
                                               SubmissionID = sb.SubmissionID,
                                               EvaluationID = h.EvaluationId,
-                                              Comment = sb.comments
+                                              Comment = sb.comments,
+                                              KappaType = KappaType
                                           }).ToList();
 
             return odpStaffCoderConsensus;
         }
 
-        public List<AbstractListRow> GetODPConsensusWithNotes_2N(int ParentAbstractID)
+        public List<AbstractListRow> GetODPConsensusWithNotes_2N(int ParentAbstractID, KappaTypeEnum KappaType)
         {
             var query = from a in db.Abstracts
                         /* get status */
@@ -232,16 +249,17 @@ namespace ODPTaxonomyDAL_JY
                             StatusDate = sb.SubmissionDateTime,
                             SubmissionID = sb.SubmissionID,
                             EvaluationID = h.EvaluationId,
-                            Comment = sb.comments
+                            Comment = sb.comments,
+                            KappaType = KappaType
                         };
 
             return query.ToList();
         }
 
-        public KappaData GetKappaData(int AbstractID, int KappaTypeID)
+        public KappaData GetKappaData(int AbstractID, KappaTypeEnum KappaType)
         {
             return (from k in db.KappaDatas
-                    where k.AbstractID == AbstractID && k.KappaTypeID == KappaTypeID
+                    where k.AbstractID == AbstractID && k.KappaTypeID == (int)KappaType
                     select k).FirstOrDefault();
         }
 
