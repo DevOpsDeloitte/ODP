@@ -14,6 +14,19 @@ namespace ODPTaxonomyWebsite.AccountManagement
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // if reset, hide cancel button
+            MembershipUser l_user = Membership.GetUser(User.Identity.Name);
+
+            if (!(l_user.Comment == null))
+            {
+
+                bool isPasswordReset = l_user.Comment == "reset" ? true : false;
+
+                if (isPasswordReset)
+                {
+                    btn_cancel.Visible = false;
+                }
+            }
 
         }
 
@@ -43,6 +56,11 @@ namespace ODPTaxonomyWebsite.AccountManagement
                 HandlePageError("A system error has occurred.  Please contact the administrator.");
                 Utils.LogError(ex);
             }
+        }
+
+        protected void btn_cancel_OnClick(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AccountManagement/EditProfile.aspx");
         }
 
         protected void HandlePageError(string message)

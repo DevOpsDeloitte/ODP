@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 
-<asp:Label ID="lbl_error_message" runat="server" Visible="false" />
+<asp:Label ID="lbl_error_message" runat="server" Visible="false" CssClass="errorMessage" />
 
 <asp:Panel ID="pnl_confirmation" runat="server" Visible="false">
     Your password has been reset and sent to your email address.  Please login and change your password.

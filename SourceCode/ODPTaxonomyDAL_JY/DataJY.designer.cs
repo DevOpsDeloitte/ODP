@@ -54,6 +54,12 @@ namespace ODPTaxonomyDAL_JY
     partial void InsertAbstractReviewList(AbstractReviewList instance);
     partial void UpdateAbstractReviewList(AbstractReviewList instance);
     partial void DeleteAbstractReviewList(AbstractReviewList instance);
+    partial void InsertKappaData(KappaData instance);
+    partial void UpdateKappaData(KappaData instance);
+    partial void DeleteKappaData(KappaData instance);
+    partial void InsertKappaUserIdentify(KappaUserIdentify instance);
+    partial void UpdateKappaUserIdentify(KappaUserIdentify instance);
+    partial void DeleteKappaUserIdentify(KappaUserIdentify instance);
     #endregion
 		
 		public DataJYDataContext() : 
@@ -149,6 +155,22 @@ namespace ODPTaxonomyDAL_JY
 				return this.GetTable<AbstractReviewList>();
 			}
 		}
+		
+		public System.Data.Linq.Table<KappaData> KappaDatas
+		{
+			get
+			{
+				return this.GetTable<KappaData>();
+			}
+		}
+		
+		public System.Data.Linq.Table<KappaUserIdentify> KappaUserIdentifies
+		{
+			get
+			{
+				return this.GetTable<KappaUserIdentify>();
+			}
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Abstract")]
@@ -203,6 +225,8 @@ namespace ODPTaxonomyDAL_JY
 		
 		private EntitySet<AbstractReviewList> _AbstractReviewLists1;
 		
+		private EntitySet<KappaData> _KappaDatas;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -252,6 +276,7 @@ namespace ODPTaxonomyDAL_JY
 			this._Evaluations1 = new EntitySet<Evaluation>(new Action<Evaluation>(this.attach_Evaluations1), new Action<Evaluation>(this.detach_Evaluations1));
 			this._AbstractReviewLists = new EntitySet<AbstractReviewList>(new Action<AbstractReviewList>(this.attach_AbstractReviewLists), new Action<AbstractReviewList>(this.detach_AbstractReviewLists));
 			this._AbstractReviewLists1 = new EntitySet<AbstractReviewList>(new Action<AbstractReviewList>(this.attach_AbstractReviewLists1), new Action<AbstractReviewList>(this.detach_AbstractReviewLists1));
+			this._KappaDatas = new EntitySet<KappaData>(new Action<KappaData>(this.attach_KappaDatas), new Action<KappaData>(this.detach_KappaDatas));
 			OnCreated();
 		}
 		
@@ -680,6 +705,19 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_KappaData", Storage="_KappaDatas", ThisKey="AbstractID", OtherKey="AbstractID")]
+		public EntitySet<KappaData> KappaDatas
+		{
+			get
+			{
+				return this._KappaDatas;
+			}
+			set
+			{
+				this._KappaDatas.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -758,6 +796,18 @@ namespace ODPTaxonomyDAL_JY
 		{
 			this.SendPropertyChanging();
 			entity.Abstract1 = null;
+		}
+		
+		private void attach_KappaDatas(KappaData entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract = this;
+		}
+		
+		private void detach_KappaDatas(KappaData entity)
+		{
+			this.SendPropertyChanging();
+			entity.Abstract = null;
 		}
 	}
 	
@@ -2716,6 +2766,507 @@ namespace ODPTaxonomyDAL_JY
 						this._AbstractID = default(int);
 					}
 					this.SendPropertyChanged("Abstract1");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KappaData")]
+	public partial class KappaData : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _KappaDataID;
+		
+		private System.Nullable<int> _AbstractID;
+		
+		private System.Nullable<int> _KappaTypeID;
+		
+		private System.Nullable<decimal> _A1;
+		
+		private System.Nullable<decimal> _A2;
+		
+		private System.Nullable<decimal> _A3;
+		
+		private System.Nullable<decimal> _B;
+		
+		private System.Nullable<decimal> _C;
+		
+		private System.Nullable<decimal> _D;
+		
+		private System.Nullable<decimal> _E;
+		
+		private System.Nullable<decimal> _F;
+		
+		private EntityRef<Abstract> _Abstract;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnKappaDataIDChanging(int value);
+    partial void OnKappaDataIDChanged();
+    partial void OnAbstractIDChanging(System.Nullable<int> value);
+    partial void OnAbstractIDChanged();
+    partial void OnKappaTypeIDChanging(System.Nullable<int> value);
+    partial void OnKappaTypeIDChanged();
+    partial void OnA1Changing(System.Nullable<decimal> value);
+    partial void OnA1Changed();
+    partial void OnA2Changing(System.Nullable<decimal> value);
+    partial void OnA2Changed();
+    partial void OnA3Changing(System.Nullable<decimal> value);
+    partial void OnA3Changed();
+    partial void OnBChanging(System.Nullable<decimal> value);
+    partial void OnBChanged();
+    partial void OnCChanging(System.Nullable<decimal> value);
+    partial void OnCChanged();
+    partial void OnDChanging(System.Nullable<decimal> value);
+    partial void OnDChanged();
+    partial void OnEChanging(System.Nullable<decimal> value);
+    partial void OnEChanged();
+    partial void OnFChanging(System.Nullable<decimal> value);
+    partial void OnFChanged();
+    #endregion
+		
+		public KappaData()
+		{
+			this._Abstract = default(EntityRef<Abstract>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaDataID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int KappaDataID
+		{
+			get
+			{
+				return this._KappaDataID;
+			}
+			set
+			{
+				if ((this._KappaDataID != value))
+				{
+					this.OnKappaDataIDChanging(value);
+					this.SendPropertyChanging();
+					this._KappaDataID = value;
+					this.SendPropertyChanged("KappaDataID");
+					this.OnKappaDataIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					if (this._Abstract.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAbstractIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractID = value;
+					this.SendPropertyChanged("AbstractID");
+					this.OnAbstractIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaTypeID", DbType="Int")]
+		public System.Nullable<int> KappaTypeID
+		{
+			get
+			{
+				return this._KappaTypeID;
+			}
+			set
+			{
+				if ((this._KappaTypeID != value))
+				{
+					this.OnKappaTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._KappaTypeID = value;
+					this.SendPropertyChanged("KappaTypeID");
+					this.OnKappaTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A1
+		{
+			get
+			{
+				return this._A1;
+			}
+			set
+			{
+				if ((this._A1 != value))
+				{
+					this.OnA1Changing(value);
+					this.SendPropertyChanging();
+					this._A1 = value;
+					this.SendPropertyChanged("A1");
+					this.OnA1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A2
+		{
+			get
+			{
+				return this._A2;
+			}
+			set
+			{
+				if ((this._A2 != value))
+				{
+					this.OnA2Changing(value);
+					this.SendPropertyChanging();
+					this._A2 = value;
+					this.SendPropertyChanged("A2");
+					this.OnA2Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A3
+		{
+			get
+			{
+				return this._A3;
+			}
+			set
+			{
+				if ((this._A3 != value))
+				{
+					this.OnA3Changing(value);
+					this.SendPropertyChanging();
+					this._A3 = value;
+					this.SendPropertyChanged("A3");
+					this.OnA3Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> B
+		{
+			get
+			{
+				return this._B;
+			}
+			set
+			{
+				if ((this._B != value))
+				{
+					this.OnBChanging(value);
+					this.SendPropertyChanging();
+					this._B = value;
+					this.SendPropertyChanged("B");
+					this.OnBChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this.OnCChanging(value);
+					this.SendPropertyChanging();
+					this._C = value;
+					this.SendPropertyChanged("C");
+					this.OnCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this.OnDChanging(value);
+					this.SendPropertyChanging();
+					this._D = value;
+					this.SendPropertyChanged("D");
+					this.OnDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this.OnEChanging(value);
+					this.SendPropertyChanging();
+					this._E = value;
+					this.SendPropertyChanged("E");
+					this.OnEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this.OnFChanging(value);
+					this.SendPropertyChanging();
+					this._F = value;
+					this.SendPropertyChanged("F");
+					this.OnFChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_KappaData", Storage="_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		public Abstract Abstract
+		{
+			get
+			{
+				return this._Abstract.Entity;
+			}
+			set
+			{
+				Abstract previousValue = this._Abstract.Entity;
+				if (((previousValue != value) 
+							|| (this._Abstract.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Abstract.Entity = null;
+						previousValue.KappaDatas.Remove(this);
+					}
+					this._Abstract.Entity = value;
+					if ((value != null))
+					{
+						value.KappaDatas.Add(this);
+						this._AbstractID = value.AbstractID;
+					}
+					else
+					{
+						this._AbstractID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Abstract");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KappaUserIdentify")]
+	public partial class KappaUserIdentify : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _KappaUserIdentifyID;
+		
+		private System.Nullable<int> _TeamID;
+		
+		private System.Nullable<System.Guid> _UserId;
+		
+		private string _UserName;
+		
+		private string _UserAlias;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnKappaUserIdentifyIDChanging(int value);
+    partial void OnKappaUserIdentifyIDChanged();
+    partial void OnTeamIDChanging(System.Nullable<int> value);
+    partial void OnTeamIDChanged();
+    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUserIdChanged();
+    partial void OnUserNameChanging(string value);
+    partial void OnUserNameChanged();
+    partial void OnUserAliasChanging(string value);
+    partial void OnUserAliasChanged();
+    #endregion
+		
+		public KappaUserIdentify()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaUserIdentifyID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int KappaUserIdentifyID
+		{
+			get
+			{
+				return this._KappaUserIdentifyID;
+			}
+			set
+			{
+				if ((this._KappaUserIdentifyID != value))
+				{
+					this.OnKappaUserIdentifyIDChanging(value);
+					this.SendPropertyChanging();
+					this._KappaUserIdentifyID = value;
+					this.SendPropertyChanged("KappaUserIdentifyID");
+					this.OnKappaUserIdentifyIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamID", DbType="Int")]
+		public System.Nullable<int> TeamID
+		{
+			get
+			{
+				return this._TeamID;
+			}
+			set
+			{
+				if ((this._TeamID != value))
+				{
+					this.OnTeamIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamID = value;
+					this.SendPropertyChanged("TeamID");
+					this.OnTeamIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="NVarChar(256)")]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this.OnUserNameChanging(value);
+					this.SendPropertyChanging();
+					this._UserName = value;
+					this.SendPropertyChanged("UserName");
+					this.OnUserNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserAlias", DbType="NVarChar(50)")]
+		public string UserAlias
+		{
+			get
+			{
+				return this._UserAlias;
+			}
+			set
+			{
+				if ((this._UserAlias != value))
+				{
+					this.OnUserAliasChanging(value);
+					this.SendPropertyChanging();
+					this._UserAlias = value;
+					this.SendPropertyChanged("UserAlias");
+					this.OnUserAliasChanged();
 				}
 			}
 		}

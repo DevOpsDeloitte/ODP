@@ -22,6 +22,15 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.DropDownList MainviewDDL;
         
         /// <summary>
+        /// SubviewPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel SubviewPanel;
+        
+        /// <summary>
         /// SubviewLabel control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList SubviewDDL;
+        
+        /// <summary>
+        /// PagerSizeDDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PagerSizeDDL;
         
         /// <summary>
         /// AbstractViewPlaceHolder control.

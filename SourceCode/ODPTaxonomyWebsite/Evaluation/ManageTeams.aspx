@@ -11,16 +11,17 @@
     <p>
     <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers"></asp:Label>
     </p>
+    <div class="six columns alpha">
     <asp:HiddenField runat="server" ID="hf_teamTypeId" />
     <h3>Users available for team to pick up</h3>
     <p runat="server" id="gc_noUsers">No users are currently available for you to select for a new team.</p>
     <p></p>
     <asp:Repeater runat="server" ID="rpt_users">
         <HeaderTemplate>
-            <table class="teamUsers">
+            <table class="bordered zebra-striped">
                 <tr>
-                    <th>User Name</th>
-                    <th>Select</th>
+                    <th scope="col">User Name</th>
+                    <th scope="col">Select</th>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
@@ -36,22 +37,21 @@
             </table>
         </FooterTemplate>
     </asp:Repeater>
-    <p>
+   
     <asp:Button runat="server" ID="btn_saveteam" Text="Save Team" 
-        onclick="btn_saveteam_Click" /></p>
-
-
-        <p></p>
-        <p></p>
+        onclick="btn_saveteam_Click" class="button yes" />
+</div>
+<div class="six columns omega">
+        
         <h3>Active Teams</h3>
         <p runat="server" id="gc_noTeam">No Active Teams currently exist.</p>
         <p></p>
         <asp:Repeater runat="server" ID="rpt_teams" OnItemDataBound="rp_teams_OnItemDataBound">
         <HeaderTemplate>
-            <table class="teamUsers">
+            <table class="bordered zebra-striped">
                 <tr>
-                    <th>Team</th>
-                    <th>Action</th>
+                    <th scope="col">Team</th>
+                    <th scope="col">Action</th>
                 </tr>
         </HeaderTemplate>
         <ItemTemplate>
@@ -64,7 +64,7 @@
                     </asp:Repeater>
                 </td>
                 <td><asp:HiddenField runat="server" ID="hf_teamID" Value='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
-                <asp:Button runat="server" ID="btn_deleteTeam" OnClick="DeleteTeam_Click" OnClientClick="return confirm('Are you sure you would like to Remove Team?');" Text="Remove Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
+                <asp:Button runat="server" ID="btn_deleteTeam"  class="button no" OnClick="DeleteTeam_Click" OnClientClick="return confirm('Are you sure you would like to Remove Team?');" Text="Remove Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
                 </td>
             </tr>
         </ItemTemplate>
@@ -72,5 +72,6 @@
             </table>
         </FooterTemplate>
     </asp:Repeater>
+    </div>
     </asp:Panel>
 </asp:Content>

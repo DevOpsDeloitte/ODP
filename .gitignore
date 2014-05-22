@@ -179,3 +179,5 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+SourceCode/ODPTaxonomyWebsite/Web.config
+SourceCode/ODPTaxonomyWebsite/Web.config

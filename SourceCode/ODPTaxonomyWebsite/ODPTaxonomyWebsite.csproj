@@ -53,13 +53,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="404-error.html" />
+    <Content Include="AccountManagement\ChangePassword.aspx" />
+    <Content Include="AccountManagement\EditAccount.aspx" />
+    <Content Include="AccountManagement\EditProfile.aspx" />
+    <Content Include="AccountManagement\ManageAccounts.aspx" />
     <Content Include="ErrorPage.html" />
     <Content Include="Evaluation\AbstractListViews\AdminView.ascx" />
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx" />
-    <Content Include="AccountManagement\ViewUsers.aspx" />
     <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
@@ -87,6 +91,34 @@
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountManagement\ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountManagement\ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AccountManagement\EditAccount.aspx.cs">
+      <DependentUpon>EditAccount.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountManagement\EditAccount.aspx.designer.cs">
+      <DependentUpon>EditAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AccountManagement\EditProfile.aspx.cs">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountManagement\EditProfile.aspx.designer.cs">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AccountManagement\ManageAccounts.aspx.cs">
+      <DependentUpon>ManageAccounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountManagement\ManageAccounts.aspx.designer.cs">
+      <DependentUpon>ManageAccounts.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
@@ -104,13 +136,6 @@
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx.designer.cs">
       <DependentUpon>CoderSupervisorView_Coded.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="AccountManagement\ViewUsers.aspx.cs">
-      <DependentUpon>ViewUsers.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AccountManagement\ViewUsers.aspx.designer.cs">
-      <DependentUpon>ViewUsers.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -136,6 +161,13 @@
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx.designer.cs">
       <DependentUpon>ODPStaffMemberView_Review.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx.cs">
+      <DependentUpon>ODPStaffMemberView_Review_Uncoded.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx.designer.cs">
+      <DependentUpon>ODPStaffMemberView_Review_Uncoded.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx.cs">
       <DependentUpon>ODPSupervisorView_Default.ascx</DependentUpon>
@@ -206,6 +238,10 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ODPTaxonomyAccountDAL\ODPTaxonomyAccountDAL.csproj">
+      <Project>{9D2949A2-EE38-4C9E-A0EB-7B16B17EA6BD}</Project>
+      <Name>ODPTaxonomyAccountDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ODPTaxonomyDAL_TT\ODPTaxonomyDAL_TT.csproj">
       <Project>{D3B28058-2182-41A6-9C85-3105F700F24A}</Project>
       <Name>ODPTaxonomyDAL_TT</Name>
@@ -267,6 +303,9 @@
     <Content Include="Web.Test.Release.config">
       <DependentUpon>Web.Test.config</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AccountManagement\Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

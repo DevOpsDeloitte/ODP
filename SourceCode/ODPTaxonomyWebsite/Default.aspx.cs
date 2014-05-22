@@ -38,8 +38,10 @@ namespace ODPTaxonomyWebsite
                 role_odp = Common.RoleNames["odp"];
                 role_odpSup = Common.RoleNames["odpSup"];
                 role_admin = Common.RoleNames["admin"];
-
-                connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
+                if (ConfigurationManager.ConnectionStrings["ODPTaxonomy"] != null)
+                {
+                    connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
+                }
                
                 if (!Page.IsPostBack)
                 {
@@ -196,7 +198,11 @@ namespace ODPTaxonomyWebsite
         private void LoadPageData()
         {
             MembershipUser userCurrent = Membership.GetUser();
-            string userCurrentName = userCurrent.UserName;
+            string userCurrentName = "";
+            if (userCurrent != null)
+            {
+                userCurrentName = userCurrent.UserName;
+            }
             Guid userId = Common.GetCurrentUserId(connString, userCurrentName);
             int teamTypeID = 0;
            

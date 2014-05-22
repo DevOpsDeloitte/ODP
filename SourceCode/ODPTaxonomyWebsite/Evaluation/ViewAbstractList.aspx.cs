@@ -17,34 +17,77 @@ namespace ODPTaxonomyWebsite.Evaluation
             List<string> roles = Roles.GetRolesForUser().ToList();
             roles.Remove("Coder");
 
+            string Mainview = null;
+            int MainviewIndex = -1;
+            string Subview = null;
+            int SubviewIndex = -1;
+
+            SetPager();
+
             if (!IsPostBack)
             {
-                LoadViewDropDownData(roles);
-
                 if (roles.Count == 1)
                 {
-                    RenderAbstractListView(roles[0]);
+                    Mainview = roles[0];
                 }
             }
             else
             {
-                var targetID = Request.Form["__EVENTTARGET"];
-                // check if we are changing main view
-                // if we are, reset the subview
-                if (targetID.Contains("MainviewDDL"))
+                if (roles.Count == 1)
                 {
-                    SubviewDDL.SelectedIndex = -1;
+                    Mainview = roles[0];
+
+                    Subview = SubviewDDL.SelectedValue;
+                    SubviewIndex = SubviewDDL.SelectedIndex;
                 }
-
-                string selectedView = MainviewDDL.SelectedValue;
-                int selectedSubview = SubviewDDL.SelectedIndex;
-
-                if (!string.IsNullOrEmpty(selectedView))
+                else
                 {
-                    if (roles.Contains(selectedView))
+                    Mainview = MainviewDDL.SelectedValue;
+                    MainviewIndex = MainviewDDL.SelectedIndex;
+
+                    Subview = SubviewDDL.SelectedValue;
+                    SubviewIndex = SubviewDDL.SelectedIndex;
+
+                    // switching mainview, reset subview
+                    var targetID = Request.Form["__EVENTTARGET"];
+                    if (targetID.Contains("MainviewDDL"))
                     {
-                        LoadSubviewDropDownData(selectedView, selectedSubview);
-                        RenderAbstractListView(selectedView);
+                        SubviewIndex = -1;
+                    }
+                }
+            }
+
+            SetPager();
+            LoadViewDropDownData(roles, Mainview);
+            LoadSubviewDropDownData(Mainview, SubviewIndex);
+
+            if (!string.IsNullOrEmpty(Mainview))
+            {
+                RenderAbstractListView(Mainview, Subview);
+            }
+        }
+
+        protected void SetPager()
+        {
+            if (HttpContext.Current.Request.Cookies["Pager"] != null)
+            {
+                int TempPagerSize;
+
+                if (int.TryParse(HttpContext.Current.Request.Cookies["Pager"]["Size"].ToString(), out TempPagerSize))
+                {
+                    switch (TempPagerSize)
+                    {
+                        case 25:
+                            PagerSizeDDL.SelectedIndex = 0;
+                            break;
+                        case 50:
+                            PagerSizeDDL.SelectedIndex = 1;
+                            break;
+                        case 100:
+                            PagerSizeDDL.SelectedIndex = 2;
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -53,15 +96,18 @@ namespace ODPTaxonomyWebsite.Evaluation
         /**
          * Loads data for select a view dropdown
          */
-        protected void LoadViewDropDownData(List<string> roles)
+        protected void LoadViewDropDownData(List<string> roles, string SelectedView)
         {
             if (roles.Count > 1)
             {
                 MainviewDDL.Items.Clear();
-                MainviewDDL.Items.Add(new ListItem("Select a view", ""));
+                MainviewDDL.Items.Add(new ListItem("Select a View", ""));
                 foreach (string role in roles)
                 {
-                    MainviewDDL.Items.Add(new ListItem(role + " view", role));
+                    ListItem item = new ListItem(role + " View", role);
+                    item.Selected = SelectedView == role;
+
+                    MainviewDDL.Items.Add(item);
                 }
                 MainviewDDL.Visible = true;
             }
@@ -89,6 +135,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
 
                     SubviewDDL.Visible = true;
+                    SubviewPanel.Visible = true;
                     break;
                 case "ODPStaffMember":
                     SubviewLabel.Text = "Abstract Types:";
@@ -96,6 +143,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                     SubviewDDL.Items.Add(new ListItem("Default View", ""));
                     SubviewDDL.Items.Add(new ListItem("In Review List", "review"));
+                    SubviewDDL.Items.Add(new ListItem("In Review List - Uncoded Only", "uncoded"));
 
                     if (selectedIndex > -1)
                     {
@@ -103,6 +151,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
 
                     SubviewDDL.Visible = true;
+                    SubviewPanel.Visible = true;
                     break;
                 case "ODPStaffSupervisor":
                     SubviewLabel.Text = "Abstract Types:";
@@ -117,37 +166,39 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
 
                     SubviewDDL.Visible = true;
+                    SubviewPanel.Visible = true;
                     break;
 
                 case "Admin":
                 default:
                     SubviewLabel.Visible = false;
                     SubviewDDL.Visible = false;
+                    SubviewPanel.Visible = false;
                     break;
             }
         }
 
-        protected void RenderAbstractListView(string view)
+        protected void RenderAbstractListView(string Mainview, string Subview = "")
         {
             Control abstractView = null;
 
-            switch (view)
+            switch (Mainview)
             {
                 case "Admin":
                     abstractView = LoadControl("~/Evaluation/AbstractListViews/AdminView.ascx") as AdminView;
                     break;
                 case "CoderSupervisor":
-                    if (SubviewDDL.SelectedValue == "coded")
-                    {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Coded.ascx") as CoderSupervisorView_Coded;
-                    }
-                    else if (SubviewDDL.SelectedValue == "open")
+                    if (Subview == "open")
                     {
                         abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Open.ascx") as CoderSupervisorView_Open;
                     }
+                    else
+                    {
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Coded.ascx") as CoderSupervisorView_Coded;
+                    }
                     break;
                 case "ODPStaffSupervisor":
-                    if (SubviewDDL.SelectedValue == "open")
+                    if (Subview == "open")
                     {
                         abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Open.ascx") as ODPSupervisorView_Open;
                     }
@@ -157,9 +208,13 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
                     break;
                 case "ODPStaffMember":
-                    if (SubviewDDL.SelectedValue == "review")
+                    if (Subview == "review")
                     {
                         abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Review.ascx") as ODPStaffMemberView_Review;
+                    }
+                    else if (Subview == "uncoded")
+                    {
+                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Review_Uncoded.ascx") as ODPStaffMemberView_Review_Uncoded;
                     }
                     else
                     {
@@ -174,6 +229,31 @@ namespace ODPTaxonomyWebsite.Evaluation
             {
                 AbstractViewPlaceHolder.Controls.Add(abstractView);
             }
+        }
+
+        protected void PagerSizeChangeHandler(object sender, EventArgs e)
+        {
+            int NewPagerSize;
+
+            if (int.TryParse(PagerSizeDDL.SelectedValue, out NewPagerSize))
+            {
+                switch (NewPagerSize)
+                {
+                    case 25:
+                    case 50:
+                    case 100:
+                        HttpCookie PagerCookie = new HttpCookie("Pager");
+                        PagerCookie["size"] = NewPagerSize.ToString();
+                        PagerCookie.Expires = DateTime.Now.AddYears(1);
+
+                        Response.Cookies.Add(PagerCookie);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            Response.Redirect("~/Evaluation/ViewAbstractList.aspx");
         }
     }
 }
