@@ -49,7 +49,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        select new AbstractListRow
                        {
                            AbstractID = a.AbstractID,
-                           ProjectTitle = a.ProjectTitle,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            ApplicationID = a.ApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,

@@ -22,6 +22,6 @@
                 <asp:ListItem Value="100" Text="Show: 100 Results" />
             </asp:DropDownList>
         </div>
-        <asp:PlaceHolder runat="server" ID="AbstractViewPlaceHolder" EnableViewState="false" />
+        <asp:PlaceHolder runat="server" ID="AbstractViewPlaceHolder" EnableViewState="true" />
     </div>
 </asp:Content>
