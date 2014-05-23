@@ -57,7 +57,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
                            EvaluationID = h.EvaluationId,
-                           KappaType = KappaTypeEnum.CODER_COMPARISON_K1,
+                           KappaType = KappaTypeEnum.K1,
                            IsParent = true
                        };
 
@@ -119,18 +119,18 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     var coderEvaluations = data.GetCoderEvaluations_1A(ParentAbstracts[i].AbstractID);
                     abstracts.AddRange(coderEvaluations);
 
-                    var odpStaffConsensusNotes = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID, KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
+                    var odpStaffConsensusNotes = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID, KappaTypeEnum.K5);
                     if (odpStaffConsensusNotes.Count > 0)
                     {
                         abstracts.AddRange(odpStaffConsensusNotes);
                     }
                     else
                     {
-                        var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID, KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
+                        var odpStaffConsensus = data.GetODPStaffConsensus_2B(ParentAbstracts[i].AbstractID, KappaTypeEnum.K5);
                         abstracts.AddRange(odpStaffConsensus);
                     }
 
-                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID,KappaTypeEnum.CODER_CONSENSUS_VS_ODP_CONSENSUS_K9);
+                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID,KappaTypeEnum.K9);
                     abstracts.AddRange(odpStaffCoderConsensus);
                 }
             }

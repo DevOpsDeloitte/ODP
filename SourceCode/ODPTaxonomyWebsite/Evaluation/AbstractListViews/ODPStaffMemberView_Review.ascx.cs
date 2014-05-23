@@ -55,7 +55,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
                            EvaluationID = h.EvaluationId,
-                           KappaType = KappaTypeEnum.CODER_COMPARISON_K1,
+                           KappaType = KappaTypeEnum.K1,
                            IsParent = true
                        };
 
