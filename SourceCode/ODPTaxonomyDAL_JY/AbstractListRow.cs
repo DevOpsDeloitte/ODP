@@ -16,20 +16,7 @@ namespace ODPTaxonomyDAL_JY
         public int AbstractID { get; set; }
         public int? ApplicationID { get; set; }
 
-        private string _ProjectTitle;
-        public string ProjectTitle
-        {
-            get
-            {
-                string title = _ProjectTitle;
-                title += !string.IsNullOrEmpty(AbstractStatusCode) ? " (" + AbstractStatusCode + ")" : "";
-                return title;
-            }
-            set
-            {
-                _ProjectTitle = value;
-            }
-        }
+        public string ProjectTitle { get; set; }
 
         public int? TeamID { get; set; }
         public Guid? UserID { get; set; }
@@ -69,27 +56,6 @@ namespace ODPTaxonomyDAL_JY
         public AbstractListRow()
         {
             this.IsParent = false;
-        }
-
-        public void GetKappaValues()
-        {
-            AbstractListViewData data = new AbstractListViewData();
-
-            string specifier = "#.##";
-            KappaData kappa = data.GetKappaData(this.AbstractID, this.KappaType);
-
-            if (kappa != null)
-            {
-                this.A1 = ((decimal)(kappa.A1)).ToString(specifier);
-                this.A2 = ((decimal)(kappa.A2)).ToString(specifier);
-                this.A3 = ((decimal)(kappa.A3)).ToString(specifier);
-                this.B = ((decimal)(kappa.B)).ToString(specifier);
-                this.C = ((decimal)(kappa.C)).ToString(specifier);
-                this.D = ((decimal)(kappa.D)).ToString(specifier);
-                this.E = ((decimal)(kappa.E)).ToString(specifier);
-                this.F = ((decimal)(kappa.F)).ToString(specifier);
-                this.G = this.UnableToCode ? "Y" : "";
-            }
         }
 
         public SubmissionTypeEnum GetSubmissionType()
