@@ -148,6 +148,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             AbstractListRow item = e.Row.DataItem as AbstractListRow;
             Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
             HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
+            CheckBox Review = e.Row.FindControl("Review") as CheckBox;
 
             if (item != null && TitleWrapper != null && AbstractScanLink != null)
             {
@@ -163,6 +164,12 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 {
                     AbstractScanLink.Visible = false;
                 }
+            }
+
+            // checkbox for review list
+            if (item != null && Review != null)
+            {
+                Review.Visible = item.IsParent;
             }
         }
 
@@ -194,6 +201,29 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
             AbstractViewGridView.DataBind();
+        }
+
+        protected void RemoveFromReviewHandler(object sender, EventArgs e)
+        {
+            AbstractListViewData data = new AbstractListViewData();
+            List<AbstractListRow> Abstracts = AbstractViewGridView.DataSource as List<AbstractListRow>;
+
+            if (Abstracts != null)
+            {
+                foreach (GridViewRow row in AbstractViewGridView.Rows)
+                {
+                    CheckBox Review = row.FindControl("Review") as CheckBox;
+                    if (Review != null && Review.Checked)
+                    {
+                        data.RemoveAbstractFromReview(Abstracts[row.DataItemIndex].AbstractID);
+                    }
+                }
+
+                var parentAbstracts = GetParentAbstracts();
+
+                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
+                AbstractViewGridView.DataBind();
+            }
         }
     }
 }

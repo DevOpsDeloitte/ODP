@@ -8,6 +8,7 @@ using System.Configuration;
 
 using ODPTaxonomyDAL_JY;
 using ODPTaxonomyUtility_TT;
+using System.Web.Security;
 
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
@@ -148,7 +149,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             AbstractListRow item = e.Row.DataItem as AbstractListRow;
             Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
             HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
+            CheckBox ToReview = e.Row.FindControl("ToReview") as CheckBox;
 
+            // check attachment
             if (item != null && TitleWrapper != null && AbstractScanLink != null)
             {
                 if (!string.IsNullOrEmpty(item.AbstractScan))
@@ -162,6 +165,20 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 else
                 {
                     AbstractScanLink.Visible = false;
+                }
+            }
+
+            // checkbox for review list
+            if (item != null && ToReview != null)
+            {
+                AbstractListViewData data = new AbstractListViewData();
+                if (data.IsAbstractInReview(item.AbstractID))
+                {
+                    ToReview.Visible = false;
+                }
+                else
+                {
+                    ToReview.Visible = item.IsParent;
                 }
             }
         }
@@ -194,6 +211,33 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
             AbstractViewGridView.DataBind();
+        }
+
+        protected void AddtoReviewHandler(object sender, EventArgs e)
+        {
+            AbstractListViewData data = new AbstractListViewData();
+            MembershipUser user = Membership.GetUser();
+            List<AbstractListRow> Abstracts = AbstractViewGridView.DataSource as List<AbstractListRow>;
+
+            if (Abstracts != null)
+            {
+                foreach (GridViewRow row in AbstractViewGridView.Rows)
+                {
+                    CheckBox ToReview = row.FindControl("ToReview") as CheckBox;
+                    if (ToReview != null && ToReview.Checked)
+                    {
+                        if (data.IsAbstractInReview(Abstracts[row.DataItemIndex].AbstractID) == false)
+                        {
+                            data.AddAbstractToReview(Abstracts[row.DataItemIndex].AbstractID, (Guid)user.ProviderUserKey);
+                        }
+                    }
+                }
+
+                var parentAbstracts = GetParentAbstracts();
+
+                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
+                AbstractViewGridView.DataBind();
+            }
         }
     }
 }

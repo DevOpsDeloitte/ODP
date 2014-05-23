@@ -58,27 +58,6 @@ namespace ODPTaxonomyDAL_JY
             this.IsParent = false;
         }
 
-        public void GetKappaValues()
-        {
-            AbstractListViewData data = new AbstractListViewData();
-
-            string specifier = "#.##";
-            KappaData kappa = data.GetKappaData(this.AbstractID, this.KappaType);
-
-            if (kappa != null)
-            {
-                this.A1 = ((decimal)(kappa.A1)).ToString(specifier);
-                this.A2 = ((decimal)(kappa.A2)).ToString(specifier);
-                this.A3 = ((decimal)(kappa.A3)).ToString(specifier);
-                this.B = ((decimal)(kappa.B)).ToString(specifier);
-                this.C = ((decimal)(kappa.C)).ToString(specifier);
-                this.D = ((decimal)(kappa.D)).ToString(specifier);
-                this.E = ((decimal)(kappa.E)).ToString(specifier);
-                this.F = ((decimal)(kappa.F)).ToString(specifier);
-                this.G = this.UnableToCode ? "Y" : "";
-            }
-        }
-
         public SubmissionTypeEnum GetSubmissionType()
         {
             SubmissionTypeEnum SubmissionType = SubmissionTypeEnum.NA;
