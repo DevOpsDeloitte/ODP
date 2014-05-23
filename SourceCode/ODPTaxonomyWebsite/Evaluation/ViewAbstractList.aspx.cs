@@ -180,54 +180,47 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         protected void RenderAbstractListView(string Mainview, string Subview = "")
         {
-            Control abstractView = null;
-
             switch (Mainview)
             {
                 case "Admin":
-                    abstractView = LoadControl("~/Evaluation/AbstractListViews/AdminView.ascx") as AdminView;
+                    AdminView.Visible = true;
                     break;
                 case "CoderSupervisor":
                     if (Subview == "open")
                     {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Open.ascx") as CoderSupervisorView_Open;
+                        CoderSupervisor_Open.Visible = true;
                     }
                     else
                     {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/CoderSupervisorView_Coded.ascx") as CoderSupervisorView_Coded;
+                        CoderSupervisor_Coded.Visible = true;
                     }
                     break;
                 case "ODPStaffSupervisor":
                     if (Subview == "open")
                     {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Open.ascx") as ODPSupervisorView_Open;
+                        ODPSupervisorView_Open.Visible = true;
                     }
                     else
                     {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPSupervisorView_Default.ascx") as ODPSupervisorView_Default;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     break;
                 case "ODPStaffMember":
                     if (Subview == "review")
                     {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Review.ascx") as ODPStaffMemberView_Review;
+                        ODPStaffView_Review.Visible = true;
                     }
                     else if (Subview == "uncoded")
                     {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Review_Uncoded.ascx") as ODPStaffMemberView_Review_Uncoded;
+                        ODPStaffView_Review_Uncoded.Visible = true;
                     }
                     else
                     {
-                        abstractView = LoadControl("~/Evaluation/AbstractListViews/ODPStaffMemberView_Default.ascx") as ODPStaffMemberView_Default;
+                        ODPStaffView_Default.Visible = true;
                     }
                     break;
                 default:
                     break;
-            }
-
-            if (abstractView != null)
-            {
-                AbstractViewPlaceHolder.Controls.Add(abstractView);
             }
         }
 
