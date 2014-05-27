@@ -101,6 +101,22 @@ namespace ODPTaxonomyDAL_JY
             }
         }
 
+        public void GetUnableToCode()
+        {
+            if (this.EvaluationID != null)
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                DataJYDataContext db = new DataJYDataContext(connStr);
+
+                SubmissionTypeEnum SubmissionType = GetSubmissionType();
+
+                this.G = (from s in db.Submissions
+                          where s.EvaluationId == this.EvaluationID &&
+                          s.SubmissionTypeId == (int)SubmissionType
+                          select s.UnableToCode).FirstOrDefault() ? "Y" : "";
+            }
+        }
+
         public void GetAbstractScan()
         {
             if (this.EvaluationID != null)

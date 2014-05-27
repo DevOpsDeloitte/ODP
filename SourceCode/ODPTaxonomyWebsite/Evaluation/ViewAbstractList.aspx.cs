@@ -180,6 +180,15 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         protected void RenderAbstractListView(string Mainview, string Subview = "")
         {
+            AdminView.Visible = false;
+            CoderSupervisor_Coded.Visible = false;
+            CoderSupervisor_Open.Visible = false;
+            ODPStaffView_Default.Visible = false;
+            ODPStaffView_Review.Visible = false;
+            ODPStaffView_Review_Uncoded.Visible = false;
+            ODPSupervisorView_Default.Visible = false;
+            ODPSupervisorView_Open.Visible = false;
+
             switch (Mainview)
             {
                 case "Admin":

@@ -111,8 +111,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
                 ParentAbstracts[i].GetComment();
+                ParentAbstracts[i].GetUnableToCode();
                 ParentAbstracts[i].GetAbstractScan();
-
+                
                 // gets all kappa data for abstract
                 var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
 
