@@ -58,12 +58,75 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.DropDownList PagerSizeDDL;
         
         /// <summary>
-        /// AbstractViewPlaceHolder control.
+        /// ODPSupervisorView_Default control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder AbstractViewPlaceHolder;
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Default ODPSupervisorView_Default;
+        
+        /// <summary>
+        /// ODPSupervisorView_Open control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Open ODPSupervisorView_Open;
+        
+        /// <summary>
+        /// ODPStaffView_Default control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Default ODPStaffView_Default;
+        
+        /// <summary>
+        /// ODPStaffView_Review control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Review ODPStaffView_Review;
+        
+        /// <summary>
+        /// ODPStaffView_Review_Uncoded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Review_Uncoded ODPStaffView_Review_Uncoded;
+        
+        /// <summary>
+        /// CoderSupervisor_Coded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView_Coded CoderSupervisor_Coded;
+        
+        /// <summary>
+        /// CoderSupervisor_Open control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView_Open CoderSupervisor_Open;
+        
+        /// <summary>
+        /// AdminView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.AdminView AdminView;
     }
 }

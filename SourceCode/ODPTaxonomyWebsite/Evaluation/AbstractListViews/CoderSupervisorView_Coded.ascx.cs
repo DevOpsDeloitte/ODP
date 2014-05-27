@@ -14,6 +14,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.Visible)
+                return;
+
             // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
 
@@ -51,7 +54,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        select new AbstractListRow
                        {
                            AbstractID = a.AbstractID,
-                           ProjectTitle = a.ProjectTitle,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            ApplicationID = a.ApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
@@ -109,6 +112,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
                 ParentAbstracts[i].GetComment();
+                ParentAbstracts[i].GetUnableToCode();
                 ParentAbstracts[i].GetAbstractScan();
 
                 // gets all kappa data for abstract

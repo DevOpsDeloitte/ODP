@@ -14,6 +14,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.Visible)
+                return;
+
             // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
             AbstractViewGridView.RowCreated += new GridViewRowEventHandler(this.AbstractListRowCreatedHandler);
@@ -47,7 +50,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        select new AbstractListRow
                        {
                            AbstractID = a.AbstractID,
-                           ProjectTitle = a.ProjectTitle,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            ApplicationID = a.ApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
@@ -108,8 +111,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
                 ParentAbstracts[i].GetComment();
+                ParentAbstracts[i].GetUnableToCode();
                 ParentAbstracts[i].GetAbstractScan();
-
+                
                 // gets all kappa data for abstract
                 var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
 
@@ -206,21 +210,22 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 {
                     if (tc.HasControls())
                     {
+                        LinkButton headerLink = (LinkButton)tc.Controls[0];
+
                         if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
                         {
-                            LinkButton headerLink = (LinkButton)tc.Controls[0];
-
                             if (AbstractViewGridView.Attributes["CurrentSortExp"] == headerLink.CommandArgument)
                             {
                                 tc.CssClass += " sorted ";
                                 tc.CssClass += AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? "ascending " : "descending ";
-                            }
-
-                            tc.CssClass = tc.CssClass.Trim();
+                            }                            
                         }
-                        else
+                        else if(headerLink.CommandArgument=="Date")
                         {
+                            tc.CssClass += " sorted descending ";
                         }
+
+                        tc.CssClass = tc.CssClass.Trim();
                     }
                 }
             }
