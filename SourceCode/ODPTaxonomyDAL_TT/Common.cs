@@ -305,23 +305,31 @@ namespace ODPTaxonomyDAL_TT
             return evaluationId;
         }
 
+        
+
         public static AbstractStatusID GetAbstractStatus(string connString, int abstractId)
         {
             AbstractStatusID statusId = AbstractStatusID.none;
+            select_abstract_status_ttResult item = null;
             int id = -1;
+            
             using (DataDataContext db = new DataDataContext(connString))
             {
                 var matches = db.select_abstract_status_tt(abstractId);
-                id = matches.First().AbstractStatusID;
-                foreach (AbstractStatusID i in Enum.GetValues(typeof(AbstractStatusID)))
+                item = matches.FirstOrDefault();
+
+                if (item != null)
                 {
-                    if ((int)i == id)
+                    id = item.AbstractStatusID;
+                    foreach (AbstractStatusID i in Enum.GetValues(typeof(AbstractStatusID)))
                     {
-                        statusId = i;
-                        break;
+                        if ((int)i == id)
+                        {
+                            statusId = i;
+                            break;
+                        }
                     }
                 }
-
             }
 
             return statusId;
@@ -428,19 +436,17 @@ namespace ODPTaxonomyDAL_TT
         
         public static int? GetEvaluationIdForAbstract(string connString, int abstractId, EvaluationType type)
         {
-            int? evaluationId = null;
+            int? id = null;
             using (DataDataContext db = new DataDataContext(connString))
             {
                 var matches = from e in db.tbl_Evaluations
-                              where e.AbstractID == abstractId && e.EvaluationTypeId == (int)type
+                              where e.EvaluationTypeId == (int)type && e.AbstractID == abstractId
+                              && e.IsStopped == false
                               select e.EvaluationId;
-                foreach (var i in matches)
-                {
-                    evaluationId = i;
-                }
+                id = matches.FirstOrDefault();
             }
 
-            return evaluationId;
+            return id;
         }
 
 
