@@ -97,6 +97,13 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
             $scope.showSaveButton = true;
             return;
         }
+        if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
+            console.log(" new rule :: form is valid :: ");
+            $scope.formIsValid = true;
+            $scope.disallowSave = false;
+            $scope.showSaveButton = true;
+            return;
+        }
 
         // For Consensus Mode -- Insert Validate all boxes are dark green or transparent.
         var boxColors = true; // all green

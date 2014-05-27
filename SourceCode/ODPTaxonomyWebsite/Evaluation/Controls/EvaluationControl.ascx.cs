@@ -13,7 +13,7 @@ using System.Text;
 
 namespace ODPTaxonomyWebsite.Evaluation.Controls
 {
-    public class TeamUser
+    public class TeamUser // Team user class
     {
         public Guid UserId {get;set;}
         public int TeamId { get; set; }
@@ -22,7 +22,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }
         public int UserSubmissionID { get; set; }
-
     }
 
     public class ComparisonTeamUser
