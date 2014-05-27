@@ -1,0 +1,140 @@
+﻿div.debugWindow
+{
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    width: 220px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: 11px;
+    font-family: Consolas;
+    color: #fff;
+    background-color: #08c;
+    z-index: 100000;
+}
+
+textarea#comments
+{
+    width: 851px;
+    height: 105px;
+}
+
+div.select-box {
+    cursor: pointer;
+    height: 26px;
+    text-align: right;
+    padding: 2px 5px 2px 5px;
+}
+
+div.select-box-container
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+div.codercbox
+{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 0px;
+}
+
+div.coder1
+{
+    left: 10px;
+}
+
+div.coder2
+{
+    left: 45%;
+}
+
+div.coder3
+{
+    right:10px;
+}
+
+div.comparisoncbox
+{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 0px;
+}
+
+div.ccoder
+{
+    left: 10px;
+}
+
+
+div.codp
+{
+    right:10px;
+}
+
+div.codercount
+{
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    bottom: 7px;
+    left: 0px;
+    text-align: left;
+    
+}
+
+div.select-box input {
+    opacity: 0;
+}
+
+div.box-disabled {
+    background-color: #808080;
+    cursor:default;
+}
+
+div.onstate {
+    background-color:#259bb5;
+}
+
+td[scope="row"]
+{
+   cursor: pointer;
+}
+
+
+.outcomeBoxColor-1 /* One Coder Red */
+{
+    background-color: #ff0000;
+}
+
+.outcomeBoxColor-2 /* Two Coder Yellow */
+{
+    background-color: #ffff00;
+}
+
+.outcomeBoxColor-3 /* Three Coder Light Green */
+{
+    background-color: #4eb861;
+}
+
+.comparisonoutcomeBoxColor-1 /* Blue */
+{
+    background-color: #477DFA;
+}
+
+.comparisonoutcomeBoxColor-2 /* Orange*/
+{
+    background-color: #FD9336;
+}
+
+.comparisonoutcomeBoxColor-3 /* Three Coder Light Green */
+{
+    background-color: #4eb861;
+}
+
+.outcomeBoxColor4
+{
+}
