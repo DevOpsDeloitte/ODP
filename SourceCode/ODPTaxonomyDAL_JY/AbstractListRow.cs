@@ -101,20 +101,42 @@ namespace ODPTaxonomyDAL_JY
             }
         }
 
-        public void GetUnableToCode()
+        public void GetUnableToCode(SubmissionTypeEnum SubmissionType)
         {
-            if (this.EvaluationID != null)
+            string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connStr);
+
+            var query = from s in db.Submissions
+                        join e in db.Evaluations on s.EvaluationId equals e.EvaluationId
+                        where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+                        s.SubmissionTypeId == (int)SubmissionType
+                        orderby s.SubmissionDateTime descending
+                        select s.UnableToCode;
+
+            this.G = query.FirstOrDefault() ? "UC" : "-";
+        }
+
+        public void GetUnableToCode(SubmissionTypeEnum SubmissionType, Guid? UserID)
+        {
+            if (UserID != null)
             {
                 string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
                 DataJYDataContext db = new DataJYDataContext(connStr);
 
-                SubmissionTypeEnum SubmissionType = GetSubmissionType();
+                var query = from s in db.Submissions
+                            join e in db.Evaluations on s.EvaluationId equals e.EvaluationId
+                            where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+                            s.SubmissionTypeId == (int)SubmissionType && s.UserId == UserID.Value
+                            orderby s.SubmissionDateTime descending
+                            select s.UnableToCode;
 
-                this.G = (from s in db.Submissions
-                          where s.EvaluationId == this.EvaluationID &&
-                          s.SubmissionTypeId == (int)SubmissionType
-                          select s.UnableToCode).FirstOrDefault() ? "Y" : "";
+                this.G = query.FirstOrDefault() ? "UC" : "-";
             }
+            else
+            {
+                this.G = "-";
+            }
+            
         }
 
         public void GetAbstractScan()

@@ -5,6 +5,14 @@ using System.Text;
 
 namespace ODPTaxonomyDAL_JY
 {
+    public enum AbstractViewRole
+    {
+        Admin,
+        ODPSupervisor,
+        ODPStaff,
+        CoderSupervisor
+    }
+
     public enum AbstractStatusEnum
     {
         OPEN_0 = 1,

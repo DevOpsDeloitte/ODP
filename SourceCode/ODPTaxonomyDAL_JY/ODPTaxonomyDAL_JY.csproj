@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AbstractListRow.cs" />
     <Compile Include="AbstractListViewData.cs" />
+    <Compile Include="AbstractListViewHelper.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DataJY.designer.cs">
       <AutoGen>True</AutoGen>
