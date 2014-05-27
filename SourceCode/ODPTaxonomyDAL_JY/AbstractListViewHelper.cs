@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace ODPTaxonomyDAL_JY
 {
@@ -172,6 +175,88 @@ namespace ODPTaxonomyDAL_JY
             }
 
             return Abstract;
+        }
+
+        public static void AbstractListRowCreatedHandler(object sender, GridViewRowEventArgs e)
+        {
+            if (sender == null)
+            {
+                return;
+            }
+
+            AbstractGridView AbstractGridView = sender as AbstractGridView;
+
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                foreach (TableCell tc in e.Row.Cells)
+                {
+                    if (tc.HasControls())
+                    {
+                        LinkButton headerLink = (LinkButton)tc.Controls[0];
+
+                        if (AbstractGridView.Attributes["CurrentSortExp"] != null)
+                        {
+                            if (AbstractGridView.Attributes["CurrentSortExp"] == headerLink.CommandArgument)
+                            {
+                                tc.CssClass += " sorted ";
+                                tc.CssClass += AbstractGridView.Attributes["CurrentSortDir"] == "ASC" ? "ascending " : "descending ";
+                            }
+                        }
+                        else if (headerLink.CommandArgument == "Date")
+                        {
+                            tc.CssClass += " sorted descending ";
+                        }
+
+                        tc.CssClass = tc.CssClass.Trim();
+                    }
+                }
+            }
+        }
+
+        public static void AbstractListRowBindingHandler(object sender, GridViewRowEventArgs e)
+        {
+            AbstractListRow item = e.Row.DataItem as AbstractListRow;
+            Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
+            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
+
+            if (item != null && TitleWrapper != null && AbstractScanLink != null)
+            {
+                if (!string.IsNullOrEmpty(item.AbstractScan))
+                {
+                    TitleWrapper.CssClass += " has-file";
+
+                    AbstractScanLink.ToolTip = item.AbstractScan;
+                    AbstractScanLink.NavigateUrl = "#";
+                    AbstractScanLink.Visible = true;
+                }
+                else
+                {
+                    AbstractScanLink.Visible = false;
+                }
+            }
+
+            CheckBox Review = e.Row.FindControl("Review") as CheckBox;
+            CheckBox ToReview = e.Row.FindControl("ToReview") as CheckBox;
+
+            // checkbox for remove from review list
+            if (item != null && Review != null)
+            {
+                Review.Visible = item.IsParent;
+            }
+
+            // checkbox for add to review list
+            if (item != null && ToReview != null)
+            {
+                AbstractListViewData data = new AbstractListViewData();
+                if (data.IsAbstractInReview(item.AbstractID))
+                {
+                    ToReview.Visible = false;
+                }
+                else
+                {
+                    ToReview.Visible = item.IsParent;
+                }
+            }
         }
     }
 }

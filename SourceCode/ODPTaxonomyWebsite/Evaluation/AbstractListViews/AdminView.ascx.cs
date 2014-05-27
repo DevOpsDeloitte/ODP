@@ -17,9 +17,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             if (!this.Visible)
                 return;
 
-            // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
-            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(this.AbstractListRowCreatedHandler);
+            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
+            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
@@ -102,29 +102,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
-        {
-            AbstractListRow item = e.Row.DataItem as AbstractListRow;
-            Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
-            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
-
-            if (item != null && TitleWrapper != null && AbstractScanLink != null)
-            {
-                if (!string.IsNullOrEmpty(item.AbstractScan))
-                {
-                    TitleWrapper.CssClass += " has-file";
-
-                    AbstractScanLink.ToolTip = item.AbstractScan;
-                    AbstractScanLink.NavigateUrl = "#";
-                    AbstractScanLink.Visible = true;
-                }
-                else
-                {
-                    AbstractScanLink.Visible = false;
-                }
-            }
-        }
-
         protected void AbstractSortHandler(object sender, GridViewSortEventArgs e)
         {
             string SortExpression = e.SortExpression;
@@ -153,35 +130,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.Admin);
             AbstractViewGridView.DataBind();
-        }
-
-        protected void AbstractListRowCreatedHandler(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                foreach (TableCell tc in e.Row.Cells)
-                {
-                    if (tc.HasControls())
-                    {
-                        LinkButton headerLink = (LinkButton)tc.Controls[0];
-
-                        if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
-                        {
-                            if (AbstractViewGridView.Attributes["CurrentSortExp"] == headerLink.CommandArgument)
-                            {
-                                tc.CssClass += " sorted ";
-                                tc.CssClass += AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? "ascending " : "descending ";
-                            }
-                        }
-                        else if (headerLink.CommandArgument == "Date")
-                        {
-                            tc.CssClass += " sorted descending ";
-                        }
-
-                        tc.CssClass = tc.CssClass.Trim();
-                    }
-                }
-            }
-        }
+        }              
     }
 }

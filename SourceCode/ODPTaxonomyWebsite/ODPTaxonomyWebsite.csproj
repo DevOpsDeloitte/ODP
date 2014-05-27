@@ -122,7 +122,6 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Evaluation\AbstractListViews\AbstractGridView.cs" />
     <Compile Include="Evaluation\AbstractListViews\AdminView.ascx.cs">
       <DependentUpon>AdminView.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

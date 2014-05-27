@@ -17,8 +17,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             if (!this.Visible)
                 return;
 
-            // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
+            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
+            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
@@ -98,11 +99,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     }
 
             }
-        }
-
-        protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
-        {
-
         }
 
         protected void AbstractSortHandler(object sender, GridViewSortEventArgs e)

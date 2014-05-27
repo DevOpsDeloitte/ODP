@@ -17,8 +17,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             if (!this.Visible)
                 return;
 
-            // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
+            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
+            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
@@ -97,29 +98,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                     {
                         return data.OrderByDescending(d => d.StatusDate).ToList();
                     }
-            }
-        }
-
-        protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
-        {
-            AbstractListRow item = e.Row.DataItem as AbstractListRow;
-            Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
-            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
-
-            if (item != null && TitleWrapper != null && AbstractScanLink != null)
-            {
-                if (!string.IsNullOrEmpty(item.AbstractScan))
-                {
-                    TitleWrapper.CssClass += " has-file";
-
-                    AbstractScanLink.ToolTip = item.AbstractScan;
-                    AbstractScanLink.NavigateUrl = "#";
-                    AbstractScanLink.Visible = true;
-                }
-                else
-                {
-                    AbstractScanLink.Visible = false;
-                }
             }
         }
 

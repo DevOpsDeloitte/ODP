@@ -1,11 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CoderSupervisorView_Open.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView_Open" %>
-<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
-    Assembly="ODPTaxonomyWebsite" %>
+<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
 <h2>
     View Open Abstracts</h2>
-<odp:AbstractGridView runat="server" ID="AbstractViewGridView" CssClass="AbstractViewTable bordered zebra-striped"
-    OnRowDataBound="AbstractListRowBindingHandle">
+<odp:AbstractGridView runat="server" ID="AbstractViewGridView" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
         <asp:BoundField DataField="AbstractID" HeaderText="ID" />
         <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" SortExpression="ApplicationID" />

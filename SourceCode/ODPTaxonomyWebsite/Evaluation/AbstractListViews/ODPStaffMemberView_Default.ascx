@@ -1,12 +1,11 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Default.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Default" %>
-<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
-    Assembly="ODPTaxonomyWebsite" %>
+<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
 <h2>
     View Abstracts</h2>
     <asp:Button runat="server" text="Add to Review" OnClick="AddtoReviewHandler" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
-    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped" OnRowDataBound="AbstractListRowBindingHandle">
+    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
         <asp:TemplateField>
             <ItemTemplate>

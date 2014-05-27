@@ -20,6 +20,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 return;
 
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
+            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
+            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
@@ -99,45 +101,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                         return data.OrderByDescending(d => d.StatusDate).ToList();
                     }
 
-            }
-        }
-
-        protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
-        {
-            AbstractListRow item = e.Row.DataItem as AbstractListRow;
-            Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
-            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
-            CheckBox ToReview = e.Row.FindControl("ToReview") as CheckBox;
-
-            // check attachment
-            if (item != null && TitleWrapper != null && AbstractScanLink != null)
-            {
-                if (!string.IsNullOrEmpty(item.AbstractScan))
-                {
-                    TitleWrapper.CssClass += " has-file";
-
-                    AbstractScanLink.ToolTip = item.AbstractScan;
-                    AbstractScanLink.NavigateUrl = "#";
-                    AbstractScanLink.Visible = true;
-                }
-                else
-                {
-                    AbstractScanLink.Visible = false;
-                }
-            }
-
-            // checkbox for review list
-            if (item != null && ToReview != null)
-            {
-                AbstractListViewData data = new AbstractListViewData();
-                if (data.IsAbstractInReview(item.AbstractID))
-                {
-                    ToReview.Visible = false;
-                }
-                else
-                {
-                    ToReview.Visible = item.IsParent;
-                }
             }
         }
 
