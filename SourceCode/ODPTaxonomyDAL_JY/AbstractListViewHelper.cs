@@ -12,6 +12,32 @@ namespace ODPTaxonomyDAL_JY
     {
         private static string KappaSpecifier = "#.##";
 
+        public static IDictionary<int, string> GetViewRoles(List<string> UserRoles)
+        {
+            IDictionary<int, string> ViewRoles = new Dictionary<int, string>();
+
+            foreach (string role in UserRoles)
+            {
+                switch (role)
+                {
+                    case "Admin":
+                        ViewRoles.Add((int)AbstractViewRole.Admin, "Admin");
+                        break;
+                    case "CoderSupervisor":
+                        ViewRoles.Add((int)AbstractViewRole.CoderSupervisor, "Coder Supervisor");
+                        break;
+                    case "ODPStaffMember":
+                        ViewRoles.Add((int)AbstractViewRole.ODPStaff, "ODP Staff");
+                        break;
+                    case "ODPStaffSupervisor":
+                        ViewRoles.Add((int)AbstractViewRole.ODPSupervisor, "ODP Supervisor");
+                        break;
+                }
+            }
+
+            return ViewRoles;
+        }
+
         public static List<AbstractListRow> ProcessAbstracts(List<AbstractListRow> ParentAbstracts, AbstractViewRole AbstractView)
         {
             List<AbstractListRow> Abstracts = new List<AbstractListRow>();
