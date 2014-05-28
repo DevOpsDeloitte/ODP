@@ -194,17 +194,35 @@ namespace ODPTaxonomyDAL_TT
             return data;
         }
 
-        public static void OverrideAbstract(string connString, int evaluationId, int abstractId, Guid userId, int abstractStatusId)
+        public static string OverrideAbstract(string connString, int evaluationId, int abstractId, Guid userId, int abstractStatusId)
         {
             tbl_Evaluation evaluation = null;
             List<tbL_Submission> submissions = null;
             tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+            int? evaluationIdForHistory = -1;
+            string mess = null;
+
+            if (abstractStatusId == (int)AbstractStatusID._0)
+            {
+                evaluationIdForHistory = null;
+            }
+
+            if (abstractStatusId == (int)AbstractStatusID._1N)
+            {
+                using (DataDataContext db = new DataDataContext(connString))
+                {
+                    var matches = from e in db.tbl_AbstractStatusChangeHistories
+                                  where e.AbstractID == abstractId && e.AbstractStatusID == abstractStatusId
+                                  select e.EvaluationId;
+                    evaluationIdForHistory = matches.FirstOrDefault();
+                }
+            }
 
             history.AbstractID = abstractId;
             history.AbstractStatusID = abstractStatusId;
             history.CreatedDate = DateTime.Now;
             history.CreatedBy = userId;
-            history.EvaluationId = evaluationId;
+            history.EvaluationId = evaluationIdForHistory;
 
             using (DataDataContext db = new DataDataContext(connString))
             {
@@ -219,18 +237,26 @@ namespace ODPTaxonomyDAL_TT
 
                     db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
 
-                    evaluation.IsStopped = true;
-                    evaluation.StoppedBy = userId;
-                    evaluation.StoppedDateTime = DateTime.Now;
-
-                    foreach (var s in submissions)
+                    if (evaluation != null)
                     {
-                        s.StatusID = (int)Status.Deleted;
-                        s.UpdatedBy = userId;
-                        s.UpdatedDate = DateTime.Now;
-                    }
+                        evaluation.IsStopped = true;
+                        evaluation.StoppedBy = userId;
+                        evaluation.StoppedDateTime = DateTime.Now;
 
-                    db.SubmitChanges();
+                        foreach (var s in submissions)
+                        {
+                            s.StatusID = (int)Status.Deleted;
+                            s.UpdatedBy = userId;
+                            s.UpdatedDate = DateTime.Now;
+                        }
+
+                        db.SubmitChanges();
+                    }
+                    else
+                    {
+                       mess = "No evaluation exists for evaluationId = " + evaluationId;
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
@@ -239,6 +265,7 @@ namespace ODPTaxonomyDAL_TT
                 }                               
                               
             }
+            return mess;
         }
 
 

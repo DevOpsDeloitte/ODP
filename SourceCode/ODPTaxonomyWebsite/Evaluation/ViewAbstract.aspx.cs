@@ -263,6 +263,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         {
             try
             {
+                string errorMessage = null;
                 int abstractId = -1;
                 int evaluationId = -1;
                 int abstractStatusId = -1;
@@ -282,7 +283,12 @@ namespace ODPTaxonomyWebsite.Evaluation
                                 if (Int32.TryParse(hf_evaluationId_coder.Value, out evaluationId))
                                 {
                                     abstractStatusId = (int)AbstractStatusID._0;
-                                    Common.OverrideAbstract(connString, evaluationId, abstractId, userId, abstractStatusId);
+                                    errorMessage = Common.OverrideAbstract(connString, evaluationId, abstractId, userId, abstractStatusId);
+
+                                    if (!String.IsNullOrEmpty(errorMessage))
+                                    {
+                                        throw new Exception(errorMessage);
+                                    }
 
                                     lbl_messageUsers.Visible = true;
                                     lbl_messageUsers.Text = messOverrideSuccess;
@@ -310,7 +316,12 @@ namespace ODPTaxonomyWebsite.Evaluation
                                 if (Int32.TryParse(hf_evaluationId_odp.Value, out evaluationId))
                                 {
                                     abstractStatusId = (int)AbstractStatusID._1N;
-                                    Common.OverrideAbstract(connString, evaluationId, abstractId, userId, abstractStatusId);
+                                    errorMessage = Common.OverrideAbstract(connString, evaluationId, abstractId, userId, abstractStatusId);
+
+                                    if (!String.IsNullOrEmpty(errorMessage))
+                                    {
+                                        throw new Exception(errorMessage);
+                                    }
 
                                     lbl_messageUsers.Visible = true;
                                     lbl_messageUsers.Text = messOverrideSuccess;
