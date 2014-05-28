@@ -13,32 +13,66 @@ namespace ODPTaxonomyWebsite.Evaluation {
     public partial class ViewAbstractList {
         
         /// <summary>
-        /// lbl_messageUsers control.
+        /// MainviewDDL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_messageUsers;
+        protected global::System.Web.UI.WebControls.DropDownList MainviewDDL;
         
         /// <summary>
-        /// btn_print control.
+        /// SubviewPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_print;
+        protected global::System.Web.UI.WebControls.Panel SubviewPanel;
         
         /// <summary>
-        /// btn_code control.
+        /// SubviewLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_code;
+        protected global::System.Web.UI.WebControls.Label SubviewLabel;
+        
+        /// <summary>
+        /// SubviewDDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList SubviewDDL;
+        
+        /// <summary>
+        /// PagerWrapper control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PagerWrapper;
+        
+        /// <summary>
+        /// PagerSizeDDL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PagerSizeDDL;
+        
+        /// <summary>
         /// ODPSupervisorView_Default control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
         protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Default ODPSupervisorView_Default;
         
         /// <summary>
