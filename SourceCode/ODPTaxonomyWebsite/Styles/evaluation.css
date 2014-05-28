@@ -1,4 +1,18 @@
-﻿div.debugWindow
+﻿/* some overrides of main styles */
+
+.subtitle
+{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+
+/* end of overrides */
+
+
+
+div.debugWindow
 {
     position: fixed;
     top: 30px;
