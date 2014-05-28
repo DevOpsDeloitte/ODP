@@ -63,8 +63,7 @@ namespace ODPTaxonomyDAL_JY
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
-                ParentAbstracts[i].GetComment();
-                ParentAbstracts[i].GetUnableToCode(SubmissionTypeEnum.CODER_CONSENSUS);
+                ParentAbstracts[i].GetSubmissionData(SubmissionTypeEnum.CODER_CONSENSUS);
                 ParentAbstracts[i].GetAbstractScan();
 
                 // gets all kappa data for abstract
@@ -92,19 +91,19 @@ namespace ODPTaxonomyDAL_JY
                                         if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
-                                            CoderEvaluation.GetUnableToCode(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
-                                            CoderEvaluation.GetUnableToCode(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
-                                            CoderEvaluation.GetUnableToCode(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                     }
@@ -119,7 +118,7 @@ namespace ODPTaxonomyDAL_JY
                         if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
                         {
                             AbstractListRow ODPConsensus = ConstructNewAbstractListRow(kappa, "ODP Staff", ParentAbstracts[i].AbstractID);
-                            ODPConsensus.GetUnableToCode(SubmissionTypeEnum.ODP_STAFF_CONSENSUS);
+                            ODPConsensus.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_CONSENSUS);
                             Abstracts.Add(ODPConsensus);
                         }
                     }
@@ -141,19 +140,19 @@ namespace ODPTaxonomyDAL_JY
                                         if (iden.UserAlias == "ODPA" && kappa.KappaTypeID == (int)KappaTypeEnum.K6)
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
-                                            ODPEvaluation.GetUnableToCode(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                         else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
-                                            ODPEvaluation.GetUnableToCode(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                         else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
-                                            ODPEvaluation.GetUnableToCode(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                     }
@@ -168,7 +167,7 @@ namespace ODPTaxonomyDAL_JY
                         if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
                         {
                             AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, "ODP vs. Coder", ParentAbstracts[i].AbstractID);
-                            ODPCoderComparison.GetUnableToCode(SubmissionTypeEnum.ODP_STAFF_COMPARISON);
+                            ODPCoderComparison.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_COMPARISON);
                             Abstracts.Add(ODPCoderComparison);
                         }
                     }
