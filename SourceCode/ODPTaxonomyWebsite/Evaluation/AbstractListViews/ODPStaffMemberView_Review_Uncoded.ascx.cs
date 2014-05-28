@@ -23,10 +23,13 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             try
             {
-                var parentAbstracts = GetParentAbstracts();
+                if (!IsPostBack)
+                {
+                    var parentAbstracts = GetParentAbstracts();
 
-                AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
-                AbstractViewGridView.DataBind();
+                    AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
+                    AbstractViewGridView.DataBind();
+                }
             }
             catch (Exception exp)
             {
@@ -135,24 +138,24 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
         protected void RemoveFromReviewHandler(object sender, EventArgs e)
         {
             AbstractListViewData data = new AbstractListViewData();
-            List<AbstractListRow> Abstracts = AbstractViewGridView.DataSource as List<AbstractListRow>;
 
-            if (Abstracts != null)
+            foreach (GridViewRow row in AbstractViewGridView.Rows)
             {
-                foreach (GridViewRow row in AbstractViewGridView.Rows)
+                CheckBox Review = row.FindControl("Review") as CheckBox;
+                HiddenField AbstractIDField = row.FindControl("AbstractID") as HiddenField;
+                int AbstractID = 0;
+
+                if (Review != null && Review.Checked &&
+                    AbstractIDField != null && int.TryParse(AbstractIDField.Value, out AbstractID))
                 {
-                    CheckBox Review = row.FindControl("Review") as CheckBox;
-                    if (Review != null && Review.Checked)
-                    {
-                        data.RemoveAbstractFromReview(Abstracts[row.DataItemIndex].AbstractID);
-                    }
+                    data.RemoveAbstractFromReview(AbstractID);
                 }
-
-                var parentAbstracts = GetParentAbstracts();
-
-                AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
-                AbstractViewGridView.DataBind();
             }
+
+            var parentAbstracts = GetParentAbstracts();
+
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
+            AbstractViewGridView.DataBind();
         }
     }
 }

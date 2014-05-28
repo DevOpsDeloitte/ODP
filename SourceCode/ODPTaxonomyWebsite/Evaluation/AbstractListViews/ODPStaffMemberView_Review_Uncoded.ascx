@@ -9,6 +9,7 @@
     <Columns>
         <asp:TemplateField>
             <ItemTemplate>
+                <asp:HiddenField runat="server" ID="AbstractID" Value='<%#Eval("AbstractID") %>' />
                 <asp:CheckBox runat="server" ID="Review" />
             </ItemTemplate>
         </asp:TemplateField>
