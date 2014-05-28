@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Eval.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.Evaluation" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Eval.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.Eval" %>
 
 <%@ Register Src="~/Evaluation/Controls/EvaluationControl.ascx" TagPrefix="uc1" TagName="EvaluationControl" %>
 
