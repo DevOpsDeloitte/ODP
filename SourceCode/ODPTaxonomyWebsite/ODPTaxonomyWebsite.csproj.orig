@@ -1,0 +1,432 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FDD4CDA3-ACA7-4711-9EBD-699A7401FC2F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ODPTaxonomyWebsite</RootNamespace>
+    <AssemblyName>ODPTaxonomyWebsite</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libraries\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="404-error.html" />
+    <Content Include="AccountManagement\EditProfile.aspx" />
+    <Content Include="AccountManagement\ManageAccounts.aspx" />
+    <Content Include="ErrorPage.html" />
+<<<<<<< HEAD
+    <Content Include="Evaluation\AbstractListViews\AdminView.ascx" />
+    <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Coded.ascx" />
+    <Content Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx" />
+    <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx" />
+    <Content Include="Evaluation\Controls\EvaluationControl.ascx" />
+    <Content Include="Evaluation\Eval.aspx" />
+    <Content Include="Evaluation\Evaluation.aspx" />
+    <Content Include="Evaluation\Glossary.aspx" />
+    <Content Include="Evaluation\ManageTeams.aspx" />
+    <Content Include="Evaluation\ViewAbstract.aspx" />
+    <Content Include="Evaluation\ViewAbstractList.aspx" />
+    <Content Include="ForgotPassword.aspx" />
+    <Content Include="Images\clip.png" />
+    <Content Include="Libraries\Newtonsoft.Json.dll" />
+    <Content Include="Libraries\Newtonsoft.Json.pdb" />
+    <Content Include="Libraries\Newtonsoft.Json.xml" />
+    <Content Include="Login.aspx" />
+    <Content Include="Scripts\alertify.js" />
+    <Content Include="Scripts\alertify.min.js" />
+    <Content Include="Scripts\angular\angular-csp.css" />
+    <Content Include="Scripts\angular\angular.js" />
+    <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\classie.js" />
+    <Content Include="Scripts\controllers\controller.js" />
+    <Content Include="Scripts\directives\directive.js" />
+=======
+    <Content Include="Evaluation\Evaluation.aspx" />
+    <Content Include="Evaluation\ManageTeams.aspx" />
+    <Content Include="Evaluation\ViewAbstract.aspx" />
+    <Content Include="Evaluation\ViewAbstractList.aspx" />
+    <Content Include="Login.aspx" />
+    <Content Include="Scripts\alertify.js" />
+    <Content Include="Scripts\alertify.min.js" />
+    <Content Include="Scripts\classie.js" />
+>>>>>>> origin/ttDEV
+    <Content Include="Scripts\html5.js" />
+    <Content Include="Scripts\icheck.js" />
+    <Content Include="Scripts\icheck.min.js" />
+    <Content Include="Scripts\jquery.js" />
+<<<<<<< HEAD
+    <Content Include="Scripts\main.js" />
+    <Content Include="Scripts\modules\module.js" />
+=======
+>>>>>>> origin/ttDEV
+    <Content Include="Styles\AbstractListView.css" />
+    <Content Include="Styles\alertify.core.css" />
+    <Content Include="Styles\alertify.css" />
+    <Content Include="Styles\base.css" />
+    <Content Include="Styles\component.css" />
+<<<<<<< HEAD
+    <Content Include="Styles\evaluation.css" />
+=======
+>>>>>>> origin/ttDEV
+    <Content Include="Styles\layout.css" />
+    <Content Include="Styles\line\aero.css" />
+    <Content Include="Styles\line\blue.css" />
+    <Content Include="Styles\line\green.css" />
+    <Content Include="Styles\line\grey.css" />
+    <Content Include="Styles\line\line%402x.png" />
+    <Content Include="Styles\line\line.css" />
+    <Content Include="Styles\line\line.png" />
+    <Content Include="Styles\line\orange.css" />
+    <Content Include="Styles\line\pink.css" />
+    <Content Include="Styles\line\purple.css" />
+    <Content Include="Styles\line\red.css" />
+    <Content Include="Styles\line\tax.css" />
+    <Content Include="Styles\line\yellow.css" />
+    <Content Include="Styles\line\_all.css" />
+    <Content Include="Styles\Site.css" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Styles\skeleton.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="_App_Offline.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccountManagement\EditProfile.aspx.cs">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountManagement\EditProfile.aspx.designer.cs">
+      <DependentUpon>EditProfile.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AccountManagement\ManageAccounts.aspx.cs">
+      <DependentUpon>ManageAccounts.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountManagement\ManageAccounts.aspx.designer.cs">
+      <DependentUpon>ManageAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Evaluation.aspx.cs">
+      <DependentUpon>Evaluation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Evaluation.aspx.designer.cs">
+      <DependentUpon>Evaluation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\ManageTeams.aspx.cs">
+      <DependentUpon>ManageTeams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\ManageTeams.aspx.designer.cs">
+      <DependentUpon>ManageTeams.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+<<<<<<< HEAD
+    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx.cs">
+      <DependentUpon>CoderSupervisorView_Open.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\CoderSupervisorView_Open.ascx.designer.cs">
+      <DependentUpon>CoderSupervisorView_Open.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx.cs">
+      <DependentUpon>ODPStaffMemberView_Default.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Default.ascx.designer.cs">
+      <DependentUpon>ODPStaffMemberView_Default.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx.cs">
+      <DependentUpon>ODPStaffMemberView_Review.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review.ascx.designer.cs">
+      <DependentUpon>ODPStaffMemberView_Review.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx.cs">
+      <DependentUpon>ODPStaffMemberView_Review_Uncoded.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx.designer.cs">
+      <DependentUpon>ODPStaffMemberView_Review_Uncoded.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx.cs">
+      <DependentUpon>ODPSupervisorView_Default.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx.designer.cs">
+      <DependentUpon>ODPSupervisorView_Default.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx.cs">
+      <DependentUpon>ODPSupervisorView_Open.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx.designer.cs">
+      <DependentUpon>ODPSupervisorView_Open.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Classes\DBData.cs" />
+    <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
+      <DependentUpon>EvaluationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
+      <DependentUpon>EvaluationControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Eval.aspx.cs">
+      <DependentUpon>Eval.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Eval.aspx.designer.cs">
+      <DependentUpon>Eval.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Evaluation.aspx.cs">
+      <DependentUpon>Evaluation.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Evaluation.aspx.designer.cs">
+      <DependentUpon>Evaluation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Glossary.aspx.cs">
+      <DependentUpon>Glossary.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Glossary.aspx.designer.cs">
+      <DependentUpon>Glossary.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\Evaluations.cs" />
+    <Compile Include="Evaluation\ManageTeams.aspx.cs">
+      <DependentUpon>ManageTeams.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\ManageTeams.aspx.designer.cs">
+      <DependentUpon>ManageTeams.aspx</DependentUpon>
+=======
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+>>>>>>> origin/ttDEV
+    </Compile>
+    <Compile Include="Evaluation\ViewAbstract.aspx.cs">
+      <DependentUpon>ViewAbstract.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\ViewAbstract.aspx.designer.cs">
+      <DependentUpon>ViewAbstract.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\ViewAbstractList.aspx.cs">
+      <DependentUpon>ViewAbstractList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\ViewAbstractList.aspx.designer.cs">
+      <DependentUpon>ViewAbstractList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Images\" />
+    <Folder Include="log\" />
+    <Folder Include="notes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Site.Master" />
+  </ItemGroup>
+  <ItemGroup>
+<<<<<<< HEAD
+    <ProjectReference Include="..\ODPTaxonomyAccountDAL\ODPTaxonomyAccountDAL.csproj">
+      <Project>{9D2949A2-EE38-4C9E-A0EB-7B16B17EA6BD}</Project>
+      <Name>ODPTaxonomyAccountDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ODPTaxonomyDAL_ST\ODPTaxonomyDAL_ST.csproj">
+      <Project>{73402BC0-7AA0-4E57-BA70-0BC6E2ECA88A}</Project>
+      <Name>ODPTaxonomyDAL_ST</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ODPTaxonomyDAL_TT\ODPTaxonomyDAL_TT.csproj">
+      <Project>{D3B28058-2182-41A6-9C85-3105F700F24A}</Project>
+      <Name>ODPTaxonomyDAL_TT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ODPTaxonomyDAL_JY\ODPTaxonomyDAL_JY.csproj">
+      <Project>{FC11E5F7-FE17-481E-9F8A-32FDCD097F21}</Project>
+      <Name>ODPTaxonomyDAL_JY</Name>
+=======
+    <ProjectReference Include="..\ODPTaxonomyCommon\ODPTaxonomyCommon.csproj">
+      <Project>{17BF1472-985E-449E-BBA7-D61118F82B6C}</Project>
+      <Name>ODPTaxonomyCommon</Name>
+>>>>>>> origin/ttDEV
+    </ProjectReference>
+    <ProjectReference Include="..\ODPTaxonomyDAL_TT\ODPTaxonomyDAL_TT.csproj">
+      <Project>{D3B28058-2182-41A6-9C85-3105F700F24A}</Project>
+      <Name>ODPTaxonomyDAL_TT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ODPTaxonomyUtility_TT\ODPTaxonomyUtility_TT.csproj">
+      <Project>{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}</Project>
+      <Name>ODPTaxonomyUtility_TT</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Dev.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Dev.Debug.config">
+      <DependentUpon>Web.Dev.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Dev.Release.config">
+      <DependentUpon>Web.Dev.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Demo.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Demo.Debug.config">
+      <DependentUpon>Web.Demo.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Demo.Release.config">
+      <DependentUpon>Web.Demo.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Test.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Test.Debug.config">
+      <DependentUpon>Web.Test.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.Test.Release.config">
+      <DependentUpon>Web.Test.config</DependentUpon>
+    </Content>
+  </ItemGroup>
+<<<<<<< HEAD
+  <ItemGroup>
+    <Content Include="AccountManagement\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\angular\.bower.json" />
+    <None Include="Scripts\angular\angular.min.js.gzip" />
+    <None Include="Scripts\angular\angular.min.js.map" />
+    <None Include="Scripts\angular\bower.json" />
+    <None Include="Scripts\angular\README.md" />
+  </ItemGroup>
+=======
+>>>>>>> origin/ttDEV
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50300</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

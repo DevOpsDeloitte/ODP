@@ -69,6 +69,17 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                 }
 
+                // Check if Consensus has been already started..
+                if (submissiontypeID == 1 || submissiontypeID == 3)
+                {
+                    var eval = db.Evaluations.Where(e => e.EvaluationId == evaluationID).FirstOrDefault();
+                    if (eval != null)
+                    {
+
+                        showButton = (eval.ConsensusStartedBy == null) ? true : false;
+                    }
+                }
+
                 //
                 context.Response.Write(JsonConvert.SerializeObject(new { success = true, submissionID = submissionID, showConsensusButton = showButton }));
             }
