@@ -6,6 +6,6 @@
     <title>Evaluation Form</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <%--<uc1:EvaluationControl runat="server" ID="EvaluationControl" />--%>
-    <p><asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label></p>
+    <uc1:EvaluationControl runat="server" ID="EvaluationControl" />
+    <!--<p><asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label></p>-->
 </asp:Content>

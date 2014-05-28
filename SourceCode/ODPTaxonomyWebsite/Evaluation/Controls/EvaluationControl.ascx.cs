@@ -10,6 +10,8 @@ using System.Data.Linq.Mapping;
 using ODPTaxonomyDAL_ST;
 using ODPTaxonomyWebsite.Evaluation.Classes;
 using System.Text;
+using ODPTaxonomyCommon;
+
 
 namespace ODPTaxonomyWebsite.Evaluation.Controls
 {
@@ -124,19 +126,22 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void loadSession()
         {
             // load session variable here..
-            
-            //ViewAbstractToEvaluation values = new ViewAbstractToEvaluation();
-            //values.ViewMode = Mode.code;
-            //values.EvaluationId = evaluationId;
-            //values.SubmissionTypeId = submissionTypeId;
-            //values.UserId = userId;
-            //Session["ViewAbstractToEvaluation"] = values;
 
+            if (Session["ViewAbstractToEvaluation"] != null)
+            {
+                ViewAbstractToEvaluation sv = (ViewAbstractToEvaluation)Session["ViewAbstractToEvaluation"];
+                UserId = sv.UserId;
+                SubmissionTypeId = sv.SubmissionTypeId;
+                EvaluationID = sv.EvaluationId;
+                DisplayMode = sv.ViewMode.ToString();
+            }
+            else
+            {
+                //lbl_messageUsers.Visible = true;
+                //lbl_messageUsers.Text = "No Session";
+                return;
 
-            //ViewAbstractToEvaluation sv = Session["ViewAbstractToEvaluation"];
-            //UserId = sv.userId;
-            //SubmissionTypeId = sv.SubmissionTypeId;
-            //EvaluationID = sv.EvaluationId;
+            }
 
 
 
@@ -288,13 +293,13 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             
             //FormMode = "Consensus";
             //FormMode = "Comparison";
-            UserId = new Guid("3D44C55B-CAB7-4E1F-82BD-62B50B97619E");
+            //UserId = new Guid("3D44C55B-CAB7-4E1F-82BD-62B50B97619E");
 
 
             // For testing view mode / coder evaluation
             //DisplayMode = "View"; FormMode = "Coder Evaluation"; AbstractID = 1; SubmissionID = 1; SubmissionTypeId = 1; EvaluationID = 1;
             // For testing insert mode / coder evaluation
-            DisplayMode = "Insert"; FormMode = "Coder Evaluation"; AbstractID = 1; SubmissionID = 1; SubmissionTypeId = 1; EvaluationID = 1;
+            //DisplayMode = "Insert"; FormMode = "Coder Evaluation"; AbstractID = 1; SubmissionID = 1; SubmissionTypeId = 1; EvaluationID = 1;
 
             
             
@@ -323,7 +328,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
             // For testing insert mode / ODP Staff Member Comparison
             //DisplayMode = "Insert"; FormMode = "ODP Staff Member Comparison"; AbstractID = 3; SubmissionID = 21; SubmissionTypeId = 5; EvaluationID = 11;
-
+            loadSession();
             startConsensus();
             performSecurityChecks();
             loadAbstractInfo();
