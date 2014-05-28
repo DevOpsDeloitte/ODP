@@ -32,11 +32,9 @@
                              CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required." 
                              ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
 
-                        <asp:Button ID="LoginButton" runat="server" class="button" CommandName="Login" Text="Log In" 
+                        <asp:Button ID="LoginButton" runat="server" class="button" CommandName="Login" Text="Log In" ValidationGroup=" LoginUserValidationGroup" onclick="LoginButton_Click"/>
                         <asp:CheckBox ID="RememberMe" runat="server"/>
                         <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Keep me logged in</asp:Label>
-                        ValidationGroup="LoginUserValidationGroup" onclick="LoginButton_Click"/>
-
                         <asp:HyperLink ID="hl_forgot_password" runat="server" class="forgot-password" Text="Forgot your password?" NavigateUrl="ForgotPassword.aspx" />
                     
                 </fieldset>
