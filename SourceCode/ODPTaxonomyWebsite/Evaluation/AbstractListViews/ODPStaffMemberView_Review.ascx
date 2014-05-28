@@ -1,13 +1,21 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Review.ascx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Review" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Review.ascx.cs"
+    Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Review" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
     Assembly="ODPTaxonomyWebsite" %>
 <h2>
     View Abstracts in Review</h2>
+    <asp:Button runat="server" text="Remove from Review" OnClick="RemoveFromReviewHandler" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
-    GridLines="None" CssClass="AbstractViewTable" OnRowDataBound="AbstractListRowBindingHandle">
+    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped" OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>
+        <asp:TemplateField>
+            <ItemTemplate>
+                <asp:CheckBox runat="server" ID="Review" />
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:BoundField DataField="AbstractID" HeaderText="ID" />
         <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" SortExpression="ApplicationID" />
-        <asp:BoundField DataField="StatusDate" HeaderText="Status Date" SortExpression="Date" />
+        <asp:BoundField DataField="StatusDateDisplay" HeaderText="Status Date" SortExpression="Date" />
         <asp:TemplateField HeaderText="Title" SortExpression="Title">
             <ItemTemplate>
                 <asp:Panel runat="server" ID="TitleWrapper" CssClass="title-wrapper">
@@ -31,3 +39,4 @@
         <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
     </Columns>
 </odp:AbstractGridView>
+<asp:Button runat="server" text="Remove from Review" OnClick="RemoveFromReviewHandler" />

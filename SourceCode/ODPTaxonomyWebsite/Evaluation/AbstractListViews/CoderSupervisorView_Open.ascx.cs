@@ -14,22 +14,17 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.Visible)
+                return;
+
             // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
 
             try
             {
-                string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-                DataJYDataContext db = new DataJYDataContext(connString);
+                var abstracts = GetParentAbstracts();
 
-                var abstracts = GetTableData();
-
-                foreach (AbstractListRow abs in abstracts)
-                {
-                    abs.FillKappaValues();
-                }
-
-                AbstractViewGridView.DataSource = abstracts;
+                AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -38,31 +33,38 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> GetTableData(string sort = "Date", SortDirection direction = SortDirection.Ascending)
+        protected List<AbstractListRow> GetParentAbstracts(string sort = "Date", SortDirection direction = SortDirection.Ascending)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
 
             var data = from a in db.Abstracts
-                       /* get status */
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                        where (
                           (h.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1 ||
                           h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A) &&
-                          h.CreatedDate == db.AbstractStatusChangeHistories
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
-                           .Select(h2 => h2.CreatedDate).Max()
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
                            )
                        select new AbstractListRow
                        {
                            AbstractID = a.AbstractID,
-                           ProjectTitle = a.ProjectTitle,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            ApplicationID = a.ApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
-                           StatusDate = h.CreatedDate
+                           StatusDate = h.CreatedDate,
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
                        };
+
+            if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
+            {
+                sort = AbstractViewGridView.Attributes["CurrentSortExp"];
+                direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
+            }
 
             switch (sort)
             {
@@ -98,6 +100,81 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
+        protected List<AbstractListRow> ProcessAbstracts(List<AbstractListRow> ParentAbstracts)
+        {
+            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
+            AbstractListViewData data = new AbstractListViewData();
+
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+                ParentAbstracts[i].GetComment();
+                ParentAbstracts[i].GetUnableToCode();
+                ParentAbstracts[i].GetAbstractScan();
+
+                // gets all kappa data for abstract
+                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
+
+                if (KappaData.Count() > 0)
+                {
+                    // fill in k1 value
+                    Abstracts.Add(data.FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));
+
+                    // get coder evaluation row
+                    // and fill in k2 - k4 value
+                    var CoderEvaluation = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                    if (CoderEvaluation != null && CoderEvaluation.TeamID != null)
+                    {
+                        var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluation.TeamID.Value);
+                        if (CoderKapperIdentities.Count() > 0)
+                        {
+                            foreach (var iden in CoderKapperIdentities)
+                            {
+                                foreach (var kappa in KappaData)
+                                {
+                                    if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // fill in k5 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
+                        {
+                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Staff"));
+                        }
+                    }
+
+                    // fill in k9 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
+                        {
+                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP vs. Coder"));
+                        }
+                    }
+                }
+                else
+                {
+                    Abstracts.Add(ParentAbstracts[i]);
+                }
+            }
+
+            return Abstracts;
+        }
+        
         protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
         {
 
@@ -127,9 +204,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 AbstractViewGridView.Attributes["CurrentSortDir"] = e.SortDirection == SortDirection.Ascending ? "ASC" : "DESC";
             }
 
-            var abstracts = GetTableData(SortExpression, SortDirection);
+            var abstracts = GetParentAbstracts(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = abstracts;
+            AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
             AbstractViewGridView.DataBind();
         }
     }

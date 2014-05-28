@@ -26,20 +26,29 @@
   ================================================== -->     
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
+    
+    <!-- Favicons
+  ================================================== -->
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <link rel="apple-touch-icon" href="~/Images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Images/apple-touch-icon-114x114.png">
 </head>
 <body class="cbp-spmenu-push">
 <form id="Form1" runat="server">
         <div id="header_container">
             <div class="header">
-                <button id="showLeftPush" class="button">Menu</button>
+            <h1>ODP Taxonomy</h1>
+                <a href="#" id="showLeftPush" class="button">Menu</a>
+                
                 <div class="login-display">
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <AnonymousTemplate>
                             <a href="~/Login.aspx" ID="HeadLoginStatus" runat="server" class="button">Log In</a>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
-                            Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
-                            [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/> ]
+                            Welcome <asp:LoginName ID="HeadLoginName" runat="server" />
+                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
@@ -47,32 +56,36 @@
         </div>
 
 <div class="container">
-    
-        
-
-        <div class="sixteen columns title"> 
-            <h1 class="center">ODP Taxonomy</h1>
-            <span class="subtitle">LOGIN</span>
-            <span class="subtitle">Please enter your user name and password.</span>
+       <div class="sixteen columns title"> 
+            
         </div>
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 
                         <a href="/Default.aspx">Home</a>
-                        <div runat="server" visible="false" id="pnl_admin">Role: Admin</div>
+                        
+                        <div runat="server" visible="false" id="pnl_admin"><div class="nav-role">Role: Admin</div>
                             <asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" />
-                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" />                                
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" />
+                        </div>                                    
                        
-                        <div runat="server" visible="false" id="pnl_odpSup">Role: ODP Suprvisor</div>
+                        <div runat="server" visible="false" id="pnl_odpSup"><div class="nav-role">Role: ODP Suprvisor</div>
                             <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></a>
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" />
-                        <div runat="server" visible="false" id="pnl_odp">Role: ODP Staff Member</div>
+                        </div>
+
+                        <div runat="server" visible="false" id="pnl_odp"><div class="nav-role">Role: ODP Staff Member</div>
                             <asp:LinkButton OnClick="btn_viewAbstractList_odp_Click" runat="server" ID="btn_viewAbstractList_odp" Text="View Abstract List" />
-                        <div runat="server" visible="false" id="pnl_coderSup">Role: Coder Supervisor</div>
+                        </div>
+
+                        <div runat="server" visible="false" id="pnl_coderSup"><div class="nav-role">Role: Coder Supervisor</div>
                             <asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" />
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /> 
                             <asp:LinkButton OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" />
-                        <div runat="server" visible="false" id="pnl_coder">Role: Coder</div>
+                        </div>
+
+                        <div runat="server" visible="false" id="pnl_coder"><div class="nav-role">Role: Coder</div>
                         <asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" />
+                        </div>
         </nav>                
 
         <div class="sixteen columns">
@@ -86,8 +99,9 @@
 
 <!-- JS
 ================================================== -->
-<script src="Scripts/jquery.js"></script>
-<script src="Scripts/classie.js"></script>   
+<script src="/Scripts/jquery.js"></script>
+<script src="/Scripts/classie.js"></script>
+<script src="/Scripts/persist.js"></script>     
         <script type="text/javascript">
                 <!--
             function showMenu() {

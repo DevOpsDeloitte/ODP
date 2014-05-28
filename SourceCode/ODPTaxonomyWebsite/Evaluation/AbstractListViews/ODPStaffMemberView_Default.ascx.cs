@@ -8,6 +8,7 @@ using System.Configuration;
 
 using ODPTaxonomyDAL_JY;
 using ODPTaxonomyUtility_TT;
+using System.Web.Security;
 
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
@@ -15,23 +16,16 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // bind gridview sort event
+            if (!this.Visible)
+                return;
+
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
-
-            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-            AbstractListViewData data = new AbstractListViewData(connString);
-            DataJYDataContext db = new DataJYDataContext(connString);
-
-            List<AbstractListRow> abstracts = new List<AbstractListRow>();
 
             try
             {
-                /**
-                 * Grabs abstract and other related data
-                 */
-                var parentAbstracts = GetTableData();
-                
-                AbstractViewGridView.DataSource = ProcessTableData(parentAbstracts);
+                var parentAbstracts = GetParentAbstracts();
+
+                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -40,42 +34,39 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> GetTableData(string sort = "Date", SortDirection direction = SortDirection.Ascending)
+        protected List<AbstractListRow> GetParentAbstracts(string sort = "Date", SortDirection direction = SortDirection.Ascending)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
 
             var data = from a in db.Abstracts
-                       /* get status */
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                       join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
-                       join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
-                       join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
-                       from scn in evscn.DefaultIfEmpty()
                        where (
                           (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
-                          h.CreatedDate == db.AbstractStatusChangeHistories
+                          h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B) &&
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
-                           .Select(h2 => h2.CreatedDate).Max() &&
-                          ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                          sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_CONSENSUS
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
                            )
                        select new AbstractListRow
                        {
                            AbstractID = a.AbstractID,
-                           ProjectTitle = a.ProjectTitle,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            ApplicationID = a.ApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
-                           SubmissionID = sb.SubmissionID,
                            EvaluationID = h.EvaluationId,
-                           Comment = sb.comments,
-                           AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
                        };
+
+            if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
+            {
+                sort = AbstractViewGridView.Attributes["CurrentSortExp"];
+                direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
+            }
 
             switch (sort)
             {
@@ -111,36 +102,50 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> ProcessTableData(List<AbstractListRow> ParentAbstracts)
+        protected List<AbstractListRow> ProcessAbstracts(List<AbstractListRow> ParentAbstracts)
         {
+            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
             AbstractListViewData data = new AbstractListViewData();
-
-            List<AbstractListRow> abstracts = new List<AbstractListRow>();
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
-                abstracts.Add(ParentAbstracts[i]);
+                ParentAbstracts[i].GetComment();
+                ParentAbstracts[i].GetUnableToCode();
+                ParentAbstracts[i].GetAbstractScan();
 
-                if ((ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                    ParentAbstracts[i].AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B) &&
-                    ParentAbstracts[i].EvaluationID != null)
+                // gets all kappa data for abstract
+                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
+
+                if (KappaData.Count() > 0)
                 {
-                    // ODP Staff vs Coder consensus row
-                    var odpStaffCoderConsensus = data.GetODPStaffAndCoderConsensus_2C(ParentAbstracts[i].AbstractID);
-                    abstracts.AddRange(odpStaffCoderConsensus);
+                    // fill in k1 value
+                    Abstracts.Add(data.FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));
 
-                    // ODP Consensus
-                    var odpConsensus = data.GetODPConsensusWithNotes_2N(ParentAbstracts[i].AbstractID);
-                    abstracts.AddRange(odpConsensus);
+                    // fill in k5 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
+                        {
+                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Staff"));
+                        }
+                    }
+
+                    // fill in k9 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
+                        {
+                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP vs. Coder"));
+                        }
+                    }
+                }
+                else
+                {
+                    Abstracts.Add(ParentAbstracts[i]);
                 }
             }
 
-            foreach (AbstractListRow abs in abstracts)
-            {
-                abs.FillKappaValues();
-            }
-
-            return abstracts;
+            return Abstracts;
         }
 
         protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
@@ -148,7 +153,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             AbstractListRow item = e.Row.DataItem as AbstractListRow;
             Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
             HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
+            CheckBox ToReview = e.Row.FindControl("ToReview") as CheckBox;
 
+            // check attachment
             if (item != null && TitleWrapper != null && AbstractScanLink != null)
             {
                 if (!string.IsNullOrEmpty(item.AbstractScan))
@@ -162,6 +169,20 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 else
                 {
                     AbstractScanLink.Visible = false;
+                }
+            }
+
+            // checkbox for review list
+            if (item != null && ToReview != null)
+            {
+                AbstractListViewData data = new AbstractListViewData();
+                if (data.IsAbstractInReview(item.AbstractID))
+                {
+                    ToReview.Visible = false;
+                }
+                else
+                {
+                    ToReview.Visible = item.IsParent;
                 }
             }
         }
@@ -190,10 +211,37 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 AbstractViewGridView.Attributes["CurrentSortDir"] = e.SortDirection == SortDirection.Ascending ? "ASC" : "DESC";
             }
 
-            var abstracts = GetTableData(SortExpression, SortDirection);
+            var abstracts = GetParentAbstracts(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = ProcessTableData(abstracts);
+            AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
             AbstractViewGridView.DataBind();
+        }
+
+        protected void AddtoReviewHandler(object sender, EventArgs e)
+        {
+            AbstractListViewData data = new AbstractListViewData();
+            MembershipUser user = Membership.GetUser();
+            List<AbstractListRow> Abstracts = AbstractViewGridView.DataSource as List<AbstractListRow>;
+
+            if (Abstracts != null)
+            {
+                foreach (GridViewRow row in AbstractViewGridView.Rows)
+                {
+                    CheckBox ToReview = row.FindControl("ToReview") as CheckBox;
+                    if (ToReview != null && ToReview.Checked)
+                    {
+                        if (data.IsAbstractInReview(Abstracts[row.DataItemIndex].AbstractID) == false)
+                        {
+                            data.AddAbstractToReview(Abstracts[row.DataItemIndex].AbstractID, (Guid)user.ProviderUserKey);
+                        }
+                    }
+                }
+
+                var parentAbstracts = GetParentAbstracts();
+
+                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
+                AbstractViewGridView.DataBind();
+            }
         }
     }
 }

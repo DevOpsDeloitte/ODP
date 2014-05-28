@@ -14,19 +14,17 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!this.Visible)
+                return;
+
             // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
 
             try
             {
-                var parentAbstracts = GetTableData();
+                var parentAbstracts = GetParentAbstracts();
 
-                foreach (AbstractListRow abs in parentAbstracts)
-                {
-                    abs.FillKappaValues();
-                }
-
-                AbstractViewGridView.DataSource = parentAbstracts;
+                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -35,42 +33,39 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> GetTableData(string sort = "Date", SortDirection direction = SortDirection.Ascending)
+        protected List<AbstractListRow> GetParentAbstracts(string sort = "Date", SortDirection direction = SortDirection.Ascending)
         {
-            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-            DataJYDataContext db = new DataJYDataContext(connString);
+            string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connStr);
 
             var data = from a in db.Abstracts
-                       /* get status */
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
-                       join ev in db.Evaluations on h.EvaluationId equals ev.EvaluationId
-                       join sb in db.Submissions on h.EvaluationId equals sb.EvaluationId
-                       join scn in db.AbstractScans on h.EvaluationId equals scn.EvaluationId into evscn
-                       from scn in evscn.DefaultIfEmpty()
                        where (
                           (h.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 ||
                           h.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A) &&
-                          h.CreatedDate == db.AbstractStatusChangeHistories
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
-                           .Select(h2 => h2.CreatedDate).Max() &&
-                          ev.EvaluationTypeId == (int)EvaluationTypeEnum.ODP_EVALUATION &&
-                          sb.SubmissionTypeId == (int)SubmissionTypeEnum.ODP_STAFF_CONSENSUS
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
                            )
                        select new AbstractListRow
                        {
                            AbstractID = a.AbstractID,
-                           ProjectTitle = a.ProjectTitle,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            ApplicationID = a.ApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
-                           SubmissionID = sb.SubmissionID,
                            EvaluationID = h.EvaluationId,
-                           Comment = sb.comments,
-                           AbstractScan = scn.FileName,
-                           UnableToCode = sb.UnableToCode
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
                        };
+
+            if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
+            {
+                sort = AbstractViewGridView.Attributes["CurrentSortExp"];
+                direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
+            }
 
             switch (sort)
             {
@@ -103,6 +98,110 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                         return data.OrderByDescending(d => d.StatusDate).ToList();
                     }
             }
+        }
+        
+        protected List<AbstractListRow> ProcessAbstracts(List<AbstractListRow> ParentAbstracts)
+        {
+            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
+            AbstractListViewData data = new AbstractListViewData();
+
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+                ParentAbstracts[i].GetComment();
+                ParentAbstracts[i].GetUnableToCode();
+                ParentAbstracts[i].GetAbstractScan();
+
+                // gets all kappa data for abstract
+                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
+
+                if (KappaData.Count() > 0)
+                {
+                    // fill in k1 value
+                    Abstracts.Add(data.FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));
+
+                    // get coder evaluation row
+                    // and fill in k2 - k4 value
+                    var CoderEvaluation = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                    if (CoderEvaluation != null && CoderEvaluation.TeamID != null)
+                    {
+                        var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluation.TeamID.Value);
+                        if (CoderKapperIdentities.Count() > 0)
+                        {
+                            foreach (var iden in CoderKapperIdentities)
+                            {
+                                foreach (var kappa in KappaData)
+                                {
+                                    if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // fill in k5 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
+                        {
+                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Staff"));
+                        }
+                    }
+
+                    // get odp staff evaluation row
+                    // and fill in k6 - k8 value
+                    var ODPEvaluation = data.GetODPEvaluations(ParentAbstracts[i].AbstractID);
+                    if (ODPEvaluation != null && ODPEvaluation.TeamID != null)
+                    {
+                        var ODPCoderKapperIdentities = data.GetKappaIdentities(ODPEvaluation.TeamID.Value);
+                        if (ODPCoderKapperIdentities.Count() > 0)
+                        {
+                            foreach (var iden in ODPCoderKapperIdentities)
+                            {
+                                foreach (var kappa in KappaData)
+                                {
+                                    if (iden.UserAlias == "ODPA" && kappa.KappaTypeID == (int)KappaTypeEnum.K6)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // fill in k9 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
+                        {
+                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP vs. Coder"));
+                        }
+                    }
+                }
+                else
+                {
+                    Abstracts.Add(ParentAbstracts[i]);
+                }
+            }
+
+            return Abstracts;
         }
 
         protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
@@ -152,9 +251,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 AbstractViewGridView.Attributes["CurrentSortDir"] = e.SortDirection == SortDirection.Ascending ? "ASC" : "DESC";
             }
 
-            var abstracts = GetTableData(SortExpression, SortDirection);
+            var abstracts = GetParentAbstracts(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = abstracts;
+            AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
             AbstractViewGridView.DataBind();
         }
     }

@@ -2,28 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 
 namespace ODPTaxonomyDAL_JY
 {
     public class AbstractListRow
     {
+        /**
+         * Determine if a row is a parent row
+         */
+        public bool IsParent { get; set; }
+
         public int AbstractID { get; set; }
         public int? ApplicationID { get; set; }
 
-        private string _ProjectTitle;
-        public string ProjectTitle
-        {
-            get
-            {
-                string title = _ProjectTitle;
-                title += !string.IsNullOrEmpty(AbstractStatusCode) ? " (" + AbstractStatusCode + ")" : "";
-                return title;
-            }
-            set
-            {
-                _ProjectTitle = value;
-            }
-        }
+        public string ProjectTitle { get; set; }
 
         public int? TeamID { get; set; }
         public Guid? UserID { get; set; }
@@ -36,11 +29,20 @@ namespace ODPTaxonomyDAL_JY
         public int AbstractStatusID { get; set; }
         public string AbstractStatusCode { get; set; }
         public DateTime? StatusDate { get; set; }
+        public string StatusDateDisplay
+        {
+            get
+            {
+                return this.StatusDate != null ? this.StatusDate.Value.ToString("d") : "";
+            }
+        }
 
         public string AbstractScan { get; set; }
 
         public bool UnableToCode { get; set; }
 
+        public string KappaCoderAlias { get; set; }
+        public KappaTypeEnum KappaType { get; set; }
         public string A1 { get; set; }
         public string A2 { get; set; }
         public string A3 { get; set; }
@@ -53,84 +55,78 @@ namespace ODPTaxonomyDAL_JY
 
         public AbstractListRow()
         {
-
+            this.IsParent = false;
         }
 
-        public void FillKappaValues()
+        public SubmissionTypeEnum GetSubmissionType()
         {
-            AbstractListViewData data = new AbstractListViewData();
+            SubmissionTypeEnum SubmissionType = SubmissionTypeEnum.NA;
 
-            string specifier = "#.##";
-            KappaData kappa = null;
-
-            if (this.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B)
+            switch ((AbstractStatusEnum)this.AbstractStatusID)
             {
-                kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_COMPARISON_K1);
-            }
-            else if (this.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B)
-            {
-                kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_COMPARISON_K5);
-            }
-            else if (this.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C)
-            {
-                kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_CONSENSUS_VS_ODP_CONSENSUS_K9);
-            }
-            else if (this.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_CODER_1A)
-            {
-                string KappaCoderAlias = data.GetKappaCoderAlias((Guid)this.UserID, (int)this.TeamID);
-
-                if (!string.IsNullOrEmpty(KappaCoderAlias))
-                {
-                    switch (KappaCoderAlias)
-                    {
-                        case "CdrA":
-                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_A_VS_CONSENSUS_K2);
-                            break;
-                        case "CdrB":
-                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_B_VS_CONSENSUS_K3);
-                            break;
-                        case "CdrC":
-                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.CODER_C_VS_CONSENSUS_K4);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-            else if (this.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A)
-            {
-                string KappaCoderAlias = data.GetKappaCoderAlias((Guid)this.UserID, (int)this.TeamID);
-
-                if (!string.IsNullOrEmpty(KappaCoderAlias))
-                {
-                    switch (KappaCoderAlias)
-                    {
-                        case "CdrA":
-                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_A_VS_CONSENSUS_K6);
-                            break;
-                        case "CdrB":
-                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_B_VS_CONSENSUS_K7);
-                            break;
-                        case "CdrC":
-                            kappa = data.GetKappaData(this.AbstractID, (int)KappaTypeEnum.ODP_STAFF_C_VS_CONSENSUS_K8);
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                case AbstractStatusEnum.CODED_BY_CODER_1A:
+                    SubmissionType = SubmissionTypeEnum.CODER_EVALUATION;
+                    break;
+                case AbstractStatusEnum.CODED_BY_ODP_STAFF_2A:
+                    SubmissionType = SubmissionTypeEnum.ODP_STAFF_EVALUATION;
+                    break;
+                case AbstractStatusEnum.CONSENSUS_COMPLETE_1B:
+                case AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N:
+                    SubmissionType = SubmissionTypeEnum.CODER_CONSENSUS;
+                    break;
+                case AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N:
+                case AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B:
+                    SubmissionType = SubmissionTypeEnum.ODP_STAFF_CONSENSUS;
+                    break;
+                default:
+                    break;
             }
 
-            if (kappa != null)
+            return SubmissionType;
+        }
+
+        public void GetComment()
+        {
+            if (this.EvaluationID != null)
             {
-                this.A1 = ((decimal)(kappa.A1)).ToString(specifier);
-                this.A2 = ((decimal)(kappa.A2)).ToString(specifier);
-                this.A3 = ((decimal)(kappa.A3)).ToString(specifier);
-                this.B = ((decimal)(kappa.B)).ToString(specifier);
-                this.C = ((decimal)(kappa.C)).ToString(specifier);
-                this.D = ((decimal)(kappa.D)).ToString(specifier);
-                this.E = ((decimal)(kappa.E)).ToString(specifier);
-                this.F = ((decimal)(kappa.F)).ToString(specifier);
-                this.G = this.UnableToCode ? "Y" : "N";
+                string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                DataJYDataContext db = new DataJYDataContext(connStr);
+
+                SubmissionTypeEnum SubmissionType = GetSubmissionType();
+
+                this.Comment = (from s in db.Submissions
+                                where s.EvaluationId == this.EvaluationID &&
+                                s.SubmissionTypeId == (int)SubmissionType
+                                select s.comments).FirstOrDefault();
+            }
+        }
+
+        public void GetUnableToCode()
+        {
+            if (this.EvaluationID != null)
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                DataJYDataContext db = new DataJYDataContext(connStr);
+
+                SubmissionTypeEnum SubmissionType = GetSubmissionType();
+
+                this.G = (from s in db.Submissions
+                          where s.EvaluationId == this.EvaluationID &&
+                          s.SubmissionTypeId == (int)SubmissionType
+                          select s.UnableToCode).FirstOrDefault() ? "Y" : "";
+            }
+        }
+
+        public void GetAbstractScan()
+        {
+            if (this.EvaluationID != null)
+            {
+                string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                DataJYDataContext db = new DataJYDataContext(connStr);
+
+                this.AbstractScan = (from s in db.AbstractScans
+                                     where s.EvaluationId == this.EvaluationID
+                                     select s.FileName).FirstOrDefault();
             }
         }
     }

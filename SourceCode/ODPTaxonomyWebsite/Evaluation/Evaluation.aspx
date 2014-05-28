@@ -1,9 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Evaluation.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.Evaluation" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Eval.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.Evaluation" %>
+
+<%@ Register Src="~/Evaluation/Controls/EvaluationControl.ascx" TagPrefix="uc1" TagName="EvaluationControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <title>Evaluation Form</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <h2>
-        Evaluation Form
-    </h2>
-    <p><asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label></p>
+    <uc1:EvaluationControl runat="server" ID="EvaluationControl" />
 </asp:Content>
