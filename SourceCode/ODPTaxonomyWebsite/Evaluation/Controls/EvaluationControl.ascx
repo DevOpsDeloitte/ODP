@@ -24,8 +24,7 @@
 
     <div class="sixteen columns header"> 
         <h1 class="center">Prevention Taxonomy Form</h1>
-        <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN</span>
-        <span class="subtitle">(TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
+        <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN (TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
 
