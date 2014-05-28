@@ -138,27 +138,27 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
         {
             AbstractListViewData data = new AbstractListViewData();
             MembershipUser user = Membership.GetUser();
-            List<AbstractListRow> Abstracts = AbstractViewGridView.DataSource as List<AbstractListRow>;
 
-            if (Abstracts != null)
+            foreach (GridViewRow row in AbstractViewGridView.Rows)
             {
-                foreach (GridViewRow row in AbstractViewGridView.Rows)
+                CheckBox ToReview = row.FindControl("ToReview") as CheckBox;
+                HiddenField AbstractIDField = row.FindControl("AbstractID") as HiddenField;
+                int AbstractID = 0;
+
+                if (ToReview != null && ToReview.Checked &&
+                    AbstractIDField != null && int.TryParse(AbstractIDField.Value, out AbstractID))
                 {
-                    CheckBox ToReview = row.FindControl("ToReview") as CheckBox;
-                    if (ToReview != null && ToReview.Checked)
+                    if (data.IsAbstractInReview(AbstractID) == false)
                     {
-                        if (data.IsAbstractInReview(Abstracts[row.DataItemIndex].AbstractID) == false)
-                        {
-                            data.AddAbstractToReview(Abstracts[row.DataItemIndex].AbstractID, (Guid)user.ProviderUserKey);
-                        }
+                        data.AddAbstractToReview(AbstractID, (Guid)user.ProviderUserKey);
                     }
                 }
-
-                var parentAbstracts = GetParentAbstracts();
-
-                AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
-                AbstractViewGridView.DataBind();
             }
+
+            var parentAbstracts = GetParentAbstracts();
+
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
+            AbstractViewGridView.DataBind();
         }
     }
 }
