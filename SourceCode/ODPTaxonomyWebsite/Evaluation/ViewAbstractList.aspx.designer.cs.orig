@@ -13,31 +13,30 @@ namespace ODPTaxonomyWebsite.Evaluation {
     public partial class ViewAbstractList {
         
         /// <summary>
-        /// lbl_messageUsers control.
+        /// MainviewDDL control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_messageUsers;
+        protected global::System.Web.UI.WebControls.DropDownList MainviewDDL;
         
         /// <summary>
-        /// btn_print control.
+        /// SubviewPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_print;
+        protected global::System.Web.UI.WebControls.Panel SubviewPanel;
         
         /// <summary>
-        /// btn_code control.
+        /// SubviewLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.Label SubviewLabel;
         
         /// <summary>
@@ -48,6 +47,23 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList SubviewDDL;
+        
+        /// <summary>
+<<<<<<< HEAD
+        /// Label1 control.
+=======
+        /// PagerWrapper control.
+>>>>>>> 4999fc2a75c66184ead927fee93bc3779d31b1b2
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+<<<<<<< HEAD
+        protected global::System.Web.UI.WebControls.Label Label1;
+=======
+        protected global::System.Web.UI.WebControls.Panel PagerWrapper;
+>>>>>>> 4999fc2a75c66184ead927fee93bc3779d31b1b2
         
         /// <summary>
         /// PagerSizeDDL control.
@@ -129,8 +145,5 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.AdminView AdminView;
-=======
-        protected global::System.Web.UI.WebControls.Button btn_code;
->>>>>>> origin/ttDEV
     }
 }
