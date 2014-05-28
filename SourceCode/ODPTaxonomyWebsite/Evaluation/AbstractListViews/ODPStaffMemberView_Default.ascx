@@ -1,15 +1,15 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Default.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Default" %>
-<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
+<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
+    Assembly="ODPTaxonomyWebsite" %>
 <h2>
     View Abstracts</h2>
-<asp:Button runat="server" Text="Add to Review" OnClick="AddtoReviewHandler" />
+    <asp:Button runat="server" text="Add to Review" OnClick="AddtoReviewHandler" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
-    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
+    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped" OnRowDataBound="AbstractListRowBindingHandle">
     <Columns>
         <asp:TemplateField>
             <ItemTemplate>
-                <asp:HiddenField runat="server" ID="AbstractID" Value='<%#Eval("AbstractID") %>' />
                 <asp:CheckBox runat="server" ID="ToReview" />
             </ItemTemplate>
         </asp:TemplateField>
@@ -39,4 +39,4 @@
         <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
     </Columns>
 </odp:AbstractGridView>
-<asp:Button runat="server" Text="Add to Review" OnClick="AddtoReviewHandler" />
+<asp:Button runat="server" text="Add to Review" OnClick="AddtoReviewHandler" />

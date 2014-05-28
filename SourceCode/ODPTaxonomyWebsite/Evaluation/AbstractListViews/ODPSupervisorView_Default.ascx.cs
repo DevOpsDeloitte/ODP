@@ -17,15 +17,14 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             if (!this.Visible)
                 return;
 
+            // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
-            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
-            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
                 var parentAbstracts = GetParentAbstracts();
 
-                AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
+                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -100,6 +99,133 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
+        protected List<AbstractListRow> ProcessAbstracts(List<AbstractListRow> ParentAbstracts)
+        {
+            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
+            AbstractListViewData data = new AbstractListViewData();
+
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+                ParentAbstracts[i].GetComment();
+                ParentAbstracts[i].GetUnableToCode();
+                ParentAbstracts[i].GetAbstractScan();
+
+                // gets all kappa data for abstract
+                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
+
+                if (KappaData.Count() > 0)
+                {
+                    // fill in k1 value
+                    Abstracts.Add(data.FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));
+
+                    // get coder evaluation row
+                    // and fill in k2 - k4 value
+                    var CoderEvaluation = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                    if (CoderEvaluation != null && CoderEvaluation.TeamID != null)
+                    {
+                        var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluation.TeamID.Value);
+                        if (CoderKapperIdentities.Count() > 0)
+                        {
+                            foreach (var iden in CoderKapperIdentities)
+                            {
+                                foreach (var kappa in KappaData)
+                                {
+                                    if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "Coder: " + iden.UserName));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // fill in k5 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
+                        {
+                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Staff"));
+                        }
+                    }
+
+                    // get odp staff evaluation row
+                    // and fill in k6 - k8 value
+                    var ODPEvaluation = data.GetODPEvaluations(ParentAbstracts[i].AbstractID);
+                    if (ODPEvaluation != null && ODPEvaluation.TeamID != null)
+                    {
+                        var ODPCoderKapperIdentities = data.GetKappaIdentities(ODPEvaluation.TeamID.Value);
+                        if (ODPCoderKapperIdentities.Count() > 0)
+                        {
+                            foreach (var iden in ODPCoderKapperIdentities)
+                            {
+                                foreach (var kappa in KappaData)
+                                {
+                                    if (iden.UserAlias == "ODPA" && kappa.KappaTypeID == (int)KappaTypeEnum.K6)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName));
+                                    }
+                                    else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
+                                    {
+                                        Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName));
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // fill in k9 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
+                        {
+                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP vs. Coder"));
+                        }
+                    }
+                }
+                else
+                {
+                    Abstracts.Add(ParentAbstracts[i]);
+                }
+            }
+
+            return Abstracts;
+        }
+
+        protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
+        {
+            AbstractListRow item = e.Row.DataItem as AbstractListRow;
+            Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
+            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
+
+            if (item != null && TitleWrapper != null && AbstractScanLink != null)
+            {
+                if (!string.IsNullOrEmpty(item.AbstractScan))
+                {
+                    TitleWrapper.CssClass += " has-file";
+
+                    AbstractScanLink.ToolTip = item.AbstractScan;
+                    AbstractScanLink.NavigateUrl = "#";
+                    AbstractScanLink.Visible = true;
+                }
+                else
+                {
+                    AbstractScanLink.Visible = false;
+                }
+            }
+        }
+
         protected void AbstractSortHandler(object sender, GridViewSortEventArgs e)
         {
             string SortExpression = e.SortExpression;
@@ -125,9 +251,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
 
             var abstracts = GetParentAbstracts(SortExpression, SortDirection);
-            AbstractListViewData data = new AbstractListViewData();
 
-            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.ODPSupervisor);
+            AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
             AbstractViewGridView.DataBind();
         }
     }

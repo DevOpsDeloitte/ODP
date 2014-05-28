@@ -19,6 +19,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::ODPTaxonomyDAL_JY.AbstractGridView AbstractViewGridView;
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.AbstractGridView AbstractViewGridView;
     }
 }

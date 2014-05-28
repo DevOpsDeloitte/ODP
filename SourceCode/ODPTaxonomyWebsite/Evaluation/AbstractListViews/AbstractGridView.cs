@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
-namespace ODPTaxonomyDAL_JY
+namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
     public class AbstractGridView : GridView
     {

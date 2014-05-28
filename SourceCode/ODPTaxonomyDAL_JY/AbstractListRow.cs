@@ -6,12 +6,6 @@ using System.Configuration;
 
 namespace ODPTaxonomyDAL_JY
 {
-    public class SubmissionData
-    {
-        public string Comment { get; set; }
-        public bool UnableToCode { get; set; }
-    }
-
     public class AbstractListRow
     {
         /**
@@ -64,58 +58,63 @@ namespace ODPTaxonomyDAL_JY
             this.IsParent = false;
         }
 
-        public void GetSubmissionData(SubmissionTypeEnum SubmissionType)
+        public SubmissionTypeEnum GetSubmissionType()
         {
-            string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-            DataJYDataContext db = new DataJYDataContext(connStr);
+            SubmissionTypeEnum SubmissionType = SubmissionTypeEnum.NA;
 
-            var query = (from s in db.Submissions
-                         join e in db.Evaluations on s.EvaluationId equals e.EvaluationId
-                         where e.AbstractID == this.AbstractID && e.IsComplete == true &&
-                         s.SubmissionTypeId == (int)SubmissionType
-                         orderby s.SubmissionDateTime descending
-                         select new SubmissionData
-                         {
-                             UnableToCode = s.UnableToCode,
-                             Comment = s.comments
-                         }).FirstOrDefault();
-
-            if (query != null)
+            switch ((AbstractStatusEnum)this.AbstractStatusID)
             {
-                this.G = query.UnableToCode ? "UC" : "-";
-                this.Comment = query.Comment;
+                case AbstractStatusEnum.CODED_BY_CODER_1A:
+                    SubmissionType = SubmissionTypeEnum.CODER_EVALUATION;
+                    break;
+                case AbstractStatusEnum.CODED_BY_ODP_STAFF_2A:
+                    SubmissionType = SubmissionTypeEnum.ODP_STAFF_EVALUATION;
+                    break;
+                case AbstractStatusEnum.CONSENSUS_COMPLETE_1B:
+                case AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N:
+                    SubmissionType = SubmissionTypeEnum.CODER_CONSENSUS;
+                    break;
+                case AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N:
+                case AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B:
+                    SubmissionType = SubmissionTypeEnum.ODP_STAFF_CONSENSUS;
+                    break;
+                default:
+                    break;
             }
+
+            return SubmissionType;
         }
 
-        public void GetSubmissionData(SubmissionTypeEnum SubmissionType, Guid? UserID)
+        public void GetComment()
         {
-            if (UserID != null)
+            if (this.EvaluationID != null)
             {
                 string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
                 DataJYDataContext db = new DataJYDataContext(connStr);
 
-                var query = (from s in db.Submissions
-                             join e in db.Evaluations on s.EvaluationId equals e.EvaluationId
-                             where e.AbstractID == this.AbstractID && e.IsComplete == true &&
-                             s.SubmissionTypeId == (int)SubmissionType && s.UserId == UserID.Value
-                             orderby s.SubmissionDateTime descending
-                             select new SubmissionData
-                             {
-                                 UnableToCode = s.UnableToCode,
-                                 Comment = s.comments
-                             }).FirstOrDefault();
+                SubmissionTypeEnum SubmissionType = GetSubmissionType();
 
-                if (query != null)
-                {
-                    this.G = query.UnableToCode ? "UC" : "-";
-                    this.Comment = query.Comment;
-                }
+                this.Comment = (from s in db.Submissions
+                                where s.EvaluationId == this.EvaluationID &&
+                                s.SubmissionTypeId == (int)SubmissionType
+                                select s.comments).FirstOrDefault();
             }
-            else
+        }
+
+        public void GetUnableToCode()
+        {
+            if (this.EvaluationID != null)
             {
-                this.G = "-";
-            }
+                string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                DataJYDataContext db = new DataJYDataContext(connStr);
 
+                SubmissionTypeEnum SubmissionType = GetSubmissionType();
+
+                this.G = (from s in db.Submissions
+                          where s.EvaluationId == this.EvaluationID &&
+                          s.SubmissionTypeId == (int)SubmissionType
+                          select s.UnableToCode).FirstOrDefault() ? "Y" : "";
+            }
         }
 
         public void GetAbstractScan()
