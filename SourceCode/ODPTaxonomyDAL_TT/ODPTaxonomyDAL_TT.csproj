@@ -80,10 +80,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ODPTaxonomyCommon\ODPTaxonomyCommon.csproj">
-      <Project>{17BF1472-985E-449E-BBA7-D61118F82B6C}</Project>
-      <Name>ODPTaxonomyCommon</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ODPTaxonomyUtility_TT\ODPTaxonomyUtility_TT.csproj">
       <Project>{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}</Project>
       <Name>ODPTaxonomyUtility_TT</Name>

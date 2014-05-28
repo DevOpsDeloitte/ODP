@@ -23,7 +23,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     {
                         ViewAbstractToEvaluation values = (ViewAbstractToEvaluation)Session["ViewAbstractToEvaluation"];
                         lbl_messageUsers.Visible = true;
-                        lbl_messageUsers.Text = "User ID: " + values.UserId.ToString() + "; EvaluationId = " + values.EvaluationId.ToString() 
+                        lbl_messageUsers.Text = "User ID: " + values.UserId.ToString() + "; EvaluationId = " + values.EvaluationId.ToString()
                             + "; SubmissionTypeId = " + values.SubmissionTypeId.ToString() + "; Mode: " + values.ViewMode.ToString();
                         Session.Remove("ViewAbstractToEvaluation");
                     }

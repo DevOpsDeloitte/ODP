@@ -323,6 +323,10 @@
       <Project>{9D2949A2-EE38-4C9E-A0EB-7B16B17EA6BD}</Project>
       <Name>ODPTaxonomyAccountDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ODPTaxonomyCommon\ODPTaxonomyCommon.csproj">
+      <Project>{17BF1472-985E-449E-BBA7-D61118F82B6C}</Project>
+      <Name>ODPTaxonomyCommon</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ODPTaxonomyDAL_ST\ODPTaxonomyDAL_ST.csproj">
       <Project>{73402BC0-7AA0-4E57-BA70-0BC6E2ECA88A}</Project>
       <Name>ODPTaxonomyDAL_ST</Name>
