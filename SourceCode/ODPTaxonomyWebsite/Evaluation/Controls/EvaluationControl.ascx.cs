@@ -328,7 +328,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
             // For testing insert mode / ODP Staff Member Comparison
             //DisplayMode = "Insert"; FormMode = "ODP Staff Member Comparison"; AbstractID = 3; SubmissionID = 21; SubmissionTypeId = 5; EvaluationID = 11;
-            loadSession();
+            //loadSession();
             startConsensus();
             performSecurityChecks();
             loadAbstractInfo();
