@@ -5,12 +5,30 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace ODPTaxonomyDAL_JY
 {
     public static class AbstractListViewHelper
     {
         private static string KappaSpecifier = "#.##";
+
+        public static bool UserCanView(AbstractViewRole View)
+        {
+            switch (View)
+            {
+                case AbstractViewRole.Admin:
+                    return Roles.IsUserInRole("Admin");
+                case AbstractViewRole.CoderSupervisor:
+                    return Roles.IsUserInRole("CoderSupervisor");
+                case AbstractViewRole.ODPStaff:
+                    return Roles.IsUserInRole("ODPStaffMember");
+                case AbstractViewRole.ODPSupervisor:
+                    return Roles.IsUserInRole("ODPStaffSupervisor");
+            }
+
+            return false;
+        }
 
         public static IDictionary<int, string> GetViewRoles(List<string> UserRoles)
         {

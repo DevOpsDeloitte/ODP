@@ -38,6 +38,11 @@ namespace ODPTaxonomyWebsite.Evaluation
             AbstractViewRole Mainview = (AbstractViewRole)ViewInt;
             string Subview = !string.IsNullOrEmpty(Request.QueryString["subview"]) ? Request.QueryString["subview"] : "";
 
+            if (!AbstractListViewHelper.UserCanView(Mainview))
+            {
+                return;
+            }
+
             LoadViewDropDownData(ViewRoles, Mainview);
             LoadSubviewDropDownData(Mainview, Subview);
             RenderAbstractListView(Mainview, Subview);
