@@ -78,7 +78,11 @@
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
     <Content Include="ForgotPassword.aspx" />
+    <Content Include="Images\apple-touch-icon-114x114.png" />
+    <Content Include="Images\apple-touch-icon-72x72.png" />
+    <Content Include="Images\apple-touch-icon.png" />
     <Content Include="Images\clip.png" />
+    <Content Include="Images\favicon.ico" />
     <Content Include="Libraries\Newtonsoft.Json.dll" />
     <Content Include="Libraries\Newtonsoft.Json.pdb" />
     <Content Include="Libraries\Newtonsoft.Json.xml" />
@@ -98,6 +102,7 @@
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modules\module.js" />
+    <Content Include="Scripts\persist.js" />
     <Content Include="Styles\AbstractListView.css" />
     <Content Include="Styles\alertify.core.css" />
     <Content Include="Styles\alertify.css" />
