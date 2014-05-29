@@ -8,6 +8,7 @@ namespace ODPTaxonomyDAL_JY
 {
     public class SubmissionData
     {
+        public int SubmissionID { get; set; }
         public string Comment { get; set; }
         public bool UnableToCode { get; set; }
     }
@@ -29,7 +30,28 @@ namespace ODPTaxonomyDAL_JY
 
         public int? SubmissionID { get; set; }
         public string Comment { get; set; }
+        public bool Flag_E7 { get; set; }
+        public bool Flag_F6 { get; set; }
 
+        public string Flags
+        {
+            get
+            {
+                string flags = "";
+
+                if (!string.IsNullOrEmpty(this.Comment))
+                {
+                    flags += "Com, ";
+                }
+
+                if (this.Flag_E7 && this.Flag_F6)
+                {
+                    flags += "E7F6, ";
+                }
+
+                return flags.Trim(new char[] { ' ', ',' });
+            }
+        }
         public int? EvaluationID { get; set; }
 
         public int AbstractStatusID { get; set; }
@@ -76,6 +98,7 @@ namespace ODPTaxonomyDAL_JY
                          orderby s.SubmissionDateTime descending
                          select new SubmissionData
                          {
+                             SubmissionID = s.SubmissionID,
                              UnableToCode = s.UnableToCode,
                              Comment = s.comments
                          }).FirstOrDefault();
@@ -84,6 +107,9 @@ namespace ODPTaxonomyDAL_JY
             {
                 this.G = query.UnableToCode ? "UC" : "-";
                 this.Comment = query.Comment;
+
+                this.Flag_E7 = db.E_StudyDesignPurposeAnswers.Where(e => e.SubmissionID == query.SubmissionID).Count() > 0;
+                this.Flag_F6 = db.F_PreventionCategoryAnswers.Where(f => f.SubmissionID == query.SubmissionID).Count() > 0;
             }
         }
 
