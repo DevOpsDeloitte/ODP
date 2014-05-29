@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web;
+using System.Web.Security;
 using System.IO;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -24,6 +25,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
         public Guid userID;
         public string formmode = string.Empty;
         public string comments = string.Empty;
+        public string superusername = string.Empty;
+        public string superpassword = string.Empty;
+        public Guid superuserID;
         public List<nvClass> formVals = null;
         public List<nvClass> NVs = null;
         DataDataContext db;
@@ -209,7 +213,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             db.SubmitChanges();
         }
 
-        private void initReadForm(HttpContext context)
+        private bool initReadForm(HttpContext context)
         {
             Stream s = context.Request.InputStream;
             StreamReader sr = new StreamReader(s);
@@ -222,11 +226,42 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             submissiontypeID = Int16.Parse(getFormVal("submissiontypeid"));
             comments = getFormVal("comments");
             unabletocode = getFormValBool("unabletocode");
+            // If unable to code the supervisor does need to be authenticated.
+            if (unabletocode)
+            {
+                superusername = getFormVal("superusername");
+                superpassword = getFormVal("superpassword");
+                if (superusername != "" && superpassword != "")
+                {
+                    if (Membership.ValidateUser(superusername, superpassword))
+                    {
+                        MembershipUser user = Membership.GetUser(superusername);
+                        superuserID = (Guid)user.ProviderUserKey;
+                        return true;
+
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                
+
+                }
+                else
+                {
+
+                    return false;
+                }
+
+            }
+
+
             formmode = getFormVal("mode");
             userID = new Guid(getFormVal("userid"));
             //submissionID = Int32.Parse(getFormVal("submissionid"));
             submissionID = createSubmissionRecord();
             System.Diagnostics.Trace.WriteLine("In Submission --- Submission ID : " + submissionID.ToString());
+            return true;
 
         }
 
