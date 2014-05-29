@@ -51,7 +51,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             //System.Diagnostics.Trace.WriteLine("Post process request...");
             //write your handler implementation here.
             db = DBData.GetDataContext();
-            initReadForm(context);
+            if (!initReadForm(context))
+            {
+                context.Response.Write(JsonConvert.SerializeObject(new { success = false, supervisorauthfailed = true }));
+                return;
+
+            }
             processAndOrganize(context);
             addAbstractChangeHistory();
             context.Response.ContentType = "application/json";
@@ -183,6 +188,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             sb.EvaluationId = evaluationID;
             sb.UserId = userID;
             sb.UnableToCode = unabletocode;
+            sb.ApproveSupervisorUserID = superuserID;
             sb.Comments = comments;
 
             db.Submissions.InsertOnSubmit(sb);

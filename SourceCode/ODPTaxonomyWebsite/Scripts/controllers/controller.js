@@ -284,6 +284,13 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
                    $scope.errorName = data.errors.name;
                    $scope.errorSuperhero = data.errors.superheroAlias;
                } else {
+
+                   // Logic for Supervisor User Auth Failure.
+                   if (data.supervisorauth != undefined && data.supervisorauthfailed) {
+                       $scope.errormessagesdisplay = "Supervisor authentication Failed!";
+                       return;
+                   }
+
                    // if successful, bind success message to message
                    $scope.postmessages = "Saved form successfully!";
                    // Put the form in View Mode::

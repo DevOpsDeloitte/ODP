@@ -11,6 +11,10 @@
 /* end of overrides */
 
 
+h2.errormessages
+{
+    color: Red;
+}
 
 div.debugWindow
 {
