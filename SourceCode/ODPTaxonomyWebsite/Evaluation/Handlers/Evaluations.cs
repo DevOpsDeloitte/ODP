@@ -111,6 +111,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     //FormMode = "Coder Consensus";
                     // Insert Status 1B record or ID = 4
                     insertAbstractChangeHistory(getAbstractStatusID("1B"));
+                    //update is complete to 1 on the evaluation record.
+                    updateEvaluationRecordToComplete();
+
+
                     break;
                 case 3:
                     //FormMode = "ODP Staff Member Evaluation";
@@ -123,6 +127,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     //FormMode = "ODP Staff Member Consensus";
                     // Insert Status 2B record or ID = 9
                     insertAbstractChangeHistory(getAbstractStatusID("2B"));
+                    //update is complete to 1 on the evaluation record.
+                    updateEvaluationRecordToComplete();
+
                     break;
                 case 5:
                     //FormMode = "ODP Staff Member Comparison";
@@ -134,6 +141,17 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
 
 
+            }
+
+
+        }
+
+        private void updateEvaluationRecordToComplete()
+        {
+            var evalrec = db.Evaluations.Where(e=>e.EvaluationId == evaluationID).FirstOrDefault();
+            if(evalrec != null){
+                evalrec.IsComplete = true;
+                db.SubmitChanges();
             }
 
 
