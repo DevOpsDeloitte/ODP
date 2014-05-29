@@ -1,6 +1,6 @@
-﻿<%@ Page Title="Abstract View List" Language="C#" MasterPageFile="~/Site.Master"
-    AutoEventWireup="True" CodeBehind="ViewAbstractList.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.ViewAbstractList" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewAbstractList.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.ViewAbstractList" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+</asp:Content>
 <%@ Register TagPrefix="odp" TagName="ODPSupervisorView_Open" Src="~/Evaluation/AbstractListViews/ODPSupervisorView_Open.ascx" %>
 <%@ Register TagPrefix="odp" TagName="ODPSupervisorView_Default" Src="~/Evaluation/AbstractListViews/ODPSupervisorView_Default.ascx" %>
 
@@ -13,26 +13,30 @@
 
 <%@ Register TagPrefix="odp" TagName="AdminView" Src="~/Evaluation/AbstractListViews/AdminView.ascx" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h2>
         View Abstract List
     </h2>
-    <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" />
-    <div>
+    <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" OnSelectedIndexChanged="MainviewChangeHandler" />
+    <p>
+        <asp:Button runat="server" ID="btn_print" Text="Upload Coder Notes (Scanned)" />&nbsp;&nbsp;
+        Stop Evaluation Process: <asp:Button runat="server" ID="btn_code" Text="Abstract Override" />&nbsp;&nbsp;
+    </p>
+<div>
         <asp:Panel runat="server" ID="SubviewPanel" Visible="false">
             <h3>
                 <asp:Label runat="server" ID="SubviewLabel" Visible="false" />
-                <asp:DropDownList runat="server" ID="SubviewDDL" AutoPostBack="true" Visible="false" />
+                <asp:DropDownList runat="server" ID="SubviewDDL" AutoPostBack="true" OnSelectedIndexChanged="SubviewChangeHandler" Visible="false" />
             </h3>
         </asp:Panel>
-        <div class="pager-size-wrapper">
-            <asp:Label ID="Label1" runat="server" AssociatedControlID="PagerSizeDDL"></asp:Label>
+        <asp:Panel runat="server" ID="PagerWrapper" Visible="false" class="pager-size-wrapper">
+            <asp:Label runat="server" AssociatedControlID="PagerSizeDDL"></asp:Label>
             <asp:DropDownList runat="server" ID="PagerSizeDDL" AutoPostBack="true" OnSelectedIndexChanged="PagerSizeChangeHandler">
                 <asp:ListItem Value="25" Text="Show: 25 Results" />
                 <asp:ListItem Value="50" Text="Show: 50 Results" />
                 <asp:ListItem Value="100" Text="Show: 100 Results" />
             </asp:DropDownList>
-        </div>
+        </asp:Panel>
 
         <odp:ODPSupervisorView_Default runat="server" ID="ODPSupervisorView_Default" Visible="false" />
         <odp:ODPSupervisorView_Open runat="server" ID="ODPSupervisorView_Open" Visible="false" />

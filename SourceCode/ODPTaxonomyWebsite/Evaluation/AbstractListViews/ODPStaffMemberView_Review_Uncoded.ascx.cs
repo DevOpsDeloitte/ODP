@@ -17,15 +17,19 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             if (!this.Visible)
                 return;
 
-            // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
+            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
+            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
-                var parentAbstracts = GetParentAbstracts();
+                if (!IsPostBack)
+                {
+                    var parentAbstracts = GetParentAbstracts();
 
-                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
-                AbstractViewGridView.DataBind();
+                    AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
+                    AbstractViewGridView.DataBind();
+                }
             }
             catch (Exception exp)
             {
@@ -101,82 +105,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> ProcessAbstracts(List<AbstractListRow> ParentAbstracts)
-        {
-            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
-            AbstractListViewData data = new AbstractListViewData();
-
-            for (int i = 0; i < ParentAbstracts.Count; i++)
-            {
-                ParentAbstracts[i].GetComment();
-                ParentAbstracts[i].GetUnableToCode();
-                ParentAbstracts[i].GetAbstractScan();
-
-                // gets all kappa data for abstract
-                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
-
-                if (KappaData.Count() > 0)
-                {
-                    // fill in k1 value
-                    Abstracts.Add(data.FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));
-
-                    // fill in k5 value
-                    foreach (var kappa in KappaData)
-                    {
-                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
-                        {
-                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Staff"));
-                        }
-                    }
-
-                    // fill in k9 value
-                    foreach (var kappa in KappaData)
-                    {
-                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
-                        {
-                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP vs. Coder"));
-                        }
-                    }
-                }
-                else
-                {
-                    Abstracts.Add(ParentAbstracts[i]);
-                }
-            }
-
-            return Abstracts;
-        }
-
-        protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
-        {
-            AbstractListRow item = e.Row.DataItem as AbstractListRow;
-            Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
-            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
-            CheckBox Review = e.Row.FindControl("Review") as CheckBox;
-
-            if (item != null && TitleWrapper != null && AbstractScanLink != null)
-            {
-                if (!string.IsNullOrEmpty(item.AbstractScan))
-                {
-                    TitleWrapper.CssClass += " has-file";
-
-                    AbstractScanLink.ToolTip = item.AbstractScan;
-                    AbstractScanLink.NavigateUrl = "#";
-                    AbstractScanLink.Visible = true;
-                }
-                else
-                {
-                    AbstractScanLink.Visible = false;
-                }
-            }
-
-            // checkbox for review list
-            if (item != null && Review != null)
-            {
-                Review.Visible = item.IsParent;
-            }
-        }
-
         protected void AbstractSortHandler(object sender, GridViewSortEventArgs e)
         {
             string SortExpression = e.SortExpression;
@@ -203,31 +131,31 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             var abstracts = GetParentAbstracts(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.ODPStaff);
             AbstractViewGridView.DataBind();
         }
 
         protected void RemoveFromReviewHandler(object sender, EventArgs e)
         {
             AbstractListViewData data = new AbstractListViewData();
-            List<AbstractListRow> Abstracts = AbstractViewGridView.DataSource as List<AbstractListRow>;
 
-            if (Abstracts != null)
+            foreach (GridViewRow row in AbstractViewGridView.Rows)
             {
-                foreach (GridViewRow row in AbstractViewGridView.Rows)
+                CheckBox Review = row.FindControl("Review") as CheckBox;
+                HiddenField AbstractIDField = row.FindControl("AbstractID") as HiddenField;
+                int AbstractID = 0;
+
+                if (Review != null && Review.Checked &&
+                    AbstractIDField != null && int.TryParse(AbstractIDField.Value, out AbstractID))
                 {
-                    CheckBox Review = row.FindControl("Review") as CheckBox;
-                    if (Review != null && Review.Checked)
-                    {
-                        data.RemoveAbstractFromReview(Abstracts[row.DataItemIndex].AbstractID);
-                    }
+                    data.RemoveAbstractFromReview(AbstractID);
                 }
-
-                var parentAbstracts = GetParentAbstracts();
-
-                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
-                AbstractViewGridView.DataBind();
             }
+
+            var parentAbstracts = GetParentAbstracts();
+
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
+            AbstractViewGridView.DataBind();
         }
     }
 }

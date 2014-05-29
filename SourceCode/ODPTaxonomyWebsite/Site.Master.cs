@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Text;
 using ODPTaxonomyDAL_TT;
 using ODPTaxonomyUtility_TT;
+using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite
 {
@@ -24,7 +25,7 @@ namespace ODPTaxonomyWebsite
         private string role_odpSup = null;
         private string role_admin = null;
         private string connString = null;
-        
+
         #endregion
 
         #region EventHandlers
@@ -63,7 +64,7 @@ namespace ODPTaxonomyWebsite
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured while loading page data.");
-            }   
+            }
         }
 
         //Coder
@@ -101,7 +102,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_coderSup;
-                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.CoderSupervisor, false);
             }
             catch (Exception ex)
             {
@@ -129,7 +130,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_odp;
-                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff, false);
             }
             catch (Exception ex)
             {
@@ -157,7 +158,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_odpSup;
-                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPSupervisor, false);
             }
             catch (Exception ex)
             {
@@ -186,7 +187,7 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_admin;
-                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.Admin, false);
             }
             catch (Exception ex)
             {
@@ -264,7 +265,7 @@ namespace ODPTaxonomyWebsite
                     pnl_admin.Visible = true;
                 }
             }
-                
+
         }
 
         #endregion

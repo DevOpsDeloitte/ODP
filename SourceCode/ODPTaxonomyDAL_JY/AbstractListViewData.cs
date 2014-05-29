@@ -9,8 +9,7 @@ namespace ODPTaxonomyDAL_JY
     public class AbstractListViewData
     {
         private DataJYDataContext db;
-        private string KappaSpecifier = "#.##";
-
+       
         public AbstractListViewData()
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
@@ -64,44 +63,7 @@ namespace ODPTaxonomyDAL_JY
             return query;
         }
 
-        public AbstractListRow ConstructNewAbstractListRow(KappaData Kappa, string Title)
-        {
-            return new AbstractListRow
-            {
-                AbstractID = 0,
-                ProjectTitle = Title,
-                A1 = ((decimal)(Kappa.A1)).ToString(KappaSpecifier),
-                A2 = ((decimal)(Kappa.A2)).ToString(KappaSpecifier),
-                A3 = ((decimal)(Kappa.A3)).ToString(KappaSpecifier),
-                B = ((decimal)(Kappa.B)).ToString(KappaSpecifier),
-                C = ((decimal)(Kappa.C)).ToString(KappaSpecifier),
-                D = ((decimal)(Kappa.D)).ToString(KappaSpecifier),
-                E = ((decimal)(Kappa.E)).ToString(KappaSpecifier),
-                F = ((decimal)(Kappa.F)).ToString(KappaSpecifier)
-            };
-        }
-
-        public AbstractListRow FillInKappaValue(AbstractListRow Abstract, IEnumerable<KappaData> KappaData, KappaTypeEnum KappaType)
-        {
-            foreach (var Kappa in KappaData)
-            {
-                if (Kappa.KappaTypeID == (int)KappaType)
-                {
-                    Abstract.A1 = ((decimal)(Kappa.A1)).ToString(KappaSpecifier);
-                    Abstract.A2 = ((decimal)(Kappa.A2)).ToString(KappaSpecifier);
-                    Abstract.A3 = ((decimal)(Kappa.A3)).ToString(KappaSpecifier);
-                    Abstract.B = ((decimal)(Kappa.B)).ToString(KappaSpecifier);
-                    Abstract.C = ((decimal)(Kappa.C)).ToString(KappaSpecifier);
-                    Abstract.D = ((decimal)(Kappa.D)).ToString(KappaSpecifier);
-                    Abstract.E = ((decimal)(Kappa.E)).ToString(KappaSpecifier);
-                    Abstract.F = ((decimal)(Kappa.F)).ToString(KappaSpecifier);
-
-                    break;
-                }
-            }
-
-            return Abstract;
-        }
+        
 
         public bool IsAbstractInReview(int AbstractID)
         {

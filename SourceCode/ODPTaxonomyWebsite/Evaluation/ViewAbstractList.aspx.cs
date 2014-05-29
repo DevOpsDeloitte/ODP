@@ -5,8 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
-using ODPTaxonomyDAL_TT;
-using ODPTaxonomyWebsite.Evaluation.AbstractListViews;
+using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite.Evaluation
 {
@@ -14,80 +13,128 @@ namespace ODPTaxonomyWebsite.Evaluation
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            List<string> roles = Roles.GetRolesForUser().ToList();
-            roles.Remove("Coder");
+            int ViewInt = 0;
+            List<string> UserRoles = Roles.GetRolesForUser().ToList();
+            IDictionary<int, string> ViewRoles = AbstractListViewHelper.GetViewRoles(UserRoles);
 
-            string Mainview = null;
-            int MainviewIndex = -1;
-            string Subview = null;
-            int SubviewIndex = -1;
-
-            SetPager();
-
-            if (!IsPostBack)
+            if (string.IsNullOrEmpty(Request.QueryString["view"]))
             {
-                if (roles.Count == 1)
-                {
-                    Mainview = roles[0];
-                }
-            }
-            else
-            {
-                if (roles.Count == 1)
-                {
-                    Mainview = roles[0];
-
-                    Subview = SubviewDDL.SelectedValue;
-                    SubviewIndex = SubviewDDL.SelectedIndex;
-                }
-                else
-                {
-                    Mainview = MainviewDDL.SelectedValue;
-                    MainviewIndex = MainviewDDL.SelectedIndex;
-
-                    Subview = SubviewDDL.SelectedValue;
-                    SubviewIndex = SubviewDDL.SelectedIndex;
-
-                    // switching mainview, reset subview
-                    var targetID = Request.Form["__EVENTTARGET"];
-                    if (targetID.Contains("MainviewDDL"))
-                    {
-                        SubviewIndex = -1;
-                    }
-                }
+                LoadViewDropDownData(ViewRoles);
+                return;
             }
 
-            SetPager();
-            LoadViewDropDownData(roles, Mainview);
-            LoadSubviewDropDownData(Mainview, SubviewIndex);
-
-            if (!string.IsNullOrEmpty(Mainview))
+            if (!int.TryParse(Request.QueryString["view"], out ViewInt))
             {
-                RenderAbstractListView(Mainview, Subview);
+                LoadViewDropDownData(ViewRoles);
+                return;
+            }
+
+            if (!Enum.IsDefined(typeof(AbstractViewRole), ViewInt))
+            {
+                LoadViewDropDownData(ViewRoles);
+                return;
+            }
+
+            AbstractViewRole Mainview = (AbstractViewRole)ViewInt;
+            string Subview = !string.IsNullOrEmpty(Request.QueryString["subview"]) ? Request.QueryString["subview"] : "";
+
+            if (!AbstractListViewHelper.UserCanView(Mainview))
+            {
+                return;
+            }
+
+            LoadViewDropDownData(ViewRoles, Mainview);
+            LoadSubviewDropDownData(Mainview, Subview);
+            RenderAbstractListView(Mainview, Subview);
+            SetPager();
+        }
+
+        protected void MainviewChangeHandler(object sender, EventArgs e)
+        {
+            int Mainview = 0;
+            if (int.TryParse(MainviewDDL.SelectedValue, out Mainview))
+            {
+                string RedirectURL = "";
+                switch ((AbstractViewRole)Mainview)
+                {
+                    case AbstractViewRole.Admin:
+                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.Admin;
+                        break;
+                    case AbstractViewRole.CoderSupervisor:
+                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.CoderSupervisor;
+                        break;
+                    case AbstractViewRole.ODPStaff:
+                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff;
+                        break;
+                    case AbstractViewRole.ODPSupervisor:
+                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPSupervisor;
+                        break;
+
+                    case AbstractViewRole.EMPTY:
+                    default:
+                        RedirectURL = "ViewAbstractList.aspx";
+                        break;
+                }
+
+                Response.Redirect(RedirectURL);
+            }
+        }
+
+        protected void SubviewChangeHandler(object sender, EventArgs e)
+        {
+            int Mainview = 0;
+            if (int.TryParse(MainviewDDL.SelectedValue, out Mainview))
+            {
+                string RedirectURL = "";
+                switch ((AbstractViewRole)Mainview)
+                {
+                    case AbstractViewRole.Admin:
+                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.Admin;
+                        break;
+                    case AbstractViewRole.CoderSupervisor:
+                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.CoderSupervisor;
+                        break;
+                    case AbstractViewRole.ODPStaff:
+                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff;
+                        break;
+                    case AbstractViewRole.ODPSupervisor:
+                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPSupervisor;
+                        break;
+                }
+
+                if (!string.IsNullOrEmpty(RedirectURL))
+                {
+                    RedirectURL += "&subview=" + SubviewDDL.SelectedValue;
+                    Response.Redirect(RedirectURL);
+                }
             }
         }
 
         protected void SetPager()
         {
-            if (HttpContext.Current.Request.Cookies["Pager"] != null)
+            if (!IsPostBack)
             {
-                int TempPagerSize;
-
-                if (int.TryParse(HttpContext.Current.Request.Cookies["Pager"]["Size"].ToString(), out TempPagerSize))
+                if (HttpContext.Current.Request.Cookies["Pager"] != null)
                 {
-                    switch (TempPagerSize)
+                    int TempPagerSize;
+
+                    if (int.TryParse(HttpContext.Current.Request.Cookies["Pager"]["Size"].ToString(), out TempPagerSize))
                     {
-                        case 25:
-                            PagerSizeDDL.SelectedIndex = 0;
-                            break;
-                        case 50:
-                            PagerSizeDDL.SelectedIndex = 1;
-                            break;
-                        case 100:
-                            PagerSizeDDL.SelectedIndex = 2;
-                            break;
-                        default:
-                            break;
+                        switch (TempPagerSize)
+                        {
+                            case 25:
+                                PagerSizeDDL.SelectedIndex = 0;
+                                break;
+                            case 50:
+                                PagerSizeDDL.SelectedIndex = 1;
+                                break;
+                            case 100:
+                                PagerSizeDDL.SelectedIndex = 2;
+                                break;
+                            default:
+                                break;
+                        }
+                        PagerWrapper.Visible = true;
                     }
                 }
             }
@@ -96,89 +143,104 @@ namespace ODPTaxonomyWebsite.Evaluation
         /**
          * Loads data for select a view dropdown
          */
-        protected void LoadViewDropDownData(List<string> roles, string SelectedView)
+        protected void LoadViewDropDownData(IDictionary<int, string> Roles, AbstractViewRole SelectedView = AbstractViewRole.EMPTY)
         {
-            if (roles.Count > 1)
+            if (!IsPostBack)
             {
-                MainviewDDL.Items.Clear();
-                MainviewDDL.Items.Add(new ListItem("Select a View", ""));
-                foreach (string role in roles)
+                if (Roles.Count > 1)
                 {
-                    ListItem item = new ListItem(role + " View", role);
-                    item.Selected = SelectedView == role;
+                    MainviewDDL.Items.Clear();
+                    MainviewDDL.Items.Add(new ListItem("Select a View", ""));
+                    foreach (KeyValuePair<int, string> entry in Roles)
+                    {
+                        ListItem item = new ListItem(entry.Value + " View", entry.Key.ToString());
+                        item.Selected = (int)SelectedView == entry.Key;
 
-                    MainviewDDL.Items.Add(item);
+                        MainviewDDL.Items.Add(item);
+                    }
+                    MainviewDDL.Visible = true;
                 }
-                MainviewDDL.Visible = true;
-            }
-            else
-            {
-                MainviewDDL.Visible = false;
+                else
+                {
+                    MainviewDDL.Visible = false;
+                }
             }
         }
 
-        protected void LoadSubviewDropDownData(string role, int selectedIndex = -1)
+        protected void LoadSubviewDropDownData(AbstractViewRole Role, string SelectedValue = "")
         {
-            SubviewDDL.Items.Clear();
-            switch (role)
+            if (!IsPostBack)
             {
-                case "CoderSupervisor":
-                    SubviewLabel.Text = "Abstract Types:";
-                    SubviewLabel.Visible = true;
+                SubviewDDL.Items.Clear();
+                switch (Role)
+                {
+                    case AbstractViewRole.CoderSupervisor:
+                        SubviewLabel.Text = "Abstract Types:";
+                        SubviewLabel.Visible = true;
 
-                    SubviewDDL.Items.Add(new ListItem("Coded Abstracts", "coded"));
-                    SubviewDDL.Items.Add(new ListItem("Open Abstracts", "open"));
+                        SubviewDDL.Items.Add(new ListItem("Coded Abstracts", "coded"));
+                        SubviewDDL.Items.Add(new ListItem("Open Abstracts", "open"));
 
-                    if (selectedIndex > -1)
-                    {
-                        SubviewDDL.SelectedIndex = selectedIndex;
-                    }
+                        if (!string.IsNullOrEmpty(SelectedValue))
+                        {
+                            foreach (ListItem item in SubviewDDL.Items)
+                            {
+                                item.Selected = SelectedValue == item.Value;
+                            }
+                        }
 
-                    SubviewDDL.Visible = true;
-                    SubviewPanel.Visible = true;
-                    break;
-                case "ODPStaffMember":
-                    SubviewLabel.Text = "Abstract Types:";
-                    SubviewLabel.Visible = true;
+                        SubviewDDL.Visible = true;
+                        SubviewPanel.Visible = true;
+                        break;
+                    case AbstractViewRole.ODPStaff:
+                        SubviewLabel.Text = "Abstract Types:";
+                        SubviewLabel.Visible = true;
 
-                    SubviewDDL.Items.Add(new ListItem("Default View", ""));
-                    SubviewDDL.Items.Add(new ListItem("In Review List", "review"));
-                    SubviewDDL.Items.Add(new ListItem("In Review List - Uncoded Only", "uncoded"));
+                        SubviewDDL.Items.Add(new ListItem("Default View", ""));
+                        SubviewDDL.Items.Add(new ListItem("In Review List", "review"));
+                        SubviewDDL.Items.Add(new ListItem("In Review List - Uncoded Only", "uncoded"));
 
-                    if (selectedIndex > -1)
-                    {
-                        SubviewDDL.SelectedIndex = selectedIndex;
-                    }
+                        if (!string.IsNullOrEmpty(SelectedValue))
+                        {
+                            foreach (ListItem item in SubviewDDL.Items)
+                            {
+                                item.Selected = SelectedValue == item.Value;
+                            }
+                        }
 
-                    SubviewDDL.Visible = true;
-                    SubviewPanel.Visible = true;
-                    break;
-                case "ODPStaffSupervisor":
-                    SubviewLabel.Text = "Abstract Types:";
-                    SubviewLabel.Visible = true;
+                        SubviewDDL.Visible = true;
+                        SubviewPanel.Visible = true;
+                        break;
+                    case AbstractViewRole.ODPSupervisor:
+                        SubviewLabel.Text = "Abstract Types:";
+                        SubviewLabel.Visible = true;
 
-                    SubviewDDL.Items.Add(new ListItem("Default View", ""));
-                    SubviewDDL.Items.Add(new ListItem("Open Abstract", "open"));
+                        SubviewDDL.Items.Add(new ListItem("Default View", ""));
+                        SubviewDDL.Items.Add(new ListItem("Open Abstract", "open"));
 
-                    if (selectedIndex > -1)
-                    {
-                        SubviewDDL.SelectedIndex = selectedIndex;
-                    }
+                        if (!string.IsNullOrEmpty(SelectedValue))
+                        {
+                            foreach (ListItem item in SubviewDDL.Items)
+                            {
+                                item.Selected = SelectedValue == item.Value;
+                            }
+                        }
 
-                    SubviewDDL.Visible = true;
-                    SubviewPanel.Visible = true;
-                    break;
+                        SubviewDDL.Visible = true;
+                        SubviewPanel.Visible = true;
+                        break;
 
-                case "Admin":
-                default:
-                    SubviewLabel.Visible = false;
-                    SubviewDDL.Visible = false;
-                    SubviewPanel.Visible = false;
-                    break;
+                    case AbstractViewRole.Admin:
+                    default:
+                        SubviewLabel.Visible = false;
+                        SubviewDDL.Visible = false;
+                        SubviewPanel.Visible = false;
+                        break;
+                }
             }
         }
 
-        protected void RenderAbstractListView(string Mainview, string Subview = "")
+        protected void RenderAbstractListView(AbstractViewRole Mainview, string Subview = "")
         {
             AdminView.Visible = false;
             CoderSupervisor_Coded.Visible = false;
@@ -191,10 +253,10 @@ namespace ODPTaxonomyWebsite.Evaluation
 
             switch (Mainview)
             {
-                case "Admin":
+                case AbstractViewRole.Admin:
                     AdminView.Visible = true;
                     break;
-                case "CoderSupervisor":
+                case AbstractViewRole.CoderSupervisor:
                     if (Subview == "open")
                     {
                         CoderSupervisor_Open.Visible = true;
@@ -204,7 +266,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                         CoderSupervisor_Coded.Visible = true;
                     }
                     break;
-                case "ODPStaffSupervisor":
+                case AbstractViewRole.ODPSupervisor:
                     if (Subview == "open")
                     {
                         ODPSupervisorView_Open.Visible = true;
@@ -214,7 +276,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                         ODPSupervisorView_Default.Visible = true;
                     }
                     break;
-                case "ODPStaffMember":
+                case AbstractViewRole.ODPStaff:
                     if (Subview == "review")
                     {
                         ODPStaffView_Review.Visible = true;
@@ -255,7 +317,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 }
             }
 
-            Response.Redirect("~/Evaluation/ViewAbstractList.aspx");
+            Response.Redirect("~/Evaluation/ViewAbstractList.aspx?view=" + (!string.IsNullOrEmpty(Request.QueryString["view"]) ? Request.QueryString["view"] : ""));
         }
     }
 }
