@@ -77,11 +77,6 @@
         <div class="debugWindow">
             <div class="debug">Form Mode : {{mdata.formmode}}</div>
             <div class="debug">Display Mode : {{mdata.displaymode}}</div>
-            <div class="debug">Submission ID : <%= SubmissionID %></div>
-            <hr />
-            <div class="debug">Session Abstract ID : <%= AbstractID %></div>
-            <div class="debug">Session Evaluation ID : <%= EvaluationID %></div>
-            <div class="debug">Session SubmissionType ID : <%= SubmissionTypeId %></div>
         </div>
 
      <div class="sixteen columns">
