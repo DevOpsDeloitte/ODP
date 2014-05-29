@@ -19,7 +19,7 @@
 <script type="text/javascript">
    // $scope.mdata.formmode = "<%= FormMode %>"
 </script>
-<div>
+
 <div class="container" ng-controller="ODPFormCtrl">
 
     <div class="sixteen columns header"> 
@@ -50,22 +50,10 @@
             </li>
         </ul>
     </div>
-    <div id="odpforms" name="x" >
+    <div id="odpforms" name="x" ng-cloak >
     <div class="sixteen columns"> 
             <div>
-<%--              <label>Name:</label>
-              <input type="text" name="testid" ng-model="mdata.note" placeholder="Enter a note here" />
-              <hr>
-              <h1> {{mdata.note}}</h1>
-              <h1> {{mdata.count}}</h1>
-          
-                 <input type="checkbox" ng-model="mdata.studyfocus_1_1">
-            </div>
-            <div class="field">
-                <strong>Notes :</strong>
-                <div click-to-edit="mdata.note"></div>
-            </div>
-         <tt>value1 = {{value1}}</tt><br/>--%>
+
 
 
         <div>
