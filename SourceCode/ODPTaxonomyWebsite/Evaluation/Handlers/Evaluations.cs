@@ -188,7 +188,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             sb.EvaluationId = evaluationID;
             sb.UserId = userID;
             sb.UnableToCode = unabletocode;
-            sb.ApproveSupervisorUserID = superuserID;
+            if (unabletocode)
+            {
+                sb.ApproveSupervisorUserID = superuserID;
+            }
             sb.Comments = comments;
 
             db.Submissions.InsertOnSubmit(sb);
@@ -237,13 +240,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             {
                 superusername = getFormVal("superusername");
                 superpassword = getFormVal("superpassword");
+                System.Diagnostics.Trace.WriteLine(" super username : " + superusername);
                 if (superusername != "" && superpassword != "")
                 {
                     if (Membership.ValidateUser(superusername, superpassword))
                     {
+                        System.Diagnostics.Trace.WriteLine(" validate super username : " + superusername + "     " + superpassword);
                         MembershipUser user = Membership.GetUser(superusername);
                         superuserID = (Guid)user.ProviderUserKey;
-                        return true;
 
                     }
                     else
@@ -266,7 +270,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             userID = new Guid(getFormVal("userid"));
             //submissionID = Int32.Parse(getFormVal("submissionid"));
             submissionID = createSubmissionRecord();
-            System.Diagnostics.Trace.WriteLine("In Submission --- Submission ID : " + submissionID.ToString());
+            //System.Diagnostics.Trace.WriteLine("In Submission --- Submission ID : " + submissionID.ToString());
             return true;
 
         }

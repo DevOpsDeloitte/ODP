@@ -280,17 +280,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
                console.log("response received : " + data.success);
 
                if (!data.success) {
-                   // if not successful, bind errors to error variables
-                   $scope.errorName = data.errors.name;
-                   $scope.errorSuperhero = data.errors.superheroAlias;
-               } else {
 
                    // Logic for Supervisor User Auth Failure.
-                   if (data.supervisorauth != undefined && data.supervisorauthfailed) {
+                   if (data.supervisorauthfailed != undefined && data.supervisorauthfailed) {
                        $scope.errormessagesdisplay = "Supervisor authentication Failed!";
                        return;
                    }
 
+               } else {
+
+                 
                    // if successful, bind success message to message
                    $scope.postmessages = "Saved form successfully!";
                    // Put the form in View Mode::
@@ -307,6 +306,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
     $scope.processForm = function () {
         $scope.postmessages = "";
+        $scope.errormessagesdisplay = "";
         console.log("process form clicked..");
         window.alertify.set({
             labels: {

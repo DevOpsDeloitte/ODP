@@ -70,8 +70,9 @@
 
         <div>
             <h2>{{postmessages}}</h2>
-            <h2 class="errormessages">{{errormessagesdisplay}}</h2>
+            <h2 class="errormessages">{{ errormessagesdisplay }}</h2>
         </div>
+
     </div>
         <input type="hidden" name="submissionid" value="<%= SubmissionID %>" />
         <input type="hidden" name="mode" id="mode" value="<%= FormMode %>" ng-model="mdata.formmode" />
