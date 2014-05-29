@@ -3,16 +3,9 @@
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
 <h2>
     View Abstracts</h2>
-<asp:Button runat="server" Text="Add to Review" OnClick="AddtoReviewHandler" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
-        <asp:TemplateField>
-            <ItemTemplate>
-                <asp:HiddenField runat="server" ID="AbstractID" Value='<%#Eval("AbstractID") %>' />
-                <asp:CheckBox runat="server" ID="ToReview" />
-            </ItemTemplate>
-        </asp:TemplateField>
         <asp:BoundField DataField="AbstractID" HeaderText="ID" />
         <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" SortExpression="ApplicationID" />
         <asp:BoundField DataField="StatusDateDisplay" HeaderText="Status Date" SortExpression="Date" />
@@ -39,4 +32,3 @@
         <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
     </Columns>
 </odp:AbstractGridView>
-<asp:Button runat="server" Text="Add to Review" OnClick="AddtoReviewHandler" />

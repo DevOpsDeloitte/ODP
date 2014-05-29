@@ -67,6 +67,24 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.DropDownList PagerSizeDDL;
         
         /// <summary>
+        /// btn_print control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_print;
+        
+        /// <summary>
+        /// btn_code control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_code;
+        
+        /// <summary>
         /// ODPSupervisorView_Default control.
         /// </summary>
         /// <remarks>
@@ -83,6 +101,24 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Open ODPSupervisorView_Open;
+        
+        /// <summary>
+        /// ODPSupervisorView_Review control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Review ODPSupervisorView_Review;
+        
+        /// <summary>
+        /// ODPSupervisorView_Review_Uncoded control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Review_Uncoded ODPSupervisorView_Review_Uncoded;
         
         /// <summary>
         /// ODPStaffView_Default control.

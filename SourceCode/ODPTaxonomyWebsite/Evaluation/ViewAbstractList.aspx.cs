@@ -217,6 +217,8 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                         SubviewDDL.Items.Add(new ListItem("Default View", ""));
                         SubviewDDL.Items.Add(new ListItem("Open Abstract", "open"));
+                        SubviewDDL.Items.Add(new ListItem("In Review List", "review"));
+                        SubviewDDL.Items.Add(new ListItem("In Review List - Uncoded Only", "uncoded"));
 
                         if (!string.IsNullOrEmpty(SelectedValue))
                         {
@@ -250,6 +252,8 @@ namespace ODPTaxonomyWebsite.Evaluation
             ODPStaffView_Review_Uncoded.Visible = false;
             ODPSupervisorView_Default.Visible = false;
             ODPSupervisorView_Open.Visible = false;
+            ODPSupervisorView_Review.Visible = false;
+            ODPSupervisorView_Review_Uncoded.Visible = false;
 
             switch (Mainview)
             {
@@ -270,6 +274,14 @@ namespace ODPTaxonomyWebsite.Evaluation
                     if (Subview == "open")
                     {
                         ODPSupervisorView_Open.Visible = true;
+                    }
+                    else if (Subview == "review")
+                    {
+                        ODPSupervisorView_Review.Visible = true;
+                    }
+                    else if (Subview == "uncoded")
+                    {
+                        ODPSupervisorView_Review_Uncoded.Visible = true;
                     }
                     else
                     {
