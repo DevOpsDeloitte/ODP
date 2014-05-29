@@ -95,12 +95,19 @@
     <Content Include="Login.aspx" />
     <Content Include="notes\notesFor_16_CoderEvaluation_10.xml" />
     <Content Include="Styles\AbstractListView.css" />
+    <Content Include="Styles\alertify.core.css" />
+    <Content Include="Styles\alertify.css" />
+    <Content Include="Styles\base.css" />
+    <Content Include="Styles\component.css" />
+    <Content Include="Styles\evaluation.css" />
+    <Content Include="Styles\layout.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Styles\skeleton.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
