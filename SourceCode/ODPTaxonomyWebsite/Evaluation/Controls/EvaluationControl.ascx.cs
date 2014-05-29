@@ -245,7 +245,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 }
 
                 var eval = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).FirstOrDefault();
-                if (eval != null && DisplayMode != "View")
+                if (eval != null && DisplayMode != "View" && eval.ConsensusStartedBy == null)
                 {
                     eval.ConsensusStartedBy = UserId;
                 }
