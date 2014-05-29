@@ -40,11 +40,11 @@
             <li ng-show="showResetButton"><input class="button" type="button" id="resetButton" value="Reset" ng-click="resetForm()" /></li>
             <li ng-show="showConsensusButton"><input class="button" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
             <li ng-show="showSaveButton"><input class="button" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>
-            <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'"><label>Unable to Code</label></li>
+            <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
             <li>
-            <div ng-show="mdata.unabletocode">
+            <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
                 <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
-                <input type="text" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
+                <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
             </div>
             
             </li>
@@ -81,6 +81,7 @@
         <input type="hidden" name="submissiontypeid" id="submissiontypeid" value="<%= SubmissionTypeId %>" ng-model="mdata.submissiontypeid" />
         <input type="hidden" name="abstractid" id="abstractid" value="<%= AbstractID %>" ng-model="mdata.abstractid" />
         <input type="hidden" name="showc" id="showc" value="<%= showConsensusButton %>" ng-model="mdata.showconsensusbutton" />
+        <input type="hidden" name="isunable" id="isunable" value="<%= isChecked %>" ng-model="mdata.isunable" />
         <!-- not need just a placholder for now -->
         <input type="hidden" name="evaluationid" value="<%= EvaluationID %>" />
         <div class="debugWindow">

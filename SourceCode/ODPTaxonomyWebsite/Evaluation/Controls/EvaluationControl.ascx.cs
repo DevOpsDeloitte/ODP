@@ -58,6 +58,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string FormMode = string.Empty;
         public string Comments = string.Empty;
         public bool showConsensusButton = false;
+        public string isChecked = string.Empty;
     
         private DataDataContext db = null;
         private Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
@@ -187,6 +188,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             {
                 SubmissionID = rec.SubmissionID;
                 Comments = rec.Comments;
+                if (rec.UnableToCode)
+                {
+                    isChecked = "checked";
+                }
             }
             else
             {

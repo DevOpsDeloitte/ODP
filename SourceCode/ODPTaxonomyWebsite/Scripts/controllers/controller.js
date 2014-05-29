@@ -19,6 +19,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         $rootScope.displaymode = $("input#displaymode").val();
 
         $scope.mdata.showconsensusbutton = $("input#showc").val() == "True" ? true : false;
+        $scope.mdata.unabletocode = $("input#isunable").val() == "checked" ? true : false;
+        //console.log(" is unable : " + $scope.mdata.isunable);
+        //$scope.mdata.unabletocode = true;
 
         //        var parent = $rootScope;
         //        var child = parent.$new();
@@ -289,7 +292,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
                } else {
 
-                 
+
                    // if successful, bind success message to message
                    $scope.postmessages = "Saved form successfully!";
                    // Put the form in View Mode::
