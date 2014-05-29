@@ -19,7 +19,7 @@
                 </asp:Panel>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:BoundField DataField="Comment" HeaderText="Comment" />
+        <asp:BoundField DataField="Flags" HeaderText="Flags" />
         <asp:BoundField HeaderText="A1" DataField="A1"></asp:BoundField>
         <asp:BoundField HeaderText="A2" DataField="A2"></asp:BoundField>
         <asp:BoundField HeaderText="A3" DataField="A3"></asp:BoundField>
