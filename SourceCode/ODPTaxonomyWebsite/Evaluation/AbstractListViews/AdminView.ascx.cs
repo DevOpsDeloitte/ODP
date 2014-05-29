@@ -17,15 +17,15 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             if (!this.Visible)
                 return;
 
-            // bind gridview sort event
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
-            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(this.AbstractListRowCreatedHandler);
+            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
+            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
                 var parentAbstracts = GetParentAbstracts();
 
-                AbstractViewGridView.DataSource = ProcessAbstracts(parentAbstracts);
+                AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.Admin);
                 AbstractViewGridView.DataBind();
             }
             catch (Exception exp)
@@ -102,76 +102,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-
-        protected List<AbstractListRow> ProcessAbstracts(List<AbstractListRow> ParentAbstracts)
-        {
-            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
-            AbstractListViewData data = new AbstractListViewData();
-
-            for (int i = 0; i < ParentAbstracts.Count; i++)
-            {
-                ParentAbstracts[i].GetComment();
-                ParentAbstracts[i].GetUnableToCode();
-                ParentAbstracts[i].GetAbstractScan();
-                
-                // gets all kappa data for abstract
-                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
-
-                if (KappaData.Count() > 0)
-                {
-                    // fill in k1 value
-                    Abstracts.Add(data.FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));
-                    
-                    // fill in k5 value
-                    foreach (var kappa in KappaData)
-                    {
-                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
-                        {
-                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP Staff"));
-                        }
-                    }
-                    
-                    // fill in k9 value
-                    foreach (var kappa in KappaData)
-                    {
-                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
-                        {
-                            Abstracts.Add(data.ConstructNewAbstractListRow(kappa, "ODP vs. Coder"));
-                        }
-                    }
-                }
-                else
-                {
-                    Abstracts.Add(ParentAbstracts[i]);
-                }
-            }
-
-            return Abstracts;
-        }
-
-        protected void AbstractListRowBindingHandle(object sender, GridViewRowEventArgs e)
-        {
-            AbstractListRow item = e.Row.DataItem as AbstractListRow;
-            Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
-            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
-
-            if (item != null && TitleWrapper != null && AbstractScanLink != null)
-            {
-                if (!string.IsNullOrEmpty(item.AbstractScan))
-                {
-                    TitleWrapper.CssClass += " has-file";
-
-                    AbstractScanLink.ToolTip = item.AbstractScan;
-                    AbstractScanLink.NavigateUrl = "#";
-                    AbstractScanLink.Visible = true;
-                }
-                else
-                {
-                    AbstractScanLink.Visible = false;
-                }
-            }
-        }
-
         protected void AbstractSortHandler(object sender, GridViewSortEventArgs e)
         {
             string SortExpression = e.SortExpression;
@@ -198,37 +128,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             var abstracts = GetParentAbstracts(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = ProcessAbstracts(abstracts);
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.Admin);
             AbstractViewGridView.DataBind();
-        }
-
-        protected void AbstractListRowCreatedHandler(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.Header)
-            {
-                foreach (TableCell tc in e.Row.Cells)
-                {
-                    if (tc.HasControls())
-                    {
-                        LinkButton headerLink = (LinkButton)tc.Controls[0];
-
-                        if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
-                        {
-                            if (AbstractViewGridView.Attributes["CurrentSortExp"] == headerLink.CommandArgument)
-                            {
-                                tc.CssClass += " sorted ";
-                                tc.CssClass += AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? "ascending " : "descending ";
-                            }                            
-                        }
-                        else if(headerLink.CommandArgument=="Date")
-                        {
-                            tc.CssClass += " sorted descending ";
-                        }
-
-                        tc.CssClass = tc.CssClass.Trim();
-                    }
-                }
-            }
-        }
+        }              
     }
 }
