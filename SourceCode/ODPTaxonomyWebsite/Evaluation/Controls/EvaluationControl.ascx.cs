@@ -139,6 +139,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             {
                 //lbl_messageUsers.Visible = true;
                 //lbl_messageUsers.Text = "No Session";
+                Response.Redirect("/");
                 return;
 
             }
@@ -244,7 +245,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 }
 
                 var eval = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).FirstOrDefault();
-                if (eval != null && DisplayMode != "View")
+                if (eval != null && DisplayMode != "View" && eval.ConsensusStartedBy == null)
                 {
                     eval.ConsensusStartedBy = UserId;
                 }
@@ -277,7 +278,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             // Check if Consensus has been already started..
 
             var eval = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).FirstOrDefault();
-            if (eval != null)
+            if (eval != null && showConsensusButton == true)
             {
                 
                 this.showConsensusButton = (eval.ConsensusStartedBy == null) ? true : false;
@@ -670,8 +671,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec3 != null)
                     {
                         retval[0] = rec3.StudyFocus_A1 ? retval[0] + "," + TeamUsers[3].UserName : "";
-                        retval[1] = rec3.StudyFocus_A2 ? retval[0] + "," + TeamUsers[3].UserName : "";
-                        retval[2] = rec3.StudyFocus_A3 ? retval[0] + "," + TeamUsers[3].UserName : "";
+                        retval[1] = rec3.StudyFocus_A2 ? retval[1] + "," + TeamUsers[3].UserName : "";
+                        retval[2] = rec3.StudyFocus_A3 ? retval[2] + "," + TeamUsers[3].UserName : "";
                     }
 
                     retval[0] = replaceComma(retval[0]);
