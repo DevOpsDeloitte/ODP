@@ -39,7 +39,7 @@
         <div id="header_container">
             <div class="header">
             <h1>ODP Taxonomy</h1>
-                <a href="#" id="showLeftPush" class="button">Menu</a>
+                <a href="#" id="showLeftPush" class="button" runat="server">Menu</a>
                 
                 <div class="login-display">
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
@@ -55,7 +55,7 @@
             </div>    
         </div>
 
-<div class="container">
+<div class="container" runat="server" id="menuContainer">
        <div class="sixteen columns title"> 
             
         </div>
@@ -85,6 +85,9 @@
 
                         <div runat="server" visible="false" id="pnl_coder"><div class="nav-role">Role: Coder</div>
                         <asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" />
+                        </div>
+                        <div runat="server" visible="true" id="pnl_editProfile">
+                            <asp:HyperLink runat="server" ID="link_editProfile" NavigateUrl="~/AccountManagement/EditProfile.aspx" Text="Edit Profile"></asp:HyperLink>
                         </div>
         </nav>                
 
