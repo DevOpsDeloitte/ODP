@@ -27,7 +27,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 {
                     var parentAbstracts = GetParentAbstracts();
 
-                    AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
+                    AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
                     AbstractViewGridView.DataBind();
                 }
             }
@@ -131,7 +131,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             var abstracts = GetParentAbstracts(SortExpression, SortDirection);
 
-            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.ODPStaff);
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.ODPSupervisor);
             AbstractViewGridView.DataBind();
         }
 
@@ -154,7 +154,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             var parentAbstracts = GetParentAbstracts();
 
-            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
             AbstractViewGridView.DataBind();
         }
     }

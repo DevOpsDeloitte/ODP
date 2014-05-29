@@ -22,24 +22,6 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.DropDownList MainviewDDL;
         
         /// <summary>
-        /// btn_print control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_print;
-        
-        /// <summary>
-        /// btn_code control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_code;
-        
-        /// <summary>
         /// SubviewPanel control.
         /// </summary>
         /// <remarks>
@@ -83,6 +65,24 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList PagerSizeDDL;
+        
+        /// <summary>
+        /// btn_print control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_print;
+        
+        /// <summary>
+        /// btn_code control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_code;
         
         /// <summary>
         /// ODPSupervisorView_Default control.
