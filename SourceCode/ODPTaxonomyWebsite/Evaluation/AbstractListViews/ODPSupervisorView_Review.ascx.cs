@@ -10,7 +10,7 @@ using ODPTaxonomyUtility_TT;
 
 namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 {
-    public partial class ODPStaffMemberView_Review : System.Web.UI.UserControl
+    public partial class ODPSupervisorView_Review : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -47,8 +47,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                        join rv in db.AbstractReviewLists on a.AbstractID equals rv.AbstractID
                        where (
-                          (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N ||
-                          h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B) &&
+                          h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
                           h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
@@ -133,6 +132,29 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             var abstracts = GetParentAbstracts(SortExpression, SortDirection);
 
             AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.ODPStaff);
+            AbstractViewGridView.DataBind();
+        }
+
+        protected void RemoveFromReviewHandler(object sender, EventArgs e)
+        {
+            AbstractListViewData data = new AbstractListViewData();
+
+            foreach (GridViewRow row in AbstractViewGridView.Rows)
+            {
+                CheckBox Review = row.FindControl("Review") as CheckBox;
+                HiddenField AbstractIDField = row.FindControl("AbstractID") as HiddenField;
+                int AbstractID = 0;
+
+                if (Review != null && Review.Checked &&
+                    AbstractIDField != null && int.TryParse(AbstractIDField.Value, out AbstractID))
+                {
+                    data.RemoveAbstractFromReview(AbstractID);
+                }
+            }
+
+            var parentAbstracts = GetParentAbstracts();
+
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
             AbstractViewGridView.DataBind();
         }
     }
