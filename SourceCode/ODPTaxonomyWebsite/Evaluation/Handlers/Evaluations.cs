@@ -70,7 +70,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 }
 
                 // Check if Consensus has been already started..
-                if (submissiontypeID == 1 || submissiontypeID == 3)
+                if ((submissiontypeID == 1 || submissiontypeID == 3) && showButton)
                 {
                     var eval = db.Evaluations.Where(e => e.EvaluationId == evaluationID).FirstOrDefault();
                     if (eval != null)
