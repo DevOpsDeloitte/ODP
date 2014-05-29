@@ -136,32 +136,5 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.ODPStaff);
             AbstractViewGridView.DataBind();
         }
-
-        protected void AddtoReviewHandler(object sender, EventArgs e)
-        {
-            AbstractListViewData data = new AbstractListViewData();
-            MembershipUser user = Membership.GetUser();
-
-            foreach (GridViewRow row in AbstractViewGridView.Rows)
-            {
-                CheckBox ToReview = row.FindControl("ToReview") as CheckBox;
-                HiddenField AbstractIDField = row.FindControl("AbstractID") as HiddenField;
-                int AbstractID = 0;
-
-                if (ToReview != null && ToReview.Checked &&
-                    AbstractIDField != null && int.TryParse(AbstractIDField.Value, out AbstractID))
-                {
-                    if (data.IsAbstractInReview(AbstractID) == false)
-                    {
-                        data.AddAbstractToReview(AbstractID, (Guid)user.ProviderUserKey);
-                    }
-                }
-            }
-
-            var parentAbstracts = GetParentAbstracts();
-
-            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
-            AbstractViewGridView.DataBind();
-        }
     }
 }
