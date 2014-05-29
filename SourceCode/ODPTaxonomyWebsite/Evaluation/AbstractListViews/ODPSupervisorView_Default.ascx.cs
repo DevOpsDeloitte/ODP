@@ -158,7 +158,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             var parentAbstracts = GetParentAbstracts();
 
-            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPStaff);
+            AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
             AbstractViewGridView.DataBind();
         }
     }
