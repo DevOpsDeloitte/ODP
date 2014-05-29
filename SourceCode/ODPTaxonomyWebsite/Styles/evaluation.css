@@ -15,7 +15,7 @@
 div.debugWindow
 {
     position: fixed;
-    top: 30px;
+    top: 60px;
     right: 20px;
     width: 220px;
     border: 1px solid #ccc;
