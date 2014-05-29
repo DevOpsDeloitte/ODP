@@ -41,6 +41,13 @@
             <li ng-show="showConsensusButton"><input class="button" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
             <li ng-show="showSaveButton"><input class="button" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'"><label>Unable to Code</label></li>
+            <li>
+            <div ng-show="mdata.unabletocode">
+                <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
+                <input type="text" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
+            </div>
+            
+            </li>
         </ul>
     </div>
     <div id="odpforms" name="x" >

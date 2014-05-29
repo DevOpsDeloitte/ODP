@@ -6,6 +6,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
 
         $scope.mdata = {};
+        $scope.mdata.superusername = "";
+        $scope.mdata.superpassword = "";
         $scope.mdata.formmode = "Consensus"; // $("input#mode").val();
         $rootScope.mode = "Consensus"; // $("input#mode").val();
 
@@ -91,10 +93,20 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
     $scope.$on("validate.formdata", function () {
         // No need to validate if user has checked unable to code.
         if ($scope.mdata.unabletocode) {
-            console.log(" unable to code :: form is valid :: ");
-            $scope.formIsValid = true;
-            $scope.disallowSave = false;
-            $scope.showSaveButton = true;
+
+            if ($scope.mdata.superusername != "" && $scope.mdata.superpassword != "") {
+                //console.log(" unable to code :: form is valid :: ");
+                $scope.formIsValid = true;
+                $scope.disallowSave = false;
+                $scope.showSaveButton = true;
+            }
+            else {
+                //console.log(" unable to code :: form is not valid :: ");
+                $scope.formIsValid = false;
+                $scope.disallowSave = true;
+                $scope.showSaveButton = false;
+
+            }
             return;
         }
         if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {

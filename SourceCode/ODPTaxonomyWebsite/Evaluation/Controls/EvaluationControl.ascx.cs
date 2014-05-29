@@ -133,7 +133,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 UserId = sv.UserId;
                 SubmissionTypeId = sv.SubmissionTypeId;
                 EvaluationID = sv.EvaluationId;
-                Response.Write(" SESSION PASSED VIEW MODE : " + sv.ViewMode);
+                //Response.Write(" SESSION PASSED VIEW MODE : " + sv.ViewMode);
                 DisplayMode = sv.ViewMode.ToString() == "view" ? "View" : "Insert";
             }
             else
