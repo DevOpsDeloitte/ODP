@@ -412,7 +412,6 @@
     <Content Include="AccountManagement\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\ODPTaxonomyAccountDAL.dll.config" />
     <Content Include="bin\ODPTaxonomyDAL_TT.dll.config" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
