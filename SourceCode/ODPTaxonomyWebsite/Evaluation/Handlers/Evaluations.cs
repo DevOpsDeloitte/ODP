@@ -248,7 +248,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         System.Diagnostics.Trace.WriteLine(" validate super username : " + superusername + "     " + superpassword);
                         MembershipUser user = Membership.GetUser(superusername);
                         superuserID = (Guid)user.ProviderUserKey;
+                        List<string> UserRoles = Roles.GetRolesForUser(superusername).ToList();
+                        var isSupervisor = false;
+                        foreach (var role in UserRoles)
+                        {
+                            if (role.ToLower().Contains("supervisor")) isSupervisor = true;
 
+                        }
+                        if (!isSupervisor) return false;
+                        
                     }
                     else
                     {
