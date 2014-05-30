@@ -412,6 +412,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\ODPTaxonomyDAL_TT.dll.config" />
+    <Content Include="Evaluation\Handlers\Evaluation.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
