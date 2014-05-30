@@ -181,6 +181,42 @@ namespace ODPTaxonomyDAL_JY
             return Abstracts;
         }
 
+        public static List<AbstractListRow> SortAbstracts(List<AbstractListRow> Abstracts, string Sort, SortDirection SortDirection)
+        {
+            switch (Sort)
+            {
+                case "ApplicationID":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.ApplicationID).ToList();
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.ApplicationID).ToList();
+                    }
+                case "Title":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.ProjectTitle).ToList();
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.ProjectTitle).ToList();
+                    }
+                case "Date":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.StatusDate).ToList();
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.StatusDate).ToList();
+                    }
+                default:
+                    return Abstracts.OrderByDescending(d => d.StatusDate).ToList();
+            }
+        }
+
         public static AbstractListRow ConstructNewAbstractListRow(KappaData Kappa, string Title, int AbstractID = 0)
         {
             return new AbstractListRow

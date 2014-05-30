@@ -34,7 +34,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             }
         }
 
-        protected List<AbstractListRow> GetParentAbstracts(string sort = "Date", SortDirection direction = SortDirection.Ascending)
+        protected List<AbstractListRow> GetParentAbstracts(string sort = "", SortDirection direction = SortDirection.Ascending)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -68,38 +68,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                 direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
             }
 
-            switch (sort)
-            {
-                case "ApplicationID":
-                    if (direction == SortDirection.Ascending)
-                    {
-                        return abstracts.OrderBy(d => d.ApplicationID).ToList();
-                    }
-                    else
-                    {
-                        return abstracts.OrderByDescending(d => d.ApplicationID).ToList();
-                    }
-                case "Title":
-                    if (direction == SortDirection.Ascending)
-                    {
-                        return abstracts.OrderBy(d => d.ProjectTitle).ToList();
-                    }
-                    else
-                    {
-                        return abstracts.OrderByDescending(d => d.ProjectTitle).ToList();
-                    }
-                case "Date":
-                default:
-                    if (direction == SortDirection.Ascending)
-                    {
-                        return abstracts.OrderBy(d => d.StatusDate).ToList();
-                    }
-                    else
-                    {
-                        return abstracts.OrderByDescending(d => d.StatusDate).ToList();
-                    }
-
-            }
+            return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
         }
 
         protected void AbstractSortHandler(object sender, GridViewSortEventArgs e)
@@ -130,6 +99,6 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(abstracts, AbstractViewRole.Admin);
             AbstractViewGridView.DataBind();
-        }              
+        }
     }
 }

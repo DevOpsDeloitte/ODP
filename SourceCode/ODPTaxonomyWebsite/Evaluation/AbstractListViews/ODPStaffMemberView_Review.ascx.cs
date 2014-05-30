@@ -66,44 +66,15 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                            IsParent = true
                        };
 
+            List<AbstractListRow> abstracts = data.ToList();
+
             if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
             {
                 sort = AbstractViewGridView.Attributes["CurrentSortExp"];
                 direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
             }
 
-            switch (sort)
-            {
-                case "ApplicationID":
-                    if (direction == SortDirection.Ascending)
-                    {
-                        return data.OrderBy(d => d.ApplicationID).ToList();
-                    }
-                    else
-                    {
-                        return data.OrderByDescending(d => d.ApplicationID).ToList();
-                    }
-                case "Title":
-                    if (direction == SortDirection.Ascending)
-                    {
-                        return data.OrderBy(d => d.ProjectTitle).ToList();
-                    }
-                    else
-                    {
-                        return data.OrderByDescending(d => d.ProjectTitle).ToList();
-                    }
-                case "Date":
-                default:
-                    if (direction == SortDirection.Ascending)
-                    {
-                        return data.OrderBy(d => d.StatusDate).ToList();
-                    }
-                    else
-                    {
-                        return data.OrderByDescending(d => d.StatusDate).ToList();
-                    }
-
-            }
+            return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
         }
 
         protected void AbstractSortHandler(object sender, GridViewSortEventArgs e)
