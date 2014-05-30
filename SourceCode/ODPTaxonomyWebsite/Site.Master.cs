@@ -43,6 +43,17 @@ namespace ODPTaxonomyWebsite
         {
             try
             {
+                //Hide Menu on Login  page
+                string currentPage = Request.Url.ToString().ToLower();
+                if (currentPage.IndexOf("login.aspx") > -1)
+                {
+                    showLeftPush.Visible = false;
+                }
+                else
+                {
+                    showLeftPush.Visible = true;
+                }
+
                 role_coder = Common.RoleNames["coder"];
                 role_coderSup = Common.RoleNames["coderSup"];
                 role_odp = Common.RoleNames["odp"];

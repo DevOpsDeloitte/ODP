@@ -58,6 +58,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string FormMode = string.Empty;
         public string Comments = string.Empty;
         public bool showConsensusButton = false;
+        public string isChecked = string.Empty;
     
         private DataDataContext db = null;
         private Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
@@ -133,7 +134,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 UserId = sv.UserId;
                 SubmissionTypeId = sv.SubmissionTypeId;
                 EvaluationID = sv.EvaluationId;
-                Response.Write(" SESSION PASSED VIEW MODE : " + sv.ViewMode);
+                //Response.Write(" SESSION PASSED VIEW MODE : " + sv.ViewMode);
                 DisplayMode = sv.ViewMode.ToString() == "view" ? "View" : "Insert";
             }
             else
@@ -187,6 +188,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             {
                 SubmissionID = rec.SubmissionID;
                 Comments = rec.Comments;
+                if (rec.UnableToCode)
+                {
+                    isChecked = "checked";
+                }
             }
             else
             {

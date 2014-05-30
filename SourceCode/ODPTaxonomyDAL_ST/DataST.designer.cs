@@ -72,9 +72,6 @@ namespace ODPTaxonomyDAL_ST
     partial void InsertStatus(Status instance);
     partial void UpdateStatus(Status instance);
     partial void DeleteStatus(Status instance);
-    partial void InsertSubmission(Submission instance);
-    partial void UpdateSubmission(Submission instance);
-    partial void DeleteSubmission(Submission instance);
     partial void InsertSubmissionType(SubmissionType instance);
     partial void UpdateSubmissionType(SubmissionType instance);
     partial void DeleteSubmissionType(SubmissionType instance);
@@ -111,6 +108,9 @@ namespace ODPTaxonomyDAL_ST
     partial void InsertAbstract(Abstract instance);
     partial void UpdateAbstract(Abstract instance);
     partial void DeleteAbstract(Abstract instance);
+    partial void InsertSubmission(Submission instance);
+    partial void UpdateSubmission(Submission instance);
+    partial void DeleteSubmission(Submission instance);
     #endregion
 		
 		public DataDataContext() : 
@@ -255,14 +255,6 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		public System.Data.Linq.Table<Submission> Submissions
-		{
-			get
-			{
-				return this.GetTable<Submission>();
-			}
-		}
-		
 		public System.Data.Linq.Table<SubmissionType> SubmissionTypes
 		{
 			get
@@ -364,6 +356,14 @@ namespace ODPTaxonomyDAL_ST
 			get
 			{
 				return this.GetTable<Abstract>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Submission> Submissions
+		{
+			get
+			{
+				return this.GetTable<Submission>();
 			}
 		}
 	}
@@ -3038,11 +3038,11 @@ namespace ODPTaxonomyDAL_ST
 		
 		private EntitySet<F_PreventionCategory> _F_PreventionCategories;
 		
+		private EntitySet<ProtocolVersionControl> _ProtocolVersionControls;
+		
 		private EntitySet<Submission> _Submissions;
 		
 		private EntitySet<Submission> _Submissions1;
-		
-		private EntitySet<ProtocolVersionControl> _ProtocolVersionControls;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -3062,9 +3062,9 @@ namespace ODPTaxonomyDAL_ST
 			this._D_PopulationFocus = new EntitySet<D_PopulationFocus>(new Action<D_PopulationFocus>(this.attach_D_PopulationFocus), new Action<D_PopulationFocus>(this.detach_D_PopulationFocus));
 			this._E_StudyDesignPurposes = new EntitySet<E_StudyDesignPurpose>(new Action<E_StudyDesignPurpose>(this.attach_E_StudyDesignPurposes), new Action<E_StudyDesignPurpose>(this.detach_E_StudyDesignPurposes));
 			this._F_PreventionCategories = new EntitySet<F_PreventionCategory>(new Action<F_PreventionCategory>(this.attach_F_PreventionCategories), new Action<F_PreventionCategory>(this.detach_F_PreventionCategories));
+			this._ProtocolVersionControls = new EntitySet<ProtocolVersionControl>(new Action<ProtocolVersionControl>(this.attach_ProtocolVersionControls), new Action<ProtocolVersionControl>(this.detach_ProtocolVersionControls));
 			this._Submissions = new EntitySet<Submission>(new Action<Submission>(this.attach_Submissions), new Action<Submission>(this.detach_Submissions));
 			this._Submissions1 = new EntitySet<Submission>(new Action<Submission>(this.attach_Submissions1), new Action<Submission>(this.detach_Submissions1));
-			this._ProtocolVersionControls = new EntitySet<ProtocolVersionControl>(new Action<ProtocolVersionControl>(this.attach_ProtocolVersionControls), new Action<ProtocolVersionControl>(this.detach_ProtocolVersionControls));
 			OnCreated();
 		}
 		
@@ -3186,6 +3186,19 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_ProtocolVersionControl", Storage="_ProtocolVersionControls", ThisKey="StatusID", OtherKey="StatusID")]
+		public EntitySet<ProtocolVersionControl> ProtocolVersionControls
+		{
+			get
+			{
+				return this._ProtocolVersionControls;
+			}
+			set
+			{
+				this._ProtocolVersionControls.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Submission", Storage="_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
 		public EntitySet<Submission> Submissions
 		{
@@ -3209,19 +3222,6 @@ namespace ODPTaxonomyDAL_ST
 			set
 			{
 				this._Submissions1.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_ProtocolVersionControl", Storage="_ProtocolVersionControls", ThisKey="StatusID", OtherKey="StatusID")]
-		public EntitySet<ProtocolVersionControl> ProtocolVersionControls
-		{
-			get
-			{
-				return this._ProtocolVersionControls;
-			}
-			set
-			{
-				this._ProtocolVersionControls.Assign(value);
 			}
 		}
 		
@@ -3317,6 +3317,18 @@ namespace ODPTaxonomyDAL_ST
 			entity.Status = null;
 		}
 		
+		private void attach_ProtocolVersionControls(ProtocolVersionControl entity)
+		{
+			this.SendPropertyChanging();
+			entity.Status = this;
+		}
+		
+		private void detach_ProtocolVersionControls(ProtocolVersionControl entity)
+		{
+			this.SendPropertyChanging();
+			entity.Status = null;
+		}
+		
 		private void attach_Submissions(Submission entity)
 		{
 			this.SendPropertyChanging();
@@ -3339,624 +3351,6 @@ namespace ODPTaxonomyDAL_ST
 		{
 			this.SendPropertyChanging();
 			entity.Status1 = null;
-		}
-		
-		private void attach_ProtocolVersionControls(ProtocolVersionControl entity)
-		{
-			this.SendPropertyChanging();
-			entity.Status = this;
-		}
-		
-		private void detach_ProtocolVersionControls(ProtocolVersionControl entity)
-		{
-			this.SendPropertyChanging();
-			entity.Status = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Submission")]
-	public partial class Submission : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _SubmissionID;
-		
-		private System.Nullable<int> _EvaluationId;
-		
-		private System.Nullable<System.Guid> _UserId;
-		
-		private System.Nullable<short> _SubmissionTypeId;
-		
-		private string _Comments;
-		
-		private bool _UnableToCode;
-		
-		private System.Nullable<System.DateTime> _SubmissionDateTime;
-		
-		private System.Nullable<int> _StatusID;
-		
-		private System.Nullable<System.Guid> _UpdatedBy;
-		
-		private System.Nullable<System.DateTime> _UpdatedDate;
-		
-		private EntitySet<A_StudyFocusAnswer> _A_StudyFocusAnswers;
-		
-		private EntitySet<B_EntitiesStudiedAnswer> _B_EntitiesStudiedAnswers;
-		
-		private EntitySet<C_StudySettingAnswer> _C_StudySettingAnswers;
-		
-		private EntitySet<D_PopulationFocusAnswer> _D_PopulationFocusAnswers;
-		
-		private EntitySet<E_StudyDesignPurposeAnswer> _E_StudyDesignPurposeAnswers;
-		
-		private EntitySet<F_PreventionCategoryAnswer> _F_PreventionCategoryAnswers;
-		
-		private EntityRef<Status> _Status;
-		
-		private EntityRef<Status> _Status1;
-		
-		private EntityRef<SubmissionType> _SubmissionType;
-		
-		private EntityRef<Evaluation> _Evaluation;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnSubmissionIDChanging(int value);
-    partial void OnSubmissionIDChanged();
-    partial void OnEvaluationIdChanging(System.Nullable<int> value);
-    partial void OnEvaluationIdChanged();
-    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
-    partial void OnUserIdChanged();
-    partial void OnSubmissionTypeIdChanging(System.Nullable<short> value);
-    partial void OnSubmissionTypeIdChanged();
-    partial void OnCommentsChanging(string value);
-    partial void OnCommentsChanged();
-    partial void OnUnableToCodeChanging(bool value);
-    partial void OnUnableToCodeChanged();
-    partial void OnSubmissionDateTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnSubmissionDateTimeChanged();
-    partial void OnStatusIDChanging(System.Nullable<int> value);
-    partial void OnStatusIDChanged();
-    partial void OnUpdatedByChanging(System.Nullable<System.Guid> value);
-    partial void OnUpdatedByChanged();
-    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdatedDateChanged();
-    #endregion
-		
-		public Submission()
-		{
-			this._A_StudyFocusAnswers = new EntitySet<A_StudyFocusAnswer>(new Action<A_StudyFocusAnswer>(this.attach_A_StudyFocusAnswers), new Action<A_StudyFocusAnswer>(this.detach_A_StudyFocusAnswers));
-			this._B_EntitiesStudiedAnswers = new EntitySet<B_EntitiesStudiedAnswer>(new Action<B_EntitiesStudiedAnswer>(this.attach_B_EntitiesStudiedAnswers), new Action<B_EntitiesStudiedAnswer>(this.detach_B_EntitiesStudiedAnswers));
-			this._C_StudySettingAnswers = new EntitySet<C_StudySettingAnswer>(new Action<C_StudySettingAnswer>(this.attach_C_StudySettingAnswers), new Action<C_StudySettingAnswer>(this.detach_C_StudySettingAnswers));
-			this._D_PopulationFocusAnswers = new EntitySet<D_PopulationFocusAnswer>(new Action<D_PopulationFocusAnswer>(this.attach_D_PopulationFocusAnswers), new Action<D_PopulationFocusAnswer>(this.detach_D_PopulationFocusAnswers));
-			this._E_StudyDesignPurposeAnswers = new EntitySet<E_StudyDesignPurposeAnswer>(new Action<E_StudyDesignPurposeAnswer>(this.attach_E_StudyDesignPurposeAnswers), new Action<E_StudyDesignPurposeAnswer>(this.detach_E_StudyDesignPurposeAnswers));
-			this._F_PreventionCategoryAnswers = new EntitySet<F_PreventionCategoryAnswer>(new Action<F_PreventionCategoryAnswer>(this.attach_F_PreventionCategoryAnswers), new Action<F_PreventionCategoryAnswer>(this.detach_F_PreventionCategoryAnswers));
-			this._Status = default(EntityRef<Status>);
-			this._Status1 = default(EntityRef<Status>);
-			this._SubmissionType = default(EntityRef<SubmissionType>);
-			this._Evaluation = default(EntityRef<Evaluation>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int SubmissionID
-		{
-			get
-			{
-				return this._SubmissionID;
-			}
-			set
-			{
-				if ((this._SubmissionID != value))
-				{
-					this.OnSubmissionIDChanging(value);
-					this.SendPropertyChanging();
-					this._SubmissionID = value;
-					this.SendPropertyChanged("SubmissionID");
-					this.OnSubmissionIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationId", DbType="Int")]
-		public System.Nullable<int> EvaluationId
-		{
-			get
-			{
-				return this._EvaluationId;
-			}
-			set
-			{
-				if ((this._EvaluationId != value))
-				{
-					if (this._Evaluation.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnEvaluationIdChanging(value);
-					this.SendPropertyChanging();
-					this._EvaluationId = value;
-					this.SendPropertyChanged("EvaluationId");
-					this.OnEvaluationIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this.OnUserIdChanging(value);
-					this.SendPropertyChanging();
-					this._UserId = value;
-					this.SendPropertyChanged("UserId");
-					this.OnUserIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionTypeId", DbType="SmallInt")]
-		public System.Nullable<short> SubmissionTypeId
-		{
-			get
-			{
-				return this._SubmissionTypeId;
-			}
-			set
-			{
-				if ((this._SubmissionTypeId != value))
-				{
-					if (this._SubmissionType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnSubmissionTypeIdChanging(value);
-					this.SendPropertyChanging();
-					this._SubmissionTypeId = value;
-					this.SendPropertyChanged("SubmissionTypeId");
-					this.OnSubmissionTypeIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comments", DbType="NVarChar(MAX)")]
-		public string Comments
-		{
-			get
-			{
-				return this._Comments;
-			}
-			set
-			{
-				if ((this._Comments != value))
-				{
-					this.OnCommentsChanging(value);
-					this.SendPropertyChanging();
-					this._Comments = value;
-					this.SendPropertyChanged("Comments");
-					this.OnCommentsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnableToCode", DbType="Bit NOT NULL")]
-		public bool UnableToCode
-		{
-			get
-			{
-				return this._UnableToCode;
-			}
-			set
-			{
-				if ((this._UnableToCode != value))
-				{
-					this.OnUnableToCodeChanging(value);
-					this.SendPropertyChanging();
-					this._UnableToCode = value;
-					this.SendPropertyChanged("UnableToCode");
-					this.OnUnableToCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionDateTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> SubmissionDateTime
-		{
-			get
-			{
-				return this._SubmissionDateTime;
-			}
-			set
-			{
-				if ((this._SubmissionDateTime != value))
-				{
-					this.OnSubmissionDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._SubmissionDateTime = value;
-					this.SendPropertyChanged("SubmissionDateTime");
-					this.OnSubmissionDateTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int")]
-		public System.Nullable<int> StatusID
-		{
-			get
-			{
-				return this._StatusID;
-			}
-			set
-			{
-				if ((this._StatusID != value))
-				{
-					if ((this._Status.HasLoadedOrAssignedValue || this._Status1.HasLoadedOrAssignedValue))
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnStatusIDChanging(value);
-					this.SendPropertyChanging();
-					this._StatusID = value;
-					this.SendPropertyChanged("StatusID");
-					this.OnStatusIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedBy", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> UpdatedBy
-		{
-			get
-			{
-				return this._UpdatedBy;
-			}
-			set
-			{
-				if ((this._UpdatedBy != value))
-				{
-					this.OnUpdatedByChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedBy = value;
-					this.SendPropertyChanged("UpdatedBy");
-					this.OnUpdatedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UpdatedDate
-		{
-			get
-			{
-				return this._UpdatedDate;
-			}
-			set
-			{
-				if ((this._UpdatedDate != value))
-				{
-					this.OnUpdatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedDate = value;
-					this.SendPropertyChanged("UpdatedDate");
-					this.OnUpdatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_A_StudyFocusAnswer", Storage="_A_StudyFocusAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
-		public EntitySet<A_StudyFocusAnswer> A_StudyFocusAnswers
-		{
-			get
-			{
-				return this._A_StudyFocusAnswers;
-			}
-			set
-			{
-				this._A_StudyFocusAnswers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_B_EntitiesStudiedAnswer", Storage="_B_EntitiesStudiedAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
-		public EntitySet<B_EntitiesStudiedAnswer> B_EntitiesStudiedAnswers
-		{
-			get
-			{
-				return this._B_EntitiesStudiedAnswers;
-			}
-			set
-			{
-				this._B_EntitiesStudiedAnswers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_C_StudySettingAnswer", Storage="_C_StudySettingAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
-		public EntitySet<C_StudySettingAnswer> C_StudySettingAnswers
-		{
-			get
-			{
-				return this._C_StudySettingAnswers;
-			}
-			set
-			{
-				this._C_StudySettingAnswers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_D_PopulationFocusAnswer", Storage="_D_PopulationFocusAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
-		public EntitySet<D_PopulationFocusAnswer> D_PopulationFocusAnswers
-		{
-			get
-			{
-				return this._D_PopulationFocusAnswers;
-			}
-			set
-			{
-				this._D_PopulationFocusAnswers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_E_StudyDesignPurposeAnswer", Storage="_E_StudyDesignPurposeAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
-		public EntitySet<E_StudyDesignPurposeAnswer> E_StudyDesignPurposeAnswers
-		{
-			get
-			{
-				return this._E_StudyDesignPurposeAnswers;
-			}
-			set
-			{
-				this._E_StudyDesignPurposeAnswers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_F_PreventionCategoryAnswer", Storage="_F_PreventionCategoryAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
-		public EntitySet<F_PreventionCategoryAnswer> F_PreventionCategoryAnswers
-		{
-			get
-			{
-				return this._F_PreventionCategoryAnswers;
-			}
-			set
-			{
-				this._F_PreventionCategoryAnswers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Submission", Storage="_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
-		public Status Status
-		{
-			get
-			{
-				return this._Status.Entity;
-			}
-			set
-			{
-				Status previousValue = this._Status.Entity;
-				if (((previousValue != value) 
-							|| (this._Status.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Status.Entity = null;
-						previousValue.Submissions.Remove(this);
-					}
-					this._Status.Entity = value;
-					if ((value != null))
-					{
-						value.Submissions.Add(this);
-						this._StatusID = value.StatusID;
-					}
-					else
-					{
-						this._StatusID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Status");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Submission1", Storage="_Status1", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
-		public Status Status1
-		{
-			get
-			{
-				return this._Status1.Entity;
-			}
-			set
-			{
-				Status previousValue = this._Status1.Entity;
-				if (((previousValue != value) 
-							|| (this._Status1.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Status1.Entity = null;
-						previousValue.Submissions1.Remove(this);
-					}
-					this._Status1.Entity = value;
-					if ((value != null))
-					{
-						value.Submissions1.Add(this);
-						this._StatusID = value.StatusID;
-					}
-					else
-					{
-						this._StatusID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Status1");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubmissionType_Submission", Storage="_SubmissionType", ThisKey="SubmissionTypeId", OtherKey="SubmissionTypeId", IsForeignKey=true)]
-		public SubmissionType SubmissionType
-		{
-			get
-			{
-				return this._SubmissionType.Entity;
-			}
-			set
-			{
-				SubmissionType previousValue = this._SubmissionType.Entity;
-				if (((previousValue != value) 
-							|| (this._SubmissionType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._SubmissionType.Entity = null;
-						previousValue.Submissions.Remove(this);
-					}
-					this._SubmissionType.Entity = value;
-					if ((value != null))
-					{
-						value.Submissions.Add(this);
-						this._SubmissionTypeId = value.SubmissionTypeId;
-					}
-					else
-					{
-						this._SubmissionTypeId = default(Nullable<short>);
-					}
-					this.SendPropertyChanged("SubmissionType");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_Submission", Storage="_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
-		public Evaluation Evaluation
-		{
-			get
-			{
-				return this._Evaluation.Entity;
-			}
-			set
-			{
-				Evaluation previousValue = this._Evaluation.Entity;
-				if (((previousValue != value) 
-							|| (this._Evaluation.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Evaluation.Entity = null;
-						previousValue.Submissions.Remove(this);
-					}
-					this._Evaluation.Entity = value;
-					if ((value != null))
-					{
-						value.Submissions.Add(this);
-						this._EvaluationId = value.EvaluationId;
-					}
-					else
-					{
-						this._EvaluationId = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("Evaluation");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_A_StudyFocusAnswers(A_StudyFocusAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = this;
-		}
-		
-		private void detach_A_StudyFocusAnswers(A_StudyFocusAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = null;
-		}
-		
-		private void attach_B_EntitiesStudiedAnswers(B_EntitiesStudiedAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = this;
-		}
-		
-		private void detach_B_EntitiesStudiedAnswers(B_EntitiesStudiedAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = null;
-		}
-		
-		private void attach_C_StudySettingAnswers(C_StudySettingAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = this;
-		}
-		
-		private void detach_C_StudySettingAnswers(C_StudySettingAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = null;
-		}
-		
-		private void attach_D_PopulationFocusAnswers(D_PopulationFocusAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = this;
-		}
-		
-		private void detach_D_PopulationFocusAnswers(D_PopulationFocusAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = null;
-		}
-		
-		private void attach_E_StudyDesignPurposeAnswers(E_StudyDesignPurposeAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = this;
-		}
-		
-		private void detach_E_StudyDesignPurposeAnswers(E_StudyDesignPurposeAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = null;
-		}
-		
-		private void attach_F_PreventionCategoryAnswers(F_PreventionCategoryAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = this;
-		}
-		
-		private void detach_F_PreventionCategoryAnswers(F_PreventionCategoryAnswer entity)
-		{
-			this.SendPropertyChanging();
-			entity.Submission = null;
 		}
 	}
 	
@@ -5311,11 +4705,11 @@ namespace ODPTaxonomyDAL_ST
 		
 		private System.Nullable<System.DateTime> _StoppedDateTime;
 		
-		private EntitySet<Submission> _Submissions;
-		
 		private EntitySet<AbstractStatusChangeHistory> _AbstractStatusChangeHistories;
 		
 		private EntitySet<AbstractStatusChangeHistory> _AbstractStatusChangeHistories1;
+		
+		private EntitySet<Submission> _Submissions;
 		
 		private EntityRef<Team> _Team;
 		
@@ -5355,9 +4749,9 @@ namespace ODPTaxonomyDAL_ST
 		
 		public Evaluation()
 		{
-			this._Submissions = new EntitySet<Submission>(new Action<Submission>(this.attach_Submissions), new Action<Submission>(this.detach_Submissions));
 			this._AbstractStatusChangeHistories = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories));
 			this._AbstractStatusChangeHistories1 = new EntitySet<AbstractStatusChangeHistory>(new Action<AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories1), new Action<AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories1));
+			this._Submissions = new EntitySet<Submission>(new Action<Submission>(this.attach_Submissions), new Action<Submission>(this.detach_Submissions));
 			this._Team = default(EntityRef<Team>);
 			this._EvaluationType = default(EntityRef<EvaluationType>);
 			this._Abstract = default(EntityRef<Abstract>);
@@ -5597,19 +4991,6 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_Submission", Storage="_Submissions", ThisKey="EvaluationId", OtherKey="EvaluationId")]
-		public EntitySet<Submission> Submissions
-		{
-			get
-			{
-				return this._Submissions;
-			}
-			set
-			{
-				this._Submissions.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_AbstractStatusChangeHistory", Storage="_AbstractStatusChangeHistories", ThisKey="EvaluationId", OtherKey="EvaluationId")]
 		public EntitySet<AbstractStatusChangeHistory> AbstractStatusChangeHistories
 		{
@@ -5633,6 +5014,19 @@ namespace ODPTaxonomyDAL_ST
 			set
 			{
 				this._AbstractStatusChangeHistories1.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_Submission", Storage="_Submissions", ThisKey="EvaluationId", OtherKey="EvaluationId")]
+		public EntitySet<Submission> Submissions
+		{
+			get
+			{
+				return this._Submissions;
+			}
+			set
+			{
+				this._Submissions.Assign(value);
 			}
 		}
 		
@@ -5792,18 +5186,6 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		private void attach_Submissions(Submission entity)
-		{
-			this.SendPropertyChanging();
-			entity.Evaluation = this;
-		}
-		
-		private void detach_Submissions(Submission entity)
-		{
-			this.SendPropertyChanging();
-			entity.Evaluation = null;
-		}
-		
 		private void attach_AbstractStatusChangeHistories(AbstractStatusChangeHistory entity)
 		{
 			this.SendPropertyChanging();
@@ -5826,6 +5208,18 @@ namespace ODPTaxonomyDAL_ST
 		{
 			this.SendPropertyChanging();
 			entity.Evaluation1 = null;
+		}
+		
+		private void attach_Submissions(Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation = this;
+		}
+		
+		private void detach_Submissions(Submission entity)
+		{
+			this.SendPropertyChanging();
+			entity.Evaluation = null;
 		}
 	}
 	
@@ -7280,6 +6674,636 @@ namespace ODPTaxonomyDAL_ST
 		{
 			this.SendPropertyChanging();
 			entity.Abstract = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Submission")]
+	public partial class Submission : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SubmissionID;
+		
+		private System.Nullable<int> _EvaluationId;
+		
+		private System.Nullable<System.Guid> _UserId;
+		
+		private System.Nullable<short> _SubmissionTypeId;
+		
+		private string _Comments;
+		
+		private bool _UnableToCode;
+		
+		private System.Nullable<System.Guid> _ApproveSupervisorUserID;
+		
+		private System.Nullable<System.DateTime> _SubmissionDateTime;
+		
+		private System.Nullable<int> _StatusID;
+		
+		private System.Nullable<System.Guid> _UpdatedBy;
+		
+		private System.Nullable<System.DateTime> _UpdatedDate;
+		
+		private EntitySet<A_StudyFocusAnswer> _A_StudyFocusAnswers;
+		
+		private EntitySet<B_EntitiesStudiedAnswer> _B_EntitiesStudiedAnswers;
+		
+		private EntitySet<C_StudySettingAnswer> _C_StudySettingAnswers;
+		
+		private EntitySet<D_PopulationFocusAnswer> _D_PopulationFocusAnswers;
+		
+		private EntitySet<E_StudyDesignPurposeAnswer> _E_StudyDesignPurposeAnswers;
+		
+		private EntitySet<F_PreventionCategoryAnswer> _F_PreventionCategoryAnswers;
+		
+		private EntityRef<Evaluation> _Evaluation;
+		
+		private EntityRef<Status> _Status;
+		
+		private EntityRef<Status> _Status1;
+		
+		private EntityRef<SubmissionType> _SubmissionType;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSubmissionIDChanging(int value);
+    partial void OnSubmissionIDChanged();
+    partial void OnEvaluationIdChanging(System.Nullable<int> value);
+    partial void OnEvaluationIdChanged();
+    partial void OnUserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUserIdChanged();
+    partial void OnSubmissionTypeIdChanging(System.Nullable<short> value);
+    partial void OnSubmissionTypeIdChanged();
+    partial void OnCommentsChanging(string value);
+    partial void OnCommentsChanged();
+    partial void OnUnableToCodeChanging(bool value);
+    partial void OnUnableToCodeChanged();
+    partial void OnApproveSupervisorUserIDChanging(System.Nullable<System.Guid> value);
+    partial void OnApproveSupervisorUserIDChanged();
+    partial void OnSubmissionDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnSubmissionDateTimeChanged();
+    partial void OnStatusIDChanging(System.Nullable<int> value);
+    partial void OnStatusIDChanged();
+    partial void OnUpdatedByChanging(System.Nullable<System.Guid> value);
+    partial void OnUpdatedByChanged();
+    partial void OnUpdatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedDateChanged();
+    #endregion
+		
+		public Submission()
+		{
+			this._A_StudyFocusAnswers = new EntitySet<A_StudyFocusAnswer>(new Action<A_StudyFocusAnswer>(this.attach_A_StudyFocusAnswers), new Action<A_StudyFocusAnswer>(this.detach_A_StudyFocusAnswers));
+			this._B_EntitiesStudiedAnswers = new EntitySet<B_EntitiesStudiedAnswer>(new Action<B_EntitiesStudiedAnswer>(this.attach_B_EntitiesStudiedAnswers), new Action<B_EntitiesStudiedAnswer>(this.detach_B_EntitiesStudiedAnswers));
+			this._C_StudySettingAnswers = new EntitySet<C_StudySettingAnswer>(new Action<C_StudySettingAnswer>(this.attach_C_StudySettingAnswers), new Action<C_StudySettingAnswer>(this.detach_C_StudySettingAnswers));
+			this._D_PopulationFocusAnswers = new EntitySet<D_PopulationFocusAnswer>(new Action<D_PopulationFocusAnswer>(this.attach_D_PopulationFocusAnswers), new Action<D_PopulationFocusAnswer>(this.detach_D_PopulationFocusAnswers));
+			this._E_StudyDesignPurposeAnswers = new EntitySet<E_StudyDesignPurposeAnswer>(new Action<E_StudyDesignPurposeAnswer>(this.attach_E_StudyDesignPurposeAnswers), new Action<E_StudyDesignPurposeAnswer>(this.detach_E_StudyDesignPurposeAnswers));
+			this._F_PreventionCategoryAnswers = new EntitySet<F_PreventionCategoryAnswer>(new Action<F_PreventionCategoryAnswer>(this.attach_F_PreventionCategoryAnswers), new Action<F_PreventionCategoryAnswer>(this.detach_F_PreventionCategoryAnswers));
+			this._Evaluation = default(EntityRef<Evaluation>);
+			this._Status = default(EntityRef<Status>);
+			this._Status1 = default(EntityRef<Status>);
+			this._SubmissionType = default(EntityRef<SubmissionType>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SubmissionID
+		{
+			get
+			{
+				return this._SubmissionID;
+			}
+			set
+			{
+				if ((this._SubmissionID != value))
+				{
+					this.OnSubmissionIDChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionID = value;
+					this.SendPropertyChanged("SubmissionID");
+					this.OnSubmissionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationId", DbType="Int")]
+		public System.Nullable<int> EvaluationId
+		{
+			get
+			{
+				return this._EvaluationId;
+			}
+			set
+			{
+				if ((this._EvaluationId != value))
+				{
+					if (this._Evaluation.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnEvaluationIdChanging(value);
+					this.SendPropertyChanging();
+					this._EvaluationId = value;
+					this.SendPropertyChanged("EvaluationId");
+					this.OnEvaluationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionTypeId", DbType="SmallInt")]
+		public System.Nullable<short> SubmissionTypeId
+		{
+			get
+			{
+				return this._SubmissionTypeId;
+			}
+			set
+			{
+				if ((this._SubmissionTypeId != value))
+				{
+					if (this._SubmissionType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSubmissionTypeIdChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionTypeId = value;
+					this.SendPropertyChanged("SubmissionTypeId");
+					this.OnSubmissionTypeIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Comments", DbType="NVarChar(MAX)")]
+		public string Comments
+		{
+			get
+			{
+				return this._Comments;
+			}
+			set
+			{
+				if ((this._Comments != value))
+				{
+					this.OnCommentsChanging(value);
+					this.SendPropertyChanging();
+					this._Comments = value;
+					this.SendPropertyChanged("Comments");
+					this.OnCommentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UnableToCode", DbType="Bit NOT NULL")]
+		public bool UnableToCode
+		{
+			get
+			{
+				return this._UnableToCode;
+			}
+			set
+			{
+				if ((this._UnableToCode != value))
+				{
+					this.OnUnableToCodeChanging(value);
+					this.SendPropertyChanging();
+					this._UnableToCode = value;
+					this.SendPropertyChanged("UnableToCode");
+					this.OnUnableToCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApproveSupervisorUserID", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> ApproveSupervisorUserID
+		{
+			get
+			{
+				return this._ApproveSupervisorUserID;
+			}
+			set
+			{
+				if ((this._ApproveSupervisorUserID != value))
+				{
+					this.OnApproveSupervisorUserIDChanging(value);
+					this.SendPropertyChanging();
+					this._ApproveSupervisorUserID = value;
+					this.SendPropertyChanged("ApproveSupervisorUserID");
+					this.OnApproveSupervisorUserIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionDateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> SubmissionDateTime
+		{
+			get
+			{
+				return this._SubmissionDateTime;
+			}
+			set
+			{
+				if ((this._SubmissionDateTime != value))
+				{
+					this.OnSubmissionDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionDateTime = value;
+					this.SendPropertyChanged("SubmissionDateTime");
+					this.OnSubmissionDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int")]
+		public System.Nullable<int> StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					if ((this._Status.HasLoadedOrAssignedValue || this._Status1.HasLoadedOrAssignedValue))
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._StatusID = value;
+					this.SendPropertyChanged("StatusID");
+					this.OnStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UpdatedBy
+		{
+			get
+			{
+				return this._UpdatedBy;
+			}
+			set
+			{
+				if ((this._UpdatedBy != value))
+				{
+					this.OnUpdatedByChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedBy = value;
+					this.SendPropertyChanged("UpdatedBy");
+					this.OnUpdatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdatedDate
+		{
+			get
+			{
+				return this._UpdatedDate;
+			}
+			set
+			{
+				if ((this._UpdatedDate != value))
+				{
+					this.OnUpdatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedDate = value;
+					this.SendPropertyChanged("UpdatedDate");
+					this.OnUpdatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_A_StudyFocusAnswer", Storage="_A_StudyFocusAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
+		public EntitySet<A_StudyFocusAnswer> A_StudyFocusAnswers
+		{
+			get
+			{
+				return this._A_StudyFocusAnswers;
+			}
+			set
+			{
+				this._A_StudyFocusAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_B_EntitiesStudiedAnswer", Storage="_B_EntitiesStudiedAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
+		public EntitySet<B_EntitiesStudiedAnswer> B_EntitiesStudiedAnswers
+		{
+			get
+			{
+				return this._B_EntitiesStudiedAnswers;
+			}
+			set
+			{
+				this._B_EntitiesStudiedAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_C_StudySettingAnswer", Storage="_C_StudySettingAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
+		public EntitySet<C_StudySettingAnswer> C_StudySettingAnswers
+		{
+			get
+			{
+				return this._C_StudySettingAnswers;
+			}
+			set
+			{
+				this._C_StudySettingAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_D_PopulationFocusAnswer", Storage="_D_PopulationFocusAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
+		public EntitySet<D_PopulationFocusAnswer> D_PopulationFocusAnswers
+		{
+			get
+			{
+				return this._D_PopulationFocusAnswers;
+			}
+			set
+			{
+				this._D_PopulationFocusAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_E_StudyDesignPurposeAnswer", Storage="_E_StudyDesignPurposeAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
+		public EntitySet<E_StudyDesignPurposeAnswer> E_StudyDesignPurposeAnswers
+		{
+			get
+			{
+				return this._E_StudyDesignPurposeAnswers;
+			}
+			set
+			{
+				this._E_StudyDesignPurposeAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_F_PreventionCategoryAnswer", Storage="_F_PreventionCategoryAnswers", ThisKey="SubmissionID", OtherKey="SubmissionID")]
+		public EntitySet<F_PreventionCategoryAnswer> F_PreventionCategoryAnswers
+		{
+			get
+			{
+				return this._F_PreventionCategoryAnswers;
+			}
+			set
+			{
+				this._F_PreventionCategoryAnswers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_Submission", Storage="_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
+		public Evaluation Evaluation
+		{
+			get
+			{
+				return this._Evaluation.Entity;
+			}
+			set
+			{
+				Evaluation previousValue = this._Evaluation.Entity;
+				if (((previousValue != value) 
+							|| (this._Evaluation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Evaluation.Entity = null;
+						previousValue.Submissions.Remove(this);
+					}
+					this._Evaluation.Entity = value;
+					if ((value != null))
+					{
+						value.Submissions.Add(this);
+						this._EvaluationId = value.EvaluationId;
+					}
+					else
+					{
+						this._EvaluationId = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Evaluation");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Submission", Storage="_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		public Status Status
+		{
+			get
+			{
+				return this._Status.Entity;
+			}
+			set
+			{
+				Status previousValue = this._Status.Entity;
+				if (((previousValue != value) 
+							|| (this._Status.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Status.Entity = null;
+						previousValue.Submissions.Remove(this);
+					}
+					this._Status.Entity = value;
+					if ((value != null))
+					{
+						value.Submissions.Add(this);
+						this._StatusID = value.StatusID;
+					}
+					else
+					{
+						this._StatusID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Status");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Submission1", Storage="_Status1", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		public Status Status1
+		{
+			get
+			{
+				return this._Status1.Entity;
+			}
+			set
+			{
+				Status previousValue = this._Status1.Entity;
+				if (((previousValue != value) 
+							|| (this._Status1.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Status1.Entity = null;
+						previousValue.Submissions1.Remove(this);
+					}
+					this._Status1.Entity = value;
+					if ((value != null))
+					{
+						value.Submissions1.Add(this);
+						this._StatusID = value.StatusID;
+					}
+					else
+					{
+						this._StatusID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("Status1");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="SubmissionType_Submission", Storage="_SubmissionType", ThisKey="SubmissionTypeId", OtherKey="SubmissionTypeId", IsForeignKey=true)]
+		public SubmissionType SubmissionType
+		{
+			get
+			{
+				return this._SubmissionType.Entity;
+			}
+			set
+			{
+				SubmissionType previousValue = this._SubmissionType.Entity;
+				if (((previousValue != value) 
+							|| (this._SubmissionType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._SubmissionType.Entity = null;
+						previousValue.Submissions.Remove(this);
+					}
+					this._SubmissionType.Entity = value;
+					if ((value != null))
+					{
+						value.Submissions.Add(this);
+						this._SubmissionTypeId = value.SubmissionTypeId;
+					}
+					else
+					{
+						this._SubmissionTypeId = default(Nullable<short>);
+					}
+					this.SendPropertyChanged("SubmissionType");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_A_StudyFocusAnswers(A_StudyFocusAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = this;
+		}
+		
+		private void detach_A_StudyFocusAnswers(A_StudyFocusAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = null;
+		}
+		
+		private void attach_B_EntitiesStudiedAnswers(B_EntitiesStudiedAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = this;
+		}
+		
+		private void detach_B_EntitiesStudiedAnswers(B_EntitiesStudiedAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = null;
+		}
+		
+		private void attach_C_StudySettingAnswers(C_StudySettingAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = this;
+		}
+		
+		private void detach_C_StudySettingAnswers(C_StudySettingAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = null;
+		}
+		
+		private void attach_D_PopulationFocusAnswers(D_PopulationFocusAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = this;
+		}
+		
+		private void detach_D_PopulationFocusAnswers(D_PopulationFocusAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = null;
+		}
+		
+		private void attach_E_StudyDesignPurposeAnswers(E_StudyDesignPurposeAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = this;
+		}
+		
+		private void detach_E_StudyDesignPurposeAnswers(E_StudyDesignPurposeAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = null;
+		}
+		
+		private void attach_F_PreventionCategoryAnswers(F_PreventionCategoryAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = this;
+		}
+		
+		private void detach_F_PreventionCategoryAnswers(F_PreventionCategoryAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = null;
 		}
 	}
 }

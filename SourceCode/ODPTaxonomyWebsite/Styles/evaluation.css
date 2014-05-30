@@ -10,7 +10,14 @@
 
 /* end of overrides */
 
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 
+h2.errormessages
+{
+    color: Red;
+}
 
 div.debugWindow
 {

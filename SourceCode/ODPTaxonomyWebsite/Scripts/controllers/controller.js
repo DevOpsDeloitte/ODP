@@ -6,6 +6,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
 
         $scope.mdata = {};
+        $scope.mdata.superusername = "";
+        $scope.mdata.superpassword = "";
         $scope.mdata.formmode = "Consensus"; // $("input#mode").val();
         $rootScope.mode = "Consensus"; // $("input#mode").val();
 
@@ -17,6 +19,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         $rootScope.displaymode = $("input#displaymode").val();
 
         $scope.mdata.showconsensusbutton = $("input#showc").val() == "True" ? true : false;
+        $scope.mdata.unabletocode = $("input#isunable").val() == "checked" ? true : false;
+        //console.log(" is unable : " + $scope.mdata.isunable);
+        //$scope.mdata.unabletocode = true;
 
         //        var parent = $rootScope;
         //        var child = parent.$new();
@@ -91,10 +96,20 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
     $scope.$on("validate.formdata", function () {
         // No need to validate if user has checked unable to code.
         if ($scope.mdata.unabletocode) {
-            console.log(" unable to code :: form is valid :: ");
-            $scope.formIsValid = true;
-            $scope.disallowSave = false;
-            $scope.showSaveButton = true;
+
+            if ($scope.mdata.superusername != "" && $scope.mdata.superpassword != "") {
+                //console.log(" unable to code :: form is valid :: ");
+                $scope.formIsValid = true;
+                $scope.disallowSave = false;
+                $scope.showSaveButton = true;
+            }
+            else {
+                //console.log(" unable to code :: form is not valid :: ");
+                $scope.formIsValid = false;
+                $scope.disallowSave = true;
+                $scope.showSaveButton = false;
+
+            }
             return;
         }
         if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
@@ -268,10 +283,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
                console.log("response received : " + data.success);
 
                if (!data.success) {
-                   // if not successful, bind errors to error variables
-                   $scope.errorName = data.errors.name;
-                   $scope.errorSuperhero = data.errors.superheroAlias;
+
+                   // Logic for Supervisor User Auth Failure.
+                   if (data.supervisorauthfailed != undefined && data.supervisorauthfailed) {
+                       $scope.errormessagesdisplay = "Supervisor authentication Failed!";
+                       return;
+                   }
+
                } else {
+
+
                    // if successful, bind success message to message
                    $scope.postmessages = "Saved form successfully!";
                    // Put the form in View Mode::
@@ -288,6 +309,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
     $scope.processForm = function () {
         $scope.postmessages = "";
+        $scope.errormessagesdisplay = "";
         console.log("process form clicked..");
         window.alertify.set({
             labels: {
