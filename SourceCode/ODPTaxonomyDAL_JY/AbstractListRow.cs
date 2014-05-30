@@ -108,8 +108,12 @@ namespace ODPTaxonomyDAL_JY
                 this.G = query.UnableToCode ? "UC" : "-";
                 this.Comment = query.Comment;
 
-                this.Flag_E7 = db.E_StudyDesignPurposeAnswers.Where(e => e.SubmissionID == query.SubmissionID).Count() > 0;
-                this.Flag_F6 = db.F_PreventionCategoryAnswers.Where(f => f.SubmissionID == query.SubmissionID).Count() > 0;
+                this.Flag_E7 = db.E_StudyDesignPurposeAnswers
+                    .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                    .Count() > 0;
+                this.Flag_F6 = db.F_PreventionCategoryAnswers
+                    .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                    .Count() > 0;
             }
         }
 
@@ -127,6 +131,7 @@ namespace ODPTaxonomyDAL_JY
                              orderby s.SubmissionDateTime descending
                              select new SubmissionData
                              {
+                                 SubmissionID = s.SubmissionID,
                                  UnableToCode = s.UnableToCode,
                                  Comment = s.comments
                              }).FirstOrDefault();
@@ -135,6 +140,13 @@ namespace ODPTaxonomyDAL_JY
                 {
                     this.G = query.UnableToCode ? "UC" : "-";
                     this.Comment = query.Comment;
+
+                    this.Flag_E7 = db.E_StudyDesignPurposeAnswers
+                    .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                    .Count() > 0;
+                    this.Flag_F6 = db.F_PreventionCategoryAnswers
+                        .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                        .Count() > 0;
                 }
             }
             else
