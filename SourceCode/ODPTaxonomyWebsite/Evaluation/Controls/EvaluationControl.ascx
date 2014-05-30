@@ -50,7 +50,7 @@
             </li>
         </ul>
     </div>
-    <div id="odpforms" name="x" ng-cloak >
+    <div id="odpforms" name="x" ng-cloak>
     <div class="sixteen columns"> 
             <div>
 
@@ -79,7 +79,8 @@
             <hr />
             <div class="debug">Session Abstract ID : <%= AbstractID %></div>
             <div class="debug">Session Evaluation ID : <%= EvaluationID %></div>
-            <div class="debug">Session SubmissionType ID : <%= SubmissionTypeId %></div>
+            <div class="debug">Session SubmissionType ID : <%= SessionSubmissionTypeId %></div>
+            <div class="debug">Evaluated SubmissionType ID : <%= SubmissionTypeId %></div>
         </div>
 
      <div class="sixteen columns">

@@ -49,6 +49,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public int SubmissionID = Int16.MinValue;
         public int EvaluationID = Int16.MinValue;
         public int SubmissionTypeId = Int16.MinValue;
+        public int SessionSubmissionTypeId = Int16.MinValue;
         public string applicationID = string.Empty;
         public string firstName = string.Empty;
         public string lastName = string.Empty;
@@ -72,7 +73,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             db = DBData.GetDataContext();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load Start...");
             loadSession();
-
             setAndrenderPageVars();
             renderStudyFocusQuestions();
             renderEntitiesStudiedQuestions();
@@ -133,6 +133,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 ViewAbstractToEvaluation sv = (ViewAbstractToEvaluation)Session["ViewAbstractToEvaluation"];
                 UserId = sv.UserId;
                 SubmissionTypeId = sv.SubmissionTypeId;
+                SessionSubmissionTypeId = sv.SubmissionTypeId;
                 EvaluationID = sv.EvaluationId;
                 //Response.Write(" SESSION PASSED VIEW MODE : " + sv.ViewMode);
                 DisplayMode = sv.ViewMode.ToString() == "view" ? "View" : "Insert";
