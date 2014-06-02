@@ -456,7 +456,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                         //Reload Page Data
                         //LoadPageData();
-                        Response.Redirect("ManageTeams.aspx", true);
+                        Response.Redirect("ManageTeams.aspx", false);
                     }
                     else
                     {
