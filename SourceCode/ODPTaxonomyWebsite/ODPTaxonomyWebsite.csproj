@@ -88,6 +88,7 @@
     <Content Include="Evaluation\Evaluation.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
     <Content Include="Evaluation\ManageTeams.aspx" />
+    <Content Include="Evaluation\PrintAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
     <Content Include="ForgotPassword.aspx" />
@@ -285,6 +286,13 @@
     <Compile Include="Evaluation\ManageTeams.aspx.designer.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\PrintAbstract.aspx.cs">
+      <DependentUpon>PrintAbstract.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\PrintAbstract.aspx.designer.cs">
+      <DependentUpon>PrintAbstract.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\ViewAbstract.aspx.cs">
       <DependentUpon>ViewAbstract.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -315,6 +323,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Print.Master.cs">
+      <DependentUpon>Print.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Print.Master.designer.cs">
+      <DependentUpon>Print.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">
@@ -416,6 +431,7 @@
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
+    <Content Include="Print.Master" />
     <None Include="Scripts\angular\.bower.json" />
     <None Include="Scripts\angular\angular.min.js.gzip" />
     <None Include="Scripts\angular\angular.min.js.map" />
