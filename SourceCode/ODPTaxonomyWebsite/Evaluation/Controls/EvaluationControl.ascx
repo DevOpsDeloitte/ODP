@@ -37,6 +37,7 @@
             <li><a href="#study-design-purpose">Study Design/Purpose</a></li>
             <li><a href="#prevention-research-category">Prevention Research Category</a></li>
             <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
+            <li><input class="button" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
             <li ng-show="showResetButton"><input class="button" type="button" id="resetButton" value="Reset" ng-click="resetForm()" /></li>
             <li ng-show="showConsensusButton"><input class="button" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
             <li ng-show="showSaveButton"><input class="button" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>

@@ -6,13 +6,56 @@
 <head runat="server">
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
+
+
     </asp:ContentPlaceHolder>
+<%--    <link href="~/Styles/base.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/skeleton.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/layout.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />--%>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        <style type="text/css">
+          .stick-right
+          {
+              position: absolute;
+              top: 20px;
+              right: 60px;
+              cursor: pointer;
+          }
+          
+           .stick-right2
+          {
+              position: absolute;
+              top: 20px;
+              right: 30px;
+              cursor: pointer;
+          }
+    
+    </style>
+    <script type="text/javascript" src="/Scripts/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("i#printButton").click(function () {
+                window.print();
+
+            });
+
+            $("i#closeButton").click(function () {
+                window.close();
+
+            });
+
+        });
+
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
+    <i id="printButton" class="fa fa-print  stick-right"></i>
+    <i id="closeButton" class="fa fa-power-off stick-right2"></i>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
+  
         </asp:ContentPlaceHolder>
     </div>
     </form>

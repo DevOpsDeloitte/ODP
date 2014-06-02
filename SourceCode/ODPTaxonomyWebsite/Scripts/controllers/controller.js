@@ -20,6 +20,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
         $scope.mdata.showconsensusbutton = $("input#showc").val() == "True" ? true : false;
         $scope.mdata.unabletocode = $("input#isunable").val() == "checked" ? true : false;
+
+        $scope.mdata.abstractid = $("input#abstractid").val();
         //console.log(" is unable : " + $scope.mdata.isunable);
         //$scope.mdata.unabletocode = true;
 
@@ -67,6 +69,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
             console.log("start consensus :: " + window.location.href);
             window.location.replace(window.location.href + "?startConsenus=true");
             //location.reload(true);
+        };
+
+        $scope.printAbstract = function () {
+            console.log("print abstract :: " + window.location.href);
+            window.open("./PrintAbstract.aspx?id=" + $scope.mdata.abstractid, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=1200, height=700");
         };
 
         $scope.$watch("mdata", function () {

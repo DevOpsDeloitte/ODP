@@ -54,14 +54,16 @@
         <span class="printTitle">Project Number: </span>
         <span class="printValue"><%= ProjectNumber  %></span>
     </div>
-
+    <hr />
     <div>
         <div class="printTitle">Description :</div>
+
         <div>
         <%= desc %>
         </div>
-
+        <hr />
         <div class="printTitle">Public Health Part :</div>
+        
         <div>
         <%= healthpart %>
         </div>
