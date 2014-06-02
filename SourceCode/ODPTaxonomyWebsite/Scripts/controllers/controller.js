@@ -61,18 +61,18 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         $scope.mdata.preventioncategory = [];
 
         $scope.showDescription = function (inID) {
-            console.log("show description.." + inID);
+            //console.log("show description.." + inID);
             window.open("./Glossary.aspx#" + inID, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=600, height=400");
         };
 
         $scope.startConsensus = function () {
-            console.log("start consensus :: " + window.location.href);
+            //console.log("start consensus :: " + window.location.href);
             window.location.replace(window.location.href + "?startConsenus=true");
             //location.reload(true);
         };
 
         $scope.printAbstract = function () {
-            console.log("print abstract :: " + window.location.href);
+            //console.log("print abstract :: " + window.location.href);
             window.open("./PrintAbstract.aspx?id=" + $scope.mdata.abstractid, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=1200, height=700");
         };
 
