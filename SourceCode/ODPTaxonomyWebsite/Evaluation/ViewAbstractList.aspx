@@ -34,11 +34,7 @@
                 <asp:ListItem Value="100" Text="Show: 100 Results" />
             </asp:DropDownList>
         </asp:Panel>
-        <p>
-            <asp:Button runat="server" ID="btn_print" Text="Upload Coder Notes (Scanned)" />&nbsp;&nbsp;
-            Stop Evaluation Process:
-            <asp:Button runat="server" ID="btn_code" Text="Abstract Override" />&nbsp;&nbsp;
-        </p>
+        
         <odp:ODPSupervisorView_Default runat="server" ID="ODPSupervisorView_Default" Visible="false" />
         <odp:ODPSupervisorView_Open runat="server" ID="ODPSupervisorView_Open" Visible="false" />
         <odp:ODPSupervisorView_Review runat="server" ID="ODPSupervisorView_Review" Visible="false" />
