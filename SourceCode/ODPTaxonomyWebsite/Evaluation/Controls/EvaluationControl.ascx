@@ -97,14 +97,18 @@
      
      </div>
 
-     <div class="sixteen columns">
+    <!-- <div class="sixteen columns">
          <div>
              <span class="titles">Last Name :</span>
              <span class="titlevals"><%= lastName %></span>
+         </div>  
+     </div>-->
 
-             
-         </div>
-     
+       <div class="sixteen columns">
+         <div>
+             <span class="titles">User ID :</span>
+             <span class="titlevals"><%= userName %></span>
+         </div>  
      </div>
     
      <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 

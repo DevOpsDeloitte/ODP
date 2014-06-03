@@ -53,6 +53,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string applicationID = string.Empty;
         public string firstName = string.Empty;
         public string lastName = string.Empty;
+        public string userName = string.Empty;
         public string projectTitle = string.Empty;
         public Guid UserId = new Guid();
         public string DisplayMode = string.Empty;
@@ -176,6 +177,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             var userrec = db.aspnet_Users.Where(u => u.UserId == UserId).Select(u => u).FirstOrDefault();
             if (userrec != null)
             {
+                userName = userrec.UserName;
                 firstName = userrec.UserFirstName;
                 lastName = userrec.UserLastName;
             }
@@ -448,7 +450,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                 foreach (var ct in ComparisonTeamUsers)
                 {
-                    Response.Write(" Comparison Team  :::: " + ct.Value.ComparisonSubmissionID + "   Team Type : " + ct.Value.TeamType + "<br>");
+                    //Response.Write(" Comparison Team  :::: " + ct.Value.ComparisonSubmissionID + "   Team Type : " + ct.Value.TeamType + "<br>");
                 }
                 
 
@@ -829,12 +831,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                     retval[0] = replaceComma(retval[0]);
 
-                }
-
-
-
-
-               
+                }  
 
             }
            
