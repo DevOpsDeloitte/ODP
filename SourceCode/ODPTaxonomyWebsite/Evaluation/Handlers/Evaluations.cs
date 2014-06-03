@@ -63,7 +63,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             if (submissionID > 0)
             {
                 // logic to show consensus button 
-                var showButton = false;
+                var showButton = false; 
+                var showComparison = false;
                 if (submissiontypeID == 1)
                 {
                     var subList = db.Submissions.Where(s => s.EvaluationId == evaluationID && s.SubmissionTypeId == 1).Select(s => s).ToList();
@@ -89,8 +90,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     }
                 }
 
+                // show comparison button 
+                if (submissiontypeID == 4)
+                {
+                    showComparison = true;
+
+                }
+
                 //
-                context.Response.Write(JsonConvert.SerializeObject(new { success = true, submissionID = submissionID, showConsensusButton = showButton }));
+                context.Response.Write(JsonConvert.SerializeObject(new { success = true, submissionID = submissionID, showConsensusButton = showButton, showComparisonButton = showComparison }));
             }
             else
             {

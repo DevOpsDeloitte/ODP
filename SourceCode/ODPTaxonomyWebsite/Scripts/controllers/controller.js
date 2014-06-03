@@ -19,6 +19,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         $rootScope.displaymode = $("input#displaymode").val();
 
         $scope.mdata.showconsensusbutton = $("input#showc").val() == "True" ? true : false;
+        $scope.mdata.showcomparisonbutton = $("input#showcomp").val() == "True" ? true : false;
         $scope.mdata.unabletocode = $("input#isunable").val() == "checked" ? true : false;
 
         $scope.mdata.abstractid = $("input#abstractid").val();
@@ -35,6 +36,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
         if ($scope.mdata.showconsensusbutton) {
             $scope.showConsensusButton = true;
+        }
+        if ($scope.mdata.showcomparisonbutton) {
+            $scope.showComparisonButton = true;
         }
 
         // Init for View mode
@@ -68,6 +72,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         $scope.startConsensus = function () {
             //console.log("start consensus :: " + window.location.href);
             window.location.replace(window.location.href + "?startConsenus=true");
+            //location.reload(true);
+        };
+
+        $scope.startComparison = function () {
+            //console.log("start consensus :: " + window.location.href);
+            window.location.replace(window.location.href + "?startComparison=true");
             //location.reload(true);
         };
 
@@ -309,6 +319,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
                    $rootScope.displaymode = "View";
                    $scope.showResetButton = false;
                    if (data.showConsensusButton) $scope.showConsensusButton = true;
+                   if (data.showComparisonButton) $scope.showComparisonButton = true;
                    //$scope.message = data.message;
                }
            });

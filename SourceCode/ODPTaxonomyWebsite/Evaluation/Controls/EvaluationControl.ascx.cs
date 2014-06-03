@@ -59,6 +59,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string FormMode = string.Empty;
         public string Comments = string.Empty;
         public bool showConsensusButton = false;
+        public bool showComparisonButton = false;
+
         public string isChecked = string.Empty;
     
         private DataDataContext db = null;
@@ -260,8 +262,39 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
             }
 
+        }
 
+        protected void startComparison()
+        {
+            //Request.QueryString['EQCN'] ?? "default text";
+            string startComparison = string.IsNullOrEmpty(Request.QueryString["startComparison"]) ? "" : Request.QueryString["startComparison"];
+            bool startC = startComparison == "true" ? true : false;
+            if (startC)
+            {
+                
+                    SubmissionTypeId = 5;
 
+            }
+
+        }
+
+        protected void showComparison()
+        {
+
+            // check if show comparison button can be shown
+            var abschhistconsensuses = db.AbstractStatusChangeHistories.Where(a => a.AbstractID == AbstractID && (a.AbstractStatusID == 4 || a.AbstractStatusID == 9)).ToList();
+            var abschhistcomparisons = db.AbstractStatusChangeHistories.Where(a => a.AbstractID == AbstractID && a.AbstractStatusID == 10).Any();
+            string startComparison = string.IsNullOrEmpty(Request.QueryString["startComparison"]) ? "" : Request.QueryString["startComparison"];
+            bool startC = startComparison == "true" ? true : false;
+            if (abschhistconsensuses.Count == 2 && !abschhistcomparisons && !startC)
+            {
+                this.showComparisonButton = true;
+            }
+            else
+            {
+                this.showComparisonButton = false;
+            }
+            
         }
 
         protected void showConsensus()
@@ -338,9 +371,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //DisplayMode = "Insert"; FormMode = "ODP Staff Member Comparison"; AbstractID = 3; SubmissionID = 21; SubmissionTypeId = 5; EvaluationID = 11;
             //loadSession();
             startConsensus();
+            startComparison();
             performSecurityChecks();
             loadAbstractInfo();
             showConsensus();
+            showComparison();
 
 
 
@@ -359,10 +394,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             if (FormMode.IndexOf("Comparison") != -1)
             {
                 var comparisonTeams = db.Evaluations
-                                         .Where(e => e.AbstractID == AbstractID && e.IsComplete && e.ConsensusStartedBy.HasValue)
+                                         .Where(e => e.AbstractID == AbstractID /*&& e.IsComplete*/ && e.ConsensusStartedBy.HasValue)
                                          .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
                 //Dictionary<Guid?, int?> cteamusers = new Dictionary<Guid?, int?>();
-                Response.Write(" Comparison Team Count : " + comparisonTeams.Count.ToString()+ "<br>");
+                //Response.Write(" Comparison Team Count : " + comparisonTeams.Count.ToString()+ "<br>");
                 if (comparisonTeams.Count == 2)
                 {   // we are all good
                     // need to get team type.
@@ -396,7 +431,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                         }
 
                         
-                        Response.Write(" Comparison Team   -- Consensus Started by : " + cteam.ConsensusStartedBy + "   Team Type : " + TeamType.TeamType + "<br>");
+                        //Response.Write(" Comparison Team   -- Consensus Started by : " + cteam.ConsensusStartedBy + "   Team Type : " + TeamType.TeamType + "<br>");
 
 
                     }
@@ -408,7 +443,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 {
                     //Comparison can't be done. No two consensuses exist.
 
-                    Response.Write(" NO COMPARISON -- Comparison Team Count : " + comparisonTeams.Count.ToString() + "<br>");
+                    //Response.Write(" NO COMPARISON -- Comparison Team Count : " + comparisonTeams.Count.ToString() + "<br>");
                 }
 
                 foreach (var ct in ComparisonTeamUsers)
@@ -423,21 +458,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
             // NO Submission ID should exist for UserId / EvaluationID / SubmissionTypeId ( This will put the form in View Mode automatically. )
 
-
-           
-
-
-
-
-            //Comment for testing only.
-
-
-            
-
-           
-
-
-            //DisplayMode = "Insert";
 
             
 

@@ -111,6 +111,7 @@ app.directive("outcomeBox", function ($rootScope) {
                 retval = ["",""];
                 if(codervals !== undefined){
                 x = codervals.split(",");
+                
                 if(x.length ==1 ){
                     if(x[0].indexOf("o-") != -1) {
                         retval[0] = x[0].replace("o-","");
@@ -122,11 +123,27 @@ app.directive("outcomeBox", function ($rootScope) {
                         }
                     }
                  if(x.length ==2 ){
-                     retval[0] = x[0].replace("o-","");
-                     retval[1] = x[1].replace("c-","");
+
+                        if(x[0].indexOf("o-") != -1) {
+                         retval[0] = x[0].replace("o-","");
+                         }
+                         else{
+                         retval[1] = x[0].replace("c-","");
+                         }
+
+                         if(x[1].indexOf("o-") != -1) {
+                         retval[0] = x[1].replace("o-","");
+                         }
+                         else{
+                         retval[1] = x[1].replace("c-","");
+                         }
+
+
                     }
 
                 }
+
+                //console.log( x + '       ' + retval);
 
 
                 return retval;
@@ -198,7 +215,7 @@ app.directive("outcomeBox", function ($rootScope) {
             }
 
             // this happens in the link phase.
-            // this where the initial color states are being set for consensus.
+            // this where the initial color states are being set for comparison.
             if($rootScope.mode.indexOf("Comparison") != -1 && !scope.view.disabled && $rootScope.displaymode != "View")
             {
                 if( attrs.showComparers != "" && attrs.showComparers !== undefined){

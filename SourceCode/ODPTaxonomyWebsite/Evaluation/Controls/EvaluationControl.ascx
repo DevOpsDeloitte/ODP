@@ -39,6 +39,7 @@
             <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
             <li><input class="button" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
             <li ng-show="showResetButton"><input class="button" type="button" id="resetButton" value="Reset" ng-click="resetForm()" /></li>
+            <li ng-show="showComparisonButton"><input class="button" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
             <li ng-show="showConsensusButton"><input class="button" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
             <li ng-show="showSaveButton"><input class="button" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
@@ -70,6 +71,7 @@
         <input type="hidden" name="submissiontypeid" id="submissiontypeid" value="<%= SubmissionTypeId %>" ng-model="mdata.submissiontypeid" />
         <input type="hidden" name="abstractid" id="abstractid" value="<%= AbstractID %>" ng-model="mdata.abstractid" />
         <input type="hidden" name="showc" id="showc" value="<%= showConsensusButton %>" ng-model="mdata.showconsensusbutton" />
+        <input type="hidden" name="showcomp" id="showcomp" value="<%= showComparisonButton %>" ng-model="mdata.showcomparisonbutton" />
         <input type="hidden" name="isunable" id="isunable" value="<%= isChecked %>" ng-model="mdata.isunable" />
         <!-- not need just a placholder for now -->
         <input type="hidden" name="evaluationid" value="<%= EvaluationID %>" />
