@@ -112,8 +112,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 case 1:
                     //FormMode = "Coder Evaluation";
                     // Insert Status 1A record or ID = 3 
-
-                    insertAbstractChangeHistory(getAbstractStatusID("1A"));
+                    // Insert only on the 3rd submission of this evaluation.
+                     var subListC = db.Submissions.Where(s => s.EvaluationId == evaluationID && s.SubmissionTypeId == 1).Select(s => s).ToList();
+                     if (subListC.Count == 3)
+                     {
+                         insertAbstractChangeHistory(getAbstractStatusID("1A"));
+                     }
                    
                     break;
                 case 2:
@@ -127,23 +131,30 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
                 case 3:
                     //FormMode = "ODP Staff Member Evaluation";
-                    // Insert Status 2A record or ID = 8
-                   
-                    insertAbstractChangeHistory(getAbstractStatusID("2A"));
+                    // Insert Status 2A record or ID = 8 
+                    // Insert only on the 3rd submission of this evaluation.
+                    var subListO = db.Submissions.Where(s => s.EvaluationId == evaluationID && s.SubmissionTypeId == 3).Select(s => s).ToList();
+                    if (subListO.Count == 3)
+                    {
+                        insertAbstractChangeHistory(getAbstractStatusID("2A"));
+                    }
+
                     
                     break;
                 case 4:
                     //FormMode = "ODP Staff Member Consensus";
                     // Insert Status 2B record or ID = 9
                     insertAbstractChangeHistory(getAbstractStatusID("2B"));
-                    //update is complete to 1 on the evaluation record.
-                    updateEvaluationRecordToComplete();
+                    
 
                     break;
                 case 5:
                     //FormMode = "ODP Staff Member Comparison";
                     // Insert Status 2C record or ID = 10
                     insertAbstractChangeHistory(getAbstractStatusID("2C"));
+                    //update is complete to 1 on the evaluation record.
+                    updateEvaluationRecordToComplete();
+
                     break;
 
            
