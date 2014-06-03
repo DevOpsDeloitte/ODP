@@ -20,6 +20,7 @@ namespace ODPTaxonomyWebsite.Evaluation
     public partial class ViewAbstract : System.Web.UI.Page
     {
         #region Fields
+        public string absid = "";
         private string userCurrentName = "";
         private string role_coder = null;
         private string role_coderSup = null;
@@ -652,6 +653,8 @@ namespace ODPTaxonomyWebsite.Evaluation
             pnl_printBtns.Visible = true;
             pnl_abstract.Visible = true;
             pnl_extraData.Visible = true;
+
+            absid = abstr.AbstractID.ToString();
         }
 
         private void GetAbstract_OdpEvaluation(Guid userId, int evaluationTypeId, int abstractId)
@@ -816,6 +819,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 if (Int32.TryParse(Request.QueryString["AbstractID"].ToString(), out id))
                 {
                     abstractId = id;
+                   
                 }
             }
 
@@ -1101,6 +1105,11 @@ namespace ODPTaxonomyWebsite.Evaluation
         }
 
         #endregion
+
+        protected void btn_print_Click(object sender, EventArgs e)
+        {
+
+        }
 
         
 
