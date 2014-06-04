@@ -42,6 +42,8 @@
             <li ng-show="showComparisonButton"><input class="button" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
             <li ng-show="showConsensusButton"><input class="button" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
             <li ng-show="showSaveButton"><input class="button" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>
+            <li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
+            <li ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></li>
             <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
             <li>
             <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">

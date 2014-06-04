@@ -69,15 +69,19 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
             window.open("./Glossary.aspx#" + inID, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=600, height=400");
         };
 
+        $scope.cleanURL = function (instr) {
+            return instr.replace("?startConsenus=true", "").replace("?startComparison=true", "");
+        }
+
         $scope.startConsensus = function () {
             //console.log("start consensus :: " + window.location.href);
-            window.location.replace(window.location.href + "?startConsenus=true");
+            window.location.replace($scope.cleanURL(window.location.href) + "?startConsenus=true");
             //location.reload(true);
         };
 
         $scope.startComparison = function () {
             //console.log("start consensus :: " + window.location.href);
-            window.location.replace(window.location.href + "?startComparison=true");
+            window.location.replace($scope.cleanURL(window.location.href) + "?startComparison=true");
             //location.reload(true);
         };
 

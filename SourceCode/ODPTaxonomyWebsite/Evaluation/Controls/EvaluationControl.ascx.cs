@@ -61,6 +61,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string Comments = string.Empty;
         public bool showConsensusButton = false;
         public bool showComparisonButton = false;
+        public string unableCoders = string.Empty;
 
         public string isChecked = string.Empty;
     
@@ -77,6 +78,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //System.Diagnostics.Trace.WriteLine("Eval Page Load Start...");
             loadSession();
             setAndrenderPageVars();
+            unableCoders = getUnabletoCodeValues();
             renderStudyFocusQuestions();
             renderEntitiesStudiedQuestions();
             renderStudySettingsQuestions();
@@ -670,6 +672,78 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
 
             return retval;
+
+        }
+
+
+        protected string getUnabletoCodeValues()
+        {
+            StringBuilder usersUnable = new StringBuilder();
+
+            if (FormMode.IndexOf("Consensus") != -1)
+            {
+                var coder1 = db.Submissions.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.UnableToCode == true).Any();
+                if (coder1)
+                {
+                    usersUnable.Append(TeamUsers[1].UserName);
+                   
+                }
+                var coder2 = db.Submissions.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.UnableToCode == true).Any();
+                if (coder2)
+                {
+                    usersUnable.Append(", ");
+                    usersUnable.Append(TeamUsers[2].UserName);
+                }
+                var coder3 = db.Submissions.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.UnableToCode == true).Any();
+                if (coder3)
+                {
+                    usersUnable.Append(", ");
+                    usersUnable.Append(TeamUsers[3].UserName);
+                }
+
+            }
+
+            if (FormMode.IndexOf("Comparison") != -1)
+            {
+                int CoderTeamSubmissionID = 0;
+                int ODPTeamSubmissionID = 0;
+                int? CoderTeamID = 0;
+                int? ODPTeamID = 0;
+                try
+                {
+                    CoderTeamSubmissionID = ComparisonTeamUsers["Coder"].ComparisonSubmissionID;
+                    CoderTeamID = ComparisonTeamUsers["Coder"].TeamId;
+
+                }
+                catch (Exception ex) {
+                    Response.Write(ex.Message + " Unable to get Coder Team ID ");
+                }
+                try
+                {
+
+                    ODPTeamSubmissionID = ComparisonTeamUsers["ODP Staff"].ComparisonSubmissionID;
+                    ODPTeamID = ComparisonTeamUsers["ODP Staff"].TeamId;
+                }
+                catch (Exception ex) {
+                    Response.Write(ex.Message + " Unable to get ODP Team ID ");
+                }
+                var team1 = db.Submissions.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.UnableToCode == true).Any();
+                if (team1)
+                {
+                    usersUnable.Append(CoderTeamID);
+
+                }
+                var team2 = db.Submissions.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.UnableToCode == true).Any();
+                if (team2)
+                {
+                    usersUnable.Append(", ");
+                    usersUnable.Append(ODPTeamID);
+                }
+              
+
+            }
+            if (usersUnable.ToString().IndexOf(", ") == 0) return usersUnable.ToString().Substring(2);
+            else return usersUnable.ToString();
 
         }
 
