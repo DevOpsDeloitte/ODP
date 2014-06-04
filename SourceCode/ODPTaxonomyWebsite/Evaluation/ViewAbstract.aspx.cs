@@ -945,7 +945,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                         currentStatus = Common.GetAbstractStatus(connString, i_abstractId);
                         if (((int)currentStatus >= (int)AbstractStatusID._1N) && ((int)currentStatus <= (int)AbstractStatusID._2B))
                         {
-                            isViewMode = false;//could do coding
+                            isViewMode =!Common.OdpMemberIsAllowedToCode(connString, i_abstractId, (int)TeamType.ODPStaff, (int)EvaluationType.ODPEvaluation, userId);
                         }
                         else
                         {
@@ -1013,7 +1013,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                         currentStatus = Common.GetAbstractStatus(connString, i_abstractId);
                         if (((int)currentStatus >= (int)AbstractStatusID._1N) && ((int)currentStatus <= (int)AbstractStatusID._2B))
                         {
-                            isViewMode = false;//could do coding
+                            isViewMode = !Common.OdpMemberIsAllowedToCode(connString, i_abstractId, (int)TeamType.ODPStaff, (int)EvaluationType.ODPEvaluation, userId);
                         }
                         else
                         {
