@@ -77,6 +77,42 @@ namespace ODPTaxonomyDAL_TT
             get;
         }
 
+        public static bool OdpMemberIsAllowedToCode(string connString, int abstractId, int teamTypeID, int evaluationTypeId, Guid userId)
+        {
+            bool isAllowed = false;
+            int i_teamId = -1;
+            int? teamId = null;
+            
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from e in db.tbl_Evaluations
+                              where e.AbstractID == abstractId && e.EvaluationTypeId == evaluationTypeId && e.IsComplete == false && e.IsStopped == false
+                              select e.TeamID;
+                teamId = matches.FirstOrDefault();
+
+                if (teamId != null)
+                {
+                    i_teamId = (int)teamId;
+
+                    isAllowed = (from t in db.tbl_Teams
+                                     join tu in db.tbl_TeamUsers on t.TeamID equals tu.TeamID
+                                     join u in db.tbl_aspnet_Users on tu.UserId equals u.UserId
+                                     where u.UserId == userId && t.TeamID == i_teamId
+                                     select t.TeamID).Any();
+                    
+                }
+                else
+                {
+                    isAllowed = true;
+                }
+
+            }
+
+            
+            return isAllowed;
+        }
+
         public static bool UserIsInTeam(string connString, int teamTypeID, Guid userId)
         {
             bool isInTeam = false;
