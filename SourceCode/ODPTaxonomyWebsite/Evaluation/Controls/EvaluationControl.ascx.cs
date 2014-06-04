@@ -290,7 +290,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             var abschhistcomparisons = db.AbstractStatusChangeHistories.Where(a => a.AbstractID == AbstractID && a.AbstractStatusID == 10).Any();
             string startComparison = string.IsNullOrEmpty(Request.QueryString["startComparison"]) ? "" : Request.QueryString["startComparison"];
             bool startC = startComparison == "true" ? true : false;
-            if (abschhistconsensuses.Count == 2 && !abschhistcomparisons && !startC)
+            var eval = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).FirstOrDefault();
+            if (abschhistconsensuses.Count == 2 && !abschhistcomparisons && !startC && eval.ConsensusStartedBy == UserId)
             {
                 this.showComparisonButton = true;
             }
@@ -436,7 +437,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                                                 //Please add TeamStatusID ==1
                         if(TeamType.TeamType == "Coder"){
-                            var rec = db.Submissions.Where(sb => sb.UnableToCode == false && sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 2 && sb.EvaluationId == cteam.EvaluationId ).Select(sb => sb).FirstOrDefault();
+                            var rec = db.Submissions.Where(sb => /*sb.UnableToCode == false &&*/ sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 2 && sb.EvaluationId == cteam.EvaluationId ).Select(sb => sb).FirstOrDefault();
                             if (rec != null)
                             {
                                 ComparisonTeamUsers.Add(TeamType.TeamType, new ComparisonTeamUser { UserId = cteam.ConsensusStartedBy, TeamId = cteam.TeamID, TeamType = TeamType.TeamType, ComparisonSubmissionID = rec.SubmissionID });
@@ -444,7 +445,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                         }
                         if (TeamType.TeamType == "ODP Staff")
                         {
-                            var rec = db.Submissions.Where(sb => sb.UnableToCode == false && sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 4 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).FirstOrDefault();
+                            var rec = db.Submissions.Where(sb => /*sb.UnableToCode == false &&*/ sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 4 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).FirstOrDefault();
                             if (rec != null)
                             {
                                 ComparisonTeamUsers.Add(TeamType.TeamType, new ComparisonTeamUser { UserId = cteam.ConsensusStartedBy, TeamId = cteam.TeamID, TeamType = TeamType.TeamType, ComparisonSubmissionID = rec.SubmissionID });
