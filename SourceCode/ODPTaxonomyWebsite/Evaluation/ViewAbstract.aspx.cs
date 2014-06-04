@@ -1029,6 +1029,13 @@ namespace ODPTaxonomyWebsite.Evaluation
                                 //Display abstract on screen 
                                 LoadAbstract(abstr);
                                 hf_abstractId.Value = i_abstractId.ToString();
+                                //Get Evaluation ID of type ODPEvaluation for the current Abstract
+                                evaluationId_odp = Common.GetEvaluationIdForAbstract(connString, i_abstractId, EvaluationType.ODPEvaluation);
+                                if (evaluationId_odp != null)
+                                {
+                                    i_evaluationId_odp = (int)evaluationId_odp;
+                                    hf_evaluationId_odp.Value = i_evaluationId_odp.ToString();
+                                }
                             }
                         }
                         else
