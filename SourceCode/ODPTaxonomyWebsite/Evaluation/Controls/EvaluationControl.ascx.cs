@@ -322,8 +322,25 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             var eval = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).FirstOrDefault();
             if (eval != null && showConsensusButton == true)
             {
-                
-                this.showConsensusButton = (eval.ConsensusStartedBy == null) ? true : false;
+                if (eval.ConsensusStartedBy != null)
+                {
+                    // check if the user id is the same & consensus was not complete :: button to be shown in this case.
+                    var consensusRecord = db.Submissions.Where(s => s.EvaluationId == EvaluationID && (s.SubmissionTypeId == 2 || s.SubmissionTypeId == 4) && s.UserId == UserId).Any();
+                    if (UserId == eval.ConsensusStartedBy && !consensusRecord)
+                    {
+                        this.showConsensusButton = true;
+                    }
+                    else
+                    {
+                        this.showConsensusButton = false;
+                    }
+
+                }
+                else
+                {
+
+                    this.showConsensusButton = (eval.ConsensusStartedBy == null) ? true : false;
+                }
             }
 
         }
