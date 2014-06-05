@@ -952,7 +952,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
             if (DisplayMode == "View")
             {
-                if (FormMode.IndexOf("Evaluation") != -1 || FormMode.IndexOf("Consensus") != -1) // Currently viewing a Evaluation by UserID.
+                if (FormMode.IndexOf("Evaluation") != -1 || FormMode.IndexOf("Consensus") != -1 || FormMode.IndexOf("Comparison") != -1) // Currently viewing a Evaluation by UserID.
                 {
                     if (Type == "A_StudyFocus")
                     {
