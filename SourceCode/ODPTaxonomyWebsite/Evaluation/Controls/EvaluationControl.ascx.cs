@@ -784,16 +784,16 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                     if (rec2 != null)
                     {
-                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + ","+TeamUsers[2].UserName : "";
-                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + TeamUsers[2].UserName : "";
-                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + TeamUsers[2].UserName : "";
+                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + ","+TeamUsers[2].UserName : retval[0] + "";
+                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + TeamUsers[2].UserName : retval[1] + "";
+                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + TeamUsers[2].UserName : retval[2] + "";
                     }
 
                     if (rec3 != null)
                     {
-                        retval[0] = rec3.StudyFocus_A1 ? retval[0] + "," + TeamUsers[3].UserName : "";
-                        retval[1] = rec3.StudyFocus_A2 ? retval[1] + "," + TeamUsers[3].UserName : "";
-                        retval[2] = rec3.StudyFocus_A3 ? retval[2] + "," + TeamUsers[3].UserName : "";
+                        retval[0] = rec3.StudyFocus_A1 ? retval[0] + "," + TeamUsers[3].UserName : retval[0] + "";
+                        retval[1] = rec3.StudyFocus_A2 ? retval[1] + "," + TeamUsers[3].UserName : retval[1] + "";
+                        retval[2] = rec3.StudyFocus_A3 ? retval[2] + "," + TeamUsers[3].UserName : retval[2] + "";
                     }
 
                     retval[0] = replaceComma(retval[0]);
