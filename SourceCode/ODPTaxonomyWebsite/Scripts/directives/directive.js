@@ -179,7 +179,9 @@ app.directive("outcomeBox", function ($rootScope) {
                     scope.value.isChecked = false;
                     scope.view.checked = false;
                     scope.view.colorstate = scope.value.originalcolorState;
-                    scope.value.modelcolorState = scope.getColor( codercount );
+                    if( codercount > 0){
+                        scope.value.modelcolorState = scope.getColor( codercount );
+                    }
                  }
 
 

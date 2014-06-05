@@ -147,7 +147,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
             for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
                 if ($scope.mdata.studyfocus[1][i].modelcolorState != "SolidGreen" && $scope.mdata.studyfocus[1][i].modelcolorState != "Transparent" && $scope.mdata.studyfocus[1][i].modelcolorState != "Disabled") {
                     boxColors = false;
-                    //console.log(" bad box color : 1 :" + i);
+                    //console.log(" bad box color : 1 :" + i + "    " + $scope.mdata.studyfocus[1][i].modelcolorState);
                     break;
                 }
             }
