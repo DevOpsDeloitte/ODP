@@ -180,7 +180,13 @@ app.directive("outcomeBox", function ($rootScope) {
                     scope.view.checked = false;
                     scope.view.colorstate = scope.value.originalcolorState;
                     if( codercount > 0){
-                        scope.value.modelcolorState = scope.getColor( codercount );
+
+                       if($rootScope.mode.indexOf("Consensus") != -1) {
+                        scope.value.modelcolorState = scope.getColor( codercount );}
+
+                        if($rootScope.mode.indexOf("Comparison") != -1) {
+                        scope.value.modelcolorState = scope.getComparisonColor( codercount );}
+
                     }
                  }
 
