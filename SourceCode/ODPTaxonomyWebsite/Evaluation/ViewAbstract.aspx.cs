@@ -37,11 +37,21 @@ namespace ODPTaxonomyWebsite.Evaluation
         private string messMaxSizeExceeded = "The file size exceeded 8M maximum allowed.";
         private string messNoFile = "Please select the file to upload.";
         private string messWrongFileType = "Only PDF files are allowed to upload.";
+        private string messProsessIsStopped = "The evaluaiton process was stopped by supervisor. You will be redirected to the homepage in 10 seconds.";
         private int maxLen = 8388608;
 
         #endregion
 
         #region EventHandlers
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            Response.AppendHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1.
+            Response.AppendHeader("Pragma", "no-cache"); // HTTP 1.0.
+            Response.AppendHeader("Expires", "0"); // Proxies.
+
+
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -99,15 +109,27 @@ namespace ODPTaxonomyWebsite.Evaluation
                     {
                         if (Int32.TryParse(hf_submissionTypeId.Value, out submissionTypeId))
                         {
-                            //Store userId, submissionTypeId and evaluationId in Session. These values are used on Submission page.
-                            ViewAbstractToEvaluation values = new ViewAbstractToEvaluation();
-                            values.ViewMode = Mode.code;
-                            values.EvaluationId = evaluationId;
-                            values.SubmissionTypeId = submissionTypeId;
-                            values.UserId = userId;
-                            Session["ViewAbstractToEvaluation"] = values;
+                            //Check if the process was stopped
+                            bool isStopped = Common.ProcessIsStopped(connString, evaluationId);
+                            if (isStopped)
+                            {
+                                Session["ViewAbstractToEvaluation"] = null;
+                                lbl_messageUsers.Visible = true;
+                                lbl_messageUsers.Text = messProsessIsStopped;
+                                Response.AddHeader("REFRESH", "10;URL=/Default.aspx");
+                            }
+                            else
+                            {
+                                //Store userId, submissionTypeId and evaluationId in Session. These values are used on Submission page.
+                                ViewAbstractToEvaluation values = new ViewAbstractToEvaluation();
+                                values.ViewMode = Mode.code;
+                                values.EvaluationId = evaluationId;
+                                values.SubmissionTypeId = submissionTypeId;
+                                values.UserId = userId;
+                                Session["ViewAbstractToEvaluation"] = values;
 
-                            Response.Redirect("Evaluation.aspx", false);
+                                Response.Redirect("Evaluation.aspx", false);
+                            }
                         }
                     }
                 }
@@ -686,6 +708,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 {
                     //Display abstract on screen 
                     LoadAbstract(abstr);
+                    hf_abstractId.Value = abstractId.ToString(); 
 
                     hf_evaluationId.Value = evaluationId.ToString();
                     if (evaluationTypeId == (int)EvaluationType.CoderEvaluation)

@@ -77,6 +77,20 @@ namespace ODPTaxonomyDAL_TT
             get;
         }
 
+        public static bool ProcessIsStopped(string connString, int evaluationId)
+        {
+            bool isStopped = false;
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from e in db.tbl_Evaluations
+                              where e.EvaluationId == evaluationId && e.IsStopped == true
+                              select e.EvaluationId;
+
+                isStopped = matches.Any();
+            }
+            return isStopped;
+        }
+
         public static bool OdpMemberIsAllowedToCode(string connString, int abstractId, int teamTypeID, int evaluationTypeId, Guid userId)
         {
             bool isAllowed = false;
