@@ -731,14 +731,16 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var team1 = db.Submissions.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.UnableToCode == true).Any();
                 if (team1)
                 {
-                    usersUnable.Append(CoderTeamID);
+                    //usersUnable.Append("Coder Consensus : "+CoderTeamID);
+                    usersUnable.Append("Coder Consensus");
 
                 }
                 var team2 = db.Submissions.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.UnableToCode == true).Any();
                 if (team2)
                 {
                     usersUnable.Append(", ");
-                    usersUnable.Append(ODPTeamID);
+                    //usersUnable.Append(ODPTeamID);
+                    usersUnable.Append("ODP Consensus");
                 }
               
 
