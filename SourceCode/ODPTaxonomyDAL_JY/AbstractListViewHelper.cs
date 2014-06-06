@@ -304,7 +304,7 @@ namespace ODPTaxonomyDAL_JY
             {
                 if (item.IsParent)
                 {
-                    AbstractTitleLink.NavigateUrl = "ViewAbstract.aspx?AbstractID=" + item.AbstractID;
+                    AbstractTitleLink.NavigateUrl = "~/Evaluation/ViewAbstract.aspx?AbstractID=" + item.AbstractID;
                     AbstractTitleLink.Text = item.ProjectTitle;
                     AbstractTitleLink.Visible = true;
                 }
