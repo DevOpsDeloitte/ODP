@@ -702,6 +702,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 {
                     //Start Evaluation process
                     evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId);
+                    abstr = Common.GetAbstractByAbstractId(connString, abstractId);
                 }
 
                 if (abstr != null)
