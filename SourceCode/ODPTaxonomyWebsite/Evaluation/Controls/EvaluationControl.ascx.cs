@@ -1041,7 +1041,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getComparerVals = getComparerValues("A_StudyFocus", question.StudyFocusID);
                 StringBuilder row = new StringBuilder();
                 row.AppendLine("<tr>");
-                row.AppendLine("<td scope=\"row\" ng-click=\"showDescription('studyfocus-" + question.StudyFocusID.ToString() + "')\">" + question.StudyFocusID.ToString() + ". " + question.StudyFocus + "</td>");
+                if (question.A1_IsEnabled || question.A2_IsEnabled || question.A3_IsEnabled)
+                {
+                    row.AppendLine("<td scope=\"row\" ng-click=\"showDescription('studyfocus-" + question.StudyFocusID.ToString() + "')\">" + question.StudyFocusID.ToString() + ". " + question.StudyFocus + "</td>");
+                }
+                else
+                {
+                    row.AppendLine("<td scope=\"row\">" + question.StudyFocusID.ToString() + ". " + question.StudyFocus + "</td>");
+                }
                 
                 row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[1][" + question.StudyFocusID + "]\" is-checked='"+getViewVals[0]+"' show-coders='"+getCoderVals[0]+"' show-comparers='"+getComparerVals[0]+"' is-enabled='" + (question.A1_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-1\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-1\"></div></td>");
                 row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[2][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[1] + "'  show-coders='" + getCoderVals[1] + "' show-comparers='" + getComparerVals[1] + "' is-enabled='" + (question.A2_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-2\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-2\"></div></td>");
