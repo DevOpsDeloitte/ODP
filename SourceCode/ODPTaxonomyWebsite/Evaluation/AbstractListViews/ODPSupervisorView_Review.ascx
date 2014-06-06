@@ -19,11 +19,10 @@
         <asp:TemplateField HeaderText="Title" SortExpression="Title">
             <ItemTemplate>
                 <asp:Panel runat="server" ID="TitleWrapper" CssClass="title-wrapper">
-                    <a href='ViewAbstract.aspx?AbstractID=<%#Eval("AbstractID") %>'><span>
-                        <%#Eval("ProjectTitle") %></span></a>
-                    <asp:HyperLink runat="server" ID="AbstractScanLink" CssClass="scan-file">
-                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment" />
-                    </asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="AbstractTitleLink" Visible="false" />
+                    <asp:Label runat="server" ID="AbstractTitleText" Visible="false" />
+                    <asp:Image ID="AbstractScanClip" runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment"
+                        CssClass="scan-file" Visible="false" />
                 </asp:Panel>
             </ItemTemplate>
         </asp:TemplateField>

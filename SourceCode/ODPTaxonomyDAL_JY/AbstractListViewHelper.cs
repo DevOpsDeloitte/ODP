@@ -296,21 +296,32 @@ namespace ODPTaxonomyDAL_JY
         {
             AbstractListRow item = e.Row.DataItem as AbstractListRow;
             Panel TitleWrapper = e.Row.FindControl("TitleWrapper") as Panel;
-            HyperLink AbstractScanLink = e.Row.FindControl("AbstractScanLink") as HyperLink;
+            Image AbstractScanClip = e.Row.FindControl("AbstractScanClip") as Image;
+            HyperLink AbstractTitleLink = e.Row.FindControl("AbstractTitleLink") as HyperLink;
+            Label AbstractTitleText = e.Row.FindControl("AbstractTitleText") as Label;
 
-            if (item != null && TitleWrapper != null && AbstractScanLink != null)
+            if (item != null && AbstractTitleLink != null && AbstractTitleText != null)
+            {
+                if (item.IsParent)
+                {
+                    AbstractTitleLink.NavigateUrl = "ViewAbstract.aspx?AbstractID=" + item.AbstractID;
+                    AbstractTitleLink.Text = item.ProjectTitle;
+                    AbstractTitleLink.Visible = true;
+                }
+                else
+                {
+                    AbstractTitleText.Text = item.ProjectTitle;
+                    AbstractTitleText.Visible = true;
+                }
+            }
+
+            if (item != null && TitleWrapper != null && AbstractScanClip != null)
             {
                 if (!string.IsNullOrEmpty(item.AbstractScan))
                 {
                     TitleWrapper.CssClass += " has-file";
 
-                    AbstractScanLink.ToolTip = item.AbstractScan;
-                    AbstractScanLink.NavigateUrl = "#";
-                    AbstractScanLink.Visible = true;
-                }
-                else
-                {
-                    AbstractScanLink.Visible = false;
+                    AbstractScanClip.Visible = true;
                 }
             }
 

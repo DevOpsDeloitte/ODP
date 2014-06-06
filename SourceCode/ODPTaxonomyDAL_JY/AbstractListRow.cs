@@ -105,7 +105,7 @@ namespace ODPTaxonomyDAL_JY
 
             if (query != null)
             {
-                this.G = query.UnableToCode ? "UC" : "-";
+                this.G = query.UnableToCode ? "UC" : "";
                 this.Comment = query.Comment;
 
                 this.Flag_E7 = db.E_StudyDesignPurposeAnswers
@@ -138,7 +138,7 @@ namespace ODPTaxonomyDAL_JY
 
                 if (query != null)
                 {
-                    this.G = query.UnableToCode ? "UC" : "-";
+                    this.G = query.UnableToCode ? "UC" : "";
                     this.Comment = query.Comment;
 
                     this.Flag_E7 = db.E_StudyDesignPurposeAnswers

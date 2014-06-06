@@ -83,30 +83,37 @@ namespace ODPTaxonomyWebsite.Evaluation
         protected void SubviewChangeHandler(object sender, EventArgs e)
         {
             int Mainview = 0;
-            if (int.TryParse(MainviewDDL.SelectedValue, out Mainview))
-            {
-                string RedirectURL = "";
-                switch ((AbstractViewRole)Mainview)
-                {
-                    case AbstractViewRole.Admin:
-                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.Admin;
-                        break;
-                    case AbstractViewRole.CoderSupervisor:
-                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.CoderSupervisor;
-                        break;
-                    case AbstractViewRole.ODPStaff:
-                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff;
-                        break;
-                    case AbstractViewRole.ODPSupervisor:
-                        RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPSupervisor;
-                        break;
-                }
 
-                if (!string.IsNullOrEmpty(RedirectURL))
-                {
-                    RedirectURL += "&subview=" + SubviewDDL.SelectedValue;
-                    Response.Redirect(RedirectURL);
-                }
+            if (MainviewDDL.Visible)
+            {
+                int.TryParse(MainviewDDL.SelectedValue, out Mainview);
+            }
+            else
+            {
+                int.TryParse(Request.QueryString["view"], out Mainview);
+            }
+
+            string RedirectURL = "";
+            switch ((AbstractViewRole)Mainview)
+            {
+                case AbstractViewRole.Admin:
+                    RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.Admin;
+                    break;
+                case AbstractViewRole.CoderSupervisor:
+                    RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.CoderSupervisor;
+                    break;
+                case AbstractViewRole.ODPStaff:
+                    RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff;
+                    break;
+                case AbstractViewRole.ODPSupervisor:
+                    RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPSupervisor;
+                    break;
+            }
+
+            if (!string.IsNullOrEmpty(RedirectURL))
+            {
+                RedirectURL += "&subview=" + SubviewDDL.SelectedValue;
+                Response.Redirect(RedirectURL);
             }
         }
 
@@ -158,7 +165,6 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                         MainviewDDL.Items.Add(item);
                     }
-                    MainviewDDL.Visible = true;
                 }
                 else
                 {

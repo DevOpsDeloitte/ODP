@@ -18,7 +18,7 @@
         View Abstract List
     </h2>
     <div>
-        <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" OnSelectedIndexChanged="MainviewChangeHandler" />
+        <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" OnSelectedIndexChanged="MainviewChangeHandler" Visible="false" />
         <asp:Panel runat="server" ID="SubviewPanel" Visible="false">
             <h3>
                 <asp:Label runat="server" ID="SubviewLabel" Visible="false" />

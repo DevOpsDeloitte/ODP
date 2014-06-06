@@ -44,7 +44,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                        where (
                           (
-                          (h.AbstractStatusID >= (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1 &&
+                          (h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B &&
                            h.AbstractStatusID <= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N) ||
                           (h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C)
                           ) &&
