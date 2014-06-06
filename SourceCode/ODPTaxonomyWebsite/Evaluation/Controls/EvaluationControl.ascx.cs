@@ -120,7 +120,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             int counter=1;
             foreach( var t in teamlist){
                
-                Response.Write("<br> Team ID : " + t.TeamId.ToString() + " User ID : " + t.UserId.ToString() + " User Name : " + t.UserName.ToString());
+                //Response.Write("<br> Team ID : " + t.TeamId.ToString() + " User ID : " + t.UserId.ToString() + " User Name : " + t.UserName.ToString());
                 TeamUsers.Add(counter, t);
                 counter++;
             }
@@ -205,7 +205,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 SubmissionID = 0;
             }
             //SubmissionID = DBData.getSubmissionID(UserId, EvaluationID, SubmissionTypeId);
-            Response.Write("<br> Submission ID : " + SubmissionID);
+            //Response.Write("<br> Submission ID : " + SubmissionID);
             if (SubmissionID > 0)
             {
                 //Is definitely view mode
