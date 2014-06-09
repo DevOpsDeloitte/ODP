@@ -63,6 +63,8 @@
       <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UpdatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Submission_E_StudyDesignPurposeAnswer" Member="E_StudyDesignPurposeAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="E_StudyDesignPurposeAnswer" />
+      <Association Name="Submission_F_PreventionCategoryAnswer" Member="F_PreventionCategoryAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="F_PreventionCategoryAnswer" />
       <Association Name="Evaluation_Submission" Member="Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Evaluation" IsForeignKey="true" />
     </Type>
   </Table>
@@ -143,6 +145,22 @@
       <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="UserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Column Name="UserAlias" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.E_StudyDesignPurposeAnswer" Member="E_StudyDesignPurposeAnswers">
+    <Type Name="E_StudyDesignPurposeAnswer">
+      <Column Name="E_StudyDesignPurposeAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StudyDesignPurposeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Submission_E_StudyDesignPurposeAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.F_PreventionCategoryAnswer" Member="F_PreventionCategoryAnswers">
+    <Type Name="F_PreventionCategoryAnswer">
+      <Column Name="F_PreventionCategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PreventionCategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Submission_F_PreventionCategoryAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>

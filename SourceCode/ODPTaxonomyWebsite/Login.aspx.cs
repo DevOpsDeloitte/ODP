@@ -13,7 +13,7 @@ namespace ODPTaxonomyWebsite.Account
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void LoginButton_Click(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace ODPTaxonomyWebsite.Account
                     if (!(user.Comment == null))
                         isPasswordReset = user.Comment.ToString() == "reset" ? true : false;
 
-                    
+
                     if (isPasswordReset)
                     {
                         FormsAuthentication.SetAuthCookie(l_username, false);

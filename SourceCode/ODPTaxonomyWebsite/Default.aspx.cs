@@ -11,6 +11,7 @@ using System.Web.UI.WebControls;
 using System.Text;
 using ODPTaxonomyDAL_TT;
 using ODPTaxonomyUtility_TT;
+using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite
 {
@@ -42,7 +43,7 @@ namespace ODPTaxonomyWebsite
                 {
                     connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
                 }
-               
+
                 if (!Page.IsPostBack)
                 {
                     bool isLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
@@ -56,10 +57,10 @@ namespace ODPTaxonomyWebsite
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured while loading page data.");
-            }   
+            }
         }
 
-        
+
         //Coder
         protected void btn_viewAbstract_coder_Click(object sender, EventArgs e)
         {
@@ -72,8 +73,8 @@ namespace ODPTaxonomyWebsite
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
-            
+            }
+
         }
         //Coder Supervisor
         protected void btn_manageTeams_coderSup_Click(object sender, EventArgs e)
@@ -87,7 +88,7 @@ namespace ODPTaxonomyWebsite
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
+            }
         }
 
         protected void btn_viewAbstractList_coderSup_Click(object sender, EventArgs e)
@@ -95,13 +96,13 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_coderSup;
-                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.CoderSupervisor, false);
             }
             catch (Exception ex)
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
+            }
         }
 
         protected void btn_viewAbstract_coderSup_Click(object sender, EventArgs e)
@@ -115,7 +116,7 @@ namespace ODPTaxonomyWebsite
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
+            }
         }
         //ODP Staff
         protected void btn_viewAbstractList_odp_Click(object sender, EventArgs e)
@@ -123,13 +124,13 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_odp;
-                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff, false);
             }
             catch (Exception ex)
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
+            }
         }
         //ODP Supervisor
         protected void btn_manageTeams_odpSup_Click(object sender, EventArgs e)
@@ -143,7 +144,7 @@ namespace ODPTaxonomyWebsite
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
+            }
         }
 
         protected void btn_viewAbstractList_odpSup_Click(object sender, EventArgs e)
@@ -151,16 +152,16 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_odpSup;
-                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPSupervisor, false);
             }
             catch (Exception ex)
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
+            }
         }
 
-        
+
         //Admin
         protected void btn_manageUserAccounts_admin_Click(object sender, EventArgs e)
         {
@@ -173,7 +174,7 @@ namespace ODPTaxonomyWebsite
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
+            }
         }
 
         protected void btn_viewAbstractList_admin_Click(object sender, EventArgs e)
@@ -181,19 +182,19 @@ namespace ODPTaxonomyWebsite
             try
             {
                 Session["CurrentRole"] = role_admin;
-                Response.Redirect("/Evaluation/ViewAbstractList.aspx", false);
+                Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.Admin, false);
             }
             catch (Exception ex)
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on button click.");
-            }   
+            }
         }
 
 
         #endregion
 
-        #region Methods        
+        #region Methods
 
         private void LoadPageData()
         {
@@ -205,7 +206,7 @@ namespace ODPTaxonomyWebsite
             }
             Guid userId = Common.GetCurrentUserId(connString, userCurrentName);
             int teamTypeID = 0;
-           
+
 
             if (userCurrent != null)
             {
@@ -228,7 +229,7 @@ namespace ODPTaxonomyWebsite
                         lbl_messCoder.Text = messUserNotInTeam;
                     }
                 }
-                
+
                 if (Roles.IsUserInRole(userCurrent.UserName, role_coderSup))
                 {
                     //Coder Supervisor
@@ -263,13 +264,13 @@ namespace ODPTaxonomyWebsite
                     //Admin
                     pnl_admin.Visible = true;
                 }
-                
+
             }
-            
+
         }
 
         #endregion
 
-        
+
     }
 }

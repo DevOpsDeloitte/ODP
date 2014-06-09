@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ODPTaxonomyWebsite.Account {
-    
-    
-    public partial class Login {
-        
+namespace ODPTaxonomyWebsite.Account
+{
+
+
+    public partial class Login
+    {
+
         /// <summary>
         /// LoginUser control.
         /// </summary>

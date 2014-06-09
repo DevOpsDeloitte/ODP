@@ -49,7 +49,8 @@ namespace ODPTaxonomyWebsite.AccountManagement
         {
             try
             {
-                if (Page.IsValid && isValidForm()) {
+                if (Page.IsValid && isValidForm())
+                {
                     MembershipUser l_user = Membership.GetUser(User.Identity.Name);
                     Guid l_userID = (Guid)l_user.ProviderUserKey;
 

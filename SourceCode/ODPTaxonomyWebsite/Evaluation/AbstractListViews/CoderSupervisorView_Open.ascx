@@ -1,25 +1,24 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CoderSupervisorView_Open.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView_Open" %>
-<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyWebsite.Evaluation.AbstractListViews"
-    Assembly="ODPTaxonomyWebsite" %>
+<%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
 <h2>
     View Open Abstracts</h2>
-<odp:AbstractGridView runat="server" ID="AbstractViewGridView" CssClass="AbstractViewTable bordered zebra-striped"
-    OnRowDataBound="AbstractListRowBindingHandle">
+<odp:AbstractGridView runat="server" ID="AbstractViewGridView" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
+        <asp:BoundField DataField="AbstractID" HeaderText="ID" />
         <asp:BoundField DataField="ApplicationID" HeaderText="APPL ID" SortExpression="ApplicationID" />
         <asp:BoundField DataField="StatusDateDisplay" HeaderText="Status Date" SortExpression="Date" />
         <asp:TemplateField HeaderText="Title" SortExpression="Title">
             <ItemTemplate>
                 <asp:Panel runat="server" ID="TitleWrapper" CssClass="title-wrapper">
-                    <a href='ViewAbstract.aspx?AbstractID=<%#Eval("AbstractID") %>'><span>
-                        <%#Eval("ProjectTitle") %></span></a>
-                    <asp:HyperLink runat="server" ID="AbstractScanLink" CssClass="scan-file">
-                        <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment" />
-                    </asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="AbstractTitleLink" Visible="false" />
+                    <asp:Label runat="server" ID="AbstractTitleText" Visible="false" />
+                    <asp:Image ID="AbstractScanClip" runat="server" ImageUrl="~/Images/clip.png" AlternateText="Attachment"
+                        CssClass="scan-file" Visible="false" />
                 </asp:Panel>
             </ItemTemplate>
         </asp:TemplateField>
+        <asp:BoundField DataField="Flags" HeaderText="Flags" />
         <asp:BoundField HeaderText="A1" DataField="A1"></asp:BoundField>
         <asp:BoundField HeaderText="A2" DataField="A2"></asp:BoundField>
         <asp:BoundField HeaderText="A3" DataField="A3"></asp:BoundField>

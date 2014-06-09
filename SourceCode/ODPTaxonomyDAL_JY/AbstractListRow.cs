@@ -6,6 +6,13 @@ using System.Configuration;
 
 namespace ODPTaxonomyDAL_JY
 {
+    public class SubmissionData
+    {
+        public int SubmissionID { get; set; }
+        public string Comment { get; set; }
+        public bool UnableToCode { get; set; }
+    }
+
     public class AbstractListRow
     {
         /**
@@ -16,27 +23,35 @@ namespace ODPTaxonomyDAL_JY
         public int AbstractID { get; set; }
         public int? ApplicationID { get; set; }
 
-        private string _ProjectTitle;
-        public string ProjectTitle
-        {
-            get
-            {
-                string title = _ProjectTitle;
-                title += !string.IsNullOrEmpty(AbstractStatusCode) ? " (" + AbstractStatusCode + ")" : "";
-                return title;
-            }
-            set
-            {
-                _ProjectTitle = value;
-            }
-        }
+        public string ProjectTitle { get; set; }
 
         public int? TeamID { get; set; }
         public Guid? UserID { get; set; }
 
         public int? SubmissionID { get; set; }
         public string Comment { get; set; }
+        public bool Flag_E7 { get; set; }
+        public bool Flag_F6 { get; set; }
 
+        public string Flags
+        {
+            get
+            {
+                string flags = "";
+
+                if (!string.IsNullOrEmpty(this.Comment))
+                {
+                    flags += "Com, ";
+                }
+
+                if (this.Flag_E7 && this.Flag_F6)
+                {
+                    flags += "E7F6, ";
+                }
+
+                return flags.Trim(new char[] { ' ', ',' });
+            }
+        }
         public int? EvaluationID { get; set; }
 
         public int AbstractStatusID { get; set; }
@@ -71,68 +86,74 @@ namespace ODPTaxonomyDAL_JY
             this.IsParent = false;
         }
 
-        public void GetKappaValues()
+        public void GetSubmissionData(SubmissionTypeEnum SubmissionType)
         {
-            AbstractListViewData data = new AbstractListViewData();
+            string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connStr);
 
-            string specifier = "#.##";
-            KappaData kappa = data.GetKappaData(this.AbstractID, this.KappaType);
+            var query = (from s in db.Submissions
+                         join e in db.Evaluations on s.EvaluationId equals e.EvaluationId
+                         where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+                         s.SubmissionTypeId == (int)SubmissionType
+                         orderby s.SubmissionDateTime descending
+                         select new SubmissionData
+                         {
+                             SubmissionID = s.SubmissionID,
+                             UnableToCode = s.UnableToCode,
+                             Comment = s.comments
+                         }).FirstOrDefault();
 
-            if (kappa != null)
+            if (query != null)
             {
-                this.A1 = ((decimal)(kappa.A1)).ToString(specifier);
-                this.A2 = ((decimal)(kappa.A2)).ToString(specifier);
-                this.A3 = ((decimal)(kappa.A3)).ToString(specifier);
-                this.B = ((decimal)(kappa.B)).ToString(specifier);
-                this.C = ((decimal)(kappa.C)).ToString(specifier);
-                this.D = ((decimal)(kappa.D)).ToString(specifier);
-                this.E = ((decimal)(kappa.E)).ToString(specifier);
-                this.F = ((decimal)(kappa.F)).ToString(specifier);
-                this.G = this.UnableToCode ? "Y" : "";
+                this.G = query.UnableToCode ? "UC" : "";
+                this.Comment = query.Comment;
+
+                this.Flag_E7 = db.E_StudyDesignPurposeAnswers
+                    .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                    .Count() > 0;
+                this.Flag_F6 = db.F_PreventionCategoryAnswers
+                    .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                    .Count() > 0;
             }
         }
 
-        public SubmissionTypeEnum GetSubmissionType()
+        public void GetSubmissionData(SubmissionTypeEnum SubmissionType, Guid? UserID)
         {
-            SubmissionTypeEnum SubmissionType = SubmissionTypeEnum.NA;
-
-            switch ((AbstractStatusEnum)this.AbstractStatusID)
-            {
-                case AbstractStatusEnum.CODED_BY_CODER_1A:
-                    SubmissionType = SubmissionTypeEnum.CODER_EVALUATION;
-                    break;
-                case AbstractStatusEnum.CODED_BY_ODP_STAFF_2A:
-                    SubmissionType = SubmissionTypeEnum.ODP_STAFF_EVALUATION;
-                    break;
-                case AbstractStatusEnum.CONSENSUS_COMPLETE_1B:
-                case AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N:
-                    SubmissionType = SubmissionTypeEnum.CODER_CONSENSUS;
-                    break;
-                case AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N:
-                case AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B:
-                    SubmissionType = SubmissionTypeEnum.ODP_STAFF_CONSENSUS;
-                    break;
-                default:
-                    break;
-            }
-
-            return SubmissionType;
-        }
-
-        public void GetComment()
-        {
-            if (this.EvaluationID != null)
+            if (UserID != null)
             {
                 string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
                 DataJYDataContext db = new DataJYDataContext(connStr);
 
-                SubmissionTypeEnum SubmissionType = GetSubmissionType();
+                var query = (from s in db.Submissions
+                             join e in db.Evaluations on s.EvaluationId equals e.EvaluationId
+                             where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+                             s.SubmissionTypeId == (int)SubmissionType && s.UserId == UserID.Value
+                             orderby s.SubmissionDateTime descending
+                             select new SubmissionData
+                             {
+                                 SubmissionID = s.SubmissionID,
+                                 UnableToCode = s.UnableToCode,
+                                 Comment = s.comments
+                             }).FirstOrDefault();
 
-                this.Comment = (from s in db.Submissions
-                                where s.EvaluationId == this.EvaluationID &&
-                                s.SubmissionTypeId == (int)SubmissionType
-                                select s.comments).FirstOrDefault();
+                if (query != null)
+                {
+                    this.G = query.UnableToCode ? "UC" : "";
+                    this.Comment = query.Comment;
+
+                    this.Flag_E7 = db.E_StudyDesignPurposeAnswers
+                    .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                    .Count() > 0;
+                    this.Flag_F6 = db.F_PreventionCategoryAnswers
+                        .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                        .Count() > 0;
+                }
             }
+            else
+            {
+                this.G = "-";
+            }
+
         }
 
         public void GetAbstractScan()

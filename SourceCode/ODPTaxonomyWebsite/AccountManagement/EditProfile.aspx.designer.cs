@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ODPTaxonomyWebsite.AccountManagement {
-    
-    
-    public partial class EditProfile {
-        
+namespace ODPTaxonomyWebsite.AccountManagement
+{
+
+
+    public partial class EditProfile
+    {
+
         /// <summary>
         /// btn_change_password control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_change_password;
-        
+
         /// <summary>
         /// pnl_confirmation control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_confirmation;
-        
+
         /// <summary>
         /// lbl_error_message control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_error_message;
-        
+
         /// <summary>
         /// pnl_edit_profile control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnl_edit_profile;
-        
+
         /// <summary>
         /// valsum_errors control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary valsum_errors;
-        
+
         /// <summary>
         /// lbl_fname control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_fname;
-        
+
         /// <summary>
         /// txt_fname control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_fname;
-        
+
         /// <summary>
         /// reqval_firstName control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqval_firstName;
-        
+
         /// <summary>
         /// lbl_lname control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_lname;
-        
+
         /// <summary>
         /// txt_lname control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_lname;
-        
+
         /// <summary>
         /// reqval_lastName control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqval_lastName;
-        
+
         /// <summary>
         /// lbl_email control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_email;
-        
+
         /// <summary>
         /// txt_email control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_email;
-        
+
         /// <summary>
         /// reqval_email control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqval_email;
-        
+
         /// <summary>
         /// regex_email control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator regex_email;
-        
+
         /// <summary>
         /// lbl_confirm_email control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_confirm_email;
-        
+
         /// <summary>
         /// txt_confirm_email control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txt_confirm_email;
-        
+
         /// <summary>
         /// reqval_confirm_email control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqval_confirm_email;
-        
+
         /// <summary>
         /// regex_confirm_email control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator regex_confirm_email;
-        
+
         /// <summary>
         /// cmpval_email control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator cmpval_email;
-        
+
         /// <summary>
         /// btn_save_profile control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_save_profile;
-        
+
         /// <summary>
         /// btn_cancel control.
         /// </summary>

@@ -25,7 +25,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
                     }
 
                     BindData();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -50,7 +50,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
             {
                 l_sortBy = Session["AM_SortExpression"].ToString();
                 l_sortDirection = Session["AM_SortDirection"].ToString();
-                
+
             }
             BindData(l_sortBy, l_sortDirection);
         }
@@ -76,7 +76,8 @@ namespace ODPTaxonomyWebsite.AccountManagement
                 if (l_prevSortExpression == column)
                 {
                     string l_prevSortDirection = Session["AM_SortDirection"].ToString();
-                    if ((l_prevSortDirection != null) && (l_prevSortDirection.ToUpper() == "ASC")){
+                    if ((l_prevSortDirection != null) && (l_prevSortDirection.ToUpper() == "ASC"))
+                    {
                         l_sortDirection = "DESC";
                     }
                 }
@@ -87,7 +88,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
 
             return l_sortDirection;
         }
-        
+
         protected string GetUserRoles(string userName)
         {
             string l_roleList = "";
@@ -108,13 +109,13 @@ namespace ODPTaxonomyWebsite.AccountManagement
                     default:
                         l_roleDesc = role;
                         break;
- 
+
                 }
                 l_roleList += l_roleDesc + "|";
             }
 
             return l_roleList.TrimEnd('|').Replace("|", "<br />").ToString();
-            
+
         }
 
         protected void gvw_users_OnSorting(object sender, GridViewSortEventArgs e)
@@ -136,7 +137,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
 
         protected void gvw_users_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            Session["AM_PageIndex"] = e.NewPageIndex; 
+            Session["AM_PageIndex"] = e.NewPageIndex;
             gvw_users.PageIndex = e.NewPageIndex;
             BindData();
         }

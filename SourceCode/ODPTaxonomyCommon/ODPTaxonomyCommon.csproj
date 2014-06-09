@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewAbstractData.cs" />
     <Compile Include="ViewAbstractToEvaluation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
