@@ -1,24 +1,24 @@
-﻿/* this rule styles <h1> and <h2> tags that are the 
-first child of the left and right table columns */
-.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
-{
-    margin-top: 0px;
-}
-
-
-/* MISC  
+﻿/* MISC  
 ----------------------------------------------------------*/
 
 /*Tatiana's Styles: Start */
 .errorMessage
 {
-    display:block;
-    color:#ff0000;
+    display: table;
+    background: #F3A2A2;
+    border: 1px solid;
+    color: #030303;
+    padding: 8px;
+    margin: auto;
 }
 .regularMessage
 {
-    color:#ff0000;
-    display:block;
+    display: table;
+    background: #F8E0A2;
+    border: 1px solid;
+    color: #724809;
+    padding: 8px;
+    margin: auto;
 }
 .teamUsers
 {
@@ -35,14 +35,13 @@ first child of the left and right table columns */
 /* Styles for View Abstract page*/
 #pnl_printBtns
 {
-    float:left;
-    width:300px;
+    float: right;
 }
 #pnl_uploadNotes
 {
-    clear:both;
     width:200px;
-    margin:10px 0px 10px 200px;
+    float:left;
+    margin-left:40px;
 }
 #pnl_overrideBtns
 {

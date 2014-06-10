@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Review_Uncoded.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Review_Uncoded" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
-<h2>
-    View Abstracts in Review</h2>
+<h3>
+    View Abstracts in Review</h3>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
