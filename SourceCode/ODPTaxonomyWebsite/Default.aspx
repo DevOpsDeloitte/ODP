@@ -7,12 +7,12 @@
 
 <div class="sixteen columns sub-title"> 
     <span class="title">HOMEPAGE</span>
-            
-
-    <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error" Visible="false"></asp:Label>
-    <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label>   
+</div>            
+<div class="sixteen columns"> 
+    <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error" class="panel" Visible="false"></asp:Label>
+    <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" class="panel" Visible="false"></asp:Label>   
     
-    <asp:Panel runat="server" ID="pnl_admin" Visible="false">
+    <asp:Panel runat="server" ID="pnl_admin" class="panel" Visible="false">
         <span class="subtitle center">Role: Admin</span>
         <div class="center">
             <asp:Button class="button" runat="server" ID="btn_manageUserAccounts_admin" 
@@ -21,7 +21,7 @@
                     Text="View Abstract List" onclick="btn_viewAbstractList_admin_Click" />
         </div>
     </asp:Panel>
-    <asp:Panel runat="server" ID="pnl_odpSup" Visible="false">
+    <asp:Panel runat="server" ID="pnl_odpSup" class="panel" Visible="false">
         <span class="subtitle center">Role: ODP Supervisor</span>
         <div class="center">
             <asp:Button class="button" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" 
@@ -30,14 +30,14 @@
                     Text="View Abstract List" onclick="btn_viewAbstractList_odpSup_Click" />
         </div>
     </asp:Panel>
-    <asp:Panel runat="server" ID="pnl_odp" Visible="false">
+    <asp:Panel runat="server" ID="pnl_odp" class="panel" Visible="false">
         <span class="subtitle center">Role: ODP Staff Member</span>
         <div class="center">
             <asp:Button class="button" runat="server" ID="btn_viewAbstractList_odp" 
                     Text="View Abstract List" onclick="btn_viewAbstractList_odp_Click" />
         </div>        
     </asp:Panel>
-    <asp:Panel runat="server" ID="pnl_coderSup" Visible="false">
+    <asp:Panel runat="server" ID="pnl_coderSup" class="panel" Visible="false">
         <span class="subtitle center">Role: Coder Supervisor</span>
         <div class="center">
             <asp:Button class="button" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" 
@@ -48,12 +48,12 @@
                     Text="View/Code Abstract" onclick="btn_viewAbstract_coderSup_Click" />
         </div>        
     </asp:Panel>
-    <asp:Panel runat="server" ID="pnl_coder" Visible="false">
+    <asp:Panel runat="server" ID="pnl_coder" class="panel" Visible="false">
         <span class="subtitle center">Role: Coder</span>
         <div class="center">
         <asp:Button class="button" runat="server" Text="View/Code Abstract" 
             ID="btn_viewAbstract_coder" onclick="btn_viewAbstract_coder_Click" />
-        <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messCoder" Visible="false"></asp:Label>
+        <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messCoder" class="panel" Visible="false"></asp:Label>
         </div>
     </asp:Panel>
     </div>

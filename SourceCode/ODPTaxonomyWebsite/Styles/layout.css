@@ -35,7 +35,7 @@ h2 { display: block; font-size: 1.8em; color: #1B3753; text-transform: uppercase
 .subtitle, h3{ display: block; font-size: 1.5em; font-weight: normal; text-align: left; margin-top: 12px; color: #0A223A; }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; display: block; margin: 20px auto; }
 .hidden { display:none;}
-.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; }
+.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
 	.container .button.yes { background: #24AA7A; color: #fff }
 	.container .button.no { background: #9B0202; color: #fff }
 	.container .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
@@ -80,7 +80,8 @@ width: 100%; }
 /* #Login
 ================================================== */
 
-fieldset.login { background: #fff; width: 40%; -webkit-border-radius: 6px 6px 6px 6px; border-radius: 6px 6px 6px 6px; margin: auto; padding: 50px 20px 10px 20px; box-shadow: 2px 2px 4px 2px rgba(0,0,0,.1); -webkit-box-shadow: 2px 2px 4px 2px rgba(0,0,0,.1); border: 1px solid #ccc; position: relative; }
+.accountInfo { width: 100%; display: table; }
+fieldset.login { background: #fff; width: 40%; -webkit-border-radius: 6px; border-radius: 6px; margin: auto; padding: 50px 20px 10px 20px; box-shadow: 2px 2px 4px 2px rgba(0,0,0,.1); -webkit-box-shadow: 2px 2px 4px 2px rgba(0,0,0,.1); border: 1px solid #ccc; position: relative; }
 fieldset.login legend { font-weight:bold; position:absolute; top:20px; left:20px; font-size: 18px; color: #57616D; }
 fieldset.login input[type=text], fieldset.login input[type=password] { width: 85%}
 fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 11px; text-align: right; }
@@ -91,6 +92,8 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 #toggle-unanswered.active { background: #1B7E5A; color: #FFF; }
 
 .sub-title { margin-bottom: 20px; }
+
+.panel {  float: left; width: 28%; background: #FFF; margin-right: 2%; padding: 0 10px;-webkit-border-radius: 6px; border-radius: 6px; border: solid 1px #DDD; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); }
 
 /* Menu */
 .nav { position: fixed; left: 4px; padding: 10px 20px; border: 1px solid #7D9EB1; top: 120px; z-index: 999; width: 150px; background: #EEE; background: rgba(215, 225, 235, 0.5); }
