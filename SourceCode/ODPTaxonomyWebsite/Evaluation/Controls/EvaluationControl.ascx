@@ -38,10 +38,13 @@
             <li><a href="#prevention-research-category">Prevention Research Category</a></li>-->
             <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
             <li><input class="button" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
-            <li ng-show="showResetButton"><input class="button" type="button" id="resetButton" value="Reset" ng-click="resetForm()" /></li>
+            <li ng-show="showResetButton"><input class="button" type="button" id="resetButton" value="Reset" ng-click="resetFormStart()" /></li>
             <li ng-show="showComparisonButton"><input class="button" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
+            <li ng-show="!showComparisonButton && mode.indexOf('Comparison') != -1"><input class="button no" type="button" id="disabledcomparisonButton" value="Start Comparison" /></li>
             <li ng-show="showConsensusButton"><input class="button" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
+            <li ng-show="!showConsensusButton && mode.indexOf('Comparison') == -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
             <li ng-show="showSaveButton"><input class="button" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>
+            <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Save"/></li>
             <li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
             <li ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></li>
             <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
