@@ -5,7 +5,9 @@
     <h2>
         View Abstract
     </h2>
-    <p><asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label></p>
+     <div class="sixteen columns view-abstract">
+     
+    <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label>
     <asp:HiddenField runat="server" ID="hf_abstractId" />
     <asp:HiddenField runat="server" ID="hf_evaluationId_coder" />
     <asp:HiddenField runat="server" ID="hf_evaluationId_odp" />
@@ -13,22 +15,26 @@
     <asp:HiddenField runat="server" ID="hf_userId" />
     <asp:HiddenField runat="server" ID="hf_evaluationId" />
     <asp:HiddenField runat="server" ID="hf_submissionTypeId" />
+    <div class="clearfix">
     <asp:Panel runat="server" ID="pnl_printBtns" ClientIDMode="Static" Visible="false">
     <script type="text/javascript">
         window.absid = <%= absid %>;
     </script>
-        <asp:Button runat="server" ID="btn_print" Text="Print Abstract" Visible="true" 
+
+    
+        <asp:Button runat="server" ID="btn_print" Text="Print Abstract" Visible="true" class="button clearfix"
              OnClientClick=" window.open('./PrintAbstract.aspx?id='+absid, '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=1200, height=700'); return false;"  />&nbsp;&nbsp;
         <asp:Button runat="server" ID="btn_code" Text="Code Abstract" 
-            onclick="btn_code_Click" Visible="false" />&nbsp;&nbsp;
+            onclick="btn_code_Click" Visible="false" />
     </asp:Panel>
     <asp:Panel runat="server" ID="pnl_overrideBtns" ClientIDMode="Static" Visible="false">
         <asp:Button runat="server" ID="btn_override" Text="Abstract Override" Visible="true" 
             onclick="btn_override_Click" 
-            OnClientClick="return confirm('You are about to force close this abstract. Would you like to proceed?');" /><br /><br />
+            OnClientClick="return confirm('You are about to force close this abstract. Would you like to proceed?');" />
         
     </asp:Panel>
-    
+    </div>
+    <div class="view-abstract-panel clearfix" >
     <asp:Panel runat="server" ID="pnl_odpValues" ClientIDMode="Static" Visible="false">
     <asp:LinkButton runat="server" ID="link_odpCompare" CssClass="viewSubmissionLink"  onclick="link_Submission_Click"
          CommandArgument='' Visible="false">ODP vs. Coder Compare</asp:LinkButton>
@@ -58,24 +64,26 @@
     </asp:Panel>
 
     <asp:Panel runat="server" ID="pnl_uploadNotes" ClientIDMode="Static" Visible="false">
-        <asp:Button runat="server" ID="btn_notes" Text="Upload Notes" Visible="true" 
+        <asp:Button class="button" runat="server" ID="btn_notes" Text="Upload Notes" Visible="true" 
             onclick="btn_notes_Click" /><br />
         <asp:FileUpload runat="server" ID="fu_notes" />
     </asp:Panel>
+    </div>
     <asp:Panel runat="server" ID="pnl_extraData" ClientIDMode="Static" Visible="false">
-        <p>User ID: <span runat="server" id="userId"></span></p>
-        <p>Date: <span runat="server" id="date"></span></p>
+        <p><strong>User ID:</strong> <span runat="server" id="userId"></span></p>
+        <p><strong>Date:</strong> <span runat="server" id="date"></span></p>
     </asp:Panel>
     <asp:Panel runat="server" ID="pnl_abstract" ClientIDMode="Static" Visible="false">
-     <p>ProjectTitle: <span runat="server" id="ProjectTitle"></span></p>
-        <p>AdministeringIC: <span runat="server" id="AdministeringIC"></span></p>
-        <p>ApplicationID: <span runat="server" id="ApplicationID"></span></p>
-        <p>PIProjectLeader: <span runat="server" id="PIProjectLeader"></span></p>
-        <p>FY: <span runat="server" id="FY"></span></p>
-        <p>ProjectNumber: <span runat="server" id="ProjectNumber"></span></p>
-        <p>AbstractDescPart: <span runat="server" id="AbstractDescPart"></span></p>
-        <p>AbstractPublicHeathPart: <span runat="server" id="AbstractPublicHeathPart"></span></p>
+     <p><strong>ProjectTitle:</strong> <span runat="server" id="ProjectTitle"></span></p>
+        <p><strong>AdministeringIC:</strong> <span runat="server" id="AdministeringIC"></span></p>
+        <p><strong>ApplicationID:</strong> <span runat="server" id="ApplicationID"></span></p>
+        <p><strong>PIProjectLeader:</strong> <span runat="server" id="PIProjectLeader"></span></p>
+        <p><strong>FY:</strong> <span runat="server" id="FY"></span></p>
+        <p><strong>ProjectNumber:</strong> <span runat="server" id="ProjectNumber"></span></p>
+        <p><strong>AbstractDescPart:</strong><br /> <span runat="server" id="AbstractDescPart"></span></p>
+        <p><strong>AbstractPublicHeathPart:</strong><br /> <span runat="server" id="AbstractPublicHeathPart"></span></p>
          
 
     </asp:Panel>
+    </div>
 </asp:Content>

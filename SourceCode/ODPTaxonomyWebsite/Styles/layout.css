@@ -29,10 +29,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#456777', end
 }
 
 h1 { color: #fff; position: absolute; top: 10px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
-h2 { display: block; font-size: 1.8em; color: #333; text-transform: uppercase; }
 .title, h2:first-child  { display: block; font-size: 1.8em; color: #fff; text-transform: uppercase; }
-h2 { display: block; font-size: 1.8em; color: #1B3753; text-transform: uppercase; }
-.subtitle, h3{ display: block; font-size: 1.5em; font-weight: normal; text-align: left; margin-top: 12px; color: #0A223A; }
+.subtitle, h3{ display: block; font-size: 1.5em; font-weight: normal; text-align: left; color: #0A223A; margin: 0; }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; display: block; margin: 20px auto; }
 .hidden { display:none;}
 .container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
@@ -48,8 +46,8 @@ h2 { display: block; font-size: 1.8em; color: #1B3753; text-transform: uppercase
 
 .white {background: #fff; padding: 10px;}
 
-table { margin-bottom: 30px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); background: #fff; width: 98%; }
-table.form { background: transparent; box-shadow: none; -webkit-box-shadow: none; margin-top: 30px; }
+table { -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); background: #fff; width: 100%; }
+table.form { margin-top: 30px; padding: 20px; -webkit-box-shadow: none; background: transparent; box-shadow: none; }
 	table.form td:first-child { width: 15%; margin: 0; padding: 10px; height: 10px; vertical-align: top; }
 	table.form td.form-button { padding: 0; }
 caption { text-align: left; font-weight: bold; font-size: 17px; padding: 14px 12px; }
@@ -88,12 +86,20 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 
 /* #Page Styles
 ================================================== */
+
+#MainContent_pnl_account, .columns.alpha, .columns.omega, .view-abstract { background: #FFF; margin-top: 30px; padding: 20px; border: solid 1px #DDD; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); }
+.view-abstract-panel { border: 1px solid #D1D0D0; margin: 10px 0; display: block; background: #F7F9FC; padding: 10px;}
 #toggle-unanswered:hover { background: #24AA7A; }
 #toggle-unanswered.active { background: #1B7E5A; color: #FFF; }
 
 .sub-title { margin-bottom: 20px; }
 
 .panel {  float: left; width: 28%; background: #FFF; margin-right: 2%; padding: 0 10px;-webkit-border-radius: 6px; border-radius: 6px; border: solid 1px #DDD; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); }
+
+.has-file .scan-file { position: absolute; top: 0; right: 0; background: #2F557C; padding: 3px; }
+.pager-size-wrapper { text-align: right; }
+.title-wrapper { padding-right: 12px; }
+.title-wrapper a { text-transform: lowercase; }
 
 /* Menu */
 .nav { position: fixed; left: 4px; padding: 10px 20px; border: 1px solid #7D9EB1; top: 120px; z-index: 999; width: 150px; background: #EEE; background: rgba(215, 225, 235, 0.5); }
@@ -129,6 +135,13 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 .cbp-spmenu-push-toright, .cbp-spmenu-push-toright #header_container { left: 240px; }
 .cbp-spmenu,
 .cbp-spmenu-push, #header_container { -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; transition: all 0.3s ease; }
+
+/* Pagination
+================================================== */
+tr.pagination table { width: auto; color: #2F557C; -webkit-box-shadow: none; box-shadow: none; border: 1px solid #fff; margin: 0; }
+tr.pagination td {  }
+tr.pagination td, .zebra-striped tbody tr.pagination table tr:nth-child(odd) td { border: none; background: #AFAFAF; color: #fff; margin: 2px; border: 1px solid #E0DFDF; }
+tr.pagination td a { font-weight: bold; color: #fff; }
 
 /* #Media Queries
 ================================================== */

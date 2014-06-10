@@ -1,9 +1,9 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPSupervisorView_Default.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Default" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
-<h2>
-    View Coded Abstracts</h2>
-<asp:Button runat="server" Text="Add to Review" OnClick="AddtoReviewHandler" />
+<h3>
+    View Coded Abstracts</h3>
+<asp:Button runat="server" class="button" Text="Add to Review" OnClick="AddtoReviewHandler" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
@@ -38,4 +38,4 @@
         <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
     </Columns>
 </odp:AbstractGridView>
-<asp:Button runat="server" Text="Add to Review" OnClick="AddtoReviewHandler" />
+<asp:Button class="button" runat="server" Text="Add to Review" OnClick="AddtoReviewHandler" />

@@ -14,8 +14,12 @@
     <div class="six columns alpha">
     <asp:HiddenField runat="server" ID="hf_teamTypeId" />
     <h3>Users available for team to pick up</h3>
-    <p runat="server" id="gc_noUsers">No users are currently available for you to select for a new team.</p>
+    <p runat="server" id="gc_noUsers" class="regularMessage" >No users are currently available for you to select for a new team.</p>
     <p></p>
+
+    <asp:Button runat="server" ID="Button1" Text="Save Team" 
+        onclick="btn_saveteam_Click" class="button yes" />
+
     <asp:Repeater runat="server" ID="rpt_users">
         <HeaderTemplate>
             <table class="bordered zebra-striped">
@@ -44,7 +48,7 @@
 <div class="six columns omega">
         
         <h3>Active Teams</h3>
-        <p runat="server" id="gc_noTeam">No Active Teams currently exist.</p>
+        <p runat="server" id="gc_noTeam" class="regularMessage">No Active Teams currently exist.</p>
         <p></p>
         <asp:Repeater runat="server" ID="rpt_teams" OnItemDataBound="rp_teams_OnItemDataBound">
         <HeaderTemplate>
