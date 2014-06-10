@@ -12,7 +12,19 @@
 
 /* end of overrides */
 
+div.icon.open
+{
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    display:inline-block;
+    margin: 0px 0px 0px 10px;
+}
 
+table tbody th.box-three.big, table tbody td.box-three.big
+{
+    width: 55%;
+}
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
