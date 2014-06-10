@@ -6,9 +6,13 @@
     font-weight: bold;
 }
 
+.button.no:hover { background: #9B0202; color: #fff;}
+.button.no:active { background: #9B0202; color: #fff; }
 
 
 /* end of overrides */
+
+
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;

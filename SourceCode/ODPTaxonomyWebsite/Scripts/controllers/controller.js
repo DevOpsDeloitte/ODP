@@ -5,6 +5,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
     $scope.init = function () {
 
 
+
+
         $scope.mdata = {};
         $scope.mdata.superusername = "";
         $scope.mdata.superpassword = "";
@@ -253,7 +255,34 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
     });
 
+    $scope.resetFormStart = function () {
+
+        window.alertify.set({
+            labels: {
+                ok: "OK",
+                cancel: "Cancel"
+            },
+            delay: 5000,
+            buttonReverse: true,
+            buttonFocus: "none"
+        });
+
+        alertify.confirm("Are you sure you want to reset?", function (e) {
+            if (e) {
+                //window.location.href = "revise.html";
+                //util.save();
+
+                $scope.resetForm();
+            } else {
+                alertify.error("You've clicked Cancel");
+            }
+        });
+
+    };
+
     $scope.resetForm = function () {
+
+     
 
         for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
             $scope.mdata.studyfocus[1][i].resetBox();
@@ -281,7 +310,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
             $scope.mdata.preventioncategory[i].resetBox();
         }
 
-        //$scope.$apply();
+        $scope.$apply();
+
+        //console.log(" reset triggered..");
 
 
 
@@ -333,6 +364,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         $scope.postmessages = "";
         $scope.errormessagesdisplay = "";
         console.log("process form clicked..");
+
         window.alertify.set({
             labels: {
                 ok: "OK",
@@ -343,22 +375,20 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
             buttonFocus: "none"
         });
 
-        alertify.confirm("Please confirm this", function (e) {
+        alertify.confirm("Please confirm save?", function (e) {
             if (e) {
                 //window.location.href = "revise.html";
                 //util.save();
                 $scope.submitForm();
             } else {
-                alertify.error("You've clicked Cancel");
+                alertify.error("You've clicked cancel Save..");
             }
         });
 
 
-
-
-
-
     };
+
+   
 
 
 

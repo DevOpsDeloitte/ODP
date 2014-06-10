@@ -1,41 +1,41 @@
 ﻿
-(function(window, document, undefined){
+//(function(window, document, undefined){
 
-    util = {};
-    
-    util.save = function(){
-        var formArray = $("form").serializeArray();
-        console.log("saved ..."+ JSON.stringify(formArray));
-    };
+//    util = {};
+//    
+//    util.save = function(){
+//        var formArray = $("form").serializeArray();
+//        console.log("saved ..."+ JSON.stringify(formArray));
+//    };
 
-    util.reset = function () {
+//    util.reset = function () {
 
-        alertify.set({
-            labels: {
-                ok: "OK",
-                cancel: "Cancel"
-            },
-            delay: 5000,
-            buttonReverse: true,
-            buttonFocus: "none"
-        });
-    };
+//        alertify.set({
+//            labels: {
+//                ok: "OK",
+//                cancel: "Cancel"
+//            },
+//            delay: 5000,
+//            buttonReverse: true,
+//            buttonFocus: "none"
+//        });
+//    };
 
 
-    $("#confirm").on('click', function () {
-        util.reset();
-        alertify.confirm("Please confirm this", function (e) {
-            if (e) {
-                //window.location.href = "revise.html";
-                util.save();
-            } else {
-                alertify.error("You've clicked Cancel");
-            }
-        });
-        return false;
-    });
+//    $("#confirm").on('click', function () {
+//        util.reset();
+//        alertify.confirm("Please confirm this", function (e) {
+//            if (e) {
+//                //window.location.href = "revise.html";
+//                util.save();
+//            } else {
+//                alertify.error("You've clicked Cancel");
+//            }
+//        });
+//        return false;
+//    });
 
-})(window, document);
+//})(window, document);
 
 
 
