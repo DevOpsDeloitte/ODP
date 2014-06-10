@@ -30,12 +30,12 @@
 
     <div class="nav">
         <ul>
-            <li><a href="#study-focus">Study Focus</a></li>
+            <!--<li><a href="#study-focus">Study Focus</a></li>
             <li><a href="#entities-studied">Entities Studied</a></li>
             <li><a href="#study-setting">Study Setting</a></li>
             <li><a href="#population-focus">Population focus</a></li>
             <li><a href="#study-design-purpose">Study Design/Purpose</a></li>
-            <li><a href="#prevention-research-category">Prevention Research Category</a></li>
+            <li><a href="#prevention-research-category">Prevention Research Category</a></li>-->
             <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
             <li><input class="button" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
             <li ng-show="showResetButton"><input class="button" type="button" id="resetButton" value="Reset" ng-click="resetForm()" /></li>
