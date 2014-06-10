@@ -85,6 +85,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             renderPopulationFocusQuestions();
             renderStudyDesignPurposeQuestions();
             renderPreventionCategoryQuestions();
+            db.Dispose();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load End...");
         }
 

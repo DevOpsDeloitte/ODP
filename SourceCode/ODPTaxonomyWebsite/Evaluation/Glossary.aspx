@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Glossary.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.Glossary" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Print.Master" AutoEventWireup="true" CodeBehind="Glossary.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.Glossary" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 <script src="../scripts/jquery.js"></script>
     <script type="text/javascript">
 
@@ -24,9 +24,13 @@
     {
         margin: 10px 0px 10px 0px;
     }
+    div#mainGlossary
+    {
+        margin: 40px 0px 0px 0px;
+    }
     </style>
 
-    <div>
+    <div id="mainGlossary">
 
 
         <%=studyFocus %>
