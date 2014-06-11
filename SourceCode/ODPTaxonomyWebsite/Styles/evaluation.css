@@ -41,6 +41,23 @@ div.commentsHeader
     
 }
 
+div.subnav
+{
+    position: fixed;
+    top: 40px;
+   right: 40px;
+    width: 700px;
+    z-index: 99901;
+
+}
+
+div.subnav input, div.subnav li
+{
+    width:150px;
+    display:inline-block;
+    
+}
+
 table tbody th.box-three.big, table tbody td.box-three.big
 {
     width: 55%;
