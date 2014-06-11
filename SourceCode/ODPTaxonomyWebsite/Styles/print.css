@@ -1,0 +1,49 @@
+body { background: #f5f7f7; padding: 20px; position: relative; }
+.stick-right
+{
+  position: absolute;
+  top: 22px;
+  right: 100px;
+  cursor: pointer;
+}
+.stick-right2
+{
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  cursor: pointer;
+}
+div.topicitem
+{
+    padding-bottom: 10px;
+    border-bottom: 1px solid #D1D0D0;
+}
+div.subtitle
+{
+    font-weight: bold;
+    background: #fff;
+    border: 1px solid #D1D0D0;
+    margin: 10px 10px 10px 0px;
+    padding: 10px;
+    display: inline-block;  
+}
+div.subtitle a { text-decoration: none; }
+div.selected
+{
+    border: 1px solid #D1D0D0;
+    margin: 10px 0 10px 0;
+    display: block;
+    background: #fff;
+    padding: 10px ;
+    
+}
+div.selected div.subtitle
+{
+    margin:0;
+    border: none;
+}
+div#mainGlossary
+{
+    margin-top: 40px;
+
+}

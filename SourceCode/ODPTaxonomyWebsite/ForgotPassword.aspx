@@ -11,21 +11,21 @@
 
 <asp:Panel ID="pnl_forgot_password" runat="server">
 <p>Please enter your user name to receive your password.</p>
-<table>
+<table class="form">
     <tr>
         <td>
             <asp:Label ID="lbl_forgotpwd_username" runat="server" Text="User name:" AssociatedControlID="txt_forgotpwd_username" />
         </td>
         <td>
-            <asp:TextBox ID="txt_forgotpwd_username" runat="server" TextMode="SingleLine" />
+            <asp:TextBox ID="txt_forgotpwd_username" runat="server" TextMode="SingleLine" /><asp:RequiredFieldValidator ID="reqval_forgotpwd_username" runat="server" SetFocusOnError="true" ControlToValidate="txt_forgotpwd_username" ErrorMessage="User name is required" CssClass="errorMessage inline" />
         </td>
         <td>
-            <asp:RequiredFieldValidator ID="reqval_forgotpwd_username" runat="server" SetFocusOnError="true" ControlToValidate="txt_forgotpwd_username" ErrorMessage="User name is required" CssClass="errorMessage" />
+            
         </td>
     </tr>
     <tr>
         <td colspan="2">
-            <asp:Button ID="btn_forgotpwd_submit" runat="server" Text="Submit" OnClick="btn_forgotpwd_submit_Click" style="float:right" />
+            <asp:Button ID="btn_forgotpwd_submit" runat="server" Text="Submit" OnClick="btn_forgotpwd_submit_Click" class="button" />
         </td>
         <td>&nbsp;</td>
     </tr>

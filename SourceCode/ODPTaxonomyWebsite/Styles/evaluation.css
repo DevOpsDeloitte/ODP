@@ -16,9 +16,20 @@ div.icon.open
 {
     width: 16px;
     height: 16px;
-    border: 1px solid #ccc;
+    background: #E9E9E9;
     display:inline-block;
     margin: 0px 0px 0px 10px;
+    position: relative;
+    border: 1px solid #ccc;
+}
+div.icon.open:before
+{
+    content: "?";
+    position: absolute;
+    font-weight: bold;
+    top: -1px;
+    left: 4px;
+    font-size: 11px;
 }
 
 table tbody th.box-three.big, table tbody td.box-three.big
@@ -59,9 +70,9 @@ textarea#comments
 
 div.select-box {
     cursor: pointer;
-    height: 26px;
     text-align: right;
     padding: 2px 5px 2px 5px;
+    height: 100%;
 }
 
 div.select-box-container
@@ -76,17 +87,18 @@ div.codercbox
     position: absolute;
     width: 10px;
     height: 10px;
-    top: 0px;
+    top: -3px;
+    font-size: 11px;
 }
 
 div.coder1
 {
-    left: 10px;
+    right: 80px;
 }
 
 div.coder2
 {
-    left: 45%;
+    right: 40px;
 }
 
 div.coder3
@@ -119,8 +131,8 @@ div.codercount
     width: 10px;
     height: 10px;
     bottom: 7px;
-    left: 0px;
     text-align: left;
+    right: 0px;
     
 }
 

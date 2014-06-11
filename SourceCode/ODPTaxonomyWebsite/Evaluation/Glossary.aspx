@@ -14,22 +14,6 @@
         });
     
     </script>
-    <style type="text/css">
-    div.selected
-    {
-        background-color: #ccc;
-        
-    }
-    div.topicitem
-    {
-        margin: 10px 0px 10px 0px;
-    }
-    div#mainGlossary
-    {
-        margin: 40px 0px 0px 0px;
-    }
-    </style>
-
     <div id="mainGlossary">
 
 

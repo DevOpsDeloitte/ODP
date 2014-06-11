@@ -11,6 +11,11 @@
     padding: 8px;
     margin: auto;
 }
+.errorMessage.inline
+{    
+    margin: inherit;
+    display: inline-block;
+}
 .regularMessage
 {
     display: table;

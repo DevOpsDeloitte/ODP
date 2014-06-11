@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="sixteen columns sub-title"> 
-            <span class="title">MANAGE ACCOUNTS</span>
+            <h2>MANAGE ACCOUNTS</h2>
     </div>
 
     <asp:Label ID="lbl_error_message" CssClass="errorMessage" runat="server" Visible="false" />

@@ -13,14 +13,14 @@
 <asp:Panel ID="pnl_change_password" runat="server">
 
 <div class="eight columns view-panel"> 
-    Password must be:
+    <strong>Password must be:</strong>
     <ol>
         <li>Minimum of 8 characters.</li>
         <li>Must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character, and 1 number.</li>
     </ol>
 </div>
 
-<asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
+<div><asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage inline" HeaderText="<strong>Please fix error(s) below:</strong>" /></div>
 
 <table class="form">
     <tr>

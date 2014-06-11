@@ -28,9 +28,12 @@ background: linear-gradient(to bottom,  #456777 0px,#C2CDD1 180px,#FFF 600px); /
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#456777', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 
-h1 { color: #fff; position: absolute; top: 10px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
-.title, h2:first-child  { display: block; font-size: 1.8em; color: #fff; text-transform: uppercase; }
-.subtitle, h3{ display: block; font-size: 1.5em; font-weight: normal; text-align: left; color: #0A223A; margin: 0; }
+h1, h2 { font-family: 'open_sansbold' }
+h3, h4, h5, h6 { font-family: 'open_sanssemibold' }
+
+h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
+.title, h2:first-child  { display: block; color: #fff; text-transform: uppercase; font-size: 1.65em; margin: 0 10px; }
+.subtitle, h3{ display: block; font-size: 1.35em; font-weight: normal; text-align: left; color: #0C3966; margin: 0 0 4px 10px; }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; display: block; margin: 20px auto; }
 .hidden { display:none;}
 .container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
@@ -39,7 +42,7 @@ h1 { color: #fff; position: absolute; top: 10px; left: 0; font-size: 2em; text-a
 	.container .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
 	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
 
-.container { padding-top: 80px; margin:0 auto; }
+.container { padding-top: 80px; margin: 0 auto; }
 
 .center { text-align: center; margin: 10px auto; }
 .right { float: right; margin: 10px 20px; } .left { float: left; margin: 10px 20px; }
@@ -63,13 +66,18 @@ table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -web
 input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline;}
 	select { padding: 5px}
 
-.table-40 {
-width: 100%; }
+.table-40 { width: 100%; }
+
+table.persist-area {
+position: relative; }
+table.persist-area th { }
+tr.floatingHeader { position: fixed; top: 62px; visibility: hidden; z-index: 999; background: #D3D3D3; width: inherit; }
+tr.floatingHeader th { width: inherit; }
 
 /* Sticky Header */
 #header_container { background:rgba(47, 85, 124, 0.9); height:60px; position:fixed; width:100%; top:0; z-index: 999; }
 .header{ margin: 15px 24px; width:95%; }
-.header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; position: relative; z-index: 2; }
+.header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; position: relative; z-index: 2; margin-left: 5px; }
  .header .button:hover { background: #eee; border: 1px solid #eee; }
 .login-display { color: #fff; position: absolute; top: 14px; right: 14px;  }
 
@@ -79,16 +87,16 @@ width: 100%; }
 .accountInfo { width: 100%; display: table; }
 fieldset.login { background: #fff; width: 40%; -webkit-border-radius: 6px; border-radius: 6px; margin: auto; padding: 50px 20px 10px 20px; box-shadow: 2px 2px 4px 2px rgba(0,0,0,.1); -webkit-box-shadow: 2px 2px 4px 2px rgba(0,0,0,.1); border: 1px solid #ccc; position: relative; }
 fieldset.login legend { font-weight:bold; position:absolute; top:20px; left:20px; font-size: 18px; color: #57616D; }
-fieldset.login input[type=text], fieldset.login input[type=password] { width: 85%}
+fieldset.login input[type=text], fieldset.login input[type=password] { width: 85% }
 fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 11px; text-align: right; }
 
 /* #Page Styles
 ================================================== */
 
-#MainContent_pnl_account, .columns.alpha, .columns.omega, .view-abstract, #MainContent_pnl_edit_profile, #MainContent_pnl_change_password { background: #FFF; margin-top: 30px; padding: 20px; border: solid 1px #DDD; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); }
-.view-abstract-panel, .view-panel { border: 1px solid #D1D0D0; margin: 10px 0; display: block; background: #F7F9FC; padding: 10px;}
-#toggle-unanswered:hover { background: #24AA7A; }
-#toggle-unanswered.active { background: #1B7E5A; color: #FFF; }
+#MainContent_pnl_account, .columns.alpha, .columns.omega, .view-abstract, #MainContent_pnl_edit_profile, #MainContent_pnl_change_password { background: #FFF; border: solid 1px #DDD; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); margin-top: 30px; padding: 20px; }
+.view-abstract-panel, .view-panel, #MainContent_pnl_forgot_password { border: 1px solid #D1D0D0; margin: 10px 0 20px 0; display: block; background: #F7F9FC; padding: 10px;}
+
+#MainContent_btn_change_password { margin-left: 10px; }
 
 .sub-title { margin-bottom: 20px; }
 
@@ -98,6 +106,11 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 .pager-size-wrapper { text-align: right; }
 .title-wrapper { padding-right: 12px; }
 .title-wrapper a { text-transform: lowercase; }
+
+#toggle-unanswered:hover { background: #24AA7A; }
+#toggle-unanswered.active { background: #1B7E5A; color: #FFF; }
+
+span.highlight { font-weight: bold; background: #F7F9FC; border: 1px solid #D1D0D0; margin: 10px 10px 10px 0px; padding: 10px; display: inline-block; }
 
 /* Menu */
 .nav { position: fixed; left: 4px; padding: 10px 20px; border: 1px solid #7D9EB1; top: 120px; z-index: 999; width: 150px; background: #EEE; background: rgba(215, 225, 235, 0.5); }
@@ -128,7 +141,7 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 .cbp-spmenu-left {	left: -240px; }
 .cbp-spmenu-left.cbp-spmenu-open {	left: 0px; }
 
-.cbp-spmenu-push { overflow-x: hidden; left: 0; position: relative; }
+.cbp-spmenu-push { overflow-x: hidden; position: relative; left: 0; }
 .cbp-spmenu-push #header_container { left: 0; }
 .cbp-spmenu-push-toright, .cbp-spmenu-push-toright #header_container { left: 240px; }
 .cbp-spmenu,
@@ -169,19 +182,35 @@ tr.pagination td a { font-weight: bold; color: #fff; }
 		copy your FontName into code below and remove
 		comment brackets */
 
-/*	@font-face {
-	    font-family: 'FontName';
-	    src: url('../fonts/FontName.eot');
-	    src: url('../fonts/FontName.eot?iefix') format('eot'),
-	         url('../fonts/FontName.woff') format('woff'),
-	         url('../fonts/FontName.ttf') format('truetype'),
-	         url('../fonts/FontName.svg#webfontZam02nTh') format('svg');
-	    font-weight: normal;
-	    font-style: normal; }
-*/
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('OpenSans-Bold-webfont.eot');
+    src: url('OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('OpenSans-Bold-webfont.woff') format('woff'),
+         url('OpenSans-Bold-webfont.ttf') format('truetype'),
+         url('OpenSans-Bold-webfont.svg#open_sansbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
-table.persist-area {
-position: relative; }
-table.persist-area th { }
-tr.floatingHeader { position: fixed; top: 62px; visibility: hidden; z-index: 999; background: #D3D3D3; width: inherit; }
-tr.floatingHeader th { width: inherit; }
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('OpenSans-Regular-webfont.eot');
+    src: url('OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('OpenSans-Regular-webfont.woff') format('woff'),
+         url('OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sanssemibold';
+    src: url('OpenSans-Semibold-webfont.eot');
+    src: url('OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('OpenSans-Semibold-webfont.woff') format('woff'),
+         url('OpenSans-Semibold-webfont.ttf') format('truetype'),
+         url('OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
