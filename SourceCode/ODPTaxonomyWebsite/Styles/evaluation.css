@@ -21,6 +21,15 @@ div.icon.open
     margin: 0px 0px 0px 10px;
 }
 
+div.commentsHeader
+{
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    
+}
+
 table tbody th.box-three.big, table tbody td.box-three.big
 {
     width: 55%;

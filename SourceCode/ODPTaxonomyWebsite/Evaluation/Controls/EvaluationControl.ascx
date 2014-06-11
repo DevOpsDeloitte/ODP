@@ -42,7 +42,7 @@
             <li ng-show="showComparisonButton"><input class="button yes" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
             <li ng-show="!showComparisonButton && mode.indexOf('Comparison') != -1"><input class="button no" type="button" id="disabledcomparisonButton" value="Start Comparison" /></li>
             <li ng-show="showConsensusButton"><input class="button yes" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
-            <li ng-show="!showConsensusButton && mode.indexOf('Comparison') == -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
+            <li ng-show="!showConsensusButton && mode.indexOf('Consensus') != -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
             <li ng-show="showSaveButton"><input class="button yes" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Save"/></li>
             <li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
@@ -116,14 +116,7 @@
          </div>  
      </div>
     
-     <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
-         <div>Comments</div>
-         <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
-     </div>
-     <div class="sixteen columns" ng-show="mdata.displaymode=='View'"> 
-         <div>Comments</div>
-         <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
-     </div>
+
 
     <div class="sixteen columns"> 
 
@@ -203,6 +196,16 @@
 
 
         </div>
+
+    <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
+        <div class="commentsHeader">Comments</div>
+        <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
+    </div>
+     <div class="sixteen columns" ng-show="mdata.displaymode=='View'"> 
+         <div class="commentsHeader">Comments</div>
+         <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
+     </div>
+
     </div>
 </div>
 </div>
