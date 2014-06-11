@@ -28,7 +28,7 @@
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
 
-    <div class="nav">
+    <div class="subnav">
         <ul>
             <!--<li><a href="#study-focus">Study Focus</a></li>
             <li><a href="#entities-studied">Entities Studied</a></li>
@@ -42,10 +42,10 @@
             <li ng-show="showComparisonButton"><input class="button yes" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
             <li ng-show="!showComparisonButton && mode.indexOf('Comparison') != -1"><input class="button no" type="button" id="disabledcomparisonButton" value="Start Comparison" /></li>
             <li ng-show="showConsensusButton"><input class="button yes" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
-            <li ng-show="!showConsensusButton && mode.indexOf('Comparison') == -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
+            <li ng-show="!showConsensusButton && mode.indexOf('Consensus') != -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
             <li ng-show="showSaveButton"><input class="button yes" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Save"/></li>
-            <li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
+            <%--<li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
             <li ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></li>
             <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
             <li>
@@ -54,7 +54,7 @@
                 <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
             </div>
             
-            </li>
+            </li>--%>
         </ul>
     </div>
     <div id="odpforms" name="x" ng-cloak>
@@ -115,15 +115,21 @@
              <span class="titlevals"><%= userName %></span>
          </div>  
      </div>
+
+       <div class="sixteen columns">
+         <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
+         <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
+            <div><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div>
+            <div>
+            <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
+                <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
+                <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
+            </div>
+            
+            </div>
+        </div>
     
-     <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
-         <div>Comments</div>
-         <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
-     </div>
-     <div class="sixteen columns" ng-show="mdata.displaymode=='View'"> 
-         <div>Comments</div>
-         <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
-     </div>
+
 
     <div class="sixteen columns"> 
 
@@ -203,6 +209,16 @@
 
 
         </div>
+
+    <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
+        <div class="commentsHeader">Comments</div>
+        <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
+    </div>
+     <div class="sixteen columns" ng-show="mdata.displaymode=='View'"> 
+         <div class="commentsHeader">Comments</div>
+         <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
+     </div>
+
     </div>
 </div>
 </div>

@@ -32,6 +32,32 @@ div.icon.open:before
     font-size: 11px;
 }
 
+div.commentsHeader
+{
+    font-weight: bold;
+    padding: 10px 0px 10px 0px;
+    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    
+}
+
+div.subnav
+{
+    position: fixed;
+    top: 40px;
+   right: 40px;
+    width: 700px;
+    z-index: 99901;
+
+}
+
+div.subnav input, div.subnav li
+{
+    width:150px;
+    display:inline-block;
+    
+}
+
 table tbody th.box-three.big, table tbody td.box-three.big
 {
     width: 55%;
