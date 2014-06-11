@@ -6,7 +6,7 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 
 <div class="sixteen columns sub-title"> 
-    <span class="title">HOMEPAGE</span>
+    <h2>HOMEPAGE</h2>
 </div>            
 <div class="sixteen columns"> 
     <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error" class="panel" Visible="false"></asp:Label>

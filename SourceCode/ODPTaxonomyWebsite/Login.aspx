@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <div class="sixteen columns sub-title"> 
-            <span class="title center">LOGIN</span>
+            <h2 class="center">LOGIN</h2>
             <span class="subtitle center">Please enter your user name and password.</span>
     </div>
     <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false" DisplayRememberMe="false" PasswordRecoveryText="Forgot Password" >

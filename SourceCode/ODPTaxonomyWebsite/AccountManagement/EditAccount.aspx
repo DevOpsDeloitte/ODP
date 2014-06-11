@@ -55,7 +55,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-<span class="title"><asp:Literal ID="ltl_page_title" runat="server" Text="Edit Account" /></span>
+<h2><asp:Literal ID="ltl_page_title" runat="server" Text="Edit Account" /></h2>
 
 
 <asp:Label ID="lbl_confirmation_message" runat="server" Visible = "false" Text="User account successfully saved." />

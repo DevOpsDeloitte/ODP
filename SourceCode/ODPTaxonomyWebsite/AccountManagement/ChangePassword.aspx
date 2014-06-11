@@ -2,24 +2,25 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+<h2>
+    Change Password</h2>
 <asp:Label ID="lbl_error_message" runat="server" Visible="false" CssClass="errorMessage" />
 
-<asp:Panel ID="pnl_confirmation" runat="server" Visible="false">
+<asp:Panel ID="pnl_confirmation" runat="server" Visible="false" class="Message">
     Your password is successfully changed.
 </asp:Panel>
 
 <asp:Panel ID="pnl_change_password" runat="server">
 
-<div class="eight columns white"> 
-    Password must be:
+<div class="eight columns view-panel"> 
+    <strong>Password must be:</strong>
     <ol>
         <li>Minimum of 8 characters.</li>
         <li>Must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character, and 1 number.</li>
     </ol>
 </div>
 
-<asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage" HeaderText="Data entry error(s) occurred.  Please fix error(s) below." />
+<div><asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage inline" HeaderText="<strong>Please fix error(s) below:</strong>" /></div>
 
 <table class="form">
     <tr>

@@ -1,8 +1,8 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="CoderSupervisorView_Coded.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.CoderSupervisorView_Coded" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
-<h2>
-    View Coded Abstracts</h2>
+<h3>
+    View Coded Abstracts</h3>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>

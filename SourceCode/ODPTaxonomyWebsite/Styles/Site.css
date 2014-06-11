@@ -11,12 +11,26 @@
     padding: 8px;
     margin: auto;
 }
+.errorMessage.inline
+{    
+    margin: inherit;
+    display: inline-block;
+}
 .regularMessage
 {
     display: table;
     background: #F8E0A2;
     border: 1px solid;
     color: #724809;
+    padding: 8px;
+    margin: auto;
+}
+.Message
+{
+    display: table;
+    background: #FFFFFF;
+    border: 1px solid;
+    color: #01748A;
     padding: 8px;
     margin: auto;
 }
