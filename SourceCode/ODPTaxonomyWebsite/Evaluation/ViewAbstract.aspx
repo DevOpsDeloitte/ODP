@@ -28,7 +28,7 @@
             onclick="btn_code_Click" Visible="false" />
     </asp:Panel>
     <asp:Panel runat="server" ID="pnl_overrideBtns" ClientIDMode="Static" Visible="false">
-        <asp:Button runat="server" ID="btn_override" Text="Abstract Override" Visible="true" 
+        <asp:Button runat="server" ID="btn_override" class="button" Text="Abstract Override" Visible="true" 
             onclick="btn_override_Click" 
             OnClientClick="return confirm('You are about to force close this abstract. Would you like to proceed?');" />
         

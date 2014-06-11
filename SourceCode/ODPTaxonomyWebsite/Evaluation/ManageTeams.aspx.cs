@@ -282,7 +282,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                             if (isActivelyWorking)
                             {
                                 lbl_messageUsers.Visible = true;
-                                lbl_messageUsers.Text = "The team could NOT be deleted as it is currently working on abstract evaluation.";
+                                lbl_messageUsers.Text = "The team could not be removed, because the team is currently coding an abstract.";
 
                             }
                             else
@@ -460,7 +460,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
                     else
                     {
-                        lbl_messageUsers.Text = "You have to pick 3 users to create a new team.";
+                        lbl_messageUsers.Text = "To save a team, three team members must be selected.";
                         lbl_messageUsers.Visible = true;
                     }
 

@@ -4,17 +4,18 @@
 /*Tatiana's Styles: Start */
 .errorMessage
 {
-    display: table;
     background: #F3A2A2;
     border: 1px solid;
     color: #030303;
-    padding: 8px;
     margin: auto;
+    display: table;
+    padding: 8px;
 }
 .errorMessage.inline
 {    
-    margin: inherit;
-    display: inline-block;
+    margin: initial;
+    display: block;
+
 }
 .regularMessage
 {
@@ -59,8 +60,8 @@
 }
 #pnl_overrideBtns
 {
-    float:left;
-    width:200px;
+    float:right;
+    margin-right: 10px;
 }
 #pnl_odpValues
 {

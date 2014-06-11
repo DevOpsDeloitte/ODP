@@ -50,7 +50,7 @@ namespace ODPTaxonomyWebsite.Account
                 }
                 else
                 {
-                    LoginUser.FailureText = "Either user name or password is incorrect.  Please try again.";
+                    LoginUser.FailureText = "<p class='errorMessage'>Either user name or password is incorrect.  Please try again.</p>";
                 }
             }
             catch (Exception ex)

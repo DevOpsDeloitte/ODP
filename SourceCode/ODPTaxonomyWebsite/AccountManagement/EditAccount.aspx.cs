@@ -214,7 +214,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
                         else
                         {
                             pnl_account.Visible = false;
-                            lbl_confirmation_message.Text = "User account successfully created: " + l_username;
+                            lbl_confirmation_message.Text = "Account Created Succesfuly.<br>User ID is: " + l_username;
                             lbl_confirmation_message.Visible = true;
                         }
                     }

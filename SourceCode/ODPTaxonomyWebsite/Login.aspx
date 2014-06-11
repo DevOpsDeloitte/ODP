@@ -9,11 +9,10 @@
     </div>
     <asp:Login ID="LoginUser" runat="server" EnableViewState="false" RenderOuterTable="false" DisplayRememberMe="false" PasswordRecoveryText="Forgot Password" >
         <LayoutTemplate>
-            <span class="errorMessage">
+            <span>
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
             </span>
-            <asp:ValidationSummary ID="LoginUserValidationSummary" runat="server" CssClass="errorMessage" 
-                 ValidationGroup="LoginUserValidationGroup"/>
+            
             <div class="accountInfo">
                 <fieldset class="login">
                     <legend>Account Information</legend>
@@ -21,13 +20,13 @@
                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">User Name:</asp:Label>
                         <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" Display="Dynamic" 
-                             CssClass="errorMessage" ErrorMessage="User ID is required." ToolTip="User Name is required." 
+                             CssClass="errorMessage inline" ErrorMessage="User ID is required." ToolTip="User Name is required." 
                              ValidationGroup="LoginUserValidationGroup"/>
                     
                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">Password:</asp:Label>
                         <asp:TextBox ID="Password" runat="server" CssClass="passwordEntry" TextMode="Password"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"  Display="Dynamic"
-                             CssClass="errorMessage" ErrorMessage="Password is required." ToolTip="Password is required." 
+                             CssClass="errorMessage inline" ErrorMessage="Password is required." ToolTip="" 
                              ValidationGroup="LoginUserValidationGroup"/>
 
                         <asp:Button ID="LoginButton" runat="server" class="button" CommandName="Login" Text="Log In" 

@@ -44,7 +44,9 @@
     </tr>
     <tr>
         <td>
-            <asp:Button class="button" id="btn_change_password" runat="server" OnClick="btn_changePassword_OnClick" Text="Change Password" />
+            <asp:Button class="button yes" id="btn_change_password" runat="server" OnClick="btn_changePassword_OnClick" Text="Update" />
+        </td>
+        <td>
             <asp:Button class="button no" id="btn_cancel" runat="server" OnClick="btn_cancel_OnClick" Text="Cancel" CausesValidation="false" />
         </td>
     </tr>

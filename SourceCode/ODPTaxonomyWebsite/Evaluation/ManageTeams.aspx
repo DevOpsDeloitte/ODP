@@ -13,7 +13,7 @@
     </p>
     <div class="six columns alpha">
     <asp:HiddenField runat="server" ID="hf_teamTypeId" />
-    <h3>Users available for team to pick up</h3>
+    <h3>Available Team Members</h3>
     <p runat="server" id="gc_noUsers" class="regularMessage" >No users are currently available for you to select for a new team.</p>
     <p></p>
 
