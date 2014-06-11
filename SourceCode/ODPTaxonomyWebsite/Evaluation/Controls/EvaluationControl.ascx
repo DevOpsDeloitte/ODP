@@ -28,7 +28,7 @@
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
 
-    <div class="nav">
+    <div class="subnav">
         <ul>
             <!--<li><a href="#study-focus">Study Focus</a></li>
             <li><a href="#entities-studied">Entities Studied</a></li>
@@ -45,7 +45,7 @@
             <li ng-show="!showConsensusButton && mode.indexOf('Consensus') != -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
             <li ng-show="showSaveButton"><input class="button yes" type="button" id="saveButton" value="Save" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Save"/></li>
-            <li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
+            <%--<li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
             <li ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></li>
             <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
             <li>
@@ -54,7 +54,7 @@
                 <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
             </div>
             
-            </li>
+            </li>--%>
         </ul>
     </div>
     <div id="odpforms" name="x" ng-cloak>
@@ -115,6 +115,19 @@
              <span class="titlevals"><%= userName %></span>
          </div>  
      </div>
+
+       <div class="sixteen columns">
+         <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
+         <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
+            <div><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div>
+            <div>
+            <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
+                <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
+                <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
+            </div>
+            
+            </div>
+        </div>
     
 
 

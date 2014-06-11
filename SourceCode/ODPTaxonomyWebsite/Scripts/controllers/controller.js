@@ -282,7 +282,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
     $scope.resetForm = function () {
 
-     
+
 
         for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
             $scope.mdata.studyfocus[1][i].resetBox();
@@ -385,6 +385,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
             if (e) {
                 //window.location.href = "revise.html";
                 //util.save();
+                window.scrollTo(0, 0);
                 $scope.submitForm();
             } else {
                 alertify.error("You've clicked cancel Save..");
@@ -394,7 +395,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
     };
 
-   
+
 
 
 
