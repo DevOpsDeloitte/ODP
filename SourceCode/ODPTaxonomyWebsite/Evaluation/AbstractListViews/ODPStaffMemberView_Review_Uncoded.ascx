@@ -30,4 +30,5 @@
         <asp:BoundField HeaderText="F" DataField="F"></asp:BoundField>
         <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
     </Columns>
+    <PagerStyle CssClass="PagerContainer" />
 </odp:AbstractGridView>
