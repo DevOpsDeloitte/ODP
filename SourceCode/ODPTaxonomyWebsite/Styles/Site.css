@@ -20,6 +20,15 @@
     padding: 8px;
     margin: auto;
 }
+.Message
+{
+    display: table;
+    background: #FFFFFF;
+    border: 1px solid;
+    color: #01748A;
+    padding: 8px;
+    margin: auto;
+}
 .teamUsers
 {
     border:1px solid #000;

@@ -2,16 +2,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
+<h2>
+    Change Password</h2>
 <asp:Label ID="lbl_error_message" runat="server" Visible="false" CssClass="errorMessage" />
 
-<asp:Panel ID="pnl_confirmation" runat="server" Visible="false">
+<asp:Panel ID="pnl_confirmation" runat="server" Visible="false" class="Message">
     Your password is successfully changed.
 </asp:Panel>
 
 <asp:Panel ID="pnl_change_password" runat="server">
 
-<div class="eight columns white"> 
+<div class="eight columns view-panel"> 
     Password must be:
     <ol>
         <li>Minimum of 8 characters.</li>

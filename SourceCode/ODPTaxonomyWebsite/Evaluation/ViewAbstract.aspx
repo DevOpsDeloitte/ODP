@@ -74,14 +74,14 @@
         <p><strong>Date:</strong> <span runat="server" id="date"></span></p>
     </asp:Panel>
     <asp:Panel runat="server" ID="pnl_abstract" ClientIDMode="Static" Visible="false">
-     <p><strong>ProjectTitle:</strong> <span runat="server" id="ProjectTitle"></span></p>
-        <p><strong>AdministeringIC:</strong> <span runat="server" id="AdministeringIC"></span></p>
-        <p><strong>ApplicationID:</strong> <span runat="server" id="ApplicationID"></span></p>
-        <p><strong>PIProjectLeader:</strong> <span runat="server" id="PIProjectLeader"></span></p>
+     <p><strong>Project Title:</strong> <span runat="server" id="ProjectTitle"></span></p>
+        <p><strong>Administering IC:</strong> <span runat="server" id="AdministeringIC"></span></p>
+        <p><strong>Application ID:</strong> <span runat="server" id="ApplicationID"></span></p>
+        <p><strong>PI Project Leader:</strong> <span runat="server" id="PIProjectLeader"></span></p>
         <p><strong>FY:</strong> <span runat="server" id="FY"></span></p>
-        <p><strong>ProjectNumber:</strong> <span runat="server" id="ProjectNumber"></span></p>
-        <p><strong>AbstractDescPart:</strong><br /> <span runat="server" id="AbstractDescPart"></span></p>
-        <p><strong>AbstractPublicHeathPart:</strong><br /> <span runat="server" id="AbstractPublicHeathPart"></span></p>
+        <p><strong>Project Number:</strong> <span runat="server" id="ProjectNumber"></span></p>
+        <p><strong>Abstract Description Part:</strong><br /> <span runat="server" id="AbstractDescPart"></span></p>
+        <p><strong>Abstract Public Health Part:</strong><br /> <span runat="server" id="AbstractPublicHeathPart"></span></p>
          
 
     </asp:Panel>
