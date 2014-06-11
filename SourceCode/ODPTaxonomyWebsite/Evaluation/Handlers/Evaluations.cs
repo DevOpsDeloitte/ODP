@@ -102,7 +102,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             }
             else
             {
-                context.Response.Write(JsonConvert.SerializeObject(new { success = false }));
+                if (submissionID == -2)
+                {
+                    context.Response.Write(JsonConvert.SerializeObject(new { success = false, multipleconsensusexists = true }));
+                }
+                else
+                {
+                    context.Response.Write(JsonConvert.SerializeObject(new { success = false }));
+                }
             }
         }
 
@@ -200,6 +207,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
         private int createSubmissionRecord()
         {
+            // do a check for consensus record existing as a fail safe, just to prevent multiple consensus being written.
+            if (submissiontypeID == 2 || submissiontypeID == 4)
+            {
+                var consensusexists = db.Submissions.Where(s => s.SubmissionTypeId == submissiontypeID && s.EvaluationId == evaluationID).Any();
+                if (consensusexists)
+                {
+                    return -2;
+                }
+            }
             Submission sb = new Submission();
             sb.SubmissionTypeId = submissiontypeID;
             sb.SubmissionDateTime = DateTime.Now;
