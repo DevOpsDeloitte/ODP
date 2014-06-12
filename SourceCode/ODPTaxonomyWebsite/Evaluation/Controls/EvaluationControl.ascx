@@ -28,7 +28,7 @@
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
 
-    <div class="subnav">
+    <div class="subnav" ng-cloak>
         <ul>
             <!--<li><a href="#study-focus">Study Focus</a></li>
             <li><a href="#entities-studied">Entities Studied</a></li>
