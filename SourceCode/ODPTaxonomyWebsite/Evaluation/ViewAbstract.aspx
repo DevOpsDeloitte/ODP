@@ -24,7 +24,7 @@
     
         <asp:Button runat="server" ID="btn_print" Text="Print Abstract" Visible="true" class="button clearfix"
              OnClientClick=" window.open('./PrintAbstract.aspx?id='+absid, '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=1200, height=700'); return false;"  />&nbsp;&nbsp;
-        <asp:Button runat="server" ID="btn_code" Text="Code Abstract" 
+        <asp:Button runat="server" class="button" ID="btn_code" Text="Code Abstract" 
             onclick="btn_code_Click" Visible="false" />
     </asp:Panel>
     <asp:Panel runat="server" ID="pnl_overrideBtns" ClientIDMode="Static" Visible="false">

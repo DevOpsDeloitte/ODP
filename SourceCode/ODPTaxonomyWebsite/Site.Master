@@ -67,7 +67,7 @@
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" />
                         </div>                                    
                        
-                        <div runat="server" visible="false" id="pnl_odpSup"><div class="nav-role">Role: ODP Suprvisor</div>
+                        <div runat="server" visible="false" id="pnl_odpSup"><div class="nav-role">Role: ODP Supervisor</div>
                             <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></a>
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" />
                         </div>
@@ -79,7 +79,7 @@
                         <div runat="server" visible="false" id="pnl_coderSup"><div class="nav-role">Role: Coder Supervisor</div>
                             <asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" />
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /> 
-                            <asp:LinkButton OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" />
+                            <asp:LinkButton class="" OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" />
                         </div>
 
                         <div runat="server" visible="false" id="pnl_coder"><div class="nav-role">Role: Coder</div>
