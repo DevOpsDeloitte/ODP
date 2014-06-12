@@ -149,10 +149,11 @@ span.highlight { font-weight: bold; background: #F7F9FC; border: 1px solid #D1D0
 
 /* Pagination
 ================================================== */
-tr.pagination table { width: auto; color: #2F557C; -webkit-box-shadow: none; box-shadow: none; border: 1px solid #fff; margin: 0; }
-tr.pagination td {  }
-tr.pagination td, .zebra-striped tbody tr.pagination table tr:nth-child(odd) td { border: none; background: #AFAFAF; color: #fff; margin: 2px; border: 1px solid #E0DFDF; }
-tr.pagination td a { font-weight: bold; color: #fff; }
+tr.pagination table, tr.PagerContainer table { width: auto; color: #2F557C; -webkit-box-shadow: none; box-shadow: none; border: 1px solid #fff; margin: 0; }
+tr.pagination td, .zebra-striped tbody tr.pagination table tr:nth-child(odd) td, 
+tr.PagerContainer td, .zebra-striped tbody tr.PagerContainer table tr:nth-child(odd) td
+{ border: none; background: #AFAFAF; color: #fff; margin: 2px; border: 1px solid #E0DFDF; }
+tr.pagination td a, tr.PagerContainer td a { font-weight: bold; color: #fff; }
 
 /* #Media Queries
 ================================================== */
