@@ -344,7 +344,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
                    // Logic for Multiple consensus failure.
                    if (data.multipleconsensusexists != undefined && data.multipleconsensusexists) {
-                       $scope.errormessagesdisplay = "Consensus record already exists.. Save Failed!";
+                       $scope.errormessagesdisplay = "Consensus record already exists. Save Failed!";
                        return;
                    }
 
