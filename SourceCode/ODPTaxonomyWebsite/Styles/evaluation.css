@@ -103,7 +103,6 @@ textarea#comments
 div.select-box {
     cursor: pointer;
     text-align: right;
-    padding: 2px 5px 2px 5px;
     height: 100%;
 }
 
