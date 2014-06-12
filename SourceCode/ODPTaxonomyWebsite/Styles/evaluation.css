@@ -51,6 +51,12 @@ div.subnav
 
 }
 
+div.subnav ul
+{
+    position: absolute;
+    right: 10px;
+}
+
 div.subnav input, div.subnav li
 {
     width:150px;

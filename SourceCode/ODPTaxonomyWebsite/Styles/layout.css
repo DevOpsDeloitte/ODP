@@ -28,8 +28,8 @@ background: linear-gradient(to bottom,  #456777 0px,#C2CDD1 180px,#FFF 600px); /
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#456777', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 
-h1, h2 { font-family: 'open_sansbold' }
-h3, h4, h5, h6 { font-family: 'open_sanssemibold' }
+h1, h2 { font-family: 'open_sansbold', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+h3, h4, h5, h6 { font-family: 'open_sanssemibold',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
 .title, h2:first-child  { display: block; color: #fff; text-transform: uppercase; font-size: 1.65em; margin: 0 10px; }
