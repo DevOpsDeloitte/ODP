@@ -78,6 +78,9 @@
         <input type="hidden" name="showc" id="showc" value="<%= showConsensusButton %>" ng-model="mdata.showconsensusbutton" />
         <input type="hidden" name="showcomp" id="showcomp" value="<%= showComparisonButton %>" ng-model="mdata.showcomparisonbutton" />
         <input type="hidden" name="isunable" id="isunable" value="<%= isChecked %>" ng-model="mdata.isunable" />
+
+        <input type="hidden" name="consensusalreadystarted" id="consensusalreadystarted" value="<%= consensusAlreadyStarted %>" ng-model="mdata.consensusalreadystarted" />
+
         <!-- not need just a placholder for now -->
         <input type="hidden" name="evaluationid" value="<%= EvaluationID %>" />
         <div class="debugWindow">

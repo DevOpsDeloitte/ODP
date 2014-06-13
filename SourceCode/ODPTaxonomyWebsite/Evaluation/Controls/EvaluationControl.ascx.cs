@@ -62,6 +62,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public bool showConsensusButton = false;
         public bool showComparisonButton = false;
         public string unableCoders = string.Empty;
+        public bool consensusAlreadyStarted = false;
 
         public string isChecked = string.Empty;
     
@@ -246,6 +247,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //Request.QueryString['EQCN'] ?? "default text";
             string startConsensus = string.IsNullOrEmpty(Request.QueryString["startConsenus"]) ? "" : Request.QueryString["startConsenus"];
             bool startC = startConsensus == "true" ? true : false;
+            var orig = SubmissionTypeId;
             if (startC)
             {
                 if (SubmissionTypeId == 1)
@@ -262,6 +264,17 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 if (eval != null && DisplayMode != "View" && eval.ConsensusStartedBy == null)
                 {
                     eval.ConsensusStartedBy = UserId;
+                }
+                ///
+                if (eval != null && eval.ConsensusStartedBy != null)
+                {
+                    if (eval.ConsensusStartedBy != UserId)
+                    {
+                        // Give consensus already started message.
+                        this.consensusAlreadyStarted = true;
+                        SubmissionTypeId = orig;
+                    }
+
                 }
                 db.SubmitChanges();
 

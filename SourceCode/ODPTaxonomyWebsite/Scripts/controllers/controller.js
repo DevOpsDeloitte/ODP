@@ -24,6 +24,15 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         $scope.mdata.showcomparisonbutton = $("input#showcomp").val() == "True" ? true : false;
         $scope.mdata.unabletocode = $("input#isunable").val() == "checked" ? true : false;
 
+        $scope.mdata.consensusalreadystarted = $("input#consensusalreadystarted").val() == "True" ? true : false;
+
+        //console.log(" New Value : " + $scope.mdata.consensusalreadystarted);
+
+        if ($scope.mdata.consensusalreadystarted) {
+            $scope.errormessagesdisplay = "Consensus already started!";
+        }
+        
+
         $scope.mdata.abstractid = $("input#abstractid").val();
         //console.log(" is unable : " + $scope.mdata.isunable);
         //$scope.mdata.unabletocode = true;
@@ -76,9 +85,13 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         }
 
         $scope.startConsensus = function () {
-            //console.log("start consensus :: " + window.location.href);
-            window.location.replace($scope.cleanURL(window.location.href) + "?startConsenus=true");
-            //location.reload(true);
+//            if (!$scope.mdata.consensusalreadystarted) {
+                window.location.replace($scope.cleanURL(window.location.href) + "?startConsenus=true");
+//            }
+//            else {
+//                $scope.errormessagesdisplay = "Consensus Already started!";
+//            }
+
         };
 
         $scope.startComparison = function () {
