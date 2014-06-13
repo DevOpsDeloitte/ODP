@@ -195,7 +195,7 @@ app.directive("outcomeBox", function ($rootScope) {
 
             // this happens in the link phase.
             // this where the initial color states are being set for consensus.
-            if($rootScope.mode.indexOf("Consensus") != -1 && !scope.view.disabled && $rootScope.displaymode != "View")
+            if($rootScope.mode.indexOf("Consensus") != -1 && !scope.view.disabled /* && $rootScope.displaymode != "View" */)
             {
                 if( attrs.showCoders != "" && attrs.showCoders !== undefined){
                      //console.log(" show coders attribute : " + attrs.showCoders );
@@ -205,11 +205,14 @@ app.directive("outcomeBox", function ($rootScope) {
                      scope.view.codervals = attrs.showCoders + codercount.toString();
                      scope.view.displaycoders = attrs.showCoders.split(",");
                      scope.view.displaycoderscount = codercount;
-                     scope.view.colorstate = "outcomeBoxColor-"+ codercount;
-                     scope.value.originalcolorState = "outcomeBoxColor-"+ codercount;
-                     // model value being set ::
-                     scope.value.codercount = codercount;
-                     scope.value.modelcolorState = scope.getColor( codercount );
+                     if($rootScope.displaymode != "View")
+                     {
+                         scope.view.colorstate = "outcomeBoxColor-"+ codercount;
+                         scope.value.originalcolorState = "outcomeBoxColor-"+ codercount;
+                         // model value being set ::
+                         scope.value.codercount = codercount;
+                         scope.value.modelcolorState = scope.getColor( codercount );
+                     }
 
                  }
                  else
@@ -224,7 +227,7 @@ app.directive("outcomeBox", function ($rootScope) {
 
             // this happens in the link phase.
             // this where the initial color states are being set for comparison.
-            if($rootScope.mode.indexOf("Comparison") != -1 && !scope.view.disabled && $rootScope.displaymode != "View")
+            if($rootScope.mode.indexOf("Comparison") != -1 && !scope.view.disabled /*&& $rootScope.displaymode != "View" */)
             {
                 if( attrs.showComparers != "" && attrs.showComparers !== undefined){
                      //console.log(" show coders attribute : " + attrs.showCoders );
@@ -234,11 +237,14 @@ app.directive("outcomeBox", function ($rootScope) {
                      scope.view.codervals = attrs.showComparers + codercount.toString();
                      scope.view.displaycoders = scope.displayComparisons( attrs.showComparers );
                      scope.view.displaycoderscount = codercount;
-                     scope.view.colorstate = "comparisonoutcomeBoxColor-"+ codercount;
-                     scope.value.originalcolorState = "comparisonoutcomeBoxColor-"+ codercount;
-                     // model value being set ::
-                     scope.value.codercount = codercount;
-                     scope.value.modelcolorState = scope.getComparisonColor( codercount );
+                     if($rootScope.displaymode != "View")
+                     {
+                         scope.view.colorstate = "comparisonoutcomeBoxColor-"+ codercount;
+                         scope.value.originalcolorState = "comparisonoutcomeBoxColor-"+ codercount;
+                         // model value being set ::
+                         scope.value.codercount = codercount;
+                         scope.value.modelcolorState = scope.getComparisonColor( codercount );
+                     }
 
                  }
                  else
