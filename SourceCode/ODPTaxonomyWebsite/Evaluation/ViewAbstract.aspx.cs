@@ -78,6 +78,13 @@ namespace ODPTaxonomyWebsite.Evaluation
                             currentRole = Session["CurrentRole"].ToString();
                             hf_currentRole.Value = currentRole;
                             LoadData(currentRole);
+
+                            if (Session["ShowUploadNotesMessage"] != null)
+                            {
+                                lbl_messageUsers.Visible = true;
+                                lbl_messageUsers.Text = messUploadNotesSuccess;
+                                Session["ShowUploadNotesMessage"] = null;
+                            }
                         }
                         else
                         {
@@ -191,10 +198,13 @@ namespace ODPTaxonomyWebsite.Evaluation
                                             abstractStatusId = (int)AbstractStatusID._1N;
                                             Common.UploadNotes(connString, evaluationId, abstractId, userId, abstractStatusId, fileName);
                                             //regenerate links for coderSup - a new link should appear
-                                            GenerateLinks(EvaluationType.CoderEvaluation, evaluationId, abstractId);
+                                            //GenerateLinks(EvaluationType.CoderEvaluation, evaluationId, abstractId);
 
-                                            lbl_messageUsers.Visible = true;
-                                            lbl_messageUsers.Text = messUploadNotesSuccess;
+                                            //lbl_messageUsers.Visible = true;
+                                            //lbl_messageUsers.Text = messUploadNotesSuccess;
+                                            Session["ShowUploadNotesMessage"] = "true";
+                                            string url = Request.Url.ToString();
+                                            Response.Redirect(url);
                                         }
                                     }                                    
                                     
@@ -244,10 +254,13 @@ namespace ODPTaxonomyWebsite.Evaluation
                                             abstractStatusId = (int)AbstractStatusID._2N;
                                             Common.UploadNotes(connString, evaluationId, abstractId, userId, abstractStatusId, fileName);
                                             //regenerate links for odpSup - a new link should appear
-                                            GenerateLinks(EvaluationType.ODPEvaluation, evaluationId, abstractId);
+                                            //GenerateLinks(EvaluationType.ODPEvaluation, evaluationId, abstractId);
 
-                                            lbl_messageUsers.Visible = true;
-                                            lbl_messageUsers.Text = messUploadNotesSuccess;
+                                            //lbl_messageUsers.Visible = true;
+                                            //lbl_messageUsers.Text = messUploadNotesSuccess;
+                                            Session["ShowUploadNotesMessage"] = "true";
+                                            string url = Request.Url.ToString();
+                                            Response.Redirect(url);
                                         }
                                     }                
                                     
@@ -438,7 +451,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 Response.AddHeader("content-disposition", "filename=" + fileName);
                 //Response.Flush();   
                 Response.TransmitFile(fName);
-                Response.End();
+                //Response.End();
 
             }
             catch (Exception ex)

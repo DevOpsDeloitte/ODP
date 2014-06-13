@@ -52,7 +52,7 @@
 
     <asp:Panel runat="server" ID="pnl_coderValues" ClientIDMode="Static" Visible="false">        
         <asp:LinkButton runat="server" ID="link_coderConsensus" CssClass="viewSubmissionLink" onclick="link_Submission_Click" 
-            CommandArgument='' Visible="false">Code Consensus</asp:LinkButton>
+            CommandArgument='' Visible="false">Coder Consensus</asp:LinkButton>
         <asp:LinkButton runat="server" ID="link_coderNotes" CssClass="viewSubmissionLink" Visible="false"  
             onclick="link_Notes_Click" CommandArgument=''>Coder Notes(PDF)</asp:LinkButton>
         <asp:Repeater runat="server" ID="rpt_coderSubmissions">
