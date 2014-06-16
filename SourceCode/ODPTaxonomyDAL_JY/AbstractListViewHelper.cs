@@ -139,19 +139,19 @@ namespace ODPTaxonomyDAL_JY
                                     {
                                         if (iden.UserAlias == "ODPA" && kappa.KappaTypeID == (int)KappaTypeEnum.K6)
                                         {
-                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Staff: " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                         else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
                                         {
-                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Staff: " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                         else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
                                         {
-                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Coder: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP Staff: " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
                                             Abstracts.Add(ODPEvaluation);
                                         }
