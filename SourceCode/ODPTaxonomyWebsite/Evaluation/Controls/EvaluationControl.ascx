@@ -28,7 +28,7 @@
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
          <span class="subtitle">
         <div class="specs">
-            General Information<div class="icon open" ng-click="showDescription('generalinformation')" ></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            General Instructions<div class="icon open" ng-click="showDescription('generalinstructions')" ></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             Background<div class="icon open" ng-click="showDescription('background')" ></div>
         </div>
         </span>
@@ -152,9 +152,9 @@
             <thead>
                     <tr>
                             <th scope="col" class="question">Topics<div class="icon open" ng-click="showDescription('topics')" ></div></th>
-                            <th scope="col" class="answer">A.1 Rationale<div class="icon open" ng-click="showDescription('rationale')" ></div></th>
-                            <th scope="col" class="answer">A.2 Exposure<div class="icon open" ng-click="showDescription('exposure')" ></div></th>
-                            <th scope="col" class="answer">A.3 Outcome<div class="icon open" ng-click="showDescription('outcome')" ></div></th>
+                            <th scope="col" class="answer">A.1 Rationale<div class="icon open" ng-click="showDescription('studyfocuscategory-1')" ></div></th>
+                            <th scope="col" class="answer">A.2 Exposure<div class="icon open" ng-click="showDescription('studyfocuscategory-2')" ></div></th>
+                            <th scope="col" class="answer">A.3 Outcome<div class="icon open" ng-click="showDescription('studyfocuscategory-3')" ></div></th>
                     </tr>
             </thead>
             <tbody>

@@ -17,6 +17,9 @@ namespace ODPTaxonomyWebsite.Evaluation
     {
         public string unabletocode = string.Empty;
         public string studyFocus = string.Empty;
+        public string studyFocusCategory = string.Empty;
+        public string topics = string.Empty;
+        public string misc = string.Empty;
         public string entitiesStudied = string.Empty;
         public string studySettings = string.Empty;
         public string populationFocus = string.Empty;
@@ -25,8 +28,12 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            misc = RenderMisc();
+            topics = RenderCategory("Topics");
             unabletocode = RenderUnable();
             studyFocus = RenderCategory("A_StudyFocus");
+            studyFocusCategory = RenderCategory("A_StudyFocusCategory");
+            
             entitiesStudied = RenderCategory("B_EntitiesStudied");
             studySettings = RenderCategory("C_StudySetting");
             populationFocus = RenderCategory("D_PopulationFocus");
@@ -72,7 +79,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             var db = DBData.GetDataContext();
             var topics = db.Protocols.Where(p => p.Title.Contains("Unable")).OrderBy(p => p.LookUpID).Select(p => p).ToList();
             StringBuilder finalStr = new StringBuilder();
-            Response.Write(topics.Count);
+            //Response.Write(topics.Count);
             var count = 1;
             foreach (var topic in topics)
             {
@@ -82,6 +89,32 @@ namespace ODPTaxonomyWebsite.Evaluation
                 
                 row.AppendLine("<div class=\"subtitle\"><a name=\"" + "unabletocode" + "" + "" + "\"> " + topic.Title + "</a></div>");
                 
+                row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
+                row.AppendLine("</div>");
+                finalStr.Append(row);
+                //if (count > 0) break;
+                count++;
+            }
+
+            return finalStr.ToString();
+        }
+
+        private string RenderMisc()
+        {
+
+            var db = DBData.GetDataContext();
+            var topics = db.Protocols.Where(p => p.Title.Contains("General Inst") || p.Title.Contains("background")).OrderBy(p => p.LookUpID).Select(p => p).ToList();
+            StringBuilder finalStr = new StringBuilder();
+            //Response.Write(topics.Count);
+            var count = 1;
+            foreach (var topic in topics)
+            {
+
+                StringBuilder row = new StringBuilder();
+                row.AppendLine("<div class=\"topicitem\">");
+
+                row.AppendLine("<div class=\"subtitle\"><a name=\"" + topic.Title.ToLower().Replace(" ","") + "" + "" + "\"> " + topic.Title + "</a></div>");
+
                 row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
                 row.AppendLine("</div>");
                 finalStr.Append(row);

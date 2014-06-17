@@ -16,14 +16,17 @@
     </script>
     <div id="mainGlossary">
 
-
+       <%=misc %>
+      <%=topics %>
+      <%=studyFocusCategory %>
         <%=studyFocus %>
+        
+      
         <%=entitiesStudied %>
         <%=studySettings %>
         <%=populationFocus %>
         <%=studyDesignPurpose %>
         <%=preventionCategory %>
-
         <%=unabletocode %>
     
     
