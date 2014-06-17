@@ -26,6 +26,12 @@
         <h1 class="center">Prevention Taxonomy Form</h1>
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN (TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
+         <span class="subtitle">
+        <div class="specs">
+            General Information<div class="icon open" ng-click="showDescription('generalinformation')" ></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Background<div class="icon open" ng-click="showDescription('background')" ></div>
+        </div>
+        </span>
     </div>
 
     <div class="subnav" ng-cloak>
@@ -98,11 +104,11 @@
          <div>
              <span class="titles">Application ID :</span>
              <span class="titlevals"><%= applicationID %></span>
-
+             <br />
              <span class="titles">Project Title :</span>
              <span class="titlevals"><%= projectTitle %></span>
          </div>
-     
+   
      </div>
 
     <!-- <div class="sixteen columns">
@@ -117,18 +123,22 @@
              <span class="titles">User ID :</span>
              <span class="titlevals"><%= userName %></span>
          </div>  
+            <div class="ruler" />
      </div>
 
        <div class="sixteen columns">
-         <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
-         <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
-            <div><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div>
-            <div>
-            <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
-                <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
-                <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
-            </div>
+          
+           <div class="unableCodeBox">
+             <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
+             <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
+                <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
+                <div>
+                <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
+                    <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
+                    <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
+                </div>
             
+                </div>
             </div>
         </div>
     
@@ -137,13 +147,14 @@
     <div class="sixteen columns"> 
 
         <table class="bordered zebra-striped" id="study-focus" class="study-focus">
-            <caption>A. Study Focus</caption>
+            <div class="captionTitle">A. Study Focus</div>
+            <div class="icon open" ng-click="showDescription('studyfocus-0')" ></div>
             <thead>
                     <tr>
-                            <th scope="col" class="question"></th>
-                            <th scope="col" class="answer">A.1 Rationale</th>
-                            <th scope="col" class="answer">A.2 Exposure</th>
-                            <th scope="col" class="answer">A.3 Outcome</th>
+                            <th scope="col" class="question">Topics<div class="icon open" ng-click="showDescription('topics')" ></div></th>
+                            <th scope="col" class="answer">A.1 Rationale<div class="icon open" ng-click="showDescription('rationale')" ></div></th>
+                            <th scope="col" class="answer">A.2 Exposure<div class="icon open" ng-click="showDescription('exposure')" ></div></th>
+                            <th scope="col" class="answer">A.3 Outcome<div class="icon open" ng-click="showDescription('outcome')" ></div></th>
                     </tr>
             </thead>
             <tbody>
@@ -154,7 +165,9 @@
         </table>
 
         <table class="bordered zebra-striped" id="entities-studied">
-            <caption>B. Entities Studied</caption>
+<%--            <caption>B. Entities Studied</caption>--%>
+            <div class="captionTitle">B. Entities Studied</div>
+            <div class="icon open" ng-click="showDescription('entitiesstudied-0')" ></div>
             <thead>
 
             </thead>
@@ -166,7 +179,9 @@
         </table>
 
            <table class="bordered zebra-striped" id="study-setting">
-            <caption>C. Study Setting</caption>
+<%--            <caption>C. Study Setting</caption>--%>
+            <div class="captionTitle">C. Study Setting</div>
+            <div class="icon open" ng-click="showDescription('studysetting-')" ></div>
             <thead>
 
             </thead>
@@ -177,7 +192,9 @@
         </table>
 
            <table class="bordered zebra-striped" id="population-focus">
-            <caption>D. Population Focus</caption>
+<%--            <caption>D. Population Focus</caption>--%>
+            <div class="captionTitle">D. Population Focus</div>
+            <div class="icon open" ng-click="showDescription('populationfocus-')" ></div>
             <thead>
 
             </thead>
@@ -188,7 +205,9 @@
         </table>
 
            <table class="bordered zebra-striped" id="study-design-purpose">
-            <caption>E. Study Design/Purpose</caption>
+<%--            <caption>E. Study Design/Purpose</caption>--%>
+            <div class="captionTitle">E. Study Design/Purpose</div>
+            <div class="icon open" ng-click="showDescription('studydesignpurpose-')" ></div>
             <thead>
 
             </thead>
@@ -198,7 +217,9 @@
         </table>
 
            <table class="bordered zebra-striped" id="prevention-research-category">
-            <caption>F. Prevention Research Category</caption>
+<%--            <caption>F. Prevention Research Category</caption>--%>
+            <div class="captionTitle">F. Prevention Research Category</div>
+            <div class="icon open" ng-click="showDescription('preventioncategoryresearch-')" ></div>
             <thead>
 
             </thead>

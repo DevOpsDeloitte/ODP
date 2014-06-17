@@ -12,6 +12,47 @@
 
 /* end of overrides */
 
+.unableCodeBox
+{
+    width: 200px;
+    float: right;
+}
+
+ul.specs
+{
+   margin: 0; padding: 0; 
+}
+
+span.titles
+{
+    font-weight: bold;
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+    display: inline-block;
+
+    text-align: right;
+    
+}
+
+.ruler
+{
+    width: 100%;
+    height: 5px;
+    border-bottom: 0px solid #ccc;
+}
+    
+
+div.captionTitle
+{
+    display: inline-block;
+    font-weight: bold;
+    text-align: left;
+font-weight: bold;
+font-size: 17px;
+padding: 14px 0px;
+}
+
 div.icon.open
 {
     width: 16px;
@@ -21,6 +62,7 @@ div.icon.open
     margin: 0px 0px 0px 10px;
     position: relative;
     border: 1px solid #ccc;
+    cursor: pointer;
 }
 div.icon.open:before
 {

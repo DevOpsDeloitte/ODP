@@ -15,6 +15,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 {
     public partial class Glossary : System.Web.UI.Page
     {
+        public string unabletocode = string.Empty;
         public string studyFocus = string.Empty;
         public string entitiesStudied = string.Empty;
         public string studySettings = string.Empty;
@@ -24,6 +25,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            unabletocode = RenderUnable();
             studyFocus = RenderCategory("A_StudyFocus");
             entitiesStudied = RenderCategory("B_EntitiesStudied");
             studySettings = RenderCategory("C_StudySetting");
@@ -46,7 +48,40 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                 StringBuilder row = new StringBuilder();
                 row.AppendLine("<div class=\"topicitem\">");
-                row.AppendLine("<div class=\"subtitle\"><a name=\""+ catname[1] + "-" + topic.LookUpID.ToString() + "\"> " + topic.SubTitle + "</a></div>");
+                if (topic.SubTitle == null)
+                {
+                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + "" + "\"> " + topic.Title + "</a></div>");
+                }
+                else
+                {
+                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + topic.LookUpID.ToString() + "\"> " + topic.SubTitle + "</a></div>");
+                }
+                row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
+                row.AppendLine("</div>");
+                finalStr.Append(row);
+                //if (count > 0) break;
+                count++;
+            }
+
+            return finalStr.ToString();
+        }
+
+        private string RenderUnable()
+        {
+
+            var db = DBData.GetDataContext();
+            var topics = db.Protocols.Where(p => p.Title.Contains("Unable")).OrderBy(p => p.LookUpID).Select(p => p).ToList();
+            StringBuilder finalStr = new StringBuilder();
+            Response.Write(topics.Count);
+            var count = 1;
+            foreach (var topic in topics)
+            {
+
+                StringBuilder row = new StringBuilder();
+                row.AppendLine("<div class=\"topicitem\">");
+                
+                row.AppendLine("<div class=\"subtitle\"><a name=\"" + "unabletocode" + "" + "" + "\"> " + topic.Title + "</a></div>");
+                
                 row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
                 row.AppendLine("</div>");
                 finalStr.Append(row);
