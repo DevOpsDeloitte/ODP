@@ -40,15 +40,6 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         protected global::System.Web.UI.WebControls.Panel pnl_change_password;
         
         /// <summary>
-        /// valsum_errors control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary valsum_errors;
-        
-        /// <summary>
         /// lbl_new_password control.
         /// </summary>
         /// <remarks>

@@ -42,9 +42,6 @@
                 
                 <div class="login-display">
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
-                        <AnonymousTemplate>
-                            <a href="~/Login.aspx" ID="HeadLoginStatus" runat="server" class="button">Log In</a>
-                        </AnonymousTemplate>
                         <LoggedInTemplate>
                             Welcome <asp:LoginName ID="HeadLoginName" runat="server" />
                             <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>

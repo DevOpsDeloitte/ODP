@@ -149,6 +149,13 @@ namespace ODPTaxonomyWebsite.AccountManagement
             Response.Redirect("EditAccount.aspx");
         }
 
+        protected void lnkbtn_editUser_OnClick(Object sender, EventArgs e)
+        {
+            Session["AM_Action"] = "EDIT";
+            Session["AM_UserName"] = ((LinkButton)sender).CommandArgument.ToString();
+            Response.Redirect("EditAccount.aspx");
+        }
+
         protected void lnkbtn_createAccount_OnClick(object sender, EventArgs e)
         {
             Session["AM_Action"] = "ADD";

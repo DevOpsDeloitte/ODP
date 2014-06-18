@@ -57,9 +57,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <h2><asp:Literal ID="ltl_page_title" runat="server" Text="Edit Account" /></h2>
 
-
-<asp:Label ID="lbl_confirmation_message" runat="server" Visible = "false" Text="User account successfully saved." />
-
 <asp:Label ID="lbl_error_message" CssClass="errorMessage" runat="server" Visible="false" />
 
 <asp:Panel ID="pnl_account" runat="server">
@@ -83,7 +80,7 @@
         </td>
         <td>
             <asp:TextBox ID="txt_firstName" runat="server" />
-            <asp:RequiredFieldValidator ID="reqval_fname" runat="server" Display="Dynamic" CssClass="errorMessage" ControlToValidate="txt_firstname" ErrorMessage="First Name is required." />
+            <asp:RequiredFieldValidator ID="reqval_fname" runat="server" Display="dynamic" CssClass="errorMessage" ControlToValidate="txt_firstname" ErrorMessage="First Name is required." />
         </td>
     </tr>
     <tr>
@@ -118,7 +115,7 @@
     </tr>
     <tr>
         <td valign="top">
-            <asp:Label ID="lbl_roles" runat="server" Text="*Role(s):" />
+            <label>*Role(s):</label>
         </td>
         <td>
             <asp:CheckBox ID="cbx_Admin" runat="server" Text="Admin" onclick="EnableDisableRole('admin')" /><br />
@@ -130,17 +127,19 @@
     </tr>
     <tr>
         <td colspan="2">
-            Password must be:
-            <ul>
-                <li>Minimum of 8 characters.</li>
-                <li>Must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character, and 1 number.</li>
-            </ul>
+            <div class="eight columns view-panel"> 
+                <strong>Password must be:</strong>
+                <ol>
+                    <li>Minimum of 8 characters.</li>
+                    <li>Must contain at least 1 uppercase letter, 1 lowercase letter, 1 special character, and 1 number.</li>
+                </ol>
+            </div>
         </td>
     </tr>
     <tr>
         <td><asp:Label ID="lbl_new_password" runat="server" Text="*Password:" AssociatedControlID="txt_new_password" /></td>
         <td>
-            <asp:TextBox ID="txt_new_password" runat="server" TextMode="Password" MaxLength="50"  />
+            <asp:TextBox ID="txt_new_password" runat="server" TextMode="Password" MaxLength="50" placeholder="********" />
             <asp:RequiredFieldValidator ID="reqval_newPassword" runat="server" ErrorMessage="Password is required." Display="Dynamic" ControlToValidate="txt_new_password"  CssClass="errorMessage" Enabled="false" />
             <asp:RegularExpressionValidator ID="regval_newPassword" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" Display="Dynamic" CssClass="errorMessage" 
                 ErrorMessage="Password does not meet requirements, please enter a new password." ControlToValidate="txt_new_password" />
@@ -149,7 +148,7 @@
     <tr>
         <td><asp:Label ID="lbl_confirm_password" runat="server" Text="*Confirm Password:" AssociatedControlID="txt_confirm_password" /></td>
         <td>
-            <asp:TextBox ID="txt_confirm_password" runat="server" TextMode="Password" MaxLength="50"  />
+            <asp:TextBox ID="txt_confirm_password" runat="server" TextMode="Password" MaxLength="50" placeholder="********" />
             <asp:RequiredFieldValidator ID="reqval_NewPasswordConfirm" runat="server" ErrorMessage="Confirm password is required." Display="Dynamic" ControlToValidate="txt_confirm_password"  CssClass="errorMessage" Enabled="false" />
             <asp:RegularExpressionValidator ID="regval_NewPasswordConfirm" runat="server" ValidationExpression="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*\W).{8,}$" Display="Dynamic" CssClass="errorMessage"
                 ErrorMessage="Password does not meet requirements, please enter a new password." ControlToValidate="txt_confirm_password" />

@@ -16,8 +16,16 @@
         OnRowEditing="gvw_users_OnRowEditing" HeaderStyle-CssClass="persist-header" >
         <Columns>
             <asp:BoundField HeaderText="User ID" DataField="UserName" SortExpression="UserName" />
-            <asp:BoundField HeaderText="First Name" DataField="UserFirstName" SortExpression="UserFirstName" />
-            <asp:BoundField HeaderText="Last Name" DataField="UserLastName" SortExpression="UserLastName" />
+            <asp:TemplateField HeaderText="First Name" SortExpression="UserFirstName">
+                <ItemTemplate>
+                    <asp:LinkButton ID="lnkbtn_editUser_fname" runat="server" CommandArgument='<%#Eval("UserName") %>' Text='<%#Eval("UserFirstName") %>' OnClick="lnkbtn_editUser_OnClick" />
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Last Name" SortExpression="UserLastName">
+                <ItemTemplate>
+                    <asp:LinkButton ID="lnkbtn_editUser_lname" runat="server" CommandArgument='<%#Eval("UserName") %>' Text='<%#Eval("UserLastName") %>' OnClick="lnkbtn_editUser_OnClick" />
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:BoundField HeaderText="Email" DataField="Email"/>
             <asp:TemplateField HeaderText="Active">
                 <ItemTemplate><%# (Boolean.Parse(Eval("IsApproved").ToString())) ? "Yes" : "No" %></ItemTemplate>

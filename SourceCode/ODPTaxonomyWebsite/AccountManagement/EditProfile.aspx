@@ -7,7 +7,7 @@
     Edit Profile</h2>
 <asp:Button ID="btn_change_password" runat="server" CausesValidation="false" OnClick="btn_changePassword_OnClick" class="button" Text="Change Password" />
 
-<asp:Panel ID="pnl_confirmation" runat="server" Visible="false">
+<asp:Panel ID="pnl_confirmation" runat="server" Visible="false" CssClass="Message">
     Profile successfully saved.
 </asp:Panel>
 

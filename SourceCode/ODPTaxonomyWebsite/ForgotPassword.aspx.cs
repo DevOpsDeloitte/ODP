@@ -66,6 +66,7 @@ namespace ODPTaxonomyWebsite
             }
             catch (Exception ex)
             {
+                HandlePageError("Error sending password.");
                 Utils.LogError(ex);
             }
         }

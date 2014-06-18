@@ -32,6 +32,9 @@ namespace ODPTaxonomyWebsite.AccountManagement
                         {
                             // add user; hide userid
                             ltl_page_title.Text = "Create Account";
+                            txt_new_password.Attributes.Remove("placeholder");
+                            txt_confirm_password.Attributes.Remove("placeholder");
+
                             pnl_username.Visible = false;
                             reqval_newPassword.Enabled = true;
                             reqval_NewPasswordConfirm.Enabled = true;
@@ -53,6 +56,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
             }
             catch (Exception ex)
             {
+                HandlePageError("Error occur creating/editing account.");
                 Utils.LogError(ex);
             }
         }
@@ -213,9 +217,8 @@ namespace ODPTaxonomyWebsite.AccountManagement
                         }
                         else
                         {
-                            pnl_account.Visible = false;
-                            lbl_confirmation_message.Text = "Account Created Succesfuly.<br>User ID is: " + l_username;
-                            lbl_confirmation_message.Visible = true;
+                            Session["AM_UserName"] = l_username;
+                            Response.Redirect("EditAccountConfirm.aspx");
                         }
                     }
                     else
@@ -238,6 +241,10 @@ namespace ODPTaxonomyWebsite.AccountManagement
                             MembershipUser updateUser = Membership.GetUser(l_username);
                             updateUser.Email = l_email;
                             updateUser.IsApproved = l_activeYN;
+                            
+                            if (updateUser.IsLockedOut)
+                                updateUser.UnlockUser();
+
                             if (!String.IsNullOrEmpty(l_password)){
                                 updateUser.ChangePassword(updateUser.ResetPassword(), l_password);
                             }
@@ -250,15 +257,15 @@ namespace ODPTaxonomyWebsite.AccountManagement
                             setRoles(cbx_CoderSupervisor, updateUser.UserName, "CoderSupervisor");
                             setRoles(cbx_Coder, updateUser.UserName, "Coder");                          
 
-                            // successfully save
-                            lbl_confirmation_message.Visible = true;
-                            pnl_account.Visible = false; 
+                            // successfully save, redirect to confirm page
+                            Response.Redirect("EditAccountConfirm.aspx");
                         }
                     }
                 }
             }
             catch (Exception ex)
             {
+                lbl_error_message.Text = "Error saving this user account.";
                 Utils.LogError(ex);
             }
         }

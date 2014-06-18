@@ -35,6 +35,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
                 }
                 catch (Exception ex)
                 {
+                    HandlePageError("Error editing profile.");
                     Utils.LogError(ex);
                 }
             }
@@ -79,6 +80,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
             }
             catch (Exception ex)
             {
+                HandlePageError("Error saving profile.");
                 Utils.LogError(ex);
             }
         }

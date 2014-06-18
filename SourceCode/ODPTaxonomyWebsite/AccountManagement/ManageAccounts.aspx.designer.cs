@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ODPTaxonomyWebsite.AccountManagement
-{
-
-
-    public partial class ManageAccounts
-    {
-
+namespace ODPTaxonomyWebsite.AccountManagement {
+    
+    
+    public partial class ManageAccounts {
+        
         /// <summary>
         /// lbl_error_message control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lbl_error_message;
-
+        
         /// <summary>
         /// lnkbtn_create_account control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkbtn_create_account;
-
+        
         /// <summary>
         /// gvw_users control.
         /// </summary>

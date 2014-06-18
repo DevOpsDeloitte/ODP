@@ -22,15 +22,6 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         protected global::System.Web.UI.WebControls.Literal ltl_page_title;
         
         /// <summary>
-        /// lbl_confirmation_message control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_confirmation_message;
-        
-        /// <summary>
         /// lbl_error_message control.
         /// </summary>
         /// <remarks>
@@ -218,15 +209,6 @@ namespace ODPTaxonomyWebsite.AccountManagement {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator cmpval_email;
-        
-        /// <summary>
-        /// lbl_roles control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_roles;
         
         /// <summary>
         /// cbx_Admin control.

@@ -20,8 +20,6 @@
     </ol>
 </div>
 
-<div><asp:ValidationSummary ID="valsum_errors" runat="server" CssClass="errorMessage inline" HeaderText="<strong>Please fix error(s) below:</strong>" /></div>
-
 <table class="form">
     <tr>
         <td><asp:Label ID="lbl_new_password" runat="server" Text="*Password:" AssociatedControlID="txt_new_password" /></td>
