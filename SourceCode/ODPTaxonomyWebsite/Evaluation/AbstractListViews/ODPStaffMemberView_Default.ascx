@@ -3,18 +3,32 @@
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
 <h3>
     View Abstracts</h3>
-      <div class="showingCounts">
+     <div class="showingCounts">
             Showing : 
-            <%  var totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Count;
-                var showing = (AbstractViewGridView.PageIndex+1) * AbstractViewGridView.Rows.Count;
-                if ((AbstractViewGridView.PageIndex + 1) == AbstractViewGridView.PageCount)
+            <%  var totalCount = 0;
+                var showing = 0;
+                var displayCounts = false;
+                try
                 {
-                    showing = totalCount;
+                    totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Count;
+                    showing = (AbstractViewGridView.PageIndex + 1) * AbstractViewGridView.Rows.Count;
+                    if ((AbstractViewGridView.PageIndex + 1) == AbstractViewGridView.PageCount)
+                    {
+                        showing = totalCount;
+                    }
+                    displayCounts = true;
+                }
+                catch (Exception ex)
+                {
+                    
+
                 }
             
             %>
-
-            <span class="showing"><%= showing %></span> of <span class="showing"><%= totalCount %></span>
+            <% if (displayCounts)
+               { %>
+            <span class="showing"><%= showing%></span> of <span class="showing"><%= totalCount%></span>
+            <% } %>
             </div>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
