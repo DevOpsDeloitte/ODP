@@ -48,7 +48,7 @@ h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-al
 .right { float: right; margin: 10px 20px; } .left { float: left; margin: 10px 20px; }
 
 table { -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); background: #fff; width: 100%; }
-table.form { margin-top: 30px; padding: 20px; -webkit-box-shadow: none; background: transparent; box-shadow: none; width: 200%; }
+table.form { margin-top: 30px; padding: 20px; -webkit-box-shadow: none; background: transparent; box-shadow: none; }
 	table.form td:first-child { vertical-align: top; margin: 0; width: 20%; }
 	table.form td.form-button { padding: 0; }
 caption { text-align: left; font-weight: bold; font-size: 17px; padding: 14px 12px; }
