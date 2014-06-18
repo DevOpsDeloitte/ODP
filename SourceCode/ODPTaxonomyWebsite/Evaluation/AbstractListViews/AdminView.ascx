@@ -2,6 +2,19 @@
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
 <h3>
     View Abstracts</h3>
+            <div class="showingCounts">
+            Showing : 
+            <%  var totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Count;
+                var showing = (AbstractViewGridView.PageIndex+1) * AbstractViewGridView.Rows.Count;
+                if ((AbstractViewGridView.PageIndex + 1) == AbstractViewGridView.PageCount)
+                {
+                    showing = totalCount;
+                }
+            
+            %>
+
+            <span class="showing"><%= showing %></span> of <span class="showing"><%= totalCount %></span>
+            </div>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
@@ -29,5 +42,8 @@
         <asp:BoundField HeaderText="F" DataField="F"></asp:BoundField>
         <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
     </Columns>
+    
     <PagerStyle CssClass="PagerContainer" />
 </odp:AbstractGridView>
+
+

@@ -3,6 +3,19 @@
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
 <h3>
     View Open Abstracts</h3>
+      <div class="showingCounts">
+            Showing : 
+            <%  var totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Count;
+                var showing = (AbstractViewGridView.PageIndex+1) * AbstractViewGridView.Rows.Count;
+                if ((AbstractViewGridView.PageIndex + 1) == AbstractViewGridView.PageCount)
+                {
+                    showing = totalCount;
+                }
+            
+            %>
+
+            <span class="showing"><%= showing %></span> of <span class="showing"><%= totalCount %></span>
+            </div>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
         <asp:BoundField DataField="AbstractID" HeaderText="ID" />
