@@ -151,7 +151,7 @@
             <div class="icon open" ng-click="showDescription('studyfocus-0')" ></div>
             <thead>
                     <tr>
-                            <th scope="col" class="question">Topics<div class="icon open" ng-click="showDescription('topics')" ></div></th>
+                            <th scope="col" class="question">Topics<div class="icon open" ng-click="showDescription('topics-0')" ></div></th>
                             <th scope="col" class="answer">A.1 Rationale<div class="icon open" ng-click="showDescription('studyfocuscategory-1')" ></div></th>
                             <th scope="col" class="answer">A.2 Exposure<div class="icon open" ng-click="showDescription('studyfocuscategory-2')" ></div></th>
                             <th scope="col" class="answer">A.3 Outcome<div class="icon open" ng-click="showDescription('studyfocuscategory-3')" ></div></th>

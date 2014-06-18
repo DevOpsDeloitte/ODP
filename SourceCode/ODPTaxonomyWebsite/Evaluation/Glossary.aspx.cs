@@ -29,7 +29,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         protected void Page_Load(object sender, EventArgs e)
         {
             misc = RenderMisc();
-            topics = RenderCategory("Topics");
+            topics = RenderCategory("A_Topics");
             unabletocode = RenderUnable();
             studyFocus = RenderCategory("A_StudyFocus");
             studyFocusCategory = RenderCategory("A_StudyFocusCategory");
