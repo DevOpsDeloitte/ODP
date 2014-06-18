@@ -57,7 +57,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 row.AppendLine("<div class=\"topicitem\">");
                 if (topic.SubTitle == null)
                 {
-                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + "" + "\"> " + topic.Title + "</a></div>");
+                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + "0" + "\"> " + topic.Title + "</a></div>");
                 }
                 else
                 {

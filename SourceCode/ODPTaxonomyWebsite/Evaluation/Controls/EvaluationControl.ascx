@@ -181,7 +181,7 @@
            <table class="bordered zebra-striped" id="study-setting">
 <%--            <caption>C. Study Setting</caption>--%>
             <div class="captionTitle">C. Study Setting</div>
-            <div class="icon open" ng-click="showDescription('studysetting-')" ></div>
+            <div class="icon open" ng-click="showDescription('studysetting-0')" ></div>
             <thead>
 
             </thead>
@@ -194,7 +194,7 @@
            <table class="bordered zebra-striped" id="population-focus">
 <%--            <caption>D. Population Focus</caption>--%>
             <div class="captionTitle">D. Population Focus</div>
-            <div class="icon open" ng-click="showDescription('populationfocus-')" ></div>
+            <div class="icon open" ng-click="showDescription('populationfocus-0')" ></div>
             <thead>
 
             </thead>
@@ -207,7 +207,7 @@
            <table class="bordered zebra-striped" id="study-design-purpose">
 <%--            <caption>E. Study Design/Purpose</caption>--%>
             <div class="captionTitle">E. Study Design/Purpose</div>
-            <div class="icon open" ng-click="showDescription('studydesignpurpose-')" ></div>
+            <div class="icon open" ng-click="showDescription('studydesignpurpose-0')" ></div>
             <thead>
 
             </thead>
@@ -219,7 +219,7 @@
            <table class="bordered zebra-striped" id="prevention-research-category">
 <%--            <caption>F. Prevention Research Category</caption>--%>
             <div class="captionTitle">F. Prevention Research Category</div>
-            <div class="icon open" ng-click="showDescription('preventioncategoryresearch-')" ></div>
+            <div class="icon open" ng-click="showDescription('preventioncategory-0')" ></div>
             <thead>
 
             </thead>
