@@ -11,6 +11,22 @@
     display: table;
     padding: 8px;
 }
+table.form input 
+{ 
+        display: inline-block;
+}
+table.form .errorMessage
+{
+    background: #F3A2A2;
+    border: 1px solid;
+    color: #030303;
+    display: table;
+    margin: 0;
+    padding: 8px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 .errorMessage.inline
 {    
     margin: initial;
