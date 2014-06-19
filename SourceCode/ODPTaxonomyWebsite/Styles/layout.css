@@ -105,7 +105,7 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 .has-file .scan-file { position: absolute; top: 0; right: 0; background: #2F557C; padding: 3px; }
 .pager-size-wrapper { text-align: right; }
 .title-wrapper { padding-right: 12px; }
-.title-wrapper a { text-transform: lowercase; }
+/* .title-wrapper a { text-transform: uppercase; } */
 
 #toggle-unanswered:hover { background: #24AA7A; }
 #toggle-unanswered.active { background: #1B7E5A; color: #FFF; }
