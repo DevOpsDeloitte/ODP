@@ -155,6 +155,8 @@ tr.PagerContainer td, .zebra-striped tbody tr.PagerContainer table tr:nth-child(
 { border: none; background: #AFAFAF; color: #fff; margin: 2px; border: 1px solid #E0DFDF; }
 tr.pagination td a, tr.PagerContainer td a { font-weight: bold; color: #fff; }
 
+div.showingCounts { float: right; background: #AFAFAF; color: #FFF; font-weight: bold; margin: 10px 0; border: 1px solid #E0DFDF; padding: 8px 20px; }
+
 /* #Media Queries
 ================================================== */
 	/* Smaller than standard 960 (devices and browsers) */
