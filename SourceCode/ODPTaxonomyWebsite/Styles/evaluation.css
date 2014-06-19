@@ -41,28 +41,31 @@ span.titles
     height: 5px;
     border-bottom: 0px solid #ccc;
 }
-    
 
 div.captionTitle
 {
     display: inline-block;
     font-weight: bold;
     text-align: left;
-font-weight: bold;
-font-size: 17px;
-padding: 14px 0px;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 14px 0px;
 }
 
 div.icon.open
 {
     width: 16px;
     height: 16px;
-    background: #E9E9E9;
+    background: #FFFFFF;
     display:inline-block;
-    margin: 0px 0px 0px 10px;
-    position: relative;
-    border: 1px solid #ccc;
+    border: 1px solid #E0E0E0;
     cursor: pointer;
+    position: relative;
+    margin-left: 4px;
+}
+.subtitle div.icon.open, .captionTitle + div.icon.open, th.question div.icon.open, th.answer div.icon.open
+{
+    top: 3px;
 }
 div.icon.open:before
 {
@@ -72,24 +75,27 @@ div.icon.open:before
     top: -1px;
     left: 4px;
     font-size: 11px;
+    color: #BDBABA;
 }
 
 div.commentsHeader
 {
+    text-align: left;
+    font-size: 17px;
     font-weight: bold;
-    padding: 10px 0px 10px 0px;
-    border-bottom: 1px solid #ccc;
-    border-top: 1px solid #ccc;
+    padding: 14px 0px;
     
 }
 
 div.subnav
 {
     position: fixed;
-    top: 40px;
-   right: 40px;
-    width: 700px;
-    z-index: 99901;
+    top: 60px;
+    width: 100%;
+    z-index: 999;
+    background: rgba(196, 196, 196, 0.5);
+    height: 40px;
+    right: 0;
 
 }
 
@@ -97,15 +103,18 @@ div.subnav ul
 {
     position: absolute;
     right: 10px;
+    top: -6px;
+    margin: 0;
 }
 
 div.subnav input, div.subnav li
 {
-    width:150px;
     display:inline-block;
     
 }
-
+.container div.subnav .button {
+    padding: 4px 8px;
+}
 table tbody th.box-three.big, table tbody td.box-three.big
 {
     width: 55%;
@@ -138,8 +147,13 @@ div.debugWindow
 
 textarea#comments
 {
-    width: 851px;
-    height: 105px;
+    width: 100%;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1);
+    border: solid 1px #DDD;
 }
 
 div.select-box {
