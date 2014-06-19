@@ -42,8 +42,8 @@
       <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Status" Member="Status1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
       <Association Name="tbl_Status_tbl_A_StudyFocus" Member="tbl_A_StudyFocus" Storage="_A_StudyFocus" ThisKey="StatusID" OtherKey="StatusID" Type="tbl_A_StudyFocus" />
-      <Association Name="tbl_Status_tbl_Submission" Member="Submissions" ThisKey="StatusID" OtherKey="StatusID" Type="tbL_Submission" />
-      <Association Name="tbl_Status_tbl_Submission1" Member="tbL_Submissions" Storage="_tbl_Submissions" ThisKey="StatusID" OtherKey="StatusID" Type="tbL_Submission" />
+      <Association Name="tbl_Status_tbL_Submission" Member="Submissions" ThisKey="StatusID" OtherKey="StatusID" Type="tbL_Submission" />
+      <Association Name="tbl_Status_tbL_Submission1" Member="tbL_Submissions" Storage="_tbl_Submissions" ThisKey="StatusID" OtherKey="StatusID" Type="tbL_Submission" />
     </Type>
   </Table>
   <Table Name="dbo.aspnet_Roles" Member="tbl_aspnet_Roles">
@@ -113,7 +113,7 @@
       <Association Name="tbl_Evaluation_tbl_AbstractScan" Member="tbl_AbstractScans" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_AbstractScan" />
       <Association Name="tbl_Evaluation_tbl_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_AbstractStatusChangeHistory" />
       <Association Name="tbl_Evaluation_tbl_AbstractStatusChangeHistory1" Member="tbl_AbstractStatusChangeHistories" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_AbstractStatusChangeHistory" />
-      <Association Name="tbl_Evaluation_tbl_Submission" Member="tbL_Submissions" Storage="_tbl_Submissions" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbL_Submission" />
+      <Association Name="tbl_Evaluation_tbL_Submission" Member="tbL_Submissions" Storage="_tbl_Submissions" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbL_Submission" />
       <Association Name="tbl_Team_tbl_Evaluation" Member="tbl_Team" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Team" IsForeignKey="true" />
       <Association Name="tbl_EvaluationType_tbl_Evaluation" Member="tbl_EvaluationType" ThisKey="EvaluationTypeId" OtherKey="EvaluationTypeId" Type="tbl_EvaluationType" IsForeignKey="true" />
       <Association Name="tbl_Abstract_tbl_Evaluation" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
@@ -222,9 +222,9 @@
       <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="UpdatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
       <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Evaluation_tbl_Submission" Member="tbl_Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_Evaluation" IsForeignKey="true" />
-      <Association Name="tbl_Status_tbl_Submission" Member="tbl_Status" ThisKey="StatusID" OtherKey="StatusID" Type="tbl_Status" IsForeignKey="true" />
-      <Association Name="tbl_Status_tbl_Submission1" Member="tbl_Status1" ThisKey="StatusID" OtherKey="StatusID" Type="tbl_Status" IsForeignKey="true" />
+      <Association Name="tbl_Evaluation_tbL_Submission" Member="tbl_Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_Evaluation" IsForeignKey="true" />
+      <Association Name="tbl_Status_tbL_Submission" Member="tbl_Status" ThisKey="StatusID" OtherKey="StatusID" Type="tbl_Status" IsForeignKey="true" />
+      <Association Name="tbl_Status_tbL_Submission1" Member="tbl_Status1" ThisKey="StatusID" OtherKey="StatusID" Type="tbl_Status" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.select_abstracts_coding_tt" Method="select_abstracts_coding_tt">
@@ -239,5 +239,9 @@
     <ElementType Name="select_abstract_status_ttResult">
       <Column Name="AbstractStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.KappaUserIdentify_Insert_ByTeamID" Method="KappaUserIdentify_Insert_ByTeamID">
+    <Parameter Name="TeamID" Parameter="teamID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

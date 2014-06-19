@@ -262,6 +262,13 @@ namespace ODPTaxonomyDAL_TT
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
 			return ((ISingleResult<select_abstract_status_ttResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.KappaUserIdentify_Insert_ByTeamID")]
+		public int KappaUserIdentify_Insert_ByTeamID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TeamID", DbType="Int")] System.Nullable<int> teamID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), teamID);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Users")]
@@ -1074,7 +1081,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_Submission", Storage="_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbL_Submission", Storage="_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
 		public EntitySet<tbL_Submission> Submissions
 		{
 			get
@@ -1087,7 +1094,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_Submission1", Storage="_tbl_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbL_Submission1", Storage="_tbl_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
 		public EntitySet<tbL_Submission> tbL_Submissions
 		{
 			get
@@ -2609,7 +2616,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_tbl_Submission", Storage="_tbl_Submissions", ThisKey="EvaluationId", OtherKey="EvaluationId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_tbL_Submission", Storage="_tbl_Submissions", ThisKey="EvaluationId", OtherKey="EvaluationId")]
 		public EntitySet<tbL_Submission> tbL_Submissions
 		{
 			get
@@ -5015,7 +5022,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_tbl_Submission", Storage="_tbl_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_tbL_Submission", Storage="_tbl_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
 		public tbl_Evaluation tbl_Evaluation
 		{
 			get
@@ -5049,7 +5056,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_Submission", Storage="_tbl_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbL_Submission", Storage="_tbl_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
 		public tbl_Status tbl_Status
 		{
 			get
@@ -5083,7 +5090,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_Submission1", Storage="_tbl_Status1", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbL_Submission1", Storage="_tbl_Status1", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
 		public tbl_Status tbl_Status1
 		{
 			get
