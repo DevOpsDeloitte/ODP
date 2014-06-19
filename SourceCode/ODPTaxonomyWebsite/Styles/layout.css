@@ -105,7 +105,7 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 .has-file .scan-file { position: absolute; top: 0; right: 0; background: #2F557C; padding: 3px; }
 .pager-size-wrapper { text-align: right; }
 .title-wrapper { padding-right: 12px; }
-.title-wrapper a { text-transform: lowercase; }
+/* .title-wrapper a { text-transform: uppercase; } */
 
 #toggle-unanswered:hover { background: #24AA7A; }
 #toggle-unanswered.active { background: #1B7E5A; color: #FFF; }
@@ -154,6 +154,8 @@ tr.pagination td, .zebra-striped tbody tr.pagination table tr:nth-child(odd) td,
 tr.PagerContainer td, .zebra-striped tbody tr.PagerContainer table tr:nth-child(odd) td
 { border: none; background: #AFAFAF; color: #fff; margin: 2px; border: 1px solid #E0DFDF; }
 tr.pagination td a, tr.PagerContainer td a { font-weight: bold; color: #fff; }
+
+div.showingCounts { float: right; background: #AFAFAF; color: #FFF; font-weight: bold; margin: 10px 0; border: 1px solid #E0DFDF; padding: 8px 20px; }
 
 /* #Media Queries
 ================================================== */
