@@ -31,7 +31,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         if ($scope.mdata.consensusalreadystarted) {
             $scope.errormessagesdisplay = "Consensus already started!";
         }
-        
+
 
         $scope.mdata.abstractid = $("input#abstractid").val();
         //console.log(" is unable : " + $scope.mdata.isunable);
@@ -85,12 +85,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         }
 
         $scope.startConsensus = function () {
-//            if (!$scope.mdata.consensusalreadystarted) {
-                window.location.replace($scope.cleanURL(window.location.href) + "?startConsenus=true");
-//            }
-//            else {
-//                $scope.errormessagesdisplay = "Consensus Already started!";
-//            }
+            //            if (!$scope.mdata.consensusalreadystarted) {
+            window.location.replace($scope.cleanURL(window.location.href) + "?startConsenus=true");
+            //            }
+            //            else {
+            //                $scope.errormessagesdisplay = "Consensus Already started!";
+            //            }
 
         };
 
@@ -322,6 +322,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         for (i = 1; i < $scope.mdata.preventioncategory.length; i++) {
             $scope.mdata.preventioncategory[i].resetBox();
         }
+
+        // reset unable to code & super username / password.
+        $scope.mdata.superusername = "";
+        $scope.mdata.superpassword = "";
+        $scope.mdata.unabletocode = false;
 
         $scope.$apply();
 

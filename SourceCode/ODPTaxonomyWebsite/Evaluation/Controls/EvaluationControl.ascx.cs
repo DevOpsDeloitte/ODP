@@ -305,7 +305,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             string startComparison = string.IsNullOrEmpty(Request.QueryString["startComparison"]) ? "" : Request.QueryString["startComparison"];
             bool startC = startComparison == "true" ? true : false;
             var eval = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).FirstOrDefault();
-            if (abschhistconsensuses.Count == 2 && !abschhistcomparisons && !startC && eval.ConsensusStartedBy == UserId && SubmissionTypeId == 4)
+            if (abschhistconsensuses.Count == 2 && !abschhistcomparisons && !startC && eval.ConsensusStartedBy == UserId && (SubmissionTypeId == 4 || SubmissionTypeId == 3))
             {
                 this.showComparisonButton = true;
             }
