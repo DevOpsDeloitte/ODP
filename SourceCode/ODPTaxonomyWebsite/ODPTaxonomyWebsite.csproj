@@ -59,6 +59,7 @@
     <Content Include="404-error.html" />
     <Content Include="AccountManagement\ChangePassword.aspx" />
     <Content Include="AccountManagement\EditAccount.aspx" />
+    <Content Include="AccountManagement\EditAccountConfirm.aspx" />
     <Content Include="AccountManagement\EditProfile.aspx" />
     <Content Include="AccountManagement\ManageAccounts.aspx" />
     <Content Include="bin\ODPTaxonomyAccountDAL.dll" />
@@ -97,6 +98,8 @@
     <Content Include="Libraries\Newtonsoft.Json.xml" />
     <Content Include="Login.aspx" />
     <Content Include="notes\notesFor_16_CoderEvaluation_10.xml" />
+    <Content Include="Scripts\alertify.js" />
+    <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-csp.css" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
@@ -132,6 +135,12 @@
     <Content Include="Styles\line\tax.css" />
     <Content Include="Styles\line\yellow.css" />
     <Content Include="Styles\line\_all.css" />
+    <Content Include="Styles\OpenSans-Bold-demo.html" />
+    <Content Include="Styles\OpenSans-Bold-webfont.svg" />
+    <Content Include="Styles\OpenSans-Regular-webfont.svg" />
+    <Content Include="Styles\OpenSans-Semibold-demo.html" />
+    <Content Include="Styles\OpenSans-Semibold-webfont.svg" />
+    <Content Include="Styles\print.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
@@ -164,6 +173,13 @@
     </Compile>
     <Compile Include="AccountManagement\EditAccount.aspx.designer.cs">
       <DependentUpon>EditAccount.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AccountManagement\EditAccountConfirm.aspx.cs">
+      <DependentUpon>EditAccountConfirm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AccountManagement\EditAccountConfirm.aspx.designer.cs">
+      <DependentUpon>EditAccountConfirm.aspx</DependentUpon>
     </Compile>
     <Compile Include="AccountManagement\EditProfile.aspx.cs">
       <DependentUpon>EditProfile.aspx</DependentUpon>
@@ -432,12 +448,22 @@
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
     <Content Include="Print.Master" />
+    <None Include="Properties\PublishProfiles\ODPTaxonomy.pubxml" />
     <None Include="Scripts\angular\.bower.json" />
     <None Include="Scripts\angular\angular.min.js.gzip" />
     <None Include="Scripts\angular\angular.min.js.map" />
     <None Include="Scripts\angular\bower.json" />
     <None Include="Scripts\angular\README.md" />
-    <None Include="Scripts\README.md" />
+    <None Include="Styles\AbstractListView.css.orig" />
+    <None Include="Styles\OpenSans-Bold-webfont.eot" />
+    <None Include="Styles\OpenSans-Bold-webfont.ttf" />
+    <None Include="Styles\OpenSans-Bold-webfont.woff" />
+    <None Include="Styles\OpenSans-Regular-webfont.eot" />
+    <None Include="Styles\OpenSans-Regular-webfont.ttf" />
+    <None Include="Styles\OpenSans-Regular-webfont.woff" />
+    <None Include="Styles\OpenSans-Semibold-webfont.eot" />
+    <None Include="Styles\OpenSans-Semibold-webfont.ttf" />
+    <None Include="Styles\OpenSans-Semibold-webfont.woff" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
