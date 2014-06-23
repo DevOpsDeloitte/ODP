@@ -196,9 +196,11 @@ div.coder3
 div.comparisoncbox
 {
     position: absolute;
-    width: 10px;
+    width: 25px;
     height: 10px;
     top: 0px;
+    text-align: left;
+    font-size: 11px;
 }
 
 div.ccoder
