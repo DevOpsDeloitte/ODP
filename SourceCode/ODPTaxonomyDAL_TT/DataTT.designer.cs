@@ -45,9 +45,6 @@ namespace ODPTaxonomyDAL_TT
     partial void Inserttbl_Status(tbl_Status instance);
     partial void Updatetbl_Status(tbl_Status instance);
     partial void Deletetbl_Status(tbl_Status instance);
-    partial void Inserttbl_aspnet_Role(tbl_aspnet_Role instance);
-    partial void Updatetbl_aspnet_Role(tbl_aspnet_Role instance);
-    partial void Deletetbl_aspnet_Role(tbl_aspnet_Role instance);
     partial void Inserttbl_aspnet_Membership(tbl_aspnet_Membership instance);
     partial void Updatetbl_aspnet_Membership(tbl_aspnet_Membership instance);
     partial void Deletetbl_aspnet_Membership(tbl_aspnet_Membership instance);
@@ -81,6 +78,9 @@ namespace ODPTaxonomyDAL_TT
     partial void InserttbL_Submission(tbL_Submission instance);
     partial void UpdatetbL_Submission(tbL_Submission instance);
     partial void DeletetbL_Submission(tbL_Submission instance);
+    partial void Inserttbl_aspnet_Role(tbl_aspnet_Role instance);
+    partial void Updatetbl_aspnet_Role(tbl_aspnet_Role instance);
+    partial void Deletetbl_aspnet_Role(tbl_aspnet_Role instance);
     #endregion
 		
 		public DataDataContext() : 
@@ -150,14 +150,6 @@ namespace ODPTaxonomyDAL_TT
 			get
 			{
 				return this.GetTable<tbl_Status>();
-			}
-		}
-		
-		public System.Data.Linq.Table<tbl_aspnet_Role> tbl_aspnet_Roles
-		{
-			get
-			{
-				return this.GetTable<tbl_aspnet_Role>();
 			}
 		}
 		
@@ -249,6 +241,14 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
+		public System.Data.Linq.Table<tbl_aspnet_Role> tbl_aspnet_Roles
+		{
+			get
+			{
+				return this.GetTable<tbl_aspnet_Role>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
 		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StudyFocusID", DbType="Int")] System.Nullable<int> studyFocusID)
 		{
@@ -261,6 +261,13 @@ namespace ODPTaxonomyDAL_TT
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
 			return ((ISingleResult<select_abstract_status_ttResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.KappaUserIdentify_Insert_ByTeamID")]
+		public int KappaUserIdentify_Insert_ByTeamID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TeamID", DbType="Int")] System.Nullable<int> teamID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), teamID);
+			return ((int)(result.ReturnValue));
 		}
 	}
 	
@@ -691,7 +698,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_Role", ThisKey="RoleId", OtherKey="RoleId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_Role", ThisKey="RoleId", OtherKey="RoleId", IsForeignKey=true)]
 		public tbl_aspnet_Role tbl_aspnet_Role
 		{
 			get
@@ -1074,7 +1081,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_Submission", Storage="_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbL_Submission", Storage="_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
 		public EntitySet<tbL_Submission> Submissions
 		{
 			get
@@ -1087,7 +1094,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_Submission1", Storage="_tbl_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbL_Submission1", Storage="_tbl_Submissions", ThisKey="StatusID", OtherKey="StatusID")]
 		public EntitySet<tbL_Submission> tbL_Submissions
 		{
 			get
@@ -1154,192 +1161,6 @@ namespace ODPTaxonomyDAL_TT
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Status1 = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Roles")]
-	public partial class tbl_aspnet_Role : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private System.Guid _ApplicationId;
-		
-		private System.Guid _RoleId;
-		
-		private string _RoleName;
-		
-		private string _LoweredRoleName;
-		
-		private string _Description;
-		
-		private EntitySet<tbl_aspnet_UsersInRole> _tbl_aspnet_UsersInRoles;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnApplicationIdChanging(System.Guid value);
-    partial void OnApplicationIdChanged();
-    partial void OnRoleIdChanging(System.Guid value);
-    partial void OnRoleIdChanged();
-    partial void OnRoleNameChanging(string value);
-    partial void OnRoleNameChanged();
-    partial void OnLoweredRoleNameChanging(string value);
-    partial void OnLoweredRoleNameChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    #endregion
-		
-		public tbl_aspnet_Role()
-		{
-			this._tbl_aspnet_UsersInRoles = new EntitySet<tbl_aspnet_UsersInRole>(new Action<tbl_aspnet_UsersInRole>(this.attach_tbl_aspnet_UsersInRoles), new Action<tbl_aspnet_UsersInRole>(this.detach_tbl_aspnet_UsersInRoles));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
-		public System.Guid ApplicationId
-		{
-			get
-			{
-				return this._ApplicationId;
-			}
-			set
-			{
-				if ((this._ApplicationId != value))
-				{
-					this.OnApplicationIdChanging(value);
-					this.SendPropertyChanging();
-					this._ApplicationId = value;
-					this.SendPropertyChanged("ApplicationId");
-					this.OnApplicationIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
-		public System.Guid RoleId
-		{
-			get
-			{
-				return this._RoleId;
-			}
-			set
-			{
-				if ((this._RoleId != value))
-				{
-					this.OnRoleIdChanging(value);
-					this.SendPropertyChanging();
-					this._RoleId = value;
-					this.SendPropertyChanged("RoleId");
-					this.OnRoleIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string RoleName
-		{
-			get
-			{
-				return this._RoleName;
-			}
-			set
-			{
-				if ((this._RoleName != value))
-				{
-					this.OnRoleNameChanging(value);
-					this.SendPropertyChanging();
-					this._RoleName = value;
-					this.SendPropertyChanged("RoleName");
-					this.OnRoleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoweredRoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
-		public string LoweredRoleName
-		{
-			get
-			{
-				return this._LoweredRoleName;
-			}
-			set
-			{
-				if ((this._LoweredRoleName != value))
-				{
-					this.OnLoweredRoleNameChanging(value);
-					this.SendPropertyChanging();
-					this._LoweredRoleName = value;
-					this.SendPropertyChanged("LoweredRoleName");
-					this.OnLoweredRoleNameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(256)")]
-		public string Description
-		{
-			get
-			{
-				return this._Description;
-			}
-			set
-			{
-				if ((this._Description != value))
-				{
-					this.OnDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_UsersInRoles", ThisKey="RoleId", OtherKey="RoleId")]
-		public EntitySet<tbl_aspnet_UsersInRole> tbl_aspnet_UsersInRoles
-		{
-			get
-			{
-				return this._tbl_aspnet_UsersInRoles;
-			}
-			set
-			{
-				this._tbl_aspnet_UsersInRoles.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_aspnet_UsersInRoles(tbl_aspnet_UsersInRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_aspnet_Role = this;
-		}
-		
-		private void detach_tbl_aspnet_UsersInRoles(tbl_aspnet_UsersInRole entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_aspnet_Role = null;
 		}
 	}
 	
@@ -2609,7 +2430,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_tbl_Submission", Storage="_tbl_Submissions", ThisKey="EvaluationId", OtherKey="EvaluationId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_tbL_Submission", Storage="_tbl_Submissions", ThisKey="EvaluationId", OtherKey="EvaluationId")]
 		public EntitySet<tbL_Submission> tbL_Submissions
 		{
 			get
@@ -5015,7 +4836,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_tbl_Submission", Storage="_tbl_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Evaluation_tbL_Submission", Storage="_tbl_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
 		public tbl_Evaluation tbl_Evaluation
 		{
 			get
@@ -5049,7 +4870,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_Submission", Storage="_tbl_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbL_Submission", Storage="_tbl_Status", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
 		public tbl_Status tbl_Status
 		{
 			get
@@ -5083,7 +4904,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbl_Submission1", Storage="_tbl_Status1", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Status_tbL_Submission1", Storage="_tbl_Status1", ThisKey="StatusID", OtherKey="StatusID", IsForeignKey=true)]
 		public tbl_Status tbl_Status1
 		{
 			get
@@ -5135,6 +4956,216 @@ namespace ODPTaxonomyDAL_TT
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Roles")]
+	public partial class tbl_aspnet_Role : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _ApplicationId;
+		
+		private System.Guid _RoleId;
+		
+		private string _RoleName;
+		
+		private string _LoweredRoleName;
+		
+		private string _Description;
+		
+		private string _DisplayRoleName;
+		
+		private EntitySet<tbl_aspnet_UsersInRole> _tbl_aspnet_UsersInRoles;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnApplicationIdChanging(System.Guid value);
+    partial void OnApplicationIdChanged();
+    partial void OnRoleIdChanging(System.Guid value);
+    partial void OnRoleIdChanged();
+    partial void OnRoleNameChanging(string value);
+    partial void OnRoleNameChanged();
+    partial void OnLoweredRoleNameChanging(string value);
+    partial void OnLoweredRoleNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnDisplayRoleNameChanging(string value);
+    partial void OnDisplayRoleNameChanged();
+    #endregion
+		
+		public tbl_aspnet_Role()
+		{
+			this._tbl_aspnet_UsersInRoles = new EntitySet<tbl_aspnet_UsersInRole>(new Action<tbl_aspnet_UsersInRole>(this.attach_tbl_aspnet_UsersInRoles), new Action<tbl_aspnet_UsersInRole>(this.detach_tbl_aspnet_UsersInRoles));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid ApplicationId
+		{
+			get
+			{
+				return this._ApplicationId;
+			}
+			set
+			{
+				if ((this._ApplicationId != value))
+				{
+					this.OnApplicationIdChanging(value);
+					this.SendPropertyChanging();
+					this._ApplicationId = value;
+					this.SendPropertyChanged("ApplicationId");
+					this.OnApplicationIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid RoleId
+		{
+			get
+			{
+				return this._RoleId;
+			}
+			set
+			{
+				if ((this._RoleId != value))
+				{
+					this.OnRoleIdChanging(value);
+					this.SendPropertyChanging();
+					this._RoleId = value;
+					this.SendPropertyChanged("RoleId");
+					this.OnRoleIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string RoleName
+		{
+			get
+			{
+				return this._RoleName;
+			}
+			set
+			{
+				if ((this._RoleName != value))
+				{
+					this.OnRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._RoleName = value;
+					this.SendPropertyChanged("RoleName");
+					this.OnRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoweredRoleName", DbType="NVarChar(256) NOT NULL", CanBeNull=false)]
+		public string LoweredRoleName
+		{
+			get
+			{
+				return this._LoweredRoleName;
+			}
+			set
+			{
+				if ((this._LoweredRoleName != value))
+				{
+					this.OnLoweredRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._LoweredRoleName = value;
+					this.SendPropertyChanged("LoweredRoleName");
+					this.OnLoweredRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(256)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DisplayRoleName", DbType="NVarChar(256)")]
+		public string DisplayRoleName
+		{
+			get
+			{
+				return this._DisplayRoleName;
+			}
+			set
+			{
+				if ((this._DisplayRoleName != value))
+				{
+					this.OnDisplayRoleNameChanging(value);
+					this.SendPropertyChanging();
+					this._DisplayRoleName = value;
+					this.SendPropertyChanged("DisplayRoleName");
+					this.OnDisplayRoleNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_UsersInRoles", ThisKey="RoleId", OtherKey="RoleId")]
+		public EntitySet<tbl_aspnet_UsersInRole> tbl_aspnet_UsersInRoles
+		{
+			get
+			{
+				return this._tbl_aspnet_UsersInRoles;
+			}
+			set
+			{
+				this._tbl_aspnet_UsersInRoles.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_aspnet_UsersInRoles(tbl_aspnet_UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_aspnet_Role = this;
+		}
+		
+		private void detach_tbl_aspnet_UsersInRoles(tbl_aspnet_UsersInRole entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_aspnet_Role = null;
 		}
 	}
 	

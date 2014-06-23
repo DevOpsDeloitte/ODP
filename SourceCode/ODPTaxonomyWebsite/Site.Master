@@ -38,12 +38,16 @@
         <div id="header_container">
             <div class="header">
             <h1>ODP Taxonomy</h1>
-                <a href="#" id="showLeftPush" class="button" runat="server">Menu</a>
+                <a href="#" id="showLeftPush" class="button" runat="server">Menu
+                  
+                </a>
                 
-                <div class="login-display">
+                &nbsp;<div class="login-display">
+                <asp:Label ID="lbl_role" runat="server" Visible="false" CssClass="role-display"></asp:Label>
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <LoggedInTemplate>
                             Welcome <asp:LoginName ID="HeadLoginName" runat="server" />
+                            
                             <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
                         </LoggedInTemplate>
                     </asp:LoginView>
