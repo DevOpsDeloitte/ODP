@@ -91,6 +91,21 @@ namespace ODPTaxonomyDAL_TT
             return isStopped;
         }
 
+        public static string GetDisplayRoleName(string connString, string roleName)
+        {
+            string displayRoleName = null;
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = from r in db.tbl_aspnet_Roles
+                              where r.RoleName == roleName
+                              select r.DisplayRoleName;
+                displayRoleName = matches.FirstOrDefault();
+            }
+
+            return displayRoleName;
+        }
+
+
         public static bool OdpMemberIsAllowedToCode(string connString, int abstractId, int teamTypeID, int evaluationTypeId, Guid userId)
         {
             bool isAllowed = false;

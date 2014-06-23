@@ -49,6 +49,15 @@ namespace ODPTaxonomyWebsite {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor showLeftPush;
         
         /// <summary>
+        /// lbl_role control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_role;
+        
+        /// <summary>
         /// HeadLoginView control.
         /// </summary>
         /// <remarks>
