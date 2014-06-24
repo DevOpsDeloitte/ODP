@@ -40,9 +40,9 @@
                 <a href="#" id="showLeftPush" class="button" runat="server">Menu
                   
                 </a>
-                
-                &nbsp;<div class="login-display">
                 <asp:Label ID="lbl_role" runat="server" Visible="false" CssClass="role-display"></asp:Label>
+                &nbsp;<div class="login-display">
+                
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <LoggedInTemplate>
                             Welcome <asp:LoginName ID="HeadLoginName" runat="server" />
