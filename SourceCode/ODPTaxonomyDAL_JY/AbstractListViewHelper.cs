@@ -64,7 +64,7 @@ namespace ODPTaxonomyDAL_JY
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
                 ParentAbstracts[i].GetSubmissionData(SubmissionTypeEnum.CODER_CONSENSUS);
-                ParentAbstracts[i].GetAbstractScan();
+                ParentAbstracts[i].GetAbstractScan(AbstractView);
 
                 // gets all kappa data for abstract
                 var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);

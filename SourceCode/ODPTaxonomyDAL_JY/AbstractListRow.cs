@@ -156,16 +156,28 @@ namespace ODPTaxonomyDAL_JY
 
         }
 
-        public void GetAbstractScan()
+        public void GetAbstractScan(AbstractViewRole AbstractViewRole)
         {
             if (this.EvaluationID != null)
             {
                 string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
                 DataJYDataContext db = new DataJYDataContext(connStr);
 
-                this.AbstractScan = (from s in db.AbstractScans
-                                     where s.EvaluationId == this.EvaluationID
-                                     select s.FileName).FirstOrDefault();
+                if (this.AbstractStatusID >= 6 && AbstractViewRole.CoderSupervisor == AbstractViewRole)
+                {
+                    this.AbstractScan = "file_exists";
+                }
+
+                if (this.AbstractStatusID >= 12 && (AbstractViewRole.ODPStaff == AbstractViewRole || AbstractViewRole.ODPSupervisor == AbstractViewRole))
+                {
+                    this.AbstractScan = "file_exists";
+                }
+                
+
+
+                //this.AbstractScan = (from s in db.AbstractScans
+                //                     where s.EvaluationId == this.EvaluationID
+                //                     select s.FileName).FirstOrDefault();
             }
         }
     }
