@@ -36,8 +36,10 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    <i id="printButton" class="fa fa-print  stick-right"> Print</i>
-    <i id="closeButton" class="stick-right2">&#10006; Close</i>
+    <div class="buttons">
+    <i id="printButton" class="fa fa-print stick-right button"> Print</i>
+    <i id="closeButton" class="stick-right2 button">&#10006; Close</i>
+    </div>
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
   
         </asp:ContentPlaceHolder>

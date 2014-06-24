@@ -3,12 +3,9 @@
 
 	<!-- CSS
   ================================================== -->
-	<link rel="stylesheet" href="../styles/base.css">
-	<link rel="stylesheet" href="../styles/skeleton.css">
-	<link rel="stylesheet" href="../styles/layout.css">
-    <link rel="stylesheet" href="../styles/alertify.css">    
-    <link rel="stylesheet" href="../styles/line/tax.css">
-    <link href="../styles/evaluation.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/alertify.css">    
+  <link rel="stylesheet" href="../styles/line/tax.css">
+
 
 	<!-- Favicons
 	================================================== -->
@@ -20,18 +17,11 @@
    // $scope.mdata.formmode = "<%= FormMode %>"
 </script>
 
-<div class="container" ng-controller="ODPFormCtrl">
+<div class="container" id="tax-form" ng-controller="ODPFormCtrl">
 
     <div class="sixteen columns header"> 
-        <h1 class="center">Prevention Taxonomy Form</h1>
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN (TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
-         <span class="subtitle">
-        <div class="specs">
-            General Instructions<div class="icon open" ng-click="showDescription('generalinstructions')" ></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            Background<div class="icon open" ng-click="showDescription('background')" ></div>
-        </div>
-        </span>
     </div>
 
     <div class="subnav" ng-cloak>
@@ -42,6 +32,7 @@
             <li><a href="#population-focus">Population focus</a></li>
             <li><a href="#study-design-purpose">Study Design/Purpose</a></li>
             <li><a href="#prevention-research-category">Prevention Research Category</a></li>-->
+
             <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
             <li><input class="button yes" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
             <li ng-show="showResetButton"><input class="button yes" type="button" id="resetButton" value="Reset" ng-click="resetFormStart()" /></li>
@@ -123,22 +114,27 @@
              <span class="titles">User ID :</span>
              <span class="titlevals"><%= userName %></span>
          </div>  
-            <div class="ruler" />
-     </div>
+     
 
-       <div class="sixteen columns">
+       <div class="sixteen columns tax-form-buttons">
           
-           <div class="unableCodeBox">
-             <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
-             <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
-                <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
-                <div>
-                <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
+          <div class="tax-form-buttons-box">
+            <div class="unableCodeBox button">              
+              <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
+                
+              <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
                     <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
                     <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
-                </div>
+              </div>
+              <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
+              <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
             
-                </div>
+            </div>
+          </div>
+
+            <div class="specs">
+            <span class="button">General Instructions<div class="icon open" ng-click="showDescription('generalinstructions')" ></div></span>
+            <span class="button">Background<div class="icon open" ng-click="showDescription('background')" ></div></span>
             </div>
         </div>
     

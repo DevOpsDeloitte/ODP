@@ -77,7 +77,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
         $scope.showDescription = function (inID) {
             //console.log("show description.." + inID);
-            window.open("./Glossary.aspx#" + inID, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=600, height=400");
+            window.open("./Glossary.aspx#" + inID, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, width=768, height=700");
         };
 
         $scope.cleanURL = function (instr) {
@@ -102,7 +102,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
         $scope.printAbstract = function () {
             //console.log("print abstract :: " + window.location.href);
-            window.open("./PrintAbstract.aspx?id=" + $scope.mdata.abstractid, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=1200, height=700");
+            window.open("./PrintAbstract.aspx?id=" + $scope.mdata.abstractid, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, width=768, height=700");
         };
 
         $scope.$watch("mdata", function () {

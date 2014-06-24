@@ -30,7 +30,7 @@
             <span class="showing"><%= showing%></span> of <span class="showing"><%= totalCount%></span>
             <% } %>
             </div>
-<asp:Button runat="server" class="button" Text="Add to Review" OnClick="AddtoReviewHandler" />
+<asp:Button runat="server" class="button" Text="Add to Review List" OnClick="AddtoReviewHandler" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
@@ -66,4 +66,4 @@
     </Columns>
     <PagerStyle CssClass="PagerContainer" />
 </odp:AbstractGridView>
-<asp:Button class="button" runat="server" Text="Add to Review" OnClick="AddtoReviewHandler" />
+<asp:Button class="button" runat="server" Text="Add to Review List" OnClick="AddtoReviewHandler" />
