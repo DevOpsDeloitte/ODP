@@ -82,6 +82,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
             txt_firstName.Text = rec.UserFirstName;
             txt_lastName.Text = rec.UserLastName;
             txt_email.Text = rec.Email;
+            txt_confirm_email.Text = rec.Email;
             ViewState["Email"] = rec.Email;
 
             string l_activeYN;

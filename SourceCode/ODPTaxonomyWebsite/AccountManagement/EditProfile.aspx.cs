@@ -20,6 +20,7 @@ namespace ODPTaxonomyWebsite.AccountManagement
                 {
                     MembershipUser l_user = Membership.GetUser(User.Identity.Name);
                     txt_email.Text = l_user.Email;
+                    txt_confirm_email.Text = l_user.Email;
 
                     Guid l_userID = (Guid)l_user.ProviderUserKey;
 
