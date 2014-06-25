@@ -163,7 +163,7 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_odpNotes;
+        protected global::System.Web.UI.WebControls.HyperLink link_odpNotes;
         
         /// <summary>
         /// rpt_odpSubmissions control.
@@ -199,7 +199,7 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_coderNotes;
+        protected global::System.Web.UI.WebControls.HyperLink link_coderNotes;
         
         /// <summary>
         /// rpt_coderSubmissions control.
