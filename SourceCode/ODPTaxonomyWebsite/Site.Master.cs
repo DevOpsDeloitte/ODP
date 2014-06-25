@@ -37,6 +37,7 @@ namespace ODPTaxonomyWebsite
             Session["AM_SortDirection"] = null;
             Session["AM_UserName"] = null;
             Session["AM_Action"] = null;
+            Session["CurrentRole"] = null;
         }
 
         protected void Page_Load(object sender, EventArgs e)
