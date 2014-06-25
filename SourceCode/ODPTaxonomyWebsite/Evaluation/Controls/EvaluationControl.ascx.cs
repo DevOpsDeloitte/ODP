@@ -1046,7 +1046,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderStudyFocusQuestions()
         {
             
-            var questions = db.A_StudyFocus.Where(sf => sf.Status.Status1 == "Active" && sf.StudyFocusID <= 43 ).OrderBy( sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.A_StudyFocus.Where(sf => sf.Status.Status1 == "Active" && sf.StudyFocusID <= 100 ).OrderBy( sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             var count = 1;
             foreach(var question in questions){
