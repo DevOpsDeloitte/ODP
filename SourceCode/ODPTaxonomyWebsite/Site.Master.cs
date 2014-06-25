@@ -44,9 +44,9 @@ namespace ODPTaxonomyWebsite
         {
             try
             {
-                //Hide Menu on Login  page and forgot password
+                //Hide Menu on Login  page
                 string currentPage = Request.Url.ToString().ToLower();
-                if ((currentPage.IndexOf("login.aspx") > -1) || (currentPage.IndexOf("forgotpassword.aspx") > -1))
+                if (currentPage.IndexOf("login.aspx") > -1)
                 {
                     showLeftPush.Visible = false;
                 }
@@ -70,6 +70,18 @@ namespace ODPTaxonomyWebsite
                     {
                         LoadMenuData();
                     }
+                }
+
+                //Display Current Role when available
+                if (Session["CurrentRole"] != null)
+                {
+                    string displayRoleName = Common.GetDisplayRoleName(connString, Session["CurrentRole"].ToString());
+                    if(!String.IsNullOrEmpty(displayRoleName))
+                    {
+                        lbl_role.Visible = true;
+                        lbl_role.Text = "Current Role: " + displayRoleName;
+                    }
+                    
                 }
             }
             catch (Exception ex)
