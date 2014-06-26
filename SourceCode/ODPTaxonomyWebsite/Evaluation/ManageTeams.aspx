@@ -2,6 +2,42 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+  <link rel="stylesheet" href="../styles/alertify.css"> 
+  <script src="../scripts/alertify.js"></script>
+  <style>
+  input.novisibility
+  {
+      display: none;
+  }
+  </style>
+  <script type="text/javascript">
+
+
+      function alertify_confirm( x ) {
+          var clickElem = x.substr(0, x.lastIndexOf("_")) + "2" + x.substr(x.lastIndexOf("_"));
+          window.alertify.set({
+              labels: {
+                  ok: "OK",
+                  cancel: "Cancel"
+              },
+              delay: 5000,
+              buttonReverse: true,
+              buttonFocus: "none"
+          });
+
+          alertify.confirm("Please confirm team delete?", function (e) {
+              if (e) {
+                  //console.log(clickElem);
+                  $("#" + clickElem).click();
+              } else {
+                  alertify.error("You've clicked cancel Delete..");
+                  return false;
+              }
+          });
+
+          return false;
+      }
+  </script>
     <h2>
         Manage Teams
     </h2>
@@ -68,7 +104,8 @@
                     </asp:Repeater>
                 </td>
                 <td><asp:HiddenField runat="server" ID="hf_teamID" Value='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
-                <asp:Button runat="server" ID="btn_deleteTeam"  class="button no" OnClick="DeleteTeam_Click" OnClientClick="return confirm('Are you sure you would like to Remove Team?');" Text="Remove Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
+                <asp:Button runat="server" ID="btn_deleteTeam"  class="button no" OnClick="DeleteTeam_Click" OnClientClick="return alertify_confirm($(this).attr('id'));" Text="Remove Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
+                <asp:Button runat="server" ID="btn_deleteTeam2"  class="novisibility" OnClick="DeleteTeam_Click" Text="Remove Team" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "TeamID")%>' />
                 </td>
             </tr>
         </ItemTemplate>
