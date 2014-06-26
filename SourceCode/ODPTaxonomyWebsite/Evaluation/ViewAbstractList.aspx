@@ -14,6 +14,43 @@
 <%@ Register TagPrefix="odp" TagName="CoderSupervisorView_Open" Src="~/Evaluation/AbstractListViews/CoderSupervisorView_Open.ascx" %>
 <%@ Register TagPrefix="odp" TagName="AdminView" Src="~/Evaluation/AbstractListViews/AdminView.ascx" %>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+ <script type="text/javascript">
+
+     function checkStatus() {
+
+         //console.log("called checkStatus");
+         if ($("input.review").hasClass("no")) {
+
+             return false;
+         }
+
+         return true;
+
+     }
+
+     $(document).ready(function () {
+
+
+
+         $("input[type=checkbox]").click(function () {
+             var keepno = true;
+             //console.log("clicked...checkbox");
+             $("input[type=checkbox]").each(function () {
+                 if (this.checked) keepno = false;
+             });
+
+             if (keepno) {
+                 $("input.review").addClass("no").removeClass("yes");
+             }
+             else {
+                 $("input.review").removeClass("no").addClass("yes");
+             }
+
+         });
+
+
+     });
+</script>
     <h2>
         View Abstract List
     </h2>
