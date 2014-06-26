@@ -452,6 +452,10 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                             db.tbl_Teams.InsertOnSubmit(team);
                             db.SubmitChanges();
+
+                            int teamID = team.TeamID;
+                            db.KappaUserIdentify_Insert_ByTeamID(teamID);
+
                         }
 
                         //Reload Page Data
