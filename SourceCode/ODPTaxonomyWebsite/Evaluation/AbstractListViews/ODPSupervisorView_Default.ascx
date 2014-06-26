@@ -30,14 +30,14 @@
             <span class="showing"><%= showing%></span> of <span class="showing"><%= totalCount%></span>
             <% } %>
             </div>
-<asp:Button runat="server" class="button" Text="Add to Review List" OnClick="AddtoReviewHandler" />
+<asp:Button runat="server" class="review button no" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
     <Columns>
         <asp:TemplateField>
             <ItemTemplate>
                 <asp:HiddenField runat="server" ID="AbstractID" Value='<%#Eval("AbstractID") %>' />
-                <asp:CheckBox runat="server" ID="ToReview" />
+                <asp:CheckBox runat="server" CssClass="reviewcheck" ID="ToReview" />
             </ItemTemplate>
         </asp:TemplateField>
         <asp:BoundField DataField="AbstractID" HeaderText="ID" />
@@ -66,4 +66,4 @@
     </Columns>
     <PagerStyle CssClass="PagerContainer" />
 </odp:AbstractGridView>
-<asp:Button class="button" runat="server" Text="Add to Review List" OnClick="AddtoReviewHandler" />
+<asp:Button class="review button no" runat="server" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />
