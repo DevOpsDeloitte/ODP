@@ -31,6 +31,15 @@ namespace ODPTaxonomyWebsite {
         protected global::System.Web.UI.WebControls.Panel pnl_confirmation;
         
         /// <summary>
+        /// btn_return control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_return;
+        
+        /// <summary>
         /// pnl_forgot_password control.
         /// </summary>
         /// <remarks>
@@ -74,5 +83,14 @@ namespace ODPTaxonomyWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_forgotpwd_submit;
+        
+        /// <summary>
+        /// btn_forgotpwd_cancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_forgotpwd_cancel;
     }
 }
