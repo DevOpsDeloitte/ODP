@@ -18,6 +18,16 @@ namespace ODPTaxonomyWebsite
 
         }
 
+        protected void btn_return_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("login.aspx");
+        }
+
+        protected void btn_forgotpwd_cancel_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("login.aspx");
+        }
+
         protected void btn_forgotpwd_submit_Click(object sender, EventArgs e)
         {
             try
@@ -60,6 +70,7 @@ namespace ODPTaxonomyWebsite
 
                     pnl_forgot_password.Visible = false;
                     pnl_confirmation.Visible = true;
+                    btn_return.Visible = true;
 
 
                 }

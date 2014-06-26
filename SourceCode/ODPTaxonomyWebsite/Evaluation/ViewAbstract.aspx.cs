@@ -34,11 +34,11 @@ namespace ODPTaxonomyWebsite.Evaluation
         private string messStatusIsChanged = "You are not allowed to override as the abstract's status was changed.";
         private string messOverrideSuccess = "Abstract override successful, please ask effected coders to log out and log back in.";
         private string messUploadNotesSuccess = "Upload Notes successful, please ask effected coders to log out and log back in.";
-        private string messMaxSizeExceeded = "The file size exceeded 8M maximum allowed.";
+        private string messMaxSizeExceeded = "The file size exceeded 20MB maximum allowed.";
         private string messNoFile = "Please select the file to upload.";
         private string messWrongFileType = "Only PDF files are allowed to upload.";
         private string messProsessIsStopped = "The evaluaiton process was stopped by supervisor. You will be redirected to the homepage in 10 seconds.";
-        private int maxLen = 8388608;
+        private int maxLen = 20971520;
 
         #endregion
 
@@ -66,6 +66,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                 if (!Page.IsPostBack)
                 {
+                    
                     lbl_messageUsers.Visible = false;
 
                     bool isLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
@@ -169,7 +170,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                         currentStatus = Common.GetAbstractStatus(connString, abstractId);
                         if (currentRole == role_coderSup)
                         {
-                            if (currentStatus == AbstractStatusID._1B || currentStatus == AbstractStatusID._1N)
+                            //if (currentStatus == AbstractStatusID._1B || currentStatus == AbstractStatusID._1N)
+                            if ((int)currentStatus >= (int)AbstractStatusID._1B)
                             {
                                 if (Int32.TryParse(hf_evaluationId_coder.Value, out evaluationId))
                                 {
@@ -286,6 +288,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 {
                     throw new Exception("User ID either was not saved between page postbacks Or could not be parssed.");
                 }
+                
             }
             catch (Exception ex)
             {
@@ -443,16 +446,20 @@ namespace ODPTaxonomyWebsite.Evaluation
         {
             try
             {
+                
                 string fileName = (sender as LinkButton).CommandArgument;
-                string fName = Request.PhysicalApplicationPath + "notes\\" + fileName;
-                Response.Clear();
-                Response.BufferOutput = false;
-                Response.ContentType = "application/pdf";
-                Response.AddHeader("content-disposition", "filename=" + fileName);
-                //Response.Flush();   
-                Response.TransmitFile(fName);
-                //Response.End();
+                string url = "DownloadAbstractScan.aspx?scan=" + fileName;
+                Response.Redirect(url, false);
 
+                //string fName = Request.PhysicalApplicationPath + "notes\\" + fileName;
+                //Response.Clear();
+                //Response.BufferOutput = false;
+                //Response.ContentType = "application/pdf";
+                //Response.AddHeader("content-disposition", "filename=" + fileName);
+                  
+                //Response.TransmitFile(fName);
+               
+                
             }
             catch (Exception ex)
             {
@@ -502,7 +509,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 string fileName = Common.GetAbstractScan(connString, evaluationId);
                 if (!String.IsNullOrEmpty(fileName))
                 {
-                    link_coderNotes.CommandArgument = fileName;
+                    link_coderNotes.NavigateUrl = "DownloadAbstractScan.aspx?scan=" + fileName;
                     link_coderNotes.Visible = true;
                 }
 
@@ -542,7 +549,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 string fileName = Common.GetAbstractScan(connString, evaluationId);
                 if (!String.IsNullOrEmpty(fileName))
                 {
-                    link_odpNotes.CommandArgument = fileName;
+                    link_odpNotes.NavigateUrl = "DownloadAbstractScan.aspx?scan=" + fileName;
                     link_odpNotes.Visible = true;
                 }
 
@@ -938,15 +945,17 @@ namespace ODPTaxonomyWebsite.Evaluation
                                 pnl_overrideBtns.Visible = true;                                                             
                             }
 
-                            if (currentStatus == AbstractStatusID._1B || currentStatus == AbstractStatusID._1N)
-                            {
-                                //Upload Notes action is available
-                                pnl_uploadNotes.Visible = true;                                                           
+                            //if (currentStatus == AbstractStatusID._1B || currentStatus == AbstractStatusID._1N)
+                            //{
+                            //    //Upload Notes action is available
+                            //    pnl_uploadNotes.Visible = true;                                                           
                                 
-                            }
+                            //}
 
                             if ((int)currentStatus >= (int)AbstractStatusID._1B)
                             {
+                                //Upload Notes action is available
+                                pnl_uploadNotes.Visible = true;   
                                 //Generate links to Evaluation page for submission review
                                 GenerateLinks(EvaluationType.CoderEvaluation, i_evaluationId_coder, i_abstractId);
                                 evaluationId_odp = Common.GetEvaluationIdForAbstract(connString, i_abstractId, EvaluationType.ODPEvaluation);

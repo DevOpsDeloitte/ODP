@@ -535,7 +535,10 @@ namespace ODPTaxonomyDAL_TT
                               where e.EvaluationTypeId == (int)type && e.AbstractID == abstractId
                               && e.IsStopped == false
                               select e.EvaluationId;
-                id = matches.FirstOrDefault();
+                foreach (var i in matches)
+                {
+                    id = i;
+                }
             }
 
             return id;

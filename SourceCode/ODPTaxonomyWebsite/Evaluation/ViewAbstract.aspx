@@ -23,7 +23,7 @@
 
     
         <asp:Button runat="server" ID="btn_print" Text="Print Abstract" Visible="true" class="button clearfix"
-             OnClientClick=" window.open('./PrintAbstract.aspx?id='+absid, '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, width=768, height=700'); return false;" />
+             OnClientClick=" window.open('./PrintAbstract.aspx?id='+absid, '_blank', 'toolbar=yes, scrollbars=yes, resizable=yes, top=500, left=500, width=1200, height=700'); return false;"  />&nbsp;&nbsp;
         <asp:Button runat="server" class="button" ID="btn_code" Text="Code Abstract" 
             onclick="btn_code_Click" Visible="false" />
     </asp:Panel>
@@ -40,8 +40,9 @@
          CommandArgument='' Visible="false">ODP vs. Coder Compare</asp:LinkButton>
         <asp:LinkButton runat="server" ID="link_odpConsensus" CssClass="viewSubmissionLink"  onclick="link_Submission_Click"
          CommandArgument='' Visible="false">ODP Consensus</asp:LinkButton>
-        <asp:LinkButton runat="server" ID="link_odpNotes" CssClass="viewSubmissionLink" Visible="false"  
-            onclick="link_Notes_Click" CommandArgument=''>ODP Notes(PDF)</asp:LinkButton>
+         <asp:HyperLink ID="link_odpNotes" runat="server"
+            NavigateUrl="" Target="_blank">ODP Notes(PDF)</asp:HyperLink>
+        
         <asp:Repeater runat="server" ID="rpt_odpSubmissions">
             <ItemTemplate>
                 <asp:LinkButton runat="server" ID="link_Submission"  CommandArgument='<%# GetValue(DataBinder.Eval(Container.DataItem, "EvaluationId"), DataBinder.Eval(Container.DataItem, "SubmissionTypeId"), DataBinder.Eval(Container.DataItem, "UserId"))%>' 
@@ -53,8 +54,9 @@
     <asp:Panel runat="server" ID="pnl_coderValues" ClientIDMode="Static" Visible="false">        
         <asp:LinkButton runat="server" ID="link_coderConsensus" CssClass="viewSubmissionLink" onclick="link_Submission_Click" 
             CommandArgument='' Visible="false">Coder Consensus</asp:LinkButton>
-        <asp:LinkButton runat="server" ID="link_coderNotes" CssClass="viewSubmissionLink" Visible="false"  
-            onclick="link_Notes_Click" CommandArgument=''>Coder Notes(PDF)</asp:LinkButton>
+            <asp:HyperLink ID="link_coderNotes" runat="server"
+            NavigateUrl="" Target="_blank">Coder Notes(PDF)</asp:HyperLink>
+        
         <asp:Repeater runat="server" ID="rpt_coderSubmissions">
             <ItemTemplate>
                 <asp:LinkButton runat="server" ID="link_Submission"  CommandArgument='<%# GetValue(DataBinder.Eval(Container.DataItem, "EvaluationId"), DataBinder.Eval(Container.DataItem, "SubmissionTypeId"), DataBinder.Eval(Container.DataItem, "UserId"))%>' 
@@ -63,7 +65,7 @@
         </asp:Repeater>
     </asp:Panel>
 
-    <asp:Panel runat="server" ID="pnl_uploadNotes" ClientIDMode="Static" Visible="false">
+    <asp:Panel runat="server" ID="pnl_uploadNotes" ClientIDMode="Static" Visible="false"><span>The maximum file size is 20MB.</span><br />
         <asp:Button class="button" runat="server" ID="btn_notes" Text="Upload Notes" Visible="true" 
             onclick="btn_notes_Click" /><br />
         <asp:FileUpload runat="server" ID="fu_notes" />
@@ -86,4 +88,5 @@
 
     </asp:Panel>
     </div>
+    
 </asp:Content>
