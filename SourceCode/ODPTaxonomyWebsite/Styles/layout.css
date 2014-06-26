@@ -32,8 +32,8 @@ h1, h2 { font-family: 'open_sansbold', "HelveticaNeue", "Helvetica Neue", Helvet
 h3, h4, h5, h6 { font-family: 'open_sanssemibold',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
-.title, h2:first-child  { display: block; color: #fff; text-transform: uppercase; font-size: 1.65em; margin: 0 10px; }
-.subtitle, h3{ display: block; font-size: 1.35em; font-weight: normal; text-align: left; color: #0C3966; margin: 0 0 4px 10px; }
+.title, h2 { display: block; color: #fff; text-transform: uppercase; font-size: 1.65em; margin: 0 10px; }
+.subtitle, h3{ display: block; font-size: 1.25em; font-weight: normal; text-align: left; color: #0C3966; margin: 0 0 4px 10px; }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; display: block; margin: 20px auto; }
 .hidden { display:none;}
 .container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
@@ -66,6 +66,8 @@ table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -web
 
 input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline;}
 	select { padding: 5px}
+input[type="submit"].review { margin-left: 10px; }
+	input[type="submit"].review.no { opacity: 0.4; }
 
 .table-40 { width: 100%; }
 
@@ -156,7 +158,7 @@ tr.PagerContainer td, .zebra-striped tbody tr.PagerContainer table tr:nth-child(
 { border: none; background: #AFAFAF; color: #fff; margin: 2px; border: 1px solid #E0DFDF; }
 tr.pagination td a, tr.PagerContainer td a { font-weight: bold; color: #fff; }
 
-div.showingCounts { float: right; background: #AFAFAF; color: #FFF; font-weight: bold; margin: 10px 0; border: 1px solid #E0DFDF; padding: 8px 20px; }
+div.showingCounts { float: right; background: #AFAFAF; color: #FFF; font-weight: bold; margin: 10px; border: 1px solid #E0DFDF; padding: 8px 20px; }
 
 /* Evaluation
 ================================================== */
