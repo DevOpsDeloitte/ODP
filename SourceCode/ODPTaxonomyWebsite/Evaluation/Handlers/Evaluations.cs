@@ -131,6 +131,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                      var subListC = db.Submissions.Where(s => s.EvaluationId == evaluationID && s.SubmissionTypeId == 1).Select(s => s).ToList();
                      if (subListC.Count == 3)
                      {
+                
                          insertAbstractChangeHistory(getAbstractStatusID("1A"));
                      }
                    
@@ -141,7 +142,17 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     insertAbstractChangeHistory(getAbstractStatusID("1B"));
                     //update is complete to 1 on the evaluation record.
                     updateEvaluationRecordToComplete();
+                    //System.Diagnostics.Trace.WriteLine("abstract change history 1B : " + evaluationID + " abstract ID : " + abstractID);
 
+                    // Adding Stored Procedure call for Kappa Data Calculations.
+                    try
+                    {
+                        db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 4);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 1B/4 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : "+ ex.Message);
+                    }
 
                     break;
                 case 3:
@@ -160,6 +171,16 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     //FormMode = "ODP Staff Member Consensus";
                     // Insert Status 2B record or ID = 9
                     insertAbstractChangeHistory(getAbstractStatusID("2B"));
+
+                    // Adding Stored Procedure call for Kappa Data Calculations.
+                    try
+                    {
+                        db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 9);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 2B/9 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
+                    }
                     
 
                     break;

@@ -335,4 +335,10 @@
       <Association Name="SubmissionType_Submission" Member="SubmissionType" ThisKey="SubmissionTypeId" OtherKey="SubmissionTypeId" Type="SubmissionType" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.KappaBaseData_Insert_ByAbs_EvlID" Method="KappaBaseData_Insert_ByAbs_EvlID">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EvaluationId" Parameter="evaluationId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AbstractStatusID" Parameter="abstractStatusID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
