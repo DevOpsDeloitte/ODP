@@ -147,7 +147,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     // Adding Stored Procedure call for Kappa Data Calculations.
                     try
                     {
-                        //db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 4);
+                        db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 4);
                     }
                     catch (Exception ex)
                     {
@@ -175,7 +175,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     // Adding Stored Procedure call for Kappa Data Calculations.
                     try
                     {
-                        //db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 9);
+                        db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 9);
                     }
                     catch (Exception ex)
                     {
