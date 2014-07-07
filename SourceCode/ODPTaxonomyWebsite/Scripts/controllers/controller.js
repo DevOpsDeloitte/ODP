@@ -1,4 +1,4 @@
-app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
+app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $timeout) {
 
 
 
@@ -34,6 +34,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
 
         $scope.mdata.abstractid = $("input#abstractid").val();
+        $scope.mdata.teamid = $("input#teamid").val();
+
+
+
+
         //console.log(" is unable : " + $scope.mdata.isunable);
         //$scope.mdata.unabletocode = true;
 
@@ -74,6 +79,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         $scope.mdata.populationfocus = [];
         $scope.mdata.studydesignpurpose = [];
         $scope.mdata.preventioncategory = [];
+
+        var teamRef = new Firebase("https://intense-fire-1108.firebaseio.com/teams" + "/" + $scope.mdata.teamid);
+
+        var xService = $firebase(teamRef); //.$bind($scope, "mdata");
+        $timeout(function () {
+            xService.$bind($scope, "mdata");
+        }, 1000);
+        
 
         $scope.showDescription = function (inID) {
             //console.log("show description.." + inID);
@@ -324,9 +337,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         }
 
         // reset unable to code & super username / password.
-//        $scope.mdata.superusername = "";
-//        $scope.mdata.superpassword = "";
-//        $scope.mdata.unabletocode = false;
+        //        $scope.mdata.superusername = "";
+        //        $scope.mdata.superpassword = "";
+        //        $scope.mdata.unabletocode = false;
 
         $scope.$apply();
 

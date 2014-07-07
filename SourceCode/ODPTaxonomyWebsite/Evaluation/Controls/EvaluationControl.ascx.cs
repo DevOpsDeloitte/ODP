@@ -70,6 +70,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         private Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
         private Dictionary<string, ComparisonTeamUser> ComparisonTeamUsers = new Dictionary<string, ComparisonTeamUser>();
 
+        public int? teamID = null;
+
         
 
 
@@ -95,6 +97,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
            
             var TeamID = db.Evaluations.Where(e => e.EvaluationId == EvaluationID && e.AbstractID == AbstractID).Select( e => e.TeamID).FirstOrDefault();
+            this.teamID = TeamID;
             //Response.Write(" Team ID :: " + TeamID.ToString());
             var teamlist = db.TeamUsers
                                 .Join(db.Teams,
@@ -368,44 +371,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             
             
             
-            //FormMode = "Consensus";
-            //FormMode = "Comparison";
-            //UserId = new Guid("3D44C55B-CAB7-4E1F-82BD-62B50B97619E");
-
-
-            // For testing view mode / coder evaluation
-            //DisplayMode = "View"; FormMode = "Coder Evaluation"; AbstractID = 1; SubmissionID = 1; SubmissionTypeId = 1; EvaluationID = 1;
-            // For testing insert mode / coder evaluation
-            //DisplayMode = "Insert"; FormMode = "Coder Evaluation"; AbstractID = 1; SubmissionID = 1; SubmissionTypeId = 1; EvaluationID = 1;
-
-            
-            
-            // For testing view mode / coder consensus
-            //DisplayMode = "View"; FormMode = "Coder Consensus"; AbstractID = 1; SubmissionID = 1; SubmissionTypeId = 2; EvaluationID = 1;
-            // For testing insert mode / coder consensus
-            //DisplayMode = "Insert"; FormMode = "Coder Consensus"; AbstractID = 1; SubmissionID = 1; SubmissionTypeId = 2; EvaluationID = 1;
-
-            // We need to find out for Coder Consensus
-            // 1. All the team members, with their User IDs and Numbers 1, 2 or 3.
-            // 2. All their submissions
-
-
-
-            //UserId = new Guid("9C334C38-E22D-46D4-B37A-06E2F5405ED7");
-       
-            // For testing view mode / ODP Staff Member Evaluation
-            //DisplayMode = "View"; FormMode = "ODP Staff Member Evaluation"; AbstractID = 3; SubmissionID = 21; SubmissionTypeId = 3; EvaluationID = 11;
-            // For testing insert mode / ODP Staff Member Evaluation
-            //DisplayMode = "Insert"; FormMode = "ODP Staff Member Evaluation"; AbstractID = 3; SubmissionID = 21; SubmissionTypeId = 3; EvaluationID = 11;
-
-            // For testing view mode / ODP Staff Member Consensus
-            //DisplayMode = "View"; FormMode = "ODP Staff Member Consensus"; AbstractID = 3; SubmissionID = 21; SubmissionTypeId = 4; EvaluationID = 11;
-            // For testing insert mode / ODP Staff Member Evaluation
-            //DisplayMode = "Insert"; FormMode = "ODP Staff Member Consensus"; AbstractID = 3; SubmissionID = 21; SubmissionTypeId = 4; EvaluationID = 11;
-
-            // For testing insert mode / ODP Staff Member Comparison
-            //DisplayMode = "Insert"; FormMode = "ODP Staff Member Comparison"; AbstractID = 3; SubmissionID = 21; SubmissionTypeId = 5; EvaluationID = 11;
-            //loadSession();
+        
             startConsensus();
             startComparison();
             performSecurityChecks();

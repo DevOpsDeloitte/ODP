@@ -78,6 +78,8 @@
 
         <input type="hidden" name="consensusalreadystarted" id="consensusalreadystarted" value="<%= consensusAlreadyStarted %>" ng-model="mdata.consensusalreadystarted" />
 
+        <input type="hidden" name="teamid" id="teamid" value="<%= teamID %>" ng-model="mdata.teamid" />
+
         <!-- not need just a placholder for now -->
         <input type="hidden" name="evaluationid" value="<%= EvaluationID %>" />
         <div class="debugWindow">
@@ -253,6 +255,10 @@
 <script src="../scripts/icheck.js"></script>
 <script src="../scripts/alertify.js"></script>
 <script src="../scripts/angular/angular.min.js"></script>
+  <!-- Firebase -->
+<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+<!-- AngularFire Library -->
+<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
 
 <script src="../scripts/modules/module.js"></script>
 <script src="../scripts/controllers/controller.js"></script>
