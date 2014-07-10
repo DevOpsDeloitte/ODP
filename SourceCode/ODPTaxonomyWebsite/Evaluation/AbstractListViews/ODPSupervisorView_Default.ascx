@@ -10,11 +10,13 @@
                 var displayCounts = false;
                 try
                 {
-                    totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Count;
-                    showing = (AbstractViewGridView.PageIndex + 1) * AbstractViewGridView.Rows.Count;
+                    totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Where(x => x.ApplicationID > 0).Select(x => x).Count();
+                    //showing = (AbstractViewGridView.PageIndex + 1) * AbstractViewGridView.Rows.Count;
+                    var RowSshowing = AbstractViewGridView.Rows.Cast<GridViewRow>().Where(x => x.Cells[2].Text.ToString().Replace("&nbsp;","").Trim().Length > 3);
+                    showing = RowSshowing.Count() ;
                     if ((AbstractViewGridView.PageIndex + 1) == AbstractViewGridView.PageCount)
                     {
-                        showing = totalCount;
+                        //showing = totalCount;
                     }
                     displayCounts = true;
                 }
@@ -27,7 +29,7 @@
             %>
             <% if (displayCounts)
                { %>
-            <span class="showing"><%= showing%></span> of <span class="showing"><%= totalCount%></span>
+            <span class="showing"><%= showing%></span> of <span class="showing"><%= totalCount%></span> Abstracts.
             <% } %>
             </div>
 <asp:Button runat="server" class="review button no" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />
