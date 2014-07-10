@@ -2,18 +2,20 @@
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
 <h3>
     View Open Abstracts</h3>
-     <div class="showingCounts">
+    <div class="showingCounts">
             Showing : 
             <%  var totalCount = 0;
                 var showing = 0;
                 var displayCounts = false;
                 try
                 {
-                    totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Count;
-                    showing = (AbstractViewGridView.PageIndex + 1) * AbstractViewGridView.Rows.Count;
+                    totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Where(x => x.ApplicationID > 0).Select(x => x).Count();
+                    //showing = (AbstractViewGridView.PageIndex + 1) * AbstractViewGridView.Rows.Count;
+                    var RowSshowing = AbstractViewGridView.Rows.Cast<GridViewRow>().Where(x => x.Cells[2].Text.ToString().Replace("&nbsp;","").Trim().Length > 3);
+                    showing = RowSshowing.Count() ;
                     if ((AbstractViewGridView.PageIndex + 1) == AbstractViewGridView.PageCount)
                     {
-                        showing = totalCount;
+                        //showing = totalCount;
                     }
                     displayCounts = true;
                 }
@@ -26,7 +28,7 @@
             %>
             <% if (displayCounts)
                { %>
-            <span class="showing"><%= showing%></span> of <span class="showing"><%= totalCount%></span>
+            <span class="showing"><%= showing%></span> of <span class="showing"><%= totalCount%></span> Abstracts.
             <% } %>
             </div>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"

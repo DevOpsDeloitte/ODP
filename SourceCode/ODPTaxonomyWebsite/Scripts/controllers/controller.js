@@ -337,9 +337,10 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         }
 
         // reset unable to code & super username / password.
-        //        $scope.mdata.superusername = "";
-        //        $scope.mdata.superpassword = "";
-        //        $scope.mdata.unabletocode = false;
+        $scope.mdata.superusername = "";
+        $scope.mdata.superpassword = "";
+        $scope.mdata.unabletocode = false;
+        $scope.mdata.comments = "";
 
         $scope.$apply();
 

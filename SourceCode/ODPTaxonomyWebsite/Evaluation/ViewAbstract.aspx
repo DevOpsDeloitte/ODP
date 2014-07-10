@@ -41,7 +41,7 @@
         <asp:LinkButton runat="server" ID="link_odpConsensus" CssClass="viewSubmissionLink"  onclick="link_Submission_Click"
          CommandArgument='' Visible="false">ODP Consensus</asp:LinkButton>
          <asp:HyperLink ID="link_odpNotes" runat="server"
-            NavigateUrl="" Target="_blank">ODP Notes(PDF)</asp:HyperLink>
+            NavigateUrl="" Target="_blank" Visible="false">ODP Notes(PDF)</asp:HyperLink>
         
         <asp:Repeater runat="server" ID="rpt_odpSubmissions">
             <ItemTemplate>
@@ -55,7 +55,7 @@
         <asp:LinkButton runat="server" ID="link_coderConsensus" CssClass="viewSubmissionLink" onclick="link_Submission_Click" 
             CommandArgument='' Visible="false">Coder Consensus</asp:LinkButton>
             <asp:HyperLink ID="link_coderNotes" runat="server"
-            NavigateUrl="" Target="_blank">Coder Notes(PDF)</asp:HyperLink>
+            NavigateUrl="" Target="_blank" Visible="false">Coder Notes(PDF)</asp:HyperLink>
         
         <asp:Repeater runat="server" ID="rpt_coderSubmissions">
             <ItemTemplate>

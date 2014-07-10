@@ -11,7 +11,7 @@ namespace ODPTaxonomyDAL_JY
 {
     public static class AbstractListViewHelper
     {
-        private static string KappaSpecifier = "#.##";
+        private static string KappaSpecifier = "f";
 
         public static bool UserCanView(AbstractViewRole View)
         {

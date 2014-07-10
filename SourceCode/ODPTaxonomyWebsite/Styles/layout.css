@@ -39,7 +39,7 @@ h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-al
 .container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
 	.container .button.yes { background: #24AA7A; color: #fff }
 	.container .button.no { background: #9B0202; color: #fff; }
-	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton { opacity: 0.4; cursor: default; }
+	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton, .container .button.no#disabledconsensusButton { opacity: 0.4; cursor: default; }
 	.container .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
 	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
 
@@ -54,8 +54,8 @@ table.form { margin-top: 30px; padding: 20px; -webkit-box-shadow: none; backgrou
 	table.form td.form-button { padding: 0; }
 caption { text-align: left; font-weight: bold; font-size: 17px; padding: 14px 12px; }
 table.zebra-striped tbody tr#disabled td { color: #E4E4E4; background-color: #FFFFFF; }
-table tbody th.box-three, table tbody td.box-three { margin: 0; padding: 0; width: 25%; height: 20px; }
-table tbody th.box-one, table tbody td.box-one { width: 75%; margin: 0; padding: 0; height: 20px; }
+table tbody th.box-three, table tbody td.box-three { margin: 0; padding: 0; width: 25%;  height:34px;}
+table tbody th.box-one, table tbody td.box-one { width: 75%; margin: 0; padding: 0;; height: 34px;  }
 table .coders { position: absolute; z-index: 9; color: #FFF; right: 4px; top: 6px; font-size: 11px; height: 20px; }
 	table .issue-one .coders li, table .issue-two .coders li, table .issue-three .coders li { background: rgba(0, 0, 0, 0.15); margin: 0 1px; text-align: center; width: 20px; float: left; width: 20px; min-height: 1px; text-align: center; -webkit-border-radius: 2px 2px 2px 2px; border-radius: 2px 2px 2px 2px; }
 	table .issue-four .coders li, table .issue-five .coders li, table .issue-six .coders li { background: rgba(0, 0, 0, 0.15); margin: 0 1px; text-align: center; width: 40px; float: left; width: 40px; min-height: 1px; text-align: center; -webkit-border-radius: 2px 2px 2px 2px; border-radius: 2px 2px 2px 2px; }
@@ -158,7 +158,11 @@ tr.PagerContainer td, .zebra-striped tbody tr.PagerContainer table tr:nth-child(
 { border: none; background: #AFAFAF; color: #fff; margin: 2px; border: 1px solid #E0DFDF; }
 tr.pagination td a, tr.PagerContainer td a { font-weight: bold; color: #fff; }
 
-div.showingCounts { float: right; background: #AFAFAF; color: #FFF; font-weight: bold; margin: 10px; border: 1px solid #E0DFDF; padding: 8px 20px; }
+div.showingCounts { float: right; background: #AFAFAF; color: #FFF; font-weight: bold; margin: 10px; border: 1px solid #E0DFDF; padding: 8px 20px; clear: both;}
+.AbstractViewTable
+{
+    clear: both;
+}
 
 /* Evaluation
 ================================================== */
@@ -189,9 +193,10 @@ div.subnav input, div.subnav li { display: inline-block }
 table tbody th.box-three.big, table tbody td.box-three.big { width: 55% }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important }
 h2.errormessages { color: Red }
+h2.successmessages { color: #4eb861 }
 div.debugWindow { position: fixed; top: 60px; right: 20px; width: 220px; border: 1px solid #ccc; padding: 10px; font-size: 11px; font-family: Consolas; color: #fff; background-color: #08c; z-index: 100000; display: none; }
 textarea#comments { width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); border: solid 1px #DDD; min-height: 160px; }
-div.select-box { cursor: pointer; text-align: right; height: 100%; padding: 0px; }
+div.select-box { cursor: pointer; text-align: right; height:100%; padding: 0px; }
 div.select-box-container { width: 100%; height: 100%; position: relative; padding: 2px; }
 div.codercbox { position: absolute; width: 10px; height: 10px; top: 0; font-size: 11px; }
 div.coder1 { right: 86px }

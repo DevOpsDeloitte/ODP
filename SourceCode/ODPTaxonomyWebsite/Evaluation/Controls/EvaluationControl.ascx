@@ -61,7 +61,7 @@
 
 
         <div>
-            <h2>{{postmessages}}</h2>
+            <h2 class="successmessages">{{postmessages}}</h2>
             <h2 class="errormessages">{{ errormessagesdisplay }}</h2>
         </div>
 
