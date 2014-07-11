@@ -24,13 +24,13 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             try
             {
-                if (!IsPostBack)
-                {
+                //if (!IsPostBack)
+                //{
                     var parentAbstracts = GetParentAbstracts();
 
                     AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
                     AbstractViewGridView.DataBind();
-                }
+                //}
             }
             catch (Exception exp)
             {
