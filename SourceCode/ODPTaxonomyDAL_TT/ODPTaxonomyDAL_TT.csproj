@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractGroup.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DataTT.designer.cs">
       <AutoGen>True</AutoGen>

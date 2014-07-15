@@ -20,7 +20,7 @@
       <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="RoleId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Association Name="tbl_aspnet_User_tbl_aspnet_UsersInRole" Member="tbl_aspnet_User" Storage="_aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="tbl_aspnet_User" IsForeignKey="true" />
-      <Association Name="aspnet_Role_tbl_aspnet_UsersInRole" Member="tbl_aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="tbl_aspnet_Role" IsForeignKey="true" />
+      <Association Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole" Member="tbl_aspnet_Role" ThisKey="RoleId" OtherKey="RoleId" Type="tbl_aspnet_Role" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.TeamType" Member="tbl_TeamTypes">
@@ -225,16 +225,9 @@
       <Column Name="LoweredRoleName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Column Name="DisplayRoleName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Association Name="aspnet_Role_tbl_aspnet_UsersInRole" Member="tbl_aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="tbl_aspnet_UsersInRole" />
+      <Association Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole" Member="tbl_aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="tbl_aspnet_UsersInRole" />
     </Type>
   </Table>
-  <Function Name="dbo.select_abstracts_coding_tt" Method="select_abstracts_coding_tt">
-    <Parameter Name="AbstractStatusID" Parameter="abstractStatusID" Type="System.Int32" DbType="Int" />
-    <Parameter Name="StudyFocusID" Parameter="studyFocusID" Type="System.Int32" DbType="Int" />
-    <ElementType Name="select_abstracts_coding_ttResult">
-      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.select_abstract_status_tt" Method="select_abstract_status_tt">
     <Parameter Name="AbstractID" Parameter="abstractID" Type="System.Int32" DbType="Int" />
     <ElementType Name="select_abstract_status_ttResult">
@@ -244,5 +237,19 @@
   <Function Name="dbo.KappaUserIdentify_Insert_ByTeamID" Method="KappaUserIdentify_Insert_ByTeamID">
     <Parameter Name="TeamID" Parameter="teamID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.select_abstracts_coding_tt" Method="select_abstracts_coding_tt">
+    <Parameter Name="AbstractStatusID" Parameter="abstractStatusID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CategoryID" Parameter="categoryID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Sorting" Parameter="sorting" Type="System.Int32" DbType="Int" />
+    <ElementType Name="select_abstracts_coding_ttResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.select_abstracts_group_tt" Method="select_abstracts_group_tt">
+    <ElementType Name="select_abstracts_group_ttResult">
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Sorting" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
   </Function>
 </Database>
