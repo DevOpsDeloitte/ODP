@@ -4,6 +4,7 @@
 <h3>
     View Abstracts</h3>
        <div class="showingCounts">
+       <span  class="showing">Page&nbsp;:&nbsp;<%=  (AbstractViewGridView.PageIndex + 1) %></span><br />
             Showing : 
             <%  var totalCount = 0;
                 var showing = 0;
