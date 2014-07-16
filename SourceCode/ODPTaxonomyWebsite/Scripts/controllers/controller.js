@@ -123,7 +123,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
         //console.log($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length-1]);
         if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked) {
             for (i = 1; i < $scope.mdata.preventioncategory.length - 1; i++) {
-                $scope.mdata.preventioncategory[i].resetBox();
+                $scope.mdata.preventioncategory[i].resetBoxCC();
             }
         }
 
