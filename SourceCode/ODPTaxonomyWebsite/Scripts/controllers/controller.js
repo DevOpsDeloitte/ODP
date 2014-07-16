@@ -158,7 +158,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http) {
 
         // For Consensus Mode -- Insert Validate all boxes are dark green or transparent.
         var boxColors = true; // all green
-        if ($scope.displaymode == "Insert" && ($scope.mode == "Coder Consensus" || $scope.mode.indexOf("Comparison") != -1)) {
+        if ($scope.displaymode == "Insert" && ($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1)) {
             for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
                 if ($scope.mdata.studyfocus[1][i].modelcolorState != "SolidGreen" && $scope.mdata.studyfocus[1][i].modelcolorState != "Transparent" && $scope.mdata.studyfocus[1][i].modelcolorState != "Disabled") {
                     boxColors = false;
