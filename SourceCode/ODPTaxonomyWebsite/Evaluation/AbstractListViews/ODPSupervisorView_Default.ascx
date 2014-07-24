@@ -35,7 +35,7 @@
             </div>
 <asp:Button runat="server" class="review button no" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
-    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
+    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped" AllowPaging="false">
     <Columns>
         <asp:TemplateField>
             <ItemTemplate>
