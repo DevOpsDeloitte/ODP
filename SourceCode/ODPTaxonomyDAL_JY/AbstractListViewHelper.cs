@@ -171,6 +171,47 @@ namespace ODPTaxonomyDAL_JY
                             Abstracts.Add(ODPCoderComparison);
                         }
                     }
+
+                    /* add k10-k12 */
+                    if (AbstractView == AbstractViewRole.ODPSupervisor)
+                    {
+                        // get coder evaluation row
+                        // and fill in k10 - k12 value
+                        var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                        if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
+                        {
+                            var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value);
+                            if (CoderKapperIdentities.Count() > 0)
+                            {
+                                foreach (var iden in CoderKapperIdentities)
+                                {
+                                    foreach (var kappa in KappaData)
+                                    {
+                                        if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K10)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder A vs. ODP Consensus: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            Abstracts.Add(CoderEvaluation);
+                                        }
+                                        else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K11)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder B vs. ODP Consensus: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            Abstracts.Add(CoderEvaluation);
+                                        }
+                                        else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K12)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder C vs. ODP Consensus: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            Abstracts.Add(CoderEvaluation);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    /* end of add k10-k12 */
                 }
                 else
                 {
