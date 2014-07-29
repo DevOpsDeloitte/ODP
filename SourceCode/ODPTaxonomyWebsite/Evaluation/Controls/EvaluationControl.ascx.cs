@@ -55,6 +55,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string lastName = string.Empty;
         public string userName = string.Empty;
         public string projectTitle = string.Empty;
+        public string piProjectLeader = string.Empty;
         public Guid UserId = new Guid();
         public string DisplayMode = string.Empty;
         public string FormMode = string.Empty;
@@ -176,6 +177,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             {
                 applicationID = absrec.ApplicationID.ToString();
                 projectTitle = absrec.ProjectTitle.ToString();
+                piProjectLeader = absrec.PIProjectLeader.ToString();
 
             }
             var userrec = db.aspnet_Users.Where(u => u.UserId == UserId).Select(u => u).FirstOrDefault();
