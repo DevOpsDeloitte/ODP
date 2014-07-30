@@ -100,13 +100,15 @@
 
 /* #Lists
 ================================================== */
-	ul, ol { margin: 20px 0; }
+	ul, ol { margin-bottom: 20px; }
 	ul { list-style: none outside; }
 	ol { list-style: decimal; }
-	ol, ul.square, ul.circle, ul.disc { margin-left: 30px; }
+	ol, ul.square, ul.circle, ul.disc, ul.alpha-disc, ul.roman-disc { margin-left: 30px; }
 	ul.square { list-style: square outside; }
 	ul.circle { list-style: circle outside; }
 	ul.disc { list-style: disc outside; }
+	ul.alpha-disc { list-style: lower-alpha outside; }
+	ul.roman-disc { list-style: lower-roman outside; }
 	ul ul, ul ol,
 	ol ol, ol ul { margin: 4px 0 5px 30px; font-size: 90%;  }
 	ul ul li, ul ol li,
@@ -191,7 +193,7 @@
 	input[type="email"],
 	textarea,
 	select {
-		border: 1px solid #888;
+		border: 1px solid #ccc;
 		padding: 6px 4px;
 		outline: none;
 		-moz-border-radius: 2px;
@@ -220,9 +222,9 @@
 		min-height: 60px; }
 	label,
 	legend {
-		font-weight: normal;
-		font-size: 16px;
-		line-height: 25px  }
+		display: block;
+		font-weight: bold;
+		font-size: 13px;  }
 	select {
 		width: 220px; }
 	input[type="checkbox"] {
