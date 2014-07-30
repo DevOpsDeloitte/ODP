@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=1sql234;Initial Catalog=ODP_Taxonomy_DEV;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.7.5.234;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odptaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.A_StudyFocusAnswer" Member="A_StudyFocusAnswers">
     <Type Name="A_StudyFocusAnswer">
       <Column Name="A_StudyFocusAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -135,19 +135,6 @@
       <Association Name="SubmissionType_Submission" Member="Submissions" ThisKey="SubmissionTypeId" OtherKey="SubmissionTypeId" Type="Submission" />
     </Type>
   </Table>
-  <Table Name="dbo.Protocol" Member="Protocols">
-    <Type Name="Protocol">
-      <Column Name="ProtocolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SubTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="Protocol" Member="Protocol1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ProtocolHTML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="LookUpTable" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Protocol_ProtocolHistory" Member="ProtocolHistories" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="ProtocolHistory" />
-    </Type>
-  </Table>
   <Table Name="dbo.ProtocolHistory" Member="ProtocolHistories">
     <Type Name="ProtocolHistory">
       <Column Name="ProtocolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
@@ -159,8 +146,8 @@
       <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VersionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Protocol_ProtocolHistory" Member="Protocol1" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="Protocol" IsForeignKey="true" />
       <Association Name="ProtocolVersionControl_ProtocolHistory" Member="ProtocolVersionControl" ThisKey="VersionID" OtherKey="VersionID" Type="ProtocolVersionControl" IsForeignKey="true" />
+      <Association Name="Protocol_ProtocolHistory" Member="Protocol1" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="Protocol" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProtocolVersionControl" Member="ProtocolVersionControls">
@@ -331,6 +318,19 @@
       <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="A_StudyFocus_A_StudyFocusAnswer" Member="A_StudyFocusAnswers" ThisKey="StudyFocusID" OtherKey="StudyFocusID" Type="A_StudyFocusAnswer" />
       <Association Name="Status_A_StudyFocus" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Protocol" Member="Protocols">
+    <Type Name="Protocol">
+      <Column Name="ProtocolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubTitle" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Protocol" Member="Protocol1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProtocolLoad" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LookUpTable" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Protocol_ProtocolHistory" Member="ProtocolHistories" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="ProtocolHistory" />
     </Type>
   </Table>
   <Function Name="dbo.KappaBaseData_Insert_ByAbs_EvlID" Method="KappaBaseData_Insert_ByAbs_EvlID">

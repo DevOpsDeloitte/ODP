@@ -23,7 +23,7 @@
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN (TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
-    <div class="sixteen columns">
+    <div class="sixteen columns" ng-cloak>
     <h2 ng-show="mdata.formmode.indexOf('Evaluation') != -1">Individual Coding</h2>
     <h2 ng-show="mdata.formmode.indexOf('Consensus') != -1">Consensus Coding</h2>
     <h2 ng-show="mdata.formmode.indexOf('Comparison') != -1">Comparison Coding</h2>
