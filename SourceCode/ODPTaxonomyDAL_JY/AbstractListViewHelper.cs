@@ -189,19 +189,19 @@ namespace ODPTaxonomyDAL_JY
                                     {
                                         if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K10)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder A vs. ODP Consensus: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder "+ iden.UserName +" vs. ODP Consensus", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K11)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder B vs. ODP Consensus: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder " + iden.UserName + " vs. ODP Consensus", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K12)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder C vs. ODP Consensus: " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "Coder " + iden.UserName + " vs. ODP Consensus", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }

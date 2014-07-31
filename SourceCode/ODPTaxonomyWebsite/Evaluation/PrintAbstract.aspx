@@ -70,13 +70,13 @@
     </div>--%>
     <hr />
     <div>
-        <div class="printTitle">Description :</div>
+        <div class="printTitle">Abstract Description :</div>
 
         <div class="hdesc">
         <%= desc %>
         </div>
         <hr />
-        <div class="printTitle">Public Health Part :</div>
+        <div class="printTitle">Public Health Relevance :</div>
         
         <div class="hpart">
         <%= healthpart %>
