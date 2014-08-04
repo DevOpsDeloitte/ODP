@@ -582,7 +582,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -605,7 +605,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -628,7 +628,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -651,7 +651,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -675,7 +675,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
 
                     }
 
