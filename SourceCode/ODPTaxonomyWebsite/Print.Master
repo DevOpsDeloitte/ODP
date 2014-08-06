@@ -1,0 +1,50 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Print.master.cs" Inherits="ODPTaxonomyWebsite.Print" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+
+    </asp:ContentPlaceHolder>
+<%-- 
+    <link href="~/Styles/skeleton.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/layout.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />--%>
+    <link href="~/Styles/base.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/skeleton.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/print.css" rel="Stylesheet" type="text/css" />
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <script type="text/javascript" src="/Scripts/jquery.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("i#printButton").click(function () {
+                window.print();
+
+            });
+
+            $("i#closeButton").click(function () {
+                window.close();
+
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <div class="buttons">
+        <i id="printButton" class="fa fa-print stick-right button"> Print</i>
+        <i id="closeButton" class="stick-right2 button">&#10006; Close</i>
+        </div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+  
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

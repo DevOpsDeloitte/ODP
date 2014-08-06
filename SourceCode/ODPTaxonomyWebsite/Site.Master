@@ -1,0 +1,148 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="ODPTaxonomyWebsite.SiteMaster" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head id="Head1" runat="server">
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>ODP Taxonomy</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- CSS
+  ================================================== -->  
+    <link href="~/Styles/base.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/skeleton.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/layout.css" rel="Stylesheet" type="text/css" />
+    <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
+
+     <!-- ASP
+  ================================================== -->     
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+    
+    <!-- Favicons
+  ================================================== -->
+    <link rel="shortcut icon" href="~/Images/favicon.ico">
+    <link rel="apple-touch-icon" href="~/Images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Images/apple-touch-icon-114x114.png">
+    <script src="/Scripts/jquery.js" type="text/javascript"></script>
+</head>
+<body class="cbp-spmenu-push">
+<form id="Form1" runat="server">
+        <div id="header_container">
+            <div class="header">
+            <h1>ODP Taxonomy</h1>
+                <a href="#" id="showLeftPush" class="button" runat="server">Menu
+                  
+                </a>
+                <asp:Label ID="lbl_role" runat="server" Visible="false" CssClass="role-display"></asp:Label>
+                &nbsp;<div class="login-display">
+                
+                    <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                        <LoggedInTemplate>
+                            Welcome <asp:LoginName ID="HeadLoginName" runat="server" />
+                            
+                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>    
+        </div>
+
+<div class="container" runat="server" id="menuContainer">
+       <div class="sixteen columns title"> 
+            
+        </div>
+        <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+
+                        <a href="/Default.aspx">Home</a>
+                        
+                        <div runat="server" visible="false" id="pnl_admin"><div class="nav-role">Role: Admin</div>
+                            <asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" />
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_admin" Text="View Abstract List" OnClick="btn_viewAbstractList_admin_Click" />
+                        </div>                                    
+                       
+                        <div runat="server" visible="false" id="pnl_odpSup"><div class="nav-role">Role: ODP Supervisor</div>
+                            <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></a>
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" />
+                        </div>
+
+                        <div runat="server" visible="false" id="pnl_odp"><div class="nav-role">Role: ODP Staff Member</div>
+                            <asp:LinkButton OnClick="btn_viewAbstractList_odp_Click" runat="server" ID="btn_viewAbstractList_odp" Text="View Abstract List" />
+                        </div>
+
+                        <div runat="server" visible="false" id="pnl_coderSup"><div class="nav-role">Role: Coder Supervisor</div>
+                            <asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" />
+                            <asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /> 
+                            <asp:LinkButton class="" OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" />
+                        </div>
+
+                        <div runat="server" visible="false" id="pnl_coder"><div class="nav-role">Role: Coder</div>
+                        <asp:LinkButton OnClick="btn_viewAbstract_coder_Click" runat="server" ID="btn_viewAbstract_coder" Text="View/Code Abstract" />
+                        </div>
+                        <div runat="server" visible="true" id="pnl_editProfile">
+                            <asp:HyperLink runat="server" ID="link_editProfile" NavigateUrl="~/AccountManagement/EditProfile.aspx" Text="Edit Profile"></asp:HyperLink>
+                        </div>
+        </nav>                
+
+        <div class="sixteen columns">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        </div>
+
+
+
+    
+    </div>
+
+<!-- JS
+================================================== -->
+
+<script src="/Scripts/classie.js" type="text/javascript"></script>
+<script src="/Scripts/persist.js" type="text/javascript"></script>     
+        <script type="text/javascript">
+                <!--
+            function showMenu() {
+                var menuItems = document.getElementById("menuItems");
+                if (menuItems) {
+                    if (menuItems.style.visibility == "visible") {
+                        menuItems.style.visibility = "hidden";
+                    }
+                    else {
+                        menuItems.style.visibility = "visible";
+                    }
+                }
+            }
+                //-->
+        </script>
+        <script type="text/javascript">
+            var menuLeft = document.getElementById('cbp-spmenu-s1'),
+                showLeftPush = document.getElementById('showLeftPush'),
+                body = document.body;
+
+            showLeftPush.onclick = function () {
+                classie.toggle(this, 'active');
+                classie.toggle(body, 'cbp-spmenu-push-toright');
+                classie.toggle(menuLeft, 'cbp-spmenu-open');
+                disableOther('showLeftPush');
+                return false;
+            };
+
+            function disableOther(button) {
+
+                if (button !== 'showLeftPush') {
+                    classie.toggle(showLeftPush, 'disabled');
+                }
+            }
+        </script>
+
+
+</form>
+</body>
+</html>

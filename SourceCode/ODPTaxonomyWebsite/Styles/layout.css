@@ -1,0 +1,303 @@
+/*
+* Skeleton V1.2
+* Copyright 2011, Dave Gamache
+* www.getskeleton.com
+* Free to use under the MIT license.
+* http://www.opensource.org/licenses/mit-license.php
+* 6/20/2012
+*/
+
+/* Table of Content
+==================================================
+	#Site Styles
+	#Page Styles
+	#Media Queries
+	#Font-Face */
+
+/* #Site Styles
+================================================== */
+html, body {
+min-height: 100%; }
+body { background: #456777; /* Old browsers */
+background: -moz-linear-gradient(top,  #456777 0px, #c2cdd1 180px, #ffffff 600px); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0px,#456777), color-stop(180px,#c2cdd1), color-stop(600,#ffffff)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #456777 0px,#C2CDD1 180px,#FFF 600px); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #456777 0px,#C2CDD1 180px,#FFF 600px); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #456777 0px,#C2CDD1 180px,#FFF 600px); /* IE10+ */
+background: linear-gradient(to bottom,  #456777 0px,#C2CDD1 180px,#FFF 600px); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#456777', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}
+
+h1, h2 { font-family: 'open_sansbold', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+h3, h4, h5, h6 { font-family: 'open_sanssemibold',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
+.title, h2 { display: block; color: #fff; text-transform: uppercase; font-size: 1.65em; margin: 0 10px; }
+.subtitle, h3{ display: block; font-size: 1.25em; font-weight: normal; text-align: left; color: #0C3966; margin: 0 0 4px 10px; }
+.center, .container .column .center, .container .columns .center { text-align: center; float: none; display: block; margin: 20px auto; }
+.hidden { display:none;}
+.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
+	.container .button.yes { background: #24AA7A; color: #fff }
+	.container .button.no { background: #9B0202; color: #fff; }
+	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton, .container .button.no#disabledconsensusButton { opacity: 0.4; cursor: default; }
+	.container .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
+	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
+
+.container { margin: 0 auto; padding-top: 80px; }
+
+.center { text-align: center; margin: 10px auto; }
+.right { float: right; margin: 10px 20px; } .left { float: left; margin: 10px 20px; }
+
+table { -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); background: #fff; width: 100%; }
+table.form { margin-top: 30px; padding: 20px; -webkit-box-shadow: none; background: transparent; box-shadow: none; }
+	table.form td:first-child { vertical-align: top; margin: 0; width: 20%; }
+	table.form td.form-button { padding: 0; }
+caption { text-align: left; font-weight: bold; font-size: 17px; padding: 14px 12px; }
+table.zebra-striped tbody tr#disabled td { color: #E4E4E4; background-color: #FFFFFF; }
+table tbody th.box-three, table tbody td.box-three { margin: 0; padding: 0; width: 25%;  height:34px;}
+table tbody th.box-one, table tbody td.box-one { width: 75%; margin: 0; padding: 0;; height: 34px;  }
+table .coders { position: absolute; z-index: 9; color: #FFF; right: 4px; top: 6px; font-size: 11px; height: 20px; }
+	table .issue-one .coders li, table .issue-two .coders li, table .issue-three .coders li { background: rgba(0, 0, 0, 0.15); margin: 0 1px; text-align: center; width: 20px; float: left; width: 20px; min-height: 1px; text-align: center; -webkit-border-radius: 2px 2px 2px 2px; border-radius: 2px 2px 2px 2px; }
+	table .issue-four .coders li, table .issue-five .coders li, table .issue-six .coders li { background: rgba(0, 0, 0, 0.15); margin: 0 1px; text-align: center; width: 40px; float: left; width: 40px; min-height: 1px; text-align: center; -webkit-border-radius: 2px 2px 2px 2px; border-radius: 2px 2px 2px 2px; }
+		table .coders li.coder-number { background: none; width: 8px; }
+
+table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -webkit-box-shadow: none; }
+	table#MainContent_rdl_activeYN td { padding: 0}
+
+input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline;}
+	select { padding: 5px}
+input[type="submit"].review { margin-left: 10px; }
+	input[type="submit"].review.no { opacity: 0.4; }
+
+.table-40 { width: 100%; }
+
+table.persist-area {
+position: relative; }
+table.persist-area th { }
+tr.floatingHeader { position: fixed; top: 62px; visibility: hidden; z-index: 999; background: #D3D3D3; width: inherit; }
+tr.floatingHeader th { width: inherit; }
+
+/* Sticky Header */
+#header_container { background:rgba(47, 85, 124, 0.9); height:60px; position:fixed; width:100%; top:0; z-index: 999; }
+.header{ margin: 15px 24px; width:95%; }
+.header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; position: relative; z-index: 2; margin-left: 5px; }
+ .header .button:hover { background: #eee; border: 1px solid #eee; }
+.login-display { color: #fff; position: absolute; top: 14px; right: 14px;  }
+
+/* #Login
+================================================== */
+
+.accountInfo { width: 100%; display: table; }
+fieldset.login { background: #fff; width: 40%; -webkit-border-radius: 6px; border-radius: 6px; margin: auto; padding: 50px 20px 10px 20px; box-shadow: 2px 2px 4px 2px rgba(0,0,0,.1); -webkit-box-shadow: 2px 2px 4px 2px rgba(0,0,0,.1); border: 1px solid #ccc; position: relative; }
+fieldset.login legend { font-weight:bold; position:absolute; top:20px; left:20px; font-size: 18px; color: #57616D; }
+fieldset.login input[type=text], fieldset.login input[type=password] { width: 85% }
+fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 11px; text-align: right; }
+
+/* #Page Styles
+================================================== */
+
+#MainContent_pnl_account, .columns.alpha, .columns.omega, .view-abstract, #MainContent_pnl_edit_profile, #MainContent_pnl_change_password { background: #FFF; border: solid 1px #DDD; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); margin-top: 30px; padding: 20px; }
+.view-abstract-panel, .view-panel, #MainContent_pnl_forgot_password { border: 1px solid #D1D0D0; margin: 10px 0 20px 0; display: block; background: #F7F9FC; padding: 10px;}
+
+#MainContent_btn_change_password { margin-left: 10px; }
+
+.sub-title { margin-bottom: 20px; }
+
+.panel {  float: left; width: 28%; background: #FFF; margin-right: 2%; padding: 0 10px;-webkit-border-radius: 6px; border-radius: 6px; border: solid 1px #DDD; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); }
+
+.has-file .scan-file { position: absolute; top: 0; right: 0; background: #2F557C; padding: 3px; }
+.pager-size-wrapper { text-align: right; }
+.title-wrapper { padding-right: 12px; }
+/* .title-wrapper a { text-transform: uppercase; } */
+
+#toggle-unanswered:hover { background: #24AA7A; }
+#toggle-unanswered.active { background: #1B7E5A; color: #FFF; }
+
+span.highlight { font-weight: bold; background: #F7F9FC; border: 1px solid #D1D0D0; margin: 10px 10px 10px 0px; padding: 10px; display: inline-block; }
+
+/* Menu */
+.nav { position: fixed; left: 4px; padding: 10px 20px; border: 1px solid #7D9EB1; top: 120px; z-index: 999; width: 150px; background: #EEE; background: rgba(215, 225, 235, 0.5); }
+.nav ul li { border-bottom: 1px solid #7D9EB1; padding: 0 0 8px 0; }
+ .nav ul li a { text-decoration: none; }
+.nav .button { width: 100%; }
+
+.nav-role { padding: 10px 8px; background: #2F557C; font-size: 1.2em; color: #fff; }
+
+.cbp-spmenu { background: #E5E5E5; -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.3);	box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2); position: fixed; }
+.cbp-spmenu a {	margin: 0; color: #002247;  font-weight: bold; padding: 1em; border-bottom: 1px solid #c6cedc; text-decoration: none; display: block;
+	background: #ffffff; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffffff 69%, #d2deeb 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(69%,#ffffff), color-stop(100%,#d2deeb)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffffff 69%,#d2deeb 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffffff 69%,#d2deeb 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffffff 69%,#d2deeb 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ffffff 69%,#d2deeb 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d2deeb',GradientType=0 ); /* IE6-9 */
+	-webkit-transition: all 0.5s ease-out;
+	-moz-transition: all 0.5s ease-out;
+	transition: all 0.5s ease-out;
+	-webkit-box-shadow: inset -3px 3px 3px -3px rgba(0, 0, 0, .1); box-shadow: inset -3px 3px 3px 0px rgba(0, 0, 0, .1); font-size: .95em;
+}
+.cbp-spmenu a:hover { background: #A9001E; color: #fff; }
+.cbp-spmenu a:active {	background: #A9001E; color: #fff; }
+.cbp-spmenu-vertical {	width: 240px; height: 100%;	top: 0;	z-index: 1000; }
+.cbp-spmenu-left {	left: -240px; }
+.cbp-spmenu-left.cbp-spmenu-open {	left: 0px; }
+
+.cbp-spmenu-push { overflow-x: hidden; position: relative; left: 0; }
+.cbp-spmenu-push #header_container { left: 0; }
+.cbp-spmenu-push-toright, .cbp-spmenu-push-toright #header_container { left: 240px; }
+.cbp-spmenu,
+.cbp-spmenu-push, #header_container { -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; transition: all 0.3s ease; }
+
+/* Pagination
+================================================== */
+tr.pagination table, tr.PagerContainer table { width: auto; color: #2F557C; -webkit-box-shadow: none; box-shadow: none; border: 1px solid #fff; margin: 0; }
+tr.pagination td, .zebra-striped tbody tr.pagination table tr:nth-child(odd) td, 
+tr.PagerContainer td, .zebra-striped tbody tr.PagerContainer table tr:nth-child(odd) td
+{ border: none; background: #AFAFAF; color: #fff; margin: 2px; border: 1px solid #E0DFDF; }
+tr.pagination td a, tr.PagerContainer td a { font-weight: bold; color: #fff; }
+
+div.showingCounts { float: right; background: #AFAFAF; color: #FFF; font-weight: bold; margin: 10px; border: 1px solid #E0DFDF; padding: 8px 20px; clear: both;}
+.AbstractViewTable
+{
+    clear: both;
+}
+
+/* Evaluation
+================================================== */
+#tax-form.container { padding-top: 20px; }
+
+.subtitle { font-size: 1em; font-weight: bold; }
+.button.no:hover { background: #9B0202; color: #fff; }
+.button.no:active { background: #9B0202; color: #fff; }
+
+.specs { float: right; }
+.tax-form-buttons-box { float: right; }
+.specs .button { padding: 5px 10px; margin: 0 5px; }
+.unableCodeBox.button { margin: 10px; padding: 3px 10px;  margin: 0 5px; float: right; }
+#unable-to-code { position: absolute; background: #F3F3F3; padding: 12px; z-index: 2; border: solid 1px #DDD; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); right: 30px; margin-top: 20px; }
+
+ul.specs { margin: 0; padding: 0; }
+span.titles { font-weight: bold; text-align: left; font-weight: bold; font-size: 14px; display: inline-block; text-align: right; }
+div.captionTitle { display: inline-block; font-weight: bold; text-align: left; font-weight: bold; font-size: 17px; padding: 14px 0px; }
+div.icon.open { width: 16px; height: 16px; background: #FFFFFF; display: inline-block; border: 1px solid #E0E0E0; cursor: pointer; position: relative; margin-left: 4px; }
+.unableCodeBox div.icon.open, .specs div.icon.open, .subtitle div.icon.open, .captionTitle + div.icon.open, th.question div.icon.open, th.answer div.icon.open {
+top: 3px; }
+div.icon.open:before { content: "?"; position: absolute; font-weight: bold; top: -1px; left: 4px; font-size: 11px; color: #BDBABA; }
+div.commentsHeader { text-align: left; font-size: 17px; font-weight: bold; padding: 14px 0px; }
+div.subnav { position: fixed; top: 60px; width: 100%; z-index: 999; background: rgba(196, 196, 196, 0.5); height: 40px; right: 0; }
+div.subnav ul { position: absolute; right: 10px; top: -6px; margin: 0; }
+div.subnav input, div.subnav li { display: inline-block }
+.container div.subnav .button { padding: 4px 8px }
+table tbody th.box-three.big, table tbody td.box-three.big { width: 55% }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important }
+h2.errormessages { color: Red }
+h2.successmessages { color: #4eb861 }
+div.debugWindow { position: fixed; top: 60px; right: 20px; width: 220px; border: 1px solid #ccc; padding: 10px; font-size: 11px; font-family: Consolas; color: #fff; background-color: #08c; z-index: 100000; display: none; }
+textarea#comments { width: 100%; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); border: solid 1px #DDD; min-height: 160px; }
+div.select-box { cursor: pointer; text-align: right; height:100%; padding: 0px; }
+div.select-box-container { width: 100%; height: 100%; position: relative; padding: 2px; }
+div.codercbox { position: absolute; width: 10px; height: 10px; top: 0; font-size: 11px; }
+div.coder1 { right: 86px }
+div.coder2 { right: 46px }
+div.coder3 { right: 16px }
+div.comparisoncbox { position: absolute; width: 25px; height: 10px; top: 0px; text-align: left; font-size: 10px; }
+div.ccoder { right: 48px }
+div.codp { right: 18px }
+div.codercount { position: absolute; width: 10px; height: 10px; bottom: 10px; text-align: left; right: 4px; font-size: 11px; }
+div.select-box input { opacity: 0 }
+div.box-disabled { background-color: #808080; cursor: default; }
+div.onstate { background-color: #259bb5 }
+td[scope="row"] { cursor: pointer }
+.outcomeBoxColor-1 /* One Coder Red */ { background-color: #ff0000 }
+.outcomeBoxColor-2 /* Two Coder Yellow */ { background-color: #ffff00 }
+.outcomeBoxColor-3 /* Three Coder Light Green */ { background-color: #4eb861; background-color: #33ff00; }
+.comparisonoutcomeBoxColor-1 /* Blue */ { background-color: #477DFA }
+.comparisonoutcomeBoxColor-2 /* Orange*/ { background-color: #FD9336 }
+.comparisonoutcomeBoxColor-3 /* Three Coder Light Green */ { background-color: #4eb861;background-color: #33ff00; }
+.evalheader{ margin: 6px 0px 0px 0px; }
+#commentsBox { padding: 5px 5px 10px 5px; border: 1px solid #eee; margin: 0px 0px 50px 0px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); min-height:70px;}
+
+
+
+/* MISC  
+   ================================================== */
+
+.errorMessage { background: #F3A2A2; border: 1px solid; color: #030303; margin: auto; display: table; padding: 8px; }
+table.form input { display: inline-block }
+.errorMessage.inline { margin: initial; display: block; }
+.regularMessage { display: table; background: #F8E0A2; border: 1px solid; color: #724809; padding: 8px; margin: auto; }
+.Message { display: table; background: #FFFFFF; border: 1px solid; color: #01748A; padding: 8px; margin: auto; }
+.teamUsers { border: 1px solid #000; border-collapse: collapse; }
+.teamUsers th, .teamUsers td { text-align: left; border: 1px solid #000; padding: 5px; }
+
+#pnl_printBtns { float: right }
+#pnl_uploadNotes { width: 200px; float: left; margin-left: 40px; }
+#pnl_overrideBtns { float: right; margin-right: 10px; }
+#pnl_odpValues { float: left; width: 200px; }
+#pnl_coderValues { float: left; width: 200px; }
+#pnl_abstract { clear: both }
+#pnl_extraData { clear: both }
+.viewSubmissionLink { display: block }
+
+/* #Media Queries
+================================================== */
+	/* Smaller than standard 960 (devices and browsers) */
+	@media only screen and (max-width: 959px) {}
+
+	/* Tablet Portrait size to standard 960 (devices and browsers) */
+	@media only screen and (min-width: 768px) and (max-width: 959px) {}
+
+	/* All Mobile Sizes (devices and browser) */
+	@media only screen and (max-width: 767px) {}
+
+	/* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
+	@media only screen and (min-width: 480px) and (max-width: 767px) {}
+
+	/* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
+	@media only screen and (max-width: 479px) { 
+		input[type="text"], input[type="password"], input[type="email"], textarea, select { width: 100% }
+
+	}
+
+
+/* #Font-Face
+================================================== */
+/* 	This is the proper syntax for an @font-face file
+		Just create a "fonts" folder at the root,
+		copy your FontName into code below and remove
+		comment brackets */
+
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('OpenSans-Bold-webfont.eot');
+    src: url('OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('OpenSans-Bold-webfont.woff') format('woff'),
+         url('OpenSans-Bold-webfont.ttf') format('truetype'),
+         url('OpenSans-Bold-webfont.svg#open_sansbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('OpenSans-Regular-webfont.eot');
+    src: url('OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('OpenSans-Regular-webfont.woff') format('woff'),
+         url('OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sanssemibold';
+    src: url('OpenSans-Semibold-webfont.eot');
+    src: url('OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('OpenSans-Semibold-webfont.woff') format('woff'),
+         url('OpenSans-Semibold-webfont.ttf') format('truetype'),
+         url('OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

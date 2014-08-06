@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.7.5.234;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odptaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString3" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.A_StudyFocusAnswer" Member="A_StudyFocusAnswers">
+    <Type Name="A_StudyFocusAnswer">
+      <Column Name="A_StudyFocusAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StudyFocusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StudyFocus_A1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StudyFocus_A2" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StudyFocus_A3" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Submission_A_StudyFocusAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+      <Association Name="A_StudyFocus_A_StudyFocusAnswer" Member="A_StudyFocus" ThisKey="StudyFocusID" OtherKey="StudyFocusID" Type="A_StudyFocus" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.A_StudyFocusCategory" Member="A_StudyFocusCategories">
+    <Type Name="A_StudyFocusCategory">
+      <Column Name="StudyFocusCategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StudyFocusCategory" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.B_EntitiesStudied" Member="B_EntitiesStudieds">
+    <Type Name="B_EntitiesStudied">
+      <Column Name="EntitiesStudiedID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="EntitiesStudied" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Sort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="B_EntitiesStudied_B_EntitiesStudiedAnswer" Member="B_EntitiesStudiedAnswers" ThisKey="EntitiesStudiedID" OtherKey="EntitiesStudiedID" Type="B_EntitiesStudiedAnswer" />
+      <Association Name="Status_B_EntitiesStudied" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.B_EntitiesStudiedAnswer" Member="B_EntitiesStudiedAnswers">
+    <Type Name="B_EntitiesStudiedAnswer">
+      <Column Name="B_EntitiesStudiedAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EntitiesStudiedID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="B_EntitiesStudied_B_EntitiesStudiedAnswer" Member="B_EntitiesStudied" ThisKey="EntitiesStudiedID" OtherKey="EntitiesStudiedID" Type="B_EntitiesStudied" IsForeignKey="true" />
+      <Association Name="Submission_B_EntitiesStudiedAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.C_StudySetting" Member="C_StudySettings">
+    <Type Name="C_StudySetting">
+      <Column Name="StudySettingID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StudySetting" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Sort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="C_StudySetting_C_StudySettingAnswer" Member="C_StudySettingAnswers" ThisKey="StudySettingID" OtherKey="StudySettingID" Type="C_StudySettingAnswer" />
+      <Association Name="Status_C_StudySetting" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.C_StudySettingAnswer" Member="C_StudySettingAnswers">
+    <Type Name="C_StudySettingAnswer">
+      <Column Name="C_StudySettingAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StudySettingID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="C_StudySetting_C_StudySettingAnswer" Member="C_StudySetting" ThisKey="StudySettingID" OtherKey="StudySettingID" Type="C_StudySetting" IsForeignKey="true" />
+      <Association Name="Submission_C_StudySettingAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.D_PopulationFocus" Member="D_PopulationFocus">
+    <Type Name="D_PopulationFocus">
+      <Column Name="PopulationFocusID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PopulationFocus" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Sort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="D_PopulationFocus_D_PopulationFocusAnswer" Member="D_PopulationFocusAnswers" ThisKey="PopulationFocusID" OtherKey="PopulationFocusID" Type="D_PopulationFocusAnswer" />
+      <Association Name="Status_D_PopulationFocus" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.D_PopulationFocusAnswer" Member="D_PopulationFocusAnswers">
+    <Type Name="D_PopulationFocusAnswer">
+      <Column Name="D_PopulationFocusAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PopulationFocusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="D_PopulationFocus_D_PopulationFocusAnswer" Member="D_PopulationFocus" ThisKey="PopulationFocusID" OtherKey="PopulationFocusID" Type="D_PopulationFocus" IsForeignKey="true" />
+      <Association Name="Submission_D_PopulationFocusAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.E_StudyDesignPurpose" Member="E_StudyDesignPurposes">
+    <Type Name="E_StudyDesignPurpose">
+      <Column Name="StudyDesignPurposeID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="StudyDesignPurpose" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Sort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="E_StudyDesignPurpose_E_StudyDesignPurposeAnswer" Member="E_StudyDesignPurposeAnswers" ThisKey="StudyDesignPurposeID" OtherKey="StudyDesignPurposeID" Type="E_StudyDesignPurposeAnswer" />
+      <Association Name="Status_E_StudyDesignPurpose" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.E_StudyDesignPurposeAnswer" Member="E_StudyDesignPurposeAnswers">
+    <Type Name="E_StudyDesignPurposeAnswer">
+      <Column Name="E_StudyDesignPurposeAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StudyDesignPurposeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="E_StudyDesignPurpose_E_StudyDesignPurposeAnswer" Member="E_StudyDesignPurpose" ThisKey="StudyDesignPurposeID" OtherKey="StudyDesignPurposeID" Type="E_StudyDesignPurpose" IsForeignKey="true" />
+      <Association Name="Submission_E_StudyDesignPurposeAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.F_PreventionCategory" Member="F_PreventionCategories">
+    <Type Name="F_PreventionCategory">
+      <Column Name="PreventionCategoryID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PreventionCategory" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Sort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="F_PreventionCategory_F_PreventionCategoryAnswer" Member="F_PreventionCategoryAnswers" ThisKey="PreventionCategoryID" OtherKey="PreventionCategoryID" Type="F_PreventionCategoryAnswer" />
+      <Association Name="Status_F_PreventionCategory" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.F_PreventionCategoryAnswer" Member="F_PreventionCategoryAnswers">
+    <Type Name="F_PreventionCategoryAnswer">
+      <Column Name="F_PreventionCategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PreventionCategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="F_PreventionCategory_F_PreventionCategoryAnswer" Member="F_PreventionCategory" ThisKey="PreventionCategoryID" OtherKey="PreventionCategoryID" Type="F_PreventionCategory" IsForeignKey="true" />
+      <Association Name="Submission_F_PreventionCategoryAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Status" Member="Status">
+    <Type Name="Status">
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Status" Member="Status1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Status_B_EntitiesStudied" Member="B_EntitiesStudieds" ThisKey="StatusID" OtherKey="StatusID" Type="B_EntitiesStudied" />
+      <Association Name="Status_C_StudySetting" Member="C_StudySettings" ThisKey="StatusID" OtherKey="StatusID" Type="C_StudySetting" />
+      <Association Name="Status_D_PopulationFocus" Member="D_PopulationFocus" ThisKey="StatusID" OtherKey="StatusID" Type="D_PopulationFocus" />
+      <Association Name="Status_E_StudyDesignPurpose" Member="E_StudyDesignPurposes" ThisKey="StatusID" OtherKey="StatusID" Type="E_StudyDesignPurpose" />
+      <Association Name="Status_F_PreventionCategory" Member="F_PreventionCategories" ThisKey="StatusID" OtherKey="StatusID" Type="F_PreventionCategory" />
+      <Association Name="Status_ProtocolVersionControl" Member="ProtocolVersionControls" ThisKey="StatusID" OtherKey="StatusID" Type="ProtocolVersionControl" />
+      <Association Name="Status_Submission" Member="Submissions" ThisKey="StatusID" OtherKey="StatusID" Type="Submission" />
+      <Association Name="Status_Submission1" Member="Submissions1" ThisKey="StatusID" OtherKey="StatusID" Type="Submission" />
+      <Association Name="Status_A_StudyFocus" Member="A_StudyFocus" ThisKey="StatusID" OtherKey="StatusID" Type="A_StudyFocus" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SubmissionType" Member="SubmissionTypes">
+    <Type Name="SubmissionType">
+      <Column Name="SubmissionTypeId" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionType" Member="SubmissionType1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="SubmissionType_Submission" Member="Submissions" ThisKey="SubmissionTypeId" OtherKey="SubmissionTypeId" Type="Submission" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProtocolHistory" Member="ProtocolHistories">
+    <Type Name="ProtocolHistory">
+      <Column Name="ProtocolID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="Protocol" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProtocolHTML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LookUpTable" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="VersionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="ProtocolVersionControl_ProtocolHistory" Member="ProtocolVersionControl" ThisKey="VersionID" OtherKey="VersionID" Type="ProtocolVersionControl" IsForeignKey="true" />
+      <Association Name="Protocol_ProtocolHistory" Member="Protocol1" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="Protocol" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ProtocolVersionControl" Member="ProtocolVersionControls">
+    <Type Name="ProtocolVersionControl">
+      <Column Name="VersionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Version" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ProtocolLoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="ProtocolVersionControl_ProtocolHistory" Member="ProtocolHistories" ThisKey="VersionID" OtherKey="VersionID" Type="ProtocolHistory" />
+      <Association Name="Status_ProtocolVersionControl" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Team" Member="Teams">
+    <Type Name="Team">
+      <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TeamCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TeamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Createdby" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Team_TeamUser" Member="TeamUsers" ThisKey="TeamID" OtherKey="TeamID" Type="TeamUser" />
+      <Association Name="Team_Evaluation" Member="Evaluations" ThisKey="TeamID" OtherKey="TeamID" Type="Evaluation" />
+      <Association Name="TeamType_Team" Member="TeamType" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="TeamType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeamType" Member="TeamTypes">
+    <Type Name="TeamType">
+      <Column Name="TeamTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TeamType" Member="TeamType1" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Association Name="TeamType_Team" Member="Teams" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="Team" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeamUser" Member="TeamUsers">
+    <Type Name="TeamUser">
+      <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Team_TeamUser" Member="Team" ThisKey="TeamID" OtherKey="TeamID" Type="Team" IsForeignKey="true" />
+      <Association Name="aspnet_User_TeamUser" Member="aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="aspnet_User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Evaluation" Member="Evaluations">
+    <Type Name="Evaluation">
+      <Column Name="EvaluationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ConsensusStartedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="TeamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsComplete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DateTimeStarted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateTimeEnded" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="EvaluationTypeId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="IsStopped" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="StoppedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="StoppedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Evaluation_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="AbstractStatusChangeHistory" />
+      <Association Name="Evaluation_AbstractStatusChangeHistory1" Member="AbstractStatusChangeHistories1" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="AbstractStatusChangeHistory" />
+      <Association Name="Evaluation_Submission" Member="Submissions" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Submission" />
+      <Association Name="Team_Evaluation" Member="Team" ThisKey="TeamID" OtherKey="TeamID" Type="Team" IsForeignKey="true" />
+      <Association Name="EvaluationType_Evaluation" Member="EvaluationType" ThisKey="EvaluationTypeId" OtherKey="EvaluationTypeId" Type="EvaluationType" IsForeignKey="true" />
+      <Association Name="Abstract_Evaluation" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
+      <Association Name="Abstract_Evaluation1" Member="Abstract1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EvaluationType" Member="EvaluationTypes">
+    <Type Name="EvaluationType">
+      <Column Name="EvaluationTypeId" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EvaluationType" Member="EvaluationType1" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="EvaluationType_Evaluation" Member="Evaluations" ThisKey="EvaluationTypeId" OtherKey="EvaluationTypeId" Type="Evaluation" />
+    </Type>
+  </Table>
+  <Table Name="dbo.aspnet_Users" Member="aspnet_Users">
+    <Type Name="aspnet_User">
+      <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="MobileAlias" Type="System.String" DbType="NVarChar(16)" CanBeNull="true" />
+      <Column Name="IsAnonymous" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="LastActivityDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UserFirstName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserLastName" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Association Name="aspnet_User_TeamUser" Member="TeamUsers" ThisKey="UserId" OtherKey="UserId" Type="TeamUser" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories">
+    <Type Name="AbstractStatusChangeHistory">
+      <Column Name="AbstractStatusChangeHistoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EvaluationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AbstractStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="CreatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Association Name="Evaluation_AbstractStatusChangeHistory" Member="Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Evaluation" IsForeignKey="true" />
+      <Association Name="Evaluation_AbstractStatusChangeHistory1" Member="Evaluation1" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Evaluation" IsForeignKey="true" />
+      <Association Name="AbstractStatus_AbstractStatusChangeHistory" Member="AbstractStatus" ThisKey="AbstractStatusID" OtherKey="AbstractStatusID" Type="AbstractStatus" IsForeignKey="true" />
+      <Association Name="Abstract_AbstractStatusChangeHistory" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.AbstractStatus" Member="AbstractStatus">
+    <Type Name="AbstractStatus">
+      <Column Name="AbstractStatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AbstractStatusCode" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="AbstractStatusDescription" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="AbstractStatus_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="AbstractStatusID" OtherKey="AbstractStatusID" Type="AbstractStatusChangeHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Abstract" Member="Abstracts">
+    <Type Name="Abstract">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AdministeringIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Abstract" Member="Abstract1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractProjTermPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activity" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupportYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Association Name="Abstract_Evaluation" Member="Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
+      <Association Name="Abstract_Evaluation1" Member="Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
+      <Association Name="Abstract_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractStatusChangeHistory" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Submission" Member="Submissions">
+    <Type Name="Submission">
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EvaluationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="SubmissionTypeId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="UnableToCode" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ApproveSupervisorUserID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="SubmissionDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Submission_A_StudyFocusAnswer" Member="A_StudyFocusAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="A_StudyFocusAnswer" />
+      <Association Name="Submission_B_EntitiesStudiedAnswer" Member="B_EntitiesStudiedAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="B_EntitiesStudiedAnswer" />
+      <Association Name="Submission_C_StudySettingAnswer" Member="C_StudySettingAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="C_StudySettingAnswer" />
+      <Association Name="Submission_D_PopulationFocusAnswer" Member="D_PopulationFocusAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="D_PopulationFocusAnswer" />
+      <Association Name="Submission_E_StudyDesignPurposeAnswer" Member="E_StudyDesignPurposeAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="E_StudyDesignPurposeAnswer" />
+      <Association Name="Submission_F_PreventionCategoryAnswer" Member="F_PreventionCategoryAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="F_PreventionCategoryAnswer" />
+      <Association Name="Evaluation_Submission" Member="Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Evaluation" IsForeignKey="true" />
+      <Association Name="Status_Submission" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+      <Association Name="Status_Submission1" Member="Status1" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+      <Association Name="SubmissionType_Submission" Member="SubmissionType" ThisKey="SubmissionTypeId" OtherKey="SubmissionTypeId" Type="SubmissionType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.A_StudyFocus" Member="A_StudyFocus">
+    <Type Name="A_StudyFocus">
+      <Column Name="StudyFocusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudyFocus" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="A1_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="A2_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="A3_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Sort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="A_StudyFocus_A_StudyFocusAnswer" Member="A_StudyFocusAnswers" ThisKey="StudyFocusID" OtherKey="StudyFocusID" Type="A_StudyFocusAnswer" />
+      <Association Name="Status_A_StudyFocus" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Protocol" Member="Protocols">
+    <Type Name="Protocol">
+      <Column Name="ProtocolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubTitle" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Protocol" Member="Protocol1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProtocolLoad" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LookUpTable" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Protocol_ProtocolHistory" Member="ProtocolHistories" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="ProtocolHistory" />
+    </Type>
+  </Table>
+  <Function Name="dbo.KappaBaseData_Insert_ByAbs_EvlID" Method="KappaBaseData_Insert_ByAbs_EvlID">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EvaluationId" Parameter="evaluationId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AbstractStatusID" Parameter="abstractStatusID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
