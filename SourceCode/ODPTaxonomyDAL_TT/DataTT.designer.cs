@@ -249,13 +249,6 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
-		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="StudyFocusID", DbType="Int")] System.Nullable<int> studyFocusID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID, studyFocusID);
-			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstract_status_tt")]
 		public ISingleResult<select_abstract_status_ttResult> select_abstract_status_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="Int")] System.Nullable<int> abstractID)
 		{
@@ -268,6 +261,20 @@ namespace ODPTaxonomyDAL_TT
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), teamID);
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
+		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CategoryID", DbType="Int")] System.Nullable<int> categoryID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Sorting", DbType="Int")] System.Nullable<int> sorting)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID, categoryID, sorting);
+			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_group_tt")]
+		public ISingleResult<select_abstracts_group_ttResult> select_abstracts_group_tt()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<select_abstracts_group_ttResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -698,7 +705,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_Role", ThisKey="RoleId", OtherKey="RoleId", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_Role", ThisKey="RoleId", OtherKey="RoleId", IsForeignKey=true)]
 		public tbl_aspnet_Role tbl_aspnet_Role
 		{
 			get
@@ -5123,7 +5130,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_UsersInRoles", ThisKey="RoleId", OtherKey="RoleId")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole", Storage="_tbl_aspnet_UsersInRoles", ThisKey="RoleId", OtherKey="RoleId")]
 		public EntitySet<tbl_aspnet_UsersInRole> tbl_aspnet_UsersInRoles
 		{
 			get
@@ -5169,6 +5176,32 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
+	public partial class select_abstract_status_ttResult
+	{
+		
+		private int _AbstractStatusID;
+		
+		public select_abstract_status_ttResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractStatusID", DbType="Int NOT NULL")]
+		public int AbstractStatusID
+		{
+			get
+			{
+				return this._AbstractStatusID;
+			}
+			set
+			{
+				if ((this._AbstractStatusID != value))
+				{
+					this._AbstractStatusID = value;
+				}
+			}
+		}
+	}
+	
 	public partial class select_abstracts_coding_ttResult
 	{
 		
@@ -5195,27 +5228,45 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class select_abstract_status_ttResult
+	public partial class select_abstracts_group_ttResult
 	{
 		
-		private int _AbstractStatusID;
+		private int _CategoryID;
 		
-		public select_abstract_status_ttResult()
+		private System.Nullable<int> _Sorting;
+		
+		public select_abstracts_group_ttResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractStatusID", DbType="Int NOT NULL")]
-		public int AbstractStatusID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL")]
+		public int CategoryID
 		{
 			get
 			{
-				return this._AbstractStatusID;
+				return this._CategoryID;
 			}
 			set
 			{
-				if ((this._AbstractStatusID != value))
+				if ((this._CategoryID != value))
 				{
-					this._AbstractStatusID = value;
+					this._CategoryID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sorting", DbType="Int")]
+		public System.Nullable<int> Sorting
+		{
+			get
+			{
+				return this._Sorting;
+			}
+			set
+			{
+				if ((this._Sorting != value))
+				{
+					this._Sorting = value;
 				}
 			}
 		}

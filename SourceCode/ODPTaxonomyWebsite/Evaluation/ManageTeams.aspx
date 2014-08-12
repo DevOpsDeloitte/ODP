@@ -30,7 +30,7 @@
                   //console.log(clickElem);
                   $("#" + clickElem).click();
               } else {
-                  alertify.error("You've clicked cancel Delete..");
+                  alertify.error("You've clicked cancel.");
                   return false;
               }
           });

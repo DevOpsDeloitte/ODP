@@ -5,8 +5,21 @@ div.subtitle a { text-decoration: none }
 div.selected { border: 1px solid #D1D0D0; margin: 10px 0 10px 0; display: block; background: #fff; padding: 10px; }
 div.selected div.subtitle { margin: 0; border: none; }
 div#mainGlossary { margin-top: 40px }
-.buttons { display: block; position: absolute; top: 8px; right: 8px; }
+.buttons { display: block; position: absolute; top: 8px; right: 8px; z-index: 99999;}
 .button, a.button { font-family: Arial; color: #666; font-weight: normal; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); background: #fff; margin: 10px; padding: 8px 20px; }
   .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
   .container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
   .fa { font-family: 'FontAwesome', Arial !important; }
+  
+div.hdesc, div.hpart
+{
+    font-size: 13px;
+}
+
+hr {
+    border: solid #ddd;
+    border-width: 1px 0 0;
+    clear: both;
+    margin: 10px 0 10px;
+    height: 0;
+}

@@ -4,6 +4,7 @@
 <h3>
     View Coded Abstracts</h3>
      <div class="showingCounts">
+      <span  class="showing">Page&nbsp;:&nbsp;<%=  (AbstractViewGridView.PageIndex + 1) %></span><!-- of <span class="showing"><%=AbstractViewGridView.PageCount %></span>--><br />
             Showing : 
             <%  var totalCount = 0;
                 var showing = 0;
@@ -34,7 +35,7 @@
             </div>
 <asp:Button runat="server" class="review button no" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
-    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped">
+    GridLines="None" CssClass="AbstractViewTable bordered zebra-striped" AllowPaging="false">
     <Columns>
         <asp:TemplateField>
             <ItemTemplate>

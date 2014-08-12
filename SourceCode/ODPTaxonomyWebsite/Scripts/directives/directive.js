@@ -195,6 +195,34 @@ app.directive("outcomeBox", function ($rootScope) {
 
             }
 
+            scope.value.resetBoxCC = function()
+            {
+
+                if( scope.value.modelcolorState != "Disabled"){
+                    codercount = scope.value.codercount;
+                    scope.value.isChecked = false;
+                    scope.view.checked = false;
+                    scope.view.colorstate = scope.value.originalcolorState;
+                    if( codercount > 0){
+                       
+                       if($rootScope.mode.indexOf("Consensus") != -1) {
+                       scope.view.colorstate = "";
+                        scope.value.modelcolorState = scope.getColor( codercount );
+                        scope.value.modelcolorState = "Transparent";
+                        }
+
+                        if($rootScope.mode.indexOf("Comparison") != -1) {
+                        scope.view.colorstate = "";
+                        scope.value.modelcolorState = scope.getComparisonColor( codercount );
+                        scope.value.modelcolorState = "Transparent";
+                        }
+
+                    }
+                 }
+
+
+            }
+
             // this happens in the link phase.
             // this where the initial color states are being set for consensus.
             if($rootScope.mode.indexOf("Consensus") != -1 && !scope.view.disabled /* && $rootScope.displaymode != "View" */)

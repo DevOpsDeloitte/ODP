@@ -1,20 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=10.7.5.234;Initial Catalog=ODP_Taxonomy_DEV;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.A_StudyFocus" Member="A_StudyFocus">
-    <Type Name="A_StudyFocus">
-      <Column Name="StudyFocusID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="StudyFocus" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="A1_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="A2_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="A3_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="Sort" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="AbstractStudyFocusSort" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="ShowAsAbstractTopic" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="A_StudyFocus_A_StudyFocusAnswer" Member="A_StudyFocusAnswers" ThisKey="StudyFocusID" OtherKey="StudyFocusID" Type="A_StudyFocusAnswer" />
-      <Association Name="Status_A_StudyFocus" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
-    </Type>
-  </Table>
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.7.5.234;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odptaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.A_StudyFocusAnswer" Member="A_StudyFocusAnswers">
     <Type Name="A_StudyFocusAnswer">
       <Column Name="A_StudyFocusAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -23,8 +8,8 @@
       <Column Name="StudyFocus_A1" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="StudyFocus_A2" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
       <Column Name="StudyFocus_A3" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
-      <Association Name="A_StudyFocus_A_StudyFocusAnswer" Member="A_StudyFocus" ThisKey="StudyFocusID" OtherKey="StudyFocusID" Type="A_StudyFocus" IsForeignKey="true" />
       <Association Name="Submission_A_StudyFocusAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+      <Association Name="A_StudyFocus_A_StudyFocusAnswer" Member="A_StudyFocus" ThisKey="StudyFocusID" OtherKey="StudyFocusID" Type="A_StudyFocus" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.A_StudyFocusCategory" Member="A_StudyFocusCategories">
@@ -132,7 +117,6 @@
     <Type Name="Status">
       <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Status" Member="Status1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Association Name="Status_A_StudyFocus" Member="A_StudyFocus" ThisKey="StatusID" OtherKey="StatusID" Type="A_StudyFocus" />
       <Association Name="Status_B_EntitiesStudied" Member="B_EntitiesStudieds" ThisKey="StatusID" OtherKey="StatusID" Type="B_EntitiesStudied" />
       <Association Name="Status_C_StudySetting" Member="C_StudySettings" ThisKey="StatusID" OtherKey="StatusID" Type="C_StudySetting" />
       <Association Name="Status_D_PopulationFocus" Member="D_PopulationFocus" ThisKey="StatusID" OtherKey="StatusID" Type="D_PopulationFocus" />
@@ -141,6 +125,7 @@
       <Association Name="Status_ProtocolVersionControl" Member="ProtocolVersionControls" ThisKey="StatusID" OtherKey="StatusID" Type="ProtocolVersionControl" />
       <Association Name="Status_Submission" Member="Submissions" ThisKey="StatusID" OtherKey="StatusID" Type="Submission" />
       <Association Name="Status_Submission1" Member="Submissions1" ThisKey="StatusID" OtherKey="StatusID" Type="Submission" />
+      <Association Name="Status_A_StudyFocus" Member="A_StudyFocus" ThisKey="StatusID" OtherKey="StatusID" Type="A_StudyFocus" />
     </Type>
   </Table>
   <Table Name="dbo.SubmissionType" Member="SubmissionTypes">
@@ -148,19 +133,6 @@
       <Column Name="SubmissionTypeId" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="SubmissionType" Member="SubmissionType1" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Association Name="SubmissionType_Submission" Member="Submissions" ThisKey="SubmissionTypeId" OtherKey="SubmissionTypeId" Type="Submission" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Protocol" Member="Protocols">
-    <Type Name="Protocol">
-      <Column Name="ProtocolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SubTitle" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="Protocol" Member="Protocol1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ProtocolHTML" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="LookUpTable" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Protocol_ProtocolHistory" Member="ProtocolHistories" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="ProtocolHistory" />
     </Type>
   </Table>
   <Table Name="dbo.ProtocolHistory" Member="ProtocolHistories">
@@ -174,8 +146,8 @@
       <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="VersionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="Protocol_ProtocolHistory" Member="Protocol1" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="Protocol" IsForeignKey="true" />
       <Association Name="ProtocolVersionControl_ProtocolHistory" Member="ProtocolVersionControl" ThisKey="VersionID" OtherKey="VersionID" Type="ProtocolVersionControl" IsForeignKey="true" />
+      <Association Name="Protocol_ProtocolHistory" Member="Protocol1" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="Protocol" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.ProtocolVersionControl" Member="ProtocolVersionControls">
@@ -333,6 +305,32 @@
       <Association Name="Status_Submission" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
       <Association Name="Status_Submission1" Member="Status1" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
       <Association Name="SubmissionType_Submission" Member="SubmissionType" ThisKey="SubmissionTypeId" OtherKey="SubmissionTypeId" Type="SubmissionType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.A_StudyFocus" Member="A_StudyFocus">
+    <Type Name="A_StudyFocus">
+      <Column Name="StudyFocusID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="StudyFocus" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="A1_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="A2_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="A3_IsEnabled" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="Sort" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="A_StudyFocus_A_StudyFocusAnswer" Member="A_StudyFocusAnswers" ThisKey="StudyFocusID" OtherKey="StudyFocusID" Type="A_StudyFocusAnswer" />
+      <Association Name="Status_A_StudyFocus" Member="Status" ThisKey="StatusID" OtherKey="StatusID" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Protocol" Member="Protocols">
+    <Type Name="Protocol">
+      <Column Name="ProtocolID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubTitle" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Protocol" Member="Protocol1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProtocolLoad" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LookUpTable" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Protocol_ProtocolHistory" Member="ProtocolHistories" ThisKey="ProtocolID" OtherKey="ProtocolID" Type="ProtocolHistory" />
     </Type>
   </Table>
   <Function Name="dbo.KappaBaseData_Insert_ByAbs_EvlID" Method="KappaBaseData_Insert_ByAbs_EvlID">

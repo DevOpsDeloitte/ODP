@@ -32,8 +32,8 @@ namespace ODPTaxonomyWebsite.Evaluation
         private string messUserNotInTeam = "You have not been added to a team at this time. Once you are on a team, refresh this page and you can begin.";
         private string messNoCurrentRole = "Your current role is not identified. You will be redirected to the homepage in 10 seconds.";
         private string messStatusIsChanged = "You are not allowed to override as the abstract's status was changed.";
-        private string messOverrideSuccess = "Abstract override successful, please ask effected coders to log out and log back in.";
-        private string messUploadNotesSuccess = "Upload Notes successful, please ask effected coders to log out and log back in.";
+        private string messOverrideSuccess = "Abstract override successful.";
+        private string messUploadNotesSuccess = "Upload Notes successful.";
         private string messMaxSizeExceeded = "The file size exceeded 20MB maximum allowed.";
         private string messNoFile = "Please select the file to upload.";
         private string messWrongFileType = "Only PDF files are allowed to upload.";

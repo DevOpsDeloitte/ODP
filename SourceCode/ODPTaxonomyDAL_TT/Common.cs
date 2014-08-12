@@ -448,21 +448,21 @@ namespace ODPTaxonomyDAL_TT
             int index = 0;
             int topicsCount = 0;
             int abstractId = -1;
+            int iSorting = 1;
             tbl_Abstract abstr = null;
-            List<int> topics = new List<int>();
+            List<AbstractGroup> topics = new List<AbstractGroup>();
             List<int> abstracts =  new List<int>();
 
             //Get available Topics
             using (DataDataContext db = new DataDataContext(connString))
             {
-                var matches = from a in db.tbl_A_StudyFocus
-                              where a.ShowAsAbstractTopic == true && a.StatusID == (int)Status.Active
-                              orderby a.AbstractStudyFocusSort
-                              select a.StudyFocusID;
+                var matches = db.select_abstracts_group_tt();
 
-                foreach(int i in matches)
+                foreach(var i in matches)
                 {
-                    topics.Add(i);
+                    iSorting = (i.Sorting != null) ? (int)i.Sorting : 1;
+
+                    topics.Add(new AbstractGroup(i.CategoryID, iSorting));
                 }
             }
 
@@ -473,10 +473,10 @@ namespace ODPTaxonomyDAL_TT
                 //Get available Abstracts
                 using (DataDataContext db = new DataDataContext(connString))
                 {
-                    foreach (int i in topics)
+                    foreach (AbstractGroup i in topics)
                     {
                         
-                        var matches = db.select_abstracts_coding_tt((int)AbstractStatusID._0, i);
+                        var matches = db.select_abstracts_coding_tt((int)AbstractStatusID._0, i.CategoryID, i.Sorting);
 
                         foreach (var item in matches)
                         {
