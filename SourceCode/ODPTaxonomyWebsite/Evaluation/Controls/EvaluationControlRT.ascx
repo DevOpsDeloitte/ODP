@@ -17,7 +17,7 @@
    // $scope.mdata.formmode = "<%= FormMode %>"
 </script>
 
-<div class="container" id="tax-form" ng-controller="ODPFormCtrl">
+<div class="container" id="tax-form" ng-controller="ODPFormCtrlRT">
 
     <div class="sixteen columns header"> 
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN (TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
@@ -25,16 +25,8 @@
     </div>
 
     <div class="subnav" ng-cloak>
-        <ul>
-            <!--<li><a href="#study-focus">Study Focus</a></li>
-            <li><a href="#entities-studied">Entities Studied</a></li>
-            <li><a href="#study-setting">Study Setting</a></li>
-            <li><a href="#population-focus">Population focus</a></li>
-            <li><a href="#study-design-purpose">Study Design/Purpose</a></li>
-            <li><a href="#prevention-research-category">Prevention Research Category</a></li>-->
-
-            <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
-            <li><input class="button yes" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
+    <%--    <ul>
+             <li><input class="button yes" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
             <li ng-show="showResetButton"><input class="button yes" type="button" id="resetButton" value="Reset" ng-click="resetFormStart()" /></li>
             <li ng-show="showComparisonButton"><input class="button yes" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
             <li ng-show="!showComparisonButton && mode.indexOf('Comparison') != -1"><input class="button no" type="button" id="disabledcomparisonButton" value="Start Comparison" /></li>
@@ -42,17 +34,8 @@
             <li ng-show="!showConsensusButton && mode.indexOf('Consensus') != -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
             <li ng-show="showSaveButton"><input class="button yes" type="button" id="saveButton" value="Submit" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Submit"/></li>
-            <%--<li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
-            <li ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></li>
-            <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
-            <li>
-            <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
-                <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
-                <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
-            </div>
-            
-            </li>--%>
-        </ul>
+         
+        </ul>--%>
     </div>
     <div id="odpforms" name="x" ng-cloak>
     <div class="sixteen columns"> 
@@ -256,9 +239,9 @@
 <script src="../scripts/alertify.js"></script>
 <script src="../scripts/angular/angular.min.js"></script>
   <!-- Firebase -->
-<script src="https://cdn.firebase.com/js/client/1.0.17/firebase.js"></script>
+<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
 <!-- AngularFire Library -->
-<script src="https://cdn.firebase.com/libs/angularfire/0.7.1/angularfire.min.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
 
 <script src="../scripts/modules/module.js"></script>
 <script src="../scripts/controllers/controllerRT.js"></script>

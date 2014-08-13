@@ -15,25 +15,7 @@ using ODPTaxonomyCommon;
 
 namespace ODPTaxonomyWebsite.Evaluation.Controls
 {
-    //public class TeamUser // Team user class
-    //{
-    //    public Guid UserId {get;set;}
-    //    public int TeamId { get; set; }
-    //    public string TeamType { get; set; }
-    //    public string UserName { get; set; }
-    //    public string UserFirstName { get; set; }
-    //    public string UserLastName { get; set; }
-    //    public int UserSubmissionID { get; set; }
-    //}
-
-    //public class ComparisonTeamUser
-    //{
-    //    public Guid? UserId { get; set; }
-    //    public int? TeamId { get; set; }
-    //    public string TeamType { get; set; }
-    //    public int ComparisonSubmissionID { get; set; }
-
-    //}
+   
 
 
 
@@ -80,7 +62,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             db = DBData.GetDataContext();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load Start...");
             //loadSession();
-            //setAndrenderPageVars();
+            getTeamFromQuery();
+            setAndrenderPageVars();
             unableCoders = getUnabletoCodeValues();
             renderStudyFocusQuestions();
             renderEntitiesStudiedQuestions();
@@ -90,6 +73,13 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             renderPreventionCategoryQuestions();
             db.Dispose();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load End...");
+        }
+
+        protected void getTeamFromQuery()
+        {
+            int val = 0;
+            bool res = Int32.TryParse(Request.QueryString["teamid"], out val);
+            teamID = res ? val : 0;
         }
 
         protected Dictionary<int, TeamUser> getTeamUsers()

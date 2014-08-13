@@ -286,6 +286,7 @@
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControlRT.ascx.cs">
       <DependentUpon>EvaluationControlRT.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControlRT.ascx.designer.cs">
       <DependentUpon>EvaluationControlRT.ascx</DependentUpon>
@@ -299,6 +300,7 @@
     </Compile>
     <Compile Include="Evaluation\EvaluationRT.aspx.cs">
       <DependentUpon>EvaluationRT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\EvaluationRT.aspx.designer.cs">
       <DependentUpon>EvaluationRT.aspx</DependentUpon>

@@ -37,6 +37,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         $scope.mdata.teamid = $("input#teamid").val();
 
 
+        //$scope.$apply();
 
 
         //console.log(" is unable : " + $scope.mdata.isunable);
@@ -80,13 +81,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         $scope.mdata.studydesignpurpose = [];
         $scope.mdata.preventioncategory = [];
 
-        var teamRef = new Firebase("https://intense-fire-1108.firebaseio.com/teams" + "/" + $scope.mdata.teamid);
 
-        var xService = $firebase(teamRef); //.$bind($scope, "mdata");
-        $timeout(function () {
-            xService.$bind($scope, "mdata");
-        }, 1000);
-        
 
         $scope.showDescription = function (inID) {
             //console.log("show description.." + inID);
@@ -119,12 +114,44 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         };
 
         $scope.$watch("mdata", function () {
-            //console.log("form data changed :: " + $scope.mdata);
+            console.log("form data changed :: " + $scope.mdata);
             if ($scope.displaymode != "View") {
                 $scope.$broadcast("disableboxes");
                 $scope.$broadcast("validate.formdata");
+
+                // sync mdata with data - remove all function properties
+                if ($scope.mode.indexOf("Consensus") != -1) {
+                    $scope.data = $scope.syncObjects($scope.mdata);
+                    $globdata = JSON.parse(JSON.stringify($scope.mdata));
+                }
             }
         }, true);
+
+        $scope.syncObjects = function (inData) {
+
+
+            return JSON.parse(JSON.stringify(inData));
+
+        };
+
+
+
+        var firebaseURL = "https://intense-fire-1108.firebaseio.com/teams" + "/" + $scope.mdata.teamid;
+        console.log(firebaseURL);
+        var teamRef = new Firebase(firebaseURL);
+
+        var sync = $firebase(teamRef);
+        //$scope.mdata = sync.$asObject();
+        var syncObject = sync.$asObject();
+
+        $scope.data = $scope.syncObjects($scope.mdata);
+        syncObject.$bindTo($scope, "data");
+
+        $timeout(function () {
+            //$scope.data = $scope.syncObjects($scope.mdata);
+            $scope.mdata.firebaseOn = true;
+        }, 2000);
+
 
 
 

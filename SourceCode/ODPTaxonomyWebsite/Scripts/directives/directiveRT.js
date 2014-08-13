@@ -1,3 +1,4 @@
+
 app.directive("outcomeBox", function ($rootScope) {
 
     var boxTemplate = '<div class="select-box {{view.colorstate}}" ng-class="view.classValue"  ng-click="updatestate()" >' +
@@ -17,6 +18,77 @@ app.directive("outcomeBox", function ($rootScope) {
         template: boxTemplate,
         scope: {
             value: "=outcomeBox"
+            //count: "=hitCount",
+            //isEnabled: "=isEnabled"
+        },
+
+        link: function (scope, elem, attrs) {
+         scope.value = {};
+         scope.view.disabled = false;
+         scope.view.checked = true;
+         //scope.view.colorstate = "onstate icheckbox_line-tax checked";
+           scope.$watch('value', function(newValue, oldValue) {
+                if (newValue)
+                try{
+                    scope.view.checked = newValue.isChecked;
+                }catch(e) {};
+
+
+
+                
+
+                if(scope.view.checked){
+                    scope.view.colorstate = "onstate icheckbox_line-tax checked";
+                }
+                else{
+                    scope.view.colorstate = "";
+                }
+                if(newValue.modelcolorState == "Disabled"){
+                    scope.view.colorstate = "select-box box-disabled";
+                }
+                // attrs.isChecked == "yes" ? true : false;
+                    console.log("I see a data change!"+newValue.isChecked);
+            });
+
+        },
+
+        controller: function ( $scope, $element, $attrs) {
+             //console.log($scope.codercount);
+              $scope.view = {
+                modelValue: $scope.value,
+                editorEnabled: false,
+                hitCount: 0,
+                enabled: true
+
+            };
+
+        }
+
+        }
+
+
+});
+
+
+app.directive("outcomeBoxOld", function ($rootScope) {
+
+    var boxTemplate = '<div class="select-box {{view.colorstate}}" ng-class="view.classValue"  ng-click="updatestate()" >' +
+       '<div class="select-box-container">' +
+       '<input type="checkbox" name="{{view.iname}}"  ng-model="view.modelValue" ng-disabled="view.disabled" ng-checked="view.checked" />' +
+       //'<span ng-show="view.consensus">{{view.codervals}}</span>' +
+       '<div ng-show="view.consensus"><div class="codercbox coder1">{{view.displaycoders[0]}}</div> <div class="codercbox coder2">{{view.displaycoders[1]}}</div> <div class="codercbox coder3">{{view.displaycoders[2]}}</div> </div>' +
+       '<div ng-show="view.comparers"><div class="comparisoncbox ccoder">{{view.displaycoders[0]}}</div> <div class="comparisoncbox codp">{{view.displaycoders[1]}}</div> </div>' +
+       '<div class="codercount">{{view.displaycoderscount}}</div>' +
+      //'<span>{{$rootScope.mdata.formmode}}</span>' +
+       '<div>' +
+       '</div>';
+
+    return {
+        restrict: "A",
+        replace: true,
+        template: boxTemplate,
+        scope: {
+            value: "=outcomeBoxOld"
             //count: "=hitCount",
             //isEnabled: "=isEnabled"
         },
