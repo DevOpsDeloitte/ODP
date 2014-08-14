@@ -26,6 +26,9 @@ app.directive("outcomeBox", function ($rootScope) {
          scope.value = {};
          scope.view.disabled = false;
          scope.view.checked = true;
+//         if(scope.value.codercount){
+//                    scope.view.displaycoderscount = scope.value.codercount;
+//          }
          //scope.view.colorstate = "onstate icheckbox_line-tax checked";
            scope.$watch('value', function(newValue, oldValue) {
                 if (newValue)
@@ -33,9 +36,6 @@ app.directive("outcomeBox", function ($rootScope) {
                     scope.view.checked = newValue.isChecked;
                 }catch(e) {};
 
-
-
-                
 
                 if(scope.view.checked){
                     scope.view.colorstate = "onstate icheckbox_line-tax checked";
@@ -46,8 +46,20 @@ app.directive("outcomeBox", function ($rootScope) {
                 if(newValue.modelcolorState == "Disabled"){
                     scope.view.colorstate = "select-box box-disabled";
                 }
+
+                  if(oldValue.codercount){
+                    scope.view.displaycoderscount = oldValue.codercount;
+                }
+//                if(oldValue.displaycoders){
+//                   
+//                }
+                 scope.view.consensus = true;
+                  try{
+                     scope.view.displaycoders = oldValue.displaycoders;
+                }catch(e) {};
+
                 // attrs.isChecked == "yes" ? true : false;
-                    console.log("I see a data change!"+newValue.isChecked);
+                    //console.log("I see a data change!"+newValue.isChecked);
             });
 
         },

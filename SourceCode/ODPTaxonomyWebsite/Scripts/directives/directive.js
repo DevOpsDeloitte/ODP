@@ -242,6 +242,9 @@ app.directive("outcomeBox", function ($rootScope) {
                          // model value being set ::
                          scope.value.codercount = codercount;
                          scope.value.modelcolorState = scope.getColor( codercount );
+
+                         // adding model value.
+                         scope.value.displaycoders = scope.view.displaycoders;
                      }
 
                  }
