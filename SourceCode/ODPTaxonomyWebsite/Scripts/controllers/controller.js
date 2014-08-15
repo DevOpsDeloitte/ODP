@@ -5,7 +5,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
     $scope.init = function () {
 
 
-
+        var FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
 
         $scope.mdata = {};
         $scope.mdata.superusername = "";
@@ -102,6 +102,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
 
         };
 
+        $scope.watchConsensus = function () {
+
+            window.location.replace("/Evaluation/EvaluationRT.aspx?teamid=" + $scope.mdata.teamid);
+        }
+
         $scope.startComparison = function () {
             //console.log("start consensus :: " + window.location.href);
             window.location.replace($scope.cleanURL(window.location.href) + "?startComparison=true");
@@ -121,6 +126,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
 
                 // sync mdata with data - remove all function properties
                 if ($scope.mode.indexOf("Consensus") != -1) {
+                    console.log(" watch fired to sync mdata - data ");
                     $scope.data = $scope.syncObjects($scope.mdata);
                     $globdata = JSON.parse(JSON.stringify($scope.mdata));
                 }
@@ -128,29 +134,85 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         }, true);
 
         $scope.syncObjects = function (inData) {
-
-
             return JSON.parse(JSON.stringify(inData));
-
         };
 
 
+        // turn on syncing with firebase in consensus mode:
+        if ($scope.mode.indexOf("Consensus") != -1) {
 
-        var firebaseURL = "https://intense-fire-1108.firebaseio.com/teams" + "/" + $scope.mdata.teamid;
-        console.log(firebaseURL);
-        var teamRef = new Firebase(firebaseURL);
+            // Add ourselves to presence list when online.
+            var listRef = new Firebase("https://intense-fire-1108.firebaseio.com" + "/presence/");
+            var presenceRef = new Firebase("https://intense-fire-1108.firebaseio.com/.info/connected");
+            var userRef = listRef.push();
 
-        var sync = $firebase(teamRef);
-        //$scope.mdata = sync.$asObject();
-        var syncObject = sync.$asObject();
+            presenceRef.on("value", function (snap) {
+                if (snap.val()) {
+                    //userRef.set(true);
+                    userRef.set({ teamid: $scope.mdata.teamid });
+                    // Remove ourselves when we disconnect.
+                    userRef.onDisconnect().remove();
 
-        $scope.data = $scope.syncObjects($scope.mdata);
-        syncObject.$bindTo($scope, "data");
+                }
+            });
 
+            var firebaseURL = "https://intense-fire-1108.firebaseio.com/teams" + "/" + $scope.mdata.teamid;
+            console.log(firebaseURL);
+            var teamRef = new Firebase(firebaseURL);
+            teamRef.onDisconnect().remove();
+
+            var sync = $firebase(teamRef);
+            var syncObject = sync.$asObject();
+            $scope.data = $scope.syncObjects($scope.mdata);
+            syncObject.$bindTo($scope, "data");
+
+            $timeout(function () {
+                $scope.mdata.firebaseOn = true;
+                $scope.data = $scope.syncObjects($scope.mdata);
+            }, 2000);
+        }
+
+        // check for team consensus in progress
+        $scope.showWatchConsensusButton = false;
+        var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
+        console.log(firebasedetectURL);
+        var teamdetectObj = new Firebase(firebasedetectURL);
         $timeout(function () {
-            //$scope.data = $scope.syncObjects($scope.mdata);
-            $scope.mdata.firebaseOn = true;
-        }, 2000);
+            console.log(" showing team id : " + $scope.mdata.teamid);
+            teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
+                var exists = (snapshot.val() !== null);
+                if (exists) {
+                    console.log("Team Exists :: show watch consensus button ");
+                    $scope.showWatchConsensusButton = true;
+                    $scope.$apply();
+                }
+            });
+
+            teamdetectObj.on("value", function (snap) {
+                if (snap.val()) {
+                    $globdata = snap.val();
+                    if (snap.val() !== undefined) {
+                        console.log(typeof (snap.val()));
+                        $team.keys = Object.keys(snap.val());
+                        for (var i = 0; i < $team.keys.length; i++) {
+                            console.log(" team keys " + i + "    " + $team.keys[i]);
+                            if ($team.keys[i] == $scope.mdata.teamid) {
+                                $scope.showWatchConsensusButton = true;
+                                //$scope.$apply();
+                            }
+                        }
+                    }
+                }
+                else {
+                    // empty
+                    $scope.showWatchConsensusButton = false;
+                    //$scope.$apply();
+
+                }
+
+            });
+
+        }, 300);
 
 
 
@@ -370,6 +432,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         $scope.mdata.comments = "";
 
         $scope.$apply();
+
+        if ($scope.mode.indexOf("Consensus") != -1) {
+            //console.log(" watch fired to sync mdata - data ");
+            //$scope.data = $scope.syncObjects($scope.mdata);
+        }
 
         //console.log(" reset triggered..");
 

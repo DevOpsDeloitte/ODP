@@ -190,7 +190,9 @@ app.directive("outcomeBox", function ($rootScope) {
                         scope.value.modelcolorState = scope.getComparisonColor( codercount );}
 
                     }
+                     scope.value.colorstatecopy = scope.view.colorstate;
                  }
+                
 
 
             }
@@ -218,6 +220,8 @@ app.directive("outcomeBox", function ($rootScope) {
                         }
 
                     }
+
+                     scope.value.colorstatecopy = scope.view.colorstate;
                  }
 
 
@@ -256,6 +260,8 @@ app.directive("outcomeBox", function ($rootScope) {
                       scope.value.originalcolorState = "";
                       scope.value.codercount = 0;
                  }
+
+                 scope.value.colorstatecopy = scope.view.colorstate;
             }
 
             // this happens in the link phase.
@@ -327,6 +333,9 @@ app.directive("outcomeBox", function ($rootScope) {
                              $scope.view.checked = false;
                              $scope.value.modelcolorState = $scope.getComparisonColor( codercount );
                              $scope.view.colorstate = $scope.value.originalcolorState;
+
+                              $scope.value.colorstatecopy = $scope.view.colorstate;
+
                              return;
                         }
                     }
@@ -353,9 +362,11 @@ app.directive("outcomeBox", function ($rootScope) {
                         $scope.value.modelcolorState = "Transparent";
                     }
 
+                     $scope.value.colorstatecopy = $scope.view.colorstate;
+
                 }
                
-
+              
             };
         }
     };

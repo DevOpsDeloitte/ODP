@@ -93,6 +93,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //System.Diagnostics.Trace.WriteLine("Eval Page Load End...");
         }
 
+        protected void assignTeam()
+        {
+            var TeamID = db.Evaluations.Where(e => e.EvaluationId == EvaluationID && e.AbstractID == AbstractID).Select(e => e.TeamID).FirstOrDefault();
+            this.teamID = TeamID;
+        }
+
         protected Dictionary<int, TeamUser> getTeamUsers()
         {
             Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
@@ -382,6 +388,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             showComparison();
 
 
+            if (FormMode.IndexOf("Evaluation") != -1)
+            {
+                assignTeam();
+            }
 
             if (FormMode.IndexOf("Consensus") != -1)
             {

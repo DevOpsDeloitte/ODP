@@ -4,3 +4,4 @@ angular.element(document).ready(function() {
 });
 
 var $globdata;
+var $team = {};
