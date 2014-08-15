@@ -178,41 +178,48 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         console.log(firebasedetectURL);
         var teamdetectObj = new Firebase(firebasedetectURL);
         $timeout(function () {
-            console.log(" showing team id : " + $scope.mdata.teamid);
-            teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
-                var exists = (snapshot.val() !== null);
-                if (exists) {
-                    console.log("Team Exists :: show watch consensus button ");
-                    $scope.showWatchConsensusButton = true;
-                    $scope.$apply();
-                }
-            });
+            //Check for team id existence and show consensus button in view individual evaluation.
+            if ($scope.displaymode == "View") {
+                console.log(" showing team id : " + $scope.mdata.teamid);
+                teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
+                    var exists = (snapshot.val() !== null);
+                    if (exists) {
+                        console.log("Team Exists :: show watch consensus button ");
+                        $scope.showWatchConsensusButton = true;
+                        $scope.$apply();
+                    }
+                });
 
-            teamdetectObj.on("value", function (snap) {
-                if (snap.val()) {
-                    $globdata = snap.val();
-                    if (snap.val() !== undefined) {
-                        console.log(typeof (snap.val()));
-                        $team.keys = Object.keys(snap.val());
-                        for (var i = 0; i < $team.keys.length; i++) {
-                            console.log(" team keys " + i + "    " + $team.keys[i]);
-                            if ($team.keys[i] == $scope.mdata.teamid) {
-                                $scope.showWatchConsensusButton = true;
-                                //$scope.$apply();
+
+            
+                teamdetectObj.on("value", function (snap) {
+                    var teamexists = false;
+                    if (snap.val()) {
+                        console.log(" team detect object :: value change " + snap.val());
+                        $globdata = snap.val();
+                        if (snap.val() !== undefined) {
+                            console.log(typeof (snap.val()));
+                            $team.keys = Object.keys(snap.val());
+                            for (var i = 0; i < $team.keys.length; i++) {
+                                console.log(" team keys " + i + "    " + $team.keys[i]);
+                                if ($team.keys[i] == $scope.mdata.teamid) {
+                                    teamexists = true;      
+                                }
                             }
                         }
                     }
-                }
-                else {
-                    // empty
-                    $scope.showWatchConsensusButton = false;
-                    //$scope.$apply();
-
-                }
-
-            });
+                    else {
+                        teamexists = false;
+                    }
+                    $scope.$apply(function () {
+                        $scope.showWatchConsensusButton = teamexists;
+                    });
+                });
+            } 
 
         }, 300);
+
+
 
 
 
