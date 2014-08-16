@@ -18,20 +18,20 @@ app.directive("outcomeBox", function ($rootScope) {
         template: boxTemplate,
         scope: {
             value: "=outcomeBox"
-            //count: "=hitCount",
-            //isEnabled: "=isEnabled"
         },
 
         link: function (scope, elem, attrs) {
-         scope.value = {};
+         //scope.value = {};
          scope.view.disabled = false;
          scope.view.checked = true;
-//         if(scope.value.codercount){
-//                    scope.view.displaycoderscount = scope.value.codercount;
-//          }
-         //scope.view.colorstate = "onstate icheckbox_line-tax checked";
+         console.log(" link fired " + scope.value);
+         
+
            scope.$watch('value', function(newValue, oldValue) {
-                if (newValue)
+           
+           //console.log( " link function old value : " + oldValue.codercount + "     new value : " + newValue.codercount );
+                //if (newValue)
+
                 try{
                     scope.view.checked = newValue.isChecked;
                 }catch(e) {};
@@ -40,15 +40,17 @@ app.directive("outcomeBox", function ($rootScope) {
                     
                      scope.view.colorstate = newValue.colorstatecopy;
                 }catch(e) {};
+
                 try{
                     if(scope.view.checked){
-                        scope.view.colorstate = "onstate icheckbox_line-tax checked";
+                       // scope.view.colorstate = "onstate icheckbox_line-tax checked";
                     }
                     else{
                         //scope.view.colorstate = "";
                         //scope.view.colorstate = newValue.colorstatecopy;
                     }
                 }catch(e) {};
+
                 try{
                 if(newValue.modelcolorState == "Disabled"){
                     scope.view.colorstate = "select-box box-disabled";
@@ -56,8 +58,8 @@ app.directive("outcomeBox", function ($rootScope) {
                 }catch(e) {};
 
                 try{
-                  if(oldValue.codercount){
-                    scope.view.displaycoderscount = oldValue.codercount;
+                  if(newValue.codercount){
+                    scope.view.displaycoderscount = newValue.codercount;
                 }
                 }catch(e) {};
 //                if(oldValue.displaycoders){
@@ -65,7 +67,7 @@ app.directive("outcomeBox", function ($rootScope) {
 //                }
                  scope.view.consensus = true;
                   try{
-                     scope.view.displaycoders = oldValue.displaycoders;
+                     scope.view.displaycoders = newValue.displaycoders;
                 }catch(e) {};
                  
 

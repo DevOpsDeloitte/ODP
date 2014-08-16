@@ -4,7 +4,8 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
     $scope.init = function () {
 
-
+        var FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
+        window.MYSCOPE = $scope;
         $scope.mdata = {};
         $scope.mdata.studyfocus = [];
         $scope.mdata.studyfocus[0] = [];
@@ -21,9 +22,8 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
         console.log(" model team id :: " + $scope.mdata.teamid);
 
-        var teamRef = new Firebase("https://intense-fire-1108.firebaseio.com/teams" + "/" + $scope.mdata.teamid);
+        var teamRef = new Firebase(FIREBASE_LOCATION + "/teams" + "/" + $scope.mdata.teamid);
         var sync = $firebase(teamRef);
-        //$scope.mdata = sync.$asObject();
         var syncObject = sync.$asObject();
         syncObject.$bindTo($scope, "mdata");
 

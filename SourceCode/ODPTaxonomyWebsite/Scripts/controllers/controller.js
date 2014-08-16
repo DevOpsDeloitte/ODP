@@ -142,8 +142,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         if ($scope.mode.indexOf("Consensus") != -1) {
 
             // Add ourselves to presence list when online.
-            var listRef = new Firebase("https://intense-fire-1108.firebaseio.com" + "/presence/");
-            var presenceRef = new Firebase("https://intense-fire-1108.firebaseio.com/.info/connected");
+            var listRef = new Firebase(FIREBASE_LOCATION + "/presence/");
+            var presenceRef = new Firebase(FIREBASE_LOCATION + "/.info/connected");
             var userRef = listRef.push();
 
             presenceRef.on("value", function (snap) {
@@ -156,7 +156,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                 }
             });
 
-            var firebaseURL = "https://intense-fire-1108.firebaseio.com/teams" + "/" + $scope.mdata.teamid;
+            var firebaseURL = FIREBASE_LOCATION + "/teams" + "/" + $scope.mdata.teamid;
             console.log(firebaseURL);
             var teamRef = new Firebase(firebaseURL);
             teamRef.onDisconnect().remove();
@@ -169,18 +169,18 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             $timeout(function () {
                 $scope.mdata.firebaseOn = true;
                 $scope.data = $scope.syncObjects($scope.mdata);
-            }, 2000);
+            }, 1500);
         }
 
         // check for team consensus in progress
         $scope.showWatchConsensusButton = false;
         var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
-        console.log(firebasedetectURL);
+        //console.log(firebasedetectURL);
         var teamdetectObj = new Firebase(firebasedetectURL);
         $timeout(function () {
             //Check for team id existence and show consensus button in view individual evaluation.
             if ($scope.displaymode == "View") {
-                console.log(" showing team id : " + $scope.mdata.teamid);
+                //console.log(" showing team id : " + $scope.mdata.teamid);
                 teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
                     var exists = (snapshot.val() !== null);
                     if (exists) {
