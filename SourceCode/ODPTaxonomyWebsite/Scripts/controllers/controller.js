@@ -179,7 +179,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         var teamdetectObj = new Firebase(firebasedetectURL);
         $timeout(function () {
             //Check for team id existence and show consensus button in view individual evaluation.
-            if ($scope.displaymode == "View") {
+            if ($scope.displaymode == "View" && $scope.mode.indexOf("Evaluation") != -1) {
                 //console.log(" showing team id : " + $scope.mdata.teamid);
                 teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
                     var exists = (snapshot.val() !== null);
