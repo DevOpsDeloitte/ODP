@@ -25,6 +25,7 @@ app.directive("outcomeBox", function ($rootScope) {
          scope.view.disabled = false;
          scope.view.checked = true;
          console.log(" link fired " + scope.value);
+
          
 
            scope.$watch('value', function(newValue, oldValue) {
@@ -86,6 +87,11 @@ app.directive("outcomeBox", function ($rootScope) {
                 enabled: true
 
             };
+
+            
+           $scope.updatestate = function(){
+                return;
+           };
 
         }
 
