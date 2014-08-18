@@ -37,6 +37,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string lastName = string.Empty;
         public string userName = string.Empty;
         public string projectTitle = string.Empty;
+        public string piProjectLeader = string.Empty;
         public Guid UserId = new Guid();
         public string DisplayMode = string.Empty;
         public string FormMode = string.Empty;
@@ -61,8 +62,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         {
             db = DBData.GetDataContext();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load Start...");
-            //loadSession();
-            getTeamFromQuery();
+            loadSession();
+            getTeamAbstractFromQuery();
+            loadAbstractInfoFromID();
             setAndrenderPageVars();
             unableCoders = getUnabletoCodeValues();
             renderStudyFocusQuestions();
@@ -75,11 +77,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //System.Diagnostics.Trace.WriteLine("Eval Page Load End...");
         }
 
-        protected void getTeamFromQuery()
+        protected void getTeamAbstractFromQuery()
         {
             int val = 0;
             bool res = Int32.TryParse(Request.QueryString["teamid"], out val);
             teamID = res ? val : 0;
+
+            res = Int32.TryParse(Request.QueryString["abstractid"], out val);
+            AbstractID = res ? val : 0;
+
         }
 
         protected Dictionary<int, TeamUser> getTeamUsers()
@@ -150,6 +156,39 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
 
         }
+
+        protected void loadAbstractInfoFromID()
+        {
+            //var evalrec = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).Select(e => e).FirstOrDefault();
+            //if (evalrec != null)
+            //{
+            //    AbstractID = Convert.ToInt32(evalrec.AbstractID);
+            //    //Response.Write(" Abstract ID : " + AbstractID);
+            //}
+            //else
+            //{
+            //    // We need to exit -- trouble.
+
+            //}
+
+            var absrec = db.Abstracts.Where(a => a.AbstractID == AbstractID).Select(a => a).FirstOrDefault();
+            if (absrec != null)
+            {
+                applicationID = absrec.ApplicationID.ToString();
+                projectTitle = absrec.ProjectTitle.ToString();
+                piProjectLeader = absrec.PIProjectLeader.ToString();
+
+            }
+            var userrec = db.aspnet_Users.Where(u => u.UserId == UserId).Select(u => u).FirstOrDefault();
+            if (userrec != null)
+            {
+                userName = userrec.UserName;
+                firstName = userrec.UserFirstName;
+                lastName = userrec.UserLastName;
+            }
+
+        }
+
         protected void loadAbstractInfo()
         {
             var evalrec = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).Select(e => e).FirstOrDefault();

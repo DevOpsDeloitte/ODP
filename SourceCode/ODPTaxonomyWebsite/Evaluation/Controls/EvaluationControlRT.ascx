@@ -19,9 +19,12 @@
 
 <div class="container" id="tax-form" ng-controller="ODPFormCtrlRT">
 
-    <div class="sixteen columns header"> 
+    <div class="sixteen columns evalheader"> 
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN (TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
+    </div>
+     <div class="sixteen columns" ng-cloak>
+        <h2 ng-show="mdata.formmode.indexOf('Consensus') != -1">Consensus Watch</h2>
     </div>
 
     <div class="subnav" ng-cloak>
@@ -77,12 +80,15 @@
         </div>
 
      <div class="sixteen columns">
-         <div>
+        <div>
              <span class="titles">Application ID :</span>
              <span class="titlevals"><%= applicationID %></span>
              <br />
              <span class="titles">Project Title :</span>
              <span class="titlevals"><%= projectTitle %></span>
+             <br />
+             <span class="titles">PI Project Leader :</span>
+             <span class="titlevals"><%= piProjectLeader %></span>
          </div>
    
      </div>

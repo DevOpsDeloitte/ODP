@@ -104,7 +104,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
 
         $scope.watchConsensus = function () {
 
-            window.location.replace("/Evaluation/EvaluationRT.aspx?teamid=" + $scope.mdata.teamid);
+            window.location.replace("/Evaluation/EvaluationRT.aspx?teamid=" + $scope.mdata.teamid + "&abstractid="+ $scope.mdata.abstractid);
         }
 
         $scope.startComparison = function () {
