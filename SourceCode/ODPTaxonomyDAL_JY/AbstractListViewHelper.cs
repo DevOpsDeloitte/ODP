@@ -322,7 +322,7 @@ namespace ODPTaxonomyDAL_JY
                 return ((decimal)(inVal)).ToString(KappaSpecifier);
             }
             catch {
-                return "0.00";
+                return "\u2014";
             }
 
         }
