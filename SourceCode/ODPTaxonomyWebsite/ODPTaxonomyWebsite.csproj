@@ -118,7 +118,6 @@
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modules\module.js" />
     <Content Include="Scripts\persist.js" />
-    <Content Include="Styles\AbstractListView.css" />
     <Content Include="Styles\alertify.core.css" />
     <Content Include="Styles\alertify.css" />
     <Content Include="Styles\base.css" />
@@ -472,7 +471,6 @@
     <None Include="Scripts\angular\angular.min.js.map" />
     <None Include="Scripts\angular\bower.json" />
     <None Include="Scripts\angular\README.md" />
-    <None Include="Styles\AbstractListView.css.orig" />
     <None Include="Styles\OpenSans-Bold-webfont.eot" />
     <None Include="Styles\OpenSans-Bold-webfont.ttf" />
     <None Include="Styles\OpenSans-Bold-webfont.woff" />

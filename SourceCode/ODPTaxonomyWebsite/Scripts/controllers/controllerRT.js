@@ -20,6 +20,11 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         $scope.mdata.preventioncategory = [];
         $scope.mdata.teamid = $("input#teamid").val();
 
+        $scope.showDescription = function (inID) {
+            //console.log("show description.." + inID);
+            window.open("./Glossary.aspx#" + inID, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, width=768, height=700");
+        };
+
         console.log(" model team id :: " + $scope.mdata.teamid);
 
         var teamRef = new Firebase(FIREBASE_LOCATION + "/teams" + "/" + $scope.mdata.teamid);
