@@ -24,7 +24,7 @@ app.directive("outcomeBox", function ($rootScope) {
          //scope.value = {};
          scope.view.disabled = false;
          scope.view.checked = true;
-         console.log(" link fired " + scope.value);
+         //console.log(" link fired " + scope.value);
 
          
 
