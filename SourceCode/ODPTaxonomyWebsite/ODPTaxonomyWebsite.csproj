@@ -103,8 +103,11 @@
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-csp.css" />
+    <Content Include="Scripts\angular\angular-latest.min.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
+    <Content Include="Scripts\angular\angularfire.min.js" />
+    <Content Include="Scripts\angular\firebase.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\controllers\controller.js" />

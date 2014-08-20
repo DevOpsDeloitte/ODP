@@ -246,11 +246,14 @@
 <script src="../scripts/main.js"></script>
 <script src="../scripts/icheck.js"></script>
 <script src="../scripts/alertify.js"></script>
-<script src="../scripts/angular/angular.min.js"></script>
+<script src="../scripts/angular/angular-latest.min.js"></script>
+<script src="../scripts/angular/firebase.js"></script>
+<script src="../scripts/angular/angularfire.min.js"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular.min.js"></script>-->
   <!-- Firebase -->
-<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>
+<!--<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>-->
 <!-- AngularFire Library -->
-<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
+<!--<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>-->
 
 <script src="../scripts/modules/module.js"></script>
 <script src="../scripts/controllers/controllerRT.js"></script>

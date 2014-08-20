@@ -8,6 +8,8 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         window.MYSCOPE = $scope;
         $scope.mdata = {};
         $scope.local = {};
+        $scope.FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
+        FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
         $scope.mdata.studyfocus = [];
         $scope.mdata.studyfocus[0] = [];
         $scope.mdata.studyfocus[1] = [];
