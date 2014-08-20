@@ -4,4 +4,6 @@ angular.element(document).ready(function() {
 });
 
 var $globdata;
+var $globDebug;
 var $team = {};
+var $teamRT = {};

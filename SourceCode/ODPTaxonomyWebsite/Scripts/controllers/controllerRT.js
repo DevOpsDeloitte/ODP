@@ -55,12 +55,9 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         // check & listen for team consensus in progress + exist otherwise.
 
         var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
-        //console.log(firebasedetectURL);
         var teamdetectObj = new Firebase(firebasedetectURL);
         $timeout(function () {
-            //Check for team id existence and show consensus button in view individual evaluation.
-            //if ($scope.displaymode == "View" && $scope.mode.indexOf("Evaluation") != -1) {
-            //console.log(" showing team id : " + $scope.mdata.teamid);
+       
             teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
                 var exists = (snapshot.val() !== null);
                 if (exists) {
@@ -99,13 +96,52 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
                     window.location = "Evaluation.aspx";
                 }
             });
-            // }
+         
 
         }, 300);
 
 
 
     }
+
+    $scope.detectTeam = function () {
+        var firebasedetectURL = $scope.FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
+        var teamdetectObj = new Firebase(firebasedetectURL);
+        var teamexists = false;
+        $timeout(function () {
+
+            teamdetectObj.on("value", function (snap) {
+
+                if (snap.val()) {
+                    $globdata = snap.val();
+                    if (snap.val() !== undefined) {
+
+                        $team.keys = Object.keys(snap.val());
+                        //var $teamRT = {};
+                        $teamRT.vals = $.map(snap.val(), function (value, key) {
+                            return value;
+                        });
+                        for (var i = 0; i < $team.keys.length; i++) {
+                            console.log(" team keys " + i + "    " + $teamRT.vals[i].teamid);
+                            if ($teamRT.vals[i].teamid == $scope.mdata.teamid) {
+                                teamexists = true;
+                            }
+                        }
+                    }
+                }
+                else {
+                    teamexists = false;
+                }
+
+
+            });
+
+
+        }, 0);
+
+        return teamexists;
+
+    },
 
     $scope.showChange = function () {
 

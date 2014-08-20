@@ -242,6 +242,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
     };
 
 
+
     $scope.turnOnSyncing = function () {
 
         var FIREBASE_LOCATION;
@@ -261,6 +262,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                     // Remove ourselves when we disconnect.
                     userRef.onDisconnect().remove();
 
+
                 }
             });
 
@@ -275,6 +277,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             syncObject.$bindTo($scope, "data");
             $scope.mdata.firebaseOn = true;
             $scope.data = $scope.syncObjects($scope.mdata);
+            //$scope.$digest();
+
+
+
+//            $timeout(function () {
+//                angular.element('#ginst').triggerHandler('click');
+//            }, 1000);
+
+
+
             //console.log($scope.data);
 
             //            setTimeout(function () {
@@ -363,7 +375,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                         if (snap.val() !== undefined) {
                             //console.log(typeof (snap.val()));
                             $team.keys = Object.keys(snap.val());
-                            var $teamRT = {};
+                            //var $teamRT = {};
                             $teamRT.vals = $.map(snap.val(), function (value, key) {
                                 return value;
                             });
