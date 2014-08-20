@@ -25,6 +25,7 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         $scope.mdata.abstractid = $("input#abstractid").val();
         $scope.local.abstractid = $("input#abstractid").val();
         $scope.mdata.teamid = $("input#teamid").val();
+        $scope.teamid = $("input#teamid").val();
 
         $scope.showDescription = function (inID) {
             //console.log("show description.." + inID);
@@ -45,7 +46,7 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
         $scope.$watch("mdata", function () {
 
-            //console.log(" mdata model changed : " + $scope.mdata.firebaseOn);
+            console.log(" mdata model changed : " + $scope.mdata.firebaseOn);
             if (!$scope.mdata.firebaseOn) {
                 // console.log(" time to redirect -- watch over. ");
                 //window.location = "Evaluation.aspx";
@@ -54,51 +55,53 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
         // check & listen for team consensus in progress + exist otherwise.
 
-        var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
-        var teamdetectObj = new Firebase(firebasedetectURL);
-        $timeout(function () {
-       
-            teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
-                var exists = (snapshot.val() !== null);
-                if (exists) {
-                    console.log("Team Exists :: all good ");
+        //        var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
+        //        var teamdetectObj = new Firebase(firebasedetectURL);
+        //        $timeout(function () {
+        //       
+        //            teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
+        //                var exists = (snapshot.val() !== null);
+        //                if (exists) {
+        //                    console.log("Team Exists :: all good ");
 
-                }
-                else {
-                    console.log(" time to redirect -- watch over. ");
-                    window.location = "Evaluation.aspx";
-                }
-            });
+        //                }
+        //                else {
+        //                    console.log(" time to redirect -- watch over. ");
+        //                    window.location = "Evaluation.aspx";
+        //                }
+        //            });
 
 
 
-            teamdetectObj.on("value", function (snap) {
-                var teamexists = false;
-                if (snap.val()) {
-                    console.log(" team detect object :: value change " + snap.val());
-                    $globdata = snap.val();
-                    if (snap.val() !== undefined) {
-                        console.log(typeof (snap.val()));
-                        $team.keys = Object.keys(snap.val());
-                        for (var i = 0; i < $team.keys.length; i++) {
-                            console.log(" team keys " + i + "    " + $team.keys[i]);
-                            if ($team.keys[i] == $scope.mdata.teamid) {
-                                teamexists = true;
-                            }
-                        }
-                    }
-                }
-                else {
-                    teamexists = false;
-                }
-                if (!teamexists) {
-                    console.log(" time to redirect -- watch over. ");
-                    window.location = "Evaluation.aspx";
-                }
-            });
-         
+        //            teamdetectObj.on("value", function (snap) {
+        //                var teamexists = false;
+        //                if (snap.val()) {
+        //                    console.log(" team detect object :: value change " + snap.val());
+        //                    $globdata = snap.val();
+        //                    if (snap.val() !== undefined) {
+        //                        console.log(typeof (snap.val()));
+        //                        $team.keys = Object.keys(snap.val());
+        //                        for (var i = 0; i < $team.keys.length; i++) {
+        //                            console.log(" team keys " + i + "    " + $team.keys[i]);
+        //                            if ($team.keys[i] == $scope.mdata.teamid) {
+        //                                teamexists = true;
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //                else {
+        //                    teamexists = false;
+        //                }
+        //                if (!teamexists) {
+        //                    console.log(" time to redirect -- watch over. ");
+        //                    window.location = "Evaluation.aspx";
+        //                }
+        //            });
+        //         
 
-        }, 300);
+        //        }, 300);
+
+        $scope.detectTeam();
 
 
 
@@ -107,11 +110,11 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
     $scope.detectTeam = function () {
         var firebasedetectURL = $scope.FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
         var teamdetectObj = new Firebase(firebasedetectURL);
-        var teamexists = false;
+        
         $timeout(function () {
-
+            
             teamdetectObj.on("value", function (snap) {
-
+                var teamexists = false;
                 if (snap.val()) {
                     $globdata = snap.val();
                     if (snap.val() !== undefined) {
@@ -122,8 +125,8 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
                             return value;
                         });
                         for (var i = 0; i < $team.keys.length; i++) {
-                            console.log(" team keys " + i + "    " + $teamRT.vals[i].teamid);
-                            if ($teamRT.vals[i].teamid == $scope.mdata.teamid) {
+                            console.log(" team keys " + i + "    " + $teamRT.vals[i].teamid + "     " +$scope.teamid);
+                            if ($teamRT.vals[i].teamid == $scope.teamid) {
                                 teamexists = true;
                             }
                         }
@@ -133,13 +136,22 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
                     teamexists = false;
                 }
 
+                if (!teamexists) {
+                    console.log(" time to redirect -- watch over. ");
+                    window.location = "Evaluation.aspx";
+                }
+
+
+
 
             });
 
+            
 
-        }, 0);
 
-        return teamexists;
+        }, 500);
+
+        
 
     },
 

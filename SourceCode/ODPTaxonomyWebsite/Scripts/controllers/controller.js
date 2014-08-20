@@ -248,7 +248,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         var FIREBASE_LOCATION;
         FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
 
-        if ($scope.mode.indexOf("Consensus") != -1) {
+        if ($scope.mode.indexOf("Consensus") != -1 && $scope.displaymode == "Insert") {
 
             // Add ourselves to presence list when online.
             var listRef = new Firebase(FIREBASE_LOCATION + "/presence/");
@@ -289,12 +289,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
 
             //console.log($scope.data);
 
-            //            setTimeout(function () {
-            //                $scope.mdata.firebaseOn = true;
-            //                $scope.data = $scope.syncObjects($scope.mdata);
-            //                $scope.$apply();
-            //                console.log(" manual timeout fired :: ");
-            //            }, 3000);
+//                        setTimeout(function () {
+//                            $scope.mdata.firebaseOn = true;
+//                            $scope.data = $scope.syncObjects($scope.mdata);
+//                            $scope.$apply();
+//                            console.log(" manual timeout fired :: ");
+//                        }, 2000);
         }
 
     };

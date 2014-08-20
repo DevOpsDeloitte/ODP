@@ -24,7 +24,7 @@
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
      <div class="sixteen columns" ng-cloak>
-        <h2 ng-show="mdata.formmode.indexOf('Consensus') != -1">Consensus Watch <span class="successmessages" ng-show="mdata.displaymode.indexOf('View') != -1"> -- Completed</span><span ng-show="mdata.displaymode.indexOf('Insert') != -1"> -- In Progress</span> </h2>
+        <h2 ng-show="mdata.formmode.indexOf('Consensus') != -1">Consensus Watch <span class="successmessages" ng-show="mdata.displaymode.indexOf('View') != -1 && mdata.displaymode != undefined"> -- Completed</span><span ng-show="mdata.displaymode.indexOf('Insert') != -1 && mdata.displaymode != undefined"> -- In Progress</span> </h2>
         
         
     </div>
