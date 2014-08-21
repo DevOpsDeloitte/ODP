@@ -130,7 +130,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                 // sync mdata with data - remove all function properties
                 if ($scope.mode.indexOf("Consensus") != -1) {
                     console.log(" watch fired to sync mdata - data ");
-                    $scope.data = $scope.syncObjects($scope.mdata);
+                    $timeout(function () {
+                        $scope.data = $scope.syncObjects($scope.mdata);
+                    }, 250);
                     $globdata = JSON.parse(JSON.stringify($scope.mdata));
                 }
             }
@@ -140,7 +142,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                 if ($scope.mode.indexOf("Consensus") != -1) {
                     $scope.mdata.displaymode = $scope.displaymode;
                     console.log(" watch fired to sync mdata - data ");
-                    $scope.data = $scope.syncObjects($scope.mdata);
+                    $timeout(function () {
+                        $scope.data = $scope.syncObjects($scope.mdata);
+                    }, 250);
                     $globdata = JSON.parse(JSON.stringify($scope.mdata));
                 }
 
@@ -234,9 +238,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
 
         $scope.mdata.firebaseOn = true;
         $scope.data = $scope.syncObjects($scope.mdata);
-        $scope.turnOnSyncing();
+
         //$scope.checkForConsensusProgress();
         $scope.checkForConsensusProgress2();
+
+        $scope.turnOnSyncing();
 
 
     };
@@ -281,20 +287,20 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
 
 
 
-//            $timeout(function () {
-//                angular.element('#ginst').triggerHandler('click');
-//            }, 1000);
+            //            $timeout(function () {
+            //                angular.element('#ginst').triggerHandler('click');
+            //            }, 1000);
 
 
 
             //console.log($scope.data);
 
-//                        setTimeout(function () {
-//                            $scope.mdata.firebaseOn = true;
-//                            $scope.data = $scope.syncObjects($scope.mdata);
-//                            $scope.$apply();
-//                            console.log(" manual timeout fired :: ");
-//                        }, 2000);
+            //                        setTimeout(function () {
+            //                            $scope.mdata.firebaseOn = true;
+            //                            $scope.data = $scope.syncObjects($scope.mdata);
+            //                            $scope.$apply();
+            //                            console.log(" manual timeout fired :: ");
+            //                        }, 2000);
         }
 
     };
@@ -373,9 +379,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                         console.log(" Function 2 team detect object :: value change " + snap.val());
                         $globdata = snap.val();
                         if (snap.val() !== undefined) {
-                            //console.log(typeof (snap.val()));
                             $team.keys = Object.keys(snap.val());
-                            //var $teamRT = {};
                             $teamRT.vals = $.map(snap.val(), function (value, key) {
                                 return value;
                             });
