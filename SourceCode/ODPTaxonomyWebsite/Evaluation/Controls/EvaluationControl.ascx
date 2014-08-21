@@ -40,6 +40,7 @@
 
             <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
             <li ng-show="showWatchConsensusButton"><input class="button yes" type="button" id="watchConsensus" value="Watch Consensus" ng-click="watchConsensus()" /></li>
+            <li ng-show="!showWatchConsensusButton"><input class="button no" type="button" id="disabledwatchConsensusButton" value="Watch Consensus" /></li>
             <li><input class="button yes" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
             <li ng-show="showResetButton"><input class="button yes" type="button" id="resetButton" value="Reset" ng-click="resetFormStart()" /></li>
             <li ng-show="showComparisonButton"><input class="button yes" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
