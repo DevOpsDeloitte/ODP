@@ -122,7 +122,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         };
 
         $scope.$watch("mdata", function () {
-            console.log("form data changed :: " + $scope.mdata);
+            //console.log("form data changed :: " + $scope.mdata);
             if ($scope.displaymode != "View") {
                 $scope.$broadcast("disableboxes");
                 $scope.$broadcast("validate.formdata");
