@@ -130,9 +130,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                 // sync mdata with data - remove all function properties
                 if ($scope.mode.indexOf("Consensus") != -1) {
                     console.log(" watch fired to sync mdata - data ");
-                    $timeout(function () {
+                    if ($watchSyncCounter < 5) {
+                        $timeout(function () {
+                            $scope.data = $scope.syncObjects($scope.mdata);
+                            $watchSyncCounter++;
+                        }, 250);
+                    }
+                    else {
                         $scope.data = $scope.syncObjects($scope.mdata);
-                    }, 250);
+                        $watchSyncCounter++;
+                    }
                     $globdata = JSON.parse(JSON.stringify($scope.mdata));
                 }
             }
@@ -142,9 +149,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                 if ($scope.mode.indexOf("Consensus") != -1) {
                     $scope.mdata.displaymode = $scope.displaymode;
                     console.log(" watch fired to sync mdata - data ");
-                    $timeout(function () {
+                    if ($watchSyncCounter < 5) {
+                        $timeout(function () {
+                            $scope.data = $scope.syncObjects($scope.mdata);
+                            $watchSyncCounter++;
+                        }, 250);
+                    }
+                    else {
                         $scope.data = $scope.syncObjects($scope.mdata);
-                    }, 250);
+                        $watchSyncCounter++;
+                    }
                     $globdata = JSON.parse(JSON.stringify($scope.mdata));
                 }
 

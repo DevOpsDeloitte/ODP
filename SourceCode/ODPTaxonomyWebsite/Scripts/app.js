@@ -7,3 +7,4 @@ var $globdata;
 var $globDebug;
 var $team = {};
 var $teamRT = {};
+var $watchSyncCounter = 0;
