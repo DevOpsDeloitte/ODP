@@ -237,7 +237,7 @@ namespace ODPTaxonomyWebsite
             }
             catch (Exception ex)
             {
-                firebaseConfig = "https://intense-fire-1108.firebaseio.com/xx";
+                firebaseConfig = "https://intense-fire-1108.firebaseio.com";
                 Utils.LogError(ex);
             }
 
