@@ -4,11 +4,12 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
     $scope.init = function () {
 
-        var FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
+        var FIREBASE_LOCATION;
         window.MYSCOPE = $scope;
         $scope.mdata = {};
         $scope.local = {};
-        $scope.FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
+        //$scope.FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
+        $scope.FIREBASE_LOCATION = window.FIREBASE_CONFIG;
         FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
         $scope.mdata.studyfocus = [];
         $scope.mdata.studyfocus[0] = [];
@@ -46,7 +47,7 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
         $scope.$watch("mdata", function () {
 
-            console.log(" mdata model changed : " + $scope.mdata.firebaseOn);
+            //console.log(" mdata model changed : " + $scope.mdata.firebaseOn);
             if (!$scope.mdata.firebaseOn) {
                 // console.log(" time to redirect -- watch over. ");
                 //window.location = "Evaluation.aspx";
@@ -110,9 +111,9 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
     $scope.detectTeam = function () {
         var firebasedetectURL = $scope.FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
         var teamdetectObj = new Firebase(firebasedetectURL);
-        
+
         $timeout(function () {
-            
+
             teamdetectObj.on("value", function (snap) {
                 var teamexists = false;
                 if (snap.val()) {
@@ -125,7 +126,7 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
                             return value;
                         });
                         for (var i = 0; i < $team.keys.length; i++) {
-                            console.log(" team keys " + i + "    " + $teamRT.vals[i].teamid + "     " +$scope.teamid);
+                            console.log(" team keys " + i + "    " + $teamRT.vals[i].teamid + "     " + $scope.teamid);
                             if ($teamRT.vals[i].teamid == $scope.teamid) {
                                 teamexists = true;
                             }
@@ -146,12 +147,12 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
             });
 
-            
+
 
 
         }, 500);
 
-        
+
 
     },
 

@@ -8,7 +8,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         var FIREBASE_LOCATION;
 
         $scope.mdata = {};
-        $scope.FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
+        //$scope.FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
+        $scope.FIREBASE_LOCATION = window.FIREBASE_CONFIG;
         FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
         $scope.mdata.superusername = "";
         $scope.mdata.superpassword = "";
@@ -43,14 +44,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         //$scope.$apply();
 
 
-        //console.log(" is unable : " + $scope.mdata.isunable);
-        //$scope.mdata.unabletocode = true;
-
-        //        var parent = $rootScope;
-        //        var child = parent.$new();
-
-        //        parent.salutation = "Hello";
-        //        child.name = "World";
+       
 
         $scope.disallowSave = true;
 
@@ -319,59 +313,59 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
 
     };
 
-    $scope.checkForConsensusProgress = function () {
+//    $scope.checkForConsensusProgress = function () {
 
-        var FIREBASE_LOCATION;
-        FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
+//        var FIREBASE_LOCATION;
+//        FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
 
-        // check for team consensus in progress
-        $scope.showWatchConsensusButton = false;
-        var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
-        var teamdetectObj = new Firebase(firebasedetectURL);
-        $timeout(function () {
-            //Check for team id existence and show consensus button in view/insert individual evaluation.
-            if ( /*$scope.displaymode == "View" && */$scope.mode.indexOf("Evaluation") != -1) {
-                //console.log(" showing team id : " + $scope.mdata.teamid);
-                teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
-                    var exists = (snapshot.val() !== null);
-                    if (exists) {
-                        console.log("Team Exists :: show watch consensus button ");
-                        $scope.showWatchConsensusButton = true;
-                        $scope.$apply();
-                    }
-                });
-
-
-
-                teamdetectObj.on("value", function (snap) {
-                    var teamexists = false;
-                    if (snap.val()) {
-                        console.log(" team detect object :: value change " + snap.val());
-                        $globdata = snap.val();
-                        if (snap.val() !== undefined) {
-                            console.log(typeof (snap.val()));
-                            $team.keys = Object.keys(snap.val());
-                            for (var i = 0; i < $team.keys.length; i++) {
-                                console.log(" team keys " + i + "    " + $team.keys[i]);
-                                if ($team.keys[i] == $scope.mdata.teamid) {
-                                    teamexists = true;
-                                }
-                            }
-                        }
-                    }
-                    else {
-                        teamexists = false;
-                    }
-                    $scope.$apply(function () {
-                        $scope.showWatchConsensusButton = teamexists;
-                    });
-                });
-            }
-
-        }, 300);
+//        // check for team consensus in progress
+//        $scope.showWatchConsensusButton = false;
+//        var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
+//        var teamdetectObj = new Firebase(firebasedetectURL);
+//        $timeout(function () {
+//            //Check for team id existence and show consensus button in view/insert individual evaluation.
+//            if ( /*$scope.displaymode == "View" && */$scope.mode.indexOf("Evaluation") != -1) {
+//                //console.log(" showing team id : " + $scope.mdata.teamid);
+//                teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
+//                    var exists = (snapshot.val() !== null);
+//                    if (exists) {
+//                        console.log("Team Exists :: show watch consensus button ");
+//                        $scope.showWatchConsensusButton = true;
+//                        $scope.$apply();
+//                    }
+//                });
 
 
-    };
+
+//                teamdetectObj.on("value", function (snap) {
+//                    var teamexists = false;
+//                    if (snap.val()) {
+//                        console.log(" team detect object :: value change " + snap.val());
+//                        $globdata = snap.val();
+//                        if (snap.val() !== undefined) {
+//                            console.log(typeof (snap.val()));
+//                            $team.keys = Object.keys(snap.val());
+//                            for (var i = 0; i < $team.keys.length; i++) {
+//                                console.log(" team keys " + i + "    " + $team.keys[i]);
+//                                if ($team.keys[i] == $scope.mdata.teamid) {
+//                                    teamexists = true;
+//                                }
+//                            }
+//                        }
+//                    }
+//                    else {
+//                        teamexists = false;
+//                    }
+//                    $scope.$apply(function () {
+//                        $scope.showWatchConsensusButton = teamexists;
+//                    });
+//                });
+//            }
+
+//        }, 300);
+
+
+//    };
 
     $scope.checkForConsensusProgress2 = function () {
 
