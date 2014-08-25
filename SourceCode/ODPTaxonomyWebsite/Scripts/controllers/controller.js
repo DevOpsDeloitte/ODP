@@ -272,7 +272,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             presenceRef.on("value", function (snap) {
                 if (snap.val()) {
                     //userRef.set(true);
-                    userRef.set({ teamid: $scope.mdata.teamid });
+                    userRef.set({ teamid: $scope.mdata.teamid, abstractid: $scope.mdata.abstractid });
                     // Remove ourselves when we disconnect.
                     userRef.onDisconnect().remove();
 
@@ -393,7 +393,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                             });
                             for (var i = 0; i < $team.keys.length; i++) {
                                 console.log(" team keys " + i + "    " + $teamRT.vals[i].teamid);
-                                if ($teamRT.vals[i].teamid == $scope.mdata.teamid) {
+                                if ($teamRT.vals[i].teamid == $scope.mdata.teamid && $teamRT.vals[i].abstractid == $scope.mdata.abstractid) {
                                     teamexists = true;
                                 }
                             }
