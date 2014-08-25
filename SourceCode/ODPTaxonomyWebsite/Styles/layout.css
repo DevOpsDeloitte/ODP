@@ -219,7 +219,7 @@ td[scope="row"] { cursor: pointer }
 .evalheader{ margin: 6px 0px 0px 0px; }
 #commentsBox { padding: 5px 5px 10px 5px; border: 1px solid #eee; margin: 0px 0px 50px 0px; -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.1); min-height:70px;}
 
-
+ td.hidestaffcols { /*visibility: hidden;*/ color: transparent;}
 
 /* MISC  
    ================================================== */

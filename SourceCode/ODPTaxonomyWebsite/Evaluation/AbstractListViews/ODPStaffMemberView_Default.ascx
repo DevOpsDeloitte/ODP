@@ -1,6 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Default.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Default" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
+<style>
+    td.hidestaffcols
+    {
+        /*visibility: hidden;*/
+        color: transparent;
+    }
+</style>
 <h3>
     View Abstracts</h3>
        <div class="showingCounts">
@@ -49,16 +56,16 @@
                 </asp:Panel>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:BoundField DataField="Flags" HeaderText="Flags" />
-        <asp:BoundField HeaderText="A1" DataField="A1"></asp:BoundField>
-        <asp:BoundField HeaderText="A2" DataField="A2"></asp:BoundField>
-        <asp:BoundField HeaderText="A3" DataField="A3"></asp:BoundField>
-        <asp:BoundField HeaderText="B" DataField="B"></asp:BoundField>
-        <asp:BoundField HeaderText="C" DataField="C"></asp:BoundField>
-        <asp:BoundField HeaderText="D" DataField="D"></asp:BoundField>
-        <asp:BoundField HeaderText="E" DataField="E"></asp:BoundField>
-        <asp:BoundField HeaderText="F" DataField="F"></asp:BoundField>
-        <asp:BoundField HeaderText="G" DataField="G"></asp:BoundField>
+        <asp:BoundField DataField="Flags" HeaderText="Flags" ItemStyle-CssClass="hidestaffcols" />
+        <asp:BoundField HeaderText="A1" DataField="A1" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
+        <asp:BoundField HeaderText="A2" DataField="A2" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
+        <asp:BoundField HeaderText="A3" DataField="A3" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
+        <asp:BoundField HeaderText="B" DataField="B" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
+        <asp:BoundField HeaderText="C" DataField="C" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
+        <asp:BoundField HeaderText="D" DataField="D" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
+        <asp:BoundField HeaderText="E" DataField="E" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
+        <asp:BoundField HeaderText="F" DataField="F" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
+        <asp:BoundField HeaderText="G" DataField="G" ItemStyle-CssClass="hidestaffcols"></asp:BoundField>
     </Columns>
     <PagerStyle CssClass="PagerContainer" />
 </odp:AbstractGridView>

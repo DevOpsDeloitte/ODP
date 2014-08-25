@@ -401,12 +401,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             
             
         
-            startConsensus();
-            startComparison();
+            //startConsensus();
+            //startComparison();
             performSecurityChecks();
             loadAbstractInfo();
-            showConsensus();
-            showComparison();
+            //showConsensus();
+            //showComparison();
 
 
 

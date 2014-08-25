@@ -226,7 +226,7 @@
 
     <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
         <div class="commentsHeader">Comments</div>
-        <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
+        <textarea name="comments" id="comments" ng-model="mdata.comments" disabled=disabled></textarea>
     </div>
      <div class="sixteen columns" ng-show="mdata.displaymode=='View'"> 
          <div class="commentsHeader">Comments</div>
