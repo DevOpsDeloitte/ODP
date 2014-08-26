@@ -1,6 +1,18 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPStaffMemberView_Review.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPStaffMemberView_Review" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("table tr.data-row").each(function () {
+            var $this = $(this);
+            var rowb = $this.find("td:nth-child(2)");
+            //console.log(rowb.html());
+            if (rowb.html() == "&nbsp;") {
+                rowb.parent("tr.data-row").addClass("hide");
+            }
+        });
+    });
+</script>
 <h3>
     View Abstracts in Review</h3>
   <div class="showingCounts">
