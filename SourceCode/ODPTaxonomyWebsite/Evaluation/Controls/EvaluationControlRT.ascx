@@ -127,8 +127,8 @@
           </div>
 
             <div class="specs">
-            <span class="button">General Instructions<div class="icon open" ng-click="showDescription('generalinstructions')" ></div></span>
-            <span class="button">Background<div class="icon open" ng-click="showDescription('background')" ></div></span>
+            <span class="buttonx">General Instructions<div class="icon open" ng-click="showDescription('generalinstructions')" ></div></span>
+            <span class="buttonx">Background<div class="icon open" ng-click="showDescription('background')" ></div></span>
             </div>
         </div>
     
