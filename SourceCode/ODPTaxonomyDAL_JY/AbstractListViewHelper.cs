@@ -90,19 +90,19 @@ namespace ODPTaxonomyDAL_JY
                                     {
                                         if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQ " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQ " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQ " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
@@ -166,7 +166,7 @@ namespace ODPTaxonomyDAL_JY
                     {
                         if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
                         {
-                            AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, "IQ vs. ODP", ParentAbstracts[i].AbstractID);
+                            AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, "IQS vs. ODP", ParentAbstracts[i].AbstractID);
                             ODPCoderComparison.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_COMPARISON);
                             Abstracts.Add(ODPCoderComparison);
                         }
@@ -189,19 +189,19 @@ namespace ODPTaxonomyDAL_JY
                                     {
                                         if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K10)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQ "+ iden.UserName +" vs. ODP", ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS "+ iden.UserName +" vs. ODP", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K11)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQ " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K12)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQ " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             Abstracts.Add(CoderEvaluation);
                                         }
