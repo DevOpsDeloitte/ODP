@@ -44,7 +44,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         //$scope.$apply();
 
 
-       
+
 
         $scope.disallowSave = true;
 
@@ -101,7 +101,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
 
         $scope.watchConsensus = function () {
 
-            window.location.replace("/Evaluation/EvaluationRT.aspx?teamid=" + $scope.mdata.teamid + "&abstractid=" + $scope.mdata.abstractid);
+            window.location.replace("/Evaluation/EvaluationRT.aspx?modetype=watchconsensus&teamid=" + $scope.mdata.teamid + "&abstractid=" + $scope.mdata.abstractid);
+        }
+
+        $scope.watchComparison = function () {
+
+            window.location.replace("/Evaluation/EvaluationRT.aspx?modetype=watchcomparison&teamid=" + $scope.mdata.teamid + "&abstractid=" + $scope.mdata.abstractid);
         }
 
         $scope.startComparison = function () {
@@ -122,7 +127,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                 $scope.$broadcast("validate.formdata");
 
                 // sync mdata with data - remove all function properties
-                if ($scope.mode.indexOf("Consensus") != -1) {
+                if ($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) {
                     console.log(" watch fired to sync mdata - data ");
                     if ($watchSyncCounter < 5) {
                         $timeout(function () {
@@ -140,7 +145,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             else {
 
                 // sync mdata with data - remove all function properties
-                if ($scope.mode.indexOf("Consensus") != -1) {
+                if ($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) {
                     $scope.mdata.displaymode = $scope.displaymode;
                     console.log(" watch fired to sync mdata - data ");
                     if ($watchSyncCounter < 5) {
@@ -164,7 +169,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         };
 
 
-     
+
 
         $scope.mdata.firebaseOn = true;
         $scope.data = $scope.syncObjects($scope.mdata);
@@ -184,7 +189,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         var FIREBASE_LOCATION;
         FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
 
-        if ($scope.mode.indexOf("Consensus") != -1 && $scope.displaymode == "Insert") {
+        if (($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) && $scope.displaymode == "Insert") {
 
             // Add ourselves to presence list when online.
             var listRef = new Firebase(FIREBASE_LOCATION + "/presence/");
@@ -194,7 +199,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             presenceRef.on("value", function (snap) {
                 if (snap.val()) {
                     //userRef.set(true);
-                    userRef.set({ teamid: $scope.mdata.teamid, abstractid: $scope.mdata.abstractid });
+                    userRef.set({ teamid: $scope.mdata.teamid, abstractid: $scope.mdata.abstractid, mode: $scope.mode });
                     // Remove ourselves when we disconnect.
                     userRef.onDisconnect().remove();
 
@@ -213,7 +218,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             syncObject.$bindTo($scope, "data");
             $scope.mdata.firebaseOn = true;
             $scope.data = $scope.syncObjects($scope.mdata);
-            
+
         }
 
     };
@@ -230,12 +235,13 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         var firebasedetectURL = FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
         var teamdetectObj = new Firebase(firebasedetectURL);
         $timeout(function () {
-            //Check for team id existence and show consensus button in view/insert individual evaluation.
+            //Check for team id existence and show consensus & show comparison button in view/insert individual evaluation.
             if ($scope.mode.indexOf("Evaluation") != -1) {
 
 
                 teamdetectObj.on("value", function (snap) {
                     var teamexists = false;
+                    var modeval = "";
                     if (snap.val()) {
                         console.log(" Function 2 team detect object :: value change " + snap.val());
                         $globdata = snap.val();
@@ -248,6 +254,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                                 console.log(" team keys " + i + "    " + $teamRT.vals[i].teamid);
                                 if ($teamRT.vals[i].teamid == $scope.mdata.teamid && $teamRT.vals[i].abstractid == $scope.mdata.abstractid) {
                                     teamexists = true;
+                                    modeval = $teamRT.vals[i].mode;
                                 }
                             }
                         }
@@ -257,7 +264,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                     }
 
                     $scope.$apply(function () {
-                        $scope.showWatchConsensusButton = teamexists;
+
+                        if (modeval.indexOf("Consensus") != -1) {
+                            $scope.showWatchConsensusButton = teamexists;
+                        }
+                        if (modeval.indexOf("Comparison") != -1) {
+                            $scope.showWatchComparisonButton = teamexists;
+                        }
+
                     });
                 });
             }

@@ -388,10 +388,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             showComparison();
 
 
-            if (FormMode.IndexOf("Evaluation") != -1)
-            {
+            //if (FormMode.IndexOf("Evaluation") != -1)
+            //{
                 assignTeam();
-            }
+            //}
 
             if (FormMode.IndexOf("Consensus") != -1)
             {

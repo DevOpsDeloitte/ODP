@@ -67,6 +67,7 @@ app.directive("outcomeBox", function ($rootScope) {
 //                   
 //                }
                  scope.view.consensus = true;
+                 //scope.view.comparers = true;
                   try{
                      scope.view.displaycoders = newValue.displaycoders;
                 }catch(e) {};

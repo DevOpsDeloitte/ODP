@@ -39,7 +39,7 @@ h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-al
 .container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
 	.container .button.yes { background: #24AA7A; color: #fff }
 	.container .button.no { background: #9B0202; color: #fff; }
-	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton, .container .button.no#disabledconsensusButton, .button.no#disabledwatchConsensusButton { opacity: 0.4; cursor: default; }
+	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton, .container .button.no#disabledconsensusButton, .button.no#disabledwatchConsensusButton, .button.no#disabledwatchComparisonButton { opacity: 0.4; cursor: default; }
 	.container .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
 	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
 

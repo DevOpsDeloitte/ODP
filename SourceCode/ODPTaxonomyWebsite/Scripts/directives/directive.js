@@ -283,6 +283,9 @@ app.directive("outcomeBox", function ($rootScope) {
                          // model value being set ::
                          scope.value.codercount = codercount;
                          scope.value.modelcolorState = scope.getComparisonColor( codercount );
+
+                         // adding model value.
+                         scope.value.displaycoders = scope.view.displaycoders;
                      }
 
                  }
@@ -294,6 +297,9 @@ app.directive("outcomeBox", function ($rootScope) {
                       scope.value.originalcolorState = "";
                       scope.value.codercount = 0;
                  }
+
+                   // new add..
+                   scope.value.colorstatecopy = scope.view.colorstate;
             }
 
 
@@ -346,6 +352,9 @@ app.directive("outcomeBox", function ($rootScope) {
                              $scope.view.checked = false;
                              $scope.value.modelcolorState = $scope.getColor( codercount );
                              $scope.view.colorstate = $scope.value.originalcolorState;
+
+                             $scope.value.colorstatecopy = $scope.view.colorstate;
+
                              return;
                         }
                     }
