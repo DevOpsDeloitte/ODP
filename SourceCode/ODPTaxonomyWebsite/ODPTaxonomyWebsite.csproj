@@ -87,6 +87,7 @@
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx" />
     <Content Include="Evaluation\Controls\EvaluationControl.ascx" />
     <Content Include="Evaluation\Controls\EvaluationControlRT.ascx" />
+    <Content Include="Evaluation\DownloadAbstractScan.aspx" />
     <Content Include="Evaluation\Evaluation.aspx" />
     <Content Include="Evaluation\EvaluationRT.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
@@ -204,6 +205,7 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\AbstractListViews\AbstractGridView.cs" />
     <Compile Include="Evaluation\AbstractListViews\AdminView.ascx.cs">
       <DependentUpon>AdminView.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -292,6 +294,12 @@
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControlRT.ascx.designer.cs">
       <DependentUpon>EvaluationControlRT.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\DownloadAbstractScan.aspx.cs">
+      <DependentUpon>DownloadAbstractScan.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\DownloadAbstractScan.aspx.designer.cs">
+      <DependentUpon>DownloadAbstractScan.aspx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Evaluation.aspx.cs">
       <DependentUpon>Evaluation.aspx</DependentUpon>
