@@ -141,6 +141,8 @@
                     <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
                     <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
               </div>
+
+              <input type="hidden" name="unableCodersVal" id="hiddenUnableCoders" value="<%= unableCoders %>" ng-model="mdata.unablecodersval" />
               <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
               <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
             

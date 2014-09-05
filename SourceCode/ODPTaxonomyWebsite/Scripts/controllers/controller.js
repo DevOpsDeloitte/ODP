@@ -29,7 +29,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         $scope.mdata.unabletocode = $("input#isunable").val() == "checked" ? true : false;
 
         $scope.mdata.consensusalreadystarted = $("input#consensusalreadystarted").val() == "True" ? true : false;
-
+        $scope.mdata.unablecodersval = $("input#hiddenUnableCoders").val();
         //console.log(" New Value : " + $scope.mdata.consensusalreadystarted);
 
         if ($scope.mdata.consensusalreadystarted) {

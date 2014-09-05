@@ -297,6 +297,7 @@
     </Compile>
     <Compile Include="Evaluation\DownloadAbstractScan.aspx.cs">
       <DependentUpon>DownloadAbstractScan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\DownloadAbstractScan.aspx.designer.cs">
       <DependentUpon>DownloadAbstractScan.aspx</DependentUpon>

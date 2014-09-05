@@ -120,8 +120,8 @@
                     <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
                     <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
               </div>
-              <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
-              <!--<div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>-->
+              <div ng-show="mdata.formmode.indexOf('Consensus') != -1 && mdata.formmode != undefined">Users Unable to Code : {{mdata.unablecodersval}} </div>
+              <div ng-show="mdata.formmode.indexOf('Comparison') != -1 && mdata.formmode != undefined">Teams Unable to Code : {{mdata.unablecodersval}} </div>
             
             </div>
           </div>
