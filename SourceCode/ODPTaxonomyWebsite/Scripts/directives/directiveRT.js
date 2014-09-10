@@ -63,18 +63,24 @@ app.directive("outcomeBox", function ($rootScope) {
                     scope.view.displaycoderscount = newValue.codercount;
                 }
                 }catch(e) {};
-//                if(oldValue.displaycoders){
-//                   
-//                }
-                 scope.view.consensus = true;
+
+                //if($rootScope.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
+                //if($rootScope.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
+                //testX = $rootScope.mdata;
                  //scope.view.comparers = true;
+                 //console.log(scope.$parent.mdata.formmode);
+                  try{
+                 
+                    //if(MYSCOPE.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
+                    //if(MYSCOPE.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
+                    if(scope.$parent.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
+                    if(scope.$parent.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
+                }catch(e) {};
+
                   try{
                      scope.view.displaycoders = newValue.displaycoders;
                 }catch(e) {};
                  
-
-                // attrs.isChecked == "yes" ? true : false;
-                    //console.log("I see a data change!"+newValue.isChecked);
             });
 
         },
