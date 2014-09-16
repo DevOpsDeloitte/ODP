@@ -62,6 +62,8 @@
         </div>
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
 
+        <a href="#" id="showLeftPushed" class="">Close Menu</a>
+
                         <a href="/Default.aspx">Home</a>
                         
                         <div runat="server" visible="false" id="pnl_admin"><div class="nav-role">Role: Admin</div>
@@ -123,23 +125,20 @@
         </script>
         <script type="text/javascript">
             var menuLeft = document.getElementById('cbp-spmenu-s1'),
-                showLeftPush = document.getElementById('showLeftPush'),
                 body = document.body;
 
             showLeftPush.onclick = function () {
                 classie.toggle(this, 'active');
-                classie.toggle(body, 'cbp-spmenu-push-toright');
                 classie.toggle(menuLeft, 'cbp-spmenu-open');
-                disableOther('showLeftPush');
                 return false;
             };
 
-            function disableOther(button) {
+            showLeftPushed.onclick = function () {
+                classie.toggle(this, 'active');
+                classie.toggle(menuLeft, 'cbp-spmenu-open');
+                return false;
+            };
 
-                if (button !== 'showLeftPush') {
-                    classie.toggle(showLeftPush, 'disabled');
-                }
-            }
         </script>
 
 

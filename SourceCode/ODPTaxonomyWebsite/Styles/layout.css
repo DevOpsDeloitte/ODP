@@ -144,11 +144,12 @@ span.highlight { font-weight: bold; background: #F7F9FC; border: 1px solid #D1D0
 .cbp-spmenu-left {	left: -240px; }
 .cbp-spmenu-left.cbp-spmenu-open {	left: 0px; }
 
+/*a#showLeftPushed { width: 198px; margin: 0; background: #6D6D6D; color: #FFF; text-align: right; }
+
 .cbp-spmenu-push { overflow-x: hidden; position: relative; left: 0; }
 .cbp-spmenu-push #header_container { left: 0; }
-.cbp-spmenu-push-toright, .cbp-spmenu-push-toright #header_container { left: 240px; }
-.cbp-spmenu,
-.cbp-spmenu-push, #header_container { -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; transition: all 0.3s ease; }
+ .cbp-spmenu-push-toright, .cbp-spmenu-push-toright #header_container { left: 240px; } */
+.cbp-spmenu { -webkit-transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
 
 /* Pagination
 ================================================== */
