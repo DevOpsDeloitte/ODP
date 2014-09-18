@@ -40,6 +40,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         $scope.mdata.abstractid = $("input#abstractid").val();
         $scope.mdata.teamid = $("input#teamid").val();
 
+        $scope.showWatchConsensusButton = false;
+
 
         //$scope.$apply();
 
@@ -263,7 +265,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                         teamexists = false;
                     }
 
+                    //console.log(" checkForConsensusProgress2 :: modeval :: " + modeval);
+
                     $scope.$apply(function () {
+
+                        if (modeval == "") {
+                            $scope.showWatchConsensusButton = false;
+                            $scope.showWatchComparisonButton = false;
+                        }
 
                         if (modeval.indexOf("Consensus") != -1) {
                             $scope.showWatchConsensusButton = teamexists;
