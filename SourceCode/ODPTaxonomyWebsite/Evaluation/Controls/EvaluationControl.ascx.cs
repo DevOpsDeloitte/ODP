@@ -554,9 +554,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + "," + "o-" + ODPTeamID.ToString() : retval[0] + "," + "";
-                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + "o-" + ODPTeamID.ToString() : retval[1] + "," + "";
-                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + "o-" + ODPTeamID.ToString() : retval[2] + "," + "";
+                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + "," + "o-" + ODPTeamID.ToString() : retval[0];
+                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + "o-" + ODPTeamID.ToString() : retval[1];
+                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + "o-" + ODPTeamID.ToString() : retval[2];
                     }
 
 
