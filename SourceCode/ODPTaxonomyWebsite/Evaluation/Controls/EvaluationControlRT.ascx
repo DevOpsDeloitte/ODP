@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EvaluationControl.ascx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.Controls.EvaluationControl" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="EvaluationControlRT.ascx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.Controls.EvaluationControlRT" %>
 
 
 	<!-- CSS
@@ -17,51 +17,30 @@
    // $scope.mdata.formmode = "<%= FormMode %>"
 </script>
 
-<div class="container" id="tax-form" ng-controller="ODPFormCtrl">
+<div class="container" id="tax-form" ng-controller="ODPFormCtrlRT">
 
     <div class="sixteen columns evalheader"> 
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN (TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
         <span class="subtitle">See accompanying protocol for definitions and examples</span>
     </div>
-    <div class="sixteen columns" ng-cloak>
-    <h2 ng-show="mdata.formmode.indexOf('Evaluation') != -1">Individual Coding</h2>
-    <h2 ng-show="mdata.formmode.indexOf('Consensus') != -1">Consensus Coding</h2>
-    <h2 ng-show="mdata.formmode.indexOf('Comparison') != -1">Comparison Coding</h2>
+     <div class="sixteen columns" ng-cloak>
+        <h2>  <span ng-show="mdata.formmode.indexOf('Consensus') != -1 && mdata.formmode != undefined ">Consensus Watch</span><span ng-show="mdata.formmode.indexOf('Comparison') != -1  && mdata.formmode != undefined ">Comparison Watch</span> <span class="successmessages" ng-show="mdata.displaymode.indexOf('View') != -1 && mdata.displaymode != undefined"> -- Completed</span><span ng-show="mdata.displaymode.indexOf('Insert') != -1 && mdata.displaymode != undefined"> -- In Progress</span> </h2>
+        
+        
     </div>
 
     <div class="subnav" ng-cloak>
         <ul>
-            <!--<li><a href="#study-focus">Study Focus</a></li>
-            <li><a href="#entities-studied">Entities Studied</a></li>
-            <li><a href="#study-setting">Study Setting</a></li>
-            <li><a href="#population-focus">Population focus</a></li>
-            <li><a href="#study-design-purpose">Study Design/Purpose</a></li>
-            <li><a href="#prevention-research-category">Prevention Research Category</a></li>-->
-
-            <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
-            <li ng-show="showWatchConsensusButton"><input class="button yes" type="button" id="watchConsensus" value="Watch Consensus" ng-click="watchConsensus()" /></li>
-            <li ng-show="!showWatchConsensusButton && mode.indexOf('Evaluation') != -1 && displaymode == 'View'"><input class="button no" type="button" id="disabledwatchConsensusButton" value="Watch Consensus" /></li>
-             <li ng-show="showWatchComparisonButton"><input class="button yes" type="button" id="watchComparison" value="Watch Comparison" ng-click="watchComparison()" /></li>
-            <li ng-show="!showWatchComparisonButton && mode.indexOf('ODP Staff Member Evaluation') != -1  && displaymode == 'View'"><input class="button no" type="button" id="disabledwatchComparisonButton" value="Watch Comparison" /></li>
-
-            <li><input class="button yes" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
-            <li ng-show="showResetButton"><input class="button yes" type="button" id="resetButton" value="Reset" ng-click="resetFormStart()" /></li>
+             <li><input class="button yes" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
+            <!--<li ng-show="showResetButton"><input class="button yes" type="button" id="resetButton" value="Reset" ng-click="resetFormStart()" /></li>
             <li ng-show="showComparisonButton"><input class="button yes" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
             <li ng-show="!showComparisonButton && mode.indexOf('Comparison') != -1"><input class="button no" type="button" id="disabledcomparisonButton" value="Start Comparison" /></li>
-            <li ng-show="showConsensusButton && !showWatchConsensusButton"><input class="button yes" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
-            <li ng-show="(!showConsensusButton && mode.indexOf('Consensus') != -1)"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
+            <li ng-show="showConsensusButton"><input class="button yes" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
+            <li ng-show="!showConsensusButton && mode.indexOf('Consensus') != -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
             <li ng-show="showSaveButton"><input class="button yes" type="button" id="saveButton" value="Submit" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Submit"/></li>
-            <%--<li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
-            <li ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></li>
-            <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
-            <li>
-            <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
-                <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
-                <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
-            </div>
-            
-            </li>--%>
+            -->
+         
         </ul>
     </div>
     <div id="odpforms" name="x" ng-cloak>
@@ -104,7 +83,7 @@
         </div>
 
      <div class="sixteen columns">
-         <div>
+        <div>
              <span class="titles">Application ID :</span>
              <span class="titlevals"><%= applicationID %></span>
              <br />
@@ -135,22 +114,20 @@
           
           <div class="tax-form-buttons-box">
             <div class="unableCodeBox button">              
-              <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
+              <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled=" 1==1 " /><label>Unable to Code</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
                 
               <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
                     <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
                     <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
               </div>
-
-              <input type="hidden" name="unableCodersVal" id="hiddenUnableCoders" value="<%= unableCoders %>" ng-model="mdata.unablecodersval" />
-              <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
-              <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
+              <div ng-show="mdata.formmode.indexOf('Consensus') != -1 && mdata.formmode != undefined">Users Unable to Code : {{mdata.unablecodersval}} </div>
+              <div ng-show="mdata.formmode.indexOf('Comparison') != -1 && mdata.formmode != undefined">Teams Unable to Code : {{mdata.unablecodersval}} </div>
             
             </div>
           </div>
 
             <div class="specs">
-            <span class="buttonx">General Instructions<div class="icon open" id="ginst" ng-click="showDescription('generalinstructions')" ></div></span>
+            <span class="buttonx">General Instructions<div class="icon open" ng-click="showDescription('generalinstructions')" ></div></span>
             <span class="buttonx">Background<div class="icon open" ng-click="showDescription('background')" ></div></span>
             </div>
         </div>
@@ -249,7 +226,7 @@
 
     <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
         <div class="commentsHeader">Comments</div>
-        <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
+        <textarea name="comments" id="comments" ng-model="mdata.comments" disabled=disabled></textarea>
     </div>
      <div class="sixteen columns" ng-show="mdata.displaymode=='View'"> 
          <div class="commentsHeader">Comments</div>
@@ -279,8 +256,8 @@
 <!--<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>-->
 
 <script src="../scripts/modules/module.js"></script>
-<script src="../scripts/controllers/controller.js"></script>
-<script src="../scripts/directives/directive.js"></script>
+<script src="../scripts/controllers/controllerRT.js"></script>
+<script src="../scripts/directives/directiveRT.js"></script>
 <script src="../scripts/app.js"></script>
 <!-- <script src="js/controllers/controller.js"></script> -->
 

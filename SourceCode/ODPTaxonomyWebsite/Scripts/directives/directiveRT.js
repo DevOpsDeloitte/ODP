@@ -1,3 +1,4 @@
+
 app.directive("outcomeBox", function ($rootScope) {
 
     var boxTemplate = '<div class="select-box {{view.colorstate}}" ng-class="view.classValue"  ng-click="updatestate()" >' +
@@ -17,6 +18,115 @@ app.directive("outcomeBox", function ($rootScope) {
         template: boxTemplate,
         scope: {
             value: "=outcomeBox"
+        },
+
+        link: function (scope, elem, attrs) {
+         //scope.value = {};
+         scope.view.disabled = false;
+         scope.view.checked = true;
+         //console.log(" link fired " + scope.value);
+
+         
+
+           scope.$watch('value', function(newValue, oldValue) {
+           
+           //console.log( " link function old value : " + oldValue.codercount + "     new value : " + newValue.codercount );
+                //if (newValue)
+
+                try{
+                    scope.view.checked = newValue.isChecked;
+                }catch(e) {};
+
+                try{
+                    
+                     scope.view.colorstate = newValue.colorstatecopy;
+                }catch(e) {};
+
+                try{
+                    if(scope.view.checked){
+                       // scope.view.colorstate = "onstate icheckbox_line-tax checked";
+                    }
+                    else{
+                        //scope.view.colorstate = "";
+                        //scope.view.colorstate = newValue.colorstatecopy;
+                    }
+                }catch(e) {};
+
+                try{
+                if(newValue.modelcolorState == "Disabled"){
+                    scope.view.colorstate = "select-box box-disabled";
+                }
+                }catch(e) {};
+
+                try{
+                  if(newValue.codercount){
+                    scope.view.displaycoderscount = newValue.codercount;
+                }
+                }catch(e) {};
+
+                //if($rootScope.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
+                //if($rootScope.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
+                //testX = $rootScope.mdata;
+                 //scope.view.comparers = true;
+                 //console.log(scope.$parent.mdata.formmode);
+                  try{
+                 
+                    //if(MYSCOPE.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
+                    //if(MYSCOPE.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
+                    if(scope.$parent.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
+                    if(scope.$parent.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
+                }catch(e) {};
+
+                  try{
+                     scope.view.displaycoders = newValue.displaycoders;
+                }catch(e) {};
+                 
+            });
+
+        },
+
+        controller: function ( $scope, $element, $attrs) {
+             //console.log($scope.codercount);
+              $scope.view = {
+                modelValue: $scope.value,
+                editorEnabled: false,
+                hitCount: 0,
+                enabled: true
+
+            };
+
+            
+           $scope.updatestate = function(){
+                return;
+           };
+
+        }
+
+        }
+
+
+});
+
+
+app.directive("outcomeBoxOld", function ($rootScope) {
+
+    var boxTemplate = '<div class="select-box {{view.colorstate}}" ng-class="view.classValue"  ng-click="updatestate()" >' +
+       '<div class="select-box-container">' +
+       '<input type="checkbox" name="{{view.iname}}"  ng-model="view.modelValue" ng-disabled="view.disabled" ng-checked="view.checked" />' +
+       //'<span ng-show="view.consensus">{{view.codervals}}</span>' +
+       '<div ng-show="view.consensus"><div class="codercbox coder1">{{view.displaycoders[0]}}</div> <div class="codercbox coder2">{{view.displaycoders[1]}}</div> <div class="codercbox coder3">{{view.displaycoders[2]}}</div> </div>' +
+       '<div ng-show="view.comparers"><div class="comparisoncbox ccoder">{{view.displaycoders[0]}}</div> <div class="comparisoncbox codp">{{view.displaycoders[1]}}</div> </div>' +
+       '<div class="codercount">{{view.displaycoderscount}}</div>' +
+      //'<span>{{$rootScope.mdata.formmode}}</span>' +
+       '<div>' +
+       '</div>';
+
+    return {
+        restrict: "A",
+        replace: true,
+        template: boxTemplate,
+        scope: {
+            value: "=outcomeBoxOld"
             //count: "=hitCount",
             //isEnabled: "=isEnabled"
         },
@@ -190,38 +300,6 @@ app.directive("outcomeBox", function ($rootScope) {
                         scope.value.modelcolorState = scope.getComparisonColor( codercount );}
 
                     }
-                     scope.value.colorstatecopy = scope.view.colorstate;
-                 }
-                
-
-
-            }
-
-            scope.value.resetBoxCC = function()
-            {
-
-                if( scope.value.modelcolorState != "Disabled"){
-                    codercount = scope.value.codercount;
-                    scope.value.isChecked = false;
-                    scope.view.checked = false;
-                    scope.view.colorstate = scope.value.originalcolorState;
-                    if( codercount > 0){
-                       
-                       if($rootScope.mode.indexOf("Consensus") != -1) {
-                       scope.view.colorstate = "";
-                        scope.value.modelcolorState = scope.getColor( codercount );
-                        scope.value.modelcolorState = "Transparent";
-                        }
-
-                        if($rootScope.mode.indexOf("Comparison") != -1) {
-                        scope.view.colorstate = "";
-                        scope.value.modelcolorState = scope.getComparisonColor( codercount );
-                        scope.value.modelcolorState = "Transparent";
-                        }
-
-                    }
-
-                     scope.value.colorstatecopy = scope.view.colorstate;
                  }
 
 
@@ -246,9 +324,6 @@ app.directive("outcomeBox", function ($rootScope) {
                          // model value being set ::
                          scope.value.codercount = codercount;
                          scope.value.modelcolorState = scope.getColor( codercount );
-
-                         // adding model value.
-                         scope.value.displaycoders = scope.view.displaycoders;
                      }
 
                  }
@@ -260,8 +335,6 @@ app.directive("outcomeBox", function ($rootScope) {
                       scope.value.originalcolorState = "";
                       scope.value.codercount = 0;
                  }
-
-                 scope.value.colorstatecopy = scope.view.colorstate;
             }
 
             // this happens in the link phase.
@@ -283,9 +356,6 @@ app.directive("outcomeBox", function ($rootScope) {
                          // model value being set ::
                          scope.value.codercount = codercount;
                          scope.value.modelcolorState = scope.getComparisonColor( codercount );
-
-                         // adding model value.
-                         scope.value.displaycoders = scope.view.displaycoders;
                      }
 
                  }
@@ -297,9 +367,6 @@ app.directive("outcomeBox", function ($rootScope) {
                       scope.value.originalcolorState = "";
                       scope.value.codercount = 0;
                  }
-
-                   // new add..
-                   scope.value.colorstatecopy = scope.view.colorstate;
             }
 
 
@@ -339,9 +406,6 @@ app.directive("outcomeBox", function ($rootScope) {
                              $scope.view.checked = false;
                              $scope.value.modelcolorState = $scope.getComparisonColor( codercount );
                              $scope.view.colorstate = $scope.value.originalcolorState;
-
-                              $scope.value.colorstatecopy = $scope.view.colorstate;
-
                              return;
                         }
                     }
@@ -352,9 +416,6 @@ app.directive("outcomeBox", function ($rootScope) {
                              $scope.view.checked = false;
                              $scope.value.modelcolorState = $scope.getColor( codercount );
                              $scope.view.colorstate = $scope.value.originalcolorState;
-
-                             $scope.value.colorstatecopy = $scope.view.colorstate;
-
                              return;
                         }
                     }
@@ -371,11 +432,9 @@ app.directive("outcomeBox", function ($rootScope) {
                         $scope.value.modelcolorState = "Transparent";
                     }
 
-                     $scope.value.colorstatecopy = $scope.view.colorstate;
-
                 }
                
-              
+
             };
         }
     };
