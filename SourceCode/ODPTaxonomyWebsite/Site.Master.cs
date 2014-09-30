@@ -25,6 +25,7 @@ namespace ODPTaxonomyWebsite
         private string role_odpSup = null;
         private string role_admin = null;
         private string connString = null;
+        public  string firebaseConfig = string.Empty;
 
         #endregion
 
@@ -69,6 +70,7 @@ namespace ODPTaxonomyWebsite
                     if (isLoggedIn)
                     {
                         LoadMenuData();
+                        LoadFireBaseConfig();
                     }
                 }
 
@@ -225,6 +227,21 @@ namespace ODPTaxonomyWebsite
         #endregion
 
         #region Methods
+
+        private void LoadFireBaseConfig()
+        {
+            try
+            {
+
+                firebaseConfig = System.Configuration.ConfigurationManager.AppSettings["firebaseConfig"];
+            }
+            catch (Exception ex)
+            {
+                firebaseConfig = "https://intense-fire-1108.firebaseio.com";
+                Utils.LogError(ex);
+            }
+
+        }
 
         private void LoadMenuData()
         {

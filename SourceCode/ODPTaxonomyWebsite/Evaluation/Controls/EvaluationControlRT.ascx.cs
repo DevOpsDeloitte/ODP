@@ -15,29 +15,11 @@ using ODPTaxonomyCommon;
 
 namespace ODPTaxonomyWebsite.Evaluation.Controls
 {
-    public class TeamUser // Team user class
-    {
-        public Guid UserId {get;set;}
-        public int TeamId { get; set; }
-        public string TeamType { get; set; }
-        public string UserName { get; set; }
-        public string UserFirstName { get; set; }
-        public string UserLastName { get; set; }
-        public int UserSubmissionID { get; set; }
-    }
-
-    public class ComparisonTeamUser
-    {
-        public Guid? UserId { get; set; }
-        public int? TeamId { get; set; }
-        public string TeamType { get; set; }
-        public int ComparisonSubmissionID { get; set; }
-
-    }
+   
 
 
 
-    public partial class EvaluationControl : System.Web.UI.UserControl
+    public partial class EvaluationControlRT : System.Web.UI.UserControl
     {
         public string studyFocusQuestions = string.Empty;
         public string entitiesStudiedQuestions = string.Empty;
@@ -81,6 +63,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             db = DBData.GetDataContext();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load Start...");
             loadSession();
+            getTeamAbstractFromQuery();
+            loadAbstractInfoFromID();
             setAndrenderPageVars();
             unableCoders = getUnabletoCodeValues();
             renderStudyFocusQuestions();
@@ -93,10 +77,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //System.Diagnostics.Trace.WriteLine("Eval Page Load End...");
         }
 
-        protected void assignTeam()
+        protected void getTeamAbstractFromQuery()
         {
-            var TeamID = db.Evaluations.Where(e => e.EvaluationId == EvaluationID && e.AbstractID == AbstractID).Select(e => e.TeamID).FirstOrDefault();
-            this.teamID = TeamID;
+            int val = 0;
+            bool res = Int32.TryParse(Request.QueryString["teamid"], out val);
+            teamID = res ? val : 0;
+
+            res = Int32.TryParse(Request.QueryString["abstractid"], out val);
+            AbstractID = res ? val : 0;
+
         }
 
         protected Dictionary<int, TeamUser> getTeamUsers()
@@ -167,6 +156,39 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
 
         }
+
+        protected void loadAbstractInfoFromID()
+        {
+            //var evalrec = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).Select(e => e).FirstOrDefault();
+            //if (evalrec != null)
+            //{
+            //    AbstractID = Convert.ToInt32(evalrec.AbstractID);
+            //    //Response.Write(" Abstract ID : " + AbstractID);
+            //}
+            //else
+            //{
+            //    // We need to exit -- trouble.
+
+            //}
+
+            var absrec = db.Abstracts.Where(a => a.AbstractID == AbstractID).Select(a => a).FirstOrDefault();
+            if (absrec != null)
+            {
+                applicationID = absrec.ApplicationID.ToString();
+                projectTitle = absrec.ProjectTitle.ToString();
+                piProjectLeader = absrec.PIProjectLeader.ToString();
+
+            }
+            var userrec = db.aspnet_Users.Where(u => u.UserId == UserId).Select(u => u).FirstOrDefault();
+            if (userrec != null)
+            {
+                userName = userrec.UserName;
+                firstName = userrec.UserFirstName;
+                lastName = userrec.UserLastName;
+            }
+
+        }
+
         protected void loadAbstractInfo()
         {
             var evalrec = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).Select(e => e).FirstOrDefault();
@@ -186,7 +208,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             {
                 applicationID = absrec.ApplicationID.ToString();
                 projectTitle = absrec.ProjectTitle.ToString();
-                piProjectLeader = absrec.PIProjectLeader.ToString();
 
             }
             var userrec = db.aspnet_Users.Where(u => u.UserId == UserId).Select(u => u).FirstOrDefault();
@@ -380,18 +401,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             
             
         
-            startConsensus();
-            startComparison();
+            //startConsensus();
+            //startComparison();
             performSecurityChecks();
             loadAbstractInfo();
-            showConsensus();
-            showComparison();
+            //showConsensus();
+            //showComparison();
 
 
-            //if (FormMode.IndexOf("Evaluation") != -1)
-            //{
-                assignTeam();
-            //}
 
             if (FormMode.IndexOf("Consensus") != -1)
             {
@@ -529,9 +546,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                     if (rec2 != null)
                     {
-                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + "," + "o-" + ODPTeamID.ToString() : retval[0];
-                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + "o-" + ODPTeamID.ToString() : retval[1];
-                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + "o-" + ODPTeamID.ToString() : retval[2];
+
+                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + "," + "o-" + ODPTeamID.ToString() : "";
+                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + "o-" + ODPTeamID.ToString() : "";
+                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + "o-" + ODPTeamID.ToString() : "";
                     }
 
 
@@ -557,7 +575,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -580,7 +598,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -603,7 +621,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -626,7 +644,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -650,7 +668,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -1022,8 +1040,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         protected void renderStudyFocusQuestions()
         {
-
-            var questions = db.A_StudyFocus.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            
+            var questions = db.A_StudyFocus.Where(sf => sf.Status.Status1 == "Active" && sf.StudyFocusID <= 100 ).OrderBy( sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             var count = 1;
             foreach(var question in questions){
