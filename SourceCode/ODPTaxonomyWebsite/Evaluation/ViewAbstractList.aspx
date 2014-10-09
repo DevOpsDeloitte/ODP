@@ -14,6 +14,13 @@
 <%@ Register TagPrefix="odp" TagName="CoderSupervisorView_Open" Src="~/Evaluation/AbstractListViews/CoderSupervisorView_Open.ascx" %>
 <%@ Register TagPrefix="odp" TagName="AdminView" Src="~/Evaluation/AbstractListViews/AdminView.ascx" %>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+
+<link type="text/css" rel="Stylesheet" href="http://cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css" />
+<script type="text/javascript" src="http://cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<link type="text/css" rel="Stylesheet" href="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css" />
+
+
  <script type="text/javascript">
 
      function checkStatus() {
