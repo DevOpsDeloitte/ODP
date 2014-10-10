@@ -74,12 +74,74 @@
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $('#example').DataTable();
+        //$('#example').DataTable();
+        $('#DTable').DataTable({
+        "processing": true,
+        "ajax": "/Evaluation/Handlers/Abstracts.ashx",
+        "columns": [
+            { "data": "AbstractID" },
+            { "data": "ApplicationID" },
+            { "data": "ProjectTitle" },
+            { "data": "Flags" },
+            { "data": "A1" },
+            { "data": "A2" },
+            { "data": "A3" },
+            { "data": "B" },
+            { "data": "C" },
+            { "data": "D" },
+            { "data": "E" },
+            { "data": "F" },
+            { "data": "G" }
+            ]
+
+
     });
+
+   // $('#MainContent_ODPSupervisorView_Default_AbstractViewGridView').prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
+});
 
 </script>
 
-<table id="example" class="display" cellspacing="0" width="100%">
+<table id="DTable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Abstract ID</th>
+                <th>Application ID</th>
+                <th>Title</th>
+                <th>Flags</th>
+                <th>A1</th>
+                <th>A2</th>
+                <th>A3</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+                <th>G</th>
+                
+            </tr>
+        </thead>
+
+           <tfoot>
+            <tr>
+               <th>Abstract ID</th>
+               <th>Application ID</th>
+               <th>Title</th>
+               <th>Flags</th>
+                <th>A1</th>
+                <th>A2</th>
+                <th>A3</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+                <th>E</th>
+                <th>F</th>
+                <th>G</th>
+            </tr>
+        </tfoot>
+</table>
+
+<%--<table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -560,4 +622,4 @@
                 <td>$112,000</td>
             </tr>
         </tbody>
-    </table>
+    </table>--%>

@@ -18,6 +18,7 @@ namespace ODPTaxonomyDAL_JY
         /**
          * Determine if a row is a parent row
          */
+        
         public bool IsParent { get; set; }
 
         public int AbstractID { get; set; }
@@ -80,6 +81,8 @@ namespace ODPTaxonomyDAL_JY
         public string E { get; set; }
         public string F { get; set; }
         public string G { get; set; }
+
+        public List<AbstractListRow> ChildRows { get; set; }
 
         public AbstractListRow()
         {

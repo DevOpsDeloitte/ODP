@@ -65,7 +65,7 @@ namespace ODPTaxonomyDAL_JY
             {
                 ParentAbstracts[i].GetSubmissionData(SubmissionTypeEnum.CODER_CONSENSUS);
                 ParentAbstracts[i].GetAbstractScan(AbstractView);
-
+                ParentAbstracts[i].ChildRows = new List<AbstractListRow>();
                 // gets all kappa data for abstract
                 var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
 
@@ -92,18 +92,21 @@ namespace ODPTaxonomyDAL_JY
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                     }
@@ -141,18 +144,21 @@ namespace ODPTaxonomyDAL_JY
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                         else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                         else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                     }

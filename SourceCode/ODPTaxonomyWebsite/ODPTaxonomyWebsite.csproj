@@ -91,6 +91,7 @@
     <Content Include="Evaluation\Evaluation.aspx" />
     <Content Include="Evaluation\EvaluationRT.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
+    <Content Include="Evaluation\Handlers\test.htm" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\PrintAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
