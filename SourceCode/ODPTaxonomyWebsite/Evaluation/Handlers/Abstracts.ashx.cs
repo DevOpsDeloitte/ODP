@@ -24,7 +24,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             var parentAbstracts = GetParentAbstractsSupervisorDefault();
 
-            List<AbstractListRow> ALR = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
+            List<AbstractListRow> ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
             IEnumerable<AbstractListRow> ALRX = ALR.Where(x => x.IsParent == true);
                                                 
             context.Response.Write("{  \"data\" : " +JsonConvert.SerializeObject(ALRX.ToList())+"  }");

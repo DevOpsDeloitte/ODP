@@ -26,10 +26,10 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             {
                 if (!IsPostBack)
                 {
-                    var parentAbstracts = GetParentAbstracts();
+                   // var parentAbstracts = GetParentAbstracts();
 
-                    AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
-                    AbstractViewGridView.DataBind();
+                   // AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
+                   // AbstractViewGridView.DataBind();
                 }
             }
             catch (Exception exp)
