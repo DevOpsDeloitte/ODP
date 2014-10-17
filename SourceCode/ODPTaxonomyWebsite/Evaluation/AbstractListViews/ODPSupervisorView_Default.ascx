@@ -24,7 +24,7 @@
                 for (var i = 0; i < rowData.ChildRows.length; i++) {
                     console.log(rowData.ChildRows[i]);
                     var ctRow = '<tr>' +
-                                '<td>' + '</td>' + // Col 1
+                                 '<td style="width:' + $($("#DTable th")[0]).css("width") + '" >' + '</td>' + // Col 1
                                 '<td style="width:'+ $($("#DTable th")[1]).css("width") +'" >' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
                                 '<td style="width:' + $($("#DTable th")[2]).css("width") + '" >' + '&nbsp;' + '</td>' + // Col 3
                                 '<td style="width:'+ $($("#DTable th")[3]).css("width") +'" >' + '&nbsp;' + '</td>' + // Col 4
