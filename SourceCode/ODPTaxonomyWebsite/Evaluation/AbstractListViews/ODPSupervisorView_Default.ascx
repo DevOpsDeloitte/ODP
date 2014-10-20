@@ -19,18 +19,27 @@
                 return Rows;
             };
 
+            this.coalesceCol = function (inv) {
+                var out = "&nbsp;";
+                //console.log(" val :: " + inv);
+                if (inv.length > 0 && inv !== undefined) {
+                    out = inv
+                }
+                return out;
+            };
+
             this.getTableChildRows = function (id) {
                 var rowData = Rows[id];
                 var childTable = '';
                 for (var i = 0; i < rowData.ChildRows.length; i++) {
-                    console.log(rowData.ChildRows[i]);
+                    //console.log(rowData.ChildRows[i]);
                     var ctRow = '<tr>' +
                                  '<td class="ccol" style="width:' + '16px' + '" >' + '&nbsp;' + '</td>' + // Col 1
                                 '<td class="ccol" style="width:' + ( $($("#DTable th")[1]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[2]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 3
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[3]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 4
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[4]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].ProjectTitle + '</td>' + // Col 3
-                                '<td class="ccol" style="width:' + ($($("#DTable th")[5]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].Flags + '</td>' + // Col 4
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[5]).outerWidth() - cellPadding).toString() + 'px" >' + this.coalesceCol(rowData.ChildRows[i].Flags) + '</td>' + // Col 4
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[6]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A1 + '</td>' + // Col 5
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[7]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A2 + '</td>' + // Col 6
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[8]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A3 + '</td>' + // Col 7
@@ -39,7 +48,7 @@
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[11]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].D + '</td>' + // Col 10
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[12]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].E + '</td>' + // Col 11
                                 '<td class="ccol" style="width:' + ($($("#DTable th")[13]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].F + '</td>' + // Col 12
-                                '<td class="ccol" style="width:' + ($($("#DTable th")[14]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].G + '</td>' + // Col 13
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[14]).outerWidth() - cellPadding).toString() + 'px" >' + this.coalesceCol(rowData.ChildRows[i].G) + '</td>' + // Col 13
                                
                             '</tr>'
                     childTable = childTable + ctRow;
@@ -77,10 +86,31 @@
             $(document).ready(function () {
                 //$('#example').DataTable();
                 table = $('#DTable').DataTable({
+                    //"bAutoWidth": false,
+                    "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                         $(nRow).addClass("closed");
+                          //$('td:eq(0)', nRow).addClass( "avo-lime-h avo-heading-white" );
+                          //$('td:eq(1),td:eq(2),td:eq(3)', nRow).addClass( "avo-light" );
+                        },
+                    "columnDefs": [
+                        {
+                            // The `data` parameter refers to the data for the cell (defined by the
+                            // `data` option, which defaults to the column being worked with, in
+                            // this case `data: 0`.
+                            "render": function (data, type, row) {
+                                return data.length == 0 ? "&nbsp;" : data;
+
+                            },
+                            "targets": 5
+                        },
+
+                        { "visible": true, "targets": [4] }
+                    ],
+                    //iDisplayLength: 10,
                     "processing": true,
                     //"ajax": "/Evaluation/Handlers/Abstracts.ashx",
                     "ajax": " /Evaluation/Handlers/json.js",
-                   
+
                     "columns": [
                  {
                      "class": 'details-control',
@@ -91,7 +121,7 @@
             { "data": "AbstractID" },
             { "data": "ApplicationID" },
             { "data": "StatusDate" },
-            { "data": "ProjectTitle" },
+            { "data": "ProjectTitle", "width": "120px" },
             { "data": "Flags" },
             { "data": "A1" },
             { "data": "A2" },
@@ -116,39 +146,61 @@
                     util = new Utility(table.data());
 
                     table.rows().eq(0).each(function (rowIdx) {
-                        
+
                         var childrows = util.getTableChildRows(rowIdx);
-                        console.log(rowIdx+ '    ' + childrows);
+                        //console.log(rowIdx+ '    ' + childrows);
                         table
                     .row(rowIdx)
                     .child(
                         $(
                            childrows
-                        )
+                        ), "hide"
                     )
                     .show();
+
                     });
+
+                });
+
+                $('#DTable tbody').on('click', 'td.details-control', function (evt) {
+                    console.log("here ::" + evt);
+                    var tr = $(this).closest('tr');
+                    var child = $(tr).next();
+
+                    if ( !$(tr).hasClass("shown")) {
+                         $(child).addClass("show").removeClass("hide");
+                         tr.addClass('shown');
+                         tr.removeClass('closed').addClass('open');
+                     }
+
+                    else {
+                        $(child).addClass("hide").removeClass("show");
+                        tr.removeClass('shown');
+                        tr.removeClass('open').addClass('closed');
+                    }
+
+
 
                 });
 
                 // $('#MainContent_ODPSupervisorView_Default_AbstractViewGridView').prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
 
-                //             $('#DTable tbody').on('click', 'td.details-control', function (evt) {
-                //                 console.log("here ::" + evt);
-                //                 var tr = $(this).closest('tr');
-                //                 var row = table.row(tr);
+                //                             $('#DTable tbody').on('click', 'td.details-control', function (evt) {
+                //                                 console.log("here ::" + evt);
+                //                                 var tr = $(this).closest('tr');
+                //                                 var row = table.row(tr);
 
-                //                 if (row.child.isShown()) {
-                //                     // This row is already open - close it
-                //                     row.child.hide();
-                //                     tr.removeClass('shown');
-                //                 }
-                //                 else {
-                //                     // Open this row
-                //                     row.child(format(row.data())).show();
-                //                     tr.addClass('shown');
-                //                 }
-                //             });
+                //                                 if (row.child.isShown()) {
+                //                                     // This row is already open - close it
+                //                                     row.child.hide();
+                //                                     tr.removeClass('shown');
+                //                                 }
+                //                                 else {
+                //                                     // Open this row
+                //                                     row.child().show();
+                //                                     tr.addClass('shown');
+                //                                 }
+                //                             });
 
             });
 

@@ -8,11 +8,22 @@ tr.shown td.details-control {
 
 #DTable td.ccol, table.dataTable tbody th.ccol, table.dataTable tbody td.ccol
 {
-    display:inline-block;
+    /*display:inline-block;*/
     padding: 8px 10px;
+
 }
 
 table.dataTable tbody th[colspan="15"], table.dataTable tbody td[colspan="15"]
 {
     padding: 0;
+}
+
+table.dataTable tbody tr.hide
+{
+   display: none;
+}
+
+table.dataTable tbody tr.show
+{
+  display: table-row;
 }
