@@ -7,6 +7,7 @@
     <script type="text/javascript">
 
         var table;
+        var cellPadding = 20;
 
         function Utility(data) {
             // private member
@@ -24,21 +25,21 @@
                 for (var i = 0; i < rowData.ChildRows.length; i++) {
                     console.log(rowData.ChildRows[i]);
                     var ctRow = '<tr>' +
-                                 '<td style="width:' + $($("#DTable th")[0]).css("width") + '" >' + '</td>' + // Col 1
-                                '<td style="width:'+ $($("#DTable th")[1]).css("width") +'" >' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
-                                '<td style="width:' + $($("#DTable th")[2]).css("width") + '" >' + '&nbsp;' + '</td>' + // Col 3
-                                '<td style="width:'+ $($("#DTable th")[3]).css("width") +'" >' + '&nbsp;' + '</td>' + // Col 4
-                                '<td style="width:' + $($("#DTable th")[4]).css("width") + '" >' + rowData.ChildRows[i].ProjectTitle + '</td>' + // Col 3
-                                '<td style="width:' + $($("#DTable th")[5]).css("width") + '" >' + rowData.ChildRows[i].Flags + '</td>' + // Col 4
-                                '<td style="width:' + $($("#DTable th")[6]).css("width") + '" >' + rowData.ChildRows[i].A1 + '</td>' + // Col 5
-                                '<td style="width:' + $($("#DTable th")[7]).css("width") + '" >' + rowData.ChildRows[i].A2 + '</td>' + // Col 6
-                                '<td style="width:' + $($("#DTable th")[8]).css("width") + '" >' + rowData.ChildRows[i].A3 + '</td>' + // Col 7
-                                '<td style="width:' + $($("#DTable th")[9]).css("width") + '" >' + rowData.ChildRows[i].B + '</td>' + // Col 8
-                                '<td style="width:' + $($("#DTable th")[10]).css("width") + '" >' + rowData.ChildRows[i].C + '</td>' + // Col 9
-                                '<td style="width:' + $($("#DTable th")[11]).css("width") + '" >' + rowData.ChildRows[i].D + '</td>' + // Col 10
-                                '<td style="width:' + $($("#DTable th")[12]).css("width") + '" >' + rowData.ChildRows[i].E + '</td>' + // Col 11
-                                '<td style="width:' + $($("#DTable th")[13]).css("width") + '" >' + rowData.ChildRows[i].F + '</td>' + // Col 12
-                                '<td style="width:' + $($("#DTable th")[14]).css("width") + '" >' + rowData.ChildRows[i].G + '</td>' + // Col 13
+                                 '<td class="ccol" style="width:' + '16px' + '" >' + '&nbsp;' + '</td>' + // Col 1
+                                '<td class="ccol" style="width:' + ( $($("#DTable th")[1]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[2]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 3
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[3]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 4
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[4]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].ProjectTitle + '</td>' + // Col 3
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[5]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].Flags + '</td>' + // Col 4
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[6]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A1 + '</td>' + // Col 5
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[7]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A2 + '</td>' + // Col 6
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[8]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A3 + '</td>' + // Col 7
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[9]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].B + '</td>' + // Col 8
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[10]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].C + '</td>' + // Col 9
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[11]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].D + '</td>' + // Col 10
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[12]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].E + '</td>' + // Col 11
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[13]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].F + '</td>' + // Col 12
+                                '<td class="ccol" style="width:' + ($($("#DTable th")[14]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].G + '</td>' + // Col 13
                                
                             '</tr>'
                     childTable = childTable + ctRow;
@@ -77,7 +78,9 @@
                 //$('#example').DataTable();
                 table = $('#DTable').DataTable({
                     "processing": true,
-                    "ajax": "/Evaluation/Handlers/Abstracts.ashx",
+                    //"ajax": "/Evaluation/Handlers/Abstracts.ashx",
+                    "ajax": " /Evaluation/Handlers/json.js",
+                   
                     "columns": [
                  {
                      "class": 'details-control',

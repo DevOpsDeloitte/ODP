@@ -5,3 +5,14 @@
 tr.shown td.details-control {
     background: url('/images/details_close.png') no-repeat center center;
 }
+
+#DTable td.ccol, table.dataTable tbody th.ccol, table.dataTable tbody td.ccol
+{
+    display:inline-block;
+    padding: 8px 10px;
+}
+
+table.dataTable tbody th[colspan="15"], table.dataTable tbody td[colspan="15"]
+{
+    padding: 0;
+}
