@@ -6,6 +6,18 @@
 
     <script type="text/javascript">
 
+
+        (function($)  {
+            $.fn.extend({
+                check : function()  {
+                    return this.filter(":radio, :checkbox").attr("checked", true);
+                },
+                uncheck : function()  {
+                    return this.filter(":radio, :checkbox").removeAttr("checked");
+                }
+            });
+        }(jQuery));
+
         var table;
         var cellPadding = 20;
 
@@ -26,6 +38,43 @@
                     out = inv
                 }
                 return out;
+            };
+
+            this.showOpenRows = function (flag) {
+
+                if (flag) {
+                    //console.log("All box checked..");
+                    $("#DTable tr").each(function (idx, value) {
+                        // parent rows
+                        if (!$(this).hasClass("shown")) {
+                            $(this).addClass("shown");
+                        }
+                        // child rows
+                        if ($(this).hasClass("hide")) {
+                            $(this).removeClass("hide").addClass("show");
+                        }
+
+                    });
+
+                }
+                else {
+
+                    //console.log("All box unchecked..");
+
+                    $("#DTable tr").each(function (idx, value) {
+                        // parent rows
+                        if ($(this).hasClass("shown")) {
+                            $(this).removeClass("shown");
+                        }
+                        // child rows
+                        if ($(this).hasClass("show")) {
+                            $(this).removeClass("show").addClass("hide");
+                        }
+
+                    });
+                }
+
+
             };
 
             this.getTableChildRows = function (id) {
@@ -88,10 +137,10 @@
                 table = $('#DTable').DataTable({
                     //"bAutoWidth": false,
                     "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                         $(nRow).addClass("closed");
-                          //$('td:eq(0)', nRow).addClass( "avo-lime-h avo-heading-white" );
-                          //$('td:eq(1),td:eq(2),td:eq(3)', nRow).addClass( "avo-light" );
-                        },
+                        $(nRow).addClass("closed");
+                        //$('td:eq(0)', nRow).addClass( "avo-lime-h avo-heading-white" );
+                        //$('td:eq(1),td:eq(2),td:eq(3)', nRow).addClass( "avo-light" );
+                    },
                     "columnDefs": [
                         {
                             // The `data` parameter refers to the data for the cell (defined by the
@@ -162,26 +211,41 @@
 
                 });
 
+                table.on('page.dt', function () {
+                    var info = table.page.info();
+                    console.log('Showing page: ' + info.page + ' of ' + info.pages);
+                });
+
                 $('#DTable tbody').on('click', 'td.details-control', function (evt) {
                     console.log("here ::" + evt);
                     var tr = $(this).closest('tr');
                     var child = $(tr).next();
 
-                    if ( !$(tr).hasClass("shown")) {
-                         $(child).addClass("show").removeClass("hide");
-                         tr.addClass('shown');
-                         tr.removeClass('closed').addClass('open');
-                     }
+                    if (!$(tr).hasClass("shown")) {
+                        $(child).addClass("show").removeClass("hide");
+                        tr.addClass('shown');
+                        //tr.removeClass('closed').addClass('open');
+                    }
 
                     else {
                         $(child).addClass("hide").removeClass("show");
                         tr.removeClass('shown');
-                        tr.removeClass('open').addClass('closed');
+                        //tr.removeClass('open').addClass('closed');
                     }
 
 
 
                 });
+
+
+
+                $("#allBox").on("click", function (evt) {
+                    util.showOpenRows(this.checked);
+                 
+
+                });
+
+
 
                 // $('#MainContent_ODPSupervisorView_Default_AbstractViewGridView').prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable();
 
@@ -206,6 +270,11 @@
 
 </script>
 
+<div class="filterBoxes">
+
+    <input type="checkbox" name="allBox" id="allBox" value="all">Expand All</input>
+
+</div>
 
     <table id="DTable" class="display" cellspacing="0" width="100%">
         <thead>
