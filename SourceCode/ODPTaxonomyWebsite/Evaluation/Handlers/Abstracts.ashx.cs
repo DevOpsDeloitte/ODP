@@ -41,6 +41,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
                     serializeResponse(context, ALR);
                     break;
+                case "ODPStaff":
+                    parentAbstracts = this.GetParentAbstractsStaffMemberDefault();
+                    ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
+                    serializeResponse(context, ALR);
+                    break;
                 case "Admin" :
 
                     break;
