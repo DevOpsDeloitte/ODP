@@ -297,6 +297,13 @@
             });
 
 </script>--%>
+<script type="text/javascript" src="/Scripts/datatables/util.js"></script>
+
+<script type="text/javascript">
+
+    window.config.role = "ODPSupervisor";
+
+</script>
 <script type="text/javascript" src="/Scripts/datatables/app.js"></script>
 
 <div class="filterBoxes">
