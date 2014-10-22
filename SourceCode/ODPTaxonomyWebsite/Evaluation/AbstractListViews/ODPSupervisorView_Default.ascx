@@ -4,7 +4,7 @@
 <h3>
     View Coded Abstracts</h3>
 
-    <script type="text/javascript">
+<%--    <script type="text/javascript">
 
 
         (function($)  {
@@ -16,7 +16,17 @@
                     return this.filter(":radio, :checkbox").removeAttr("checked");
                 }
             });
-        }(jQuery));
+        } (jQuery));
+
+        getFormattedDate = function (date) {
+            var year = date.getFullYear();
+            var month = (1 + date.getMonth()).toString();
+            month = month.length > 1 ? month : '0' + month;
+            var day = date.getDate().toString();
+            day = day.length > 1 ? day : '0' + day;
+           // return year + '/' + month + '/' + day;
+            return  month + '/' + day + '/' + year;
+        };
 
         var table;
         var cellPadding = 20;
@@ -153,7 +163,18 @@
                             "targets": 5
                         },
 
-                        { "visible": true, "targets": [4] }
+                        { "visible": true, "targets": [4] },
+                        {
+
+                            "render": function (data, type, row) {
+                                var myDate = new Date(data);
+                                //myDate = myDate.replace(/^(\d{4})\-(\d{2})\-(\d{2}).*$/, '$2/$3/$1');
+                                return getFormattedDate(myDate);
+
+                            },
+                            "targets": 3
+                        }
+
                     ],
                     //iDisplayLength: 10,
                     "processing": true,
@@ -188,6 +209,10 @@
 
                 table.on('draw.dt', function () {
                     console.log('Redraw occurred at: ' + new Date().getTime());
+                    var alb = $("#allBox").is(':checked');
+                    setTimeout(function () {
+                        util.showOpenRows(alb);
+                    }, 0);
                 });
 
                 table.on('init.dt', function () {
@@ -213,7 +238,11 @@
 
                 table.on('page.dt', function () {
                     var info = table.page.info();
-                    console.log('Showing page: ' + info.page + ' of ' + info.pages);
+                    //                    var alb = $("#allBox").is(':checked');
+                    //                    setTimeout(function () {
+                    //                        util.showOpenRows(alb);
+                    //                    }, 100);
+                    console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
                 });
 
                 $('#DTable tbody').on('click', 'td.details-control', function (evt) {
@@ -241,7 +270,6 @@
 
                 $("#allBox").on("click", function (evt) {
                     util.showOpenRows(this.checked);
-                 
 
                 });
 
@@ -268,7 +296,8 @@
 
             });
 
-</script>
+</script>--%>
+<script type="text/javascript" src="/Scripts/datatables/app.js"></script>
 
 <div class="filterBoxes">
 
