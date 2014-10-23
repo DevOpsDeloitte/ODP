@@ -309,6 +309,9 @@
 <div class="filterBoxes">
 
     <input type="checkbox" name="allBox" id="allBox" value="all">Expand All</input>
+    <br />
+    <br />
+    <input type="button" name="tbutton" id= "tbutton" value="try" class="review button yes" />
 
 </div>
 
@@ -320,6 +323,7 @@
                 <th>Application ID</th>
                 <th>Status Date</th>
                 <th>Title</th>
+                <th>Abstract Scan</th>
                 <th>Flags</th>
                 <th>A1</th>
                 <th>A2</th>
@@ -341,6 +345,7 @@
                <th>Application ID</th>
                <th>Status Date</th>
                <th>Title</th>
+               <th>Abstract Scan</th>
                <th>Flags</th>
                 <th>A1</th>
                 <th>A2</th>

@@ -3,14 +3,24 @@
 var table;
 var cellPadding = 20;
 
-function Utility(data) {
+config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
+
+
+function Utility() {
     // private member
-    var Rows = data;
-    this.RowsP = data;
+//    var Rows = data;
+//    this.RowsP = data;
+    var Rows = null;
+    this.RowsP = null;
 
     // public function
     this.getRows = function () {
         return Rows;
+    };
+
+    this.setRows = function (data) {
+        this.RowsP = data;
+        Rows = data;
     };
 
     this.coalesceCol = function (inv) {
@@ -132,7 +142,7 @@ $(document).ready(function () {
                     return data.length == 0 ? "&nbsp;" : data;
 
                 },
-                "targets": 5
+                "targets": 6
             },
 
             { "visible": true, "targets": [4] },
@@ -144,13 +154,32 @@ $(document).ready(function () {
                     return getFormattedDate(myDate);
 
                 },
-                "targets": 3
-            }
+                "targets": 3 //date column
+            },
+
+            {
+
+                "render": function (data, type, row) {
+                    var collink = "";
+                    console.log(row);
+                    collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'>" + data + "</a>"; ;
+                    var class1 = row.AbstractScan !== null ? "scan-file" : "";
+                    var addImg = '<img class="scan-file" src="../Images/clip.png" alt="Attachment">';
+                    //this.className = class1;
+                    if (class1 != "") collink = '<div class="titleimg has-file" style="position: relative">' + collink + addImg + '</div>';
+                    return collink;
+
+                },
+                "targets": 4 //title column
+            },
+            { "visible": false, "targets": [5]} // hide abstract scan}
+
 
         ],
         //iDisplayLength: 10,
         "processing": true,
-        "ajax": "/Evaluation/Handlers/Abstracts.ashx?role="+window.config.role,
+        //"ajax": "/Evaluation/Handlers/Abstracts.ashx?role=" + window.config.role,
+        "ajax": config.baseURL,
         //"ajax": " /Evaluation/Handlers/json.js",
 
         "columns": [
@@ -164,6 +193,7 @@ $(document).ready(function () {
     { "data": "ApplicationID" },
     { "data": "StatusDate" },
     { "data": "ProjectTitle", "width": "120px" },
+    { "data": "AbstractScan" },
     { "data": "Flags" },
     { "data": "A1" },
     { "data": "A2" },
@@ -188,8 +218,10 @@ $(document).ready(function () {
     });
 
     table.on('init.dt', function () {
-        console.log("loaded...");
-        util = new Utility(table.data());
+        console.log("datable initialized :: init.dt ::");
+        //util = new Utility(table.data());
+        util = new Utility();
+        util.setRows(table.data());
 
         table.rows().eq(0).each(function (rowIdx) {
 
@@ -244,6 +276,49 @@ $(document).ready(function () {
         util.showOpenRows(this.checked);
 
     });
+
+    $("#tbutton").on("click", function (evt) {
+        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role,
+        table.ajax.reload(function (json) {
+
+        childrenRedraw(table.data());
+//            util.setRows(table.data());
+
+//            table.rows().eq(0).each(function (rowIdx) {
+
+//                var childrows = util.getTableChildRows(rowIdx);
+//                //console.log(rowIdx+ '    ' + childrows);
+//                table
+//        .row(rowIdx)
+//        .child(
+//            $(
+//                childrows
+//            ), "hide"
+//        )
+//        .show();
+
+//            });
+        });
+        //table.destroy();
+    });
+
+    function childrenRedraw(tdata) {
+        util.setRows(tdata);
+
+        table.rows().eq(0).each(function (rowIdx) {
+            var childrows = util.getTableChildRows(rowIdx);
+            //console.log(rowIdx+ '    ' + childrows);
+            table
+        .row(rowIdx)
+        .child(
+            $(
+                childrows
+            ), "hide"
+        )
+        .show();
+        });
+
+    }
 
 
 });

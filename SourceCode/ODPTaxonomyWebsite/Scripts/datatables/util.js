@@ -1,6 +1,7 @@
 ﻿
 var config = {};
 
+
 (function ($) {
     $.fn.extend({
         check: function () {

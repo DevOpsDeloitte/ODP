@@ -27,3 +27,15 @@ table.dataTable tbody tr.show
 {
   display: table-row;
 }
+
+div.scan-file
+{
+    top : -4px;
+    right: -4px;
+}
+
+div.has-file a
+{
+    padding-right: 25px;
+    display: block;
+}
