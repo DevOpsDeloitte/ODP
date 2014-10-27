@@ -26,8 +26,10 @@ function Utility() {
     this.coalesceCol = function (inv) {
         var out = "&nbsp;";
         //console.log(" val :: " + inv);
-        if (inv.length > 0 && inv !== undefined) {
-            out = inv
+        if (inv !== undefined && inv !== null) {
+            if (inv.length > 0) {
+                out = inv
+            }
         }
         return out;
     };
@@ -183,6 +185,12 @@ $(document).ready(function () {
         //"ajax": " /Evaluation/Handlers/json.js",
 
         "columns": [
+         {
+             "class": 'checkbox-control',
+             "orderable": false,
+             "data": null,
+             "defaultContent": '<input type="checkbox" />'
+         },
         {
             "class": 'details-control',
             "orderable": false,

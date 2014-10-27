@@ -297,6 +297,38 @@
             });
 
 </script>--%>
+
+<div class="sixteen columns" id="functionsbox"> 
+            
+<div class="four columns">     
+<label for="filterlist">Filters List</label>
+<select name="filterlist"  id="filterlist">
+		<option selected="selected" value="">Default View</option>
+		<option value="open">Open Abstract</option>
+		<option value="review">In Review List</option>
+		<option value="uncoded">In Review List - Uncoded Only</option>
+
+</select>
+
+</div>   
+
+<div class="four columns">  
+<label for="actionlistlist">Actions List</label>
+<select name="actionlist"  id="actionlist">
+		<option selected="selected" value="">Default View</option>
+		<option value="open">Open Abstract</option>
+		<option value="review">In Review List</option>
+		<option value="uncoded">In Review List - Uncoded Only</option>
+
+</select>
+</div>
+<div class="four columns">  
+<input type="checkbox" name="allBox" id="allBox" value="all">Expand All</input>
+</div>
+
+</div>
+
+
 <script type="text/javascript" src="/Scripts/datatables/util.js"></script>
 
 <script type="text/javascript">
@@ -308,9 +340,8 @@
 
 <div class="filterBoxes">
 
-    <input type="checkbox" name="allBox" id="allBox" value="all">Expand All</input>
-    <br />
-    <br />
+    
+  
     <input type="button" name="tbutton" id= "tbutton" value="try" class="review button yes" />
 
 </div>
@@ -318,6 +349,7 @@
     <table id="DTable" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
+                <th></th>
                 <th></th>
                 <th>Abstract ID</th>
                 <th>Application ID</th>
@@ -340,7 +372,8 @@
 
            <tfoot>
             <tr>
-            <th></th>
+                <th></th>
+                <th></th>
                <th>Abstract ID</th>
                <th>Application ID</th>
                <th>Status Date</th>
