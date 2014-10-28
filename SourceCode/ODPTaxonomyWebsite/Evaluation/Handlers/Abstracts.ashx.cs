@@ -55,6 +55,18 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             parentAbstracts = GetParentAbstractsODPSupervisorDefault();
                             System.Diagnostics.Stopwatch objStopWatch = new System.Diagnostics.Stopwatch();
                             objStopWatch.Start();
+                            AbstractListViewData data = new AbstractListViewData();
+                            foreach (var abs in parentAbstracts)
+                            {
+                                if (data.IsAbstractInReview(abs.AbstractID))
+                                {
+                                    abs.InReview  = true;
+                                }
+                                else
+                                {
+                                    abs.InReview = false;
+                                }
+                            }
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
                             objStopWatch.Stop();
                             serializeResponse(context, ALR);

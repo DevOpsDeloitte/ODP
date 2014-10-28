@@ -307,7 +307,6 @@
 		<option value="open">Open Abstract</option>
 		<option value="review">In Review List</option>
 		<option value="uncoded">In Review List - Uncoded Only</option>
-
 </select>
 
 </div>   
@@ -315,12 +314,12 @@
 <div class="four columns">  
 <label for="actionlistlist">Actions List</label>
 <select name="actionlist"  id="actionlist">
-		<option selected="selected" value="">Default View</option>
-		<option value="open">Open Abstract</option>
-		<option value="review">In Review List</option>
-		<option value="uncoded">In Review List - Uncoded Only</option>
-
+		<option selected="selected" value="addtoreview">Add to Review List</option>
+		<option value="closeabstracts">Close Abstracts</option>
+		<option value="reopenabstracts">Reopen Abstracts</option>
+		<option value="exportabstracts">Export Abstracts</option>
 </select>
+ <input type="button" name="subButton" id="subButton" value="Submit" class="review button no" />
 </div>
 <div class="four columns">  
 <input type="checkbox" name="allBox" id="allBox" value="all">Expand All</input>

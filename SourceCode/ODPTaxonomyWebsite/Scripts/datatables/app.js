@@ -128,15 +128,20 @@ function format(d) {
 }
 
 $(document).ready(function () {
-    //$('#example').DataTable();
     table = $('#DTable').DataTable({
-        //"bAutoWidth": false,
+
         "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
             $(nRow).addClass("closed");
-            //$('td:eq(0)', nRow).addClass( "avo-lime-h avo-heading-white" );
-            //$('td:eq(1),td:eq(2),td:eq(3)', nRow).addClass( "avo-light" );
         },
         "columnDefs": [
+             {
+                 // show review list check box.
+                 "render": function (data, type, row) {
+                     return data == true ? "&nbsp;" : '<input type="checkbox" />';
+
+                 },
+                 "targets": 0
+             },
             {
                 // The `data` parameter refers to the data for the cell (defined by the
                 // `data` option, which defaults to the column being worked with, in
@@ -189,8 +194,8 @@ $(document).ready(function () {
          {
              "class": 'checkbox-control',
              "orderable": false,
-             "data": null,
-             "defaultContent": '<input type="checkbox" />'
+             "data": "InReview"//,
+             //"defaultContent": '<input type="checkbox" />'
              // "defaultContent": ''
          },
         {
@@ -318,6 +323,29 @@ $(document).ready(function () {
         console.log(" checkbox clicked : " + $(this).is(":checked"));
 
 
+    });
+
+    function doSubmitChecks() {
+
+
+    }
+
+    $("select#filterlist").change(function () {
+        //alert("Handler for .change() called.");
+        var str = "";
+        $("select#filterlist option:selected").each(function () {
+            str += $(this).text() + " ";
+        });
+        alert(str);
+    });
+
+    $("select#actionlist").change(function () {
+        //alert("Handler for .change() called.");
+        var str = "";
+        $("select#actionlist option:selected").each(function () {
+            str += $(this).text() + " ";
+        });
+        alert(str);
     });
 
     function childrenRedraw(tdata) {

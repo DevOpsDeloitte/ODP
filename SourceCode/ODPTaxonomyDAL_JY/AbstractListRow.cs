@@ -20,6 +20,7 @@ namespace ODPTaxonomyDAL_JY
          */
         
         public bool IsParent { get; set; }
+        public bool InReview { get; set; }
 
         public int AbstractID { get; set; }
         public int? ApplicationID { get; set; }
