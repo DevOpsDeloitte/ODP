@@ -328,6 +328,9 @@
     <Compile Include="Evaluation\Glossary.aspx.designer.cs">
       <DependentUpon>Glossary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractReview.ashx.cs">
+      <DependentUpon>AbstractReview.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\Abstracts.ashx.cs">
       <DependentUpon>Abstracts.ashx</DependentUpon>
     </Compile>
@@ -482,6 +485,7 @@
     <Content Include="bin\ODPTaxonomyDAL_TT.dll.config" />
     <Content Include="Evaluation\Handlers\Evaluation.ashx" />
     <Content Include="Evaluation\Handlers\Abstracts.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractReview.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />

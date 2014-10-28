@@ -11,10 +11,14 @@ namespace ODPTaxonomyWebsite.Evaluation
 {
     public partial class ViewAbstractList : System.Web.UI.Page
     {
+        public string userGUID = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int ViewInt = 0;
             List<string> UserRoles = Roles.GetRolesForUser().ToList();
+            MembershipUser user = Membership.GetUser();
+            userGUID = ((Guid)user.ProviderUserKey).ToString();
             IDictionary<int, string> ViewRoles = AbstractListViewHelper.GetViewRoles(UserRoles);
 
             if (string.IsNullOrEmpty(Request.QueryString["view"]))

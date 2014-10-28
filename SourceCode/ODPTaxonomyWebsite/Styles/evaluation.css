@@ -13,7 +13,7 @@ tr.shown td.details-control {
 
 }
 
-table.dataTable tbody th[colspan="15"], table.dataTable tbody td[colspan="15"]
+table.dataTable tbody th[colspan="16"], table.dataTable tbody td[colspan="16"]
 {
     padding: 0;
 }

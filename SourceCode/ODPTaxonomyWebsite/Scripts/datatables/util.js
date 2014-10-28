@@ -1,5 +1,6 @@
 ﻿
 var config = {};
+var $opts = { selectedItems : [], xy : "" };
 
 
 (function ($) {

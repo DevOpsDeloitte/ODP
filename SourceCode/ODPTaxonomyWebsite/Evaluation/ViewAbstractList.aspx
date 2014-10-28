@@ -18,6 +18,7 @@
 <link type="text/css" rel="Stylesheet" href="/Styles/evaluation.css" />
 <link type="text/css" rel="Stylesheet" href="http://cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css" />
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 <!--
 <script type="text/javascript" src="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
 <link type="text/css" rel="Stylesheet" href="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css" />
@@ -27,9 +28,11 @@
 
  <script type="text/javascript">
 
+     window.user = {};
+     window.user.GUID = '<%= userGUID %>';
+
      function checkStatus() {
 
-         //console.log("called checkStatus");
          if ($("input.review").hasClass("no")) {
 
              return false;
@@ -45,7 +48,6 @@
 
          $("input[type=checkbox]").click(function () {
              var keepno = true;
-             //console.log("clicked...checkbox");
              $("input[type=checkbox]").each(function () {
                  if (this.checked) keepno = false;
              });

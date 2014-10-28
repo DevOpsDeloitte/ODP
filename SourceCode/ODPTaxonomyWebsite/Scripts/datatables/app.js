@@ -78,20 +78,21 @@ function Utility() {
             //console.log(rowData.ChildRows[i]);
             var ctRow = '<tr>' +
                         '<td class="ccol" style="width:' + '16px' + '" >' + '&nbsp;' + '</td>' + // Col 1
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[1]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[2]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 3
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[3]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 4
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[4]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].ProjectTitle + '</td>' + // Col 3
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[5]).outerWidth() - cellPadding).toString() + 'px" >' + this.coalesceCol(rowData.ChildRows[i].Flags) + '</td>' + // Col 4
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[6]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A1 + '</td>' + // Col 5
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[7]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A2 + '</td>' + // Col 6
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[8]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A3 + '</td>' + // Col 7
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[9]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].B + '</td>' + // Col 8
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[10]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].C + '</td>' + // Col 9
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[11]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].D + '</td>' + // Col 10
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[12]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].E + '</td>' + // Col 11
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[13]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].F + '</td>' + // Col 12
-                    '<td class="ccol" style="width:' + ($($("#DTable th")[14]).outerWidth() - cellPadding).toString() + 'px" >' + this.coalesceCol(rowData.ChildRows[i].G) + '</td>' + // Col 13
+                        '<td class="ccol" style="width:' + '16px' + '" >' + '&nbsp;' + '</td>' + // Col 1a
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[2]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[3]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 3
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[4]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 4
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[5]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].ProjectTitle + '</td>' + // Col 3
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[6]).outerWidth() - cellPadding).toString() + 'px" >' + this.coalesceCol(rowData.ChildRows[i].Flags) + '</td>' + // Col 4
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[7]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A1 + '</td>' + // Col 5
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[8]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A2 + '</td>' + // Col 6
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[9]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A3 + '</td>' + // Col 7
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[10]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].B + '</td>' + // Col 8
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[11]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].C + '</td>' + // Col 9
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[12]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].D + '</td>' + // Col 10
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[13]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].E + '</td>' + // Col 11
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[14]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].F + '</td>' + // Col 12
+                    '<td class="ccol" style="width:' + ($($("#DTable th")[15]).outerWidth() - cellPadding).toString() + 'px" >' + this.coalesceCol(rowData.ChildRows[i].G) + '</td>' + // Col 13
 
                 '</tr>'
             childTable = childTable + ctRow;
@@ -144,10 +145,10 @@ $(document).ready(function () {
                     return data.length == 0 ? "&nbsp;" : data;
 
                 },
-                "targets": 6
+                "targets": 7
             },
 
-            { "visible": true, "targets": [4] },
+            { "visible": true, "targets": [5] },
             {
 
                 "render": function (data, type, row) {
@@ -156,7 +157,7 @@ $(document).ready(function () {
                     return getFormattedDate(myDate);
 
                 },
-                "targets": 3 //date column
+                "targets": 4 //date column
             },
 
             {
@@ -172,9 +173,9 @@ $(document).ready(function () {
                     return collink;
 
                 },
-                "targets": 4 //title column
+                "targets": 5 //title column
             },
-            { "visible": false, "targets": [5]} // hide abstract scan}
+            { "visible": false, "targets": [6]} // hide abstract scan}
 
 
         ],
@@ -190,6 +191,7 @@ $(document).ready(function () {
              "orderable": false,
              "data": null,
              "defaultContent": '<input type="checkbox" />'
+             // "defaultContent": ''
          },
         {
             "class": 'details-control',
@@ -197,7 +199,7 @@ $(document).ready(function () {
             "data": null,
             "defaultContent": ''
         },
-    { "data": "AbstractID" },
+    { "data": "AbstractID", "class": "abstractid" },
     { "data": "ApplicationID" },
     { "data": "StatusDate" },
     { "data": "ProjectTitle", "width": "120px" },
@@ -229,22 +231,23 @@ $(document).ready(function () {
         console.log("datable initialized :: init.dt ::");
         //util = new Utility(table.data());
         util = new Utility();
-        util.setRows(table.data());
+        childrenRedraw(table.data());
+        //        util.setRows(table.data());
 
-        table.rows().eq(0).each(function (rowIdx) {
+        //        table.rows().eq(0).each(function (rowIdx) {
 
-            var childrows = util.getTableChildRows(rowIdx);
-            //console.log(rowIdx+ '    ' + childrows);
-            table
-        .row(rowIdx)
-        .child(
-            $(
-                childrows
-            ), "hide"
-        )
-        .show();
+        //            var childrows = util.getTableChildRows(rowIdx);
+        //            //console.log(rowIdx+ '    ' + childrows);
+        //            table
+        //        .row(rowIdx)
+        //        .child(
+        //            $(
+        //                childrows
+        //            ), "hide"
+        //        )
+        //        .show();
 
-        });
+        //        });
 
     });
 
@@ -289,25 +292,32 @@ $(document).ready(function () {
         config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role,
         table.ajax.reload(function (json) {
 
-        childrenRedraw(table.data());
-//            util.setRows(table.data());
+            childrenRedraw(table.data());
 
-//            table.rows().eq(0).each(function (rowIdx) {
-
-//                var childrows = util.getTableChildRows(rowIdx);
-//                //console.log(rowIdx+ '    ' + childrows);
-//                table
-//        .row(rowIdx)
-//        .child(
-//            $(
-//                childrows
-//            ), "hide"
-//        )
-//        .show();
-
-//            });
         });
         //table.destroy();
+    });
+
+    $("body").on("click", "table.dataTable td input[type=checkbox]", function (evt) {
+        var absid = $(this).parent().parent().find("td.abstractid").html();
+        if ($(this).is(":checked")) {
+            var i = _.indexOf($opts.selectedItems, absid);
+            if (i == -1) {
+                $opts.selectedItems.push(absid);
+            }
+            //console.log(" abstract id : " + $(this).parent().parent().find("td.abstractid").html());
+        }
+        else {
+            var i = _.indexOf($opts.selectedItems, absid);
+            if (i != -1) {
+                $opts.selectedItems.splice(i, 1);
+            }
+
+        }
+
+        console.log(" checkbox clicked : " + $(this).is(":checked"));
+
+
     });
 
     function childrenRedraw(tdata) {
