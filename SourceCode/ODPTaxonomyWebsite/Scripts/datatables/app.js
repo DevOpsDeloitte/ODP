@@ -13,6 +13,8 @@ function Utility() {
     var Rows = null;
     this.RowsP = null;
 
+
+
     // public function
     this.getRows = function () {
         return Rows;
@@ -128,6 +130,34 @@ function format(d) {
 }
 
 $(document).ready(function () {
+
+    var spinneropts = {
+        lines: 10, // The number of lines to draw
+        length: 15, // The length of each line
+        width: 3, // The line thickness
+        radius: 5, // The radius of the inner circle
+        corners: 1, // Corner roundness (0..1)
+        rotate: 0, // The rotation offset
+        direction: 1, // 1: clockwise, -1: counterclockwise
+        color: '#24AA7A', // #rgb or #rrggbb or array of colors
+        speed: 1, // Rounds per second
+        trail: 60, // Afterglow percentage
+        shadow: false, // Whether to render a shadow
+        hwaccel: false, // Whether to use hardware acceleration
+        className: 'spinner', // The CSS class to assign to the spinner
+        zIndex: 2e9, // The z-index (defaults to 2000000000)
+        top: '20px', // Top position relative to parent
+        left: '100px' // Left position relative to parent
+    };
+
+    var target = document.getElementById('spinner');
+    var spinner = new Spinner(spinneropts).spin(target);
+
+
+    util = new Utility();
+
+    filtersManager(); // Init
+
     table = $('#DTable').DataTable({
 
         "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
@@ -137,7 +167,14 @@ $(document).ready(function () {
              {
                  // show review list check box.
                  "render": function (data, type, row) {
-                     return data == true ? "&nbsp;" : '<input type="checkbox" />';
+                     // default condition add to review.
+                     if ($opts.filterlist != "review") {
+                         return data == true ? "&nbsp;" : '<input type="checkbox" />';
+                     }
+                     else {
+                         return data == true ? '<input type="checkbox"/>' : "&nbsp;";
+                     }
+                     // in review list, remove.
 
                  },
                  "targets": 0
@@ -169,7 +206,7 @@ $(document).ready(function () {
 
                 "render": function (data, type, row) {
                     var collink = "";
-                    console.log(row);
+                    //console.log(row);
                     collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'>" + data + "</a>"; ;
                     var class1 = row.AbstractScan !== null ? "scan-file" : "";
                     var addImg = '<img class="scan-file" src="../Images/clip.png" alt="Attachment">';
@@ -233,9 +270,11 @@ $(document).ready(function () {
     });
 
     table.on('init.dt', function () {
+
+
         console.log("datable initialized :: init.dt ::");
         //util = new Utility(table.data());
-        util = new Utility();
+        //util = new Utility();
         childrenRedraw(table.data());
         //        util.setRows(table.data());
 
@@ -294,14 +333,15 @@ $(document).ready(function () {
     });
 
     $("#tbutton").on("click", function (evt) {
-        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role,
+        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
         table.ajax.reload(function (json) {
-
             childrenRedraw(table.data());
-
         });
         //table.destroy();
     });
+
+
+
 
     $("body").on("click", "table.dataTable td input[type=checkbox]", function (evt) {
         var absid = $(this).parent().parent().find("td.abstractid").html();
@@ -319,33 +359,135 @@ $(document).ready(function () {
             }
 
         }
-
-        console.log(" checkbox clicked : " + $(this).is(":checked"));
+        doSubmitChecks();
+        //console.log(" checkbox clicked : " + $(this).is(":checked"));
 
 
     });
 
-    function doSubmitChecks() {
 
+    function filtersManager() {
+        $("select#actionlist").empty();
+        switch ($opts.filterlist) {
+
+            case "review":
+                $("select#actionlist").append('<option selected="selected" value="removereview">Remove From Review List</option>');
+
+                break;
+
+            default:
+                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                break;
+
+
+        }
 
     }
+
+    function changeFilters() {
+        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+        table.ajax.url(config.baseURL);
+        console.log(config.baseURL);
+        table.ajax.reload(function (json) {
+            childrenRedraw(table.data());
+        });
+
+    }
+
+    function doSubmitChecks() {
+        //alertify.success("showing...");
+        $opts.actionlist = $("select#actionlist option:selected").val();
+
+        if ($opts.selectedItems.length > 0 && $opts.actionlist != "") {
+
+            $("#subButton").removeClass("no").addClass("yes");
+        }
+        else {
+            $("#subButton").removeClass("yes").addClass("no");
+        }
+
+    }
+
+    $("input#subButton").on("click", function (evt) {
+        if ($(this).hasClass("yes")) {
+            console.log("enabled ::");
+
+            switch ($opts.actionlist) {
+
+                case "addreview":
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Evaluation/Handlers/AbstractReview.ashx",
+                        dataType: 'json',
+                        data: { type: "add", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                    })
+                      .done(function (data) {
+                          console.log(" add : " + data);
+                          if (data.success == true) {
+                              alertify.success("Abstract(s) added to review list.");
+                          }
+                          else {
+                              alertify.error("Failed to add in review list.");
+                          }
+                      });
+
+
+                      break;
+
+                  case "removereview":
+
+                      $.ajax({
+                          type: "GET",
+                          url: "/Evaluation/Handlers/AbstractReview.ashx",
+                          dataType: 'json',
+                          data: { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                      })
+                      .done(function (data) {
+                          console.log(" remove : " + data);
+                          if (data.success == true) {
+                              alertify.success("Abstract(s) removed from review list.");
+                          }
+                          else {
+                              alertify.error("Failed to remove from review list.");
+                          }
+                      });
+
+
+                      break;
+
+
+
+
+            }
+
+        }
+        else {
+            console.log("not enabled ::");
+
+        }
+
+    });
 
     $("select#filterlist").change(function () {
         //alert("Handler for .change() called.");
         var str = "";
         $("select#filterlist option:selected").each(function () {
-            str += $(this).text() + " ";
+            str = $(this).val();
+            $opts.filterlist = $(this).val();
         });
-        alert(str);
+
+        filtersManager();
+        changeFilters();
     });
 
     $("select#actionlist").change(function () {
         //alert("Handler for .change() called.");
         var str = "";
         $("select#actionlist option:selected").each(function () {
-            str += $(this).text() + " ";
+            str = $(this).val();
+            $opts.actionlist = $(this).val();
         });
-        alert(str);
     });
 
     function childrenRedraw(tdata) {

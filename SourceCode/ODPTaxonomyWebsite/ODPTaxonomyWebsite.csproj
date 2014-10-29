@@ -117,6 +117,7 @@
     <Content Include="Scripts\controllers\controller.js" />
     <Content Include="Scripts\controllers\controllerRT.js" />
     <Content Include="Scripts\datatables\app.js" />
+    <Content Include="Scripts\datatables\spin.min.js" />
     <Content Include="Scripts\datatables\util.js" />
     <Content Include="Scripts\directives\directive.js" />
     <Content Include="Scripts\directives\directiveRT.js" />
@@ -335,6 +336,9 @@
       <DependentUpon>Abstracts.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Handlers\Evaluations.cs" />
+    <Compile Include="Evaluation\Handlers\Test.ashx.cs">
+      <DependentUpon>Test.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\ManageTeams.aspx.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -486,6 +490,7 @@
     <Content Include="Evaluation\Handlers\Evaluation.ashx" />
     <Content Include="Evaluation\Handlers\Abstracts.ashx" />
     <Content Include="Evaluation\Handlers\AbstractReview.ashx" />
+    <Content Include="Evaluation\Handlers\Test.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />

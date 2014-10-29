@@ -13,15 +13,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
     public class AbstractReview : IHttpHandler
     {
         public string abstracts = "";
-        public string function = "";
+        public string type = "";
         public string userguid = "";
         public List<string> abstractIDs;
 
         public void ProcessRequest(HttpContext context)
         {
             abstracts = context.Request["abstracts"] ?? "";
-            function = context.Request["function"] ?? "";
-            userguid = context.Request["function"] ?? "";
+            type = context.Request["type"] ?? "";
+            userguid = context.Request["guid"] ?? "";
             Guid ug;
             if (!Guid.TryParse(userguid, out ug))
             {
@@ -30,7 +30,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             }
             abstractIDs = abstracts.Split(',').ToList();
             AbstractListViewData data = new AbstractListViewData();
-            switch (function)
+            switch (type)
             {
 
                 case "add" :

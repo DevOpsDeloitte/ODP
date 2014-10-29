@@ -19,7 +19,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
     public class Abstracts : IHttpHandler
     {
         public string roleRequested = "";
-        public string filter1 = "";
+        public string filter = "";
         public short? submissiontypeID = 0;
 
 
@@ -34,14 +34,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             List<AbstractListRow> parentAbstracts;
             List<AbstractListRow> ALR;
             roleRequested = context.Request["role"] ?? "";
-            filter1 = context.Request["filter1"] ?? "";
-
+            filter = context.Request["filter"] ?? "";
+            AbstractListViewData data = new AbstractListViewData();
             switch (roleRequested)
             {
 
                 case "ODPSupervisor":
 
-                    switch (filter1)
+                    switch (filter)
                     {
                         case "open":
 
@@ -50,12 +50,23 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         case "coded":
 
                             break;
+                        case "review" :
+                            parentAbstracts = this.GetParentAbstractsODPSupervisorReview();
+                            foreach (var abs in parentAbstracts)
+                            {
+                                
+                                    abs.InReview  = true;
+                                
+                            }
+                            ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
+                            serializeResponse(context, ALR);
+                            
+                            break;
 
                         default: // return default
                             parentAbstracts = GetParentAbstractsODPSupervisorDefault();
                             System.Diagnostics.Stopwatch objStopWatch = new System.Diagnostics.Stopwatch();
                             objStopWatch.Start();
-                            AbstractListViewData data = new AbstractListViewData();
                             foreach (var abs in parentAbstracts)
                             {
                                 if (data.IsAbstractInReview(abs.AbstractID))
@@ -80,7 +91,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
                 case "CoderSupervisor":
 
-                    switch (filter1)
+                    switch (filter)
                     {
                         case "open" :
 

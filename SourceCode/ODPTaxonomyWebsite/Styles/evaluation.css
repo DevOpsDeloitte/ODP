@@ -39,3 +39,9 @@ div.has-file a
     padding-right: 25px;
     display: block;
 }
+
+div#spinner
+{
+    width: 100px;
+    height: 100px;
+}

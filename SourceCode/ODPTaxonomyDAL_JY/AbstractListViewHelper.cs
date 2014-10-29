@@ -235,6 +235,8 @@ namespace ODPTaxonomyDAL_JY
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
+                //HttpContext.Current.Response.Write("done :: " + i + "<br>");
+                //HttpContext.Current.Response.Flush();
                 ParentAbstracts[i].GetSubmissionData(SubmissionTypeEnum.CODER_CONSENSUS);
                 ParentAbstracts[i].GetAbstractScan(AbstractView);
                 ParentAbstracts[i].ChildRows = new List<AbstractListRow>();

@@ -1,6 +1,6 @@
 ﻿
 var config = {};
-var $opts = { selectedItems : [], xy : "" };
+var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "" };
 
 
 (function ($) {
