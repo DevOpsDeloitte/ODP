@@ -44,32 +44,31 @@
 
      }
 
-     $(document).ready(function () {
+//     $(document).ready(function () {
 
 
 
-         $("input[type=checkbox]").click(function () {
-             var keepno = true;
-             $("input[type=checkbox]").each(function () {
-                 if (this.checked) keepno = false;
-             });
+//         $("input[type=checkbox]").click(function () {
+//             var keepno = true;
+//             $("input[type=checkbox]").each(function () {
+//                 if (this.checked) keepno = false;
+//             });
 
-             if (keepno) {
-                 $("input.review").addClass("no").removeClass("yes");
-             }
-             else {
-                 $("input.review").removeClass("no").addClass("yes");
-             }
+//             if (keepno) {
+//                 $("input.review").addClass("no").removeClass("yes");
+//             }
+//             else {
+//                 $("input.review").removeClass("no").addClass("yes");
+//             }
 
-         });
+//         });
 
 
-     });
+//     });
 </script>
     <h2>
-        View Abstract List
     </h2>
-    <div id="spinner">
+    
     </div>
     <div>
         <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" OnSelectedIndexChanged="MainviewChangeHandler" Visible="false" />
@@ -80,7 +79,7 @@
                     Visible="false" />
             </h3>
         </asp:Panel>
-        <asp:Panel runat="server" ID="PagerWrapper" Visible="false" class="pager-size-wrapper">
+<%--        <asp:Panel runat="server" ID="PagerWrapper" Visible="false" class="pager-size-wrapper">
             <asp:Label runat="server" AssociatedControlID="PagerSizeDDL"></asp:Label>
             <asp:DropDownList runat="server" ID="PagerSizeDDL" AutoPostBack="true" OnSelectedIndexChanged="PagerSizeChangeHandler">
                 <asp:ListItem Value="25" Text="Show: 25 Results" />
@@ -88,7 +87,7 @@
                 <asp:ListItem Value="100" Text="Show: 100 Results" />
             </asp:DropDownList>
         </asp:Panel>
-        
+        --%>
         <odp:ODPSupervisorView_Default runat="server" ID="ODPSupervisorView_Default" Visible="false" />
         <odp:ODPSupervisorView_Open runat="server" ID="ODPSupervisorView_Open" Visible="false" />
         <odp:ODPSupervisorView_Review runat="server" ID="ODPSupervisorView_Review" Visible="false" />

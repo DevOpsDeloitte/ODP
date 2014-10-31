@@ -49,24 +49,6 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.DropDownList SubviewDDL;
         
         /// <summary>
-        /// PagerWrapper control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PagerWrapper;
-        
-        /// <summary>
-        /// PagerSizeDDL control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PagerSizeDDL;
-        
-        /// <summary>
         /// ODPSupervisorView_Default control.
         /// </summary>
         /// <remarks>
