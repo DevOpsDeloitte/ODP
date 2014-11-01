@@ -16,7 +16,7 @@
 
         </div>   
 
-        <div class="three columns">  
+        <div class="three columns actions interface">  
         <label for="actionlistlist">Actions List</label>
         <select name="actionlist"  id="actionlist">
 		        <option selected="selected" value="addtoreview">Add to Review List</option>
@@ -26,16 +26,16 @@
         </select>
 
         </div>
-        <div class="two columns">
+        <div class="two columns actions interface">
             <input type="button" name="subButton" id="subButton" value="Submit" class="review button no" />
         </div>
         <div class="three columns">
             <div id="spinner"></div>
         </div>
-        <div class="two columns interface">  
+        <div class="two columns actions interface">  
             <label><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes"> Expand All</label>
         </div>
-        <div class="two columns interface">  
+        <div class="two columns actions interface">  
             <label><input type="checkbox" name="selectallBox" id="selectallBox" value="selectall" class="cboxes"> Select All</label>
         </div>
 
@@ -44,14 +44,14 @@
 </div>
 
 
-<script type="text/javascript" src="/Scripts/datatables/util.js"></script>
+
 
 <script type="text/javascript">
 
-    window.config.role = "ODPSupervisor";
+   // window.config.role = "ODPSupervisor";
 
 </script>
-<script type="text/javascript" src="/Scripts/datatables/app.js"></script>
+
 
 <div class="filterBoxes hide">
 

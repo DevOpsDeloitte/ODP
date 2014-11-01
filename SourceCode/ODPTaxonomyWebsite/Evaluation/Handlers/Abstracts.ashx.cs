@@ -94,10 +94,16 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     switch (filter)
                     {
                         case "open" :
+                             parentAbstracts = this.GetParentAbstractsCoderSupervisorOpen();
+                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.CoderSupervisor);
+                             serializeResponse(context, ALR);
 
                             break;
 
                         case "coded" :
+                            parentAbstracts = this.GetParentAbstractsCoderSupervisorCoded();
+                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.CoderSupervisor);
+                             serializeResponse(context, ALR);
 
                             break;
 
@@ -141,6 +147,47 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
           
             //context.Response.Write(JsonConvert.SerializeObject(new { success = false, supervisorauthfailed = true }));
             return;
+        }
+        protected List<AbstractListRow> GetParentAbstractsCoderSupervisorCoded(string sort = "", SortDirection direction = SortDirection.Ascending)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connString);
+
+            var data = from a in db.Abstracts
+                       join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                       join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                       where (
+                          (
+                          (h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B &&
+                           h.AbstractStatusID <= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N) ||
+                          (h.AbstractStatusID >= (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C)
+                          ) &&
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
+                           )
+                       select new AbstractListRow
+                       {
+                           AbstractID = a.AbstractID,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                           ApplicationID = a.ApplicationID,
+                           AbstractStatusID = s.AbstractStatusID,
+                           AbstractStatusCode = s.AbstractStatusCode,
+                           StatusDate = h.CreatedDate,
+                           EvaluationID = h.EvaluationId,
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
+                       };
+
+            List<AbstractListRow> abstracts = data.ToList();
+
+            //if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
+            //{
+            //    sort = AbstractViewGridView.Attributes["CurrentSortExp"];
+            //    direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
+            //}
+
+            return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
         }
 
         protected List<AbstractListRow> GetParentAbstractsCoderSupervisorOpen(string sort = "", SortDirection direction = SortDirection.Ascending)

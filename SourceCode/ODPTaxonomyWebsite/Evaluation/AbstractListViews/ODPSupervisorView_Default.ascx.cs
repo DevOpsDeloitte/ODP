@@ -18,6 +18,8 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             if (!this.Visible)
                 return;
 
+            Response.Write("I am here!!");
+
             AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
             AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
             AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);

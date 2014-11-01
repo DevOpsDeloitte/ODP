@@ -21,17 +21,16 @@
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 <script src="../scripts/alertify.js"></script>
 <script src="../scripts/datatables/spin.min.js"></script>
-<!--
-<script type="text/javascript" src="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
-<link type="text/css" rel="Stylesheet" href="http://cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.css" />
-
--->
+<script type="text/javascript" src="/Scripts/datatables/util.js"></script>
 
 
  <script type="text/javascript">
 
      window.user = {};
      window.user.GUID = '<%= userGUID %>';
+     window.config.role = "ODPSupervisor";
+     window.config.role = '<%= userROLE %>';
+
 
      function checkStatus() {
 
@@ -44,28 +43,8 @@
 
      }
 
-//     $(document).ready(function () {
-
-
-
-//         $("input[type=checkbox]").click(function () {
-//             var keepno = true;
-//             $("input[type=checkbox]").each(function () {
-//                 if (this.checked) keepno = false;
-//             });
-
-//             if (keepno) {
-//                 $("input.review").addClass("no").removeClass("yes");
-//             }
-//             else {
-//                 $("input.review").removeClass("no").addClass("yes");
-//             }
-
-//         });
-
-
-//     });
 </script>
+<script type="text/javascript" src="/Scripts/datatables/app.js"></script>
     <h2>
     </h2>
     

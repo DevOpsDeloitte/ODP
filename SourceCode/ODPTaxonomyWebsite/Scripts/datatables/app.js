@@ -133,7 +133,8 @@ $(document).ready(function () {
 
     util = new Utility();
 
-    filtersManager(); // Init
+    filtersManager(); //Init
+    actionsManager(); // Init
 
 
     function InitializeTable() {
@@ -206,9 +207,7 @@ $(document).ready(function () {
                 ],
             //iDisplayLength: 10,
             "processing": true,
-            //"ajax": "/Evaluation/Handlers/Abstracts.ashx?role=" + window.config.role,
             "ajax": config.baseURL,
-            //"ajax": " /Evaluation/Handlers/json.js",
 
             "columns": [
                  {
@@ -249,108 +248,7 @@ $(document).ready(function () {
 
     InitializeTable();
 
-    //    table = $('#DTable').DataTable({
 
-    //        "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-    //            $(nRow).addClass("closed");
-    //        },
-    //        "columnDefs": [
-    //             {
-    //                 // show review list check box.
-    //                 "render": function (data, type, row) {
-    //                     // default condition add to review.
-    //                     if ($opts.filterlist != "review") {
-    //                         return data == true ? "&nbsp;" : '<input type="checkbox" />';
-    //                     }
-    //                     else {
-    //                         return data == true ? '<input type="checkbox"/>' : "&nbsp;";
-    //                     }
-    //                     // in review list, remove.
-
-    //                 },
-    //                 "targets": 0
-    //             },
-    //            {
-    //                // The `data` parameter refers to the data for the cell (defined by the
-    //                // `data` option, which defaults to the column being worked with, in
-    //                // this case `data: 0`.
-    //                "render": function (data, type, row) {
-    //                    return data.length == 0 ? "&nbsp;" : data;
-
-    //                },
-    //                "targets": 7
-    //            },
-
-    //            { "visible": true, "targets": [5] },
-    //            {
-
-    //                "render": function (data, type, row) {
-    //                    var myDate = new Date(data);
-    //                    //myDate = myDate.replace(/^(\d{4})\-(\d{2})\-(\d{2}).*$/, '$2/$3/$1');
-    //                    return getFormattedDate(myDate);
-
-    //                },
-    //                "targets": 4 //date column
-    //            },
-
-    //            {
-
-    //                "render": function (data, type, row) {
-    //                    var collink = "";
-    //                    //console.log(row);
-    //                    collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'>" + data + "</a>"; ;
-    //                    var class1 = row.AbstractScan !== null ? "scan-file" : "";
-    //                    var addImg = '<img class="scan-file" src="../Images/clip.png" alt="Attachment">';
-    //                    //this.className = class1;
-    //                    if (class1 != "") collink = '<div class="titleimg has-file" style="position: relative">' + collink + addImg + '</div>';
-    //                    return collink;
-
-    //                },
-    //                "targets": 5 //title column
-    //            },
-    //            { "visible": false, "targets": [6]} // hide abstract scan}
-
-
-    //        ],
-    //        //iDisplayLength: 10,
-    //        "processing": true,
-    //        //"ajax": "/Evaluation/Handlers/Abstracts.ashx?role=" + window.config.role,
-    //        "ajax": config.baseURL,
-    //        //"ajax": " /Evaluation/Handlers/json.js",
-
-    //        "columns": [
-    //         {
-    //             "class": 'checkbox-control',
-    //             "orderable": false,
-    //             "data": "InReview"//,
-    //             //"defaultContent": '<input type="checkbox" />'
-    //             // "defaultContent": ''
-    //         },
-    //        {
-    //            "class": 'details-control',
-    //            "orderable": false,
-    //            "data": null,
-    //            "defaultContent": ''
-    //        },
-    //    { "data": "AbstractID", "class": "abstractid" },
-    //    { "data": "ApplicationID" },
-    //    { "data": "StatusDate" },
-    //    { "data": "ProjectTitle", "width": "120px" },
-    //    { "data": "AbstractScan" },
-    //    { "data": "Flags" },
-    //    { "data": "A1" },
-    //    { "data": "A2" },
-    //    { "data": "A3" },
-    //    { "data": "B" },
-    //    { "data": "C" },
-    //    { "data": "D" },
-    //    { "data": "E" },
-    //    { "data": "F" },
-    //    { "data": "G" }
-    //    ]
-
-
-    //    });
 
     table.on('draw.dt', function () {
         console.log('Redraw occurred at: ' + new Date().getTime());
@@ -434,6 +332,46 @@ $(document).ready(function () {
     });
 
     function filtersManager() {
+        $("select#filterlist").empty();
+        console.log(" filters manager :: " + config.role);
+        switch (config.role) {
+
+            case "CoderSupervisor":
+                $("select#filterlist").append('<option selected="selected" value="coded">Coded Abstracts</option>');
+                $("select#filterlist").append('<option value="open">Open Abstracts</option>');
+                hideActionsInterface();
+                setPageTitle("View Coded Abstracts");
+                break;
+
+            case "ODPSupervisor":
+
+                break;
+
+
+
+        }
+
+
+        $("select#filterlist option:selected").each(function () {
+            $opts.filterlist = $(this).val();
+        });
+        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+
+
+
+    }
+
+    function hideActionsInterface() {
+        $(".actions.interface").hide();
+    }
+    function showActionsInterface() {
+        $(".actions.interface").show();
+    }
+    function setPageTitle(title) {
+
+    }
+
+    function actionsManager() {
         $("select#actionlist").empty();
         switch ($opts.filterlist) {
 
@@ -628,7 +566,7 @@ $(document).ready(function () {
             $opts.filterlist = $(this).val();
         });
 
-        filtersManager();
+        actionsManager();
         changeFilters();
     });
 
