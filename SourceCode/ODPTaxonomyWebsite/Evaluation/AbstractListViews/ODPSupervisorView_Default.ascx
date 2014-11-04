@@ -16,7 +16,7 @@
 
         </div>   
 
-        <div class="three columns actions interface">  
+        <div class="three columns subactions interface">  
         <label for="actionlistlist">Actions List</label>
         <select name="actionlist"  id="actionlist">
 		        <option selected="selected" value="addtoreview">Add to Review List</option>
@@ -26,16 +26,16 @@
         </select>
 
         </div>
-        <div class="two columns actions interface">
+        <div class="two columns subactions interface">
             <input type="button" name="subButton" id="subButton" value="Submit" class="review button no" />
         </div>
         <div class="three columns">
-            <div id="spinner"></div>
+           
         </div>
         <div class="two columns actions interface">  
             <label><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes"> Expand All</label>
         </div>
-        <div class="two columns actions interface">  
+        <div class="two columns subactions interface">  
             <label><input type="checkbox" name="selectallBox" id="selectallBox" value="selectall" class="cboxes"> Select All</label>
         </div>
 
@@ -53,12 +53,22 @@
 </script>
 
 
-<div class="filterBoxes hide">
+<%--<div class="filterBoxes hide">
 
     
   
     <input type="button" name="tbutton" id= "tbutton" value="try" class="review button yes" />
 
+</div>--%>
+
+<div class="progressBar">
+     <div id="spinner"></div>
+     <div class="progressText">
+         <span>Loading records...</span>
+         </div>
+    <div class="meter animate">
+	<span style="width: 50%"><span></span></span>
+    </div>
 </div>
 
 <div id="tableContainer">

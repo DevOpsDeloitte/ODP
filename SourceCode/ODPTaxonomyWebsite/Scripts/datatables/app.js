@@ -139,8 +139,8 @@ $(document).ready(function () {
 
     function InitializeTable() {
 
-        $("div#spinner").show();
-        $("div#tableContainer").show();
+        $("div.progressBar").show();
+        //$("div#tableContainer").show();
 
         table = $('#DTable').DataTable({
 
@@ -152,11 +152,16 @@ $(document).ready(function () {
                          // show review list check box.
                          "render": function (data, type, row) {
                              // default condition add to review.
-                             if ($opts.filterlist != "review") {
-                                 return data == true ? "&nbsp;" : '<input type="checkbox" />';
+                             if (config.role == "ODPSupervisor") {
+                                 if ($opts.filterlist != "review") {
+                                     return data == true ? "&nbsp;" : '<input type="checkbox" />';
+                                 }
+                                 else {
+                                     return data == true ? '<input type="checkbox"/>' : "&nbsp;";
+                                 }
                              }
                              else {
-                                 return data == true ? '<input type="checkbox"/>' : "&nbsp;";
+                                 return "&nbsp;"
                              }
                              // in review list, remove.
 
@@ -270,24 +275,40 @@ $(document).ready(function () {
 
     table.on('processing.dt', function (e, settings, processing) {
         console.log(" processing.dt " + processing);
-        $('div#spinner').css('display', processing ? 'block' : 'none');
+        $('div.progressBar').css('display', processing ? 'block' : 'none');
         if (!processing) {
             // show it all
             $("#DTable_paginate").show();
             $("#DTable_info").show();
             $("#DTable").show();
+            $("#tableContainer").show();
             //reset submit button
             $("#subButton").removeClass("yes").addClass("no");
 
 
             $("div#tableContainer").show();
+            showActionsInterface();
+
+            switch (config.role) {
+
+                case "CoderSupervisor":
+                    showActionsInterface();
+
+                    break;
+
+                case "ODPSupervisor":
+                    showActionsInterface();
+                    showSubActionsInterface();
+                    break;
+
+            }
 
         }
         else {
             $("#DTable_paginate").hide();
             $("#DTable_info").hide();
             $("#DTable").hide();
-
+            $("#tableContainer").hide();
 
         }
     })
@@ -334,6 +355,7 @@ $(document).ready(function () {
     function filtersManager() {
         $("select#filterlist").empty();
         console.log(" filters manager :: " + config.role);
+        hideSubActionsInterface();
         switch (config.role) {
 
             case "CoderSupervisor":
@@ -341,9 +363,20 @@ $(document).ready(function () {
                 $("select#filterlist").append('<option value="open">Open Abstracts</option>');
                 hideActionsInterface();
                 setPageTitle("View Coded Abstracts");
+
                 break;
 
             case "ODPSupervisor":
+                //                $("select#filterlist").append('<option selected="selected" value="">Default View</option>');
+                //                $("select#filterlist").append('<option value="open">Open Abstract</option>');
+                //                $("select#filterlist").append('<option value="review">In Review List</option>');
+                //                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+                hideActionsInterface();
+                hideSubActionsInterface();
+                setPageTitle("View Coded Abstracts");
+                loadODPSuperFilters();
+
+                
 
                 break;
 
@@ -361,11 +394,35 @@ $(document).ready(function () {
 
     }
 
+    function loadODPSuperFilters() {
+        $.ajax({
+            type: "GET",
+            url: "/Evaluation/Handlers/Filters.ashx",
+            dataType: 'json',
+            data: { guid: window.user.GUID }
+        })
+                      .done(function (data) {
+                          if (data.opts.length > 0) {
+                              console.log(" filters received..");
+                              for (var i = 0; i < data.opts.length; i++) {
+                                  $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                              }
+
+                          }
+                      });
+    }
+
     function hideActionsInterface() {
         $(".actions.interface").hide();
     }
     function showActionsInterface() {
         $(".actions.interface").show();
+    }
+    function hideSubActionsInterface() {
+        $(".subactions.interface").hide();
+    }
+    function showSubActionsInterface() {
+        $(".subactions.interface").show();
     }
     function setPageTitle(title) {
 
