@@ -272,7 +272,8 @@ namespace ODPTaxonomyWebsite.Evaluation
             switch (Mainview)
             {
                 case AbstractViewRole.Admin:
-                    AdminView.Visible = true;
+                    ODPSupervisorView_Default.Visible = true;
+                    //AdminView.Visible = true;
                     userROLE = "Admin";
                     break;
                 case AbstractViewRole.CoderSupervisor: // 4
@@ -311,15 +312,18 @@ namespace ODPTaxonomyWebsite.Evaluation
                     userROLE = "ODPStaff";
                     if (Subview == "review")
                     {
-                        ODPStaffView_Review.Visible = true;
+                        ODPStaffView_Review.Visible = false;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     else if (Subview == "uncoded")
                     {
-                        ODPStaffView_Review_Uncoded.Visible = true;
+                        ODPStaffView_Review_Uncoded.Visible = false;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     else
                     {
-                        ODPStaffView_Default.Visible = true;
+                        ODPStaffView_Default.Visible = false;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     break;
                 default:

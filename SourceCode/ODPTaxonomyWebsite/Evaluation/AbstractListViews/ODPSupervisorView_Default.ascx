@@ -43,6 +43,10 @@
 
 </div>
 
+<div class="sixteen columns" id="pagetitlebox"> 
+    <span>Title</span>
+</div>
+
 
 
 
@@ -67,7 +71,7 @@
          <span>Loading records...</span>
          </div>
     <div class="meter animate">
-	<span style="width: 50%"><span></span></span>
+	<span style="width: 100%"><span></span></span>
     </div>
 </div>
 

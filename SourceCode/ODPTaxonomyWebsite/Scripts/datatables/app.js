@@ -42,31 +42,13 @@ function Utility() {
     this.showOpenRows = function (flag) {
 
         if (flag) {
-            $("#DTable tr").each(function (idx, value) {
-                // parent rows
-                if (!$(this).hasClass("shown")) {
-                    $(this).addClass("shown");
-                }
-                // child rows
-                if ($(this).hasClass("hide")) {
-                    $(this).removeClass("hide").addClass("show");
-                }
-
-            });
-
+            $("#DTable tr[role='row']").removeClass("closed").addClass("open");
+            $("#DTable tr.child").removeClass("hide").addClass("show");
         }
         else {
-            $("#DTable tr").each(function (idx, value) {
-                // parent rows
-                if ($(this).hasClass("shown")) {
-                    $(this).removeClass("shown");
-                }
-                // child rows
-                if ($(this).hasClass("show")) {
-                    $(this).removeClass("show").addClass("hide");
-                }
 
-            });
+            $("#DTable tr[role='row']").removeClass("open").addClass("closed");
+            $("#DTable tr.child").removeClass("show").addClass("hide");
         }
     };
 
@@ -278,6 +260,7 @@ $(document).ready(function () {
         $('div.progressBar').css('display', processing ? 'block' : 'none');
         if (!processing) {
             // show it all
+            progressBarReset();
             $("#DTable_paginate").show();
             $("#DTable_info").show();
             $("#DTable").show();
@@ -331,26 +314,51 @@ $(document).ready(function () {
         console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
     });
 
+
+    // logic to open and close child rows.
     $('#DTable tbody').on('click', 'td.details-control', function (evt) {
-        console.log("here ::" + evt);
+        
         var tr = $(this).closest('tr');
         var child = $(tr).next();
 
-        if (!$(tr).hasClass("shown")) {
-            $(child).addClass("show").removeClass("hide");
-            tr.addClass('shown');
-            //tr.removeClass('closed').addClass('open');
+        if ($(child).attr("role") == "row") {
+            console.log("child row missing. here ::" + evt);
+            return; // child row missing.
+
+        }
+
+        if ($(tr).hasClass("open")) {
+            $(child).addClass("hide").removeClass("show");
+            //tr.removeClass('shown');
+            tr.removeClass('open').addClass('closed');
+
+           
         }
 
         else {
-            $(child).addClass("hide").removeClass("show");
-            tr.removeClass('shown');
-            //tr.removeClass('open').addClass('closed');
+            $(child).addClass("show").removeClass("hide");
+            //tr.addClass('shown');
+            tr.removeClass('closed').addClass('open');
         }
 
 
 
     });
+
+    function progressBarReset() {
+        $("div.progressBar div.meter.animate").empty().append('<span style="width: 100%"><span></span></span>');
+        setTimeout(function () {
+            $(".meter > span").each(function () {
+                $(this)
+					.data("origWidth", "100%")
+					.width(0)
+					.animate({
+					    width: "100%"
+					}, 30000);
+            });
+        }, 0);
+
+    }
 
     function filtersManager() {
         $("select#filterlist").empty();
@@ -376,7 +384,23 @@ $(document).ready(function () {
                 setPageTitle("View Coded Abstracts");
                 loadODPSuperFilters();
 
-                
+
+
+                break;
+
+            case "ODPStaff":
+                //                $("select#filterlist").append('<option selected="selected" value="">Default View</option>');
+                //                $("select#filterlist").append('<option value="open">Open Abstract</option>');
+                //                $("select#filterlist").append('<option value="review">In Review List</option>');
+                //                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+                hideActionsInterface();
+                hideSubActionsInterface();
+                setPageTitle("View Coded Abstracts");
+                $("select#filterlist").append('<option selected="selected" value="coded">Default View</option>');
+                $("select#filterlist").append('<option value="review">In Review List</option>');
+                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+
+
 
                 break;
 
@@ -425,7 +449,7 @@ $(document).ready(function () {
         $(".subactions.interface").show();
     }
     function setPageTitle(title) {
-
+        $("#pagetitlebox span").text(title);
     }
 
     function actionsManager() {
@@ -450,6 +474,24 @@ $(document).ready(function () {
         config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
         table.ajax.url(config.baseURL);
         console.log(config.baseURL);
+        switch ($opts.filterlist) {
+
+            case "review":
+                setPageTitle("View Coded Abstracts in Review");
+                break;
+            case "open":
+                setPageTitle("View Open Abstracts");
+                break;
+
+            default:
+                setPageTitle("View Coded Abstracts");
+                break;
+
+
+        }
+
+
+
         table.ajax.reload(function (json) {
             childrenRedraw(table.data());
         });
@@ -494,7 +536,7 @@ $(document).ready(function () {
         .child(
             $(
                 childrows
-            ), "hide"
+            ), "child hide"
         )
         .show();
         });

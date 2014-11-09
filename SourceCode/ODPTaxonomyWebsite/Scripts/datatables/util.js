@@ -31,6 +31,6 @@ $(function () {
 					.width(0)
 					.animate({
 					    width: $(this).data("origWidth")
-					}, 1200);
+					}, 30000);
     });
 });

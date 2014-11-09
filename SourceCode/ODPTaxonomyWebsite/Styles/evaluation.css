@@ -2,7 +2,7 @@
     background: url('/images/details_open.png') no-repeat center center;
     cursor: pointer;
 }
-tr.shown td.details-control {
+tr.open td.details-control {
     background: url('/images/details_close.png') no-repeat center center;
 }
 
@@ -112,6 +112,12 @@ div.progressText
 .dataTables_wrapper .dataTables_filter {
 
     margin-top: 25px;
+}
+
+#pagetitlebox span
+{
+    font-weight: bold;
+    font-size: 18px;
 }
 
 
