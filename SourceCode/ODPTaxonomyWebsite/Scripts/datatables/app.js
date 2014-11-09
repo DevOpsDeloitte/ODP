@@ -317,12 +317,12 @@ $(document).ready(function () {
 
     // logic to open and close child rows.
     $('#DTable tbody').on('click', 'td.details-control', function (evt) {
-        
+
         var tr = $(this).closest('tr');
         var child = $(tr).next();
 
         if ($(child).attr("role") == "row") {
-            console.log("child row missing. here ::" + evt);
+            //console.log("child row missing. here ::" + evt);
             return; // child row missing.
 
         }
@@ -332,7 +332,7 @@ $(document).ready(function () {
             //tr.removeClass('shown');
             tr.removeClass('open').addClass('closed');
 
-           
+
         }
 
         else {
@@ -527,10 +527,19 @@ $(document).ready(function () {
 
     function childrenRedraw(tdata) {
         util.setRows(tdata);
-
-        table.rows().eq(0).each(function (rowIdx) {
+        table.rows().eq(0).each(function (rowIdx, val) {
             var childrows = util.getTableChildRows(rowIdx);
-            //console.log(rowIdx+ '    ' + childrows);
+            console.log(rowIdx + '    ' + val);
+            if (childrows == '') {
+                var rowx = table.row(rowIdx).nodes()
+                .to$();     // Convert to a jQuery object
+
+                rowx.addClass('nochildren');
+                rowx.find("td.details-control").addClass('nodisplay');
+
+                console.log(" here ::" + rowx);
+            }
+
             table
         .row(rowIdx)
         .child(
