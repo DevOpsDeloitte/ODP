@@ -369,6 +369,7 @@ $(document).ready(function () {
             case "CoderSupervisor":
                 $("select#filterlist").append('<option selected="selected" value="coded">Coded Abstracts</option>');
                 $("select#filterlist").append('<option value="open">Open Abstracts</option>');
+                showFiltersInterface();
                 hideActionsInterface();
                 setPageTitle("View Coded Abstracts");
 
@@ -379,6 +380,7 @@ $(document).ready(function () {
                 //                $("select#filterlist").append('<option value="open">Open Abstract</option>');
                 //                $("select#filterlist").append('<option value="review">In Review List</option>');
                 //                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+                showFiltersInterface();
                 hideActionsInterface();
                 hideSubActionsInterface();
                 setPageTitle("View Coded Abstracts");
@@ -393,15 +395,20 @@ $(document).ready(function () {
                 //                $("select#filterlist").append('<option value="open">Open Abstract</option>');
                 //                $("select#filterlist").append('<option value="review">In Review List</option>');
                 //                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+                showFiltersInterface();
                 hideActionsInterface();
                 hideSubActionsInterface();
                 setPageTitle("View Coded Abstracts");
                 $("select#filterlist").append('<option selected="selected" value="coded">Default View</option>');
                 $("select#filterlist").append('<option value="review">In Review List</option>');
                 $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+                break;
 
-
-
+            case "Admin":
+                hideFiltersInterface();
+                hideActionsInterface();
+                hideSubActionsInterface();
+                setPageTitle("View Abstracts");
                 break;
 
 
@@ -434,6 +441,15 @@ $(document).ready(function () {
 
                           }
                       });
+    }
+
+
+    function hideFiltersInterface() {
+        $(".filters.interface").hide();
+
+    }
+    function showFiltersInterface() {
+        $(".filters.interface").show();
     }
 
     function hideActionsInterface() {

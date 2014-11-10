@@ -5,7 +5,7 @@
 
 <div class="sixteen columns" id="functionsbox"> 
             
-        <div class="three columns">     
+        <div class="three columns filters interface">     
         <label for="filterlist">Filters List</label>
         <select name="filterlist"  id="filterlist">
 		        <option selected="selected" value="">Default View</option>

@@ -124,6 +124,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     serializeResponse(context, ALR);
                     break;
                 case "Admin" :
+                    parentAbstracts = this.GetParentAbstractsAdmin();
+                    ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.Admin);
+                    serializeResponse(context, ALR);
 
                     break;
 
@@ -147,6 +150,36 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
           
             //context.Response.Write(JsonConvert.SerializeObject(new { success = false, supervisorauthfailed = true }));
             return;
+        }
+        protected List<AbstractListRow> GetParentAbstractsAdmin(string sort = "", SortDirection direction = SortDirection.Ascending)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connString);
+
+            var data = from a in db.Abstracts
+                       join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                       join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                       where (
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
+                           )
+                       select new AbstractListRow
+                       {
+                           AbstractID = a.AbstractID,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                           ApplicationID = a.ApplicationID,
+                           AbstractStatusID = s.AbstractStatusID,
+                           AbstractStatusCode = s.AbstractStatusCode,
+                           StatusDate = h.CreatedDate,
+                           EvaluationID = h.EvaluationId,
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
+                       };
+
+            List<AbstractListRow> abstracts = data.ToList();
+
+            return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
         }
         protected List<AbstractListRow> GetParentAbstractsCoderSupervisorCoded(string sort = "", SortDirection direction = SortDirection.Ascending)
         {
