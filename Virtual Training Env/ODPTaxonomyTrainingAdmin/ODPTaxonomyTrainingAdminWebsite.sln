@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyTrainingAdminWebsite", "ODPTaxonomyTrainingAdminWebsite\ODPTaxonomyTrainingAdminWebsite.csproj", "{6975F9C9-8298-44E6-B03E-B58FC46DC7F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyTrainingAdminDAL", "ODPTaxonomyTrainingAdminDAL\ODPTaxonomyTrainingAdminDAL.csproj", "{7A489397-24FA-43C8-85A3-846E03FEB55B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6975F9C9-8298-44E6-B03E-B58FC46DC7F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6975F9C9-8298-44E6-B03E-B58FC46DC7F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6975F9C9-8298-44E6-B03E-B58FC46DC7F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6975F9C9-8298-44E6-B03E-B58FC46DC7F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A489397-24FA-43C8-85A3-846E03FEB55B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A489397-24FA-43C8-85A3-846E03FEB55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A489397-24FA-43C8-85A3-846E03FEB55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A489397-24FA-43C8-85A3-846E03FEB55B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
