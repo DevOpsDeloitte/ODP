@@ -25,6 +25,9 @@ namespace ODPTaxonomyTrainingAdminWebsite
         private string role_odpSup = null;
         private string role_admin = null;
         private string connString = null;
+        private int? l_instanceID;
+        private int? l_intReturn;
+        private string l_message;
 
         #endregion
 
@@ -69,11 +72,35 @@ namespace ODPTaxonomyTrainingAdminWebsite
                     lbl_Error.Text = "Please select an instance.";
                     lbl_Error.Visible = true;
                 }
+                else
+                {
+                    l_instanceID = Convert.ToInt32(ddl_instances.SelectedValue);
+                    using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
+                    {
+                        var qry = db.Tr_Trainee_KappaBaseDataPush(l_instanceID, ref l_intReturn);
+                    }
+
+                    if (l_intReturn == null)
+                    {
+                        l_message = "Error pushing Trainee Data for Instance " + l_instanceID.ToString() + ".  Value is null.";
+                        ShowMessage(l_message, true);
+                    }
+                    else if (l_intReturn == 0)
+                    {
+                        l_message = "No Trainee Data to push for Instance " + l_instanceID.ToString() + ".";
+                        ShowMessage(l_message, false);
+                    }
+                    else
+                    {
+                        l_message = "Trainee Data successfully pushed for Instance " + l_instanceID.ToString() + ".  Abstracts Count = " + l_intReturn.ToString() + ".  Please wait 15 minutes before pulling Trainee KAPPA data.";
+                        ShowMessage(l_message, false);
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Utils.LogError(ex);
-                throw new Exception("An error has occured on button push click.");
+                throw new Exception("An error has occured on pushing trainee data.");
             }
         }
 
@@ -86,18 +113,56 @@ namespace ODPTaxonomyTrainingAdminWebsite
                     lbl_Error.Text = "Please select an instance.";
                     lbl_Error.Visible = true;
                 }
+                else
+                {
+                    l_instanceID = Convert.ToInt32(ddl_instances.SelectedValue);
+                    using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
+                    {
+                        var qry = db.Tr_Trainee_KappaDataPull(l_instanceID, ref l_intReturn);
+                    }
+
+                    if (l_intReturn == null)
+                    {
+                        l_message = "Error pulling Trainee KAPPA Data for Instance " + l_instanceID.ToString() + ".  Value is null.";
+                        ShowMessage(l_message, true);
+                    }
+                    else if (l_intReturn == 0)
+                    {
+                        l_message = "No Trainee KAPPA Data to pull for Instance " + l_instanceID.ToString() + ".";
+                        ShowMessage(l_message, false);
+                    }
+                    else
+                    {
+                        l_message = "Trainee KAPPA Data successfully pulled for Instance " + l_instanceID.ToString() + ".  Abstracts Count = " + l_intReturn.ToString();
+                        ShowMessage(l_message, false);
+                    }
+                }
 
             }
             catch (Exception ex)
             {
                 Utils.LogError(ex);
-                throw new Exception("An error has occured on button push click.");
+                throw new Exception("An error has occured on pulling trainee data.");
             }
         }
 
         #endregion
 
         #region Methods
+
+        private void ShowMessage(string message, bool isError)
+        {
+            if (isError)
+            {
+                lbl_Error.Text = message;
+                lbl_Error.Visible = true;
+            }
+            else
+            {
+                lbl_message.Text = message;
+                lbl_message.Visible = true;
+            }
+        }
 
         private void LoadPageData()
         {

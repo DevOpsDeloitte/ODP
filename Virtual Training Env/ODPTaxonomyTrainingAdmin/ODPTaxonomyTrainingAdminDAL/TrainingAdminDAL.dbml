@@ -6,4 +6,14 @@
       <Column Name="InstanceName" Type="System.String" DbType="VarChar(39)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Tr_Trainee_KappaDataPull" Method="Tr_Trainee_KappaDataPull">
+    <Parameter Name="Instance" Parameter="instance" Type="System.Int32" DbType="Int" />
+    <Parameter Name="returnValue" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Tr_Trainee_KappaBaseDataPush" Method="Tr_Trainee_KappaBaseDataPush">
+    <Parameter Name="Instance" Parameter="instance" Type="System.Int32" DbType="Int" />
+    <Parameter Name="returnValue" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

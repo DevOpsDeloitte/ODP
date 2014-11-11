@@ -9,7 +9,7 @@
 </div>            
 <div class="sixteen columns"> 
     <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error" class="panel" Visible="false"></asp:Label>
-    <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" class="panel" Visible="false"></asp:Label>   
+    <asp:Label runat="server" CssClass="regularMessage" ID="lbl_message" class="panel" Visible="false"></asp:Label>   
     
     <asp:Panel runat="server" ID="pnl_training" class="panel">
         <span class="subtitle center">Training</span>

@@ -22,13 +22,13 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         protected global::System.Web.UI.WebControls.Label lbl_Error;
         
         /// <summary>
-        /// lbl_messageUsers control.
+        /// lbl_message control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_messageUsers;
+        protected global::System.Web.UI.WebControls.Label lbl_message;
         
         /// <summary>
         /// pnl_training control.

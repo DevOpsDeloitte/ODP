@@ -68,6 +68,22 @@ namespace ODPTaxonomyTrainingAdminDAL
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<Tr_SelectInstancesResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Tr_Trainee_KappaDataPull")]
+		public int Tr_Trainee_KappaDataPull([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Instance", DbType="Int")] System.Nullable<int> instance, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> returnValue)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), instance, returnValue);
+			returnValue = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Tr_Trainee_KappaBaseDataPush")]
+		public int Tr_Trainee_KappaBaseDataPush([global::System.Data.Linq.Mapping.ParameterAttribute(Name="Instance", DbType="Int")] System.Nullable<int> instance, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> returnValue)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), instance, returnValue);
+			returnValue = ((System.Nullable<int>)(result.GetParameterValue(1)));
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	public partial class Tr_SelectInstancesResult
