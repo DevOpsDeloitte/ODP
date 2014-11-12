@@ -119,9 +119,40 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
 
                 case "ODPStaff":
-                    parentAbstracts = this.GetParentAbstractsODPStaffMemberDefault();
-                    ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
-                    serializeResponse(context, ALR);
+                    
+
+
+                     switch (filter)
+                    {
+                        case "uncoded":
+                            parentAbstracts = this.GetParentAbstractsODPStaffMemberUncoded();
+                            ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
+                            serializeResponse(context, ALR);
+                            
+                            break;
+
+                        case "coded":
+                            parentAbstracts = this.GetParentAbstractsODPStaffMemberDefault();
+                            ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
+                            serializeResponse(context, ALR);
+                            break;
+
+                           
+                        case "review" :
+                            parentAbstracts = this.GetParentAbstractsODPStaffMemberReview();
+                            ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
+                            serializeResponse(context, ALR);
+                            break;
+
+                        default: // return default
+                           parentAbstracts = this.GetParentAbstractsODPStaffMemberDefault();
+                            ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
+                            serializeResponse(context, ALR);
+                            break;
+
+                    }
+                   
+                    
                     break;
                 case "Admin" :
                     parentAbstracts = this.GetParentAbstractsAdmin();
@@ -389,7 +420,74 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
         }
+        protected List<AbstractListRow> GetParentAbstractsODPStaffMemberReview(string sort = "", SortDirection direction = SortDirection.Ascending)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connString);
 
+            var data = from a in db.Abstracts
+                       join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                       join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                       join rv in db.AbstractReviewLists on a.AbstractID equals rv.AbstractID
+                       where (
+                          h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
+                           )
+                       select new AbstractListRow
+                       {
+                           AbstractID = a.AbstractID,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                           ApplicationID = a.ApplicationID,
+                           AbstractStatusID = s.AbstractStatusID,
+                           AbstractStatusCode = s.AbstractStatusCode,
+                           StatusDate = h.CreatedDate,
+                           EvaluationID = h.EvaluationId,
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
+                       };
+
+            List<AbstractListRow> abstracts = data.ToList();
+
+            
+            return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
+        }
+        protected List<AbstractListRow> GetParentAbstractsODPStaffMemberUncoded(string sort = "", SortDirection direction = SortDirection.Ascending)
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connStr);
+
+            var data = from a in db.Abstracts
+                       join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                       join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                       join rv in db.AbstractReviewLists on a.AbstractID equals rv.AbstractID
+                       where (
+                          h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
+                           )
+                       select new AbstractListRow
+                       {
+                           AbstractID = a.AbstractID,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                           ApplicationID = a.ApplicationID,
+                           AbstractStatusID = s.AbstractStatusID,
+                           AbstractStatusCode = s.AbstractStatusCode,
+                           StatusDate = h.CreatedDate,
+                           EvaluationID = h.EvaluationId,
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
+                       };
+
+            List<AbstractListRow> abstracts = data.ToList();
+
+
+            return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
+        }
+
+        
         public bool IsReusable
         {
             get
