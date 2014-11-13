@@ -18,6 +18,11 @@ tr.open td.details-control {
 
 }
 
+table, table.dataTable
+{
+     border-collapse: collapse;
+}
+
 table.dataTable tbody th[colspan="16"], table.dataTable tbody td[colspan="16"]
 {
     padding: 0;

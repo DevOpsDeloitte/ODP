@@ -15,8 +15,8 @@
 <%@ Register TagPrefix="odp" TagName="AdminView" Src="~/Evaluation/AbstractListViews/AdminView.ascx" %>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 <link rel="stylesheet" href="../styles/alertify.css">    
+<link type="text/css" rel="Stylesheet" href="http://cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css" /> 
 <link type="text/css" rel="Stylesheet" href="/Styles/evaluation.css" />
-<link type="text/css" rel="Stylesheet" href="http://cdn.datatables.net/1.10.3/css/jquery.dataTables.min.css" />
 <script type="text/javascript" src="http://cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="http://underscorejs.org/underscore-min.js"></script>
 <script src="../scripts/alertify.js"></script>
