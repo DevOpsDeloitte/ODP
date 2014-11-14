@@ -107,6 +107,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             List<AbstractListRow> reviewabstracts = data2.ToList();
             FV.opts.Add(new FilterOpts() { option = "review", text = "In Review List"+ " (" + reviewabstracts.Count.ToString()+")" });
+            FV.opts.Add(new FilterOpts() { option = "uncoded", text = "In Review List - Uncoded" });
 
         }
     }
