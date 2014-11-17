@@ -422,6 +422,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             }
         }
 
+        // Adding business logic for A - F Mandatory Coding.
+
         if (studyfocuscol1 && studyfocuscol2 && studyfocuscol3 && boxColors) {
             console.log(" form is valid :: ");
             $scope.formIsValid = true;
