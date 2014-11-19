@@ -218,6 +218,12 @@ td[scope="row"] { cursor: pointer }
  td.hidestaffcols { /*visibility: hidden;*/ color: transparent;}
  .clearbothf{ clear: both;}
  tr.data-row.hide{ display: none;}
+ 
+ div#unablecontain.hidden-functionality
+{
+    display: none;
+}
+
 
 /* MISC  
    ================================================== */

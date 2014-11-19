@@ -25,12 +25,13 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
     public class Filters : IHttpHandler
     {
         private FilterVals FV = new FilterVals();
+        //public string filter = "";
+        public string roleRequested = "";
 
         public void ProcessRequest(HttpContext context)
         {
             //context.Response.ContentType = "";
-           
-           
+            roleRequested = context.Request["role"] ?? "";       
             buildFilters();
 
             context.Response.Write(JsonConvert.SerializeObject(FV));
@@ -75,7 +76,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             List<AbstractListRow> abstracts = data.ToList();
             FV.opts.Add(new FilterOpts() { option = "default", text = "All Abstracts" + " (" + abstracts.Count.ToString() + ")" });
-            FV.opts.Add(new FilterOpts() { option = "open", text = "Open Abstracts" });
+            //FV.opts.Add(new FilterOpts() { option = "open", text = "Open Abstracts" });
 
 
 
@@ -107,7 +108,16 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             List<AbstractListRow> reviewabstracts = data2.ToList();
             FV.opts.Add(new FilterOpts() { option = "review", text = "In Review List"+ " (" + reviewabstracts.Count.ToString()+")" });
-            FV.opts.Add(new FilterOpts() { option = "uncoded", text = "In Review List - Uncoded" });
+            //FV.opts.Add(new FilterOpts() { option = "uncoded", text = "In Review List - Uncoded" });
+
+            FV.opts.Add(new FilterOpts() { option = "codercompleted", text = "Coder Completed" });
+            FV.opts.Add(new FilterOpts() { option = "activeabstracts", text = "Active Abstracts" });
+            FV.opts.Add(new FilterOpts() { option = "odpcompleted", text = "ODP Completed" });
+            FV.opts.Add(new FilterOpts() { option = "odpcompletedwonotes", text = "ODP Completed without notes" });
+            FV.opts.Add(new FilterOpts() { option = "closed", text = "Closed" });
+            FV.opts.Add(new FilterOpts() { option = "exported", text = "Exported" });
+
+
 
         }
     }

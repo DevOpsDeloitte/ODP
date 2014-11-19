@@ -133,7 +133,7 @@
 
        <div class="sixteen columns tax-form-buttons">
           
-          <div class="tax-form-buttons-box">
+          <div  id="unablecontain" class="tax-form-buttons-box hidden-functionality">
             <div class="unableCodeBox button">              
               <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
                 

@@ -95,7 +95,7 @@
                     <th>D</th>
                     <th>E</th>
                     <th>F</th>
-                    <th>G</th>
+                    <th>Exported Date</th>
                 
                 </tr>
             </thead>
@@ -118,7 +118,7 @@
                     <th>D</th>
                     <th>E</th>
                     <th>F</th>
-                    <th>G</th>
+                    <th>Exported Date</th>
                 </tr>
             </tfoot>
       </table>

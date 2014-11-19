@@ -6,86 +6,6 @@ var cellPadding = 20;
 config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
 
 
-//function Utility() {
-//    // private member
-////    var Rows = data;
-////    this.RowsP = data;
-//    var Rows = null;
-//    this.RowsP = null;
-
-
-
-//    // public function
-//    this.getRows = function () {
-//        return Rows;
-//    };
-
-//    this.setRows = function (data) {
-//        this.RowsP = data;
-//        Rows = data;
-//    };
-
-//    this.coalesceCol = function (inv) {
-//        var out = "&nbsp;";
-//        if (inv !== undefined && inv !== null) {
-//            if (inv.length > 0) {
-//                out = inv
-//            }
-//        }
-//        return out;
-//    };
-
-//    this.selectAllRows = function (flag) {
-//        $("table tr td input[type=checkbox]").prop("checked", flag);
-//    };
-
-//    this.showOpenRows = function (flag) {
-
-//        if (flag) {
-//            $("#DTable tr[role='row']").removeClass("closed").addClass("open");
-//            $("#DTable tr.child").removeClass("hide").addClass("show");
-//        }
-//        else {
-
-//            $("#DTable tr[role='row']").removeClass("open").addClass("closed");
-//            $("#DTable tr.child").removeClass("show").addClass("hide");
-//        }
-//    };
-
-//    this.getTableChildRows = function (id) {
-//        var rowData = Rows[id];
-//        var childTable = '';
-//        for (var i = 0; i < rowData.ChildRows.length; i++) {
-//            var ctRow = '<tr>' +
-//                        '<td class="ccol" style="width:' + ($($("#DTable th")[0]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 1
-//                        '<td class="ccol" style="width:' + ($($("#DTable th")[1]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 1a
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[2]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[3]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 3
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[4]).outerWidth() - cellPadding).toString() + 'px" >' + '&nbsp;' + '</td>' + // Col 4
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[5]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].ProjectTitle + '</td>' + // Col 3
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[6]).outerWidth() - cellPadding).toString() + 'px" >' + this.coalesceCol(rowData.ChildRows[i].Flags) + '</td>' + // Col 4
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[7]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A1 + '</td>' + // Col 5
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[8]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A2 + '</td>' + // Col 6
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[9]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].A3 + '</td>' + // Col 7
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[10]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].B + '</td>' + // Col 8
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[11]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].C + '</td>' + // Col 9
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[12]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].D + '</td>' + // Col 10
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[13]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].E + '</td>' + // Col 11
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[14]).outerWidth() - cellPadding).toString() + 'px" >' + rowData.ChildRows[i].F + '</td>' + // Col 12
-//                    '<td class="ccol" style="width:' + ($($("#DTable th")[15]).outerWidth() - cellPadding).toString() + 'px" >' + this.coalesceCol(rowData.ChildRows[i].G) + '</td>' + // Col 13
-
-//                '</tr>'
-//            childTable = childTable + ctRow;
-//        }
-//        if (rowData.ChildRows.length > 0) {
-//            childTable = '<table>' + childTable + '</table>';
-//        }
-
-//        return childTable;
-//    };
-
-//}
-
 var util;
 
 
@@ -429,7 +349,7 @@ $(document).ready(function () {
     function loadODPSuperFilters() {
         $.ajax({
             type: "GET",
-            url: "/Evaluation/Handlers/Filters.ashx",
+            url: "/Evaluation/Handlers/Filters.ashx?role=" + config.role,
             dataType: 'json',
             data: { guid: window.user.GUID }
         })
@@ -475,11 +395,17 @@ $(document).ready(function () {
 
             case "review":
                 $("select#actionlist").append('<option selected="selected" value="removereview">Remove From Review List</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="exportabstracts">Export Abstracts</option>');
 
                 break;
 
             default:
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="exportabstracts">Export Abstracts</option>');
                 break;
 
 
