@@ -395,31 +395,41 @@ $(document).ready(function () {
 
             case "review":
                 $("select#actionlist").append('<option selected="selected" value="removereview">Remove From Review List</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 break;
             case "codercompleted":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 break;
             case "activeabstracts":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
                 break;
             case "odpcompleted":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 break;
             case "odpcompletedwonotes":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                break;
+            case "closed":
+                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                break;
+            case "exported":
+                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 break;
 
             default:
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option disabled="disabled" value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 break;
 
 
@@ -476,6 +486,10 @@ $(document).ready(function () {
 
             if ($(this).is(":checked")) {
                 $(this).addClass("hideme");
+                table
+                .row($(this).parents('tr'))
+                .remove()
+                .draw();
             }
 
         });
