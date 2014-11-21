@@ -263,18 +263,18 @@ namespace ODPTaxonomyDAL_TT
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
-		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CategoryID", DbType="Int")] System.Nullable<int> categoryID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Sorting", DbType="Int")] System.Nullable<int> sorting)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID, categoryID, sorting);
-			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_group_tt")]
 		public ISingleResult<select_abstracts_group_ttResult> select_abstracts_group_tt()
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<select_abstracts_group_ttResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
+		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID);
+			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -5202,32 +5202,6 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class select_abstracts_coding_ttResult
-	{
-		
-		private int _AbstractID;
-		
-		public select_abstracts_coding_ttResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
-		public int AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
-		}
-	}
-	
 	public partial class select_abstracts_group_ttResult
 	{
 		
@@ -5267,6 +5241,32 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._Sorting != value))
 				{
 					this._Sorting = value;
+				}
+			}
+		}
+	}
+	
+	public partial class select_abstracts_coding_ttResult
+	{
+		
+		private int _AbstractID;
+		
+		public select_abstracts_coding_ttResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
+		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this._AbstractID = value;
 				}
 			}
 		}
