@@ -146,7 +146,6 @@ span.highlight { font-weight: bold; background: #F7F9FC; border: 1px solid #D1D0
 a#showLeftPushed { background: #7C7C7C; text-align: right; color: #FFF; padding: 10px 12px; font-size: 15px; }
 .cbp-spmenu { -webkit-transition: all 0.3s ease-out; -moz-transition: all 0.3s ease-out; transition: all 0.3s ease-out; }
 
-
 /* Pagination
 ================================================== */
 tr.pagination table, tr.PagerContainer table { width: auto; color: #2F557C; -webkit-box-shadow: none; box-shadow: none; border: 1px solid #fff; margin: 0; }
