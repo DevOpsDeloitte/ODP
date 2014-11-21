@@ -398,7 +398,21 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option disabled="disabled" value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option disabled="disabled" value="exportabstracts">Export Abstracts</option>');
-
+                break;
+            case "codercompleted":
+                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
+                break;
+            case "activeabstracts":
+                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                break;
+            case "odpcompleted":
+                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
+                break;
+            case "odpcompletedwonotes":
+                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option disabled="disabled" value="closeabstract">Close Abstracts</option>');
                 break;
 
             default:

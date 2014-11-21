@@ -70,8 +70,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             
                             break;
 
+
                         default: // return default
-                            parentAbstracts = GetParentAbstractsODPSupervisorDefault();
+                            //parentAbstracts = GetParentAbstractsODPSupervisorDefault();
+                            parentAbstracts = GetParentAbstractsODPSupervisor(filter); // we are passing the filter as the query.
                             System.Diagnostics.Stopwatch objStopWatch = new System.Diagnostics.Stopwatch();
                             objStopWatch.Start();
                             foreach (var abs in parentAbstracts)
@@ -252,12 +254,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             List<AbstractListRow> abstracts = data.ToList();
 
-            //if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
-            //{
-            //    sort = AbstractViewGridView.Attributes["CurrentSortExp"];
-            //    direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
-            //}
-
             return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
         }
         protected List<AbstractListRow> GetParentAbstractsCoderSupervisorOpen(string sort = "", SortDirection direction = SortDirection.Ascending)
@@ -298,13 +294,96 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
         }
 
+
+        protected List<AbstractListRow> GetParentAbstractsODPSupervisor(string query = "", string sort = "", SortDirection direction = SortDirection.Ascending)
+        {
+            string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connStr);
+
+
+            var data = from a in db.Abstracts
+                       join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                       join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                       where (
+                          /*h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N && */
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
+                           )
+                       select new AbstractListRow
+                       {
+                           AbstractID = a.AbstractID,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                           ApplicationID = a.ApplicationID,
+                           AbstractStatusID = s.AbstractStatusID,
+                           AbstractStatusCode = s.AbstractStatusCode,
+                           StatusDate = h.CreatedDate,
+                           EvaluationID = h.EvaluationId,
+                           IsParent = true
+                       };
+
+
+
+            List<AbstractListRow> abstracts = data.ToList();
+            List<AbstractListRow> finalabstracts = null;
+              //public enum AbstractStatusEnum
+              //      {
+              //          OPEN_0 = 1,
+              //          RETRIEVED_FOR_CODING_1 = 2,
+              //          CODED_BY_CODER_1A = 3,
+              //          CONSENSUS_COMPLETE_1B = 4,
+              //          CONSENSUS_COMPLETE_WITH_NOTES_1N = 6,
+              //          RETRIEVED_FOR_ODP_CODING_2 = 7,
+              //          CODED_BY_ODP_STAFF_2A = 8,
+              //          ODP_STAFF_CONSENSUS_2B = 9,
+              //          ODP_STAFF_AND_CODER_CONSENSUS_2C = 10,
+              //          ODP_CONSENSUS_WITH_NOTES_2N = 12,
+              //          CLOSED_3 = 13,
+              //          DATA_EXPORTED_4 = 14,
+              //          REOPEN_FOR_REVIEW_BY_ODP = 15
+              //      }
+            switch (query)
+            {
+                case "default" :
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
+                    break;
+                case "codercompleted":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
+                    break;
+                case "activeabstracts":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2).Select(s => s).ToList();
+                    break;
+                case "odpcompleted":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N).Select(s => s).ToList();
+                    break;
+                case "odpcompletedwonotes":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C).Select(s => s).ToList();
+                    break;
+                case "closed":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3).Select(s => s).ToList();
+                    break;
+                case "exported":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4).Select(s => s).ToList();
+                    break;
+                default:
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
+                    break;
+
+
+            }
+            //List<AbstractListRow> finalabstracts = abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
+
+
+            return AbstractListViewHelper.SortAbstracts(finalabstracts, sort, direction);
+        }
+
         protected List<AbstractListRow> GetParentAbstractsODPSupervisorDefault(string sort = "", SortDirection direction = SortDirection.Ascending)
         {
             string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connStr);
 
-            System.Diagnostics.Stopwatch objStopWatch = new System.Diagnostics.Stopwatch();
-            objStopWatch.Start();
+            //System.Diagnostics.Stopwatch objStopWatch = new System.Diagnostics.Stopwatch();
+            //objStopWatch.Start();
 
             var data = from a in db.Abstracts
                        join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
@@ -327,17 +406,17 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            IsParent = true
                        };
 
-            var genSQL = db.GetCommand(data).CommandText;
+            //var genSQL = db.GetCommand(data).CommandText;
             //System.Diagnostics.Trace.WriteLine(genSQL);
 
            
 
             List<AbstractListRow> abstracts = data.ToList();
 
-            objStopWatch.Stop();
-            System.Diagnostics.Trace.Write("The time taken to execute query without compilation is : " +
-            objStopWatch.ElapsedMilliseconds.ToString() + " MillionSeconds<br>");
-            objStopWatch.Reset();
+            //objStopWatch.Stop();
+            //System.Diagnostics.Trace.Write("The time taken to execute query without compilation is : " +
+            //objStopWatch.ElapsedMilliseconds.ToString() + " MillionSeconds<br>");
+            //objStopWatch.Reset();
            
             //db.Log = Console.Out;
 
