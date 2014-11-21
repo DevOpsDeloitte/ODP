@@ -445,82 +445,29 @@ namespace ODPTaxonomyDAL_TT
         public static tbl_Abstract GetAbstract_CoderEvaluation(string connString, out string message)
         {
             message = "OK";
-            int index = 0;
-            int topicsCount = 0;
             int abstractId = -1;
-            int iSorting = 1;
             tbl_Abstract abstr = null;
-            List<AbstractGroup> topics = new List<AbstractGroup>();
             List<int> abstracts =  new List<int>();
-
-            //Get available Topics
+            
             using (DataDataContext db = new DataDataContext(connString))
             {
-                var matches = db.select_abstracts_group_tt();
-
-                foreach(var i in matches)
+                var matches = db.select_abstracts_coding_tt((int)AbstractStatusID._0);
+                try
                 {
-                    iSorting = (i.Sorting != null) ? (int)i.Sorting : 1;
-
-                    topics.Add(new AbstractGroup(i.CategoryID, iSorting));
+                    abstractId = (int)matches.FirstOrDefault().AbstractID;
+                    var matches2 = from a in db.tbl_Abstracts
+                                   where a.AbstractID == abstractId
+                                   select a;
+                    abstr = matches2.ToList<tbl_Abstract>().First();
                 }
-            }
-
-            topicsCount = topics.Count;
-
-            if (topicsCount > 0)
-            {
-                //Get available Abstracts
-                using (DataDataContext db = new DataDataContext(connString))
+                catch(Exception ex)
                 {
-                    foreach (AbstractGroup i in topics)
-                    {
-                        
-                        var matches = db.select_abstracts_coding_tt((int)AbstractStatusID._0, i.CategoryID, i.Sorting);
-
-                        foreach (var item in matches)
-                        {
-                            abstracts.Add(item.AbstractID);
-                        }
-
-                        index++;
-
-                        if (abstracts.Count > 0)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            if (index == topicsCount)
-                            {
-                                message = "No abstracts are available.";
-                            }
-                        }
-                    }
-
+                    message = "No abstracts are available.";
+                    Utils.LogError(ex);
+                    return abstr;
                 }
-
                 
-                if (abstracts.Count > 0)
-                {
-                    Random rnd = new Random();
-                    //Get Abstract for coding
-                    abstractId = abstracts.OrderBy(x => rnd.Next()).First();
-
-                    using (DataDataContext db = new DataDataContext(connString))
-                    {
-                        var matches = from a in db.tbl_Abstracts
-                                      where a.AbstractID == abstractId
-                                      select a;
-                        abstr = matches.ToList<tbl_Abstract>().First();
-                    }
-                }
             }
-            else
-            {
-                message = "No topics are available.";
-            }            
-
 
             return abstr;
         }
