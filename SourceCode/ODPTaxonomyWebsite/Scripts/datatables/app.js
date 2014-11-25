@@ -566,7 +566,11 @@ $(document).ready(function () {
                     console.log(rowx.find(".abstractid").html());
                     $opts.selectedItems.push(rowx.find(".abstractid").html());
                     $opts.hiderowItems.push(rowIdx);
+                    rowx.addClass("selected");
                 }
+            }
+            else {
+                rowx.removeClass("selected");
             }
         });
 
