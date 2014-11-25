@@ -84,8 +84,8 @@
                     <th>Abstract ID</th>
                     <th>Application ID</th>
                     <th>Status Date</th>
-                    <th>Title</th>
-                    <th>Abstract Scan</th>
+                    <th>PI Name</th>
+                    <th>Title</th>        
                     <th>Flags</th>
                     <th>A1</th>
                     <th>A2</th>
@@ -107,8 +107,8 @@
                    <th>Abstract ID</th>
                    <th>Application ID</th>
                    <th>Status Date</th>
+                   <th>PI Name</th>
                    <th>Title</th>
-                   <th>Abstract Scan</th>
                    <th>Flags</th>
                     <th>A1</th>
                     <th>A2</th>

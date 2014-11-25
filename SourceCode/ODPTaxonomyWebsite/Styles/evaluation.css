@@ -27,7 +27,7 @@ table, table.dataTable
      border-collapse: collapse;
 }
 
-table.dataTable tbody th[colspan="16"], table.dataTable tbody td[colspan="16"]
+table.dataTable tbody th[colspan="17"], table.dataTable tbody td[colspan="17"]
 {
     padding: 0;
 }

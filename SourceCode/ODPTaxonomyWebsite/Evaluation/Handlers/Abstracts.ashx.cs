@@ -314,10 +314,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        {
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                           PIProjectLeader = a.PIProjectLeader,
                            ApplicationID = a.ApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
+                           LastExportDate = a.LastExportDate,
                            EvaluationID = h.EvaluationId,
                            IsParent = true
                        };

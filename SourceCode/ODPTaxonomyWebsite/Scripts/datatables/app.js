@@ -48,7 +48,21 @@ $(document).ready(function () {
         table = $('#DTable').DataTable({
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
+                console.log(" invoking fnRowCallback ::");
                 $(nRow).addClass("closed");
+                setTimeout(function () {
+                    $("tr[role=row].selected").find("input").prop("checked", "checked");
+                }, 0);
+            },
+            "rowCallback": function (row, data) {
+                console.log(" invoking rowCallback ::");
+                //                if ($.inArray(data.DT_RowId, $opts.hiderowItems) !== -1) {
+                //                    $(row).addClass('selected');
+                //                    //row.nodes().to$().find("input").prop("checked", "checked");
+                //                   
+                //                    //$(row).find("input").prop("checked", "checked");
+                //                    //$("tr[role=row].selected").find("input").prop("checked", "checked");
+                //                }
             },
             "columnDefs": [
                      {
@@ -107,9 +121,11 @@ $(document).ready(function () {
                             return collink;
 
                         },
-                        "targets": 5 //title column
-                    },
-                    { "visible": false, "targets": [6]} // hide abstract scan}
+                        "targets": 6 //title column
+                    }
+
+            //,
+            //{ "visible": false, "targets": [6]} // hide abstract scan}
 
 
                 ],
@@ -134,9 +150,10 @@ $(document).ready(function () {
             { "data": "AbstractID", "class": "abstractid" },
             { "data": "ApplicationID" },
             { "data": "StatusDate" },
+            { "data": "PIProjectLeader" },
             { "data": "ProjectTitle" },
-            { "data": "AbstractScan" },
-            { "data": "Flags" },
+            //   { "data": "AbstractScan" },
+            {"data": "Flags" },
             { "data": "A1" },
             { "data": "A2" },
             { "data": "A3" },
@@ -145,7 +162,7 @@ $(document).ready(function () {
             { "data": "D" },
             { "data": "E" },
             { "data": "F" },
-            { "data": "G" }
+            { "data": "LastExportDate" }
             ]
 
 
@@ -165,6 +182,8 @@ $(document).ready(function () {
         setTimeout(function () {
             util.showOpenRows(alb);
             util.selectAllRows(salb);
+            // add function to remove rows that have been acted upon.
+            //util.removeRows($opts.hideItems);
         }, 0);
     });
 
@@ -233,6 +252,9 @@ $(document).ready(function () {
     table.on('page.dt', function () {
         var info = table.page.info();
         console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
+        setTimeout(function () {
+            $("tr[role=row].selected").find("input").prop("checked", "checked");
+        }, 500);
     });
 
 
@@ -482,14 +504,23 @@ $(document).ready(function () {
     function resetSubmitBtnAndCheckboxes() {
 
         $("#subButton").removeClass("yes").addClass("no");
+        util.removeRowsV2($opts.hiderowItems);
+        $opts.selectedItems = [];
+        $opts.hiderowItems = [];
+        return;
+
         $("table input[type=checkbox]").each(function (idx, val) {
 
             if ($(this).is(":checked")) {
                 $(this).addClass("hideme");
+                //
+                /*
                 table
                 .row($(this).parents('tr'))
                 .remove()
                 .draw();
+
+                */
             }
 
         });
@@ -525,6 +556,7 @@ $(document).ready(function () {
 
     function doAllSubmitCheck(flag) {
         $opts.selectedItems = [];
+        $opts.hiderowItems = [];
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
@@ -533,6 +565,7 @@ $(document).ready(function () {
                 if (rowx.find("input[type=checkbox]").length > 0) {
                     console.log(rowx.find(".abstractid").html());
                     $opts.selectedItems.push(rowx.find(".abstractid").html());
+                    $opts.hiderowItems.push(rowIdx);
                 }
             }
         });
@@ -567,26 +600,35 @@ $(document).ready(function () {
 
 
 
-
+    // logic to select and unselect checkboxes
     $("body").on("click", "table.dataTable td input[type=checkbox]", function (evt) {
 
         var absid = $(this).parent().parent().find("td.abstractid").html();
+        var rowIndex = table.row($(this).parent().parent()).index();
+        var row = $(this).parents('tr');
+
+        console.log('Row index: ' + table.row($(this).parent().parent()).index());
         if ($(this).is(":checked")) {
             var i = _.indexOf($opts.selectedItems, absid);
+            $(row).addClass('selected');
             if (i == -1) {
                 $opts.selectedItems.push(absid);
+                $opts.hiderowItems.push(rowIndex);
             }
-            //console.log(" abstract id : " + $(this).parent().parent().find("td.abstractid").html());
+
         }
         else {
             var i = _.indexOf($opts.selectedItems, absid);
+            var rowi = _.indexOf($opts.hiderowItems, rowIndex);
+            $(row).removeClass('selected');
             if (i != -1) {
                 $opts.selectedItems.splice(i, 1);
+                $opts.hiderowItems.splice(rowi, 1);
             }
 
         }
         doSubmitChecks();
-        //console.log("   doSubmitChecks(); checkbox clicked : " + $(this).is(":checked"));
+
 
 
     });
@@ -612,6 +654,7 @@ $(document).ready(function () {
                           console.log(" add : " + data);
                           if (data.success == true) {
                               alertify.success("Abstract(s) added to review list.");
+                              //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
                           }
                           else {
@@ -634,6 +677,7 @@ $(document).ready(function () {
                           console.log(" remove : " + data);
                           if (data.success == true) {
                               alertify.success("Abstract(s) removed from review list.");
+                              //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
                           }
                           else {
