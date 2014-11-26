@@ -310,11 +310,12 @@ $(document).ready(function () {
         switch (config.role) {
 
             case "CoderSupervisor":
-                $("select#filterlist").append('<option selected="selected" value="coded">Coded Abstracts</option>');
-                $("select#filterlist").append('<option value="open">Open Abstracts</option>');
+//                $("select#filterlist").append('<option selected="selected" value="coded">Coded Abstracts</option>');
+//                $("select#filterlist").append('<option value="open">Open Abstracts</option>');
                 showFiltersInterface();
                 hideActionsInterface();
                 setPageTitle("View Coded Abstracts");
+                loadFilters();
 
                 break;
 
@@ -327,7 +328,7 @@ $(document).ready(function () {
                 hideActionsInterface();
                 hideSubActionsInterface();
                 setPageTitle("View Coded Abstracts");
-                loadODPSuperFilters();
+                loadFilters();
 
 
 
@@ -342,9 +343,10 @@ $(document).ready(function () {
                 hideActionsInterface();
                 hideSubActionsInterface();
                 setPageTitle("View Coded Abstracts");
-                $("select#filterlist").append('<option selected="selected" value="coded">Default View</option>');
-                $("select#filterlist").append('<option value="review">In Review List</option>');
-                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+//                $("select#filterlist").append('<option selected="selected" value="coded">Default View</option>');
+//                $("select#filterlist").append('<option value="review">In Review List</option>');
+//                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+                loadFilters();
                 break;
 
             case "Admin":
@@ -368,7 +370,7 @@ $(document).ready(function () {
 
     }
 
-    function loadODPSuperFilters() {
+    function loadFilters() {
         $.ajax({
             type: "GET",
             url: "/Evaluation/Handlers/Filters.ashx?role=" + config.role,
@@ -378,6 +380,7 @@ $(document).ready(function () {
                       .done(function (data) {
                           if (data.opts.length > 0) {
                               console.log(" filters received..");
+                              $("select#filterlist").empty();
                               for (var i = 0; i < data.opts.length; i++) {
                                   $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
                               }
@@ -507,6 +510,9 @@ $(document).ready(function () {
         util.removeRowsV2($opts.hiderowItems);
         $opts.selectedItems = [];
         $opts.hiderowItems = [];
+        $("#allBox").prop("checked", false);
+        $("#selectallBox").prop("checked", false);
+
         return;
 
         $("table input[type=checkbox]").each(function (idx, val) {
@@ -657,9 +663,10 @@ $(document).ready(function () {
                       .done(function (data) {
                           console.log(" add : " + data);
                           if (data.success == true) {
-                              alertify.success("Abstract(s) added to review list.");
+                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) added to review list.");
                               //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
+                              loadFilters();
                           }
                           else {
                               alertify.error("Failed to add in review list.");
@@ -680,9 +687,10 @@ $(document).ready(function () {
                       .done(function (data) {
                           console.log(" remove : " + data);
                           if (data.success == true) {
-                              alertify.success("Abstract(s) removed from review list.");
+                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from review list.");
                               //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
+                              loadFilters();
                           }
                           else {
                               alertify.error("Failed to remove from review list.");
