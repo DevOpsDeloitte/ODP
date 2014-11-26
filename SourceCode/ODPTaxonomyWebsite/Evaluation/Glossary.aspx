@@ -17,9 +17,10 @@
     <div id="mainGlossary">
 
        <%=misc %>
-      <%=topics %>
-      <%=studyFocusCategory %>
-        <%=studyFocus %>
+       <%=studyFocusTitle %>
+        <%=topics %>
+        <%=studyFocusCategory %>
+       <%=studyFocus %>
         
       
         <%=entitiesStudied %>
