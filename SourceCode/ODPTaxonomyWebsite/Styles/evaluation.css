@@ -2,6 +2,12 @@
 {
     color: #aaa;
 }
+
+div#tableContainer {
+
+margin-left: -100px;
+}
+
 td.details-control {
     background: url('/images/details_open.png') no-repeat center center;
     cursor: pointer;
