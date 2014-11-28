@@ -4,6 +4,49 @@
      table-layout: fixed;
 }
 
+table.childtable
+{
+    
+}
+
+
+table.dataTable thead th, table.dataTable thead td {
+    padding: 8px 10px;
+    border-left: 1px solid #ccc;
+    border-bottom: 1px solid #111;
+}
+
+.col_select, .col_openclose, .col_flags
+{
+    width: 20px;
+}
+.col_abstractid
+{
+    width: 40px;
+}
+.col_applicationid
+{
+    width: 50px;
+}
+.col_piname
+{
+    width: 100px;
+}
+.col_statusdate, .col_exportdate
+{
+    width: 55px;
+}
+.col_title
+{
+    width: 195px;
+    max-width: 195px;
+    min-width: 195px;
+}
+.col_kappa
+{
+    width: 20px;
+}
+
 option:disabled
 {
     color: #aaa;
@@ -12,11 +55,22 @@ option:disabled
 div#tableContainer {
 
 margin-left: -100px;
+width: 1200px;
+}
+
+div.titlebox
+{
+    width: 153px;
+    
 }
 
 table.dataTable tbody th, table.dataTable tbody td {
     padding: 8px 10px;
     border: 1px solid #ccc;
+    
+  /*white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;*/
 }
 
 td.details-control {
@@ -36,6 +90,9 @@ tr.open td.details-control {
 {
     /*display:inline-block;*/
     padding: 8px 10px;
+    border-left: 0;
+    display: table-cell;
+    text-align: left;
 
 }
 

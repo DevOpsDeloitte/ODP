@@ -85,8 +85,9 @@ $(document).ready(function () {
                              // in review list, remove.
 
                          },
-                         "targets": 0,
-                         "swidth": "10%"
+                         className : "test1tscolxxxxxxxxxx",
+                         "targets": [0]
+                         
                      },
                     {
                         // The `data` parameter refers to the data for the cell (defined by the
@@ -553,7 +554,7 @@ $(document).ready(function () {
     function childrenRedraw(tdata) {
         util.setRows(tdata);
         table.rows().eq(0).each(function (rowIdx, val) {
-            var childrows = util.getTableChildRows(rowIdx);
+            var childrows = util.getTableChildRowsV2(rowIdx);
             //console.log(rowIdx + '    ' + val);
             if (childrows == '') {
                 var rowx = table.row(rowIdx).nodes()

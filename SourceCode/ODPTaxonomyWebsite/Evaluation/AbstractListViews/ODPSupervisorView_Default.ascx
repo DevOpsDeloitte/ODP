@@ -79,23 +79,23 @@
         <table id="DTable" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Abstract ID</th>
-                    <th>Application ID</th>
-                    <th>Status Date</th>
-                    <th>PI Name</th>
-                    <th>Title</th>        
-                    <th>Flags</th>
-                    <th>A1</th>
-                    <th>A2</th>
-                    <th>A3</th>
-                    <th>B</th>
-                    <th>C</th>
-                    <th>D</th>
-                    <th>E</th>
-                    <th>F</th>
-                    <th>Exported Date</th>
+                    <th class="col_select"></th>
+                    <th class="col_openclose"></th>
+                    <th class="col_abstractid">Abstract ID</th>
+                    <th class="col_applicationid">Application ID</th>
+                    <th class="col_statusdate">Status Date</th>
+                    <th class="col_piname">PI Name</th>
+                    <th class="col_title">Title</th>        
+                    <th class="col_flags">Flags</th>
+                    <th class="col_kappa">A1</th>
+                    <th class="col_kappa">A2</th>
+                    <th class="col_kappa">A3</th>
+                    <th class="col_kappa">B</th>
+                    <th class="col_kappa">C</th>
+                    <th class="col_kappa">D</th>
+                    <th class="col_kappa">E</th>
+                    <th class="col_kappa">F</th>
+                    <th class="col_exportdate">Exported Date</th>
                 
                 </tr>
             </thead>
