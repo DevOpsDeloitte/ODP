@@ -64,6 +64,8 @@ $(document).ready(function () {
                 //                    //$("tr[role=row].selected").find("input").prop("checked", "checked");
                 //                }
             },
+            "bAutoWidth": false,
+            
             "columnDefs": [
                      {
                          // show review list check box.
@@ -83,7 +85,8 @@ $(document).ready(function () {
                              // in review list, remove.
 
                          },
-                         "targets": 0
+                         "targets": 0,
+                         "swidth": "10%"
                      },
                     {
                         // The `data` parameter refers to the data for the cell (defined by the

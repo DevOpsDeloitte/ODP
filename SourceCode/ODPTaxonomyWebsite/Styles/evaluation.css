@@ -1,4 +1,10 @@
-﻿option:disabled
+﻿table, table.dataTable
+{
+     border-collapse: collapse;
+     table-layout: fixed;
+}
+
+option:disabled
 {
     color: #aaa;
 }
@@ -6,6 +12,11 @@
 div#tableContainer {
 
 margin-left: -100px;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
 }
 
 td.details-control {
@@ -28,10 +39,7 @@ tr.open td.details-control {
 
 }
 
-table, table.dataTable
-{
-     border-collapse: collapse;
-}
+
 
 table.dataTable tbody th[colspan="17"], table.dataTable tbody td[colspan="17"]
 {
