@@ -18,8 +18,9 @@
 
        <%=misc %>
        <%=studyFocusTitle %>
-        <%=topics %>
+       
         <%=studyFocusCategory %>
+         <%=topics %>
        <%=studyFocus %>
         
       
