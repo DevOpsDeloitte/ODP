@@ -13,6 +13,7 @@ namespace ODPTaxonomyDAL_JY
     {
         private static string KappaSpecifier = "f";
 
+
         public static bool UserCanView(AbstractViewRole View)
         {
             switch (View)
@@ -228,10 +229,26 @@ namespace ODPTaxonomyDAL_JY
             return Abstracts;
         }
 
+        private static string getContractorName()
+        {
+            string retVal = "";
+            try
+            {
+                retVal = System.Configuration.ConfigurationManager.AppSettings["contractorName"];
+            }
+            catch (Exception)
+            {
+               retVal = "IQS";
+            }
+
+            return retVal;
+        }
+
         public static List<AbstractListRow> ProcessAbstracts2(List<AbstractListRow> ParentAbstracts, AbstractViewRole AbstractView)
         {
             List<AbstractListRow> Abstracts = new List<AbstractListRow>();
             AbstractListViewData data = new AbstractListViewData();
+            string contractorName = getContractorName();
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
@@ -264,21 +281,21 @@ namespace ODPTaxonomyDAL_JY
                                     {
                                         if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName +" " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             //Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             //Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             //Abstracts.Add(CoderEvaluation);
@@ -346,7 +363,7 @@ namespace ODPTaxonomyDAL_JY
                     {
                         if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
                         {
-                            AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, "IQS vs. ODP", ParentAbstracts[i].AbstractID);
+                            AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, contractorName +" "+ "vs. ODP", ParentAbstracts[i].AbstractID);
                             ODPCoderComparison.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_COMPARISON);
                             ParentAbstracts[i].ChildRows.Add(ODPCoderComparison);
                             //Abstracts.Add(ODPCoderComparison);
@@ -370,21 +387,21 @@ namespace ODPTaxonomyDAL_JY
                                     {
                                         if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K10)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             //Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K11)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             //Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K12)
                                         {
-                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs. ODP", ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
                                             ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             //Abstracts.Add(CoderEvaluation);
