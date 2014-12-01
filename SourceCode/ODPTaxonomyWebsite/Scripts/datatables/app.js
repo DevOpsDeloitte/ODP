@@ -38,6 +38,7 @@ $(document).ready(function () {
 
     filtersManager(); //Init
     actionsManager(); // Init
+    disableFilters();
 
 
     function InitializeTable() {
@@ -65,7 +66,7 @@ $(document).ready(function () {
                 //                }
             },
             "bAutoWidth": false,
-            
+
             "columnDefs": [
                      {
                          // show review list check box.
@@ -85,9 +86,9 @@ $(document).ready(function () {
                              // in review list, remove.
 
                          },
-                         className : "test1tscolxxxxxxxxxx",
+                         className: "test1tscolxxxxxxxxxx",
                          "targets": [0]
-                         
+
                      },
                     {
                         // The `data` parameter refers to the data for the cell (defined by the
@@ -263,6 +264,7 @@ $(document).ready(function () {
         console.log("datable initialized :: init.dt ::");
 
         childrenRedraw(table.data());
+        enableFilters();
 
 
     });
@@ -325,53 +327,38 @@ $(document).ready(function () {
         $("select#filterlist").empty();
         console.log(" filters manager :: " + config.role);
         hideSubActionsInterface();
+        assignPageTitle();
+
         switch (config.role) {
 
             case "CoderSupervisor":
-                //                $("select#filterlist").append('<option selected="selected" value="coded">Coded Abstracts</option>');
-                //                $("select#filterlist").append('<option value="open">Open Abstracts</option>');
+
                 showFiltersInterface();
                 hideActionsInterface();
-                setPageTitle("View Coded Abstracts");
                 loadFilters();
-
                 break;
 
             case "ODPSupervisor":
-                //                $("select#filterlist").append('<option selected="selected" value="">Default View</option>');
-                //                $("select#filterlist").append('<option value="open">Open Abstract</option>');
-                //                $("select#filterlist").append('<option value="review">In Review List</option>');
-                //                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+
                 showFiltersInterface();
                 hideActionsInterface();
                 hideSubActionsInterface();
-                setPageTitle("View Coded Abstracts");
                 loadFilters();
-
-
-
                 break;
 
             case "ODPStaff":
-                //                $("select#filterlist").append('<option selected="selected" value="">Default View</option>');
-                //                $("select#filterlist").append('<option value="open">Open Abstract</option>');
-                //                $("select#filterlist").append('<option value="review">In Review List</option>');
-                //                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
+
                 showFiltersInterface();
                 hideActionsInterface();
                 hideSubActionsInterface();
-                setPageTitle("View Coded Abstracts");
-                //                $("select#filterlist").append('<option selected="selected" value="coded">Default View</option>');
-                //                $("select#filterlist").append('<option value="review">In Review List</option>');
-                //                $("select#filterlist").append('<option value="uncoded">In Review List - Uncoded Only</option>');
                 loadFilters();
                 break;
 
             case "Admin":
-                hideFiltersInterface();
+                showFiltersInterface();
                 hideActionsInterface();
                 hideSubActionsInterface();
-                setPageTitle("View Abstracts");
+                loadFilters();
                 break;
 
 
@@ -399,8 +386,14 @@ $(document).ready(function () {
                           if (data.opts.length > 0) {
                               console.log(" filters received..");
                               $("select#filterlist").empty();
+
                               for (var i = 0; i < data.opts.length; i++) {
-                                  $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                                  if ($opts.lastfilterSelection == '') {
+                                      $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                                  }
+                                  else {
+                                      $("select#filterlist").append('<option ' + ($opts.lastfilterSelection == data.opts[i].option ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                                  }
                               }
 
                           }
@@ -483,29 +476,58 @@ $(document).ready(function () {
     function changeFilters() {
         config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
         table.ajax.url(config.baseURL);
+        $opts.lastfilterSelection = $opts.filterlist;
         console.log(config.baseURL);
-        switch ($opts.filterlist) {
 
-            case "review":
-                setPageTitle("View Coded Abstracts in Review");
-                break;
-            case "open":
-                setPageTitle("View Open Abstracts");
-                break;
+        assignPageTitle();
 
-            default:
-                setPageTitle("View Coded Abstracts");
-                break;
-
-
-        }
 
 
 
         table.ajax.reload(function (json) {
             childrenRedraw(table.data());
+            enableFilters();
         });
 
+    }
+
+    function assignPageTitle() {
+
+        switch ($opts.filterlist) {
+
+            case "review":
+                setPageTitle("View Review List");
+                break;
+            case "open":
+                setPageTitle("View Open Abstracts");
+                break;
+            case "coded":
+                setPageTitle("View Coded Abstracts");
+                break;
+            case "closed":
+                setPageTitle("View Closed Abstracts");
+                break;
+            case "odpcompleted":
+                setPageTitle("View ODP Completed Abstracts");
+                break;
+            case "odpcompletedwonotes":
+                setPageTitle("View ODP Completed Without Notes Abstracts");
+                break;
+
+            default:
+                setPageTitle("View All Abstracts");
+                break;
+
+
+        }
+
+    }
+
+    function disableFilters() {
+        $("select#filterlist").attr("disabled", true);
+    }
+    function enableFilters() {
+        $("select#filterlist").attr("disabled", false);
     }
 
     function doSubmitChecks() {
@@ -734,6 +756,7 @@ $(document).ready(function () {
     $("select#filterlist").change(function () {
         //alert("Handler for .change() called.");
         var str = "";
+        disableFilters();
         $("select#filterlist option:selected").each(function () {
             str = $(this).val();
             $opts.filterlist = $(this).val();

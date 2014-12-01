@@ -103,6 +103,21 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             switch(roleRequested){
 
+                case "Admin":
+                    FV.opts.Add(new FilterOpts() { option = "uncoded", text = "View Uncoded Abstracts" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.OPEN_0).Select(s => s).ToList().Count.ToString() + ")" });
+                    FV.opts.Add(new FilterOpts() { option = "default", text = "All Abstracts" + " (" + abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1).Select(s => s).ToList().Count.ToString() + ")" });
+                    FV.opts.Add(new FilterOpts() { option = "codercompleted", text = "Coder Completed" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList().Count.ToString() + ")" });
+                    FV.opts.Add(new FilterOpts() { option = "odpcompleted", text = "ODP Completed" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N).Select(s => s).ToList().Count.ToString() + ")" });
+                    FV.opts.Add(new FilterOpts() { option = "closed", text = "Closed" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3).Select(s => s).ToList().Count.ToString() + ")" });
+                    FV.opts.Add(new FilterOpts() { option = "exported", text = "Exported" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4).Select(s => s).ToList().Count.ToString() + ")" });
+
+                    //FV.opts.Add(new FilterOpts() { option = "review", text = "In Review List" + " (" + reviewabstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).ToList().Count.ToString() + ")" });
+                    //FV.opts.Add(new FilterOpts() { option = "uncoded", text = "In Review List - Uncoded" });
+                    //FV.opts.Add(new FilterOpts() { option = "activeabstracts", text = "Active Abstracts" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2).Select(s => s).ToList().Count.ToString() + ")" });
+                    //FV.opts.Add(new FilterOpts() { option = "odpcompletedwonotes", text = "ODP Completed without notes" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C).Select(s => s).ToList().Count.ToString() + ")" });
+                  
+                    break;
+
                 case "ODPSupervisor" :
                     FV.opts.Add(new FilterOpts() { option = "default", text = "All Abstracts" + " (" + abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList().Count.ToString() + ")" });
                     FV.opts.Add(new FilterOpts() { option = "review", text = "In Review List" + " (" + reviewabstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).ToList().Count.ToString() + ")" });
