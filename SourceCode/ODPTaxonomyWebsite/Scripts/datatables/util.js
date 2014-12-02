@@ -99,12 +99,12 @@ function Utility() {
     this.showOpenRows = function (flag) {
 
         if (flag) {
-            $("#DTable tr[role='row']").removeClass("closed").addClass("open");
+            $("#DTable tr[role='row'].haschildren").removeClass("closed").addClass("open");
             $("#DTable tr.child").removeClass("hide").addClass("show");
         }
         else {
 
-            $("#DTable tr[role='row']").removeClass("open").addClass("closed");
+            $("#DTable tr[role='row'].haschildren").removeClass("open").addClass("closed");
             $("#DTable tr.child").removeClass("show").addClass("hide");
         }
     };

@@ -583,25 +583,33 @@ $(document).ready(function () {
         table.rows().eq(0).each(function (rowIdx, val) {
             var childrows = util.getTableChildRowsV2(rowIdx);
             //console.log(rowIdx + '    ' + val);
-            if (childrows == '') {
-                var rowx = table.row(rowIdx).nodes()
+            var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
+            if (childrows == '') {
+//                var rowx = table.row(rowIdx).nodes()
+//                .to$();     // Convert to a jQuery object
 
                 rowx.addClass('nochildren');
                 rowx.find("td.details-control").addClass('nodisplay');
 
-                console.log(" here ::" + rowx);
+                //console.log(" here ::" + rowx);
+            }
+            else {
+//                var rowx = table.row(rowIdx).nodes()
+//                .to$();     // Convert to a jQuery object
+                rowx.addClass('haschildren');
+
             }
 
             table
-        .row(rowIdx)
-        .child(
+            .row(rowIdx)
+            .child(
             $(
-                childrows
-            ), "child hide"
-        )
-        .show();
-        });
+                    childrows
+                ), "child hide"
+            )
+            .show();
+            });
 
     }
 
