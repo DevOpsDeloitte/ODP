@@ -94,8 +94,7 @@ namespace ODPTaxonomyUtility_TT
             }
             catch (Exception ex)
             {
-                Trace.WriteLine("Failed, exception thrown: " + ex.Message);
-                
+                throw ex;
             }
         }
 
@@ -110,8 +109,19 @@ namespace ODPTaxonomyUtility_TT
             }
             catch (Exception ex)
             {
-                Trace.WriteLine("Failed, exception thrown: " + ex.Message);
-                
+                throw ex;
+            }
+        }
+
+        public static void CreateExcelDocumentAsStream(string connString, List<string> abstractIDs, string filename, System.Web.HttpResponse Response)
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -158,14 +168,17 @@ namespace ODPTaxonomyUtility_TT
                 Response.AppendHeader("Content-Disposition", "attachment;filename=" + filename);
                 Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
                 stream.WriteTo(Response.OutputStream);
-                Response.End();
+                //Response.End();
+                /* Use 3 lines below instead of Response.End() which always throws an exception */
+                Response.Flush(); // Sends all currently buffered output to the client.
+                Response.SuppressContent = true;  // Gets or sets a value indicating whether to send HTTP content to the client.
+                System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest(); // Causes ASP.NET to bypass all 
                 /* Code for client-side option: START */
                 
             }
             catch (Exception ex)
             {
-                //Trace.WriteLine("Failed, exception thrown: " + ex.Message);
-                Utils.LogError(ex);
+                throw ex;
                 
             }
         }
@@ -185,13 +198,11 @@ namespace ODPTaxonomyUtility_TT
                 {
                     WriteExcelFile(ds, document);
                 }
-                Trace.WriteLine("Successfully created: " + excelFilename);
                 
             }
             catch (Exception ex)
             {
-                Trace.WriteLine("Failed, exception thrown: " + ex.Message);
-                
+                throw ex;
             }
         }
 
