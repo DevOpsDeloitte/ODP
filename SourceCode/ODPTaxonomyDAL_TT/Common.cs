@@ -794,6 +794,59 @@ namespace ODPTaxonomyDAL_TT
 
             return abstractIds;
         }
+        
+
+        public static IEnumerable<T> ListMerge<T>(params List<T>[] objects)
+        {
+            foreach (var obj in objects)
+            {
+                var enumerable = obj as System.Collections.IEnumerable;
+                if (enumerable != null)
+                    foreach (var item in enumerable)
+                        yield return (T)item;
+                else
+                    yield return default(T);
+            }
+        }
+
+        public static List<rpt_OPAResult> GetReportData_OpaData(string connString, List<string> abstractIDs)
+        {
+            List<rpt_OPAResult> output = null;
+            IEnumerable<rpt_OPAResult> data = null;
+            List<rpt_OPAResult> matches = null;
+            List<rpt_OPAResult> temp = new List<rpt_OPAResult>();
+            int abstractId = -1;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    foreach (string abs in abstractIDs)
+                    {
+                        if (Int32.TryParse(abs, out abstractId))
+                        {
+                            matches = db.rpt_OPA(abs.Trim()).ToList<rpt_OPAResult>();
+                            data = ListMerge<rpt_OPAResult>(temp, matches);
+                            temp = data.ToList<rpt_OPAResult>();
+                            
+                        }
+                        else
+                        {
+                            throw new Exception("abstractID '" + abs + "' is incorrect");
+                        }
+                    }
+
+                    if (data != null)
+                        output = data.OrderBy(c => c.ApplicationID).ToList<rpt_OPAResult>();                        
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return output;
+        }
 
     }
 }
