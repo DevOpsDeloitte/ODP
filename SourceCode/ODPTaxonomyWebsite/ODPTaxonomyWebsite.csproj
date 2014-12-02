@@ -90,6 +90,7 @@
     <Content Include="Evaluation\DownloadAbstractScan.aspx" />
     <Content Include="Evaluation\Evaluation.aspx" />
     <Content Include="Evaluation\EvaluationRT.aspx" />
+    <Content Include="Evaluation\GenerateExcelReport.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
     <Content Include="Evaluation\Handlers\test.htm" />
     <Content Include="Evaluation\ManageTeams.aspx" />
@@ -322,6 +323,13 @@
     <Compile Include="Evaluation\EvaluationRT.aspx.designer.cs">
       <DependentUpon>EvaluationRT.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\GenerateExcelReport.aspx.cs">
+      <DependentUpon>GenerateExcelReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\GenerateExcelReport.aspx.designer.cs">
+      <DependentUpon>GenerateExcelReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Glossary.aspx.cs">
       <DependentUpon>Glossary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -329,15 +337,27 @@
     <Compile Include="Evaluation\Glossary.aspx.designer.cs">
       <DependentUpon>Glossary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractClose.ashx.cs">
+      <DependentUpon>AbstractClose.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractExport.ashx.cs">
+      <DependentUpon>AbstractExport.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\AbstractReview.ashx.cs">
       <DependentUpon>AbstractReview.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Handlers\Abstracts.ashx.cs">
       <DependentUpon>Abstracts.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractsReopen.ashx.cs">
+      <DependentUpon>AbstractsReopen.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\Evaluations.cs" />
     <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
       <DependentUpon>Filters.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\GenerateExcelReport.ashx.cs">
+      <DependentUpon>GenerateExcelReport.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Handlers\Test.ashx.cs">
       <DependentUpon>Test.ashx</DependentUpon>
@@ -495,6 +515,10 @@
     <Content Include="Evaluation\Handlers\AbstractReview.ashx" />
     <Content Include="Evaluation\Handlers\Test.ashx" />
     <Content Include="Evaluation\Handlers\Filters.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractClose.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractsReopen.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractExport.ashx" />
+    <Content Include="Evaluation\Handlers\GenerateExcelReport.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />

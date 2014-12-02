@@ -6,6 +6,8 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using ODPTaxonomyDAL_JY;
+using ODPTaxonomyDAL_TT;
+using ODPTaxonomyUtility_TT;
 
 namespace ODPTaxonomyWebsite.Evaluation
 {
@@ -328,6 +330,30 @@ namespace ODPTaxonomyWebsite.Evaluation
                     break;
                 default:
                     break;
+            }
+        }
+
+        
+
+        protected void lnkBtn_export_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                //Test
+                lbl_exportError.Text = hf_abstracts.Value;
+                List<AbstractGroup> listOfAbstractGroups = new List<AbstractGroup>();
+                listOfAbstractGroups.Add(new AbstractGroup(1, 1));
+                listOfAbstractGroups.Add(new AbstractGroup(2, 2));
+                listOfAbstractGroups.Add(new AbstractGroup(3, 3));
+
+                CreateExcelFile.CreateExcelDocument(listOfAbstractGroups, "AbstractGroups.xlsx", Response);
+
+            }
+            catch (Exception ex)
+            {
+                lbl_exportError.Text = ex.ToString();
+                Utils.LogError(ex);
+
             }
         }
 

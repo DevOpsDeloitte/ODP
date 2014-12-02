@@ -42,14 +42,21 @@
          return true;
 
      }
+    
 
 </script>
 <script type="text/javascript" src="/Scripts/datatables/app.js"></script>
     <h2>
     </h2>
     
-    </div>
+    <!--</div>-->
     <div>
+    <asp:HiddenField runat="server" ID="hf_abstracts" />
+    <asp:Button runat="server" ID="btn_export" Text="Export to Excel" />
+    <asp:LinkButton runat="server" ID="lnkBtn_export" Text="Export to Excel" 
+            onclick="lnkBtn_export_Click"></asp:LinkButton>
+    
+            <asp:Label runat="server" ID="lbl_exportError" ForeColor="Red"></asp:Label>
         <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" OnSelectedIndexChanged="MainviewChangeHandler" Visible="false" />
         <asp:Panel runat="server" ID="SubviewPanel" Visible="false">
             <h3>
@@ -80,4 +87,50 @@
         <odp:CoderSupervisorView_Open runat="server" ID="CoderSupervisor_Open" Visible="false" />
         <odp:AdminView runat="server" ID="AdminView" Visible="false" />
     </div>
+    <iframe name="tmpFrame" id="tmpFrame" width="1" height="1" style="visibility:hidden;position:absolute;display:none"></iframe>
+    <script type="text/javascript">
+
+
+        // Tatiana's Test
+
+        $(document).ready(function () {
+
+            var hf_abstractsExported = $('#<%= hf_abstracts.ClientID %>');
+           
+            //alert(hf.attr('id'));
+            hf_abstractsExported.val("116, 149, 192");
+
+//           var url = "/Evaluation/Handlers/GenerateExcelReport.ashx";
+//            window.location = url;
+
+            //alert(hf.val());
+
+        });
+
+       var btn_export = $('#<%= btn_export.ClientID %>');
+//        //alert(btn_export.attr('id'));
+
+        btn_export.click(function () {
+            //alert("TT");
+            var url = "/Evaluation/Handlers/GenerateExcelReport.ashx";
+            //            window.location = url;
+
+            $("#tmpFrame").attr('src', url);
+            //downloadExcel();
+            return false;
+            //return true;
+        }
+        );
+
+//        function downloadExcel() {
+//            var form = $(document.createElement("form"))
+//        .attr("action", "/Evaluation/Handlers/GenerateExcelReport.ashx")
+//        .attr("method", "POST").attr("id", "frmExportToExcel")
+//        .attr("name", "frmExportToExcel").attr("target", "new");
+//            
+//            document.body.appendChild(form[0]);
+//            form.submit();
+//        }
+
+</script>
 </asp:Content>

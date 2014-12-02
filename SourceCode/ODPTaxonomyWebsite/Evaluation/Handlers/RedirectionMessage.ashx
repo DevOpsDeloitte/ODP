@@ -1,0 +1,1 @@
+﻿<%@ webhandler class="ODPTaxonomyWebsite.Evaluation.Handlers.RedirectionMessage"  %> 
