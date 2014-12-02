@@ -147,6 +147,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         //    break;
 
 
+                        case "": // first call default is review list.
+                            parentAbstracts = this.GetParentAbstractsODPStaffMemberReview();
+                            ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
+                            serializeResponse(context, ALR);
+                            break;
+
                         case "review":
                             parentAbstracts = this.GetParentAbstractsODPStaffMemberReview();
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);

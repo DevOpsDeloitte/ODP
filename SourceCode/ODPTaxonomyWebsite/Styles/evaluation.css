@@ -9,6 +9,10 @@ table.childtable
     
 }
 
+table.childtable > tbody > tr:nth-of-type(even){
+	background:rgba(245,245,245, 0.43);
+}
+
 
 table.dataTable thead th, table.dataTable thead td {
     padding: 8px 10px;

@@ -36,6 +36,11 @@ $(document).ready(function () {
 
     util = new Utility();
 
+    // ODPStaff role starts out with review list;
+    if (config.role == "ODPStaff") {
+        $opts.lastfilterSelection = "review";
+    }
+
     filtersManager(); //Init
     actionsManager(); // Init
     disableFilters();
