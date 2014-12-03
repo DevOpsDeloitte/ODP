@@ -809,6 +809,8 @@ namespace ODPTaxonomyDAL_TT
             }
         }
 
+        
+
         public static List<rpt_OPAResult> GetReportData_OpaData(string connString, List<string> abstractIDs)
         {
             List<rpt_OPAResult> output = null;
@@ -838,6 +840,201 @@ namespace ODPTaxonomyDAL_TT
 
                     if (data != null)
                         output = data.OrderBy(c => c.ApplicationID).ToList<rpt_OPAResult>();                        
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return output;
+        }
+
+        public static List<rpt_KappaDataResult> GetReportData_KappaData(string connString, List<string> abstractIDs)
+        {
+            List<rpt_KappaDataResult> output = null;
+            IEnumerable<rpt_KappaDataResult> data = null;
+            List<rpt_KappaDataResult> matches = null;
+            List<rpt_KappaDataResult> temp = new List<rpt_KappaDataResult>();
+            int abstractId = -1;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    foreach (string abs in abstractIDs)
+                    {
+                        if (Int32.TryParse(abs, out abstractId))
+                        {
+                            matches = db.rpt_KappaData(abs.Trim()).ToList<rpt_KappaDataResult>();
+                            data = ListMerge<rpt_KappaDataResult>(temp, matches);
+                            temp = data.ToList<rpt_KappaDataResult>();
+
+                        }
+                        else
+                        {
+                            throw new Exception("abstractID '" + abs + "' is incorrect");
+                        }
+                    }
+
+                    if (data != null)
+                        output = data.OrderBy(c => c.ApplicationID).ToList<rpt_KappaDataResult>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return output;
+        }
+
+        public static List<rpt_Cdr_ODPNotesPDFResult> GetReportData_Cdr_ODPNotesPDF(string connString, List<string> abstractIDs)
+        {
+            List<rpt_Cdr_ODPNotesPDFResult> output = null;
+            IEnumerable<rpt_Cdr_ODPNotesPDFResult> data = null;
+            List<rpt_Cdr_ODPNotesPDFResult> matches = null;
+            List<rpt_Cdr_ODPNotesPDFResult> temp = new List<rpt_Cdr_ODPNotesPDFResult>();
+            int abstractId = -1;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    foreach (string abs in abstractIDs)
+                    {
+                        if (Int32.TryParse(abs, out abstractId))
+                        {
+                            matches = db.rpt_Cdr_ODPNotesPDF(abs.Trim()).ToList<rpt_Cdr_ODPNotesPDFResult>();
+                            data = ListMerge<rpt_Cdr_ODPNotesPDFResult>(temp, matches);
+                            temp = data.ToList<rpt_Cdr_ODPNotesPDFResult>();
+
+                        }
+                        else
+                        {
+                            throw new Exception("abstractID '" + abs + "' is incorrect");
+                        }
+                    }
+
+                    if (data != null)
+                        output = data.OrderBy(c => c.ApplicationID).ToList<rpt_Cdr_ODPNotesPDFResult>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return output;
+        }
+
+        public static List<rpt_AbstractStatusTrailResult> GetReportData_AbstractStatusTrail(string connString, List<string> abstractIDs)
+        {
+            List<rpt_AbstractStatusTrailResult> output = null;
+            IEnumerable<rpt_AbstractStatusTrailResult> data = null;
+            List<rpt_AbstractStatusTrailResult> matches = null;
+            List<rpt_AbstractStatusTrailResult> temp = new List<rpt_AbstractStatusTrailResult>();
+            int abstractId = -1;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    foreach (string abs in abstractIDs)
+                    {
+                        if (Int32.TryParse(abs, out abstractId))
+                        {
+                            matches = db.rpt_AbstractStatusTrail(abs.Trim()).ToList<rpt_AbstractStatusTrailResult>();
+                            data = ListMerge<rpt_AbstractStatusTrailResult>(temp, matches);
+                            temp = data.ToList<rpt_AbstractStatusTrailResult>();
+
+                        }
+                        else
+                        {
+                            throw new Exception("abstractID '" + abs + "' is incorrect");
+                        }
+                    }
+
+                    if (data != null)
+                        output = data.OrderBy(c => c.ApplicationID).ToList<rpt_AbstractStatusTrailResult>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return output;
+        }
+
+        public static List<rpt_Cdr_ODP_IndividualCodingResult> GetReportData_Cdr_ODP_IndividualCoding(string connString, List<string> abstractIDs)
+        {
+            List<rpt_Cdr_ODP_IndividualCodingResult> output = null;
+            IEnumerable<rpt_Cdr_ODP_IndividualCodingResult> data = null;
+            List<rpt_Cdr_ODP_IndividualCodingResult> matches = null;
+            List<rpt_Cdr_ODP_IndividualCodingResult> temp = new List<rpt_Cdr_ODP_IndividualCodingResult>();
+            int abstractId = -1;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    foreach (string abs in abstractIDs)
+                    {
+                        if (Int32.TryParse(abs, out abstractId))
+                        {
+                            matches = db.rpt_Cdr_ODP_IndividualCoding(abs.Trim()).ToList<rpt_Cdr_ODP_IndividualCodingResult>();
+                            data = ListMerge<rpt_Cdr_ODP_IndividualCodingResult>(temp, matches);
+                            temp = data.ToList<rpt_Cdr_ODP_IndividualCodingResult>();
+
+                        }
+                        else
+                        {
+                            throw new Exception("abstractID '" + abs + "' is incorrect");
+                        }
+                    }
+
+                    if (data != null)
+                        output = data.OrderBy(c => c.ApplicationID).ToList<rpt_Cdr_ODP_IndividualCodingResult>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return output;
+        }
+
+        public static List<rpt_Team_User_UCResult> GetReportData_Team_User_UCResult(string connString, List<string> abstractIDs)
+        {
+            List<rpt_Team_User_UCResult> output = null;
+            IEnumerable<rpt_Team_User_UCResult> data = null;
+            List<rpt_Team_User_UCResult> matches = null;
+            List<rpt_Team_User_UCResult> temp = new List<rpt_Team_User_UCResult>();
+            int abstractId = -1;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    foreach (string abs in abstractIDs)
+                    {
+                        if (Int32.TryParse(abs, out abstractId))
+                        {
+                            matches = db.rpt_Team_User_UC(abs.Trim()).ToList<rpt_Team_User_UCResult>();
+                            data = ListMerge<rpt_Team_User_UCResult>(temp, matches);
+                            temp = data.ToList<rpt_Team_User_UCResult>();
+
+                        }
+                        else
+                        {
+                            throw new Exception("abstractID '" + abs + "' is incorrect");
+                        }
+                    }
+
+                    if (data != null)
+                        output = data.OrderBy(c => c.AbstractID).ToList<rpt_Team_User_UCResult>();
                 }
                 catch (Exception ex)
                 {
