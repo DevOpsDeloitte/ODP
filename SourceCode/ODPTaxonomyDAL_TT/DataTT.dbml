@@ -106,8 +106,8 @@
       <Association Name="tbl_Evaluation_tbL_Submission" Member="tbL_Submissions" Storage="_tbl_Submissions" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbL_Submission" />
       <Association Name="tbl_Team_tbl_Evaluation" Member="tbl_Team" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Team" IsForeignKey="true" />
       <Association Name="tbl_EvaluationType_tbl_Evaluation" Member="tbl_EvaluationType" ThisKey="EvaluationTypeId" OtherKey="EvaluationTypeId" Type="tbl_EvaluationType" IsForeignKey="true" />
-      <Association Name="Abstract_tbl_Evaluation" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
-      <Association Name="Abstract_tbl_Evaluation1" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+      <Association Name="tbl_Abstract_tbl_Evaluation" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+      <Association Name="tbl_Abstract_tbl_Evaluation1" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AbstractStatus" Member="tbl_AbstractStatus">
@@ -140,7 +140,7 @@
       <Association Name="tbl_AbstractStatus_tbl_AbstractStatusChangeHistory" Member="tbl_AbstractStatus" ThisKey="AbstractStatusID" OtherKey="AbstractStatusID" Type="tbl_AbstractStatus" IsForeignKey="true" />
       <Association Name="tbl_Evaluation_tbl_AbstractStatusChangeHistory" Member="tbl_Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_Evaluation" IsForeignKey="true" />
       <Association Name="tbl_Evaluation_tbl_AbstractStatusChangeHistory1" Member="tbl_Evaluation1" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_Evaluation" IsForeignKey="true" />
-      <Association Name="Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+      <Association Name="tbl_Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AbstractTopic" Member="tbl_AbstractTopics">
@@ -222,9 +222,9 @@
       <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="LastExportDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Abstract_tbl_Evaluation" Member="tbl_Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
-      <Association Name="Abstract_tbl_Evaluation1" Member="tbl_Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
-      <Association Name="Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_AbstractStatusChangeHistory" />
+      <Association Name="tbl_Abstract_tbl_Evaluation" Member="tbl_Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
+      <Association Name="tbl_Abstract_tbl_Evaluation1" Member="tbl_Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
+      <Association Name="tbl_Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_AbstractStatusChangeHistory" />
     </Type>
   </Table>
   <Function Name="dbo.select_abstract_status_tt" Method="select_abstract_status_tt">
@@ -251,8 +251,106 @@
       <Column Name="Sorting" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.rpt_OPA" Method="rpt_OPA">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(5000)" />
+    <ElementType Name="rpt_OPAResult">
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MainSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SectionID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SectionName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CdrBaseDataYN" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ODPBaseDataYN" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CdrConsensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="CdrODPComparison" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[Final Consensus]" Member="Final_Consensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.rpt_KappaData" Method="rpt_KappaData">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(5000)" />
+    <ElementType Name="rpt_KappaDataResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="UserName" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="KappaTypeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="KappaType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="B" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="C" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="CdrKappaDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ODPKappaDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.rpt_Cdr_ODPNotesPDF" Method="rpt_Cdr_ODPNotesPDF">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(5000)" />
+    <ElementType Name="rpt_Cdr_ODPNotesPDFResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FilName" Type="System.String" DbType="NVarChar(281) NOT NULL" CanBeNull="false" />
+      <Column Name="EvaluationType" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="Finnal_AbstractStatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.rpt_AbstractStatusTrail" Method="rpt_AbstractStatusTrail">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(5000)" />
+    <ElementType Name="rpt_AbstractStatusTrailResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="AbstractStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="AbstractStatusCode" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="AbstractStatusDescription" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.[rpt_Cdr_ODP IndividualCoding]" Method="rpt_Cdr_ODP_IndividualCoding">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(5000)" />
+    <ElementType Name="rpt_Cdr_ODP_IndividualCodingResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="KappaBaseDataID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MainSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SectionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SectionName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CdrA" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="CdrB" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="CdrC" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="CdrConsensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="ODPA" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="ODPB" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="ODPC" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="ODPConsensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="CdrODPComparison" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[Final Consensus]" Member="Final_Consensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.rpt_Team_User_UC" Method="rpt_Team_User_UC">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(5000)" />
+    <ElementType Name="rpt_Team_User_UCResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TeamCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TeamType" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UserAlias" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="SubmissionType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="UnableToCode" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.select_abstracts_no_reopen_tt" Method="select_abstracts_no_reopen_tt">
-    <Parameter Name="AbstractStatusID" Parameter="abstractStatusID" Type="System.String" DbType="VarChar(500)" />
     <ElementType Name="select_abstracts_no_reopen_ttResult">
       <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
