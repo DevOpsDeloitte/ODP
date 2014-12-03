@@ -78,6 +78,7 @@ $(document).ready(function () {
                          "render": function (data, type, row) {
                              // default condition add to review.
                              if (config.role == "ODPSupervisor") {
+                                 return '<input type="checkbox"/>';
                                  if ($opts.filterlist != "review") {
                                      return data == true ? "&nbsp;" : '<input type="checkbox" />';
                                  }
@@ -794,6 +795,11 @@ $(document).ready(function () {
     function watchactionsHandler() {
         console.log(" watchactionsHandler() ::" + $opts.actionlist);
         switch ($opts.actionlist) {
+            case "addreview":
+                disableFilters();
+                actionsManager();
+                changeFilters();
+                break;
             case "reopenabstracts":
                 reopenListCheck();
                 break;
@@ -805,18 +811,16 @@ $(document).ready(function () {
     function reopenListCheck() {
         $.ajax({
             type: "GET",
-            url: "/Evaluation/Handlers/reopen.js",
+            url: "/Evaluation/Handlers/AbstractsReopen.ashx",
             dataType: 'json',
-            //data: { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+            data: { guid: window.user.GUID }
         })
                       .done(function (data) {
                           console.log(" reopen : " + data);
-                          if (data.nolist) {
-                              alertify.success(" reopen data :: "+data.nolist);
-                              //alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from review list.");
-                              //$opts.hideItems = $opts.selectedItems;
-                              //resetSubmitBtnAndCheckboxes();
-                              //loadFilters();
+                          if (data.success) {
+                              alertify.success(" reopen data :: " + data.nottoreopen);
+                              hideCheckBoxes(data.nottoreopen);
+
                           }
                           else {
                               alertify.error("Failed to get reopen data");
@@ -824,6 +828,27 @@ $(document).ready(function () {
                       });
 
     }
+
+    function hideCheckBoxes(inArr) {
+
+        table.rows().eq(0).each(function (rowIdx, val) {
+            var rowx = table.row(rowIdx).nodes()
+                .to$();     // Convert to a jQuery object
+
+            //if (rowx.find("input[type=checkbox]").length > 0) {
+            console.log(inArr instanceof Array);
+            //console.log(rowx.find(".abstractid").html());
+            var absid = rowx.find(".abstractid").html().trim();
+            if (_.contains(inArr, Number(absid))) {
+                console.log(absid);
+                rowx.find("input[type=checkbox]").addClass("hidecheckbox");
+            }
+
+        });
+
+
+    }
+
 
 
 });

@@ -9,6 +9,11 @@ table.childtable
     
 }
 
+input[type="checkbox"].hidecheckbox
+{
+    display: none;
+}
+
 table.childtable > tbody > tr:nth-of-type(even){
 	background:rgba(245,245,245, 0.43);
 }
