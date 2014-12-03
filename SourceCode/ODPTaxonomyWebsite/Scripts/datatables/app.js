@@ -586,8 +586,8 @@ $(document).ready(function () {
             var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
             if (childrows == '') {
-//                var rowx = table.row(rowIdx).nodes()
-//                .to$();     // Convert to a jQuery object
+                //                var rowx = table.row(rowIdx).nodes()
+                //                .to$();     // Convert to a jQuery object
 
                 rowx.addClass('nochildren');
                 rowx.find("td.details-control").addClass('nodisplay');
@@ -595,8 +595,8 @@ $(document).ready(function () {
                 //console.log(" here ::" + rowx);
             }
             else {
-//                var rowx = table.row(rowIdx).nodes()
-//                .to$();     // Convert to a jQuery object
+                //                var rowx = table.row(rowIdx).nodes()
+                //                .to$();     // Convert to a jQuery object
                 rowx.addClass('haschildren');
 
             }
@@ -609,7 +609,7 @@ $(document).ready(function () {
                 ), "child hide"
             )
             .show();
-            });
+        });
 
     }
 
@@ -760,7 +760,7 @@ $(document).ready(function () {
 
         }
         else {
-            console.log("not enabled ::");
+            //console.log("not enabled ::");
 
         }
 
@@ -786,8 +786,44 @@ $(document).ready(function () {
             str = $(this).val();
             $opts.actionlist = $(this).val();
         });
+
+        watchactionsHandler();
     });
 
+
+    function watchactionsHandler() {
+        console.log(" watchactionsHandler() ::" + $opts.actionlist);
+        switch ($opts.actionlist) {
+            case "reopenabstracts":
+                reopenListCheck();
+                break;
+            default:
+                break;
+
+        }
+    }
+    function reopenListCheck() {
+        $.ajax({
+            type: "GET",
+            url: "/Evaluation/Handlers/reopen.js",
+            dataType: 'json',
+            //data: { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+        })
+                      .done(function (data) {
+                          console.log(" reopen : " + data);
+                          if (data.nolist) {
+                              alertify.success(" reopen data :: "+data.nolist);
+                              //alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from review list.");
+                              //$opts.hideItems = $opts.selectedItems;
+                              //resetSubmitBtnAndCheckboxes();
+                              //loadFilters();
+                          }
+                          else {
+                              alertify.error("Failed to get reopen data");
+                          }
+                      });
+
+    }
 
 
 });
