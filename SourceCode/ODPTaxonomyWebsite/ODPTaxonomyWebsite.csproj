@@ -330,11 +330,20 @@
     <Compile Include="Evaluation\Glossary.aspx.designer.cs">
       <DependentUpon>Glossary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractClose.ashx.cs">
+      <DependentUpon>AbstractClose.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractExport.ashx.cs">
+      <DependentUpon>AbstractExport.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\AbstractReview.ashx.cs">
       <DependentUpon>AbstractReview.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Handlers\Abstracts.ashx.cs">
       <DependentUpon>Abstracts.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractsReopen.ashx.cs">
+      <DependentUpon>AbstractsReopen.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Handlers\Evaluations.cs" />
     <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
@@ -496,6 +505,9 @@
     <Content Include="Evaluation\Handlers\AbstractReview.ashx" />
     <Content Include="Evaluation\Handlers\Test.ashx" />
     <Content Include="Evaluation\Handlers\Filters.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractsReopen.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractClose.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractExport.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
