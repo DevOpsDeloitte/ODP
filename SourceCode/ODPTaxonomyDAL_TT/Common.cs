@@ -596,5 +596,204 @@ namespace ODPTaxonomyDAL_TT
 
             return teamCode;
         }
+
+        public static void ExportAbstract(string connString, int abstractId, Guid userId)
+        {
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            history.AbstractID = abstractId;
+            history.AbstractStatusID = (int)AbstractStatusID._4;
+            history.CreatedDate = DateTime.Now;
+            history.CreatedBy = userId;
+            history.EvaluationId = null;
+
+            tbl_Abstract abstractItem = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    //verify user
+                    var matches = from m in db.tbl_aspnet_Memberships
+                                  where m.UserId == userId && m.IsApproved == true && m.IsLockedOut == false
+                                  select m.UserId;
+                    if (matches.Any())
+                    {
+                        //verify abstract
+                        var matchesAbstract = from a in db.tbl_Abstracts
+                                              where a.AbstractID == abstractId
+                                              select a;
+                        foreach (var i in matchesAbstract)
+                        {
+                            abstractItem = i;
+                        }
+
+                        if (abstractItem != null)
+                        {
+                            using (TransactionScope tr = new TransactionScope())
+                            {
+                                db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                                db.SubmitChanges();
+
+                                abstractItem.LastExportDate = DateTime.Now;
+                                db.SubmitChanges();
+
+                                tr.Complete();
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Abstract is NOT valid");
+                        }
+                        
+                    }
+                    else
+                    {
+                        throw new Exception("User is NOT valid");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw ex;
+                }
+            }
+        }
+
+        public static void CloseAbstract(string connString, int abstractId, Guid userId)
+        {
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            history.AbstractID = abstractId;
+            history.AbstractStatusID = (int)AbstractStatusID._3;
+            history.CreatedDate = DateTime.Now;
+            history.CreatedBy = userId;
+            history.EvaluationId = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    //verify user
+                    var matches = from m in db.tbl_aspnet_Memberships
+                                  where m.UserId == userId && m.IsApproved == true && m.IsLockedOut == false
+                                  select m.UserId;
+                    if (matches.Any())
+                    {
+                        //verify abstract
+                        var matchesAbstract = from a in db.tbl_Abstracts
+                                              where a.AbstractID == abstractId
+                                              select a;
+                        if (matchesAbstract.Any())
+                        {
+                            db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            throw new Exception("Abstract is NOT valid");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("User is NOT valid");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw ex;
+                }
+            }
+        }
+
+        public static void OpenClosedAbstract(string connString, int abstractId, Guid userId)
+        {
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    //verify user
+                    var matches1 = from m in db.tbl_aspnet_Memberships
+                                  where m.UserId == userId && m.IsApproved == true && m.IsLockedOut == false
+                                  select m.UserId;
+                    if (matches1.Any())
+                    {
+                        //verify abstract
+                        var matchesAbstract = from a in db.tbl_Abstracts
+                                              where a.AbstractID == abstractId
+                                              select a;
+                        if (matchesAbstract.Any())
+                        {
+                            var matches = db.select_abstracts_no_reopen_tt((int)AbstractStatusID._3 + ", " + (int)AbstractStatusID._4);
+                            bool isInList = matches.Any(x => x.AbstractID == abstractId);
+
+                            if (!isInList)
+                            {
+                                //could be re-opened
+                                history.AbstractID = abstractId;
+                                history.AbstractStatusID = (int)AbstractStatusID._1N;
+                                history.CreatedDate = DateTime.Now;
+                                history.CreatedBy = userId;
+                                history.EvaluationId = null;
+
+                                db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                                db.SubmitChanges();
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Abstract is NOT valid");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("User is NOT valid");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw ex;
+                }
+            }
+        }
+
+        public static List<int> GetAbstractsNotToReopen(string connString, string abstractStatusIds, Guid userId)
+        {
+            List<int> abstractIds = null;
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    //verify user
+                    var matches1 = from m in db.tbl_aspnet_Memberships
+                                  where m.UserId == userId && m.IsApproved == true && m.IsLockedOut == false
+                                  select m.UserId;
+                    if (matches1.Any())
+                    {
+                        var matches = db.select_abstracts_no_reopen_tt(abstractStatusIds);
+                        if (matches != null)
+                        {
+                            abstractIds = matches.Select(x => x.AbstractID).ToList();
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("User is NOT valid");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw ex;
+                }
+            }
+
+            return abstractIds;
+        }
+
     }
 }
