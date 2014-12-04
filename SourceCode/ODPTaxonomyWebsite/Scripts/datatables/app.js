@@ -440,31 +440,38 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $opts.actionlist = "removereview";
                 break;
             case "codercompleted":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $opts.actionlist = "addreview";
                 break;
             case "activeabstracts":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $opts.actionlist = "addreview";
                 break;
             case "odpcompleted":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $opts.actionlist = "addreview";
                 break;
             case "odpcompletedwonotes":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $opts.actionlist = "addreview";
                 break;
             case "closed":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $opts.actionlist = "addreview";
                 break;
             case "exported":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $opts.actionlist = "addreview";
                 break;
 
             default:
@@ -472,6 +479,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $opts.actionlist = "addreview";
                 break;
 
 
@@ -492,6 +500,7 @@ $(document).ready(function () {
 
         table.ajax.reload(function (json) {
             childrenRedraw(table.data());
+            ListCheck($opts.actionlist);
             enableFilters();
         });
 
@@ -799,6 +808,7 @@ $(document).ready(function () {
                 disableFilters();
                 actionsManager();
                 changeFilters();
+
                 break;
             case "reopenabstracts":
                 reopenListCheck();
@@ -818,14 +828,44 @@ $(document).ready(function () {
                       .done(function (data) {
                           console.log(" reopen : " + data);
                           if (data.success) {
-                              alertify.success(" reopen data :: " + data.nottoreopen);
+                              //alertify.success(" reopen data :: " + data.nottoreopen);
                               hideCheckBoxes(data.nottoreopen);
 
                           }
                           else {
-                              alertify.error("Failed to get reopen data");
+                              //alertify.error("Failed to get reopen data");
                           }
                       });
+
+    }
+
+    function ListCheck(type) {
+
+        switch (type) {
+
+            case "addreview":
+
+                $.ajax({
+                    type: "GET",
+                    url: "/Evaluation/Handlers/AbstractsListCheck.ashx",
+                    dataType: 'json',
+                    data: { guid: window.user.GUID, action: type }
+                })
+                        .done(function (data) {
+                            console.log(" reopen : " + data);
+                            if (data.success) {
+                                //alertify.success(" reopen data :: " + data.nottoreopen);
+                                hideCheckBoxes(data.hideboxes);
+
+                            }
+                            else {
+                                //alertify.error("Failed to get reopen data");
+                            }
+                        });
+
+                break;
+
+        }
 
     }
 
@@ -835,12 +875,8 @@ $(document).ready(function () {
             var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
 
-            //if (rowx.find("input[type=checkbox]").length > 0) {
-            console.log(inArr instanceof Array);
-            //console.log(rowx.find(".abstractid").html());
             var absid = rowx.find(".abstractid").html().trim();
             if (_.contains(inArr, Number(absid))) {
-                console.log(absid);
                 rowx.find("input[type=checkbox]").addClass("hidecheckbox");
             }
 

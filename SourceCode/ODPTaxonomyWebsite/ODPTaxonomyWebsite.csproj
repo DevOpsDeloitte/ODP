@@ -342,6 +342,9 @@
     <Compile Include="Evaluation\Handlers\Abstracts.ashx.cs">
       <DependentUpon>Abstracts.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractsListCheck.ashx.cs">
+      <DependentUpon>AbstractsListCheck.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\AbstractsReopen.ashx.cs">
       <DependentUpon>AbstractsReopen.ashx</DependentUpon>
     </Compile>
@@ -508,6 +511,7 @@
     <Content Include="Evaluation\Handlers\AbstractsReopen.ashx" />
     <Content Include="Evaluation\Handlers\AbstractClose.ashx" />
     <Content Include="Evaluation\Handlers\AbstractExport.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractsListCheck.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
