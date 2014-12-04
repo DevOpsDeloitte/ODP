@@ -1,6 +1,6 @@
 ﻿
 var config = {};
-var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "", hiderowItems : [], lastfilterSelection : "" };
+var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "", hiderowItems : [], lastfilterSelection : "", isGridDirty: false };
 
 
 (function ($) {

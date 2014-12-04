@@ -270,6 +270,15 @@ $(document).ready(function () {
         console.log("datable initialized :: init.dt ::");
 
         childrenRedraw(table.data());
+        $opts.isGridDirty = false;
+        if (config.role == "ODPSupervisor") {
+            if ($opts.actionlist == "reopenabstracts") {
+                reopenListCheck();
+            }
+            else {
+                ListCheck($opts.actionlist);
+            }
+        }
         enableFilters();
 
 
@@ -500,7 +509,15 @@ $(document).ready(function () {
 
         table.ajax.reload(function (json) {
             childrenRedraw(table.data());
-            ListCheck($opts.actionlist);
+            if (config.role == "ODPSupervisor") {
+                if ($opts.actionlist == "reopenabstracts") {
+                    reopenListCheck();
+                }
+                else {
+                    ListCheck($opts.actionlist);
+                }
+            }
+            $opts.isGridDirty = false;
             enableFilters();
         });
 
@@ -558,6 +575,26 @@ $(document).ready(function () {
         }
 
     }
+    function clearSubmitBtnAndCheckboxes() {
+        $("#subButton").removeClass("yes").addClass("no");
+        $opts.selectedItems = [];
+        $opts.hiderowItems = [];
+        $("#allBox").prop("checked", false);
+        $("#selectallBox").prop("checked", false);
+
+        $opts.selectedItems = [];
+        $opts.hiderowItems = [];
+        table.rows().eq(0).each(function (rowIdx, val) {
+            var rowx = table.row(rowIdx).nodes()
+                .to$();     // Convert to a jQuery object
+
+            if (rowx.find("input[type=checkbox].visiblecheckbox").length > 0) {
+                rowx.find("input[type=checkbox].visiblecheckbox").prop("checked", false);
+                rowx.removeClass("selected");
+            }
+        });
+    }
+
 
     function resetSubmitBtnAndCheckboxes() {
 
@@ -631,7 +668,7 @@ $(document).ready(function () {
                 .to$();     // Convert to a jQuery object
             //console.log(rowx.find("input[type=checkbox]"));
             if (flag) {
-                if (rowx.find("input[type=checkbox]").length > 0) {
+                if (rowx.find("input[type=checkbox].visiblecheckbox").length > 0) {
                     console.log(rowx.find(".abstractid").html());
                     $opts.selectedItems.push(rowx.find(".abstractid").html());
                     $opts.hiderowItems.push(rowIdx);
@@ -730,6 +767,8 @@ $(document).ready(function () {
                               //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
                               loadFilters();
+                              $opts.isGridDirty = true;
+
                           }
                           else {
                               alertify.error("Failed to add in review list.");
@@ -754,6 +793,7 @@ $(document).ready(function () {
                               //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
                               loadFilters();
+                              $opts.isGridDirty = true;
                           }
                           else {
                               alertify.error("Failed to remove from review list.");
@@ -804,20 +844,49 @@ $(document).ready(function () {
     function watchactionsHandler() {
         console.log(" watchactionsHandler() ::" + $opts.actionlist);
         switch ($opts.actionlist) {
-            case "addreview":
-                disableFilters();
-                actionsManager();
-                changeFilters();
+
+            case "reopenabstracts":
+
+                if ($opts.isGridDirty) {
+
+                    disableFilters();
+                    //actionsManager();
+                    changeFilters();
+                    clearSubmitBtnAndCheckboxes();
+
+                }
+                else {
+                    reopenListCheck();
+                    clearSubmitBtnAndCheckboxes();
+                }
 
                 break;
-            case "reopenabstracts":
-                reopenListCheck();
-                break;
+
             default:
+                reloadForAction($opts.actionlist);
                 break;
 
         }
     }
+
+    function reloadForAction(type) {
+
+        if ($opts.isGridDirty) {
+
+            disableFilters();
+            //actionsManager();
+            changeFilters();
+            clearSubmitBtnAndCheckboxes();
+
+        }
+        else {
+            ListCheck(type);
+            clearSubmitBtnAndCheckboxes();
+        }
+
+
+    }
+
     function reopenListCheck() {
         $.ajax({
             type: "GET",
@@ -843,7 +912,11 @@ $(document).ready(function () {
 
         switch (type) {
 
-            case "addreview":
+            case "":
+
+                break;
+
+            default:
 
                 $.ajax({
                     type: "GET",
@@ -874,10 +947,17 @@ $(document).ready(function () {
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
+            rowx.find("input[type=checkbox]").addClass("visiblecheckbox").removeClass("hidecheckbox"); // make all visible
+            rowx.find("input[type=checkbox]").prop("checked", false);
+            rowx.removeClass("selected");
+
 
             var absid = rowx.find(".abstractid").html().trim();
             if (_.contains(inArr, Number(absid))) {
                 rowx.find("input[type=checkbox]").addClass("hidecheckbox");
+            }
+            else {
+                rowx.find("input[type=checkbox]").addClass("visiblecheckbox");
             }
 
         });

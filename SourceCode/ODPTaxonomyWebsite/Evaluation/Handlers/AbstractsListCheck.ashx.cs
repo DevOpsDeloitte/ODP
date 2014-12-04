@@ -19,6 +19,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
         private string connString = null;
         private List<int> abstracts = null;
+        private List<AbstractListRow> finalabstracts = null;
         private string userguid = "";
         private string action = "";
 
@@ -49,11 +50,40 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         case "addreview" :
                             abstracts = db.AbstractReviewLists.Select(q => q.AbstractID).ToList<int>();
                             context.Response.Write(JsonConvert.SerializeObject(new { hideboxes = abstracts, success = true }));
-                    break;
+                            break;
                         case "removereview":
-                             abstracts = db.AbstractReviewLists.Select(q => q.AbstractID).ToList<int>();
+                             //abstracts = db.AbstractReviewLists.Select(q => q.AbstractID).ToList<int>();
                              context.Response.Write(JsonConvert.SerializeObject(new { hideboxes = new List<int>(), success = true }));
-                    break;
+                            break;
+                        case "closeabstract":
+                            var data = from a in db.Abstracts
+                                       join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                                       join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                                       where (
+                                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
+                                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
+                                           )
+                                       select new AbstractListRow
+                                       {
+                                           AbstractID = a.AbstractID,
+                                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                                           PIProjectLeader = a.PIProjectLeader,
+                                           ApplicationID = a.ApplicationID,
+                                           AbstractStatusID = s.AbstractStatusID,
+                                           AbstractStatusCode = s.AbstractStatusCode,
+                                           StatusDate = h.CreatedDate,
+                                           LastExportDate = a.LastExportDate,
+                                           EvaluationID = h.EvaluationId,
+                                           IsParent = true
+                                       };
+                            finalabstracts = data.ToList();
+                            abstracts = finalabstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3).Select(s => s.AbstractID).ToList();
+                            context.Response.Write(JsonConvert.SerializeObject(new { hideboxes = abstracts, success = true }));
+                            break;
+                        default:
+                            context.Response.Write(JsonConvert.SerializeObject(new { hideboxes = new List<int>(), success = true }));;
+                            break;
 
 
 
