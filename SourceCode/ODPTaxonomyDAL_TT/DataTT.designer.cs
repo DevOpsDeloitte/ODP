@@ -277,13 +277,6 @@ namespace ODPTaxonomyDAL_TT
 			return ((ISingleResult<select_abstracts_group_ttResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_no_reopen_tt")]
-		public ISingleResult<select_abstracts_no_reopen_ttResult> select_abstracts_no_reopen_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="VarChar(500)")] string abstractStatusID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID);
-			return ((ISingleResult<select_abstracts_no_reopen_ttResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_OPA")]
 		public ISingleResult<rpt_OPAResult> rpt_OPA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(5000)")] string abstractID)
 		{
@@ -324,6 +317,13 @@ namespace ODPTaxonomyDAL_TT
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
 			return ((ISingleResult<rpt_Team_User_UCResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_no_reopen_tt")]
+		public ISingleResult<select_abstracts_no_reopen_ttResult> select_abstracts_no_reopen_tt()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<select_abstracts_no_reopen_ttResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -5276,32 +5276,6 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class select_abstracts_no_reopen_ttResult
-	{
-		
-		private int _AbstractID;
-		
-		public select_abstracts_no_reopen_ttResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
-		public int AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
-		}
-	}
-	
 	public partial class rpt_OPAResult
 	{
 		
@@ -6587,6 +6561,32 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._UnableToCode != value))
 				{
 					this._UnableToCode = value;
+				}
+			}
+		}
+	}
+	
+	public partial class select_abstracts_no_reopen_ttResult
+	{
+		
+		private int _AbstractID;
+		
+		public select_abstracts_no_reopen_ttResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
+		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this._AbstractID = value;
 				}
 			}
 		}

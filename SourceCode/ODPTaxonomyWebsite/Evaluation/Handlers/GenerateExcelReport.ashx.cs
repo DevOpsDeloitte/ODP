@@ -6,6 +6,7 @@ using ODPTaxonomyUtility_TT;
 using ODPTaxonomyDAL_TT;
 using System.Configuration;
 using Newtonsoft.Json;
+using System.Data;
 
 namespace ODPTaxonomyWebsite.Evaluation.Handlers
 {
@@ -15,19 +16,25 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
     public class GenerateExcelReport : IHttpHandler
     {
         #region Fields
-
+        private string filenameBase = "PACT-Abstract-Export-";
+        private string filename = "PACT-Abstract-Export-YYYY-MM-DD.xlsx";
         private string connString = null;
         private string abstracts = "";
-        private List<string> abstractIDs;      
-
+        private List<string> abstractIDs;
+        private int abstractId = -1;
+        
+                    
         #endregion
 
         public void ProcessRequest(HttpContext context)
         {
+            DataSet ds = new DataSet();
             //Do Not return any text from this method
             //Otherwise an error message appears on opening saved Excel file
             try
             {
+                
+                string format = "yyyy-MM-dd-h:mm:ss";
                 connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
                 abstracts = context.Request["abstracts"] ?? "";
                 if (String.IsNullOrEmpty(abstracts))
@@ -36,13 +43,33 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 }
                 else
                 {
+                    //Stress TEST
+                    for (var i = 0; i < 40; i++)
+                    {
+                        abstracts += ",116,120,149,162,192,197,202,215,220,292,301,328,381,391,397,406,466,479,480,496,526,555,586,599,603,612,621,635,676,695,700,707";
+
+                    }
+
+                    //check abstractIDs
                     abstractIDs = abstracts.Split(',').ToList();
-                    //List<rpt_OPAResult> opaData = Common.GetReportData_OpaData(connString, abstractIDs);
-                    //List<rpt_KappaDataResult> kappaData = Common.GetReportData_KappaData(connString, abstractIDs);
-                    //List<rpt_Cdr_ODPNotesPDFResult> cdr_ODPNotesPDF = Common.GetReportData_Cdr_ODPNotesPDF(connString, abstractIDs);
-                    //List<rpt_AbstractStatusTrailResult> abstractStatusTrail = Common.GetReportData_AbstractStatusTrail(connString, abstractIDs);
-                    //List<rpt_Cdr_ODP_IndividualCodingResult> cdr_ODP_IndividualCoding = Common.GetReportData_Cdr_ODP_IndividualCoding(connString, abstractIDs);
-                    List<rpt_Team_User_UCResult> team_User_UCResult = Common.GetReportData_Team_User_UCResult(connString, abstractIDs);
+                    foreach (string abs in abstractIDs)
+                    {
+                        if (!Int32.TryParse(abs, out abstractId))
+                        {
+                            context.Response.Write("abstractID '" + abs + "' is incorrect");
+                            break;
+                        }
+                    }
+
+
+                    filename = filenameBase + DateTime.Now.ToString(format) + ".xlsx";
+
+                    List<rpt_OPAResult> opaData = Common.GetReportData_OpaData(connString, abstracts);
+                    List<rpt_KappaDataResult> kappaData = Common.GetReportData_KappaData(connString, abstracts);
+                    List<rpt_Cdr_ODPNotesPDFResult> cdr_ODPNotesPDF = Common.GetReportData_Cdr_ODPNotesPDF(connString, abstracts);
+                    List<rpt_AbstractStatusTrailResult> abstractStatusTrail = Common.GetReportData_AbstractStatusTrail(connString, abstracts);
+                    List<rpt_Cdr_ODP_IndividualCodingResult> cdr_ODP_IndividualCoding = Common.GetReportData_Cdr_ODP_IndividualCoding(connString, abstracts);
+                    List<rpt_Team_User_UCResult> team_User_UCResult = Common.GetReportData_Team_User_UCResult(connString, abstracts);
 
                     //Test
                     //List<AbstractGroup> listOfAbstractGroups = new List<AbstractGroup>();
@@ -52,14 +79,38 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                     //CreateExcelFile.CreateExcelDocument(listOfAbstractGroups, "AbstractGroups.xlsx", context.Response);
 
-                    CreateExcelFile.CreateExcelDocument(team_User_UCResult, "AbstractGroups.xlsx", context.Response);
-                }               
+                    CreateExcelFile.CreateExcelDocument<rpt_OPAResult>(opaData, context.Response, "OPA Data", ds);
+                    opaData.Clear();
+                    opaData = null;
+                    CreateExcelFile.CreateExcelDocument<rpt_KappaDataResult>(kappaData, context.Response, "Kappa Data", ds);
+                    kappaData.Clear();
+                    kappaData = null;
+                    CreateExcelFile.CreateExcelDocument<rpt_Cdr_ODPNotesPDFResult>(cdr_ODPNotesPDF, context.Response, "Cdr_ODPNotesPDF", ds);
+                    cdr_ODPNotesPDF.Clear();
+                    cdr_ODPNotesPDF = null;
+                    CreateExcelFile.CreateExcelDocument<rpt_AbstractStatusTrailResult>(abstractStatusTrail, context.Response, "AbstractStatusTrail", ds);
+                    abstractStatusTrail.Clear();
+                    abstractStatusTrail = null;
+                    CreateExcelFile.CreateExcelDocument<rpt_Cdr_ODP_IndividualCodingResult>(cdr_ODP_IndividualCoding, context.Response, "Cdr&ODP IndividualCoding", ds);
+                    cdr_ODP_IndividualCoding.Clear();
+                    cdr_ODP_IndividualCoding = null;
+                    CreateExcelFile.CreateExcelDocument<rpt_Team_User_UCResult>(team_User_UCResult, context.Response, "Team_User_UC", ds);
+                    team_User_UCResult.Clear();
+                    team_User_UCResult = null;
 
-                
+                    CreateExcelFile.CreateExcelDocumentAsStream(ds, filename, context.Response);
+                }
+
+
             }
             catch (Exception ex)
             {
-                Utils.LogError(ex);                
+                Utils.LogError(ex);
+            }
+            finally
+            {
+                ds.Dispose();
+                ds = null;
             }
             
         }

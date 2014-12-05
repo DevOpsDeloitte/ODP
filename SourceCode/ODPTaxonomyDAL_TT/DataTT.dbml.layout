@@ -176,14 +176,14 @@
         <elementListCompartment Id="9c3243ac-b52a-4500-b7f2-5c2915184af6" absoluteBounds="9.015, 8.835, 1.9700000000000002, 2.364705403645833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.75 : 6.76284912109375); (7.47916666666667 : 6.76284912109375 : JumpStart); (7.64583333333333 : 6.76284912109375 : JumpEnd); (8.19791666666667 : 6.76284912109375 : JumpStart); (8.36458333333333 : 6.76284912109375 : JumpEnd); (9.96353916666667 : 6.76284912109375 : JumpStart); (10.1302058333333 : 6.76284912109375 : JumpEnd); (10.375 : 6.76284912109375); (10.375 : 8.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(4.75 : 6.76284912109375); (10.375 : 6.76284912109375); (10.375 : 8.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataDataContext/tbl_Evaluation/tbl_Evaluation_tbL_Submission" />
       <nodes>
         <classShapeMoniker Id="a431aff3-33b8-4a59-84af-aa6861aaa238" />
         <classShapeMoniker Id="edc6c32d-4feb-4910-82a8-fe17eecb04bc" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(6.375 : 3.07975062825521); (6.69791666666667 : 3.07975062825521 : JumpStart); (6.86458333333333 : 3.07975062825521 : JumpEnd); (9.96353916666667 : 3.07975062825521 : JumpStart); (10.1302058333333 : 3.07975062825521 : JumpEnd); (10.7031275 : 3.07975062825521); (10.7031275 : 8.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(6.375 : 3.07975062825521); (6.69791666666667 : 3.07975062825521 : JumpStart); (6.86458333333333 : 3.07975062825521 : JumpEnd); (8.60416666666667 : 3.07975062825521 : JumpStart); (8.77083333333333 : 3.07975062825521 : JumpEnd); (9.96353916666667 : 3.07975062825521 : JumpStart); (10.1302058333333 : 3.07975062825521 : JumpEnd); (10.7031275 : 3.07975062825521); (10.7031275 : 8.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataDataContext/tbl_Status/tbl_Status_tbL_Submission" />
       <nodes>
         <classShapeMoniker Id="f7c33a03-9222-475e-9a0c-593c11e38eed" />
@@ -216,21 +216,21 @@
         <elementListCompartment Id="01f1f389-5b0a-4efe-b0f4-e6d5660b220e" absoluteBounds="3.0149999999999997, 9.085, 1.9700000000000002, 3.903116861979167" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.875 : 8.625); (3.875 : 7.92470540364583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.875 : 8.625); (3.875 : 7.92470540364583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataDataContext/tbl_Abstract/tbl_Abstract_tbl_Evaluation" />
       <nodes>
         <classShapeMoniker Id="b3e7f334-2a6a-4600-81eb-3f489945bebe" />
         <classShapeMoniker Id="a431aff3-33b8-4a59-84af-aa6861aaa238" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.375 : 8.625); (4.375 : 7.92470540364583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.375 : 8.625); (4.375 : 7.92470540364583)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataDataContext/tbl_Abstract/tbl_Abstract_tbl_Evaluation1" />
       <nodes>
         <classShapeMoniker Id="b3e7f334-2a6a-4600-81eb-3f489945bebe" />
         <classShapeMoniker Id="a431aff3-33b8-4a59-84af-aa6861aaa238" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(4.625 : 13.0881168619792); (4.625 : 14.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.625 : 13.0881168619792); (4.625 : 14.375)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DataDataContext/tbl_Abstract/tbl_Abstract_tbl_AbstractStatusChangeHistory" />
       <nodes>
         <classShapeMoniker Id="b3e7f334-2a6a-4600-81eb-3f489945bebe" />

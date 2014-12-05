@@ -251,12 +251,6 @@
       <Column Name="Sorting" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.select_abstracts_no_reopen_tt" Method="select_abstracts_no_reopen_tt">
-    <Parameter Name="AbstractStatusID" Parameter="abstractStatusID" Type="System.String" DbType="VarChar(500)" />
-    <ElementType Name="select_abstracts_no_reopen_ttResult">
-      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.rpt_OPA" Method="rpt_OPA">
     <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(5000)" />
     <ElementType Name="rpt_OPAResult">
@@ -354,6 +348,11 @@
       <Column Name="UserName" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
       <Column Name="SubmissionType" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="UnableToCode" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.select_abstracts_no_reopen_tt" Method="select_abstracts_no_reopen_tt">
+    <ElementType Name="select_abstracts_no_reopen_ttResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
