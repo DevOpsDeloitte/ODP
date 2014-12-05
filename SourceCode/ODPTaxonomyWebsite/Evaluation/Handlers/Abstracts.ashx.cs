@@ -57,8 +57,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                         //    break;
 
-                        case "review" :
-                            parentAbstracts = this.GetParentAbstractsODPSupervisorReview();
+                        case "review" : case "reviewuncoded" :
+                            parentAbstracts = this.GetParentAbstractsODPSupervisorReview(filter);
                             foreach (var abs in parentAbstracts)
                             {
                                 
@@ -460,7 +460,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             return AbstractListViewHelper.SortAbstracts(finalabstracts, sort, direction);
         }
-        protected List<AbstractListRow> GetParentAbstractsODPSupervisorReview(string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected List<AbstractListRow> GetParentAbstractsODPSupervisorReview(string query = "", string sort = "", SortDirection direction = SortDirection.Ascending)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -470,7 +470,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                        join rv in db.AbstractReviewLists on a.AbstractID equals rv.AbstractID
                        where (
-                          h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
+                          //h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
                           h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
@@ -492,14 +492,36 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        };
 
             List<AbstractListRow> abstracts = data.ToList();
+            List<AbstractListRow> finalabstracts = null;
+              //public enum AbstractStatusEnum
+              //      {
+              //          OPEN_0 = 1,
+              //          RETRIEVED_FOR_CODING_1 = 2,
+              //          CODED_BY_CODER_1A = 3,
+              //          CONSENSUS_COMPLETE_1B = 4,
+              //          CONSENSUS_COMPLETE_WITH_NOTES_1N = 6,
+              //          RETRIEVED_FOR_ODP_CODING_2 = 7,
+              //          CODED_BY_ODP_STAFF_2A = 8,
+              //          ODP_STAFF_CONSENSUS_2B = 9,
+              //          ODP_STAFF_AND_CODER_CONSENSUS_2C = 10,
+              //          ODP_CONSENSUS_WITH_NOTES_2N = 12,
+              //          CLOSED_3 = 13,
+              //          DATA_EXPORTED_4 = 14,
+              //          REOPEN_FOR_REVIEW_BY_ODP = 15
+              //      }
+            switch (query)
+            {
+                case "review":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
+                    break;
+                case "reviewuncoded":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 || q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B).Select(s => s).ToList();
+                    break;
 
-            //if (AbstractViewGridView.Attributes["CurrentSortExp"] != null)
-            //{
-            //    sort = AbstractViewGridView.Attributes["CurrentSortExp"];
-            //    direction = AbstractViewGridView.Attributes["CurrentSortDir"] == "ASC" ? SortDirection.Ascending : SortDirection.Descending;
-            //}
+            }
 
-            return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
+
+            return AbstractListViewHelper.SortAbstracts(finalabstracts, sort, direction);
         }
 
 

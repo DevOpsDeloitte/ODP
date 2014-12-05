@@ -451,6 +451,13 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 $opts.actionlist = "removereview";
                 break;
+            case "reviewuncoded":
+                $("select#actionlist").append('<option selected="selected" value="removereview">Remove From Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $opts.actionlist = "removereview";
+                break;
             case "codercompleted":
                 $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
@@ -801,7 +808,86 @@ $(document).ready(function () {
                       });
 
 
-                    break;
+                      break;
+
+                  case "closeabstract":
+
+                      $.ajax({
+                          type: "GET",
+                          url: "/Evaluation/Handlers/AbstractClose.ashx",
+                          dataType: 'json',
+                          data: { type: "close", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                      })
+                      .done(function (data) {
+                          console.log(" closed abstract : " + data);
+                          if (data.success == true) {
+                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been closed.");
+                              //$opts.hideItems = $opts.selectedItems;
+                              resetSubmitBtnAndCheckboxes();
+                              loadFilters();
+                              $opts.isGridDirty = true;
+
+                          }
+                          else {
+                              alertify.error("Failed to close abstracts.");
+                          }
+                      });
+
+
+                      break;
+
+                  case "reopenabstracts":
+
+                      $.ajax({
+                          type: "GET",
+                          url: "/Evaluation/Handlers/AbstractClose.ashx",
+                          dataType: 'json',
+                          data: { type: "open", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                      })
+                      .done(function (data) {
+                          console.log(" reopen abstract : " + data);
+                          if (data.success == true) {
+                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been Re-opened.");
+                              //$opts.hideItems = $opts.selectedItems;
+                              resetSubmitBtnAndCheckboxes();
+                              loadFilters();
+                              $opts.isGridDirty = true;
+
+                          }
+                          else {
+                              alertify.error("Failed to Re-open abstracts.");
+                          }
+                      });
+
+
+                      break;
+
+                  case "exportabstracts":
+
+                      $.ajax({
+                          type: "GET",
+                          url: "/Evaluation/Handlers/AbstractExport.ashx",
+                          dataType: 'json',
+                          data: { abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                      })
+                      .done(function (data) {
+                          console.log(" reopen abstract : " + data);
+                          if (data.success == true) {
+                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been Exported.");
+                              //$opts.hideItems = $opts.selectedItems;
+                              resetSubmitBtnAndCheckboxes();
+                              loadFilters();
+                              $opts.isGridDirty = true;
+
+                          }
+                          else {
+                              alertify.error("Failed to Export abstracts.");
+                          }
+                      });
+
+
+                      break;
+
 
 
 

@@ -43,9 +43,15 @@
 
 </div>
 
-<div class="sixteen columns" id="pagetitlebox"> 
-    <span>Title</span>
+<div class="sixteen columns">
+    <div class="eight columns" id="pagetitlebox"> 
+        <span>Title</span>
+    </div>
+    <div class="five columns" id="selectionsBox"> 
+        <span id="recordCount">0</span><span> Records selected</span>
+    </div>
 </div>
+
 
 
 
