@@ -17,6 +17,7 @@ namespace ODPTaxonomyWebsite.Evaluation
     {
         public string unabletocode = string.Empty;
         public string studyFocus = string.Empty;
+        public string studyFocusTitle = string.Empty;
         public string studyFocusCategory = string.Empty;
         public string topics = string.Empty;
         public string misc = string.Empty;
@@ -31,7 +32,8 @@ namespace ODPTaxonomyWebsite.Evaluation
             misc = RenderMisc();
             topics = RenderCategory("A_Topics");
             unabletocode = RenderUnable();
-            studyFocus = RenderCategory("A_StudyFocus");
+            studyFocusTitle = RenderCategoryVMod("A_StudyFocus", true);
+            studyFocus = RenderCategoryVMod("A_StudyFocus", false);
             studyFocusCategory = RenderCategory("A_StudyFocusCategory");
             
             entitiesStudied = RenderCategory("B_EntitiesStudied");
@@ -67,6 +69,45 @@ namespace ODPTaxonomyWebsite.Evaluation
                 row.AppendLine("</div>");
                 finalStr.Append(row);
                 //if (count > 0) break;
+                count++;
+            }
+
+            return finalStr.ToString();
+        }
+
+        private string RenderCategoryVMod(string LookupName, bool getFirstOnly)
+        {
+
+            var db = DBData.GetDataContext();
+            var topics = db.Protocols.Where(p => p.LookUpTable == LookupName).OrderBy(p => p.LookUpID).Select(p => p).ToList();
+            StringBuilder finalStr = new StringBuilder();
+            string[] catname = LookupName.ToLower().Split('_');
+            var count = 0;
+            foreach (var topic in topics)
+            {
+
+                StringBuilder row = new StringBuilder();
+                row.AppendLine("<div class=\"topicitem\">");
+                if (topic.SubTitle == null)
+                {
+                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + "0" + "\"> " + topic.Title + "</a></div>");
+                }
+                else
+                {
+                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + topic.LookUpID.ToString() + "\"> " + topic.SubTitle + "</a></div>");
+                }
+                row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
+                row.AppendLine("</div>");
+                finalStr.Append(row);
+                if (getFirstOnly && count == 0)
+                {
+                    break;
+                }
+                if (!getFirstOnly && count == 0)
+                {
+                    finalStr.Clear() ; // exclude first
+                }
+               
                 count++;
             }
 

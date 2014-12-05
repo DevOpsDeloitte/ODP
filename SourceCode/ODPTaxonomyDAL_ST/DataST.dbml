@@ -339,4 +339,10 @@
     <Parameter Name="AbstractStatusID" Parameter="abstractStatusID" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.ODPComparison_ByAbs_EvlID" Method="ODPComparison_ByAbs_EvlID">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EvaluationId" Parameter="evaluationId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="AbstractStatusID" Parameter="abstractStatusID" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

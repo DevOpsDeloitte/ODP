@@ -373,6 +373,13 @@ namespace ODPTaxonomyDAL_ST
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID, evaluationId, abstractStatusID);
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.ODPComparison_ByAbs_EvlID")]
+		public int ODPComparison_ByAbs_EvlID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="Int")] System.Nullable<int> abstractID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EvaluationId", DbType="Int")] System.Nullable<int> evaluationId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID, evaluationId, abstractStatusID);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.A_StudyFocusAnswer")]

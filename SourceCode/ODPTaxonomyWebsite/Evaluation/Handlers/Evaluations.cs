@@ -190,6 +190,16 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     insertAbstractChangeHistory(getAbstractStatusID("2C"));
                     //update is complete to 1 on the evaluation record.
                     updateEvaluationRecordToComplete();
+                    // Adding Stored Procedure call for Kappa Data Calculations.
+                    try
+                    {
+                        db.ODPComparison_ByAbs_EvlID(abstractID, evaluationID, 10);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 2C/10 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
+                    }
+                    
 
                     break;
 
