@@ -40,6 +40,9 @@ $(document).ready(function () {
     if (config.role == "ODPStaff") {
         $opts.lastfilterSelection = "review";
     }
+    if (config.role == "ODPSupervisor") {
+        $("div#selectionsBox").removeClass("hidden");
+    }
 
     filtersManager(); //Init
     actionsManager(); // Init
@@ -581,6 +584,8 @@ $(document).ready(function () {
             $("#subButton").removeClass("yes").addClass("no");
         }
 
+        updateSelectedList();
+
     }
     function clearSubmitBtnAndCheckboxes() {
         $("#subButton").removeClass("yes").addClass("no");
@@ -600,6 +605,8 @@ $(document).ready(function () {
                 rowx.removeClass("selected");
             }
         });
+
+        updateSelectedList();
     }
 
 
@@ -611,6 +618,8 @@ $(document).ready(function () {
         $opts.hiderowItems = [];
         $("#allBox").prop("checked", false);
         $("#selectallBox").prop("checked", false);
+
+        updateSelectedList();
 
         return;
 
@@ -629,6 +638,13 @@ $(document).ready(function () {
             }
 
         });
+    }
+
+    function updateSelectedList() {
+
+
+        $("span#recordCount").text($opts.selectedItems.length);
+
     }
 
 
@@ -808,16 +824,16 @@ $(document).ready(function () {
                       });
 
 
-                      break;
+                    break;
 
-                  case "closeabstract":
+                case "closeabstract":
 
-                      $.ajax({
-                          type: "GET",
-                          url: "/Evaluation/Handlers/AbstractClose.ashx",
-                          dataType: 'json',
-                          data: { type: "close", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
-                      })
+                    $.ajax({
+                        type: "GET",
+                        url: "/Evaluation/Handlers/AbstractClose.ashx",
+                        dataType: 'json',
+                        data: { type: "close", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                    })
                       .done(function (data) {
                           console.log(" closed abstract : " + data);
                           if (data.success == true) {
@@ -834,16 +850,16 @@ $(document).ready(function () {
                       });
 
 
-                      break;
+                    break;
 
-                  case "reopenabstracts":
+                case "reopenabstracts":
 
-                      $.ajax({
-                          type: "GET",
-                          url: "/Evaluation/Handlers/AbstractClose.ashx",
-                          dataType: 'json',
-                          data: { type: "open", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
-                      })
+                    $.ajax({
+                        type: "GET",
+                        url: "/Evaluation/Handlers/AbstractClose.ashx",
+                        dataType: 'json',
+                        data: { type: "open", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                    })
                       .done(function (data) {
                           console.log(" reopen abstract : " + data);
                           if (data.success == true) {
@@ -860,16 +876,16 @@ $(document).ready(function () {
                       });
 
 
-                      break;
+                    break;
 
-                  case "exportabstracts":
+                case "exportabstracts":
 
-                      $.ajax({
-                          type: "GET",
-                          url: "/Evaluation/Handlers/AbstractExport.ashx",
-                          dataType: 'json',
-                          data: { abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
-                      })
+                    $.ajax({
+                        type: "GET",
+                        url: "/Evaluation/Handlers/AbstractExport.ashx",
+                        dataType: 'json',
+                        data: { abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                    })
                       .done(function (data) {
                           console.log(" reopen abstract : " + data);
                           if (data.success == true) {
@@ -886,7 +902,7 @@ $(document).ready(function () {
                       });
 
 
-                      break;
+                    break;
 
 
 
@@ -1040,10 +1056,10 @@ $(document).ready(function () {
 
             var absid = rowx.find(".abstractid").html().trim();
             if (_.contains(inArr, Number(absid))) {
-                rowx.find("input[type=checkbox]").addClass("hidecheckbox");
+                rowx.find("input[type=checkbox]").addClass("hidecheckbox").removeClass("visiblecheckbox");
             }
             else {
-                rowx.find("input[type=checkbox]").addClass("visiblecheckbox");
+                rowx.find("input[type=checkbox]").addClass("visiblecheckbox").removeClass("hidecheckbox");
             }
 
         });

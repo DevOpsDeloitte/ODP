@@ -47,7 +47,7 @@
     <div class="eight columns" id="pagetitlebox"> 
         <span>Title</span>
     </div>
-    <div class="five columns" id="selectionsBox"> 
+    <div class="five columns hidden" id="selectionsBox"> 
         <span id="recordCount">0</span><span> Records selected</span>
     </div>
 </div>

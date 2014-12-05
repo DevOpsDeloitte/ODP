@@ -9,6 +9,16 @@ table.childtable
     
 }
 
+div#selectionsBox.hidden
+{
+    display: none;
+}
+
+div#selectionsBox
+{
+    font-weight: bold;
+}
+
 input[type="checkbox"].hidecheckbox
 {
     display: none;
