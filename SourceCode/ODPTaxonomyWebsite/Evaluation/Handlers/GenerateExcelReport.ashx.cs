@@ -1,4 +1,5 @@
-﻿using System;
+﻿#define ADD_STRESS_TEST
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -43,13 +44,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 }
                 else
                 {
+#if ADD_STRESS_TEST
                     //Stress TEST
-                    for (var i = 0; i < 40; i++)
+                    for (var i = 0; i <10; i++)
                     {
                         abstracts += ",116,120,149,162,192,197,202,215,220,292,301,328,381,391,397,406,466,479,480,496,526,555,586,599,603,612,621,635,676,695,700,707";
 
                     }
-
+#endif
                     //check abstractIDs
                     abstractIDs = abstracts.Split(',').ToList();
                     foreach (string abs in abstractIDs)
@@ -80,24 +82,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     //CreateExcelFile.CreateExcelDocument(listOfAbstractGroups, "AbstractGroups.xlsx", context.Response);
 
                     CreateExcelFile.CreateExcelDocument<rpt_OPAResult>(opaData, context.Response, "OPA Data", ds);
-                    opaData.Clear();
-                    opaData = null;
                     CreateExcelFile.CreateExcelDocument<rpt_KappaDataResult>(kappaData, context.Response, "Kappa Data", ds);
-                    kappaData.Clear();
-                    kappaData = null;
                     CreateExcelFile.CreateExcelDocument<rpt_Cdr_ODPNotesPDFResult>(cdr_ODPNotesPDF, context.Response, "Cdr_ODPNotesPDF", ds);
-                    cdr_ODPNotesPDF.Clear();
-                    cdr_ODPNotesPDF = null;
                     CreateExcelFile.CreateExcelDocument<rpt_AbstractStatusTrailResult>(abstractStatusTrail, context.Response, "AbstractStatusTrail", ds);
-                    abstractStatusTrail.Clear();
-                    abstractStatusTrail = null;
                     CreateExcelFile.CreateExcelDocument<rpt_Cdr_ODP_IndividualCodingResult>(cdr_ODP_IndividualCoding, context.Response, "Cdr&ODP IndividualCoding", ds);
-                    cdr_ODP_IndividualCoding.Clear();
-                    cdr_ODP_IndividualCoding = null;
                     CreateExcelFile.CreateExcelDocument<rpt_Team_User_UCResult>(team_User_UCResult, context.Response, "Team_User_UC", ds);
-                    team_User_UCResult.Clear();
-                    team_User_UCResult = null;
-
+                    
                     CreateExcelFile.CreateExcelDocumentAsStream(ds, filename, context.Response);
                 }
 
