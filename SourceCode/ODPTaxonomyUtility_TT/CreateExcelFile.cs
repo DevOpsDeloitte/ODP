@@ -226,15 +226,42 @@ namespace ODPTaxonomyUtility_TT
 
             int rowNumber = 1;
             int numberOfColumns = dt.Columns.Count;
+            double cellNumericValue = 0;
+
+            //Create Header Row: START
+            xmlAttributes = new List<OpenXmlAttribute>();
+            xmlAttributes.Add(new OpenXmlAttribute("r", null, rowNumber.ToString()));
+            writer.WriteStartElement(new Row(), xmlAttributes);
+
+            for (int colInx = 0; colInx < numberOfColumns; colInx++)
+            {
+                DataColumn col = dt.Columns[colInx];
+                string cellValue = col.ColumnName;
+                xmlAttributes = new List<OpenXmlAttribute>();
+                xmlAttributes.Add(new OpenXmlAttribute("t", null, "str"));
+                //add the cell reference (A1, B1, A2... etc)
+                xmlAttributes.Add(new OpenXmlAttribute("r", null, "column"));
+                //Add style
+                xmlAttributes.Add(new OpenXmlAttribute("s", null, "4"));
+                //write the start of the cell element with the type and cell reference attributes
+                writer.WriteStartElement(new Cell(), xmlAttributes);
+
+                //write the cell value
+                writer.WriteElement(new CellValue(cellValue));
+
+                //write the cell end element
+                writer.WriteEndElement();
+            }
+            //write the row end element
+            writer.WriteEndElement();
+            //Create Header Row: END 
 
             foreach (DataRow dr in dt.Rows)
             {
-
-
+                ++rowNumber;
                 xmlAttributes = new List<OpenXmlAttribute>();
                 // this is the row index
                 xmlAttributes.Add(new OpenXmlAttribute("r", null, rowNumber.ToString()));
-
                 //write the row start element with the attributes added above
                 writer.WriteStartElement(new Row(), xmlAttributes);
 
@@ -244,10 +271,15 @@ namespace ODPTaxonomyUtility_TT
 
                     //reset the attributes
                     xmlAttributes = new List<OpenXmlAttribute>();
-                    // this is the data type ("t"), with CellValues.String ("str")
-                    // you might need to change this depending on your source data
-                    // you might also consider using the Shared Strings table instead
-                    xmlAttributes.Add(new OpenXmlAttribute("t", null, "str"));
+                    if (!double.TryParse(cellValue, out cellNumericValue))
+                    {
+                        cellValue = cellNumericValue.ToString();
+                        // this is the data type ("t"), with CellValues.String ("str")
+                        // you might need to change this depending on your source data
+                        // you might also consider using the Shared Strings table instead
+                        xmlAttributes.Add(new OpenXmlAttribute("t", null, "str"));
+                    }
+                    
 
                     //add the cell reference (A1, B1, A2... etc)
                     xmlAttributes.Add(new OpenXmlAttribute("r", null, "column"));
@@ -265,7 +297,7 @@ namespace ODPTaxonomyUtility_TT
                 //write the row end element
                 writer.WriteEndElement();
 
-                rowNumber++;
+                
             }
 
             //write the sheetdata end element
@@ -282,6 +314,12 @@ namespace ODPTaxonomyUtility_TT
         {
             //add a workbookpart manually
             myDoc.AddWorkbookPart();
+
+            WorkbookStylesPart workbookStylesPart = myDoc.WorkbookPart.AddNewPart<WorkbookStylesPart>("rIdStyles");
+            workbookStylesPart.Stylesheet = CreateStylesheet();
+            workbookStylesPart.Stylesheet.Save();    
+
+
             uint worksheetNumber = 1;
             OpenXmlWriter writer;
 
@@ -296,7 +334,6 @@ namespace ODPTaxonomyUtility_TT
             {
                 WorksheetPart worksheetpart = GenerateWorksheetPart(myDoc, dt);
 
-            
                 //write the whole element of a sheet to the workbook part
                 //note we link it to the id of the worksheetpart populated above
                 writer.WriteElement(new Sheet()
