@@ -891,9 +891,15 @@ $(document).ready(function () {
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been Exported.");
                               //$opts.hideItems = $opts.selectedItems;
+
+                              //for exporting abstracts.
+                              //var iframe = $("<iframe id='export-frame' src='DataExportHandler.ashx?method=export' />").hide();
+                              //$(this).parent().append(iframe);
+
                               resetSubmitBtnAndCheckboxes();
                               loadFilters();
                               $opts.isGridDirty = true;
+                             
 
                           }
                           else {

@@ -39,6 +39,10 @@ table.dataTable thead th, table.dataTable thead td {
 {
     width: 20px;
 }
+.col_flags
+{
+     width: 30px;
+}
 .col_abstractid
 {
     width: 40px;
