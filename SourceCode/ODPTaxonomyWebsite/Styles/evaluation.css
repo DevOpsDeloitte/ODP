@@ -160,6 +160,7 @@ div#tableContainer
 div#functionsbox
 {
     height: 110px;
+    margin-left: -100px;
 }
 
 div.filterBoxes.hide
