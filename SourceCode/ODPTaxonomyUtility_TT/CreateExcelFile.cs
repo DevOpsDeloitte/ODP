@@ -212,38 +212,24 @@ namespace ODPTaxonomyUtility_TT
             }
         }
 
-        private static void WriteExcelFileSAX(DataSet ds, SpreadsheetDocument myDoc)
+        private static WorksheetPart GenerateWorksheetPart(SpreadsheetDocument myDoc, DataTable dt)
         {
-
             List<OpenXmlAttribute> xmlAttributes;
             OpenXmlWriter writer;
-            uint worksheetNumber = 1;
 
-            //add a workbookpart manually
-            myDoc.AddWorkbookPart();
             WorksheetPart worksheetpart = myDoc.WorkbookPart.AddNewPart<WorksheetPart>();
 
             //create an XML writer for the worksheetpart
             writer = OpenXmlWriter.Create(worksheetpart);
             writer.WriteStartElement(new Worksheet());
             writer.WriteStartElement(new SheetData());
-            
-
-            
-            foreach (DataTable dt in ds.Tables)
-            {
-
-            
-
-
-            //DataTable dt = ds.Tables[0];            
 
             int rowNumber = 1;
             int numberOfColumns = dt.Columns.Count;
 
             foreach (DataRow dr in dt.Rows)
             {
-                
+
 
                 xmlAttributes = new List<OpenXmlAttribute>();
                 // this is the row index
@@ -285,12 +271,19 @@ namespace ODPTaxonomyUtility_TT
             //write the sheetdata end element
             writer.WriteEndElement();
             //write the worksheet end element
-            writer.WriteEndElement(); 
+            writer.WriteEndElement();
             writer.Close();
 
-               
+            return worksheetpart;
+        }
 
 
+        private static void WriteExcelFileSAX(DataSet ds, SpreadsheetDocument myDoc)
+        {
+            //add a workbookpart manually
+            myDoc.AddWorkbookPart();
+            uint worksheetNumber = 1;
+            OpenXmlWriter writer;
 
             //create a writer for the workbookpart
             writer = OpenXmlWriter.Create(myDoc.WorkbookPart);
@@ -298,24 +291,31 @@ namespace ODPTaxonomyUtility_TT
             writer.WriteStartElement(new Workbook());
             //write the start element of a sheets item to the workbook part
             writer.WriteStartElement(new Sheets());
-            //write the whole element of a sheet to the workbook part
-            //note we link it to the id of the worksheetpart populated above
-            writer.WriteElement(new Sheet()
-            {
-                Name = dt.TableName,
-                SheetId = worksheetNumber,
-                Id = myDoc.WorkbookPart.GetIdOfPart(worksheetpart)
-            });
 
+            foreach (DataTable dt in ds.Tables)
+            {
+                WorksheetPart worksheetpart = GenerateWorksheetPart(myDoc, dt);
+
+            
+                //write the whole element of a sheet to the workbook part
+                //note we link it to the id of the worksheetpart populated above
+                writer.WriteElement(new Sheet()
+                {
+                    Name = dt.TableName,
+                    SheetId = worksheetNumber,
+                    Id = myDoc.WorkbookPart.GetIdOfPart(worksheetpart)
+                });
+            
+                worksheetNumber++;
 
             }//foreach
-
 
             //write the sheets end element
             writer.WriteEndElement();
             //write the workbook end element
             writer.WriteEndElement();
-            writer.Close();
+            writer.Close();    
+
 
 
         }
