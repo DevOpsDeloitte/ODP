@@ -13,33 +13,6 @@ namespace ODPTaxonomyWebsite.Evaluation {
     public partial class ViewAbstractList {
         
         /// <summary>
-        /// hf_abstracts control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hf_abstracts;
-        
-        /// <summary>
-        /// btn_export control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_export;
-        
-        /// <summary>
-        /// lnkBtn_export control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkBtn_export;
-        
-        /// <summary>
         /// lbl_exportError control.
         /// </summary>
         /// <remarks>
