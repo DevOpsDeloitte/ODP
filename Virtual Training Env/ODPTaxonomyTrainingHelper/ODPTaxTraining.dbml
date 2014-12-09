@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Training_Instance1" Class="ODPTaxTrainingDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=1sql234;Initial Catalog=ODP_Taxonomy_Training_Instance1;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyTrainingHelper.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_Training_Instance1ConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.Tr_CheckAbstractStatus" Method="Tr_CheckAbstractStatus">
+    <ElementType Name="Tr_CheckAbstractStatusResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EvaluationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AbstractStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="TeamID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsComplete" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="EvaluationTypeId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SubmissionTypeId" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Tr_Fill_Robots" Method="Tr_Fill_Robots">
+    <Parameter Name="instance" Type="System.Int32" DbType="Int" />
+    <Parameter Name="abstractID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="evaluationID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Tr_Fill_RobotsResult">
+      <Column Name="returnValue" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

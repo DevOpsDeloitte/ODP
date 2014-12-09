@@ -218,6 +218,16 @@ namespace ODPTaxonomyUtility_TT
             Response.AppendHeader("Vary", "Content-Encoding");
         }
 
+        public static void DeleteReports(string path, string pattern)
+        {
+            string[] dirs = Directory.GetFiles(path, pattern);
+            foreach (string dir in dirs)
+            {
+                File.Delete(dir);
+
+            }
+        }
+
 
     }
 }
