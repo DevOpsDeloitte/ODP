@@ -36,7 +36,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             try
             {
                 abstracts = Common.GetAbstractsNotToReopen(connString, ug);                
-                context.Response.Write(JsonConvert.SerializeObject(new { nottoreopen = abstracts, success = true }));
+                context.Response.Write(JsonConvert.SerializeObject(new { nottoreopen = JsonConvert.SerializeObject(abstracts), success = true }));
             }
             catch (Exception ex)
             {

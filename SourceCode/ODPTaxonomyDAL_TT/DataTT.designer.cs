@@ -263,13 +263,6 @@ namespace ODPTaxonomyDAL_TT
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
-		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="CategoryID", DbType="Int")] System.Nullable<int> categoryID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Sorting", DbType="Int")] System.Nullable<int> sorting)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID, categoryID, sorting);
-			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_group_tt")]
 		public ISingleResult<select_abstracts_group_ttResult> select_abstracts_group_tt()
 		{
@@ -277,53 +270,60 @@ namespace ODPTaxonomyDAL_TT
 			return ((ISingleResult<select_abstracts_group_ttResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_OPA")]
-		public ISingleResult<rpt_OPAResult> rpt_OPA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(5000)")] string abstractID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_no_reopen_tt")]
+		public ISingleResult<select_abstracts_no_reopen_ttResult> select_abstracts_no_reopen_tt()
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
-			return ((ISingleResult<rpt_OPAResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_KappaData")]
-		public ISingleResult<rpt_KappaDataResult> rpt_KappaData([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(5000)")] string abstractID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
-			return ((ISingleResult<rpt_KappaDataResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_Cdr_ODPNotesPDF")]
-		public ISingleResult<rpt_Cdr_ODPNotesPDFResult> rpt_Cdr_ODPNotesPDF([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(5000)")] string abstractID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
-			return ((ISingleResult<rpt_Cdr_ODPNotesPDFResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<select_abstracts_no_reopen_ttResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_AbstractStatusTrail")]
-		public ISingleResult<rpt_AbstractStatusTrailResult> rpt_AbstractStatusTrail([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(5000)")] string abstractID)
+		public ISingleResult<rpt_AbstractStatusTrailResult> rpt_AbstractStatusTrail([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
 			return ((ISingleResult<rpt_AbstractStatusTrailResult>)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.[rpt_Cdr_ODP IndividualCoding]")]
-		public ISingleResult<rpt_Cdr_ODP_IndividualCodingResult> rpt_Cdr_ODP_IndividualCoding([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(5000)")] string abstractID)
+		public ISingleResult<rpt_Cdr_ODP_IndividualCodingResult> rpt_Cdr_ODP_IndividualCoding([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
 			return ((ISingleResult<rpt_Cdr_ODP_IndividualCodingResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_Cdr_ODPNotesPDF")]
+		public ISingleResult<rpt_Cdr_ODPNotesPDFResult> rpt_Cdr_ODPNotesPDF([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
+			return ((ISingleResult<rpt_Cdr_ODPNotesPDFResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_KappaData")]
+		public ISingleResult<rpt_KappaDataResult> rpt_KappaData([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
+			return ((ISingleResult<rpt_KappaDataResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_OPA")]
+		public ISingleResult<rpt_OPAResult> rpt_OPA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
+			return ((ISingleResult<rpt_OPAResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_Team_User_UC")]
-		public ISingleResult<rpt_Team_User_UCResult> rpt_Team_User_UC([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(5000)")] string abstractID)
+		public ISingleResult<rpt_Team_User_UCResult> rpt_Team_User_UC([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
 			return ((ISingleResult<rpt_Team_User_UCResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_no_reopen_tt")]
-		public ISingleResult<select_abstracts_no_reopen_ttResult> select_abstracts_no_reopen_tt()
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
+		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-			return ((ISingleResult<select_abstracts_no_reopen_ttResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID);
+			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -5206,32 +5206,6 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class select_abstracts_coding_ttResult
-	{
-		
-		private int _AbstractID;
-		
-		public select_abstracts_coding_ttResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
-		public int AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
-		}
-	}
-	
 	public partial class select_abstracts_group_ttResult
 	{
 		
@@ -5276,248 +5250,12 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class rpt_OPAResult
-	{
-		
-		private System.Nullable<int> _ApplicationID;
-		
-		private System.Nullable<int> _AbstractID;
-		
-		private string _MainSection;
-		
-		private string _SubSection;
-		
-		private System.Nullable<int> _SectionID;
-		
-		private string _SectionName;
-		
-		private bool _CdrBaseDataYN;
-		
-		private bool _ODPBaseDataYN;
-		
-		private System.Nullable<short> _CdrConsensus;
-		
-		private System.Nullable<short> _CdrODPComparison;
-		
-		private System.Nullable<short> _Final_Consensus;
-		
-		public rpt_OPAResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
-		public System.Nullable<int> ApplicationID
-		{
-			get
-			{
-				return this._ApplicationID;
-			}
-			set
-			{
-				if ((this._ApplicationID != value))
-				{
-					this._ApplicationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
-		public System.Nullable<int> AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainSection", DbType="NVarChar(255)")]
-		public string MainSection
-		{
-			get
-			{
-				return this._MainSection;
-			}
-			set
-			{
-				if ((this._MainSection != value))
-				{
-					this._MainSection = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSection", DbType="NVarChar(255)")]
-		public string SubSection
-		{
-			get
-			{
-				return this._SubSection;
-			}
-			set
-			{
-				if ((this._SubSection != value))
-				{
-					this._SubSection = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionID", DbType="Int")]
-		public System.Nullable<int> SectionID
-		{
-			get
-			{
-				return this._SectionID;
-			}
-			set
-			{
-				if ((this._SectionID != value))
-				{
-					this._SectionID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionName", DbType="NVarChar(255)")]
-		public string SectionName
-		{
-			get
-			{
-				return this._SectionName;
-			}
-			set
-			{
-				if ((this._SectionName != value))
-				{
-					this._SectionName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrBaseDataYN", DbType="Bit NOT NULL")]
-		public bool CdrBaseDataYN
-		{
-			get
-			{
-				return this._CdrBaseDataYN;
-			}
-			set
-			{
-				if ((this._CdrBaseDataYN != value))
-				{
-					this._CdrBaseDataYN = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODPBaseDataYN", DbType="Bit NOT NULL")]
-		public bool ODPBaseDataYN
-		{
-			get
-			{
-				return this._ODPBaseDataYN;
-			}
-			set
-			{
-				if ((this._ODPBaseDataYN != value))
-				{
-					this._ODPBaseDataYN = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrConsensus", DbType="SmallInt")]
-		public System.Nullable<short> CdrConsensus
-		{
-			get
-			{
-				return this._CdrConsensus;
-			}
-			set
-			{
-				if ((this._CdrConsensus != value))
-				{
-					this._CdrConsensus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrODPComparison", DbType="SmallInt")]
-		public System.Nullable<short> CdrODPComparison
-		{
-			get
-			{
-				return this._CdrODPComparison;
-			}
-			set
-			{
-				if ((this._CdrODPComparison != value))
-				{
-					this._CdrODPComparison = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Final Consensus]", Storage="_Final_Consensus", DbType="SmallInt")]
-		public System.Nullable<short> Final_Consensus
-		{
-			get
-			{
-				return this._Final_Consensus;
-			}
-			set
-			{
-				if ((this._Final_Consensus != value))
-				{
-					this._Final_Consensus = value;
-				}
-			}
-		}
-	}
-	
-	public partial class rpt_KappaDataResult
+	public partial class select_abstracts_no_reopen_ttResult
 	{
 		
 		private int _AbstractID;
 		
-		private System.Nullable<int> _ApplicationID;
-		
-		private string _ProjectTitle;
-		
-		private string _UserName;
-		
-		private int _KappaTypeID;
-		
-		private string _KappaType;
-		
-		private System.Nullable<decimal> _A1;
-		
-		private System.Nullable<decimal> _A2;
-		
-		private System.Nullable<decimal> _A3;
-		
-		private System.Nullable<decimal> _B;
-		
-		private System.Nullable<decimal> _C;
-		
-		private System.Nullable<decimal> _D;
-		
-		private System.Nullable<decimal> _E;
-		
-		private System.Nullable<decimal> _F;
-		
-		private System.Nullable<System.DateTime> _CdrKappaDate;
-		
-		private System.Nullable<System.DateTime> _ODPKappaDate;
-		
-		public rpt_KappaDataResult()
+		public select_abstracts_no_reopen_ttResult()
 		{
 		}
 		
@@ -5533,362 +5271,6 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._AbstractID != value))
 				{
 					this._AbstractID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
-		public System.Nullable<int> ApplicationID
-		{
-			get
-			{
-				return this._ApplicationID;
-			}
-			set
-			{
-				if ((this._ApplicationID != value))
-				{
-					this._ApplicationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ProjectTitle
-		{
-			get
-			{
-				return this._ProjectTitle;
-			}
-			set
-			{
-				if ((this._ProjectTitle != value))
-				{
-					this._ProjectTitle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="VarChar(10)")]
-		public string UserName
-		{
-			get
-			{
-				return this._UserName;
-			}
-			set
-			{
-				if ((this._UserName != value))
-				{
-					this._UserName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaTypeID", DbType="Int NOT NULL")]
-		public int KappaTypeID
-		{
-			get
-			{
-				return this._KappaTypeID;
-			}
-			set
-			{
-				if ((this._KappaTypeID != value))
-				{
-					this._KappaTypeID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaType", DbType="NVarChar(50)")]
-		public string KappaType
-		{
-			get
-			{
-				return this._KappaType;
-			}
-			set
-			{
-				if ((this._KappaType != value))
-				{
-					this._KappaType = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> A1
-		{
-			get
-			{
-				return this._A1;
-			}
-			set
-			{
-				if ((this._A1 != value))
-				{
-					this._A1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> A2
-		{
-			get
-			{
-				return this._A2;
-			}
-			set
-			{
-				if ((this._A2 != value))
-				{
-					this._A2 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> A3
-		{
-			get
-			{
-				return this._A3;
-			}
-			set
-			{
-				if ((this._A3 != value))
-				{
-					this._A3 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> B
-		{
-			get
-			{
-				return this._B;
-			}
-			set
-			{
-				if ((this._B != value))
-				{
-					this._B = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> C
-		{
-			get
-			{
-				return this._C;
-			}
-			set
-			{
-				if ((this._C != value))
-				{
-					this._C = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> D
-		{
-			get
-			{
-				return this._D;
-			}
-			set
-			{
-				if ((this._D != value))
-				{
-					this._D = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> E
-		{
-			get
-			{
-				return this._E;
-			}
-			set
-			{
-				if ((this._E != value))
-				{
-					this._E = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> F
-		{
-			get
-			{
-				return this._F;
-			}
-			set
-			{
-				if ((this._F != value))
-				{
-					this._F = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrKappaDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CdrKappaDate
-		{
-			get
-			{
-				return this._CdrKappaDate;
-			}
-			set
-			{
-				if ((this._CdrKappaDate != value))
-				{
-					this._CdrKappaDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODPKappaDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> ODPKappaDate
-		{
-			get
-			{
-				return this._ODPKappaDate;
-			}
-			set
-			{
-				if ((this._ODPKappaDate != value))
-				{
-					this._ODPKappaDate = value;
-				}
-			}
-		}
-	}
-	
-	public partial class rpt_Cdr_ODPNotesPDFResult
-	{
-		
-		private int _AbstractID;
-		
-		private System.Nullable<int> _ApplicationID;
-		
-		private string _ProjectTitle;
-		
-		private string _FilName;
-		
-		private string _EvaluationType;
-		
-		private System.Nullable<int> _Finnal_AbstractStatusID;
-		
-		public rpt_Cdr_ODPNotesPDFResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
-		public int AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
-		public System.Nullable<int> ApplicationID
-		{
-			get
-			{
-				return this._ApplicationID;
-			}
-			set
-			{
-				if ((this._ApplicationID != value))
-				{
-					this._ApplicationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ProjectTitle
-		{
-			get
-			{
-				return this._ProjectTitle;
-			}
-			set
-			{
-				if ((this._ProjectTitle != value))
-				{
-					this._ProjectTitle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FilName", DbType="NVarChar(281) NOT NULL", CanBeNull=false)]
-		public string FilName
-		{
-			get
-			{
-				return this._FilName;
-			}
-			set
-			{
-				if ((this._FilName != value))
-				{
-					this._FilName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationType", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string EvaluationType
-		{
-			get
-			{
-				return this._EvaluationType;
-			}
-			set
-			{
-				if ((this._EvaluationType != value))
-				{
-					this._EvaluationType = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Finnal_AbstractStatusID", DbType="Int")]
-		public System.Nullable<int> Finnal_AbstractStatusID
-		{
-			get
-			{
-				return this._Finnal_AbstractStatusID;
-			}
-			set
-			{
-				if ((this._Finnal_AbstractStatusID != value))
-				{
-					this._Finnal_AbstractStatusID = value;
 				}
 			}
 		}
@@ -5902,6 +5284,8 @@ namespace ODPTaxonomyDAL_TT
 		private System.Nullable<int> _ApplicationID;
 		
 		private string _ProjectTitle;
+		
+		private string _PI_Name;
 		
 		private int _AbstractStatusID;
 		
@@ -5959,6 +5343,22 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._ProjectTitle != value))
 				{
 					this._ProjectTitle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
+		public string PI_Name
+		{
+			get
+			{
+				return this._PI_Name;
+			}
+			set
+			{
+				if ((this._PI_Name != value))
+				{
+					this._PI_Name = value;
 				}
 			}
 		}
@@ -6036,6 +5436,8 @@ namespace ODPTaxonomyDAL_TT
 		private System.Nullable<int> _ApplicationID;
 		
 		private string _ProjectTitle;
+		
+		private string _PI_Name;
 		
 		private int _KappaBaseDataID;
 		
@@ -6115,6 +5517,22 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._ProjectTitle != value))
 				{
 					this._ProjectTitle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
+		public string PI_Name
+		{
+			get
+			{
+				return this._PI_Name;
+			}
+			set
+			{
+				if ((this._PI_Name != value))
+				{
+					this._PI_Name = value;
 				}
 			}
 		}
@@ -6360,6 +5778,678 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
+	public partial class rpt_Cdr_ODPNotesPDFResult
+	{
+		
+		private int _AbstractID;
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _ProjectTitle;
+		
+		private string _PI_Name;
+		
+		private string _FilName;
+		
+		private string _EvaluationType;
+		
+		private System.Nullable<int> _Finnal_AbstractStatusID;
+		
+		public rpt_Cdr_ODPNotesPDFResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
+		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this._AbstractID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ProjectTitle
+		{
+			get
+			{
+				return this._ProjectTitle;
+			}
+			set
+			{
+				if ((this._ProjectTitle != value))
+				{
+					this._ProjectTitle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
+		public string PI_Name
+		{
+			get
+			{
+				return this._PI_Name;
+			}
+			set
+			{
+				if ((this._PI_Name != value))
+				{
+					this._PI_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FilName", DbType="NVarChar(281) NOT NULL", CanBeNull=false)]
+		public string FilName
+		{
+			get
+			{
+				return this._FilName;
+			}
+			set
+			{
+				if ((this._FilName != value))
+				{
+					this._FilName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationType", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string EvaluationType
+		{
+			get
+			{
+				return this._EvaluationType;
+			}
+			set
+			{
+				if ((this._EvaluationType != value))
+				{
+					this._EvaluationType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Finnal_AbstractStatusID", DbType="Int")]
+		public System.Nullable<int> Finnal_AbstractStatusID
+		{
+			get
+			{
+				return this._Finnal_AbstractStatusID;
+			}
+			set
+			{
+				if ((this._Finnal_AbstractStatusID != value))
+				{
+					this._Finnal_AbstractStatusID = value;
+				}
+			}
+		}
+	}
+	
+	public partial class rpt_KappaDataResult
+	{
+		
+		private int _AbstractID;
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _ProjectTitle;
+		
+		private string _PI_Name;
+		
+		private string _UserName;
+		
+		private int _KappaTypeID;
+		
+		private string _KappaType;
+		
+		private System.Nullable<decimal> _A1;
+		
+		private System.Nullable<decimal> _A2;
+		
+		private System.Nullable<decimal> _A3;
+		
+		private System.Nullable<decimal> _B;
+		
+		private System.Nullable<decimal> _C;
+		
+		private System.Nullable<decimal> _D;
+		
+		private System.Nullable<decimal> _E;
+		
+		private System.Nullable<decimal> _F;
+		
+		private System.Nullable<System.DateTime> _CdrKappaDate;
+		
+		private System.Nullable<System.DateTime> _ODPKappaDate;
+		
+		public rpt_KappaDataResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
+		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this._AbstractID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ProjectTitle
+		{
+			get
+			{
+				return this._ProjectTitle;
+			}
+			set
+			{
+				if ((this._ProjectTitle != value))
+				{
+					this._ProjectTitle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
+		public string PI_Name
+		{
+			get
+			{
+				return this._PI_Name;
+			}
+			set
+			{
+				if ((this._PI_Name != value))
+				{
+					this._PI_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserName", DbType="VarChar(10)")]
+		public string UserName
+		{
+			get
+			{
+				return this._UserName;
+			}
+			set
+			{
+				if ((this._UserName != value))
+				{
+					this._UserName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaTypeID", DbType="Int NOT NULL")]
+		public int KappaTypeID
+		{
+			get
+			{
+				return this._KappaTypeID;
+			}
+			set
+			{
+				if ((this._KappaTypeID != value))
+				{
+					this._KappaTypeID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaType", DbType="NVarChar(50)")]
+		public string KappaType
+		{
+			get
+			{
+				return this._KappaType;
+			}
+			set
+			{
+				if ((this._KappaType != value))
+				{
+					this._KappaType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A1
+		{
+			get
+			{
+				return this._A1;
+			}
+			set
+			{
+				if ((this._A1 != value))
+				{
+					this._A1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A2
+		{
+			get
+			{
+				return this._A2;
+			}
+			set
+			{
+				if ((this._A2 != value))
+				{
+					this._A2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A3
+		{
+			get
+			{
+				return this._A3;
+			}
+			set
+			{
+				if ((this._A3 != value))
+				{
+					this._A3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> B
+		{
+			get
+			{
+				return this._B;
+			}
+			set
+			{
+				if ((this._B != value))
+				{
+					this._B = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this._C = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this._D = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this._E = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this._F = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrKappaDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CdrKappaDate
+		{
+			get
+			{
+				return this._CdrKappaDate;
+			}
+			set
+			{
+				if ((this._CdrKappaDate != value))
+				{
+					this._CdrKappaDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODPKappaDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> ODPKappaDate
+		{
+			get
+			{
+				return this._ODPKappaDate;
+			}
+			set
+			{
+				if ((this._ODPKappaDate != value))
+				{
+					this._ODPKappaDate = value;
+				}
+			}
+		}
+	}
+	
+	public partial class rpt_OPAResult
+	{
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private System.Nullable<int> _AbstractID;
+		
+		private string _PI_Name;
+		
+		private string _MainSection;
+		
+		private string _SubSection;
+		
+		private System.Nullable<int> _SectionID;
+		
+		private string _SectionName;
+		
+		private bool _CdrBaseDataYN;
+		
+		private bool _ODPBaseDataYN;
+		
+		private System.Nullable<short> _CdrConsensus;
+		
+		private System.Nullable<short> _CdrODPComparison;
+		
+		private System.Nullable<short> _Final_Consensus;
+		
+		public rpt_OPAResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this._AbstractID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
+		public string PI_Name
+		{
+			get
+			{
+				return this._PI_Name;
+			}
+			set
+			{
+				if ((this._PI_Name != value))
+				{
+					this._PI_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainSection", DbType="NVarChar(255)")]
+		public string MainSection
+		{
+			get
+			{
+				return this._MainSection;
+			}
+			set
+			{
+				if ((this._MainSection != value))
+				{
+					this._MainSection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSection", DbType="NVarChar(255)")]
+		public string SubSection
+		{
+			get
+			{
+				return this._SubSection;
+			}
+			set
+			{
+				if ((this._SubSection != value))
+				{
+					this._SubSection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionID", DbType="Int")]
+		public System.Nullable<int> SectionID
+		{
+			get
+			{
+				return this._SectionID;
+			}
+			set
+			{
+				if ((this._SectionID != value))
+				{
+					this._SectionID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionName", DbType="NVarChar(255)")]
+		public string SectionName
+		{
+			get
+			{
+				return this._SectionName;
+			}
+			set
+			{
+				if ((this._SectionName != value))
+				{
+					this._SectionName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrBaseDataYN", DbType="Bit NOT NULL")]
+		public bool CdrBaseDataYN
+		{
+			get
+			{
+				return this._CdrBaseDataYN;
+			}
+			set
+			{
+				if ((this._CdrBaseDataYN != value))
+				{
+					this._CdrBaseDataYN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODPBaseDataYN", DbType="Bit NOT NULL")]
+		public bool ODPBaseDataYN
+		{
+			get
+			{
+				return this._ODPBaseDataYN;
+			}
+			set
+			{
+				if ((this._ODPBaseDataYN != value))
+				{
+					this._ODPBaseDataYN = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrConsensus", DbType="SmallInt")]
+		public System.Nullable<short> CdrConsensus
+		{
+			get
+			{
+				return this._CdrConsensus;
+			}
+			set
+			{
+				if ((this._CdrConsensus != value))
+				{
+					this._CdrConsensus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrODPComparison", DbType="SmallInt")]
+		public System.Nullable<short> CdrODPComparison
+		{
+			get
+			{
+				return this._CdrODPComparison;
+			}
+			set
+			{
+				if ((this._CdrODPComparison != value))
+				{
+					this._CdrODPComparison = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Final Consensus]", Storage="_Final_Consensus", DbType="SmallInt")]
+		public System.Nullable<short> Final_Consensus
+		{
+			get
+			{
+				return this._Final_Consensus;
+			}
+			set
+			{
+				if ((this._Final_Consensus != value))
+				{
+					this._Final_Consensus = value;
+				}
+			}
+		}
+	}
+	
 	public partial class rpt_Team_User_UCResult
 	{
 		
@@ -6368,6 +6458,8 @@ namespace ODPTaxonomyDAL_TT
 		private System.Nullable<int> _ApplicationID;
 		
 		private string _ProjectTitle;
+		
+		private string _PI_Name;
 		
 		private int _SubmissionID;
 		
@@ -6433,6 +6525,22 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._ProjectTitle != value))
 				{
 					this._ProjectTitle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
+		public string PI_Name
+		{
+			get
+			{
+				return this._PI_Name;
+			}
+			set
+			{
+				if ((this._PI_Name != value))
+				{
+					this._PI_Name = value;
 				}
 			}
 		}
@@ -6566,12 +6674,12 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class select_abstracts_no_reopen_ttResult
+	public partial class select_abstracts_coding_ttResult
 	{
 		
 		private int _AbstractID;
 		
-		public select_abstracts_no_reopen_ttResult()
+		public select_abstracts_coding_ttResult()
 		{
 		}
 		

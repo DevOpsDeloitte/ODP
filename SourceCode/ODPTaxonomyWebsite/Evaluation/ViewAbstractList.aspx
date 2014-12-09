@@ -42,14 +42,18 @@
          return true;
 
      }
+    
 
 </script>
 <script type="text/javascript" src="/Scripts/datatables/app.js"></script>
     <h2>
     </h2>
     
-    </div>
-    <div>
+    <!--</div>-->
+    <div>   
+    <a href="/Reports/PACT-Abstract-Export-2014-12-08-9-00-27.xlsx">Download Excel Report</a>
+    
+            <asp:Label runat="server" ID="lbl_exportError" ForeColor="Red"></asp:Label>
         <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" OnSelectedIndexChanged="MainviewChangeHandler" Visible="false" />
         <asp:Panel runat="server" ID="SubviewPanel" Visible="false">
             <h3>
@@ -79,5 +83,6 @@
         <odp:CoderSupervisorView_Coded runat="server" ID="CoderSupervisor_Coded" Visible="false" />
         <odp:CoderSupervisorView_Open runat="server" ID="CoderSupervisor_Open" Visible="false" />
         <odp:AdminView runat="server" ID="AdminView" Visible="false" />
-    </div>
+    </div>   
+
 </asp:Content>

@@ -20,9 +20,9 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
 
             Response.Write("I am here!!");
 
-            AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
-            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
-            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
+            //AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
+            //AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
+            //AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
