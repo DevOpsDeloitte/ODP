@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Training_Main" Class="TrainingAdminDALDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=1sql234;Initial Catalog=ODP_Taxonomy_Training_Main;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyTrainingAdminDAL.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_Training_MainConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.Tr_SelectInstances" Method="Tr_SelectInstances">
+    <ElementType Name="Tr_SelectInstancesResult">
+      <Column Name="InstanceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="InstanceName" Type="System.String" DbType="VarChar(39)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Tr_Trainee_KappaDataPull" Method="Tr_Trainee_KappaDataPull">
+    <Parameter Name="Instance" Parameter="instance" Type="System.Int32" DbType="Int" />
+    <Parameter Name="returnValue" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.Tr_Trainee_KappaBaseDataPush" Method="Tr_Trainee_KappaBaseDataPush">
+    <Parameter Name="Instance" Parameter="instance" Type="System.Int32" DbType="Int" />
+    <Parameter Name="returnValue" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>
