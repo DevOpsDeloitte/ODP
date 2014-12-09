@@ -166,8 +166,7 @@ $(document).ready(function () {
                      "class": 'checkbox-control',
                      "orderable": false,
                      "data": "InReview"//,
-                     //"defaultContent": '<input type="checkbox" />'
-                     // "defaultContent": ''
+     
                  },
                 {
                     "class": 'details-control',
@@ -180,7 +179,6 @@ $(document).ready(function () {
             { "data": "StatusDate" },
             { "data": "PIProjectLeader" },
             { "data": "ProjectTitle" },
-            //   { "data": "AbstractScan" },
             {"data": "Flags" },
             { "data": "A1" },
             { "data": "A2" },
@@ -210,9 +208,12 @@ $(document).ready(function () {
         setTimeout(function () {
             util.showOpenRows(alb);
             util.selectAllRows(salb);
-            // add function to remove rows that have been acted upon.
-            //util.removeRows($opts.hideItems);
         }, 0);
+
+        // added for search event :: to make sure checkboxes are selected when items have been selected. On search there is a re-draw.
+        setTimeout(function () {
+            $("tr[role=row].selected").find("input").prop("checked", "checked");
+        }, 100);
     });
 
     //    table.on('preXhr.dt', function (e, settings, data) {
@@ -925,7 +926,6 @@ $(document).ready(function () {
     });
 
     $("select#filterlist").change(function () {
-        //alert("Handler for .change() called.");
         var str = "";
         disableFilters();
         $("select#filterlist option:selected").each(function () {
@@ -938,7 +938,6 @@ $(document).ready(function () {
     });
 
     $("select#actionlist").change(function () {
-        //alert("Handler for .change() called.");
         var str = "";
         $("select#actionlist option:selected").each(function () {
             str = $(this).val();

@@ -163,7 +163,13 @@ div#tableContainer
 
 div#functionsbox
 {
-    height: 110px;
+    height: 70px;
+    margin-left: -100px;
+}
+
+div#titlesbox
+{
+    height: 40px;
     margin-left: -100px;
 }
 
@@ -201,6 +207,7 @@ div.progressBar
     position: absolute;
     top: 200px;
     padding: 40px;
+    margin-left: -100px;
 }
 
 div.progressText

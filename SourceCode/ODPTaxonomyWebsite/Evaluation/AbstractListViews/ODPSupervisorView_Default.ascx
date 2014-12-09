@@ -43,7 +43,7 @@
 
 </div>
 
-<div class="sixteen columns">
+<div class="sixteen columns" id="titlesbox">
     <div class="eight columns" id="pagetitlebox"> 
         <span>Title</span>
     </div>
