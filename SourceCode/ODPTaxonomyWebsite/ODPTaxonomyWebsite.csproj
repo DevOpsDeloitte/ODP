@@ -118,7 +118,9 @@
     <Content Include="Scripts\controllers\controller.js" />
     <Content Include="Scripts\controllers\controllerRT.js" />
     <Content Include="Scripts\datatables\app.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.min.js" />
     <Content Include="Scripts\datatables\spin.min.js" />
+    <Content Include="Scripts\datatables\underscore-min.js" />
     <Content Include="Scripts\datatables\util.js" />
     <Content Include="Scripts\directives\directive.js" />
     <Content Include="Scripts\directives\directiveRT.js" />
@@ -134,6 +136,7 @@
     <Content Include="Styles\base.css" />
     <Content Include="Styles\component.css" />
     <Content Include="Styles\evaluation.css" />
+    <Content Include="Styles\jquery.dataTables.min.css" />
     <Content Include="Styles\layout.css" />
     <Content Include="Styles\line\aero.css" />
     <Content Include="Styles\line\blue.css" />
@@ -352,9 +355,6 @@
     <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
       <DependentUpon>Filters.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Evaluation\Handlers\GenerateExcelReport.ashx.cs">
-      <DependentUpon>GenerateExcelReport.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Evaluation\Handlers\Test.ashx.cs">
       <DependentUpon>Test.ashx</DependentUpon>
     </Compile>
@@ -422,7 +422,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="log\" />
-    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
@@ -516,7 +515,6 @@
     <Content Include="Evaluation\Handlers\AbstractClose.ashx" />
     <Content Include="Evaluation\Handlers\AbstractExport.ashx" />
     <Content Include="Evaluation\Handlers\AbstractsListCheck.ashx" />
-    <Content Include="Evaluation\Handlers\GenerateExcelReport.ashx" />    
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />

@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace ODPTaxonomyWebsite.Evaluation.Handlers
 {
-    
+
     //this handler returns Abstracts
     //that could NOT be re-opened
     public class AbstractsReopen : IHttpHandler
@@ -20,11 +20,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
         private List<int> abstracts = null;
         private string userguid = "";
 
-        #endregion        
+        #endregion
 
         public void ProcessRequest(HttpContext context)
         {
-            connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();            
+            connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
             userguid = context.Request["guid"] ?? "";
             Guid ug;
             if (!Guid.TryParse(userguid, out ug))
@@ -35,14 +35,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             try
             {
-                abstracts = Common.GetAbstractsNotToReopen(connString, ug);                
-                context.Response.Write(JsonConvert.SerializeObject(new { nottoreopen = JsonConvert.SerializeObject(abstracts), success = true }));
+                abstracts = Common.GetAbstractsNotToReopen(connString, ug);
+                context.Response.Write(JsonConvert.SerializeObject(new { nottoreopen = abstracts, success = true }));
             }
             catch (Exception ex)
             {
                 context.Response.Write(JsonConvert.SerializeObject(new { success = false, message = ex.Message }));
             }
-            
+
         }
 
         public bool IsReusable
