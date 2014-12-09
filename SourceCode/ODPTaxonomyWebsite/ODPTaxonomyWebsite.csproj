@@ -90,7 +90,6 @@
     <Content Include="Evaluation\DownloadAbstractScan.aspx" />
     <Content Include="Evaluation\Evaluation.aspx" />
     <Content Include="Evaluation\EvaluationRT.aspx" />
-    <Content Include="Evaluation\GenerateExcelReport.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
     <Content Include="Evaluation\Handlers\test.htm" />
     <Content Include="Evaluation\ManageTeams.aspx" />
@@ -323,13 +322,6 @@
     <Compile Include="Evaluation\EvaluationRT.aspx.designer.cs">
       <DependentUpon>EvaluationRT.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Evaluation\GenerateExcelReport.aspx.cs">
-      <DependentUpon>GenerateExcelReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Evaluation\GenerateExcelReport.aspx.designer.cs">
-      <DependentUpon>GenerateExcelReport.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Evaluation\Glossary.aspx.cs">
       <DependentUpon>Glossary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -426,6 +418,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="log\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
