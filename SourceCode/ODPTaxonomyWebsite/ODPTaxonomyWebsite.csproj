@@ -352,6 +352,9 @@
     <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
       <DependentUpon>Filters.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\GenerateExcelReport.ashx.cs">
+      <DependentUpon>GenerateExcelReport.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\Test.ashx.cs">
       <DependentUpon>Test.ashx</DependentUpon>
     </Compile>
@@ -419,6 +422,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="log\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
@@ -512,6 +516,7 @@
     <Content Include="Evaluation\Handlers\AbstractClose.ashx" />
     <Content Include="Evaluation\Handlers\AbstractExport.ashx" />
     <Content Include="Evaluation\Handlers\AbstractsListCheck.ashx" />
+    <Content Include="Evaluation\Handlers\GenerateExcelReport.ashx" />    
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
