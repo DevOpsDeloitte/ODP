@@ -101,6 +101,7 @@
     <Content Include="Images\clip.png" />
     <Content Include="Images\details_close.png" />
     <Content Include="Images\details_open.png" />
+    <Content Include="Libraries\DocumentFormat.OpenXml.dll" />
     <Content Include="Libraries\Newtonsoft.Json.dll" />
     <Content Include="Libraries\Newtonsoft.Json.xml" />
     <Content Include="Login.aspx" />
