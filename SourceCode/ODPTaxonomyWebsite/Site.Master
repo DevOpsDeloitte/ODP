@@ -144,6 +144,14 @@
 
         </script>
 
+        <script type="text/javascript">
+            $(document).ready(function () {
+                if(window.location.href.indexOf("training") > -1) {
+                   $('body').addClass('training');
+                }
+            });
+        </script>
+
 
 </form>
 </body>
