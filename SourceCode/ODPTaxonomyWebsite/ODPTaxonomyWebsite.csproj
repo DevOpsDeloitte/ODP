@@ -70,8 +70,6 @@
     <Content Include="bin\ODPTaxonomyDAL_JY.pdb" />
     <Content Include="bin\ODPTaxonomyDAL_TT.dll" />
     <Content Include="bin\ODPTaxonomyDAL_TT.pdb" />
-    <Content Include="bin\ODPTaxonomyUtility_TT.dll" />
-    <Content Include="bin\ODPTaxonomyUtility_TT.pdb" />
     <Content Include="bin\ODPTaxonomyWebsite.dll" />
     <Content Include="bin\ODPTaxonomyWebsite.pdb" />
     <Content Include="ErrorPage.html" />
