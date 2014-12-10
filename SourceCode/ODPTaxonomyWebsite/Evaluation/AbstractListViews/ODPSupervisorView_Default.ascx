@@ -29,14 +29,21 @@
         <div class="two columns subactions interface">
             <input type="button" name="subButton" id="subButton" value="Submit" class="review button no" />
         </div>
-        <div class="three columns">
-           
-        </div>
+       
         <div class="two columns actions interface">  
             <label><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes"> Expand All</label>
         </div>
         <div class="two columns subactions interface">  
             <label><input type="checkbox" name="selectallBox" id="selectallBox" value="selectall" class="cboxes"> Select All</label>
+        </div>
+        <div class="three columns downloads interface">
+            <div id="downloadLinkBox">
+               <a href="">Download Excel Report</a>
+            </div>
+            <div id="downloadProgressBox">
+                <span id="downloadSpin"></span>Download Link being generated...
+            </div>
+         
         </div>
 
     

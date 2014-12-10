@@ -166,7 +166,7 @@ $(document).ready(function () {
                      "class": 'checkbox-control',
                      "orderable": false,
                      "data": "InReview"//,
-     
+
                  },
                 {
                     "class": 'details-control',
@@ -179,7 +179,7 @@ $(document).ready(function () {
             { "data": "StatusDate" },
             { "data": "PIProjectLeader" },
             { "data": "ProjectTitle" },
-            {"data": "Flags" },
+            { "data": "Flags" },
             { "data": "A1" },
             { "data": "A2" },
             { "data": "A3" },
@@ -881,6 +881,9 @@ $(document).ready(function () {
 
                 case "exportabstracts":
 
+                    // show progress indicator
+                    $("div#downloadProgressBox").show();
+
                     $.ajax({
                         type: "GET",
                         url: "/Evaluation/Handlers/AbstractExport.ashx",
@@ -890,7 +893,28 @@ $(document).ready(function () {
                       .done(function (data) {
                           console.log(" reopen abstract : " + data);
                           if (data.success == true) {
-                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been Exported.");
+                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been Exported. File being generated.");
+
+
+                              // call the second handler
+                              $.ajax({
+                                  type: "GET",
+                                  url: "/Evaluation/Handlers/GenerateExcelReport.ashx",
+                                  dataType: 'json',
+                                  data: { abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                              })
+                              .done(function (data) {
+                                  console.log(" generate excel report .ashx : " + data);
+                                  if (data.success == true) {
+                                      $("div#downloadProgressBox").hide();
+                                      $("div#downloadLinkBox a").attr("href", data.filePath);
+                                      $("div#downloadLinkBox").show();
+                                  }
+                              });
+
+
+
+
                               //$opts.hideItems = $opts.selectedItems;
 
                               //for exporting abstracts.
@@ -900,7 +924,7 @@ $(document).ready(function () {
                               resetSubmitBtnAndCheckboxes();
                               loadFilters();
                               $opts.isGridDirty = true;
-                             
+
 
                           }
                           else {

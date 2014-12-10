@@ -51,7 +51,7 @@
     
     <!--</div>-->
     <div>   
-    <a href="/Reports/PACT-Abstract-Export-2014-12-08-9-00-27.xlsx">Download Excel Report</a>
+   
     
             <asp:Label runat="server" ID="lbl_exportError" ForeColor="Red"></asp:Label>
         <asp:DropDownList runat="server" ID="MainviewDDL" AutoPostBack="true" OnSelectedIndexChanged="MainviewChangeHandler" Visible="false" />
