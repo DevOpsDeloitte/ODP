@@ -41,7 +41,7 @@
                <a href="">Download Excel Report</a>
             </div>
             <div id="downloadProgressBox">
-                <span id="downloadSpin"></span>Download Link being generated...
+                <div id="downloadSpin"></div><div id="downloadText">Download Link being generated...</div>
             </div>
          
         </div>
