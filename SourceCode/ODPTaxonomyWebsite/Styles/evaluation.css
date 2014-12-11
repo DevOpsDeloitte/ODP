@@ -98,6 +98,10 @@ table.dataTable thead th, table.dataTable thead td {
 {
     width: 20px;
 }
+.col_select
+{
+    background: none;
+}
 .col_flags
 {
      width: 30px;

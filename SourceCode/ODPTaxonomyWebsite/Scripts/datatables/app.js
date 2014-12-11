@@ -146,11 +146,9 @@ $(document).ready(function () {
 
                         "render": function (data, type, row) {
                             var collink = "";
-                            //console.log(row);
                             collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'>" + data + "</a>"; ;
                             var class1 = row.AbstractScan !== null ? "scan-file" : "";
                             var addImg = '<img class="scan-file" src="../Images/clip.png" alt="Attachment">';
-                            //this.className = class1;
                             if (class1 != "") collink = '<div class="titleimg has-file" style="position: relative">' + collink + addImg + '</div>';
                             return collink;
 
@@ -172,20 +170,19 @@ $(document).ready(function () {
                         "targets": 16 //date column
                     }
 
-            //,
-            //{ "visible": false, "targets": [6]} // hide abstract scan}
-
 
                 ],
-            //iDisplayLength: 10,
+
             "processing": true,
             "ajax": config.baseURL,
-
+            "order": [[4, "desc"]],
             "columns": [
                  {
                      "class": 'checkbox-control',
                      "orderable": false,
-                     "data": "InReview"//,
+                     //"data": "InReview"//,
+                     "data": null,
+                     "defaultContent": ''
 
                  },
                 {
@@ -303,7 +300,8 @@ $(document).ready(function () {
                 ListCheck($opts.actionlist);
             }
         }
-        enableFilters();
+        //enableFilters();
+        enableInterface();
 
 
     });
@@ -550,7 +548,8 @@ $(document).ready(function () {
                 }
             }
             $opts.isGridDirty = false;
-            enableFilters();
+            //enableFilters();
+            enableInterface();
         });
 
     }
@@ -592,6 +591,18 @@ $(document).ready(function () {
     }
     function enableFilters() {
         $("select#filterlist").attr("disabled", false);
+    }
+
+    function disableInterface() {
+        $("select#filterlist").attr("disabled", true);
+        $("select#actionlist").attr("disabled", true);
+        $("input").attr("disabled", true);
+    }
+
+    function enableInterface() {
+        $("select#filterlist").attr("disabled", false);
+        $("select#actionlist").attr("disabled", false);
+        $("input").attr("disabled", false);
     }
 
     function doSubmitChecks() {
@@ -919,7 +930,7 @@ $(document).ready(function () {
 
                               // call the second handler
                               $.ajax({
-                                  type: "GET",
+                                  type: "POST",
                                   url: "/Evaluation/Handlers/GenerateExcelReport.ashx",
                                   dataType: 'json',
                                   data: { abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
@@ -972,7 +983,8 @@ $(document).ready(function () {
 
     $("select#filterlist").change(function () {
         var str = "";
-        disableFilters();
+        //disableFilters();
+        disableInterface();
         $("select#filterlist option:selected").each(function () {
             str = $(this).val();
             $opts.filterlist = $(this).val();
