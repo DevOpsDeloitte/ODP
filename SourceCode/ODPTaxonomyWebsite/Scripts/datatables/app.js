@@ -77,14 +77,14 @@ $(document).ready(function () {
         table = $('#DTable').DataTable({
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                console.log(" invoking fnRowCallback ::");
+                //console.log(" invoking fnRowCallback ::");
                 $(nRow).addClass("closed");
                 setTimeout(function () {
                     $("tr[role=row].selected").find("input").prop("checked", "checked");
                 }, 0);
             },
             "rowCallback": function (row, data) {
-                console.log(" invoking rowCallback ::");
+                //console.log(" invoking rowCallback ::");
                 //                if ($.inArray(data.DT_RowId, $opts.hiderowItems) !== -1) {
                 //                    $(row).addClass('selected');
                 //                    //row.nodes().to$().find("input").prop("checked", "checked");
@@ -94,6 +94,13 @@ $(document).ready(function () {
                 //                }
             },
             "bAutoWidth": false,
+            "language": {
+                    "lengthMenu": "Display _MENU_ records per page",
+                    "zeroRecords": "Sorry. No Abstracts found!",
+//                    "info": "Showing page _PAGE_ of _PAGES_",
+                    "infoEmpty": "Sorry. No Abstracts found!",
+                    "infoFiltered": "(filtered from _MAX_ total records)"
+                },
 
             "columnDefs": [
                      {

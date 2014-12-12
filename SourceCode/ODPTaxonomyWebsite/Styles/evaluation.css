@@ -4,6 +4,14 @@
      table-layout: fixed;
 }
 
+select[name='DTable_length']
+{
+    /*width: 69px;
+    float: left;
+    height: 25;
+    vertical-align: middle;*/
+}
+
 table.childtable
 {
     

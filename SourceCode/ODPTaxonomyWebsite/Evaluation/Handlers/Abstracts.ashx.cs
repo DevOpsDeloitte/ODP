@@ -133,28 +133,18 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                      switch (filter)
                     {
-                        //case "uncoded":
-                        //    parentAbstracts = this.GetParentAbstractsODPStaffMemberUncoded();
-                        //    ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
-                        //    serializeResponse(context, ALR);
-                            
-                        //    break;
 
-                        //case "coded":
-                        //    parentAbstracts = this.GetParentAbstractsODPStaffMemberDefault();
-                        //    ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
-                        //    serializeResponse(context, ALR);
-                        //    break;
 
 
                         case "": // first call default is review list.
-                            parentAbstracts = this.GetParentAbstractsODPStaffMemberReview();
+                            
+                            parentAbstracts = this.GetParentAbstractsODPStaffMemberReview("review");
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
                             serializeResponse(context, ALR);
                             break;
 
-                        case "review":
-                            parentAbstracts = this.GetParentAbstractsODPStaffMemberReview();
+                         case "review": case "reviewuncoded" :
+                            parentAbstracts = this.GetParentAbstractsODPStaffMemberReview(filter);
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
                             serializeResponse(context, ALR);
                             break;
@@ -562,7 +552,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             {
                 case "default":
                     finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N || q.AbstractStatusID == (int) AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N ||
-                        q.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3 || q.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4).Select(s => s).ToList();
+                        q.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3 || q.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4 ||
+                        q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 || q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C).Select(s => s).ToList();
                     break;
                 case "codercompleted":
                     finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
@@ -586,7 +577,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             return AbstractListViewHelper.SortAbstracts(finalabstracts, sort, direction);
         }
-        protected List<AbstractListRow> GetParentAbstractsODPStaffMemberReview(string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected List<AbstractListRow> GetParentAbstractsODPStaffMemberReview(string query = "", string sort = "", SortDirection direction = SortDirection.Ascending)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -596,9 +587,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
                        join rv in db.AbstractReviewLists on a.AbstractID equals rv.AbstractID
                        where (
-                          (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N || h.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N ||  h.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3
-                          || h.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C ||  h.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4) 
-                          &&
+                         // (h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N || h.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N ||  h.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3
+                         // || h.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C ||  h.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4) 
+                         // &&
                           h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
                            .Where(h2 => h2.AbstractID == a.AbstractID)
                            .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
@@ -619,9 +610,37 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        };
 
             List<AbstractListRow> abstracts = data.ToList();
+            List<AbstractListRow> finalabstracts = null;
+            //public enum AbstractStatusEnum
+            //      {
+            //          OPEN_0 = 1,
+            //          RETRIEVED_FOR_CODING_1 = 2,
+            //          CODED_BY_CODER_1A = 3,
+            //          CONSENSUS_COMPLETE_1B = 4,
+            //          CONSENSUS_COMPLETE_WITH_NOTES_1N = 6,
+            //          RETRIEVED_FOR_ODP_CODING_2 = 7,
+            //          CODED_BY_ODP_STAFF_2A = 8,
+            //          ODP_STAFF_CONSENSUS_2B = 9,
+            //          ODP_STAFF_AND_CODER_CONSENSUS_2C = 10,
+            //          ODP_CONSENSUS_WITH_NOTES_2N = 12,
+            //          CLOSED_3 = 13,
+            //          DATA_EXPORTED_4 = 14,
+            //          REOPEN_FOR_REVIEW_BY_ODP = 15
+            //      }
+            switch (query)
+            {
+                case "review":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N || q.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3
+                          || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C || q.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4).Select(s => s).ToList();
+                    break;
+                case "reviewuncoded":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 || q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B).Select(s => s).ToList();
+                    break;
+
+            }
 
 
-            return AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
+            return AbstractListViewHelper.SortAbstracts(finalabstracts, sort, direction);
         }
 
         protected List<AbstractListRow> GetParentAbstractsCoderSupervisor(string query = "", string sort = "", SortDirection direction = SortDirection.Ascending)

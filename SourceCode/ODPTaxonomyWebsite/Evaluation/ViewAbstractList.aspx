@@ -28,7 +28,7 @@
 
      window.user = {};
      window.user.GUID = '<%= userGUID %>';
-     window.config.role = "ODPSupervisor";
+     //window.config.role = "ODPSupervisor";
      window.config.role = '<%= userROLE %>';
 
 
@@ -45,6 +45,25 @@
     
 
 </script>
+
+ <script type="text/javascript">
+    var time = new Date().getTime();
+    $(document.body).bind("mousemove keypress", function (e) {
+        time = new Date().getTime();
+        //console.log("timer updated :: " + time);
+    });
+
+    function refresh() {
+        //console.log("refresh timer ::");
+        if (new Date().getTime() - time >= 900000)
+            window.location.reload(true);
+        else
+            setTimeout(refresh, 30000);
+    }
+
+    setTimeout(refresh, 30000);
+</script>
+
 <script type="text/javascript" src="/Scripts/datatables/app.js"></script>
     <h2>
     </h2>
