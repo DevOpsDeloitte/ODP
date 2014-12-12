@@ -49,6 +49,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             {
                 // commenting out just for testing..
                 //return;
+                return;
                 
             }
 
