@@ -112,15 +112,17 @@ table.dataTable thead th, table.dataTable thead td {
 }
 .col_flags
 {
-     width: 30px;
+     width: 36px;
 }
 .col_abstractid
 {
     width: 40px;
+     width: 55px;
 }
 .col_applicationid
 {
     width: 50px;
+    width: 70px;
 }
 .col_piname
 {
@@ -187,6 +189,7 @@ tr.open td.details-control {
     border-left: 0;
     display: table-cell;
     text-align: left;
+    border-left: 1px solid #ccc;
 
 }
 
