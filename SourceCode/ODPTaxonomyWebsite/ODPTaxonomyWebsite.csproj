@@ -88,10 +88,9 @@
     <Content Include="Evaluation\DownloadAbstractScan.aspx" />
     <Content Include="Evaluation\Evaluation.aspx" />
     <Content Include="Evaluation\EvaluationRT.aspx" />
-    <Content Include="Evaluation\GenerateExcelReport.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
+    <Content Include="Evaluation\Handlers\json.js" />
     <Content Include="Evaluation\Handlers\reopen.js" />
-    <Content Include="Evaluation\Handlers\test.htm" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\PrintAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
@@ -330,13 +329,6 @@
     <Compile Include="Evaluation\EvaluationRT.aspx.designer.cs">
       <DependentUpon>EvaluationRT.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Evaluation\GenerateExcelReport.aspx.cs">
-      <DependentUpon>GenerateExcelReport.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Evaluation\GenerateExcelReport.aspx.designer.cs">
-      <DependentUpon>GenerateExcelReport.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Evaluation\Glossary.aspx.cs">
       <DependentUpon>Glossary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -369,8 +361,8 @@
     <Compile Include="Evaluation\Handlers\GenerateExcelReport.ashx.cs">
       <DependentUpon>GenerateExcelReport.ashx</DependentUpon>
     </Compile>
-    <Compile Include="Evaluation\Handlers\Test.ashx.cs">
-      <DependentUpon>Test.ashx</DependentUpon>
+    <Compile Include="Evaluation\Handlers\RedirectionMessage.ashx.cs">
+      <DependentUpon>RedirectionMessage.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\ManageTeams.aspx.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>
@@ -524,13 +516,13 @@
     <Content Include="Evaluation\Handlers\Evaluation.ashx" />
     <Content Include="Evaluation\Handlers\Abstracts.ashx" />
     <Content Include="Evaluation\Handlers\AbstractReview.ashx" />
-    <Content Include="Evaluation\Handlers\Test.ashx" />
     <Content Include="Evaluation\Handlers\Filters.ashx" />
     <Content Include="Evaluation\Handlers\AbstractsReopen.ashx" />
     <Content Include="Evaluation\Handlers\AbstractClose.ashx" />
     <Content Include="Evaluation\Handlers\AbstractExport.ashx" />
     <Content Include="Evaluation\Handlers\AbstractsListCheck.ashx" />
     <Content Include="Evaluation\Handlers\GenerateExcelReport.ashx" />
+    <Content Include="Evaluation\Handlers\RedirectionMessage.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />

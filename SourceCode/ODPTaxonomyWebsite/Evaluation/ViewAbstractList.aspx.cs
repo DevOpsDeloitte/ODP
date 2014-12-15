@@ -15,6 +15,7 @@ namespace ODPTaxonomyWebsite.Evaluation
     {
         public string userGUID = "";
         public string userROLE = "";
+        public string userNAME = "";
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -22,6 +23,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             List<string> UserRoles = Roles.GetRolesForUser().ToList();
             MembershipUser user = Membership.GetUser();
             userGUID = ((Guid)user.ProviderUserKey).ToString();
+            userNAME = user.UserName;
             IDictionary<int, string> ViewRoles = AbstractListViewHelper.GetViewRoles(UserRoles);
 
             if (string.IsNullOrEmpty(Request.QueryString["view"]))

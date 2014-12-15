@@ -2,6 +2,94 @@
     CodeBehind="ViewAbstractList.aspx.cs" Inherits="ODPTaxonomyWebsite.Evaluation.ViewAbstractList" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<script type="text/javascript">
+    //Tatiana's Code for Redirection Message
+    var userName = '<%= userNAME %>';
+
+    function alertify_confirm(x) {
+
+        window.alertify.set({
+            labels: {
+                ok: "OK",
+                cancel: "Cancel"
+            },
+            delay: 5000,
+            buttonReverse: true,
+            buttonFocus: "none"
+        });
+
+        alertify.confirm("A team member has already opened another abstract for Coding. You will be redirected to Abstract ID: " + x, function (e) {
+            if (e) {
+                //console.log(clickElem);
+
+                window.location = "ViewAbstract.aspx?AbstractID=" + x;
+                return false;
+            } else {
+                alertify.error("You've clicked cancel.");
+                return false;
+            }
+        });
+
+        return false;
+    }
+
+    function showRedirectMessage(abstractId) {
+        //alert(abstractId + '; '+ userName);
+        jQuery.ajax({
+            type: "Get",
+            url: "Handlers/RedirectionMessage.ashx?userName=" + userName.toString() + "&abstractId=" + abstractId,
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var JSONObject = jQuery.parseJSON(data);
+                var abstractStatus = Number(JSONObject.status);
+                var abstractInProcessId = JSONObject.abstractId;
+                var success = JSONObject.success;
+                //alert(JSONObject.status + '; ' + JSONObject.abstractId);
+
+                if (success) {
+                    //alert(success);
+                    if (abstractStatus >= 6 && abstractStatus <= 9) {
+                        //alert(abstractStatus);
+                        if (abstractInProcessId == null) {
+                            //alert("Empty!");
+                            window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
+                            return false;
+                        }
+                        else if (abstractInProcessId.toString() != abstractId.toString()) {
+                            alertify_confirm(abstractInProcessId);
+                            return false;
+                        }
+                        else {
+                            window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
+                            return false;
+                        }
+                    }
+                    else {
+                        window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
+                        return false;
+                    }
+                }
+                else {
+                    //alert("Bad Request");
+                    return false;
+                }
+
+
+            },
+            error: function (xmlHttpRequest, status, err) {
+                //alert('Sorry! Error happens. ' + status + err);
+
+            }
+
+        });
+
+        return false;
+    }
+
+    
+    
+
+    </script>
 </asp:Content>
 <%@ Register TagPrefix="odp" TagName="ODPSupervisorView_Default" Src="~/Evaluation/AbstractListViews/ODPSupervisorView_Default.ascx" %>
 <%@ Register TagPrefix="odp" TagName="ODPSupervisorView_Open" Src="~/Evaluation/AbstractListViews/ODPSupervisorView_Open.ascx" %>

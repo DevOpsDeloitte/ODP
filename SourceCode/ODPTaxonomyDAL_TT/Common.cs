@@ -876,6 +876,24 @@ namespace ODPTaxonomyDAL_TT
 
             return matches;
         }
+        public static string GetAbstarctIdForTeamMember(string connString, string userCurrentName)
+        {
+            string abstractId = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = db.select_abstractId_team_member_tt(userCurrentName);
+                foreach (var m in matches)
+                {
+                    abstractId = m.AbstractID.ToString();
+                    break;
+                }
+
+            }
+
+            return abstractId;
+        }
+
 
     }
 }

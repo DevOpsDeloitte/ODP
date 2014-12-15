@@ -325,6 +325,13 @@ namespace ODPTaxonomyDAL_TT
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID);
 			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstractId_team_member_tt")]
+		public ISingleResult<select_abstractId_team_member_ttResult> select_abstractId_team_member_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="NVarChar(256)")] string userName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName);
+			return ((ISingleResult<select_abstractId_team_member_ttResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Users")]
@@ -6685,6 +6692,32 @@ namespace ODPTaxonomyDAL_TT
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
 		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this._AbstractID = value;
+				}
+			}
+		}
+	}
+	
+	public partial class select_abstractId_team_member_ttResult
+	{
+		
+		private System.Nullable<int> _AbstractID;
+		
+		public select_abstractId_team_member_ttResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
 		{
 			get
 			{

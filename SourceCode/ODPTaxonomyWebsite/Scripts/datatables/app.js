@@ -153,7 +153,7 @@ $(document).ready(function () {
 
                         "render": function (data, type, row) {
                             var collink = "";
-                            collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'>" + data + "</a>"; ;
+                            collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + " onclick=\"return showRedirectMessage(" + row.AbstractID + ")\">" + data + "</a>";
                             var class1 = row.AbstractScan !== null ? "scan-file" : "";
                             var addImg = '<img class="scan-file" src="../Images/clip.png" alt="Attachment">';
                             if (class1 != "") collink = '<div class="titleimg has-file" style="position: relative">' + collink + addImg + '</div>';

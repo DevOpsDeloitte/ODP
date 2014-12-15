@@ -359,4 +359,10 @@
       <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.select_abstractId_team_member_tt" Method="select_abstractId_team_member_tt">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <ElementType Name="select_abstractId_team_member_ttResult">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
