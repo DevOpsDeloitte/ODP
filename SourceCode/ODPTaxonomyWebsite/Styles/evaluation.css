@@ -16,6 +16,7 @@ table.childtable
 {
     -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.0);
     box-shadow: 2px 2px 2px 2px rgba(0,0,0,.0);
+    width: 1200px;
 }
 
 table#DTable td.child

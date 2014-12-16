@@ -95,12 +95,12 @@ $(document).ready(function () {
             },
             "bAutoWidth": false,
             "language": {
-                    "lengthMenu": "Display _MENU_ records per page",
-                    "zeroRecords": "Sorry. No Abstracts found!",
-//                    "info": "Showing page _PAGE_ of _PAGES_",
-                    "infoEmpty": "Sorry. No Abstracts found!",
-                    "infoFiltered": "(filtered from _MAX_ total records)"
-                },
+                "lengthMenu": "Display _MENU_ records per page",
+                "zeroRecords": "Sorry. No Abstracts found!",
+                //                    "info": "Showing page _PAGE_ of _PAGES_",
+                "infoEmpty": "Sorry. No Abstracts found!",
+                "infoFiltered": "(filtered from _MAX_ total records)"
+            },
 
             "columnDefs": [
                      {
@@ -659,25 +659,16 @@ $(document).ready(function () {
         $("#allBox").prop("checked", false);
         $("#selectallBox").prop("checked", false);
 
+        // table redraw occurs, slight time delay introduced.
+        setTimeout(function () {
+            util.selectAllRows(false);
+            util.showOpenRows(false);
+        }, 800);
+
         updateSelectedList();
 
         return;
 
-        $("table input[type=checkbox]").each(function (idx, val) {
-
-            if ($(this).is(":checked")) {
-                $(this).addClass("hideme");
-                //
-                /*
-                table
-                .row($(this).parents('tr'))
-                .remove()
-                .draw();
-
-                */
-            }
-
-        });
     }
 
     function updateSelectedList() {
@@ -827,7 +818,6 @@ $(document).ready(function () {
                           console.log(" add : " + data);
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) added to review list.");
-                              //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
                               loadFilters();
                               $opts.isGridDirty = true;
@@ -853,7 +843,6 @@ $(document).ready(function () {
                           console.log(" remove : " + data);
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from review list.");
-                              //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
                               loadFilters();
                               $opts.isGridDirty = true;
@@ -878,7 +867,6 @@ $(document).ready(function () {
                           console.log(" closed abstract : " + data);
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been closed.");
-                              //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
                               loadFilters();
                               $opts.isGridDirty = true;
@@ -904,7 +892,6 @@ $(document).ready(function () {
                           console.log(" reopen abstract : " + data);
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been Re-opened.");
-                              //$opts.hideItems = $opts.selectedItems;
                               resetSubmitBtnAndCheckboxes();
                               loadFilters();
                               $opts.isGridDirty = true;
@@ -952,9 +939,6 @@ $(document).ready(function () {
                               });
 
 
-
-
-                              //$opts.hideItems = $opts.selectedItems;
 
                               //for exporting abstracts.
                               //var iframe = $("<iframe id='export-frame' src='DataExportHandler.ashx?method=export' />").hide();
