@@ -409,14 +409,10 @@ $(document).ready(function () {
 
         }
 
-
         $("select#filterlist option:selected").each(function () {
             $opts.filterlist = $(this).val();
         });
         config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
-
-
-
     }
 
     function loadFilters() {
@@ -538,7 +534,6 @@ $(document).ready(function () {
         $opts.lastfilterSelection = $opts.filterlist;
         console.log(config.baseURL);
         $("div#downloadLinkBox").hide();
-
         assignPageTitle();
 
 
@@ -557,6 +552,8 @@ $(document).ready(function () {
             $opts.isGridDirty = false;
             //enableFilters();
             enableInterface();
+            //resetSubmitBtnAndCheckboxes();
+            clearSubmitBtnAndCheckboxes();
         });
 
     }
@@ -627,11 +624,12 @@ $(document).ready(function () {
         updateSelectedList();
 
     }
+    // called on change of filter and action ::
     function clearSubmitBtnAndCheckboxes() {
         $("#subButton").removeClass("yes").addClass("no");
         $opts.selectedItems = [];
         $opts.hiderowItems = [];
-        $("#allBox").prop("checked", false);
+        //$("#allBox").prop("checked", false);
         $("#selectallBox").prop("checked", false);
 
         $opts.selectedItems = [];
@@ -645,29 +643,38 @@ $(document).ready(function () {
                 rowx.removeClass("selected");
             }
         });
+        // table redraw occurs, slight time delay introduced.
+        setTimeout(function () {
+            //util.selectAllRows(false);
+            //util.showOpenRows(false);
+        }, 400);
 
         updateSelectedList();
     }
 
-
+    //called after action submitted ::
     function resetSubmitBtnAndCheckboxes() {
 
-        $("#subButton").removeClass("yes").addClass("no");
         util.removeRowsV2($opts.hiderowItems);
-        $opts.selectedItems = [];
-        $opts.hiderowItems = [];
-        $("#allBox").prop("checked", false);
-        $("#selectallBox").prop("checked", false);
-
-        // table redraw occurs, slight time delay introduced.
-        setTimeout(function () {
-            util.selectAllRows(false);
-            util.showOpenRows(false);
-        }, 800);
-
-        updateSelectedList();
-
+        clearSubmitBtnAndCheckboxes();
         return;
+
+//        $("#subButton").removeClass("yes").addClass("no");
+
+//        $opts.selectedItems = [];
+//        $opts.hiderowItems = [];
+//        $("#allBox").prop("checked", false);
+//        $("#selectallBox").prop("checked", false);
+
+//        // table redraw occurs, slight time delay introduced.
+//        setTimeout(function () {
+//            util.selectAllRows(false);
+//            util.showOpenRows(false);
+//        }, 400);
+
+//        updateSelectedList();
+
+//        return;
 
     }
 
@@ -1070,11 +1077,8 @@ $(document).ready(function () {
         switch (type) {
 
             case "":
-
                 break;
-
             default:
-
                 $.ajax({
                     type: "GET",
                     url: "/Evaluation/Handlers/AbstractsListCheck.ashx",
