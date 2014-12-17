@@ -659,22 +659,22 @@ $(document).ready(function () {
         clearSubmitBtnAndCheckboxes();
         return;
 
-//        $("#subButton").removeClass("yes").addClass("no");
+        //        $("#subButton").removeClass("yes").addClass("no");
 
-//        $opts.selectedItems = [];
-//        $opts.hiderowItems = [];
-//        $("#allBox").prop("checked", false);
-//        $("#selectallBox").prop("checked", false);
+        //        $opts.selectedItems = [];
+        //        $opts.hiderowItems = [];
+        //        $("#allBox").prop("checked", false);
+        //        $("#selectallBox").prop("checked", false);
 
-//        // table redraw occurs, slight time delay introduced.
-//        setTimeout(function () {
-//            util.selectAllRows(false);
-//            util.showOpenRows(false);
-//        }, 400);
+        //        // table redraw occurs, slight time delay introduced.
+        //        setTimeout(function () {
+        //            util.selectAllRows(false);
+        //            util.showOpenRows(false);
+        //        }, 400);
 
-//        updateSelectedList();
+        //        updateSelectedList();
 
-//        return;
+        //        return;
 
     }
 
@@ -682,6 +682,28 @@ $(document).ready(function () {
 
 
         $("span#recordCount").text($opts.selectedItems.length);
+
+        //doAllCheck();
+
+
+    }
+
+    function doAllCheckDataBinding() {
+
+        // do all check to simulate two way data-binding.
+        var allselected = true;
+        table.rows().eq(0).each(function (rowIdx, val) {
+            var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
+            if (rowx.find("input[type=checkbox].visiblecheckbox").length > 0) {
+                if (rowx.find("input[type=checkbox].visiblecheckbox").parents("tr").hasClass("selected")) {
+                }
+                else {
+                    allselected = false;
+                }
+            }
+
+        });
+        if (allselected) $("#selectallBox").prop("checked", true);
 
     }
 
@@ -796,13 +818,24 @@ $(document).ready(function () {
                 $opts.selectedItems.splice(i, 1);
                 $opts.hiderowItems.splice(rowi, 1);
             }
+            // check to turn off all 
+            turnOffSelectAll();
+
 
         }
+
+        doAllCheckDataBinding();
         doSubmitChecks();
 
 
 
     });
+
+    function turnOffSelectAll() {
+        if ($("#selectallBox").is(":checked")) {
+            $("#selectallBox").prop("checked", false);
+        }
+    }
 
 
 
@@ -1015,6 +1048,7 @@ $(document).ready(function () {
 
                     disableFilters();
                     //actionsManager();
+                    disableInterface();
                     changeFilters();
                     clearSubmitBtnAndCheckboxes();
 
@@ -1039,6 +1073,7 @@ $(document).ready(function () {
 
             disableFilters();
             //actionsManager();
+            disableInterface();
             changeFilters();
             clearSubmitBtnAndCheckboxes();
 
