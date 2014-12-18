@@ -1,39 +1,139 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ODPSupervisorView_Default.ascx.cs"
     Inherits="ODPTaxonomyWebsite.Evaluation.AbstractListViews.ODPSupervisorView_Default" %>
 <%@ Register TagPrefix="odp" Namespace="ODPTaxonomyDAL_JY" Assembly="ODPTaxonomyDAL_JY" %>
-<h3>
-    View Coded Abstracts</h3>
-     <div class="showingCounts">
-      <span  class="showing">Page&nbsp;:&nbsp;<%=  (AbstractViewGridView.PageIndex + 1) %></span><!-- of <span class="showing"><%=AbstractViewGridView.PageCount %></span>--><br />
-            Showing : 
-            <%  var totalCount = 0;
-                var showing = 0;
-                var displayCounts = false;
-                try
-                {
-                    totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Where(x => x.ApplicationID > 0).Select(x => x).Count();
-                    //showing = (AbstractViewGridView.PageIndex + 1) * AbstractViewGridView.Rows.Count;
-                    var RowSshowing = AbstractViewGridView.Rows.Cast<GridViewRow>().Where(x => x.Cells[2].Text.ToString().Replace("&nbsp;","").Trim().Length > 3);
-                    showing = RowSshowing.Count() ;
-                    if ((AbstractViewGridView.PageIndex + 1) == AbstractViewGridView.PageCount)
-                    {
-                        //showing = totalCount;
-                    }
-                    displayCounts = true;
-                }
-                catch (Exception ex)
-                {
-                    
 
-                }
+
+<div class="sixteen columns" id="functionsbox"> 
+
+<div class="eight columns" id="pagetitlebox"> 
+        <span>Title</span>
+    </div>
             
-            %>
-            <% if (displayCounts)
-               { %>
-            <span class="showing"><%= showing%></span> of <span class="showing"><%= totalCount%></span> Abstracts.
-            <% } %>
+        <div class="three columns filters interface">     
+        <label for="filterlist">Filters List</label>
+        <select name="filterlist"  id="filterlist">
+		        <option selected="selected" value="">Default View</option>
+		        <option value="open">Open Abstract</option>
+		        <option value="review">In Review List</option>
+		        <option value="uncoded">In Review List - Uncoded Only</option>
+        </select>
+
+        </div>   
+
+        <div class="three columns subactions interface">  
+        <label for="actionlistlist">Actions List</label>
+        <select name="actionlist"  id="actionlist">
+		        <option selected="selected" value="addtoreview">Add to Review List</option>
+		        <option value="closeabstracts">Close Abstracts</option>
+		        <option value="reopenabstracts">Reopen Abstracts</option>
+		        <option value="exportabstracts">Export Abstracts</option>
+        </select>
+
+        </div>
+        <div class="two columns subactions interface">
+            <input type="button" name="subButton" id="subButton" value="Submit" class="review button" />
+        </div>
+       
+        <div class="three columns downloads interface">
+            <div id="downloadLinkBox">
+               <a href="">Download Excel Report</a>
             </div>
-<asp:Button runat="server" class="review button no" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />
+            <div id="downloadProgressBox">
+                <div id="downloadSpin"></div><div id="downloadText">Download Link being generated...</div>
+            </div>
+         
+        </div>
+
+    
+
+</div>
+
+<div class="sixteen columns" id="titlesbox">
+    
+    <div class="five columns hidden" id="selectionsBox"> 
+        <span id="recordCount">0</span><span> Records selected</span>
+    </div>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+   // window.config.role = "ODPSupervisor";
+
+</script>
+
+
+<%--<div class="filterBoxes hide">
+
+    
+  
+    <input type="button" name="tbutton" id= "tbutton" value="try" class="review button" />
+
+</div>--%>
+
+<div class="progressBar">
+     <div class="progressText">
+         <span>Loading Records</span>
+         </div>
+    <div class="meter animate">
+	<span style="width: 100%"><span></span></span>
+    </div>
+</div>
+
+<div id="tableContainer">
+        <table id="DTable" class="display" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+
+                    <th class="col_select"><label><input type="checkbox" name="selectallBox" id="selectallBox" value="selectall" class="cboxes"></label></th>
+                    <th class="col_openclose"><label><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes"></label></th>
+                    <th class="col_abstractid">Abstract ID</th>
+                    <th class="col_applicationid">Application ID</th>
+                    <th class="col_statusdate">Status Date</th>
+                    <th class="col_piname">PI Name</th>
+                    <th class="col_title">Title</th>        
+                    <th class="col_flags">Flags</th>
+                    <th class="col_kappa">A1</th>
+                    <th class="col_kappa">A2</th>
+                    <th class="col_kappa">A3</th>
+                    <th class="col_kappa">B</th>
+                    <th class="col_kappa">C</th>
+                    <th class="col_kappa">D</th>
+                    <th class="col_kappa">E</th>
+                    <th class="col_kappa">F</th>
+                    <th class="col_exportdate">Exported Date</th>
+                
+                </tr>
+            </thead>
+
+               <tfoot>
+                <tr>
+                    <th></th>
+                    <th></th>
+                   <th>Abstract ID</th>
+                   <th>Application ID</th>
+                   <th>Status Date</th>
+                   <th>PI Name</th>
+                   <th>Title</th>
+                   <th>Flags</th>
+                    <th>A1</th>
+                    <th>A2</th>
+                    <th>A3</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>E</th>
+                    <th>F</th>
+                    <th>Exported Date</th>
+                </tr>
+            </tfoot>
+      </table>
+  </div>
+
+<%--<asp:Button runat="server" class="review button" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />--%>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped" AllowPaging="false">
     <Columns>
@@ -69,4 +169,10 @@
     </Columns>
     <PagerStyle CssClass="PagerContainer" />
 </odp:AbstractGridView>
-<asp:Button class="review button no" runat="server" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />
+<%--<asp:Button class="review button" runat="server" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />--%>
+
+
+
+
+
+
