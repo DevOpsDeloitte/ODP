@@ -313,7 +313,8 @@ namespace ODPTaxonomyDAL_JY
                         {
                             AbstractListRow ODPConsensus = ConstructNewAbstractListRow(kappa, "ODP Avg", ParentAbstracts[i].AbstractID);
                             ODPConsensus.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_CONSENSUS);
-                            Abstracts.Add(ODPConsensus);
+                            ParentAbstracts[i].ChildRows.Add(ODPConsensus);
+                            //Abstracts.Add(ODPConsensus);
                         }
                     }
 
