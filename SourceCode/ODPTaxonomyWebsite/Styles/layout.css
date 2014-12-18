@@ -239,6 +239,9 @@ table.form input { display: inline-block }
 #pnl_extraData { clear: both }
 .viewSubmissionLink { display: block }
 
+table.dataTable thead .sorting_desc { background: url("../images/sort_desc.png") no-repeat center -8px !important; }
+table.dataTable thead .sorting_asc { background: url("../images/sort_asc.png") no-repeat center 0 !important; }
+table.dataTable thead .sorting {background: none !important; }
 /* #Media Queries
 ================================================== */
 	/* Smaller than standard 960 (devices and browsers) */
