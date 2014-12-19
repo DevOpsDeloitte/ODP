@@ -5,9 +5,10 @@
 
 <div class="sixteen columns" id="functionsbox"> 
 
-<div class="eight columns" id="pagetitlebox"> 
-        <span>Title</span>
-    </div>
+<div id="pagetitlebox"> 
+<h2>View Abstract List</h2>
+        <h3><span>Title</span></h3>
+ 
             
         <div class="three columns filters interface">     
         <label for="filterlist">Filters List</label>
@@ -44,17 +45,16 @@
          
         </div>
 
+
+
     
 
 </div>
 
-<div class="sixteen columns" id="titlesbox">
-    
-    <div class="five columns hidden" id="selectionsBox"> 
+
+     <div class="five columns hidden" id="selectionsBox"> 
         <span id="recordCount">0</span><span> Records selected</span>
     </div>
-</div>
-
 
 
 
@@ -83,6 +83,11 @@
     </div>
 </div>
 
+<div class="sixteen columns" id="titlesbox">
+    
+
+</div>
+
 <div id="tableContainer">
         <table id="DTable" class="display" cellspacing="0" width="100%">
             <thead>
@@ -109,27 +114,7 @@
                 </tr>
             </thead>
 
-               <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                   <th>Abstract ID</th>
-                   <th>Application ID</th>
-                   <th>Status Date</th>
-                   <th>PI Name</th>
-                   <th>Title</th>
-                   <th>Flags</th>
-                    <th>A1</th>
-                    <th>A2</th>
-                    <th>A3</th>
-                    <th>B</th>
-                    <th>C</th>
-                    <th>D</th>
-                    <th>E</th>
-                    <th>F</th>
-                    <th>Exported Date</th>
-                </tr>
-            </tfoot>
+
       </table>
   </div>
 

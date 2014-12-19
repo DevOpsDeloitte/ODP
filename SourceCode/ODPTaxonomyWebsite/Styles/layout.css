@@ -82,7 +82,7 @@ tr.floatingHeader th { width: inherit; }
 .header{ margin: 15px 24px; width:95%; }
 .header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; position: relative; z-index: 2; margin-left: 5px; }
  .header .button:hover { background: #eee; border: 1px solid #eee; }
-.login-display { color: #fff; position: absolute; top: 14px; right: 14px;  }
+.login-display { color: #fff; position: absolute; top: 20px; right: 14px;  }
 
 /* #Login
 ================================================== */
@@ -92,6 +92,7 @@ fieldset.login { background: #fff; width: 40%; -webkit-border-radius: 6px; borde
 fieldset.login legend { font-weight:bold; position:absolute; top:20px; left:20px; font-size: 18px; color: #57616D; }
 fieldset.login input[type=text], fieldset.login input[type=password] { width: 85% }
 fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 11px; text-align: right; }
+a.logout { color: #FFF; font-size: 16px; margin-left: 10px; }
 
 /* #Page Styles
 ================================================== */
@@ -185,7 +186,7 @@ div.commentsHeader { text-align: left; font-size: 17px; font-weight: bold; paddi
 div.subnav { position: fixed; top: 60px; width: 100%; z-index: 999; background: rgba(196, 196, 196, 0.5); height: 40px; right: 0; }
 div.subnav ul { position: absolute; right: 10px; top: -6px; margin: 0; }
 div.subnav input, div.subnav li { display: inline-block }
-.container div.subnav .button { padding: 4px 8px }
+.container div.subnav .button { padding: 6px 11px; }
 table tbody th.box-three.big, table tbody td.box-three.big { width: 55% }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important }
 h2.errormessages { color: Red }
