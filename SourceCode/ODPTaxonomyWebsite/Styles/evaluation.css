@@ -28,7 +28,7 @@ div#selectionsBox.hidden { display: none }
 div#selectionsBox { font-weight: bold; text-align: right; position: absolute; right: 30px; margin-top: 23px; }
 input[type="checkbox"].hidecheckbox { display: none }
 table.childtable > tbody > tr:nth-of-type(even) { background: rgba(245,245,245, 0.43) }
-table.dataTable thead th, table.dataTable thead td { padding: 8px 10px; border-left: 1px solid #ccc; border-bottom: 1px solid #111; }
+table.dataTable thead th, table.dataTable thead td { position: relative; padding: 8px 10px; border-left: 1px solid #ccc; border-bottom: 1px solid #111; }
 .col_select, .col_openclose, .col_flags { width: 20px }
 .col_select { background: none }
 .col_flags { width: 36px }
@@ -87,6 +87,18 @@ div#DTable_length { margin-left: 12px; }
 { border: none; background: #426487 !important; color: #FFF; margin: 2px; border: 1px solid #E0DFDF; padding: 0.3em 0.5em; }
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover {  border: none; background: #426487 !important; color: #FFF; border: 1px solid #E0DFDF; }
 .dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active { background: #ECECEC !important; }
+
+.container .button.no, .container .button.no:hover { background: #E4E4E4; color: #717171; }
+.container .button.yes { background: #fff; color: #666; }
+
+/*.checkbox-control input[type=checkbox], .details-control input[type=checkbox] { visibility: hidden; }*/
+
+.checkbox-control, .details-control .details-control { width: 20px; margin: 20px auto; position: relative; }
+.checkbox-control label, .details-control label { cursor: pointer; position: absolute; width: 20px; height: 20px; top: 15px; left: 8px; border-radius: 4px; border: 1px solid #4D78BB; -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5); box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5); background: #fcfff4; }
+
+.checkbox-control label:after, .details-control label:after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); opacity: 0; content: '';    position: absolute; width: 9px; height: 5px; background: transparent; top: 4px; left: 4px; border: 3px solid #3D97B8; border-top: none; border-right: none; -webkit-transform: rotate(-45deg);  -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); transform: rotate(-45deg); }
+.checkbox-control label:hover::after, .details-control label:hover::after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; filter: alpha(opacity=30);    opacity: 0.5; }
+.checkbox-control input[type=checkbox-control]:checked + label:after, .details-control input[type=checkbox-control]:checked + label:after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; filter: alpha(opacity=100); opacity: 1; }
 
 @media screen and (max-width: 1100px) {
     div#DTable_wrapper { width: 100%; overflow-y: auto; _overflow: auto; margin: 0 0 1em; }
