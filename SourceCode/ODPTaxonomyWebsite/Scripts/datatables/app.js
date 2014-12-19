@@ -565,6 +565,9 @@ $(document).ready(function () {
             case "review":
                 setPageTitle("View Review List");
                 break;
+            case "reviewuncoded":
+                setPageTitle("View Review List Uncoded");
+                break;
             case "open":
                 setPageTitle("View Open Abstracts");
                 break;
@@ -576,6 +579,15 @@ $(document).ready(function () {
                 break;
             case "odpcompleted":
                 setPageTitle("View ODP Completed Abstracts");
+                break;
+            case "codercompleted":
+                setPageTitle("View Coder Completed Abstracts");
+                break;
+            case "activeabstracts":
+                setPageTitle("View Active Abstracts");
+                break;
+            case "exported":
+                setPageTitle("View Exported Abstracts");
                 break;
             case "odpcompletedwonotes":
                 setPageTitle("View ODP Completed Without Notes Abstracts");

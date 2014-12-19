@@ -1,6 +1,6 @@
 ﻿table, table.dataTable { border-collapse: collapse; table-layout: fixed;
  }
-table.dataTable { margin-left: -100px; } 
+table.dataTable { margin-left: -100px;  width: 1200px;} 
 select[name='DTable_length'] { /*width: 69px;; float: left; height: 25; vertical-align: middle; */ }
 table.childtable { -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.0); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.0);}
 table#DTable td.child { border-left: 0px }
@@ -76,9 +76,9 @@ div.progressText { width: 100%; height: 20px; padding-top: 30px; font-weight: bo
 
 
 tr.odd.haschildren.open td, table.childtable td { background: #DDE7EA; }
-div#DTable_info { display: none !important; }
+div#DTable_info { /*display: none !important; */}
 
-.dataTables_wrapper .dataTables_paginate { float: left; }
+.dataTables_wrapper .dataTables_paginate { float: right; }
 
 div#DTable_length { margin-left: 12px; }
 

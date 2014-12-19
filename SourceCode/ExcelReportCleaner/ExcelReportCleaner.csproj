@@ -35,10 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ODPTaxonomyUtility_TT, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\ODPTaxonomyUtility_TT.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
@@ -63,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\ODPTaxonomyUtility_TT.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ODPTaxonomyUtility_TT\ODPTaxonomyUtility_TT.csproj">
+      <Project>{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}</Project>
+      <Name>ODPTaxonomyUtility_TT</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

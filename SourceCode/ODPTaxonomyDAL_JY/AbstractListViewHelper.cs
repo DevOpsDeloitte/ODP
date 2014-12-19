@@ -414,6 +414,24 @@ namespace ODPTaxonomyDAL_JY
                     }
 
                     /* end of add k10-k12 */
+
+                    /* add k13 */
+                    if (AbstractView == AbstractViewRole.ODPSupervisor)
+                    {
+                        // fill in k13 value
+                        foreach (var kappa in KappaData)
+                        {
+                            if (kappa.KappaTypeID == (int)KappaTypeEnum.K13)
+                            {
+                                AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, "ODP Cons" + " " + "vs. ODP Comp", ParentAbstracts[i].AbstractID);
+                                ODPCoderComparison.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_COMPARISON);
+                                ParentAbstracts[i].ChildRows.Add(ODPCoderComparison);
+                                //Abstracts.Add(ODPCoderComparison);
+                            }
+                        }
+                    }
+                    /* end k13 */
+
                 }
                 else
                 {
