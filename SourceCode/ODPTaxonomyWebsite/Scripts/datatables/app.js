@@ -83,6 +83,8 @@ $(document).ready(function () {
                     $("tr[role=row].selected").find("input").prop("checked", "checked");
                 }, 0);
             },
+            "aLengthMenu": [[10, 25, 50, 100], ["Display 10", "Display 25", "Display 50", "Display 100"]],
+            "sDom" : 'lfitp',
             "rowCallback": function (row, data) {
                 //console.log(" invoking rowCallback ::");
                 //                if ($.inArray(data.DT_RowId, $opts.hiderowItems) !== -1) {
@@ -95,7 +97,7 @@ $(document).ready(function () {
             },
             "bAutoWidth": false,
             "language": {
-                "lengthMenu": "Display _MENU_ records per page",
+                "lengthMenu": "_MENU_",
                 "zeroRecords": "Sorry. No Abstracts found!",
                 //                    "info": "Showing page _PAGE_ of _PAGES_",
                 "infoEmpty": "Sorry. No Abstracts found!",
