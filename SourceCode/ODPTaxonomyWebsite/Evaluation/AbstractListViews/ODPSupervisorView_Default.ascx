@@ -4,6 +4,11 @@
 
 
 <div class="sixteen columns" id="functionsbox"> 
+
+<div id="pagetitlebox"> 
+<h2>View Abstract List</h2>
+        <h3><span>Title</span></h3>
+ 
             
         <div class="three columns filters interface">     
         <label for="filterlist">Filters List</label>
@@ -27,15 +32,9 @@
 
         </div>
         <div class="two columns subactions interface">
-            <input type="button" name="subButton" id="subButton" value="Submit" class="review button no" />
+            <input type="button" name="subButton" id="subButton" value="Submit" class="review button" />
         </div>
        
-        <div class="two columns actions interface">  
-            <label><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes"> Expand All</label>
-        </div>
-        <div class="two columns subactions interface">  
-            <label><input type="checkbox" name="selectallBox" id="selectallBox" value="selectall" class="cboxes"> Select All</label>
-        </div>
         <div class="three columns downloads interface">
             <div id="downloadLinkBox">
                <a href="">Download Excel Report</a>
@@ -46,19 +45,16 @@
          
         </div>
 
+
+
     
 
 </div>
 
-<div class="sixteen columns" id="titlesbox">
-    <div class="eight columns" id="pagetitlebox"> 
-        <span>Title</span>
-    </div>
-    <div class="five columns hidden" id="selectionsBox"> 
+
+     <div class="five columns hidden" id="selectionsBox"> 
         <span id="recordCount">0</span><span> Records selected</span>
     </div>
-</div>
-
 
 
 
@@ -74,26 +70,31 @@
 
     
   
-    <input type="button" name="tbutton" id= "tbutton" value="try" class="review button yes" />
+    <input type="button" name="tbutton" id= "tbutton" value="try" class="review button" />
 
 </div>--%>
 
 <div class="progressBar">
-     <div id="spinner"></div>
      <div class="progressText">
-         <span>Loading records...</span>
+         <span>Loading Records</span>
          </div>
     <div class="meter animate">
 	<span style="width: 100%"><span></span></span>
     </div>
 </div>
 
+<div class="sixteen columns" id="titlesbox">
+    
+
+</div>
+
 <div id="tableContainer">
         <table id="DTable" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th class="col_select"></th>
-                    <th class="col_openclose"></th>
+
+                    <th class="col_select"><input type="checkbox" name="selectallBox" id="selectallBox" value="selectall" class="cboxes"><label></label></th>
+                    <th class="col_openclose"><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes"><label></label></th>
                     <th class="col_abstractid">Abstract ID</th>
                     <th class="col_applicationid">Application ID</th>
                     <th class="col_statusdate">Status Date</th>
@@ -113,31 +114,11 @@
                 </tr>
             </thead>
 
-               <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                   <th>Abstract ID</th>
-                   <th>Application ID</th>
-                   <th>Status Date</th>
-                   <th>PI Name</th>
-                   <th>Title</th>
-                   <th>Flags</th>
-                    <th>A1</th>
-                    <th>A2</th>
-                    <th>A3</th>
-                    <th>B</th>
-                    <th>C</th>
-                    <th>D</th>
-                    <th>E</th>
-                    <th>F</th>
-                    <th>Exported Date</th>
-                </tr>
-            </tfoot>
+
       </table>
   </div>
 
-<%--<asp:Button runat="server" class="review button no" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />--%>
+<%--<asp:Button runat="server" class="review button" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />--%>
 <odp:AbstractGridView runat="server" ID="AbstractViewGridView" AutoGenerateColumns="false"
     GridLines="None" CssClass="AbstractViewTable bordered zebra-striped" AllowPaging="false">
     <Columns>
@@ -173,7 +154,7 @@
     </Columns>
     <PagerStyle CssClass="PagerContainer" />
 </odp:AbstractGridView>
-<%--<asp:Button class="review button no" runat="server" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />--%>
+<%--<asp:Button class="review button" runat="server" Text="Add to Review List" OnClick="AddtoReviewHandler" OnClientClick="return checkStatus();" />--%>
 
 
 
