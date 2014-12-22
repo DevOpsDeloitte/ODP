@@ -41,12 +41,16 @@
 <form id="Form1" runat="server">
         <div id="header_container">
             <div class="header">
-            <h1>ODP Taxonomy</h1>
+            
                 <a href="#" id="showLeftPush" class="button" runat="server">Menu
                   
                 </a>
+
+
                 <asp:Label ID="lbl_role" runat="server" Visible="false" CssClass="role-display"></asp:Label>
                 &nbsp;<div class="login-display">
+
+                <h1>ODP Taxonomy</h1>
                 
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <LoggedInTemplate>

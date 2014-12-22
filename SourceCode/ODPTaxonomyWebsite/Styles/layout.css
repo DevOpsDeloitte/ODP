@@ -31,12 +31,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#456777', end
 h1, h2 { font-family: 'open_sansbold', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 h3, h4, h5, h6 { font-family: 'open_sanssemibold',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
+h1 { color: #fff; font-size: 1.5em; text-align: center; right: 0; z-index: 1; margin-right: 20px; display: inline-block; }
 .title, h2 { display: block; color: #fff; text-transform: uppercase; font-size: 1.65em; margin: 0 10px; }
 .subtitle, h3{ display: block; font-size: 1.25em; font-weight: normal; text-align: left; color: #0C3966; margin: 0 0 4px 10px; }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; display: block; margin: 20px auto; }
 .hidden { display:none;}
-.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
+.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; -webkit-appearance: none; /*Safari/Chrome*/
+    -moz-appearance: none; /*Firefox*/
+    -ms-appearance: none; /*IE*/
+    -o-appearance: none; /*Opera*/
+    appearance: none;
+
+    -webkit-border-radius: 0; }
 	.container .button.yes { background: #24AA7A; color: #fff }
 	.container .button.no { background: #9B0202; color: #fff; }
 	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton, .container .button.no#disabledconsensusButton, .button.no#disabledwatchConsensusButton, .button.no#disabledwatchComparisonButton { opacity: 0.4; cursor: default; }
@@ -64,6 +70,24 @@ table .coders { position: absolute; z-index: 9; color: #FFF; right: 4px; top: 6p
 table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -webkit-box-shadow: none; }
 	table#MainContent_rdl_activeYN td { padding: 0}
 
+input, select { position: relative; -webkit-appearance: none; /*Safari/Chrome*/   -moz-appearance: none; /*Firefox*/    -ms-appearance: none; /*IE*/   -o-appearance: none; /*Opera*/    appearance: none;   -webkit-border-radius: 0; }
+
+select:after { content: "";
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+font-size: 60%;
+line-height: 30px;
+padding: 0 7px;
+background: #BBB;
+color: #FFF;
+pointer-events: none;
+-webkit-border-radius: 0 6px 6px 0;
+-moz-border-radius: 0 6px 6px 0;
+border-radius: 0 6px 6px 0;
+}
+
 input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline;}
 	select { padding: 5px}
 input[type="submit"].review { margin-left: 10px; }
@@ -78,11 +102,11 @@ tr.floatingHeader { position: fixed; top: 62px; visibility: hidden; z-index: 999
 tr.floatingHeader th { width: inherit; }
 
 /* Sticky Header */
-#header_container { background:rgba(47, 85, 124, 0.9); height:60px; position:fixed; width:100%; top:0; z-index: 999; }
-.header{ margin: 15px 24px; width:95%; }
+#header_container { background:rgba(47, 85, 124, 0.9); height:50px; position:fixed; width:100%; top:0; z-index: 999; }
+.header{ margin: 8px 12px; width:95%; }
 .header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; position: relative; z-index: 2; margin-left: 5px; }
  .header .button:hover { background: #eee; border: 1px solid #eee; }
-.login-display { color: #fff; position: absolute; top: 20px; right: 14px;  }
+.login-display { color: #fff; position: absolute; top: 0px; right: 14px;  }
 
 /* #Login
 ================================================== */
@@ -183,10 +207,10 @@ div.icon.open { width: 16px; height: 16px; background: #FFFFFF; display: inline-
 top: 3px; }
 div.icon.open:before { content: "?"; position: absolute; font-weight: bold; top: -1px; left: 4px; font-size: 11px; color: #BDBABA; }
 div.commentsHeader { text-align: left; font-size: 17px; font-weight: bold; padding: 14px 0px; }
-div.subnav { position: fixed; top: 60px; width: 100%; z-index: 999; background: rgba(196, 196, 196, 0.5); height: 40px; right: 0; }
+div.subnav { position: fixed; top: 50px; width: 100%; z-index: 999; background: rgba(240, 240, 240, 0.9); height: 44px; right: 0; }
 div.subnav ul { position: absolute; right: 10px; top: -6px; margin: 0; }
 div.subnav input, div.subnav li { display: inline-block }
-.container div.subnav .button { padding: 6px 11px; }
+.container div.subnav .button { padding: 9px 11px; }
 table tbody th.box-three.big, table tbody td.box-three.big { width: 55% }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important }
 h2.errormessages { color: Red }
