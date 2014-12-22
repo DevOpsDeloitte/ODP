@@ -42,6 +42,7 @@ option:disabled { color: #aaa }
 div.titlebox { width: 153px }
 table.dataTable tbody th, table.dataTable tbody td { padding: 8px 10px; border: 1px solid #ccc; }
 td.details-control:after { content: "+"; font-size: 28px; top: 6px; position: relative; color: #32577B; cursor: pointer; }
+.nochildren td.details-control:after { content: ""; font-size: 28px; top: 6px; position: relative; color: #32577B; cursor: pointer; }
 td.details-control.nodisplay { background-image: none }
 tr.open td.details-control:after { content: "–"; }
 #DTable td.ccol, table.dataTable tbody th.ccol, table.dataTable tbody td.ccol { /*display: inline-block;*/ padding: 8px 10px; border-left: 0; display: table-cell; text-align: left; border-left: 1px solid #ccc; }
