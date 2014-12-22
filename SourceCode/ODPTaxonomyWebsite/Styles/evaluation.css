@@ -78,7 +78,7 @@ div.progressText { width: 100%; height: 20px; padding-top: 30px; font-weight: bo
 tr.odd.haschildren.open td, table.childtable td { background: #DDE7EA; }
 div#DTable_info { position: relative; top: -23px; left: 13px; font-size: 13px; }
 
-.dataTables_wrapper .dataTables_paginate { float: right; }
+.dataTables_wrapper .dataTables_paginate { float: left; }
 
 div#DTable_length { margin-left: 12px; }
 
