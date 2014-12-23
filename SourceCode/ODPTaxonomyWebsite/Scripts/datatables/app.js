@@ -111,7 +111,7 @@ $(document).ready(function () {
                          "render": function (data, type, row) {
                              // default condition add to review.
                              if (config.role == "ODPSupervisor") {
-                                 console.log(" show row data : " + JSON.stringify(row));
+                                 //console.log(" show row data : " + JSON.stringify(row));
                                  return '<input type="checkbox" id="rowabs-' + row.AbstractID + '" /><label for="rowabs-' + row.AbstractID + '"></label>';
 
                                  if ($opts.filterlist != "review") {
@@ -464,9 +464,11 @@ $(document).ready(function () {
     }
     function hideSubActionsInterface() {
         $(".subactions.interface").hide();
+        $("#selectallBox").addClass("hidecheckbox");
     }
     function showSubActionsInterface() {
         $(".subactions.interface").show();
+        $("#selectallBox").removeClass("hidecheckbox");
     }
     function setPageTitle(title) {
         $("#pagetitlebox span").text(title);
