@@ -52,7 +52,7 @@
                         <LoggedInTemplate>
                             Welcome <asp:LoginName ID="HeadLoginName" runat="server" />
                             
-                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="logout" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
+                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
