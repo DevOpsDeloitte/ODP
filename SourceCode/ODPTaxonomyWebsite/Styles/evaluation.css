@@ -27,7 +27,7 @@ div#downloadProgressBox div#downloadText { -webkit-animation: blinker 1.7s cubic
 div#functionsbox{ position: relative;}
 div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px; z-index: 9999999;}
 div#selectionsBox.hidden { display: none }
-div#selectionsBox { font-weight: bold; text-align: right; position: absolute; position: absolute; top: 70px; right: -150px; }
+div#selectionsBox { font-weight: bold; text-align: right; position: absolute; top: 70px; right: -205px; }
 input[type="checkbox"].hidecheckbox { display: none }
 table.childtable > tbody > tr:nth-of-type(even) { background: rgba(245,245,245, 0.43) }
 table.dataTable thead th, table.dataTable thead td { position: relative; padding: 8px 10px; border-left: 1px solid #ccc; border-bottom: 1px solid #111; }
@@ -59,7 +59,6 @@ div.scan-file { top : -4px; right: -4px; }
 div.has-file a { padding-right: 25px; display: block; }
 div#spinner { width: 50px; height: 50px; position: relative; float: left; }
 div#tableContainer { display: none }
-div#tableContainer { width: 1200px; margin-left: -100px;}
 div.filterBoxes.hide { display: none }
 #subButton { margin: 0; margin-top: 18px; }
 #allBox, .cboxes { margin: 27px 0 0 0 }
@@ -107,16 +106,28 @@ div#DTable_length { margin-left: 12px; float: right; }
 .checkbox-control, .details-control .details-control { width: 20px; margin: 20px auto; position: relative; }
 .checkbox-control label, .details-control label { cursor: pointer; position: absolute; width: 20px; height: 20px; top: 15px; left: 8px; border-radius: 4px; border: 1px solid #4D78BB; -webkit-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5); -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5); box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5); background: #fcfff4; }
 
-.checkbox-control label:after, .details-control label:after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); opacity: 0; content: '';    position: absolute; width: 9px; height: 5px; background: transparent; top: 4px; left: 4px; border: 3px solid #3D97B8; border-top: none; border-right: none; -webkit-transform: rotate(-45deg);  -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); transform: rotate(-45deg); }
-.checkbox-control label:hover::after, .details-control label:hover::after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; filter: alpha(opacity=30);    opacity: 0.5; }
-.checkbox-control input[type=checkbox]:checked + label:after, .details-control input[type=checkbox]:checked + label:after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; filter: alpha(opacity=100); opacity: 1; }
+.checkbox-control label:after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); opacity: 0; content: '';    position: absolute; width: 9px; height: 5px; background: transparent; top: 4px; left: 4px; border: 3px solid #3D97B8; border-top: none; border-right: none; -webkit-transform: rotate(-45deg);  -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); transform: rotate(-45deg); }
+.checkbox-control label:hover::after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)"; filter: alpha(opacity=30);    opacity: 0.5; }
+.checkbox-control input[type=checkbox]:checked + label:after { -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; filter: alpha(opacity=100); opacity: 1; }
 
 th.details-control input#allBox + label {  cursor: pointer; position: absolute; width: 20px; height: 20px; top: 15px; left: 8px; border-radius: 0px; border: 0px solid #4D78BB; -webkit-box-shadow: inset 0px 0px 0px white, 0px 0px 0px rgba(0,0,0,0.5); -moz-box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0,0,0,0.5); box-shadow: inset 0px 0px 0px white, 0px 0px 0px rgba(0,0,0,0.5); background: white; }
 th.details-control input#allBox + label:after{  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; filter: alpha(opacity=100); opacity: 1; content: '+';    position: absolute; width: 9px; height: 5px; background: transparent; top: 4px; left: 4px; border: 0px solid #3D97B8; border-top: none; border-right: none; -webkit-transform: rotate(0deg);  -moz-transform: rotate(0deg); -o-transform: rotate(0deg); -ms-transform: rotate(0deg); transform: rotate(0deg);}
 th.details-control input#allBox:checked + label:after{ content: '-'; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)"; filter: alpha(opacity=100); opacity: 1;}
 
-@media screen and (max-width: 1100px) {
+.details-control label:after { content: "+"; font-size: 28px; top: 2px; left: 2px; position: relative; color: #3D97B8; cursor: pointer; }
+.details-control input[type=checkbox]:checked + label:after { content: "–";  }
+.details-control label:hover::after, .details-control input[type=checkbox]:checked + label:hover::after { content: "";  }
+
+@media screen and (min-width: 1200px) {
+    div#tableContainer { width: 1200px; margin-left: -100px;}
+}
+
+@media screen and (max-width: 1200px) {
     div#DTable_wrapper { width: 100%; overflow-y: auto; _overflow: auto; margin: 0 0 1em; }
-    table.dataTable { margin-left: 0px; } 
+    table.dataTable, #pagetitlebox { margin-left: 0px; }
+    div#filtersContainer { position: relative; top: auto; left: auto; right: auto; }
+    div#selectionsBox { top: 115px; right: 0; }
+    div#DTable_length { float: left; }
+
 }
  

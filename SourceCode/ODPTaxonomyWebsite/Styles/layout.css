@@ -82,6 +82,8 @@ tr.floatingHeader th { width: inherit; }
 .header{ margin: 15px 24px; width:95%; }
 .header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; position: relative; z-index: 2; margin-left: 5px; }
  .header .button:hover { background: #eee; border: 1px solid #eee; }
+.header .login-display .button, .header .login-display .button:hover { background: none; border: none; box-shadow: none; color: #FFF; }
+ .header .login-display .button:hover { text-decoration: underline; }
 .login-display { color: #fff; position: absolute; top: 20px; right: 14px;  }
 
 /* #Login
