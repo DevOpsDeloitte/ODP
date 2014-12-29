@@ -8,28 +8,29 @@
 <div id="pagetitlebox"> 
 <h2>View Abstract List</h2>
         <h3><span>Title</span></h3>
+</div>
+
+<div id="filtersContainer">
  
             
         <div class="three columns filters interface">     
-        <label for="filterlist">Filters List</label>
-        <select name="filterlist"  id="filterlist">
-		        <option selected="selected" value="">Default View</option>
-		        <option value="open">Open Abstract</option>
-		        <option value="review">In Review List</option>
-		        <option value="uncoded">In Review List - Uncoded Only</option>
-        </select>
-
+            <label for="filterlist">Filters List</label>
+            <select name="filterlist"  id="filterlist">
+		            <option selected="selected" value="">Default View</option>
+		            <option value="open">Open Abstract</option>
+		            <option value="review">In Review List</option>
+		            <option value="uncoded">In Review List - Uncoded Only</option>
+            </select>
         </div>   
 
         <div class="three columns subactions interface">  
-        <label for="actionlistlist">Actions List</label>
-        <select name="actionlist"  id="actionlist">
-		        <option selected="selected" value="addtoreview">Add to Review List</option>
-		        <option value="closeabstracts">Close Abstracts</option>
-		        <option value="reopenabstracts">Reopen Abstracts</option>
-		        <option value="exportabstracts">Export Abstracts</option>
-        </select>
-
+            <label for="actionlistlist">Actions List</label>
+            <select name="actionlist"  id="actionlist">
+		            <option selected="selected" value="addtoreview">Add to Review List</option>
+		            <option value="closeabstracts">Close Abstracts</option>
+		            <option value="reopenabstracts">Reopen Abstracts</option>
+		            <option value="exportabstracts">Export Abstracts</option>
+            </select>
         </div>
         <div class="two columns subactions interface">
             <input type="button" name="subButton" id="subButton" value="Submit" class="review button" />
@@ -41,20 +42,15 @@
             </div>
             <div id="downloadProgressBox">
                 <div id="downloadSpin"></div><div id="downloadText">Download Link being generated...</div>
-            </div>
-         
+            </div>     
         </div>
 
 
-
-    
-
 </div>
 
-
-     <div class="five columns hidden" id="selectionsBox"> 
-        <span id="recordCount">0</span><span> Records selected</span>
-    </div>
+<div class="five columns hidden" id="selectionsBox"> 
+    <span id="recordCount">0</span><span> Records selected</span>
+</div>
 
 
 
@@ -66,13 +62,6 @@
 </script>
 
 
-<%--<div class="filterBoxes hide">
-
-    
-  
-    <input type="button" name="tbutton" id= "tbutton" value="try" class="review button" />
-
-</div>--%>
 
 <div class="progressBar">
      <div class="progressText">

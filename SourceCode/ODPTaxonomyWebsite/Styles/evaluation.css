@@ -24,9 +24,10 @@ div#downloadProgressBox div#downloadText { -webkit-animation: blinker 1.7s cubic
     from { background: red }
     to { background: yellow }
 }
-div#functionsbox{ }
+div#functionsbox{ position: relative;}
+div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px; z-index: 9999999;}
 div#selectionsBox.hidden { display: none }
-div#selectionsBox { font-weight: bold; text-align: right; position: absolute; right: 30px; margin-top: 23px; }
+div#selectionsBox { font-weight: bold; text-align: right; position: absolute; position: absolute; top: 70px; right: -150px; }
 input[type="checkbox"].hidecheckbox { display: none }
 table.childtable > tbody > tr:nth-of-type(even) { background: rgba(245,245,245, 0.43) }
 table.dataTable thead th, table.dataTable thead td { position: relative; padding: 8px 10px; border-left: 1px solid #ccc; border-bottom: 1px solid #111; }
@@ -64,8 +65,9 @@ div.progressBar { width: 100%; height: 100px; border: 0px solid #fff; display: b
 div.progressText { width: 100%; height: 20px; padding-top: 30px; font-weight: bold; text-align: center; display: block; }
 .dataTables_wrapper .dataTables_filter input { margin-left: 0.5em; line-height: 30px; height: 30px; }
 .dataTables_wrapper .dataTables_filter { margin-top: 25px; margin-top: 0px; }
+#pagetitlebox{ height: 100px; margin-left: -100px;}
 #pagetitlebox span { font-weight: bold; font-size: 18px; }
-.meter { height: 20px; /* Can be anything */ position: relative; margin: 30px 0 20px 0; /* Just for demo spacing */ background: #fff; }
+.meter { height: 20px; /* Can be anything */ position: relative; margin: 30px 0 20px 0; /* Just for demo spacing */ background: #fff;}
 .meter > span { display: block; height: 100%; background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(50, 87, 123)), color-stop(1, rgb(50, 87, 123)) ); background-image: -moz-linear-gradient( center bottom, rgb(50, 87, 123) 37%, rgb(50, 87, 123) 69% ); -webkit-box-shadow: inset 0 2px 9px  rgba(255,255,255,0.3), inset 0 -2px 6px rgba(0,0,0,0.4); -moz-box-shadow: inset 0 2px 9px  rgba(255,255,255,0.3), inset 0 -2px 6px rgba(0,0,0,0.4); box-shadow: inset 0 2px 9px  rgba(255,255,255,0.3), inset 0 -2px 6px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
 .meter > span:after, .animate > span > span { content: ""; position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent) ); background-image: -moz-linear-gradient( -45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent ); z-index: 1; -webkit-background-size: 50px 50px; -moz-background-size: 50px 50px; -webkit-animation: move 2s linear infinite; -webkit-border-top-right-radius: 8px; -webkit-border-bottom-right-radius: 8px; -moz-border-radius-topright: 8px; -moz-border-radius-bottomright: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; -webkit-border-top-left-radius: 20px; -webkit-border-bottom-left-radius: 20px; -moz-border-radius-topleft: 20px; -moz-border-radius-bottomleft: 20px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; overflow: hidden; }
 .animate > span:after { display: none }
