@@ -61,7 +61,7 @@ $(document).ready(function () {
         $opts.lastfilterSelection = "review";
     }
     if (config.role == "ODPSupervisor") {
-        $("div#selectionsBox").removeClass("hidden");
+        //$("div#selectionsBox").removeClass("hidden");
     }
 
     filtersManager(); //Init
@@ -703,7 +703,12 @@ $(document).ready(function () {
 
 
         $("span#recordCount").text($opts.selectedItems.length);
-
+            if($opts.selectedItems.length > 0 && config.role == "ODPSupervisor") {
+                    $("div#selectionsBox").removeClass("hidden");
+            }
+            else {
+                    $("div#selectionsBox").addClass("hidden");
+            }
         //doAllCheck();
 
 
