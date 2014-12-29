@@ -84,7 +84,7 @@ $(document).ready(function () {
                 }, 0);
             },
             "aLengthMenu": [[10, 25, 50, 100], ["Display 10", "Display 25", "Display 50", "Display 100"]],
-            "sDom": 'lfitp',
+            "sDom": 'fltip',
             "rowCallback": function (row, data) {
                 //console.log(" invoking rowCallback ::");
                 //                if ($.inArray(data.DT_RowId, $opts.hiderowItems) !== -1) {
