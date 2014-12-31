@@ -145,7 +145,7 @@ app.directive("outcomeBox", function ($rootScope) {
 
                 //console.log( x + '       ' + retval);
                 if (retval[0] != "") retval[0] = "ODP";
-                if (retval[1] != "") retval[1] = "CODER";
+                if (retval[1] != "") retval[1] = window.CONTRACTOR_NAME;
 
 
                 return retval;

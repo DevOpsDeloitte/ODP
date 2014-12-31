@@ -37,7 +37,7 @@
     <div class="view-abstract-panel clearfix" >
     <asp:Panel runat="server" ID="pnl_odpValues" ClientIDMode="Static" Visible="false">
     <asp:LinkButton runat="server" ID="link_odpCompare" CssClass="viewSubmissionLink"  onclick="link_Submission_Click"
-         CommandArgument='' Visible="false">ODP vs. Coder Compare</asp:LinkButton>
+         CommandArgument='' Visible="false">ODP vs. <%= System.Configuration.ConfigurationManager.AppSettings["contractorName"] %> Compare</asp:LinkButton>
         <asp:LinkButton runat="server" ID="link_odpConsensus" CssClass="viewSubmissionLink"  onclick="link_Submission_Click"
          CommandArgument='' Visible="false">ODP Consensus</asp:LinkButton>
          <asp:HyperLink ID="link_odpNotes" runat="server"
@@ -53,9 +53,9 @@
 
     <asp:Panel runat="server" ID="pnl_coderValues" ClientIDMode="Static" Visible="false">        
         <asp:LinkButton runat="server" ID="link_coderConsensus" CssClass="viewSubmissionLink" onclick="link_Submission_Click" 
-            CommandArgument='' Visible="false">Coder Consensus</asp:LinkButton>
+            CommandArgument='' Visible="false"> <%= System.Configuration.ConfigurationManager.AppSettings["contractorName"] %>  Consensus</asp:LinkButton>
             <asp:HyperLink ID="link_coderNotes" runat="server"
-            NavigateUrl="" Target="_blank" Visible="false">Coder Notes(PDF)</asp:HyperLink>
+            NavigateUrl="" Target="_blank" Visible="false"> <%= System.Configuration.ConfigurationManager.AppSettings["contractorName"] %>  Notes(PDF)</asp:HyperLink>
         
         <asp:Repeater runat="server" ID="rpt_coderSubmissions">
             <ItemTemplate>
