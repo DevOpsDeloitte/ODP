@@ -431,7 +431,7 @@ $(document).ready(function () {
         })
                       .done(function (data) {
                           if (data.opts.length > 0) {
-                              console.log(" filters received..");
+                              //console.log(" filters received..");
                               $("select#filterlist").empty();
 
                               for (var i = 0; i < data.opts.length; i++) {
@@ -748,11 +748,9 @@ $(document).ready(function () {
                 rowx.addClass('nochildren');
                 rowx.find("td.details-control").addClass('nodisplay');
 
-                //console.log(" here ::" + rowx);
             }
             else {
-                //                var rowx = table.row(rowIdx).nodes()
-                //                .to$();     // Convert to a jQuery object
+
                 rowx.addClass('haschildren');
 
             }
