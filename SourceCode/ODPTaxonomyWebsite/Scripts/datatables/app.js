@@ -307,12 +307,13 @@ $(document).ready(function () {
         childrenRedraw(table.data());
         $opts.isGridDirty = false;
         if (config.role == "ODPSupervisor") {
-            if ($opts.actionlist == "reopenabstracts") {
-                reopenListCheck();
-            }
-            else {
-                ListCheck($opts.actionlist);
-            }
+            serverCheckForActions();
+            //            if ($opts.actionlist == "reopenabstracts") {
+            //                reopenListCheck();
+            //            }
+            //            else {
+            //                ListCheck($opts.actionlist);
+            //            }
         }
         //enableFilters();
         enableInterface();
@@ -479,57 +480,74 @@ $(document).ready(function () {
         switch ($opts.filterlist) {
 
             case "review":
-                $("select#actionlist").append('<option selected="selected" value="removereview">Remove From Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="removereview">Remove From Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 $opts.actionlist = "removereview";
+                $opts.actionlist = "selectaction";
                 break;
             case "reviewuncoded":
-                $("select#actionlist").append('<option selected="selected" value="removereview">Remove From Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="removereview">Remove From Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 $opts.actionlist = "removereview";
+                $opts.actionlist = "selectaction";
                 break;
             case "codercompleted":
-                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
                 break;
             case "activeabstracts":
-                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
                 break;
             case "odpcompleted":
-                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
                 break;
             case "odpcompletedwonotes":
-                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
                 break;
             case "closed":
-                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
                 break;
             case "exported":
-                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
                 break;
 
             default:
-                $("select#actionlist").append('<option selected="selected" value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
                 break;
 
 
@@ -551,12 +569,27 @@ $(document).ready(function () {
         table.ajax.reload(function (json) {
             childrenRedraw(table.data());
             if (config.role == "ODPSupervisor") {
-                if ($opts.actionlist == "reopenabstracts") {
-                    reopenListCheck();
-                }
-                else {
-                    ListCheck($opts.actionlist);
-                }
+                // change check of action checkboxes happens here - when Filter re-loads.. same block repeated table.init.
+                serverCheckForActions();
+                //                switch ($opts.actionlist) {
+
+                //                    case "reopenabstracts":
+                //                        reopenListCheck();
+                //                        break;
+                //                    case "selectaction":
+                //                        hideAllCheckBoxes();
+                //                        break;
+                //                    default:
+                //                        ListCheck($opts.actionlist);
+                //                        break;
+
+                //                }
+                //                if ($opts.actionlist == "reopenabstracts") {
+                //                    reopenListCheck();
+                //                }
+                //                else {
+                //                    ListCheck($opts.actionlist);
+                //                }
             }
             $opts.isGridDirty = false;
             //enableFilters();
@@ -565,6 +598,26 @@ $(document).ready(function () {
             clearSubmitBtnAndCheckboxes();
         });
 
+    }
+
+    function serverCheckForActions() {
+
+        switch ($opts.actionlist) {
+
+            case "reopenabstracts":
+                $("th.col_select").children().show();
+                reopenListCheck();
+                break;
+            case "selectaction":
+                $("th.col_select").children().hide();
+                hideAllCheckBoxes();
+                break;
+            default:
+                $("th.col_select").children().show();
+                ListCheck($opts.actionlist);
+                break;
+
+        }
     }
 
     function assignPageTitle() {
@@ -703,12 +756,12 @@ $(document).ready(function () {
 
 
         $("span#recordCount").text($opts.selectedItems.length);
-            if($opts.selectedItems.length > 0 && config.role == "ODPSupervisor") {
-                    $("div#selectionsBox").removeClass("hidden");
-            }
-            else {
-                    $("div#selectionsBox").addClass("hidden");
-            }
+        if ($opts.selectedItems.length > 0 && config.role == "ODPSupervisor") {
+            $("div#selectionsBox").removeClass("hidden");
+        }
+        else {
+            $("div#selectionsBox").addClass("hidden");
+        }
         //doAllCheck();
 
 
@@ -1067,7 +1120,7 @@ $(document).ready(function () {
         switch ($opts.actionlist) {
 
             case "reopenabstracts":
-
+                $("th.col_select").children().show();
                 if ($opts.isGridDirty) {
 
                     disableFilters();
@@ -1084,7 +1137,15 @@ $(document).ready(function () {
 
                 break;
 
+            case "selectaction":
+                $("th.col_select").children().hide();
+                clearSubmitBtnAndCheckboxes();
+                hideAllCheckBoxes();
+
+                break;
+
             default:
+                $("th.col_select").children().show();
                 reloadForAction($opts.actionlist);
                 break;
 
@@ -1159,6 +1220,21 @@ $(document).ready(function () {
                 break;
 
         }
+
+    }
+
+    function hideAllCheckBoxes() {
+
+        table.rows().eq(0).each(function (rowIdx, val) {
+            var rowx = table.row(rowIdx).nodes()
+                .to$();     // Convert to a jQuery object
+            //rowx.find("input[type=checkbox]").addClass("visiblecheckbox").removeClass("hidecheckbox"); // make all visible
+            rowx.find("input[type=checkbox]").addClass("hidecheckbox").removeClass("visiblecheckbox"); // hide all boxes.
+            rowx.find("input[type=checkbox]").prop("checked", false);
+            rowx.removeClass("selected");
+
+        });
+
 
     }
 
