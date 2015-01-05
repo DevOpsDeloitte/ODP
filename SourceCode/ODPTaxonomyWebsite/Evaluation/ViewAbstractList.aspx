@@ -6,7 +6,7 @@
     //Tatiana's Code for Redirection Message
     var userName = '<%= userNAME %>';
 
-    function alertify_confirm(x) {
+    function alertify_confirm(x, y) {
 
         window.alertify.set({
             labels: {
@@ -18,7 +18,7 @@
             buttonFocus: "none"
         });
 
-        alertify.confirm("A team member has already opened another abstract for Coding. You will be redirected to Abstract ID: " + x, function (e) {
+        alertify.confirm('A team member has already opened another abstract for Coding. You will be redirected to Abstract "' + y + '"', function (e) {
             if (e) {
                 //console.log(clickElem);
 
@@ -43,6 +43,7 @@
                 var JSONObject = jQuery.parseJSON(data);
                 var abstractStatus = Number(JSONObject.status);
                 var abstractInProcessId = JSONObject.abstractId;
+                var abstractTitle = JSONObject.abstractTitle;
                 var success = JSONObject.success;
                 //alert(JSONObject.status + '; ' + JSONObject.abstractId);
 
@@ -50,13 +51,13 @@
                     //alert(success);
                     if (abstractStatus >= 6 && abstractStatus <= 9) {
                         //alert(abstractStatus);
-                        if (abstractInProcessId == null) {
+                        if (abstractInProcessId == null || abstractInProcessId == "") {
                             //alert("Empty!");
                             window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
                             return false;
                         }
                         else if (abstractInProcessId.toString() != abstractId.toString()) {
-                            alertify_confirm(abstractInProcessId);
+                            alertify_confirm(abstractInProcessId, abstractTitle);
                             return false;
                         }
                         else {

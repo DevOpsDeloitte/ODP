@@ -6712,6 +6712,8 @@ namespace ODPTaxonomyDAL_TT
 		
 		private System.Nullable<int> _AbstractID;
 		
+		private string _ProjectTitle;
+		
 		public select_abstractId_team_member_ttResult()
 		{
 		}
@@ -6728,6 +6730,22 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._AbstractID != value))
 				{
 					this._AbstractID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ProjectTitle
+		{
+			get
+			{
+				return this._ProjectTitle;
+			}
+			set
+			{
+				if ((this._ProjectTitle != value))
+				{
+					this._ProjectTitle = value;
 				}
 			}
 		}

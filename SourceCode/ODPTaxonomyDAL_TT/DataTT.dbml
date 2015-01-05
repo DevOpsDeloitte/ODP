@@ -363,6 +363,7 @@
     <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
     <ElementType Name="select_abstractId_team_member_ttResult">
       <Column Name="AbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

@@ -879,6 +879,7 @@ namespace ODPTaxonomyDAL_TT
         public static string GetAbstarctIdForTeamMember(string connString, string userCurrentName)
         {
             string abstractId = null;
+            string abstractTitle = null;
 
             using (DataDataContext db = new DataDataContext(connString))
             {
@@ -886,12 +887,13 @@ namespace ODPTaxonomyDAL_TT
                 foreach (var m in matches)
                 {
                     abstractId = m.AbstractID.ToString();
+                    abstractTitle = m.ProjectTitle;
                     break;
                 }
 
             }
 
-            return abstractId;
+            return abstractId + "," + abstractTitle;
         }
 
 

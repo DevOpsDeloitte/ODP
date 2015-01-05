@@ -41,11 +41,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         try
                         {
                             connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
-                            string abstractId = Common.GetAbstarctIdForTeamMember(connString, userName);
+                            string abstractData = Common.GetAbstarctIdForTeamMember(connString, userName);
+                            string[] arr = abstractData.Split(',');
                             int status = (int)Common.GetAbstractStatus(connString, id);
 
                             context.Response.ContentType = "text/plain";
-                            context.Response.Write(JsonConvert.SerializeObject(new { status = status, abstractId = abstractId, success = true }));
+                            context.Response.Write(JsonConvert.SerializeObject(new { status = status, abstractId = arr[0], abstractTitle = arr[1], success = true }));
                         }
                         catch(Exception ex)
                         {
