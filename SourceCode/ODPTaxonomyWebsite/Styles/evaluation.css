@@ -25,7 +25,7 @@ div#downloadProgressBox div#downloadText { -webkit-animation: blinker 1.7s cubic
     to { background: yellow }
 }
 div#functionsbox{ position: relative;}
-div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px; z-index: 99999;}
+div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px; z-index: 999;}
 div#selectionsBox.hidden { display: none }
 div#selectionsBox { font-weight: bold; text-align: right; position: absolute; top: 70px; right: -205px; }
 input[type="checkbox"].hidecheckbox { display: none }
