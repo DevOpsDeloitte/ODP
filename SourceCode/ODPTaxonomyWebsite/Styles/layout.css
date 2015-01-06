@@ -65,7 +65,8 @@ table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -web
 	table#MainContent_rdl_activeYN td { padding: 0}
 
 input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline;}
-	select { padding: 5px}
+	select { padding: 5px; -webkit-appearance: none; }
+	input { -webkit-appearance: none; }
 input[type="submit"].review { margin-left: 10px; }
 	input[type="submit"].review.no { opacity: 0.4; }
 
