@@ -36,7 +36,7 @@ h1 { color: #fff; position: absolute; top: 0; font-size: 1.8em; text-align: cent
 .subtitle, h3{ display: block; font-size: 1.25em; font-weight: normal; text-align: left; color: #0C3966; margin: 0 0 4px 10px; }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; display: block; margin: 20px auto; }
 .hidden { display:none;}
-.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
+.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0;  -webkit-appearance: none; }
 	.container .button.yes { background: #24AA7A; color: #fff }
 	.container .button.no { background: #9B0202; color: #fff; }
 	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton, .container .button.no#disabledconsensusButton, .button.no#disabledwatchConsensusButton, .button.no#disabledwatchComparisonButton { opacity: 0.4; cursor: default; }
