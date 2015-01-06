@@ -147,7 +147,6 @@ $(document).ready(function () {
 
                         "render": function (data, type, row) {
                             var myDate = new Date(data);
-                            //myDate = myDate.replace(/^(\d{4})\-(\d{2})\-(\d{2}).*$/, '$2/$3/$1');
                             return getFormattedDate(myDate);
 
                         },
@@ -192,7 +191,6 @@ $(document).ready(function () {
                  {
                      "class": 'checkbox-control',
                      "orderable": false,
-                     //"data": "InReview"//,
                      "data": null,
                      "defaultContent": ''
 
@@ -247,13 +245,6 @@ $(document).ready(function () {
         }, 100);
     });
 
-    //    table.on('preXhr.dt', function (e, settings, data) {
-    //        $("div#spinner").show();
-    //    });
-
-    //    table.on('xhr.dt', function (e, settings, json) {
-    //        $("div#spinner").hide();
-    //    })
 
     table.on('processing.dt', function (e, settings, processing) {
         console.log(" processing.dt " + processing);
@@ -571,25 +562,7 @@ $(document).ready(function () {
             if (config.role == "ODPSupervisor") {
                 // change check of action checkboxes happens here - when Filter re-loads.. same block repeated table.init.
                 serverCheckForActions();
-                //                switch ($opts.actionlist) {
-
-                //                    case "reopenabstracts":
-                //                        reopenListCheck();
-                //                        break;
-                //                    case "selectaction":
-                //                        hideAllCheckBoxes();
-                //                        break;
-                //                    default:
-                //                        ListCheck($opts.actionlist);
-                //                        break;
-
-                //                }
-                //                if ($opts.actionlist == "reopenabstracts") {
-                //                    reopenListCheck();
-                //                }
-                //                else {
-                //                    ListCheck($opts.actionlist);
-                //                }
+                
             }
             $opts.isGridDirty = false;
             //enableFilters();
@@ -733,22 +706,6 @@ $(document).ready(function () {
         clearSubmitBtnAndCheckboxes();
         return;
 
-        //        $("#subButton").removeClass("yes").addClass("no");
-
-        //        $opts.selectedItems = [];
-        //        $opts.hiderowItems = [];
-        //        $("#allBox").prop("checked", false);
-        //        $("#selectallBox").prop("checked", false);
-
-        //        // table redraw occurs, slight time delay introduced.
-        //        setTimeout(function () {
-        //            util.selectAllRows(false);
-        //            util.showOpenRows(false);
-        //        }, 400);
-
-        //        updateSelectedList();
-
-        //        return;
 
     }
 
@@ -1228,7 +1185,6 @@ $(document).ready(function () {
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
-            //rowx.find("input[type=checkbox]").addClass("visiblecheckbox").removeClass("hidecheckbox"); // make all visible
             rowx.find("input[type=checkbox]").addClass("hidecheckbox").removeClass("visiblecheckbox"); // hide all boxes.
             rowx.find("input[type=checkbox]").prop("checked", false);
             rowx.removeClass("selected");
