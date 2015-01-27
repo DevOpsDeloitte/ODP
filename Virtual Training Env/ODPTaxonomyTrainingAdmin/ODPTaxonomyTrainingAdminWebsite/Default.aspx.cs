@@ -51,6 +51,9 @@ namespace ODPTaxonomyTrainingAdminWebsite
                     bool isLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
                     if (isLoggedIn)
                     {
+                        // clear out session
+                        Session["AbstractIDList"] = "";
+                        Session["TargetInstance"] = "";
                         LoadPageData();
                     }
                 }
@@ -143,6 +146,52 @@ namespace ODPTaxonomyTrainingAdminWebsite
             {
                 Utils.LogError(ex);
                 throw new Exception("An error has occured on pulling trainee data.");
+            }
+        }
+
+        protected void btn_populate_odp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int l_targetInstance;
+                int l_sourceInstance = Convert.ToInt32(ConfigurationManager.AppSettings["sourceInstance"].ToString());
+                int l_match_cnt;
+                List<Tr_Source_Target_Instance_MatchUpResult> result; 
+
+                if (ddl_instances.SelectedValue == "-1")
+                {
+                    lbl_Error.Text = "Please select an instance.";
+                    lbl_Error.Visible = true;
+                }
+                else
+                {
+                    l_targetInstance = Convert.ToInt32(ddl_instances.SelectedValue);
+                    using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
+                    {
+                        result = db.Tr_Source_Target_Instance_MatchUp(l_targetInstance).ToList();
+                    }
+
+                    l_match_cnt = result.Count();
+
+                    if (l_match_cnt == 0)
+                    {
+                        l_message = "No selections populated for Instance " + l_targetInstance.ToString() + ".  Abstracts must be a status of 1N in the target instance for population.";
+                        ShowMessage(l_message, false);
+                    }
+                    else
+                    {
+                        Session["TargetInstance"] = l_targetInstance;
+                        Session["AbstractIDList"] = String.Join(",", result.Select(s => s.TargetAbstractID).ToArray());
+                        Response.Redirect("PopulateODP.aspx");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on populating ODP data.");
             }
         }
 

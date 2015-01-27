@@ -15,6 +15,7 @@
         <span class="subtitle center">Training</span>
         <div class="center">
             <asp:DropDownList ID="ddl_instances" runat="server" Width="250px" />
+            <asp:Button class="button" runat="server" ID="btn_populate_odp" Text="Populate ODP Selections" onclick="btn_populate_odp_Click" />
             <asp:Button class="button" runat="server" ID="btn_push" Text="Push Trainee Data" onclick="btn_push_Click" />
             <asp:Button class="button" runat="server" ID="btn_pull" Text="Pull Trainee KAPPA" onclick="btn_pull_Click" />
         </div>
