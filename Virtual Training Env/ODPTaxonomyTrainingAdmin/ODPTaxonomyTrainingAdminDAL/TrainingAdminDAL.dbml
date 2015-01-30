@@ -26,6 +26,7 @@
   <Function Name="dbo.Tr_Populate_ODPAnswer" Method="Tr_Populate_ODPAnswer">
     <Parameter Name="TargetInstance" Parameter="targetInstance" Type="System.String" DbType="VarChar(2)" />
     <Parameter Name="AbstractList" Parameter="abstractList" Type="System.String" DbType="VarChar(1000)" />
+    <Parameter Name="returnValueOUT" Type="System.Int32" DbType="Int" Direction="InOut" />
     <ElementType Name="Tr_Populate_ODPAnswerResult">
       <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />

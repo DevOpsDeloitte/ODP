@@ -19,6 +19,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
             {
                 string l_message;
                 int l_resultCnt;
+                int? l_returnValue = null ;
                 if (!IsPostBack)
                 {
                     // if no abstracts, redirect to home
@@ -39,26 +40,35 @@ namespace ODPTaxonomyTrainingAdminWebsite
 
                         using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
                         {
-                            result = db.Tr_Populate_ODPAnswer(l_targetInstance, l_abstractIDList).ToList();
-
+                            result = db.Tr_Populate_ODPAnswer(l_targetInstance, l_abstractIDList, ref l_returnValue).ToList();
                         }
 
-                        l_resultCnt = result.Count();
+                        if ((l_returnValue.HasValue == true) && (l_returnValue == 1)){
+                            // success
+                            l_resultCnt = result.Count();
 
-                        if (l_resultCnt == 0)
-                        {
+                            if (l_resultCnt == 0)
+                            {
+                                l_message = "Error populating ODP data for abstracts: " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ".";
+                                ShowMessage(l_message, true);
+                            }
+                            else
+                            {
+                                // show grid
+                                l_message = "Selections populated to Instance " + l_targetInstance + ".";
+                                ShowMessage(l_message, false);
+                                gvw_list.DataSource = result;
+                                gvw_list.DataBind();
+                                gvw_list.Visible = true;
+                            }
+                        }
+                        else {
+                            // error
                             l_message = "Error populating ODP data for abstracts: " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ".";
                             ShowMessage(l_message, true);
                         }
-                        else
-                        {
-                            // show grid
-                            l_message = "Selections populated to Instance " + l_targetInstance + ".";
-                            ShowMessage(l_message, false);
-                            gvw_list.DataSource = result;
-                            gvw_list.DataBind();
-                            gvw_list.Visible = true;
-                        }
+
+                        
                     }
                 }
                     
@@ -66,7 +76,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
             catch (Exception ex)
             {
                 Utils.LogError(ex);
-                throw new Exception("An error has occured on Populate ODP page.");
+                ShowMessage("An error has occured on ODP Population.  Please check the log.", true);
             }
 
         }

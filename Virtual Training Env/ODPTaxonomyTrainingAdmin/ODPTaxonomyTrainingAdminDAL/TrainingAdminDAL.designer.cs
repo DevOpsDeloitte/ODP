@@ -93,9 +93,10 @@ namespace ODPTaxonomyTrainingAdminDAL
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Tr_Populate_ODPAnswer")]
-		public ISingleResult<Tr_Populate_ODPAnswerResult> Tr_Populate_ODPAnswer([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TargetInstance", DbType="VarChar(2)")] string targetInstance, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractList", DbType="VarChar(1000)")] string abstractList)
+		public ISingleResult<Tr_Populate_ODPAnswerResult> Tr_Populate_ODPAnswer([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TargetInstance", DbType="VarChar(2)")] string targetInstance, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractList", DbType="VarChar(1000)")] string abstractList, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> returnValueOUT)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), targetInstance, abstractList);
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), targetInstance, abstractList, returnValueOUT);
+			returnValueOUT = ((System.Nullable<int>)(result.GetParameterValue(2)));
 			return ((ISingleResult<Tr_Populate_ODPAnswerResult>)(result.ReturnValue));
 		}
 	}
