@@ -154,7 +154,6 @@ namespace ODPTaxonomyTrainingAdminWebsite
             try
             {
                 int l_targetInstance;
-                int l_sourceInstance = Convert.ToInt32(ConfigurationManager.AppSettings["sourceInstance"].ToString());
                 int l_match_cnt;
                 List<Tr_Source_Target_Instance_MatchUpResult> result; 
 

@@ -49,7 +49,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
 
                             if (l_resultCnt == 0)
                             {
-                                l_message = "Error populating ODP data for abstracts: " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ".";
+                                l_message = "Error populating ODP data for abstract(s): " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ".";
                                 ShowMessage(l_message, true);
                             }
                             else
@@ -64,7 +64,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
                         }
                         else {
                             // error
-                            l_message = "Error populating ODP data for abstracts: " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ".";
+                            l_message = "Error populating ODP data for abstract(s): " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ".";
                             ShowMessage(l_message, true);
                         }
 
