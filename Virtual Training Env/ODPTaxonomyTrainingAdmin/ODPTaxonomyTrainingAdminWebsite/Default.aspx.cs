@@ -83,20 +83,20 @@ namespace ODPTaxonomyTrainingAdminWebsite
                         var qry = db.Tr_Trainee_KappaBaseDataPush(l_instanceID, ref l_intReturn);
                     }
 
-                    if (l_intReturn == null)
-                    {
-                        l_message = "Error pushing Trainee Data for Instance " + l_instanceID.ToString() + ".  Value is null.";
-                        ShowMessage(l_message, true);
-                    }
-                    else if (l_intReturn == 0)
+                    if (l_intReturn == 0)
                     {
                         l_message = "No Trainee Data to push for Instance " + l_instanceID.ToString() + ".";
                         ShowMessage(l_message, false);
                     }
-                    else
+                    else if (l_intReturn > 0)
                     {
-                        l_message = "Trainee Data successfully pushed for Instance " + l_instanceID.ToString() + ".  Abstracts Count = " + l_intReturn.ToString() + ".  Please wait 15 minutes before pulling Trainee KAPPA data.";
+                        l_message = "Trainee Data successfully pushed for Instance " + l_instanceID.ToString() + ".  Abstracts Count = " + l_intReturn.ToString() + ".  KAPPA calculation runs every quarter hour.  Please wait until then before pulling Trainee KAPPA data.";
                         ShowMessage(l_message, false);
+                    }
+                    else 
+                    {
+                        l_message = "Error pushing Trainee Data for Instance " + l_instanceID.ToString() + ".";
+                        ShowMessage(l_message, true);
                     }
                 }
             }
