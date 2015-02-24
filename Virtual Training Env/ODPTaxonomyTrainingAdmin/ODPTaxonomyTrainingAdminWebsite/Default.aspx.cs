@@ -229,7 +229,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
                 ddl_instances.DataValueField = "InstanceID";
                 ddl_instances.DataTextField = "InstanceName";
                 ddl_instances.DataBind();
-                ddl_instances.Items.Insert(0, new ListItem("Select Instance", "-1"));
+                ddl_instances.Items.Insert(0, new ListItem("Select Active Instance", "-1"));
                 ddl_instances.SelectedValue = "-1";
             }
         }
