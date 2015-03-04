@@ -70,6 +70,9 @@ namespace ODPTaxonomyTrainingAdminWebsite
         {
             try
             {
+                // clear message
+                ClearMessage();
+
                 if (ddl_instances.SelectedValue == "-1")
                 {
                     lbl_Error.Text = "Please select an instance.";
@@ -111,6 +114,9 @@ namespace ODPTaxonomyTrainingAdminWebsite
         {
             try
             {
+                // clear message
+                ClearMessage();
+
                 if (ddl_instances.SelectedValue == "-1")
                 {
                     lbl_Error.Text = "Please select an instance.";
@@ -153,6 +159,9 @@ namespace ODPTaxonomyTrainingAdminWebsite
         {
             try
             {
+                // clear message
+                ClearMessage();
+
                 int l_targetInstance;
                 int l_match_cnt;
                 List<Tr_Source_Target_Instance_MatchUpResult> result; 
@@ -164,6 +173,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
                 }
                 else
                 {
+
                     l_targetInstance = Convert.ToInt32(ddl_instances.SelectedValue);
                     using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
                     {
@@ -197,6 +207,14 @@ namespace ODPTaxonomyTrainingAdminWebsite
         #endregion
 
         #region Methods
+
+        private void ClearMessage()
+        {
+            lbl_Error.Text = "";
+            lbl_Error.Visible = false;
+            lbl_message.Text = "";
+            lbl_message.Visible = false;
+        }
 
         private void ShowMessage(string message, bool isError)
         {

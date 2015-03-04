@@ -11,7 +11,7 @@
 <asp:Label runat="server" CssClass="regularMessage" ID="lbl_message" class="panel" Visible="false"></asp:Label>   
 
 <asp:GridView ID="gvw_list" class="bordered zebra-striped clearbothf" runat="server" AutoGenerateColumns="false" PagerStyle-CssClass="pagination"
-    AllowPaging="true" PageSize="25" Visible="false" HeaderStyle-CssClass="persist-header" >
+    AllowPaging="false" PageSize="25" Visible="false" HeaderStyle-CssClass="persist-header" >
     <Columns>
         <asp:BoundField HeaderText="ID" DataField="AbstractID" Visible="true"/>
         <asp:BoundField HeaderText="Application ID" DataField="ApplicationID" SortExpression="ApplicationID" HeaderStyle-Width="100px"/>
