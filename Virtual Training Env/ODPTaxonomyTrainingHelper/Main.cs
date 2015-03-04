@@ -66,17 +66,17 @@ namespace ODPTaxonomyTrainingHelper
                         if (l_returnValue == 1)
                         {
                             // success
-                            MessageBox.Show("Robots data entered successfully.  Ready for consensus.", "Status", MessageBoxButtons.OK);
+                            MessageBox.Show("Robots' data entered successfully.  Ready for consensus.", "Status", MessageBoxButtons.OK);
                         }
                         else
                         {
-                            MessageBox.Show("Cannot fill robots data.  Check with your supervisor", "Error", MessageBoxButtons.OK);
+                            MessageBox.Show("Cannot fill robots' data.  Check with your supervisor", "Error", MessageBoxButtons.OK);
                         }
 
                     }
                     else
                     {
-                        MessageBox.Show("Robot data already filled. Please perform consensus.", "Status", MessageBoxButtons.OK);
+                        MessageBox.Show("Robots' data already filled. Please perform consensus.", "Status", MessageBoxButtons.OK);
                     }
 
                     this.btnFillRobot.Enabled = true;

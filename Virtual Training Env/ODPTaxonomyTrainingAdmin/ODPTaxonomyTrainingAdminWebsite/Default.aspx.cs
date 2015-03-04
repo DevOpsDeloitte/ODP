@@ -51,6 +51,9 @@ namespace ODPTaxonomyTrainingAdminWebsite
                     bool isLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
                     if (isLoggedIn)
                     {
+                        // clear out session
+                        Session["AbstractIDList"] = "";
+                        Session["TargetInstance"] = "";
                         LoadPageData();
                     }
                 }
@@ -67,6 +70,9 @@ namespace ODPTaxonomyTrainingAdminWebsite
         {
             try
             {
+                // clear message
+                ClearMessage();
+
                 if (ddl_instances.SelectedValue == "-1")
                 {
                     lbl_Error.Text = "Please select an instance.";
@@ -80,20 +86,20 @@ namespace ODPTaxonomyTrainingAdminWebsite
                         var qry = db.Tr_Trainee_KappaBaseDataPush(l_instanceID, ref l_intReturn);
                     }
 
-                    if (l_intReturn == null)
-                    {
-                        l_message = "Error pushing Trainee Data for Instance " + l_instanceID.ToString() + ".  Value is null.";
-                        ShowMessage(l_message, true);
-                    }
-                    else if (l_intReturn == 0)
+                    if (l_intReturn == 0)
                     {
                         l_message = "No Trainee Data to push for Instance " + l_instanceID.ToString() + ".";
                         ShowMessage(l_message, false);
                     }
-                    else
+                    else if (l_intReturn > 0)
                     {
-                        l_message = "Trainee Data successfully pushed for Instance " + l_instanceID.ToString() + ".  Abstracts Count = " + l_intReturn.ToString() + ".  Please wait 15 minutes before pulling Trainee KAPPA data.";
+                        l_message = "Trainee Data successfully pushed for Instance " + l_instanceID.ToString() + ".  Abstracts Count = " + l_intReturn.ToString() + ".  KAPPA calculation runs every quarter hour.  Please wait until then before pulling Trainee KAPPA data.";
                         ShowMessage(l_message, false);
+                    }
+                    else 
+                    {
+                        l_message = "Error pushing Trainee Data for Instance " + l_instanceID.ToString() + ".";
+                        ShowMessage(l_message, true);
                     }
                 }
             }
@@ -108,6 +114,9 @@ namespace ODPTaxonomyTrainingAdminWebsite
         {
             try
             {
+                // clear message
+                ClearMessage();
+
                 if (ddl_instances.SelectedValue == "-1")
                 {
                     lbl_Error.Text = "Please select an instance.";
@@ -146,9 +155,66 @@ namespace ODPTaxonomyTrainingAdminWebsite
             }
         }
 
+        protected void btn_populate_odp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // clear message
+                ClearMessage();
+
+                int l_targetInstance;
+                int l_match_cnt;
+                List<Tr_Source_Target_Instance_MatchUpResult> result; 
+
+                if (ddl_instances.SelectedValue == "-1")
+                {
+                    lbl_Error.Text = "Please select an instance.";
+                    lbl_Error.Visible = true;
+                }
+                else
+                {
+
+                    l_targetInstance = Convert.ToInt32(ddl_instances.SelectedValue);
+                    using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
+                    {
+                        result = db.Tr_Source_Target_Instance_MatchUp(l_targetInstance).ToList();
+                    }
+
+                    l_match_cnt = result.Count();
+
+                    if (l_match_cnt == 0)
+                    {
+                        l_message = "No selections populated for Instance " + l_targetInstance.ToString() + ".  Abstracts must be a status of 1N in the target instance for population.";
+                        ShowMessage(l_message, false);
+                    }
+                    else
+                    {
+                        Session["TargetInstance"] = l_targetInstance;
+                        Session["AbstractIDList"] = String.Join(",", result.Select(s => s.TargetAbstractID).ToArray());
+                        Response.Redirect("PopulateODP.aspx");
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on populating ODP data.");
+            }
+        }
+
         #endregion
 
         #region Methods
+
+        private void ClearMessage()
+        {
+            lbl_Error.Text = "";
+            lbl_Error.Visible = false;
+            lbl_message.Text = "";
+            lbl_message.Visible = false;
+        }
 
         private void ShowMessage(string message, bool isError)
         {
@@ -181,7 +247,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
                 ddl_instances.DataValueField = "InstanceID";
                 ddl_instances.DataTextField = "InstanceName";
                 ddl_instances.DataBind();
-                ddl_instances.Items.Insert(0, new ListItem("Select Instance", "-1"));
+                ddl_instances.Items.Insert(0, new ListItem("Select Active Instance", "-1"));
                 ddl_instances.SelectedValue = "-1";
             }
         }

@@ -72,6 +72,7 @@
     <Content Include="Images\clip.png" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Login.aspx" />
+    <Content Include="PopulateODP.aspx" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-csp.css" />
@@ -161,6 +162,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="PopulateODP.aspx.cs">
+      <DependentUpon>PopulateODP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PopulateODP.aspx.designer.cs">
+      <DependentUpon>PopulateODP.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

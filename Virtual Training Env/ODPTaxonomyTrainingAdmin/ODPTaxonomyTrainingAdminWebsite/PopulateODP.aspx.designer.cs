@@ -10,7 +10,25 @@
 namespace ODPTaxonomyTrainingAdminWebsite {
     
     
-    public partial class _Default {
+    public partial class PopulateODP {
+        
+        /// <summary>
+        /// ltl_page_title control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltl_page_title;
+        
+        /// <summary>
+        /// hl_return_home control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hl_return_home;
         
         /// <summary>
         /// lbl_Error control.
@@ -31,48 +49,12 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         protected global::System.Web.UI.WebControls.Label lbl_message;
         
         /// <summary>
-        /// pnl_training control.
+        /// gvw_list control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnl_training;
-        
-        /// <summary>
-        /// ddl_instances control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_instances;
-        
-        /// <summary>
-        /// btn_populate_odp control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_populate_odp;
-        
-        /// <summary>
-        /// btn_push control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_push;
-        
-        /// <summary>
-        /// btn_pull control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_pull;
+        protected global::System.Web.UI.WebControls.GridView gvw_list;
     }
 }
