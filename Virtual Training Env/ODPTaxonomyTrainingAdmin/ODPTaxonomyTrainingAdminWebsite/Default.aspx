@@ -10,8 +10,18 @@
 <div class="sixteen columns"> 
     <asp:Label runat="server" CssClass="errorMessage" ID="lbl_Error" class="panel" Visible="false"></asp:Label>
     <asp:Label runat="server" CssClass="regularMessage" ID="lbl_message" class="panel" Visible="false"></asp:Label>   
+    <asp:Panel runat="server" ID="pnl_training" CssClass="panel">
+        <span class="subtitle center">Training</span>
+
+        <div class="center">
+            <asp:DropDownList ID="ddl_instances" runat="server" Width="250px" />
+            <asp:Button class="button" runat="server" ID="btn_populate_odp" Text="Populate ODP Selections" onclick="btn_populate_odp_Click" />
+            <asp:Button class="button" runat="server" ID="btn_push" Text="Push Trainee Data" onclick="btn_push_Click" />
+            <asp:Button class="button" runat="server" ID="btn_pull" Text="Pull Trainee KAPPA" onclick="btn_pull_Click"/>
+        </div>
+    </asp:Panel>
     
-    <div>
+     <div style="margin-top:70px;float:left;display:block">
         <p>Below are instructions for populating ODP abstract coding from Anthony's instance (#2) across to other instances and generating Kappas for those instances.</p>
         <ol>
             <li>From the dropdown, choose the active instance. This is the instance that you want to replicate the ODP answers into.</li>
@@ -29,16 +39,5 @@
             <li>Log in to Anthony's instance, and as an ODP Supervisor, view the Abstract List. </li>
         </ol>
     </div>
-
-    <asp:Panel runat="server" ID="pnl_training" CssClass="panel">
-        <span class="subtitle center">Training</span>
-
-        <div class="center">
-            <asp:DropDownList ID="ddl_instances" runat="server" Width="250px" />
-            <asp:Button class="button" runat="server" ID="btn_populate_odp" Text="Populate ODP Selections" onclick="btn_populate_odp_Click" />
-            <asp:Button class="button" runat="server" ID="btn_push" Text="Push Trainee Data" onclick="btn_push_Click" />
-            <asp:Button class="button" runat="server" ID="btn_pull" Text="Pull Trainee KAPPA" onclick="btn_pull_Click"/>
-        </div>
-    </asp:Panel>
-    </div>
+</div>
 </asp:Content>
