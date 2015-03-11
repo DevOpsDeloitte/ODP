@@ -1,6 +1,6 @@
 ﻿
 var config = {};
-var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "", hiderowItems : [], lastfilterSelection : "", isGridDirty: false };
+var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "", hiderowItems : [], lastfilterSelection : "", isGridDirty: false, openItems : [] };
 
 
 (function ($) {
@@ -107,6 +107,8 @@ function Utility() {
             $("#DTable tr[role='row'].haschildren").removeClass("open").addClass("closed");
             $("#DTable tr.child").removeClass("show").addClass("hide");
         }
+
+        $opts.openItems = [];
     };
 
     this.getTableChildRows = function (id) {

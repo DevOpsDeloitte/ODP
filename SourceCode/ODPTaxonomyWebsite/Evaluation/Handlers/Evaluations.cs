@@ -58,7 +58,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             }
             processAndOrganize(context);
-            addAbstractChangeHistory();
+            addAbstractChangeHistory(); // should move to the submission block below - tighten logic for multiple records being created.
             context.Response.ContentType = "application/json";
             if (submissionID > 0)
             {

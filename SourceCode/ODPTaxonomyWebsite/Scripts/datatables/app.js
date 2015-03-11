@@ -333,18 +333,21 @@ $(document).ready(function () {
 
         }
 
+        var absid = $(this).parent().find("td.abstractid").html();
+        //console.log(absid);
+
         if ($(tr).hasClass("open")) {
             $(child).addClass("hide").removeClass("show");
-            //tr.removeClass('shown');
             tr.removeClass('open').addClass('closed');
-
-
+            var i = _.indexOf($opts.openItems, absid);
+            if (i != -1) {
+                $opts.openItems.splice(i, 1);
+            }
         }
-
         else {
             $(child).addClass("show").removeClass("hide");
-            //tr.addClass('shown');
             tr.removeClass('closed').addClass('open');
+            $opts.openItems.push(absid);
         }
 
 
@@ -562,7 +565,7 @@ $(document).ready(function () {
             if (config.role == "ODPSupervisor") {
                 // change check of action checkboxes happens here - when Filter re-loads.. same block repeated table.init.
                 serverCheckForActions();
-                
+
             }
             $opts.isGridDirty = false;
             //enableFilters();
@@ -834,7 +837,7 @@ $(document).ready(function () {
         var rowIndex = table.row($(this).parent().parent()).index();
         var row = $(this).parents('tr');
 
-        console.log('Row index: ' + table.row($(this).parent().parent()).index());
+        //console.log('Row index: ' + table.row($(this).parent().parent()).index());
         if ($(this).is(":checked")) {
             var i = _.indexOf($opts.selectedItems, absid);
             $(row).addClass('selected');
