@@ -13,9 +13,9 @@
 <div id="filtersContainer">
  
             
-        <div class="four columns filters interface">     
+        <div class="five columns filters interface">     
             <label for="filterlist">Filters List</label>
-            <select name="filterlist"  id="filterlist">
+            <select name="filterlist"  id="filterlist" style="width:240px;">
 		            <option selected="selected" value="">Default View</option>
 		            <option value="open">Open Abstract</option>
 		            <option value="review">In Review List</option>
