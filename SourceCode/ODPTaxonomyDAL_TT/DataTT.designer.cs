@@ -277,6 +277,27 @@ namespace ODPTaxonomyDAL_TT
 			return ((ISingleResult<select_abstracts_no_reopen_ttResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
+		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID);
+			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstractId_team_member_tt")]
+		public ISingleResult<select_abstractId_team_member_ttResult> select_abstractId_team_member_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="NVarChar(256)")] string userName)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName);
+			return ((ISingleResult<select_abstractId_team_member_ttResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_AbstractExported")]
+		public ISingleResult<rpt_AbstractExportedResult> rpt_AbstractExported([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
+			return ((ISingleResult<rpt_AbstractExportedResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_AbstractStatusTrail")]
 		public ISingleResult<rpt_AbstractStatusTrailResult> rpt_AbstractStatusTrail([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
 		{
@@ -305,13 +326,6 @@ namespace ODPTaxonomyDAL_TT
 			return ((ISingleResult<rpt_KappaDataResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_OPA")]
-		public ISingleResult<rpt_OPAResult> rpt_OPA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
-			return ((ISingleResult<rpt_OPAResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_Team_User_UC")]
 		public ISingleResult<rpt_Team_User_UCResult> rpt_Team_User_UC([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
 		{
@@ -319,18 +333,11 @@ namespace ODPTaxonomyDAL_TT
 			return ((ISingleResult<rpt_Team_User_UCResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstracts_coding_tt")]
-		public ISingleResult<select_abstracts_coding_ttResult> select_abstracts_coding_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID)
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_OPA")]
+		public ISingleResult<rpt_OPAResult> rpt_OPA([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractStatusID);
-			return ((ISingleResult<select_abstracts_coding_ttResult>)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.select_abstractId_team_member_tt")]
-		public ISingleResult<select_abstractId_team_member_ttResult> select_abstractId_team_member_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserName", DbType="NVarChar(256)")] string userName)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userName);
-			return ((ISingleResult<select_abstractId_team_member_ttResult>)(result.ReturnValue));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
+			return ((ISingleResult<rpt_OPAResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -5283,26 +5290,12 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class rpt_AbstractStatusTrailResult
+	public partial class select_abstracts_coding_ttResult
 	{
 		
 		private int _AbstractID;
 		
-		private System.Nullable<int> _ApplicationID;
-		
-		private string _ProjectTitle;
-		
-		private string _PI_Name;
-		
-		private int _AbstractStatusID;
-		
-		private string _AbstractStatusCode;
-		
-		private string _AbstractStatusDescription;
-		
-		private System.Nullable<System.DateTime> _CreatedDate;
-		
-		public rpt_AbstractStatusTrailResult()
+		public select_abstracts_coding_ttResult()
 		{
 		}
 		
@@ -5321,19 +5314,31 @@ namespace ODPTaxonomyDAL_TT
 				}
 			}
 		}
+	}
+	
+	public partial class select_abstractId_team_member_ttResult
+	{
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
-		public System.Nullable<int> ApplicationID
+		private System.Nullable<int> _AbstractID;
+		
+		private string _ProjectTitle;
+		
+		public select_abstractId_team_member_ttResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
 		{
 			get
 			{
-				return this._ApplicationID;
+				return this._AbstractID;
 			}
 			set
 			{
-				if ((this._ApplicationID != value))
+				if ((this._AbstractID != value))
 				{
-					this._ApplicationID = value;
+					this._AbstractID = value;
 				}
 			}
 		}
@@ -5353,35 +5358,115 @@ namespace ODPTaxonomyDAL_TT
 				}
 			}
 		}
+	}
+	
+	public partial class rpt_AbstractExportedResult
+	{
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
-		public string PI_Name
+		private System.Nullable<int> _ApplicationID_Data_exported;
+		
+		private System.DateTime _Exported_Date;
+		
+		public rpt_AbstractExportedResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID_Data_exported", DbType="Int")]
+		public System.Nullable<int> ApplicationID_Data_exported
 		{
 			get
 			{
-				return this._PI_Name;
+				return this._ApplicationID_Data_exported;
 			}
 			set
 			{
-				if ((this._PI_Name != value))
+				if ((this._ApplicationID_Data_exported != value))
 				{
-					this._PI_Name = value;
+					this._ApplicationID_Data_exported = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractStatusID", DbType="Int NOT NULL")]
-		public int AbstractStatusID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Exported Date]", Storage="_Exported_Date", DbType="DateTime NOT NULL")]
+		public System.DateTime Exported_Date
 		{
 			get
 			{
-				return this._AbstractStatusID;
+				return this._Exported_Date;
 			}
 			set
 			{
-				if ((this._AbstractStatusID != value))
+				if ((this._Exported_Date != value))
 				{
-					this._AbstractStatusID = value;
+					this._Exported_Date = value;
+				}
+			}
+		}
+	}
+	
+	public partial class rpt_AbstractStatusTrailResult
+	{
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _PIProjectLeader;
+		
+		private string _ProjectTitle;
+		
+		private string _AbstractStatusCode;
+		
+		private string _AbstractStatusDescription;
+		
+		private System.Nullable<System.DateTime> _Date;
+		
+		public rpt_AbstractStatusTrailResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ProjectTitle
+		{
+			get
+			{
+				return this._ProjectTitle;
+			}
+			set
+			{
+				if ((this._ProjectTitle != value))
+				{
+					this._ProjectTitle = value;
 				}
 			}
 		}
@@ -5418,18 +5503,18 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> Date
 		{
 			get
 			{
-				return this._CreatedDate;
+				return this._Date;
 			}
 			set
 			{
-				if ((this._CreatedDate != value))
+				if ((this._Date != value))
 				{
-					this._CreatedDate = value;
+					this._Date = value;
 				}
 			}
 		}
@@ -5438,15 +5523,11 @@ namespace ODPTaxonomyDAL_TT
 	public partial class rpt_Cdr_ODP_IndividualCodingResult
 	{
 		
-		private System.Nullable<int> _AbstractID;
-		
 		private System.Nullable<int> _ApplicationID;
 		
+		private string _PIProjectLeader;
+		
 		private string _ProjectTitle;
-		
-		private string _PI_Name;
-		
-		private int _KappaBaseDataID;
 		
 		private string _MainSection;
 		
@@ -5472,28 +5553,12 @@ namespace ODPTaxonomyDAL_TT
 		
 		private System.Nullable<short> _ODPConsensus;
 		
-		private System.Nullable<short> _CdrODPComparison;
+		private System.Nullable<short> _ConsensusReconciled;
 		
 		private System.Nullable<short> _Final_Consensus;
 		
 		public rpt_Cdr_ODP_IndividualCodingResult()
 		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
-		public System.Nullable<int> AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
@@ -5512,6 +5577,22 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string ProjectTitle
 		{
@@ -5524,38 +5605,6 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._ProjectTitle != value))
 				{
 					this._ProjectTitle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
-		public string PI_Name
-		{
-			get
-			{
-				return this._PI_Name;
-			}
-			set
-			{
-				if ((this._PI_Name != value))
-				{
-					this._PI_Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaBaseDataID", DbType="Int NOT NULL")]
-		public int KappaBaseDataID
-		{
-			get
-			{
-				return this._KappaBaseDataID;
-			}
-			set
-			{
-				if ((this._KappaBaseDataID != value))
-				{
-					this._KappaBaseDataID = value;
 				}
 			}
 		}
@@ -5752,18 +5801,18 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrODPComparison", DbType="SmallInt")]
-		public System.Nullable<short> CdrODPComparison
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ConsensusReconciled", DbType="SmallInt")]
+		public System.Nullable<short> ConsensusReconciled
 		{
 			get
 			{
-				return this._CdrODPComparison;
+				return this._ConsensusReconciled;
 			}
 			set
 			{
-				if ((this._CdrODPComparison != value))
+				if ((this._ConsensusReconciled != value))
 				{
-					this._CdrODPComparison = value;
+					this._ConsensusReconciled = value;
 				}
 			}
 		}
@@ -5788,38 +5837,18 @@ namespace ODPTaxonomyDAL_TT
 	public partial class rpt_Cdr_ODPNotesPDFResult
 	{
 		
-		private int _AbstractID;
-		
 		private System.Nullable<int> _ApplicationID;
 		
-		private string _ProjectTitle;
+		private string _PIProjectLeader;
 		
-		private string _PI_Name;
+		private string _ProjectTitle;
 		
 		private string _FilName;
 		
 		private string _EvaluationType;
 		
-		private System.Nullable<int> _Finnal_AbstractStatusID;
-		
 		public rpt_Cdr_ODPNotesPDFResult()
 		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
-		public int AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
@@ -5838,6 +5867,22 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
 		public string ProjectTitle
 		{
@@ -5850,22 +5895,6 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._ProjectTitle != value))
 				{
 					this._ProjectTitle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
-		public string PI_Name
-		{
-			get
-			{
-				return this._PI_Name;
-			}
-			set
-			{
-				if ((this._PI_Name != value))
-				{
-					this._PI_Name = value;
 				}
 			}
 		}
@@ -5901,38 +5930,18 @@ namespace ODPTaxonomyDAL_TT
 				}
 			}
 		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Finnal_AbstractStatusID", DbType="Int")]
-		public System.Nullable<int> Finnal_AbstractStatusID
-		{
-			get
-			{
-				return this._Finnal_AbstractStatusID;
-			}
-			set
-			{
-				if ((this._Finnal_AbstractStatusID != value))
-				{
-					this._Finnal_AbstractStatusID = value;
-				}
-			}
-		}
 	}
 	
 	public partial class rpt_KappaDataResult
 	{
 		
-		private int _AbstractID;
-		
 		private System.Nullable<int> _ApplicationID;
-		
-		private string _ProjectTitle;
-		
-		private string _PI_Name;
 		
 		private string _UserName;
 		
-		private int _KappaTypeID;
+		private string _PIProjectLeader;
+		
+		private string _ProjectTitle;
 		
 		private string _KappaType;
 		
@@ -5960,22 +5969,6 @@ namespace ODPTaxonomyDAL_TT
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
-		public int AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
 		public System.Nullable<int> ApplicationID
 		{
@@ -5988,38 +5981,6 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._ApplicationID != value))
 				{
 					this._ApplicationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ProjectTitle
-		{
-			get
-			{
-				return this._ProjectTitle;
-			}
-			set
-			{
-				if ((this._ProjectTitle != value))
-				{
-					this._ProjectTitle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
-		public string PI_Name
-		{
-			get
-			{
-				return this._PI_Name;
-			}
-			set
-			{
-				if ((this._PI_Name != value))
-				{
-					this._PI_Name = value;
 				}
 			}
 		}
@@ -6040,18 +6001,34 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaTypeID", DbType="Int NOT NULL")]
-		public int KappaTypeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
 		{
 			get
 			{
-				return this._KappaTypeID;
+				return this._PIProjectLeader;
 			}
 			set
 			{
-				if ((this._KappaTypeID != value))
+				if ((this._PIProjectLeader != value))
 				{
-					this._KappaTypeID = value;
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ProjectTitle
+		{
+			get
+			{
+				return this._ProjectTitle;
+			}
+			set
+			{
+				if ((this._ProjectTitle != value))
+				{
+					this._ProjectTitle = value;
 				}
 			}
 		}
@@ -6233,248 +6210,18 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class rpt_OPAResult
-	{
-		
-		private System.Nullable<int> _ApplicationID;
-		
-		private System.Nullable<int> _AbstractID;
-		
-		private string _PI_Name;
-		
-		private string _MainSection;
-		
-		private string _SubSection;
-		
-		private System.Nullable<int> _SectionID;
-		
-		private string _SectionName;
-		
-		private bool _CdrBaseDataYN;
-		
-		private bool _ODPBaseDataYN;
-		
-		private System.Nullable<short> _CdrConsensus;
-		
-		private System.Nullable<short> _CdrODPComparison;
-		
-		private System.Nullable<short> _Final_Consensus;
-		
-		public rpt_OPAResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
-		public System.Nullable<int> ApplicationID
-		{
-			get
-			{
-				return this._ApplicationID;
-			}
-			set
-			{
-				if ((this._ApplicationID != value))
-				{
-					this._ApplicationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
-		public System.Nullable<int> AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
-		public string PI_Name
-		{
-			get
-			{
-				return this._PI_Name;
-			}
-			set
-			{
-				if ((this._PI_Name != value))
-				{
-					this._PI_Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainSection", DbType="NVarChar(255)")]
-		public string MainSection
-		{
-			get
-			{
-				return this._MainSection;
-			}
-			set
-			{
-				if ((this._MainSection != value))
-				{
-					this._MainSection = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSection", DbType="NVarChar(255)")]
-		public string SubSection
-		{
-			get
-			{
-				return this._SubSection;
-			}
-			set
-			{
-				if ((this._SubSection != value))
-				{
-					this._SubSection = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionID", DbType="Int")]
-		public System.Nullable<int> SectionID
-		{
-			get
-			{
-				return this._SectionID;
-			}
-			set
-			{
-				if ((this._SectionID != value))
-				{
-					this._SectionID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionName", DbType="NVarChar(255)")]
-		public string SectionName
-		{
-			get
-			{
-				return this._SectionName;
-			}
-			set
-			{
-				if ((this._SectionName != value))
-				{
-					this._SectionName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrBaseDataYN", DbType="Bit NOT NULL")]
-		public bool CdrBaseDataYN
-		{
-			get
-			{
-				return this._CdrBaseDataYN;
-			}
-			set
-			{
-				if ((this._CdrBaseDataYN != value))
-				{
-					this._CdrBaseDataYN = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ODPBaseDataYN", DbType="Bit NOT NULL")]
-		public bool ODPBaseDataYN
-		{
-			get
-			{
-				return this._ODPBaseDataYN;
-			}
-			set
-			{
-				if ((this._ODPBaseDataYN != value))
-				{
-					this._ODPBaseDataYN = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrConsensus", DbType="SmallInt")]
-		public System.Nullable<short> CdrConsensus
-		{
-			get
-			{
-				return this._CdrConsensus;
-			}
-			set
-			{
-				if ((this._CdrConsensus != value))
-				{
-					this._CdrConsensus = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CdrODPComparison", DbType="SmallInt")]
-		public System.Nullable<short> CdrODPComparison
-		{
-			get
-			{
-				return this._CdrODPComparison;
-			}
-			set
-			{
-				if ((this._CdrODPComparison != value))
-				{
-					this._CdrODPComparison = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Final Consensus]", Storage="_Final_Consensus", DbType="SmallInt")]
-		public System.Nullable<short> Final_Consensus
-		{
-			get
-			{
-				return this._Final_Consensus;
-			}
-			set
-			{
-				if ((this._Final_Consensus != value))
-				{
-					this._Final_Consensus = value;
-				}
-			}
-		}
-	}
-	
 	public partial class rpt_Team_User_UCResult
 	{
 		
-		private int _AbstractID;
-		
 		private System.Nullable<int> _ApplicationID;
 		
+		private string _PIProjectLeader;
+		
 		private string _ProjectTitle;
-		
-		private string _PI_Name;
-		
-		private int _SubmissionID;
 		
 		private string _TeamCode;
 		
 		private string _TeamType;
-		
-		private System.Nullable<System.Guid> _UserId;
 		
 		private string _UserAlias;
 		
@@ -6488,22 +6235,6 @@ namespace ODPTaxonomyDAL_TT
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
-		public int AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
 		public System.Nullable<int> ApplicationID
 		{
@@ -6516,6 +6247,22 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._ApplicationID != value))
 				{
 					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
 				}
 			}
 		}
@@ -6532,38 +6279,6 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._ProjectTitle != value))
 				{
 					this._ProjectTitle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
-		public string PI_Name
-		{
-			get
-			{
-				return this._PI_Name;
-			}
-			set
-			{
-				if ((this._PI_Name != value))
-				{
-					this._PI_Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionID", DbType="Int NOT NULL")]
-		public int SubmissionID
-		{
-			get
-			{
-				return this._SubmissionID;
-			}
-			set
-			{
-				if ((this._SubmissionID != value))
-				{
-					this._SubmissionID = value;
 				}
 			}
 		}
@@ -6596,22 +6311,6 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._TeamType != value))
 				{
 					this._TeamType = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserId", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> UserId
-		{
-			get
-			{
-				return this._UserId;
-			}
-			set
-			{
-				if ((this._UserId != value))
-				{
-					this._UserId = value;
 				}
 			}
 		}
@@ -6681,71 +6380,117 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class select_abstracts_coding_ttResult
+	public partial class rpt_OPAResult
 	{
 		
-		private int _AbstractID;
+		private System.Nullable<int> _ApplicationID;
 		
-		public select_abstracts_coding_ttResult()
+		private string _PIProjectLeader;
+		
+		private string _MainSection;
+		
+		private string _SubSection;
+		
+		private string _SectionName;
+		
+		private System.Nullable<short> _Final_Consensus;
+		
+		public rpt_OPAResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL")]
-		public int AbstractID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
 		{
 			get
 			{
-				return this._AbstractID;
+				return this._ApplicationID;
 			}
 			set
 			{
-				if ((this._AbstractID != value))
+				if ((this._ApplicationID != value))
 				{
-					this._AbstractID = value;
-				}
-			}
-		}
-	}
-	
-	public partial class select_abstractId_team_member_ttResult
-	{
-		
-		private System.Nullable<int> _AbstractID;
-		
-		private string _ProjectTitle;
-		
-		public select_abstractId_team_member_ttResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
-		public System.Nullable<int> AbstractID
-		{
-			get
-			{
-				return this._AbstractID;
-			}
-			set
-			{
-				if ((this._AbstractID != value))
-				{
-					this._AbstractID = value;
+					this._ApplicationID = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ProjectTitle
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
 		{
 			get
 			{
-				return this._ProjectTitle;
+				return this._PIProjectLeader;
 			}
 			set
 			{
-				if ((this._ProjectTitle != value))
+				if ((this._PIProjectLeader != value))
 				{
-					this._ProjectTitle = value;
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainSection", DbType="NVarChar(255)")]
+		public string MainSection
+		{
+			get
+			{
+				return this._MainSection;
+			}
+			set
+			{
+				if ((this._MainSection != value))
+				{
+					this._MainSection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSection", DbType="NVarChar(255)")]
+		public string SubSection
+		{
+			get
+			{
+				return this._SubSection;
+			}
+			set
+			{
+				if ((this._SubSection != value))
+				{
+					this._SubSection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionName", DbType="NVarChar(255)")]
+		public string SectionName
+		{
+			get
+			{
+				return this._SectionName;
+			}
+			set
+			{
+				if ((this._SectionName != value))
+				{
+					this._SectionName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Final Consensus]", Storage="_Final_Consensus", DbType="SmallInt")]
+		public System.Nullable<short> Final_Consensus
+		{
+			get
+			{
+				return this._Final_Consensus;
+			}
+			set
+			{
+				if ((this._Final_Consensus != value))
+				{
+					this._Final_Consensus = value;
 				}
 			}
 		}
