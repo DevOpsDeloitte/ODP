@@ -766,7 +766,7 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
-                    matches = db.rpt_OPA(abstracts).OrderBy(c => c.ApplicationID).ToList<rpt_OPAResult>();
+                    matches = db.rpt_OPA(abstracts).ToList<rpt_OPAResult>();
                                        
                 }
                 catch (Exception ex)
@@ -786,7 +786,7 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
-                    matches = db.rpt_KappaData(abstracts).OrderBy(c => c.ApplicationID).ToList<rpt_KappaDataResult>();
+                    matches = db.rpt_KappaData(abstracts).ToList<rpt_KappaDataResult>();
                     
                 }
                 catch (Exception ex)
@@ -806,7 +806,7 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
-                    matches = db.rpt_Cdr_ODPNotesPDF(abstracts).OrderBy(c => c.ApplicationID).ToList<rpt_Cdr_ODPNotesPDFResult>();
+                    matches = db.rpt_Cdr_ODPNotesPDF(abstracts).ToList<rpt_Cdr_ODPNotesPDFResult>();
                    
                 }
                 catch (Exception ex)
@@ -826,7 +826,7 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
-                    matches = db.rpt_AbstractStatusTrail(abstracts).OrderBy(c => c.ApplicationID).ToList<rpt_AbstractStatusTrailResult>();
+                    matches = db.rpt_AbstractStatusTrail(abstracts).ToList<rpt_AbstractStatusTrailResult>();
                    
                 }
                 catch (Exception ex)
@@ -846,7 +846,7 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
-                    matches = db.rpt_Cdr_ODP_IndividualCoding(abstracts).OrderBy(c => c.ApplicationID).ToList<rpt_Cdr_ODP_IndividualCodingResult>();
+                    matches = db.rpt_Cdr_ODP_IndividualCoding(abstracts).ToList<rpt_Cdr_ODP_IndividualCodingResult>();
                     
                 }
                 catch (Exception ex)
@@ -866,7 +866,7 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
-                    matches = db.rpt_Team_User_UC(abstracts).OrderBy(c => c.ApplicationID).ToList<rpt_Team_User_UCResult>();                    
+                    matches = db.rpt_Team_User_UC(abstracts).ToList<rpt_Team_User_UCResult>();                    
                 }
                 catch (Exception ex)
                 {
@@ -876,6 +876,26 @@ namespace ODPTaxonomyDAL_TT
 
             return matches;
         }
+
+        public static List<rpt_AbstractExportedResult> GetReportData_AbstractExported(string connString, string abstracts)
+        {
+            List<rpt_AbstractExportedResult> matches = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    matches = db.rpt_AbstractExported(abstracts).ToList<rpt_AbstractExportedResult>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+        }
+
         public static string GetAbstarctIdForTeamMember(string connString, string userCurrentName)
         {
             string abstractId = null;

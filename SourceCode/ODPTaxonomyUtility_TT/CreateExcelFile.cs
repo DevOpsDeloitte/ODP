@@ -226,7 +226,9 @@ namespace ODPTaxonomyUtility_TT
 
             int rowNumber = 1;
             int numberOfColumns = dt.Columns.Count;
-            double cellNumericValue = 0;
+            double cellDoubleValue = 0;
+            int cellIntegerValue = 0;
+            bool cellBooleanValue = true;
 
             //Create Header Row: START
             xmlAttributes = new List<OpenXmlAttribute>();
@@ -271,13 +273,22 @@ namespace ODPTaxonomyUtility_TT
 
                     //reset the attributes
                     xmlAttributes = new List<OpenXmlAttribute>();
-                    if (!double.TryParse(cellValue, out cellNumericValue))
+                    xmlAttributes.Add(new OpenXmlAttribute("t", null, "str"));
+
+                    if (Int32.TryParse(cellValue, out cellIntegerValue))
                     {
-                        cellValue = cellNumericValue.ToString();
-                        // this is the data type ("t"), with CellValues.String ("str")
-                        // you might need to change this depending on your source data
-                        // you might also consider using the Shared Strings table instead
-                        xmlAttributes.Add(new OpenXmlAttribute("t", null, "str"));
+                        if (!String.IsNullOrEmpty(cellValue) && cellValue[0] != '0')
+                        {
+                            cellValue = cellIntegerValue.ToString();
+                        }
+                    }
+                    else if (double.TryParse(cellValue, out cellDoubleValue))
+                    {
+                        cellValue = String.Format("{0:F6}", cellDoubleValue);
+                    }
+                    else if (bool.TryParse(cellValue, out cellBooleanValue))
+                    {
+                        cellValue = Convert.ToInt32(cellBooleanValue).ToString();
                     }
                     
 
