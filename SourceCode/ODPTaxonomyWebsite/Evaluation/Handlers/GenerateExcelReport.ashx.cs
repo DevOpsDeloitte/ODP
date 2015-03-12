@@ -89,7 +89,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     List<rpt_Cdr_ODPNotesPDFResult> cdr_ODPNotesPDF = Common.GetReportData_Cdr_ODPNotesPDF(connString, abstracts);
                     List<rpt_AbstractStatusTrailResult> abstractStatusTrail = Common.GetReportData_AbstractStatusTrail(connString, abstracts);
                     List<rpt_Cdr_ODP_IndividualCodingResult> cdr_ODP_IndividualCoding = Common.GetReportData_Cdr_ODP_IndividualCoding(connString, abstracts);
-                    List<rpt_Team_User_UCResult> team_User_UCResult = Common.GetReportData_Team_User_UCResult(connString, abstracts);                    
+                    List<rpt_Team_User_UCResult> team_User_UCResult = Common.GetReportData_Team_User_UCResult(connString, abstracts);
+                    List<rpt_AbstractExportedResult> abstractExportedResult = Common.GetReportData_AbstractExported(connString, abstracts);
 
                     CreateExcelFile.CreateExcelDocument<rpt_OPAResult>(opaData, context.Response, "OPA Data", ds); 
                     opaData.Clear();
@@ -103,6 +104,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     cdr_ODP_IndividualCoding.Clear();
                     CreateExcelFile.CreateExcelDocument<rpt_Team_User_UCResult>(team_User_UCResult, context.Response, "Team_User_UC", ds);
                     team_User_UCResult.Clear();
+                    CreateExcelFile.CreateExcelDocument<rpt_AbstractExportedResult>(abstractExportedResult, context.Response, "AbstractExported", ds);
+                    abstractExportedResult.Clear();
                     
                     //Write to memory stream
                     //code below throws out of memory exception for more than 1000 abstract ids
