@@ -83,7 +83,7 @@ $(document).ready(function () {
                     $("tr[role=row].selected").find("input").prop("checked", "checked");
                 }, 0);
             },
-            "aLengthMenu": [[10, 25, 50, 100], ["Display 10", "Display 25", "Display 50", "Display 100"]],
+            "aLengthMenu": [[10, 25, 50, 100, 250, 500, -1], ["Display 10", "Display 25", "Display 50", "Display 100", "Display 250", "Display 500", "Display All"]],
             "sDom": 'fltip',
             "rowCallback": function (row, data) {
                 //console.log(" invoking rowCallback ::");

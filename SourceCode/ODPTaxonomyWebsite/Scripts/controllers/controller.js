@@ -554,6 +554,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         var formArray = $("form").serializeArray();
         //var formArray = $("form").serialize();
         //var fa = JSON.stringify(formArray);
+        $scope.showSaveButton = false; // for concurrency issue.
         $http({
             method: 'POST',
             url: 'Handlers/Evaluation.ashx',
@@ -566,7 +567,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                console.log("response received : " + data.success);
 
                if (!data.success) {
-
+                   $scope.showSaveButton = true;
                    // Logic for Supervisor User Auth Failure.
                    if (data.supervisorauthfailed != undefined && data.supervisorauthfailed) {
                        $scope.errormessagesdisplay = "Supervisor authentication Failed!";
