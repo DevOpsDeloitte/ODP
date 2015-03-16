@@ -798,7 +798,7 @@ namespace ODPTaxonomyDAL_TT
             return matches;
         }
 
-        public static List<rpt_Cdr_ODPNotesPDFResult> GetReportData_Cdr_ODPNotesPDF(string connString, string abstracts)
+        public static List<rpt_Cdr_ODPNotesPDFResult> GetReportData_Cdr_ODPNotesPDF(string connString, string abstracts, string domain)
         {
             List<rpt_Cdr_ODPNotesPDFResult> matches = null;
             
@@ -806,7 +806,7 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
-                    matches = db.rpt_Cdr_ODPNotesPDF(abstracts).ToList<rpt_Cdr_ODPNotesPDFResult>();
+                    matches = db.rpt_Cdr_ODPNotesPDF(abstracts, domain).ToList<rpt_Cdr_ODPNotesPDFResult>();
                    
                 }
                 catch (Exception ex)

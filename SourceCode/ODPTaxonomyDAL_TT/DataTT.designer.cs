@@ -312,13 +312,6 @@ namespace ODPTaxonomyDAL_TT
 			return ((ISingleResult<rpt_Cdr_ODP_IndividualCodingResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_Cdr_ODPNotesPDF")]
-		public ISingleResult<rpt_Cdr_ODPNotesPDFResult> rpt_Cdr_ODPNotesPDF([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
-			return ((ISingleResult<rpt_Cdr_ODPNotesPDFResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_KappaData")]
 		public ISingleResult<rpt_KappaDataResult> rpt_KappaData([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
 		{
@@ -338,6 +331,13 @@ namespace ODPTaxonomyDAL_TT
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
 			return ((ISingleResult<rpt_OPAResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_Cdr_ODPNotesPDF")]
+		public ISingleResult<rpt_Cdr_ODPNotesPDFResult> rpt_Cdr_ODPNotesPDF([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="Domain", DbType="VarChar(150)")] string domain)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID, domain);
+			return ((ISingleResult<rpt_Cdr_ODPNotesPDFResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -5834,104 +5834,6 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class rpt_Cdr_ODPNotesPDFResult
-	{
-		
-		private System.Nullable<int> _ApplicationID;
-		
-		private string _PIProjectLeader;
-		
-		private string _ProjectTitle;
-		
-		private string _FilName;
-		
-		private string _EvaluationType;
-		
-		public rpt_Cdr_ODPNotesPDFResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
-		public System.Nullable<int> ApplicationID
-		{
-			get
-			{
-				return this._ApplicationID;
-			}
-			set
-			{
-				if ((this._ApplicationID != value))
-				{
-					this._ApplicationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
-		public string PIProjectLeader
-		{
-			get
-			{
-				return this._PIProjectLeader;
-			}
-			set
-			{
-				if ((this._PIProjectLeader != value))
-				{
-					this._PIProjectLeader = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ProjectTitle
-		{
-			get
-			{
-				return this._ProjectTitle;
-			}
-			set
-			{
-				if ((this._ProjectTitle != value))
-				{
-					this._ProjectTitle = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FilName", DbType="NVarChar(281) NOT NULL", CanBeNull=false)]
-		public string FilName
-		{
-			get
-			{
-				return this._FilName;
-			}
-			set
-			{
-				if ((this._FilName != value))
-				{
-					this._FilName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationType", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string EvaluationType
-		{
-			get
-			{
-				return this._EvaluationType;
-			}
-			set
-			{
-				if ((this._EvaluationType != value))
-				{
-					this._EvaluationType = value;
-				}
-			}
-		}
-	}
-	
 	public partial class rpt_KappaDataResult
 	{
 		
@@ -6491,6 +6393,104 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._Final_Consensus != value))
 				{
 					this._Final_Consensus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class rpt_Cdr_ODPNotesPDFResult
+	{
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _PIProjectLeader;
+		
+		private string _ProjectTitle;
+		
+		private string _FileName;
+		
+		private string _EvaluationType;
+		
+		public rpt_Cdr_ODPNotesPDFResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProjectTitle", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ProjectTitle
+		{
+			get
+			{
+				return this._ProjectTitle;
+			}
+			set
+			{
+				if ((this._ProjectTitle != value))
+				{
+					this._ProjectTitle = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FileName", DbType="NVarChar(393)")]
+		public string FileName
+		{
+			get
+			{
+				return this._FileName;
+			}
+			set
+			{
+				if ((this._FileName != value))
+				{
+					this._FileName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EvaluationType", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string EvaluationType
+		{
+			get
+			{
+				return this._EvaluationType;
+			}
+			set
+			{
+				if ((this._EvaluationType != value))
+				{
+					this._EvaluationType = value;
 				}
 			}
 		}

@@ -301,16 +301,6 @@
       <Column Name="[Final Consensus]" Member="Final_Consensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.rpt_Cdr_ODPNotesPDF" Method="rpt_Cdr_ODPNotesPDF">
-    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(MAX)" />
-    <ElementType Name="rpt_Cdr_ODPNotesPDFResult">
-      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="FilName" Type="System.String" DbType="NVarChar(281) NOT NULL" CanBeNull="false" />
-      <Column Name="EvaluationType" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.rpt_KappaData" Method="rpt_KappaData">
     <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(MAX)" />
     <ElementType Name="rpt_KappaDataResult">
@@ -354,6 +344,17 @@
       <Column Name="SubSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="SectionName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="[Final Consensus]" Member="Final_Consensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.rpt_Cdr_ODPNotesPDF" Method="rpt_Cdr_ODPNotesPDF">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(MAX)" />
+    <Parameter Name="Domain" Parameter="domain" Type="System.String" DbType="VarChar(150)" />
+    <ElementType Name="rpt_Cdr_ODPNotesPDFResult">
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FileName" Type="System.String" DbType="NVarChar(393)" CanBeNull="true" />
+      <Column Name="EvaluationType" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>

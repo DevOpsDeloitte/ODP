@@ -25,7 +25,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
         private string excelFileName = "";
         private string filePath = "";
         private string userguid = "";
-                    
+        private string domain = "";
+          
         #endregion
                 
 
@@ -36,6 +37,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             //Otherwise an error message appears on opening saved Excel file
             try
             {
+                domain = ConfigurationManager.AppSettings["reportDomain"].ToString();
                 userguid = context.Request["guid"] ?? "";
                 Guid ug;
                 if (!Guid.TryParse(userguid, out ug))
@@ -86,7 +88,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                     List<rpt_OPAResult> opaData = Common.GetReportData_OpaData(connString, abstracts);
                     List<rpt_KappaDataResult> kappaData = Common.GetReportData_KappaData(connString, abstracts);
-                    List<rpt_Cdr_ODPNotesPDFResult> cdr_ODPNotesPDF = Common.GetReportData_Cdr_ODPNotesPDF(connString, abstracts);
+                    List<rpt_Cdr_ODPNotesPDFResult> cdr_ODPNotesPDF = Common.GetReportData_Cdr_ODPNotesPDF(connString, abstracts, domain);
                     List<rpt_AbstractStatusTrailResult> abstractStatusTrail = Common.GetReportData_AbstractStatusTrail(connString, abstracts);
                     List<rpt_Cdr_ODP_IndividualCodingResult> cdr_ODP_IndividualCoding = Common.GetReportData_Cdr_ODP_IndividualCoding(connString, abstracts);
                     List<rpt_Team_User_UCResult> team_User_UCResult = Common.GetReportData_Team_User_UCResult(connString, abstracts);
