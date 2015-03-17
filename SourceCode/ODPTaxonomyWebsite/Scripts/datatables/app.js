@@ -1099,6 +1099,10 @@ $(document).ready(function () {
 
             case "selectaction":
                 $("th.col_select").children().hide();
+                //for minor release.
+//                if ($opts.isGridDirty) {
+//                    reloadForAction($opts.actionlist);
+//                }
                 clearSubmitBtnAndCheckboxes();
                 hideAllCheckBoxes();
 
