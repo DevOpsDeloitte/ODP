@@ -143,8 +143,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 FV.opts.Add(new FilterOpts()
                 {
                     option = "review",
-                    text = "In Review List" + " (" + reviewabstracts.Where(h => h.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N || h.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N || h.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3
-                        || h.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C || h.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4).ToList().Count.ToString() + ")"
+                    text = "In Review List" + " (" + reviewabstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 || q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B || q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N || q.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3
+                        || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C || q.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4).ToList().Count.ToString() + ")"
                 });
                 FV.opts.Add(new FilterOpts() { option = "reviewuncoded", text = "In Review List Uncoded" + " (" + reviewabstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 || q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B).ToList().Count.ToString() + ")" });
                     
