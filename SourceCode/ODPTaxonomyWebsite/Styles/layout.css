@@ -249,8 +249,8 @@ table.form input { display: inline-block }
 #pnl_extraData { clear: both }
 .viewSubmissionLink { display: block }
 
-body.training { background: url('/images/training-background-gradient.png') repeat-x, url('/images/training-background.png') repeat; }
-body.training .title, body.training h2 { color: #073966; }
+/* body.training { background: url('/images/training-background-gradient.png') repeat-x, url('/images/training-background.png') repeat; }
+body.training .title, body.training h2 { color: #073966; } */
 
 table.dataTable thead .sorting_desc { background: url("../images/sort_desc.png") no-repeat center -8px !important; }
 table.dataTable thead .sorting_asc { background: url("../images/sort_asc.png") no-repeat center 0 !important; }
