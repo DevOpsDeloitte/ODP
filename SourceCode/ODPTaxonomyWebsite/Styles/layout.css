@@ -239,8 +239,8 @@ table.form input { display: inline-block }
 #pnl_extraData { clear: both }
 .viewSubmissionLink { display: block }
 
-body.training { background: url('/images/training-background-gradient.png') repeat-x, url('/images/training-background.png') repeat; }
-body.training .title, body.training h2 { color: #073966; }
+/* body.training { background: url('/images/training-background-gradient.png') repeat-x, url('/images/training-background.png') repeat; }
+body.training .title, body.training h2 { color: #073966; } */
 
 /* #Media Queries
 ================================================== */
