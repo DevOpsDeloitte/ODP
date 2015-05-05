@@ -1,4 +1,4 @@
-﻿
+
 
 var table;
 var cellPadding = 20;
