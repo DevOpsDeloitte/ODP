@@ -1,4 +1,4 @@
-﻿
+
 
 var table;
 var cellPadding = 20;
@@ -84,7 +84,7 @@ $(document).ready(function () {
                 }, 0);
             },
             "aLengthMenu": [[10, 25, 50, 100, 250, 500, -1], ["Display 10", "Display 25", "Display 50", "Display 100", "Display 250", "Display 500", "Display All"]],
-            "sDom": 'flptip',
+            "sDom": '<"filter-wrap"f><"length-wrap"l><"paginate-wrap"p><"table-wrap"t>ip',
             "rowCallback": function (row, data) {
                 //console.log(" invoking rowCallback ::");
                 //                if ($.inArray(data.DT_RowId, $opts.hiderowItems) !== -1) {

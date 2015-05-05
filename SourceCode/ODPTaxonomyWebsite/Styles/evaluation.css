@@ -67,9 +67,13 @@ input[type="checkbox"].hideme { display: none }
 div.progressBar { width: 100%; height: 100px; border: 0px solid #fff; display: block; }
 div.progressText { width: 100%; height: 20px; padding-top: 30px; font-weight: bold; text-align: center; display: block; }
 .dataTables_wrapper .dataTables_filter input { margin-left: 0.5em; line-height: 30px; height: 30px; }
-.dataTables_wrapper .dataTables_filter { margin-top: 25px; margin-top: -32px; height:30px; }
 #pagetitlebox{ height: 100px; margin-left: -100px;}
 #pagetitlebox span { font-weight: bold; font-size: 18px; }
+#DTable_length { width: 120px; }
+
+.filter-wrap { display: block; position: absolute; right: 0; top: -32px; }
+.length-wrap { display: block; position: absolute; right: 180px; top: -32px; }
+
 .meter { height: 20px; /* Can be anything */ position: relative; margin: 30px 0 20px 0; /* Just for demo spacing */ background: #fff;}
 .meter > span { display: block; height: 100%; background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0, rgb(50, 87, 123)), color-stop(1, rgb(50, 87, 123)) ); background-image: -moz-linear-gradient( center bottom, rgb(50, 87, 123) 37%, rgb(50, 87, 123) 69% ); -webkit-box-shadow: inset 0 2px 9px  rgba(255,255,255,0.3), inset 0 -2px 6px rgba(0,0,0,0.4); -moz-box-shadow: inset 0 2px 9px  rgba(255,255,255,0.3), inset 0 -2px 6px rgba(0,0,0,0.4); box-shadow: inset 0 2px 9px  rgba(255,255,255,0.3), inset 0 -2px 6px rgba(0,0,0,0.4); position: relative; overflow: hidden; }
 .meter > span:after, .animate > span > span { content: ""; position: absolute; top: 0; left: 0; bottom: 0; right: 0; background-image: -webkit-gradient(linear, 0 0, 100% 100%, color-stop(.25, rgba(255, 255, 255, .2)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255, 255, 255, .2)), color-stop(.75, rgba(255, 255, 255, .2)), color-stop(.75, transparent), to(transparent) ); background-image: -moz-linear-gradient( -45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent ); z-index: 1; -webkit-background-size: 50px 50px; -moz-background-size: 50px 50px; -webkit-animation: move 2s linear infinite; -webkit-border-top-right-radius: 8px; -webkit-border-bottom-right-radius: 8px; -moz-border-radius-topright: 8px; -moz-border-radius-bottomright: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; -webkit-border-top-left-radius: 20px; -webkit-border-bottom-left-radius: 20px; -moz-border-radius-topleft: 20px; -moz-border-radius-bottomleft: 20px; border-top-left-radius: 20px; border-bottom-left-radius: 20px; overflow: hidden; }
@@ -87,8 +91,6 @@ tr.odd.haschildren.open td, table.childtable td { background: #DDE7EA; }
 div#DTable_info { /*display: none !important; */}
 
 .dataTables_wrapper .dataTables_paginate { float: right; padding-bottom: 7px; }
-
-div#DTable_length { margin-left: 12px; float: right; margin-top: -32px; height: 30px; margin-right: 190px;}
 
 .dataTables_wrapper .dataTables_paginate .paginate_button { border: none; background: #AFAFAF !important; color: #FFF; margin: 2px; border: 1px solid #E0DFDF; padding: 0.3em 0.5em; }
 .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover
@@ -119,11 +121,18 @@ div#DTable_length { margin-left: 12px; float: right; margin-top: -32px; height: 
 }
 
 @media screen and (max-width: 1200px) {
-    div#DTable_wrapper { width: 100%; overflow-y: auto; _overflow: auto; margin: 0 0 1em; }
+    div#DTable_wrapper .table-wrap { width: 100%; overflow-y: auto; _overflow: auto; margin: 0 0 1em; }
     table.dataTable, #pagetitlebox { margin-left: 0px; }
     div#filtersContainer { position: relative; top: auto; left: auto; right: auto; }
     div#selectionsBox { top: 115px; right: 0; }
-    div#DTable_length { float: left; }
 
+    .filter-wrap { display: block; position: absolute; right: 0; top: -50px; z-index: 99; }
+    .length-wrap { display: block; position: absolute; right: 180px; top: -50px;  z-index: 99; }
 }
- 
+
+@media screen and (max-width: 960px) {
+
+    .filter-wrap { display: block; position: absolute; right: auto; left: 135px; top: 5px; }
+    .length-wrap { display: block; position: absolute; right: auto; left: 10px; top: 5px; }
+
+} 
