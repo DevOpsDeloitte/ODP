@@ -42,6 +42,15 @@ h1 { color: #fff; position: absolute; top: 0; font-size: 1.8em; text-align: cent
 	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton, .container .button.no#disabledconsensusButton, .button.no#disabledwatchConsensusButton, .button.no#disabledwatchComparisonButton { opacity: 0.4; cursor: default; }
 	.container .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
 	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
+	.button,
+	button,
+	input,
+	select,
+	input[type="search"],
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"] { -webkit-appearance:none; }
+
 
 .container { margin: 0 auto; padding-top: 80px; }
 
@@ -64,7 +73,7 @@ table .coders { position: absolute; z-index: 9; color: #FFF; right: 4px; top: 6p
 table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -webkit-box-shadow: none; }
 	table#MainContent_rdl_activeYN td { padding: 0}
 
-input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline;}
+input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline; -webkit-appearance:none; }
 	select { padding: 5px}
 input[type="submit"].review { margin-left: 10px; }
 	input[type="submit"].review.no { opacity: 0.4; }
@@ -249,8 +258,8 @@ table.form input { display: inline-block }
 #pnl_extraData { clear: both }
 .viewSubmissionLink { display: block }
 
-/* body.training { background: url('/images/training-background-gradient.png') repeat-x, url('/images/training-background.png') repeat; }
-body.training .title, body.training h2 { color: #073966; } */
+body.training { background: url('/images/training-background-gradient.png') repeat-x, url('/images/training-background.png') repeat; }
+body.training .title, body.training h2 { color: #073966; }
 
 table.dataTable thead .sorting_desc { background: url("../images/sort_desc.png") no-repeat center -8px !important; }
 table.dataTable thead .sorting_asc { background: url("../images/sort_asc.png") no-repeat center 0 !important; }

@@ -25,7 +25,7 @@ div#downloadProgressBox div#downloadText { -webkit-animation: blinker 1.7s cubic
     to { background: yellow }
 }
 div#functionsbox{ position: relative;}
-div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px; z-index: 999;}
+div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px; z-index: 999; display: inline; }
 div#selectionsBox.hidden { display: none }
 div#selectionsBox { font-weight: bold; text-align: right; position: absolute; top: 70px; right: -205px; }
 input[type="checkbox"].hidecheckbox { display: none }
@@ -124,6 +124,7 @@ div#DTable_info { /*display: none !important; */}
     div#DTable_wrapper .table-wrap { width: 100%; overflow-y: auto; _overflow: auto; margin: 0 0 1em; }
     table.dataTable, #pagetitlebox { margin-left: 0px; }
     div#filtersContainer { position: relative; top: auto; left: auto; right: auto; }
+    div#filtersContainer .button { padding: 5px 12px; }
     div#selectionsBox { top: 115px; right: 0; }
 
     .filter-wrap { display: block; position: absolute; right: 0; top: -50px; z-index: 99; }
