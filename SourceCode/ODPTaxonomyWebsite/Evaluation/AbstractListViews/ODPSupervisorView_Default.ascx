@@ -13,7 +13,7 @@
 <div id="filtersContainer">
  
             
-        <div class="three columns filters interface">     
+        <div class="four columns filters interface">     
             <label for="filterlist">Filters List</label>
             <select name="filterlist"  id="filterlist" style="width:240px;">
 		            <option selected="selected" value="">Default View</option>
