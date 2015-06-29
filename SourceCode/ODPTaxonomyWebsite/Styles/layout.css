@@ -44,7 +44,6 @@ h1 { color: #fff; position: absolute; top: 0; font-size: 1.8em; text-align: cent
 	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
 	.button,
 	button,
-	input,
 	select,
 	input[type="search"],
 	input[type="submit"],
