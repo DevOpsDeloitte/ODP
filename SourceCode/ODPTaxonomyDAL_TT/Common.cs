@@ -371,18 +371,28 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
-                    using (TransactionScope tr = new TransactionScope())
+                    TransactionOptions TransOpt = new TransactionOptions();
+                    TransOpt.IsolationLevel = System.Transactions.IsolationLevel.Serializable; 
+                    //Check if record with the same fields values exists                    
+                    using (TransactionScope tr = new TransactionScope(TransactionScopeOption.Required, TransOpt))
                     {
-                        db.tbl_Evaluations.InsertOnSubmit(evaluation);
-                        db.SubmitChanges();
-                        evaluationId = evaluation.EvaluationId;
+                        if (!(from e in db.tbl_Evaluations
+                                where (e.EvaluationTypeId == (short)evaluationTypeId) && (e.TeamID == teamId) && (e.AbstractID == abstractId)
+                                && (e.IsComplete == false) && (e.IsStopped == false)
+                                select e).Any())
+                        {
+                            db.tbl_Evaluations.InsertOnSubmit(evaluation);
+                            db.SubmitChanges();
+                            evaluationId = evaluation.EvaluationId;
 
-                        history.EvaluationId = evaluationId;
-                        db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
-                        db.SubmitChanges();
-
+                            history.EvaluationId = evaluationId;
+                            db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                            db.SubmitChanges();
+                            
+                        }
                         tr.Complete();
-                    }
+                    }                                       
+                    
                 }
                 catch(Exception ex)
                 {
