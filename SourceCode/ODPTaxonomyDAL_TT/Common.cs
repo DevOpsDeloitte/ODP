@@ -377,7 +377,7 @@ namespace ODPTaxonomyDAL_TT
                     using (TransactionScope tr = new TransactionScope(TransactionScopeOption.Required, TransOpt))
                     {
                         if (!(from e in db.tbl_Evaluations
-                                where (e.EvaluationTypeId == (short)evaluationTypeId) && (e.TeamID == teamId) && (e.AbstractID == abstractId)
+                                where (e.EvaluationTypeId == (short)evaluationTypeId) && (e.TeamID == teamId)
                                 && (e.IsComplete == false) && (e.IsStopped == false)
                                 select e).Any())
                         {
