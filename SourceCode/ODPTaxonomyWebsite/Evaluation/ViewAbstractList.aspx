@@ -53,7 +53,9 @@
                         //alert(abstractStatus);
                         if (abstractInProcessId == null || abstractInProcessId == "") {
                             //alert("Empty!");
-                            window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
+                            //window.open("ViewAbstract.aspx?AbstractID=" + abstractId, "mywindow", "menubar=1,resizable=1,width=350,height=250");
+                            window.open("ViewAbstract.aspx?AbstractID=" + abstractId, "_blank");
+                            //window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
                             return false;
                         }
                         else if (abstractInProcessId.toString() != abstractId.toString()) {
@@ -61,12 +63,18 @@
                             return false;
                         }
                         else {
-                            window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
+                            window.open("ViewAbstract.aspx?AbstractID=" + abstractId, "_blank");
+                            //window.open("ViewAbstract.aspx?AbstractID=" + abstractId, "mywindow", "menubar=1,resizable=1,width=350,height=250");
+                            
+                            //window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
                             return false;
                         }
                     }
                     else {
-                        window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
+                        window.open("ViewAbstract.aspx?AbstractID=" + abstractId, "_blank");
+                        //window.open("ViewAbstract.aspx?AbstractID=" + abstractId, "mywindow", "menubar=1,resizable=1,width=350,height=250");
+                            
+                        //window.location = "ViewAbstract.aspx?AbstractID=" + abstractId;
                         return false;
                     }
                 }

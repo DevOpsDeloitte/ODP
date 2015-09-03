@@ -74,8 +74,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         default: // return default
                             //parentAbstracts = GetParentAbstractsODPSupervisorDefault();
                             parentAbstracts = GetParentAbstractsODPSupervisor(filter); // we are passing the filter as the query.
-                            System.Diagnostics.Stopwatch objStopWatch = new System.Diagnostics.Stopwatch();
-                            objStopWatch.Start();
+                            //System.Diagnostics.Stopwatch objStopWatch = new System.Diagnostics.Stopwatch();
+                            //objStopWatch.Start();
                             foreach (var abs in parentAbstracts)
                             {
                                 if (data.IsAbstractInReview(abs.AbstractID))
@@ -88,11 +88,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                                 }
                             }
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
-                            objStopWatch.Stop();
+                            //objStopWatch.Stop();
                             serializeResponse(context, ALR);
-                            System.Diagnostics.Trace.WriteLine("The time taken to execute ProcessAbstracts is : " +
-                            objStopWatch.ElapsedMilliseconds.ToString() + " MillionSeconds<br>");
-                            objStopWatch.Reset();
+                            //System.Diagnostics.Trace.WriteLine("The time taken to execute ProcessAbstracts is : " +
+                            //objStopWatch.ElapsedMilliseconds.ToString() + " MillionSeconds<br>");
+                            //objStopWatch.Reset();
                             break;
 
                     }
@@ -440,8 +440,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4).Select(s => s).ToList();
                     break;
                 default:
-                    finalabstracts = abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N).Select(s => s).ToList();
                     break;
+                    //finalabstracts = abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
+                    //break;
 
 
             }
