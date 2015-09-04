@@ -535,13 +535,29 @@ $(document).ready(function () {
                 $opts.actionlist = "selectaction";
                 break;
 
+            case "default":
+                                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                                $opts.actionlist = "selectaction";
+                break;
+
             default:
+                //                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                //                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                //                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                //                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                //                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                //                $opts.actionlist = "selectaction";
+
                 $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
+
                 break;
 
 
@@ -632,7 +648,21 @@ $(document).ready(function () {
                 break;
 
             default:
-                setPageTitle("View All Abstracts");
+
+                switch (config.role) {
+                    case "ODPSupervisor":
+                        setPageTitle("View Abstracts");
+                        break;
+
+                    case "ODPStaff":
+                        setPageTitle("View Abstracts");
+                        break;
+
+                    case "Admin":
+                        setPageTitle("View Abstracts");
+                        break;
+                }
+
                 break;
 
 
@@ -1100,9 +1130,9 @@ $(document).ready(function () {
             case "selectaction":
                 $("th.col_select").children().hide();
                 //for minor release.
-//                if ($opts.isGridDirty) {
-//                    reloadForAction($opts.actionlist);
-//                }
+                //                if ($opts.isGridDirty) {
+                //                    reloadForAction($opts.actionlist);
+                //                }
                 clearSubmitBtnAndCheckboxes();
                 hideAllCheckBoxes();
 
