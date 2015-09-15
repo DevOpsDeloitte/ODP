@@ -44,7 +44,6 @@ h1 { color: #fff; position: absolute; top: 0; font-size: 1.8em; text-align: cent
 	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
 	.button,
 	button,
-	select,
 	input[type="search"],
 	input[type="submit"],
 	input[type="reset"],
@@ -72,10 +71,12 @@ table .coders { position: absolute; z-index: 9; color: #FFF; right: 4px; top: 6p
 table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -webkit-box-shadow: none; }
 	table#MainContent_rdl_activeYN td { padding: 0}
 
-input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline; -webkit-appearance:none; }
+input[type="checkbox"] + label, input[type="radio"] + label { display: inline; -webkit-appearance:none; }
 	select { padding: 5px}
 input[type="submit"].review { margin-left: 10px; }
 	input[type="submit"].review.no { opacity: 0.4; }
+	
+label + select { display: inline; -webkit-appearance:normal; }
 
 .table-40 { width: 100%; }
 
