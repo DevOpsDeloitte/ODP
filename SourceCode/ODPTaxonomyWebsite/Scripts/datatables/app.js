@@ -8,6 +8,20 @@ config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
 
 var util;
 
+function isMobile() {
+    if (navigator.userAgent.match(/Android/i)
+            || navigator.userAgent.match(/iPhone/i)
+            || navigator.userAgent.match(/iPad/i)
+            || navigator.userAgent.match(/iPod/i)
+            || navigator.userAgent.match(/BlackBerry/i)
+            || navigator.userAgent.match(/Windows Phone/i)
+            || navigator.userAgent.match(/Opera Mini/i)
+            || navigator.userAgent.match(/IEMobile/i)
+            ) {
+        return true;
+    }
+}
+
 
 $(document).ready(function () {
 
@@ -157,7 +171,12 @@ $(document).ready(function () {
 
                         "render": function (data, type, row) {
                             var collink = "";
-                            collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + " onclick=\"return showRedirectMessage(" + row.AbstractID + ")\">" + data + "</a>";
+                            if (isMobile()) {
+                                collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + " ontouchstart=\"return showRedirectMessage(" + row.AbstractID + ")\">" + data + "</a>";
+                            }
+                            else {
+                                collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + " onclick=\"return showRedirectMessage(" + row.AbstractID + ")\">" + data + "</a>";
+                            }
                             var class1 = row.AbstractScan !== null ? "scan-file" : "";
                             var addImg = '<img class="scan-file" src="../Images/clip.png" alt="Attachment">';
                             if (class1 != "") collink = '<div class="titleimg has-file" style="position: relative">' + collink + addImg + '</div>';
@@ -536,12 +555,12 @@ $(document).ready(function () {
                 break;
 
             case "default":
-                                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                                $opts.actionlist = "selectaction";
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $opts.actionlist = "selectaction";
                 break;
 
             default:
