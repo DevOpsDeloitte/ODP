@@ -172,7 +172,8 @@ $(document).ready(function () {
                         "render": function (data, type, row) {
                             var collink = "";
                             if (isMobile()) {
-                                collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + " ontouchstart=\"return showRedirectMessage(" + row.AbstractID + ")\">" + data + "</a>";
+                                //collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + " ontouchstart=\"return showRedirectMessage(" + row.AbstractID + ")\">" + data + "</a>";
+                                collink = "<a target='_blank' href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + ">" + data + "</a>";
                             }
                             else {
                                 collink = "<a href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + " onclick=\"return showRedirectMessage(" + row.AbstractID + ")\">" + data + "</a>";
