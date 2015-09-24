@@ -78,16 +78,13 @@ $(document).ready(function () {
         //$("div#selectionsBox").removeClass("hidden");
     }
 
-    filtersManager(); //Init
-    actionsManager(); // Init
-    disableFilters();
 
 
     function InitializeTable() {
 
         $("div.progressBar").show();
         //$("div#tableContainer").show();
-
+        console.log(" invoking InitializeTable() ::");
         table = $('#DTable').DataTable({
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
@@ -205,7 +202,7 @@ $(document).ready(function () {
                 ],
 
             "processing": true,
-            "ajax": config.baseURL,
+            //"ajax": config.baseURL,
             "order": [[4, "desc"]],
             "columns": [
                  {
@@ -241,134 +238,185 @@ $(document).ready(function () {
 
         });
 
-
+        setupTableEvents();
     }
 
+    filtersManager(); //Init
+    actionsManager(); // Init
+    disableFilters();
+
+
     InitializeTable();
+    // set search placeholder
     $('.dataTables_filter input').attr('placeholder', 'Search');
-    //$('.dataTables_filter label').hide();
 
 
+    function setupTableEvents() {
 
-    table.on('draw.dt', function () {
-        console.log('Redraw occurred at: ' + new Date().getTime());
-        var alb = $("#allBox").is(':checked');
-        var salb = $("#selectallBox").is(':checked');
-        setTimeout(function () {
-            util.showOpenRows(alb);
-            util.selectAllRows(salb);
-        }, 0);
+        table.on('draw.dt', function () {
+            console.log('Redraw occurred at: ' + new Date().getTime());
+            var alb = $("#allBox").is(':checked');
+            var salb = $("#selectallBox").is(':checked');
+            setTimeout(function () {
+                util.showOpenRows(alb);
+                util.selectAllRows(salb);
+            }, 0);
 
-        // added for search event :: to make sure checkboxes are selected when items have been selected. On search there is a re-draw.
-        setTimeout(function () {
-            $("tr[role=row].selected").find("input").prop("checked", "checked");
-        }, 100);
-    });
-
-
-    table.on('processing.dt', function (e, settings, processing) {
-        console.log(" processing.dt " + processing);
-        $('div.progressBar').css('display', processing ? 'block' : 'none');
-        if (!processing) {
-            // show it all
-            progressBarReset();
-            $("#DTable_paginate").show();
-            $("#DTable_info").show();
-            $("#DTable").show();
-            $("#tableContainer").show();
-            //reset submit button
-            $("#subButton").removeClass("yes").addClass("no");
+            // added for search event :: to make sure checkboxes are selected when items have been selected. On search there is a re-draw.
+            setTimeout(function () {
+                $("tr[role=row].selected").find("input").prop("checked", "checked");
+            }, 100);
+        });
 
 
-            $("div#tableContainer").show();
-            showActionsInterface();
+        table.on('processing.dt', function (e, settings, processing) {
+            console.log(" processing.dt " + processing);
+            $('div.progressBar').css('display', processing ? 'block' : 'none');
+            if (!processing) {
+                // show it all
+                progressBarReset();
+                $("#DTable_paginate").show();
+                $("#DTable_info").show();
+                $("#DTable").show();
+                $("#tableContainer").show();
+                //reset submit button
+                $("#subButton").removeClass("yes").addClass("no");
 
-            switch (config.role) {
 
-                case "CoderSupervisor":
-                    showActionsInterface();
+                $("div#tableContainer").show();
+                showActionsInterface();
 
-                    break;
+                switch (config.role) {
 
-                case "ODPSupervisor":
-                    showActionsInterface();
-                    showSubActionsInterface();
-                    break;
+                    case "CoderSupervisor":
+                        showActionsInterface();
+
+                        break;
+
+                    case "ODPSupervisor":
+                        showActionsInterface();
+                        showSubActionsInterface();
+                        break;
+
+                }
 
             }
+            else {
+                $("#DTable_paginate").hide();
+                $("#DTable_info").hide();
+                $("#DTable").hide();
+                $("#tableContainer").hide();
 
-        }
-        else {
-            $("#DTable_paginate").hide();
-            $("#DTable_info").hide();
-            $("#DTable").hide();
-            $("#tableContainer").hide();
-
-        }
-    })
+            }
+        })
 
 
 
 
-    table.on('init.dt', function () {
+        table.on('init.dt', function () {
 
 
-        console.log("datable initialized :: init.dt ::");
+            console.log("datable initialized :: init.dt ::");
 
-        childrenRedraw(table.data());
-        $opts.isGridDirty = false;
-        if (config.role == "ODPSupervisor") {
-            serverCheckForActions();
-            //            if ($opts.actionlist == "reopenabstracts") {
-            //                reopenListCheck();
-            //            }
-            //            else {
-            //                ListCheck($opts.actionlist);
-            //            }
-        }
-        //enableFilters();
-        enableInterface();
-
-
-    });
-
-    table.on('page.dt', function () {
-        var info = table.page.info();
-        console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
-        setTimeout(function () {
-            $("tr[role=row].selected").find("input").prop("checked", "checked");
-        }, 500);
-    });
+            childrenRedraw(table.data());
+            $opts.isGridDirty = false;
+            if (config.role == "ODPSupervisor") {
+                serverCheckForActions();
+                //            if ($opts.actionlist == "reopenabstracts") {
+                //                reopenListCheck();
+                //            }
+                //            else {
+                //                ListCheck($opts.actionlist);
+                //            }
+            }
+            //enableFilters();
+            enableInterface();
 
 
-    // logic to open and close child rows.
+        });
+
+        table.on('page.dt', function () {
+            var info = table.page.info();
+            console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
+            setTimeout(function () {
+                $("tr[role=row].selected").find("input").prop("checked", "checked");
+            }, 500);
+        });
+
+    };
+
+    function loadChildContainer(abstractid) {
+        // `d` is the original data object for the row
+        //<table><tr><td>Content to come...</td></tr></table>
+        return '<div id="' + abstractid + '">loading...</div>';
+    };
+
+    function getDetailChildRow(abstractid) {
+        var content = "";
+
+        $.ajax('Handlers/AbstractDetail.ashx', {
+            type: 'GET',
+            contentType: "application/json; charset=utf-8",
+            data: { role: config.role, 'abstractId': abstractid },
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                if (data) {
+                    content = unescape(JSON.stringify(data));
+                    $("div#" + abstractid).html(content);
+                    //$('.tabs.table').tabs();
+                }
+            }
+
+        });
+
+
+
+
+    };
+
+
+    // logic to open and close child rows. // 1.3 dynamically load child rows.
     $('#DTable tbody').on('click', 'td.details-control', function (evt) {
 
         var tr = $(this).closest('tr');
-        var child = $(tr).next();
+        var row = table.row(tr);
+        //        var child = $(tr).next();
 
-        if ($(child).attr("role") == "row") {
-            //console.log("child row missing. here ::" + evt);
-            return; // child row missing.
-
-        }
-
+        //        if ($(child).attr("role") == "row") {
+        //            return; // child row missing.
+        //        }
+        console.log(" details row clicked :: ");
         var absid = $(this).parent().find("td.abstractid").html();
-        //console.log(absid);
+        var data = getDetailChildRow(absid);
 
-        if ($(tr).hasClass("open")) {
-            $(child).addClass("hide").removeClass("show");
+        if (row.child.isShown()) {
+            // This row is already open - close it
+            row.child.hide();
+            //tr.removeClass('shown');
             tr.removeClass('open').addClass('closed');
-            var i = _.indexOf($opts.openItems, absid);
-            if (i != -1) {
-                $opts.openItems.splice(i, 1);
-            }
         }
         else {
-            $(child).addClass("show").removeClass("hide");
+            // Open this row
+            //console.log("getDetailChildRow..."+data);
+            row.child(loadChildContainer(absid)).show();
+            //tr.addClass('shown');
             tr.removeClass('closed').addClass('open');
-            $opts.openItems.push(absid);
         }
+
+        //        if ($(tr).hasClass("open")) {
+        //            //$(child).addClass("hide").removeClass("show");
+        //            tr.removeClass('open').addClass('closed');
+
+        ////            var i = _.indexOf($opts.openItems, absid);
+        ////            if (i != -1) {
+        ////                $opts.openItems.splice(i, 1);
+        ////            }
+        //        }
+        //        else {
+        //            //$(child).addClass("show").removeClass("hide");
+        //            tr.removeClass('closed').addClass('open');
+        //            //$opts.openItems.push(absid);
+        //        }
 
 
 
@@ -431,10 +479,10 @@ $(document).ready(function () {
 
         }
 
-        $("select#filterlist option:selected").each(function () {
-            $opts.filterlist = $(this).val();
-        });
-        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+        //        $("select#filterlist option:selected").each(function () {
+        //            $opts.filterlist = $(this).val();
+        //        });
+        //        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
     }
 
     function loadFilters() {
@@ -449,6 +497,12 @@ $(document).ready(function () {
                               //console.log(" filters received..");
                               $("select#filterlist").empty();
 
+                              if (window.location.hash.replace("#", "") != "") {
+                                  var locationHash = window.location.hash.replace("#", "").split("|");
+                                  var filterVal = locationHash[0], actionVal = locationHash[1];
+
+                              }
+
                               for (var i = 0; i < data.opts.length; i++) {
                                   if ($opts.lastfilterSelection == '') {
                                       $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
@@ -459,6 +513,22 @@ $(document).ready(function () {
                               }
 
                           }
+
+                          
+
+                          $("select#filterlist option:selected").each(function () {
+                              $opts.filterlist = $(this).val();
+                          });
+                          config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+                          changeFilters();
+
+                          //                          table.ajax.url(config.baseURL);
+                          //                          setTimeout(function () {
+                          //                              table.ajax.reload(function (json) {
+
+                          //                              });
+                          //                          }, 0);
+                          //InitializeTable();
                       });
     }
 
@@ -555,7 +625,7 @@ $(document).ready(function () {
                 $opts.actionlist = "selectaction";
                 break;
 
-            case "default":
+            case "default": // default = all
                 $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
@@ -564,13 +634,16 @@ $(document).ready(function () {
                 $opts.actionlist = "selectaction";
                 break;
 
-            default:
-                //                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                //                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                //                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                //                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                //                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                //                $opts.actionlist = "selectaction";
+            case "all":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $opts.actionlist = "selectaction";
+                break;
+
+            default: // currently same as odpcompleted, being the default.
 
                 $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
@@ -592,7 +665,7 @@ $(document).ready(function () {
         console.log(config.baseURL);
         $("div#downloadLinkBox").hide();
         assignPageTitle();
-
+        window.location.hash = $opts.filterlist + "|" + $opts.actionlist;
 
 
 
@@ -796,15 +869,18 @@ $(document).ready(function () {
 
     }
 
-
+    // in 1.3 we will not be pre-loading row data. childrenRedraw will add parent classes or nochildren/haschildren and return.
     function childrenRedraw(tdata) {
         util.setRows(tdata);
         table.rows().eq(0).each(function (rowIdx, val) {
             var childrows = util.getTableChildRowsV2(rowIdx);
-            //console.log(rowIdx + '    ' + val);
+
             var rowx = table.row(rowIdx).nodes()
-                .to$();     // Convert to a jQuery object
-            if (childrows == '') {
+                .to$();
+            var kappaCount = table.row(rowIdx).data().KappaCount;
+            // Convert to a jQuery object
+            //console.log(" ROW :: " + rowIdx + '    ' + JSON.stringify(table.row(rowIdx).data().KappaCount));
+            if (kappaCount <= 1) {
                 //                var rowx = table.row(rowIdx).nodes()
                 //                .to$();     // Convert to a jQuery object
 
@@ -818,6 +894,8 @@ $(document).ready(function () {
 
             }
 
+            return;
+            // Not needed anymore for 1.3.
             table
             .row(rowIdx)
             .child(
@@ -826,6 +904,8 @@ $(document).ready(function () {
                 ), "child hide"
             )
             .show();
+
+
         });
 
     }
@@ -1099,29 +1179,36 @@ $(document).ready(function () {
 
     });
 
-    $("select#filterlist").change(function () {
-        var str = "";
-        //disableFilters();
-        disableInterface();
-        $("select#filterlist option:selected").each(function () {
-            str = $(this).val();
-            $opts.filterlist = $(this).val();
+
+    function bindSelections() {
+
+        $("select#filterlist").change(function () {
+            var str = "";
+            //disableFilters();
+            disableInterface();
+            $("select#filterlist option:selected").each(function () {
+                str = $(this).val();
+                $opts.filterlist = $(this).val();
+            });
+
+            actionsManager();
+            changeFilters();
+            $("div#downloadLinkBox").hide();
         });
 
-        actionsManager();
-        changeFilters();
-        $("div#downloadLinkBox").hide();
-    });
-
-    $("select#actionlist").change(function () {
-        var str = "";
-        $("select#actionlist option:selected").each(function () {
-            str = $(this).val();
-            $opts.actionlist = $(this).val();
+        $("select#actionlist").change(function () {
+            var str = "";
+            $("select#actionlist option:selected").each(function () {
+                str = $(this).val();
+                $opts.actionlist = $(this).val();
+            });
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist;
+            watchactionsHandler();
         });
 
-        watchactionsHandler();
-    });
+    };
+
+    bindSelections();
 
 
     function watchactionsHandler() {

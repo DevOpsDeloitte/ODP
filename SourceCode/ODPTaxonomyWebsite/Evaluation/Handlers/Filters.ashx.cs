@@ -102,7 +102,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             List<AbstractListRow> abstracts = data.ToList();
 
             switch(roleRequested){
-
+                    // the 1st filter entry will be defaulted by the client code.
                 case "Admin":
                     FV.opts.Add(new FilterOpts() { option = "uncoded", text = "View Uncoded Abstracts" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.OPEN_0).Select(s => s).ToList().Count.ToString() + ")" });
                     FV.opts.Add(new FilterOpts() { option = "default", text = "All Abstracts" + " (" + abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.RETRIEVED_FOR_CODING_1).Select(s => s).ToList().Count.ToString() + ")" });
@@ -119,9 +119,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
 
                 case "ODPSupervisor" :
-                    FV.opts.Add(new FilterOpts() { option = "odpcompleted", text = "ODP Completed" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N).Select(s => s).ToList().Count.ToString() + ")" });
-                    
-                    FV.opts.Add(new FilterOpts() { option = "default", text = "All Abstracts" + " (" + abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList().Count.ToString() + ")" });
+                    FV.opts.Add(new FilterOpts() { option = "odpcompleted", text = "ODP Completed" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N).Select(s => s).ToList().Count.ToString() + ")" });  
+                    // all abstracts being set to all instead of "default".
+                    FV.opts.Add(new FilterOpts() { option = "all", text = "All Abstracts" + " (" + abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList().Count.ToString() + ")" });
                     FV.opts.Add(new FilterOpts() { option = "review", text = "In Review List" + " (" + reviewabstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).ToList().Count.ToString() + ")" });
                     FV.opts.Add(new FilterOpts() { option = "reviewuncoded", text = "In Review List Uncoded" + " (" + reviewabstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 || q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B).ToList().Count.ToString() + ")" });
                     //FV.opts.Add(new FilterOpts() { option = "uncoded", text = "In Review List - Uncoded" });

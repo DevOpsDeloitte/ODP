@@ -339,6 +339,9 @@
     <Compile Include="Evaluation\Handlers\AbstractClose.ashx.cs">
       <DependentUpon>AbstractClose.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractDetail.ashx.cs">
+      <DependentUpon>AbstractDetail.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\AbstractExport.ashx.cs">
       <DependentUpon>AbstractExport.ashx</DependentUpon>
     </Compile>
@@ -523,6 +526,7 @@
     <Content Include="Evaluation\Handlers\AbstractsListCheck.ashx" />
     <Content Include="Evaluation\Handlers\GenerateExcelReport.ashx" />
     <Content Include="Evaluation\Handlers\RedirectionMessage.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractDetail.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />

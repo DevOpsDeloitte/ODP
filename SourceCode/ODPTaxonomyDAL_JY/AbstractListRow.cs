@@ -85,6 +85,8 @@ namespace ODPTaxonomyDAL_JY
         public string F { get; set; }
         public string G { get; set; }
 
+        public int KappaCount { get; set; }
+
         public List<AbstractListRow> ChildRows { get; set; }
 
         public AbstractListRow()
