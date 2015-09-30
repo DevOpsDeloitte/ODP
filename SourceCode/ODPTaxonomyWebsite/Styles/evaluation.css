@@ -90,6 +90,8 @@ div.progressText { width: 100%; height: 20px; padding-top: 30px; font-weight: bo
 tr.odd.haschildren.open td, table.childtable td { background: #DDE7EA; }
 div#DTable_info { /*display: none !important; */}
 
+#DTable tr.nodisplay{ display: none; }
+
 .dataTables_wrapper .dataTables_paginate { float: right; padding-bottom: 7px; }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button { border: none; background: #AFAFAF !important; color: #FFF; margin: 2px; border: 1px solid #E0DFDF; padding: 0.3em 0.5em; }

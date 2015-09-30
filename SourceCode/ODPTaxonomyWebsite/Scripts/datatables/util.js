@@ -1,6 +1,6 @@
 ﻿
 var config = {};
-var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "", hiderowItems : [], lastfilterSelection : "", isGridDirty: false, openItems : [], initialPageLoad: true };
+var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "", hiderowItems : [], lastfilterSelection : "", isGridDirty: false, openItems : [], initialPageLoad: true, hideboxes : [] };
 
 
 (function ($) {
@@ -143,8 +143,42 @@ function Utility() {
 
         return childTable;
     };
+
     this.getTableChildRowsV2 = function (id) {
         var rowData = Rows[id];
+        var childTable = '';
+        for (var i = 0; i < rowData.ChildRows.length; i++) {
+            var ctRow = '<tr>' +
+                    '<td class="ccol col_select">' + '&nbsp;' + '</td>' + // Col 1
+                    '<td class="ccol col_openclose">' + '&nbsp;' + '</td>' + // Col 1a
+                    '<td class="ccol col_abstractid">' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
+                    '<td class="ccol col_applicationid">' + '&nbsp;' + '</td>' + // Col 3
+                    '<td class="ccol col_statusdate">' + '&nbsp;' + '</td>' + // Col 4
+                     '<td class="ccol col_piname">' + '&nbsp;' + '</td>' + // Col 4
+                    '<td class="ccol col_title"><div class="titlebox">' + rowData.ChildRows[i].ProjectTitle + '</div></td>' + // Col 3
+                    '<td class="ccol col_flags">' + this.coalesceCol(rowData.ChildRows[i].Flags) + '</td>' + // Col 4
+                    '<td class="ccol col_kappa">' + rowData.ChildRows[i].A1 + '</td>' + // Col 5
+                    '<td class="ccol col_kappa">' + rowData.ChildRows[i].A2 + '</td>' + // Col 6
+                    '<td class="ccol col_kappa">' + rowData.ChildRows[i].A3 + '</td>' + // Col 7
+                    '<td class="ccol col_kappa">' + rowData.ChildRows[i].B + '</td>' + // Col 8
+                    '<td class="ccol col_kappa">' + rowData.ChildRows[i].C + '</td>' + // Col 9
+                    '<td class="ccol col_kappa" >' + rowData.ChildRows[i].D + '</td>' + // Col 10
+                    '<td class="ccol col_kappa">' + rowData.ChildRows[i].E + '</td>' + // Col 11
+                    '<td class="ccol col_kappa">' + rowData.ChildRows[i].F + '</td>' + // Col 12
+                    '<td class="ccol col_exportdate">' + this.coalesceCol(rowData.ChildRows[i].LastExportDate) + '</td>' + // Col 13
+
+                '</tr>'
+            childTable = childTable + ctRow;
+        }
+        if (rowData.ChildRows.length > 0) {
+            childTable = '<table class="childtable">' + childTable + '</table>';
+        }
+
+        return childTable;
+    };
+
+    this.getTableChildRowsV3 = function (parentRowData) {
+        var rowData = parentRowData;
         var childTable = '';
         for (var i = 0; i < rowData.ChildRows.length; i++) {
             var ctRow = '<tr>' +

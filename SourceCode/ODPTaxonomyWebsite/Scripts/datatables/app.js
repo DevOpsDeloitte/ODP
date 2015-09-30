@@ -247,6 +247,19 @@ $(document).ready(function () {
 
 
     InitializeTable();
+    $.fn.dataTableExt.afnFiltering.push(function (oSettings, aData, iDataIndex) {
+        //        if ($(oSettings.nTable).hasClass('do-exclude-filtering')) {
+        //            return aData[16] == '' || $('#chkShowExcluded').is(':checked');
+        //        } else return true;
+        //console.log(" filter running :: " + aData[2] + " index :: " + iDataIndex + " Settings :: " + $opts.hideboxes);
+        if (_.contains($opts.hideboxes, Number(aData[2]))) {
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    });
     // set search placeholder
     $('.dataTables_filter input').attr('placeholder', 'Search');
 
@@ -312,7 +325,7 @@ $(document).ready(function () {
 
 
 
-
+        //is this needed?
         table.on('init.dt', function () {
 
 
@@ -321,13 +334,9 @@ $(document).ready(function () {
             childrenRedraw(table.data());
             $opts.isGridDirty = false;
             if (config.role == "ODPSupervisor") {
+                console.log("datable initialized :: serverCheckForActions() ::");
                 serverCheckForActions();
-                //            if ($opts.actionlist == "reopenabstracts") {
-                //                reopenListCheck();
-                //            }
-                //            else {
-                //                ListCheck($opts.actionlist);
-                //            }
+
             }
             //enableFilters();
             enableInterface();
@@ -361,7 +370,8 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data, textStatus, jqXHR) {
                 if (data) {
-                    content = unescape(JSON.stringify(data));
+                    console.log(data.data[0].ChildRows);
+                    content = unescape(util.getTableChildRowsV3(data.data[0]));
                     $("div#" + abstractid).html(content);
                     //$('.tabs.table').tabs();
                 }
@@ -500,7 +510,10 @@ $(document).ready(function () {
                               if (window.location.hash.replace("#", "") != "") {
                                   var locationHash = window.location.hash.replace("#", "").split("|");
                                   var filterVal = locationHash[0], actionVal = locationHash[1];
-
+                                  if ($opts.initialPageLoad) {
+                                      $opts.lastfilterSelection = filterVal;
+                                      //$opts.initialPageLoad = false;
+                                  }
                               }
 
                               for (var i = 0; i < data.opts.length; i++) {
@@ -514,7 +527,7 @@ $(document).ready(function () {
 
                           }
 
-                          
+
 
                           $("select#filterlist option:selected").each(function () {
                               $opts.filterlist = $(this).val();
@@ -655,6 +668,25 @@ $(document).ready(function () {
 
 
         }
+        //Intercept if first load to check for hash location based -- previous action.
+
+        if (window.location.hash.replace("#", "") != "") {
+            var locationHash = window.location.hash.replace("#", "").split("|");
+            var filterVal = locationHash[0], actionVal = locationHash[1];
+            if ($opts.initialPageLoad) {
+                if (actionVal != "selectaction") {
+                    $("select#actionlist option").each(function (idx, val) {
+                        $(this).attr('selected', false);
+                        if ($(this).val() == actionVal) {
+                            $(this).attr('selected', true);
+                        }
+                    });
+                }
+
+                $opts.actionlist = actionVal;
+                $opts.initialPageLoad = false;
+            }
+        }
 
     }
 
@@ -666,6 +698,7 @@ $(document).ready(function () {
         $("div#downloadLinkBox").hide();
         assignPageTitle();
         window.location.hash = $opts.filterlist + "|" + $opts.actionlist;
+        $opts.hideboxes = [];
 
 
 
@@ -1240,6 +1273,7 @@ $(document).ready(function () {
                 //                if ($opts.isGridDirty) {
                 //                    reloadForAction($opts.actionlist);
                 //                }
+                $opts.hideboxes = [];
                 clearSubmitBtnAndCheckboxes();
                 hideAllCheckBoxes();
 
@@ -1283,6 +1317,7 @@ $(document).ready(function () {
                           console.log(" reopen : " + data);
                           if (data.success) {
                               //alertify.success(" reopen data :: " + data.nottoreopen);
+                              $opts.hideboxes = data.nottoreopen;
                               hideCheckBoxes(data.nottoreopen);
 
                           }
@@ -1310,7 +1345,9 @@ $(document).ready(function () {
                             console.log(" reopen : " + data);
                             if (data.success) {
                                 //alertify.success(" reopen data :: " + data.nottoreopen);
+                                $opts.hideboxes = data.hideboxes;
                                 hideCheckBoxes(data.hideboxes);
+
 
                             }
                             else {
@@ -1326,6 +1363,8 @@ $(document).ready(function () {
 
     function hideAllCheckBoxes() {
 
+        table.draw();
+
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
@@ -1340,6 +1379,8 @@ $(document).ready(function () {
 
     function hideCheckBoxes(inArr) {
 
+        table.draw();
+
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
@@ -1347,14 +1388,17 @@ $(document).ready(function () {
             rowx.find("input[type=checkbox]").prop("checked", false);
             rowx.removeClass("selected");
 
+            // instead of hiding checkboxes, we are hiding the row completely.
 
-            var absid = rowx.find(".abstractid").html().trim();
-            if (_.contains(inArr, Number(absid))) {
-                rowx.find("input[type=checkbox]").addClass("hidecheckbox").removeClass("visiblecheckbox");
-            }
-            else {
-                rowx.find("input[type=checkbox]").addClass("visiblecheckbox").removeClass("hidecheckbox");
-            }
+            //            var absid = rowx.find(".abstractid").html().trim();
+            //            if (_.contains(inArr, Number(absid))) {
+            //                rowx.find("input[type=checkbox]").addClass("hidecheckbox").removeClass("visiblecheckbox");
+            //                //rowx.addClass("nodisplay");
+            //            }
+            //            else {
+            //                rowx.find("input[type=checkbox]").addClass("visiblecheckbox").removeClass("hidecheckbox");
+            //                //rowx.removeClass("nodisplay");
+            //            }
 
         });
 
