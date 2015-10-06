@@ -177,6 +177,18 @@ function Utility() {
         return childTable;
     };
 
+    this.hideE7F6 = function (inVal) {
+
+        if (config.role == "ODPStaff") {
+            return inVal.replace(", E7F6", "").replace("E7F6", "");
+        }
+        else {
+            return inVal;
+        }
+
+    };
+
+
     this.getTableChildRowsV3 = function (parentRowData) {
         var rowData = parentRowData;
         var childTable = '';
@@ -189,7 +201,7 @@ function Utility() {
                     '<td class="ccol col_statusdate">' + '&nbsp;' + '</td>' + // Col 4
                      '<td class="ccol col_piname">' + '&nbsp;' + '</td>' + // Col 4
                     '<td class="ccol col_title"><div class="titlebox">' + rowData.ChildRows[i].ProjectTitle + '</div></td>' + // Col 3
-                    '<td class="ccol col_flags">' + this.coalesceCol(rowData.ChildRows[i].Flags) + '</td>' + // Col 4
+                    '<td class="ccol col_flags">' + this.hideE7F6(this.coalesceCol(rowData.ChildRows[i].Flags)) + '</td>' + // Col 4
                     '<td class="ccol col_kappa">' + rowData.ChildRows[i].A1 + '</td>' + // Col 5
                     '<td class="ccol col_kappa">' + rowData.ChildRows[i].A2 + '</td>' + // Col 6
                     '<td class="ccol col_kappa">' + rowData.ChildRows[i].A3 + '</td>' + // Col 7

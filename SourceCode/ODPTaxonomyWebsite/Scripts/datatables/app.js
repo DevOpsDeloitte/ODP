@@ -90,7 +90,7 @@ $(document).ready(function () {
             "stateSave": true,
             "stateSaveParams": function (settings, data) {
                 //data.search.search = "";
-             },
+            },
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 //console.log(" invoking fnRowCallback ::");
@@ -152,13 +152,18 @@ $(document).ready(function () {
                         // `data` option, which defaults to the column being worked with, in
                         // this case `data: 0`.
                         "render": function (data, type, row) {
-                            return data.length == 0 ? "&nbsp;" : data;
+                            if (config.role == "ODPStaff") {
+                                return data.length == 0 ? "&nbsp;" : data.replace(", E7F6","").replace("E7F6","");
+                            }
+                            else {
+                                return data.length == 0 ? "&nbsp;" : data;
+                            }
 
                         },
                         "targets": 7
                     },
 
-                    { "visible": true, "targets": [5] },
+                    {"visible": true, "targets": [5] },
                     {
 
                         "render": function (data, type, row) {
