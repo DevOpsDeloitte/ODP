@@ -87,6 +87,11 @@ $(document).ready(function () {
         console.log(" invoking InitializeTable() ::");
         table = $('#DTable').DataTable({
 
+            "stateSave": true,
+            "stateSaveParams": function (settings, data) {
+                //data.search.search = "";
+             },
+
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 //console.log(" invoking fnRowCallback ::");
                 $(nRow).addClass("closed");
