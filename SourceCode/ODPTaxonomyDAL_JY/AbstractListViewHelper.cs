@@ -908,16 +908,7 @@ namespace ODPTaxonomyDAL_JY
             {
                 AbstractID = AbstractID,
                 ProjectTitle = Title,
-                //A1 = ((decimal)(Kappa.A1)).ToString(KappaSpecifier),
-                //A2 = ((decimal)(Kappa.A2)).ToString(KappaSpecifier),
-                //A3 = ((decimal)(Kappa.A3)).ToString(KappaSpecifier),
-                //B = ((decimal)(Kappa.B)).ToString(KappaSpecifier),
-                //C = ((decimal)(Kappa.C)).ToString(KappaSpecifier),
-                //D = ((decimal)(Kappa.D)).ToString(KappaSpecifier),
-                //E = ((decimal)(Kappa.E)).ToString(KappaSpecifier),
-                //F = ((decimal)(Kappa.F)).ToString(KappaSpecifier)
-
-                   A1 = convertKappa(Kappa.A1),
+                A1 = convertKappa(Kappa.A1),
                 A2 = convertKappa(Kappa.A2),
                 A3 = convertKappa(Kappa.A3),
                 B = convertKappa(Kappa.B),
@@ -934,14 +925,6 @@ namespace ODPTaxonomyDAL_JY
             {
                 if (Kappa.KappaTypeID == (int)KappaType)
                 {
-                    //Abstract.A1 = ((decimal)(Kappa.A1)).ToString(KappaSpecifier);
-                    //Abstract.A2 = ((decimal)(Kappa.A2)).ToString(KappaSpecifier);
-                    //Abstract.A3 = ((decimal)(Kappa.A3)).ToString(KappaSpecifier);
-                    //Abstract.B = ((decimal)(Kappa.B)).ToString(KappaSpecifier);
-                    //Abstract.C = ((decimal)(Kappa.C)).ToString(KappaSpecifier);
-                    //Abstract.D = ((decimal)(Kappa.D)).ToString(KappaSpecifier);
-                    //Abstract.E = ((decimal)(Kappa.E)).ToString(KappaSpecifier);
-                    //Abstract.F = ((decimal)(Kappa.F)).ToString(KappaSpecifier);
 
                     Abstract.A1 = convertKappa(Kappa.A1);
                     Abstract.A2 = convertKappa(Kappa.A2);

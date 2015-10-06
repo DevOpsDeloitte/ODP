@@ -83,7 +83,7 @@
                 <tr>
 
                     <th class="col_select"><input type="checkbox" name="selectallBox" id="selectallBox" value="selectall" class="cboxes" /><label for="selectallBox"></label></th>
-                    <th class="col_openclose"><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes" /><label for="allBox"></label></th>
+                    <th class="col_openclose"><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes" style="display: none;" /><label for="allBox"></label></th>
                     <th class="col_abstractid">Abstract ID</th>
                     <th class="col_applicationid">Application ID</th>
                     <th class="col_statusdate">Status Date</th>

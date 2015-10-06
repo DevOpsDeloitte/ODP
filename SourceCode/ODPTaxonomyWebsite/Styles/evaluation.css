@@ -117,6 +117,8 @@ div#DTable_info { /*display: none !important; */}
 .details-control label:after { content: "+"; font-size: 28px; top: 2px; left: 2px; position: relative; color: #3D97B8; cursor: pointer; }
 .details-control input[type=checkbox]:checked + label:after { content: "–";  }
 .details-control label:hover::after, .details-control input[type=checkbox]:checked + label:hover::after { content: "";  }
+.details-control input#allBox + label:after { display: none;}
+.details-control input#allBox + label { display: none;}
 
 @media screen and (min-width: 1200px) {
     div#tableContainer { width: 1200px; margin-left: -100px; margin-top: 32px;}
