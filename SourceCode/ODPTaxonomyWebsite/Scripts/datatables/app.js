@@ -25,43 +25,43 @@ function isMobile() {
 
 $(document).ready(function () {
 
-    var spinneropts = {
-        lines: 10, // The number of lines to draw
-        length: 10, // The length of each line
-        width: 3, // The line thickness
-        radius: 5, // The radius of the inner circle
-        corners: 1, // Corner roundness (0..1)
-        rotate: 0, // The rotation offset
-        direction: 1, // 1: clockwise, -1: counterclockwise
-        color: '#373644', // #rgb or #rrggbb or array of colors
-        speed: 1, // Rounds per second
-        trail: 60, // Afterglow percentage
-        shadow: false, // Whether to render a shadow
-        hwaccel: false, // Whether to use hardware acceleration
-        className: 'spinner', // The CSS class to assign to the spinner
-        zIndex: 2e9, // The z-index (defaults to 2000000000)
-        top: '35px', // Top position relative to parent
-        left: '15px' // Left position relative to parent
-    };
+//    var spinneropts = {
+//        lines: 10, // The number of lines to draw
+//        length: 10, // The length of each line
+//        width: 3, // The line thickness
+//        radius: 5, // The radius of the inner circle
+//        corners: 1, // Corner roundness (0..1)
+//        rotate: 0, // The rotation offset
+//        direction: 1, // 1: clockwise, -1: counterclockwise
+//        color: '#373644', // #rgb or #rrggbb or array of colors
+//        speed: 1, // Rounds per second
+//        trail: 60, // Afterglow percentage
+//        shadow: false, // Whether to render a shadow
+//        hwaccel: false, // Whether to use hardware acceleration
+//        className: 'spinner', // The CSS class to assign to the spinner
+//        zIndex: 2e9, // The z-index (defaults to 2000000000)
+//        top: '35px', // Top position relative to parent
+//        left: '15px' // Left position relative to parent
+//    };
 
-    var spinneropts2 = {
-        lines: 9, // The number of lines to draw
-        length: 8, // The length of each line
-        width: 3, // The line thickness
-        radius: 3, // The radius of the inner circle
-        corners: 1, // Corner roundness (0..1)
-        rotate: 0, // The rotation offset
-        direction: 1, // 1: clockwise, -1: counterclockwise
-        color: '#000', // #rgb or #rrggbb or array of colors
-        speed: 1, // Rounds per second
-        trail: 30, // Afterglow percentage
-        shadow: false, // Whether to render a shadow
-        hwaccel: false, // Whether to use hardware acceleration
-        className: 'spinner', // The CSS class to assign to the spinner
-        zIndex: 2e9, // The z-index (defaults to 2000000000)
-        top: '0px', // Top position relative to parent
-        left: '0px' // Left position relative to parent
-    };
+//    var spinneropts2 = {
+//        lines: 9, // The number of lines to draw
+//        length: 8, // The length of each line
+//        width: 3, // The line thickness
+//        radius: 3, // The radius of the inner circle
+//        corners: 1, // Corner roundness (0..1)
+//        rotate: 0, // The rotation offset
+//        direction: 1, // 1: clockwise, -1: counterclockwise
+//        color: '#000', // #rgb or #rrggbb or array of colors
+//        speed: 1, // Rounds per second
+//        trail: 30, // Afterglow percentage
+//        shadow: false, // Whether to render a shadow
+//        hwaccel: false, // Whether to use hardware acceleration
+//        className: 'spinner', // The CSS class to assign to the spinner
+//        zIndex: 2e9, // The z-index (defaults to 2000000000)
+//        top: '0px', // Top position relative to parent
+//        left: '0px' // Left position relative to parent
+//    };
 
     var target = document.getElementById('spinner');
     var downloadSpin = document.getElementById('downloadSpin');
@@ -89,7 +89,13 @@ $(document).ready(function () {
 
             "stateSave": true,
             "stateSaveParams": function (settings, data) {
+                console.log(" saving state params " + JSON.stringify(data));
+                data.search.search = "";
+            },
+
+            "stateLoadParams": function (settings, data) {
                 //data.search.search = "";
+                console.log(" saving load params " + JSON.stringify(data));
             },
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
@@ -153,7 +159,7 @@ $(document).ready(function () {
                         // this case `data: 0`.
                         "render": function (data, type, row) {
                             if (config.role == "ODPStaff") {
-                                return data.length == 0 ? "&nbsp;" : data.replace(", E7F6","").replace("E7F6","");
+                                return data.length == 0 ? "&nbsp;" : data.replace(", E7F6", "").replace("E7F6", "");
                             }
                             else {
                                 return data.length == 0 ? "&nbsp;" : data;
@@ -163,7 +169,7 @@ $(document).ready(function () {
                         "targets": 7
                     },
 
-                    {"visible": true, "targets": [5] },
+                    { "visible": true, "targets": [5] },
                     {
 
                         "render": function (data, type, row) {
@@ -257,6 +263,7 @@ $(document).ready(function () {
 
 
     InitializeTable();
+
     $.fn.dataTableExt.afnFiltering.push(function (oSettings, aData, iDataIndex) {
         //        if ($(oSettings.nTable).hasClass('do-exclude-filtering')) {
         //            return aData[16] == '' || $('#chkShowExcluded').is(':checked');
@@ -356,6 +363,9 @@ $(document).ready(function () {
 
         table.on('page.dt', function () {
             var info = table.page.info();
+
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + info.page;
+
             console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
             setTimeout(function () {
                 $("tr[role=row].selected").find("input").prop("checked", "checked");
@@ -457,6 +467,7 @@ $(document).ready(function () {
 
     }
 
+    // sets up the filters and does the load filters.
     function filtersManager() {
         $("select#filterlist").empty();
         console.log(" filters manager :: " + config.role);
@@ -520,6 +531,7 @@ $(document).ready(function () {
                               if (window.location.hash.replace("#", "") != "") {
                                   var locationHash = window.location.hash.replace("#", "").split("|");
                                   var filterVal = locationHash[0], actionVal = locationHash[1];
+                                  $opts.pageNumber = locationHash[2];
                                   if ($opts.initialPageLoad) {
                                       $opts.lastfilterSelection = filterVal;
                                       //$opts.initialPageLoad = false;
@@ -683,6 +695,7 @@ $(document).ready(function () {
         if (window.location.hash.replace("#", "") != "") {
             var locationHash = window.location.hash.replace("#", "").split("|");
             var filterVal = locationHash[0], actionVal = locationHash[1];
+            $opts.pageNumber = locationHash[2];
             if ($opts.initialPageLoad) {
                 if (actionVal != "selectaction") {
                     $("select#actionlist option").each(function (idx, val) {
@@ -707,7 +720,8 @@ $(document).ready(function () {
         console.log(config.baseURL);
         $("div#downloadLinkBox").hide();
         assignPageTitle();
-        window.location.hash = $opts.filterlist + "|" + $opts.actionlist;
+
+        window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.pageNumber;
         $opts.hideboxes = [];
 
 
@@ -1235,6 +1249,7 @@ $(document).ready(function () {
             });
 
             actionsManager();
+            $opts.actionlist = "selectaction";
             changeFilters();
             $("div#downloadLinkBox").hide();
         });
@@ -1245,7 +1260,7 @@ $(document).ready(function () {
                 str = $(this).val();
                 $opts.actionlist = $(this).val();
             });
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist;
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.pageNumber;
             watchactionsHandler();
         });
 
