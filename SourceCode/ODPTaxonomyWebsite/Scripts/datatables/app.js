@@ -25,43 +25,6 @@ function isMobile() {
 
 $(document).ready(function () {
 
-//    var spinneropts = {
-//        lines: 10, // The number of lines to draw
-//        length: 10, // The length of each line
-//        width: 3, // The line thickness
-//        radius: 5, // The radius of the inner circle
-//        corners: 1, // Corner roundness (0..1)
-//        rotate: 0, // The rotation offset
-//        direction: 1, // 1: clockwise, -1: counterclockwise
-//        color: '#373644', // #rgb or #rrggbb or array of colors
-//        speed: 1, // Rounds per second
-//        trail: 60, // Afterglow percentage
-//        shadow: false, // Whether to render a shadow
-//        hwaccel: false, // Whether to use hardware acceleration
-//        className: 'spinner', // The CSS class to assign to the spinner
-//        zIndex: 2e9, // The z-index (defaults to 2000000000)
-//        top: '35px', // Top position relative to parent
-//        left: '15px' // Left position relative to parent
-//    };
-
-//    var spinneropts2 = {
-//        lines: 9, // The number of lines to draw
-//        length: 8, // The length of each line
-//        width: 3, // The line thickness
-//        radius: 3, // The radius of the inner circle
-//        corners: 1, // Corner roundness (0..1)
-//        rotate: 0, // The rotation offset
-//        direction: 1, // 1: clockwise, -1: counterclockwise
-//        color: '#000', // #rgb or #rrggbb or array of colors
-//        speed: 1, // Rounds per second
-//        trail: 30, // Afterglow percentage
-//        shadow: false, // Whether to render a shadow
-//        hwaccel: false, // Whether to use hardware acceleration
-//        className: 'spinner', // The CSS class to assign to the spinner
-//        zIndex: 2e9, // The z-index (defaults to 2000000000)
-//        top: '0px', // Top position relative to parent
-//        left: '0px' // Left position relative to parent
-//    };
 
     var target = document.getElementById('spinner');
     var downloadSpin = document.getElementById('downloadSpin');
@@ -108,14 +71,7 @@ $(document).ready(function () {
             "aLengthMenu": [[10, 25, 50, 100, 250, 500, -1], ["Display 10", "Display 25", "Display 50", "Display 100", "Display 250", "Display 500", "Display All"]],
             "sDom": '<"filter-wrap"f><"length-wrap"l><"paginate-wrap"p><"table-wrap"t>ip',
             "rowCallback": function (row, data) {
-                //console.log(" invoking rowCallback ::");
-                //                if ($.inArray(data.DT_RowId, $opts.hiderowItems) !== -1) {
-                //                    $(row).addClass('selected');
-                //                    //row.nodes().to$().find("input").prop("checked", "checked");
-                //                   
-                //                    //$(row).find("input").prop("checked", "checked");
-                //                    //$("tr[role=row].selected").find("input").prop("checked", "checked");
-                //                }
+
             },
             "bAutoWidth": false,
             "language": {
@@ -265,10 +221,7 @@ $(document).ready(function () {
     InitializeTable();
 
     $.fn.dataTableExt.afnFiltering.push(function (oSettings, aData, iDataIndex) {
-        //        if ($(oSettings.nTable).hasClass('do-exclude-filtering')) {
-        //            return aData[16] == '' || $('#chkShowExcluded').is(':checked');
-        //        } else return true;
-        //console.log(" filter running :: " + aData[2] + " index :: " + iDataIndex + " Settings :: " + $opts.hideboxes);
+
         if (_.contains($opts.hideboxes, Number(aData[2]))) {
             return false;
         }
@@ -970,16 +923,33 @@ $(document).ready(function () {
     function doAllSubmitCheck(flag) {
         $opts.selectedItems = [];
         $opts.hiderowItems = [];
+        var filteredRows = table.$('tr', { "filter": "applied" });
+        var filteredRowsAbstractIDs = [];
+        $(filteredRows).each(function (i, val) {
+            //console.log(val);
+            //console.log($(val).find(".abstractid").html());
+            filteredRowsAbstractIDs.push($(val).find(".abstractid").html());
+        });
+        //        
+        //         filteredRows.map(function (frow) {
+        //            console.log($(frow));
+        //            return $(frow).find(".abstractid").html();
+
+        //        });
+
+        console.log(filteredRowsAbstractIDs);
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes()
                 .to$();     // Convert to a jQuery object
             //console.log(rowx.find("input[type=checkbox]"));
             if (flag) {
                 if (rowx.find("input[type=checkbox].visiblecheckbox").length > 0) {
-                    console.log(rowx.find(".abstractid").html());
-                    $opts.selectedItems.push(rowx.find(".abstractid").html());
-                    $opts.hiderowItems.push(rowIdx);
-                    rowx.addClass("selected");
+                    //console.log(rowx.find(".abstractid").html());
+                    if (_.contains(filteredRowsAbstractIDs, rowx.find(".abstractid").html())) {
+                        $opts.selectedItems.push(rowx.find(".abstractid").html());
+                        $opts.hiderowItems.push(rowIdx);
+                        rowx.addClass("selected");
+                    }
                 }
             }
             else {
