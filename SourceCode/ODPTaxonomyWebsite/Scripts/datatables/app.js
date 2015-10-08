@@ -63,7 +63,7 @@ $(document).ready(function () {
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
                 //console.log(" invoking fnRowCallback ::");
-                $(nRow).addClass("closed");
+                //$(nRow).addClass("closed");
                 setTimeout(function () {
                     $("tr[role=row].selected").find("input").prop("checked", "checked");
                 }, 0);
@@ -241,7 +241,7 @@ $(document).ready(function () {
             var alb = $("#allBox").is(':checked');
             var salb = $("#selectallBox").is(':checked');
             setTimeout(function () {
-                util.showOpenRows(alb);
+                //util.showOpenRows(alb);  // Not needed Datatables is maintaining state on table draws.
                 util.selectAllRows(salb);
             }, 0);
 
@@ -375,14 +375,11 @@ $(document).ready(function () {
         if (row.child.isShown()) {
             // This row is already open - close it
             row.child.hide();
-            //tr.removeClass('shown');
             tr.removeClass('open').addClass('closed');
         }
         else {
             // Open this row
-            //console.log("getDetailChildRow..."+data);
             row.child(loadChildContainer(absid)).show();
-            //tr.addClass('shown');
             tr.removeClass('closed').addClass('open');
         }
 
