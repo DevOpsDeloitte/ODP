@@ -52,13 +52,13 @@ $(document).ready(function () {
 
             "stateSave": true,
             "stateSaveParams": function (settings, data) {
-                console.log(" saving state params " + JSON.stringify(data));
+                //console.log(" saving state params " + JSON.stringify(data));
                 data.search.search = "";
             },
 
             "stateLoadParams": function (settings, data) {
                 //data.search.search = "";
-                console.log(" saving load params " + JSON.stringify(data));
+                //console.log(" saving load params " + JSON.stringify(data));
             },
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
@@ -296,7 +296,7 @@ $(document).ready(function () {
 
 
         //is this needed?
-        table.on('init.dt', function () {
+        table.on('init.dtx', function () {
 
 
             console.log("datable initialized :: init.dt ::");
@@ -328,9 +328,8 @@ $(document).ready(function () {
     };
 
     function loadChildContainer(abstractid) {
-        // `d` is the original data object for the row
-        //<table><tr><td>Content to come...</td></tr></table>
-        return '<div id="' + abstractid + '">loading...</div>';
+        //load initial child container with loading message.
+        return '<div class="loadingAbstractDetail" id="' + abstractid + '"><div class="loader"></div><div class="text">loading...</div></div>';
     };
 
     function getDetailChildRow(abstractid) {
@@ -346,7 +345,6 @@ $(document).ready(function () {
                     console.log(data.data[0].ChildRows);
                     content = unescape(util.getTableChildRowsV3(data.data[0]));
                     $("div#" + abstractid).html(content);
-                    //$('.tabs.table').tabs();
                 }
             }
 
@@ -657,7 +655,7 @@ $(document).ready(function () {
                 }
 
                 $opts.actionlist = actionVal;
-                $opts.initialPageLoad = false;
+                //$opts.initialPageLoad = false;
             }
         }
 
@@ -684,9 +682,7 @@ $(document).ready(function () {
 
             }
             $opts.isGridDirty = false;
-            //enableFilters();
             enableInterface();
-            //resetSubmitBtnAndCheckboxes();
             clearSubmitBtnAndCheckboxes();
         });
 
@@ -703,6 +699,10 @@ $(document).ready(function () {
             case "selectaction":
                 $("th.col_select").children().hide();
                 hideAllCheckBoxes();
+                if ($opts.initialPageLoad) {
+
+
+                }
                 break;
             default:
                 $("th.col_select").children().show();
@@ -1227,6 +1227,7 @@ $(document).ready(function () {
                 str = $(this).val();
                 $opts.actionlist = $(this).val();
             });
+            $opts.pageNumber = 0;
             window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.pageNumber;
             watchactionsHandler();
         });
@@ -1311,6 +1312,12 @@ $(document).ready(function () {
                               //alertify.success(" reopen data :: " + data.nottoreopen);
                               $opts.hideboxes = data.nottoreopen;
                               hideCheckBoxes(data.nottoreopen);
+                              setTimeout(function () {
+                                  if ($opts.initialPageLoad) {
+                                      $opts.initialPageLoad = false;
+                                      table.page(parseInt($opts.pageNumber)).draw(false);
+                                  }
+                              }, 200);
 
                           }
                           else {
@@ -1339,7 +1346,12 @@ $(document).ready(function () {
                                 //alertify.success(" reopen data :: " + data.nottoreopen);
                                 $opts.hideboxes = data.hideboxes;
                                 hideCheckBoxes(data.hideboxes);
-
+                                setTimeout(function () {
+                                    if ($opts.initialPageLoad) {
+                                        $opts.initialPageLoad = false;
+                                        table.page(parseInt($opts.pageNumber)).draw(false);
+                                    }
+                                }, 200);
 
                             }
                             else {
