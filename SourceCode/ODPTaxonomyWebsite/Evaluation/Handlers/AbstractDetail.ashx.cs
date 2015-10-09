@@ -90,6 +90,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
 
             List<AbstractListRow> abstracts = data.ToList();
+            db.Dispose();
             return abstracts;
 
         }

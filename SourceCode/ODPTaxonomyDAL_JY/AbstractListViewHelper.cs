@@ -461,11 +461,15 @@ namespace ODPTaxonomyDAL_JY
             List<AbstractListRow> Abstracts = new List<AbstractListRow>();
             AbstractListViewData data = new AbstractListViewData();
             string contractorName = getContractorName();
-            var cacheKappaData = data.getAllKappaRecords();
-            var cacheSubmissions = data.getAllSubmissionRecords();
-            var cacheEvaluations = data.getAllEvaluationRecords();
+            var AbstractId = ParentAbstracts[0].AbstractID;
+            
+            var cacheKappaData = data.getAllKappaRecords(AbstractId);
+            var cacheEvaluations = data.getAllEvaluationRecords(AbstractId);
+            var EvaluationIds = cacheEvaluations.Select(s => s.EvaluationId).ToList();
+            var SubmissionIds = data.getSubmissionIds(EvaluationIds);
+            var cacheSubmissions = data.getAllSubmissionRecords(EvaluationIds);      
             var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecords();
-            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecords();
+            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecords(SubmissionIds);
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
@@ -672,6 +676,9 @@ namespace ODPTaxonomyDAL_JY
             AbstractListViewData data = new AbstractListViewData();
             string contractorName = getContractorName();
 
+            //HttpContext.Current.Response.Write("Step 1<br>");
+            //HttpContext.Current.Response.Flush();
+
             //
            
             for (int i = 0; i < ParentAbstracts.Count; i++)
@@ -681,7 +688,10 @@ namespace ODPTaxonomyDAL_JY
                 ParentAbstracts[i].GetAbstractScan(AbstractView);
                 ParentAbstracts[i].ChildRows = new List<AbstractListRow>();
                 // gets all kappa data for abstract
-                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
+                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID).ToList() ;
+
+                //HttpContext.Current.Response.Write("Step 2<br>");
+                //HttpContext.Current.Response.Flush();
 
                 if (KappaData.Count() > 0)
                 {
@@ -695,7 +705,7 @@ namespace ODPTaxonomyDAL_JY
                         var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
                         if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
                         {
-                            var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value);
+                            var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value).ToList();
                             if (CoderKapperIdentities.Count() > 0)
                             {
                                 foreach (var iden in CoderKapperIdentities)
@@ -748,7 +758,7 @@ namespace ODPTaxonomyDAL_JY
                         var ODPEvaluations = data.GetODPEvaluations(ParentAbstracts[i].AbstractID);
                         if (ODPEvaluations != null && ODPEvaluations.TeamID != null)
                         {
-                            var ODPCoderKapperIdentities = data.GetKappaIdentities(ODPEvaluations.TeamID.Value);
+                            var ODPCoderKapperIdentities = data.GetKappaIdentities(ODPEvaluations.TeamID.Value).ToList();
                             if (ODPCoderKapperIdentities.Count() > 0)
                             {
                                 foreach (var iden in ODPCoderKapperIdentities)
@@ -802,7 +812,7 @@ namespace ODPTaxonomyDAL_JY
                         var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
                         if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
                         {
-                            var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value);
+                            var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value).ToList();
                             if (CoderKapperIdentities.Count() > 0)
                             {
                                 foreach (var iden in CoderKapperIdentities)
