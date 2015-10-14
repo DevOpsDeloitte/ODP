@@ -41,6 +41,16 @@ $(document).ready(function () {
         //$("div#selectionsBox").removeClass("hidden");
     }
 
+    function retrievePageHash() {
+        if (window.location.hash.replace("#", "") != "") {
+            var locationHash = window.location.hash.replace("#", "").split("|");
+            $opts.filterHash = locationHash[0];
+            $opts.actionHash = locationHash[1];
+            $opts.pageNumber = locationHash[2];
+            $opts.hashExists = true;
+        }
+    }
+
 
 
     function InitializeTable() {
@@ -213,6 +223,7 @@ $(document).ready(function () {
         setupTableEvents();
     }
 
+    retrievePageHash(); //Init
     filtersManager(); //Init
     actionsManager(); // Init
     disableFilters();
@@ -476,12 +487,14 @@ $(document).ready(function () {
                               //console.log(" filters received..");
                               $("select#filterlist").empty();
 
-                              if (window.location.hash.replace("#", "") != "") {
-                                  var locationHash = window.location.hash.replace("#", "").split("|");
-                                  var filterVal = locationHash[0], actionVal = locationHash[1];
-                                  $opts.pageNumber = locationHash[2];
+                              if ($opts.hashExists) {
+                                  //                              if (window.location.hash.replace("#", "") != "") {
+                                  //                                  var locationHash = window.location.hash.replace("#", "").split("|");
+                                  //                                  var filterVal = locationHash[0], actionVal = locationHash[1];
+                                  //                                  $opts.pageNumber = locationHash[2];
                                   if ($opts.initialPageLoad) {
-                                      $opts.lastfilterSelection = filterVal;
+                                      $opts.lastfilterSelection = $opts.filterHash;
+                                      //$opts.lastfilterSelection = filterVal;
                                       //$opts.initialPageLoad = false;
                                   }
                               }
@@ -640,10 +653,11 @@ $(document).ready(function () {
         }
         //Intercept if first load to check for hash location based -- previous action.
 
-        if (window.location.hash.replace("#", "") != "") {
-            var locationHash = window.location.hash.replace("#", "").split("|");
-            var filterVal = locationHash[0], actionVal = locationHash[1];
-            $opts.pageNumber = locationHash[2];
+        if ($opts.hashExists) {
+            //if (window.location.hash.replace("#", "") != "") {
+            //var locationHash = window.location.hash.replace("#", "").split("|");
+            var actionVal = $opts.actionHash;
+            //$opts.pageNumber = locationHash[2];
             if ($opts.initialPageLoad) {
                 if (actionVal != "selectaction") {
                     $("select#actionlist option").each(function (idx, val) {
@@ -668,8 +682,12 @@ $(document).ready(function () {
         console.log(config.baseURL);
         $("div#downloadLinkBox").hide();
         assignPageTitle();
-
-        window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.pageNumber;
+        if ($opts.initialPageLoad) {
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.pageNumber;
+        }
+        else {
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + "0";
+        }
         $opts.hideboxes = [];
 
 
@@ -684,15 +702,12 @@ $(document).ready(function () {
             else {
                 // for all other roles
                 if ($opts.initialPageLoad) {
-                    if (window.location.hash.replace("#", "") != "") {
-                        var locationHash = window.location.hash.replace("#", "").split("|");
-                        var filterVal = locationHash[0], actionVal = locationHash[1];
-                        $opts.pageNumber = locationHash[2];
+                    if ($opts.hashExists) {
                         $opts.initialPageLoad = false;
                         table.page(parseInt($opts.pageNumber)).draw(false);
                     }
                 }
-                
+
 
             }
             $opts.isGridDirty = false;

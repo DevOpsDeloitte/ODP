@@ -1,6 +1,6 @@
 ﻿
 var config = {};
-var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "", hiderowItems : [], lastfilterSelection : "", isGridDirty: false, openItems : [], initialPageLoad: true, hideboxes : [], pageNumber : 0 };
+var $opts = { selectedItems : [], xy : "", filterlist : "", actionlist : "", hiderowItems : [], lastfilterSelection : "", isGridDirty: false, openItems : [], initialPageLoad: true, hideboxes : [], pageNumber : 0, hashExists : false, actionHash : "", filterHash : "" };
 var spinneropts = {
     lines: 10, // The number of lines to draw
     length: 10, // The length of each line
