@@ -681,6 +681,20 @@ $(document).ready(function () {
                 serverCheckForActions();
 
             }
+            else {
+                // for all other roles
+                if ($opts.initialPageLoad) {
+                    if (window.location.hash.replace("#", "") != "") {
+                        var locationHash = window.location.hash.replace("#", "").split("|");
+                        var filterVal = locationHash[0], actionVal = locationHash[1];
+                        $opts.pageNumber = locationHash[2];
+                        $opts.initialPageLoad = false;
+                        table.page(parseInt($opts.pageNumber)).draw(false);
+                    }
+                }
+                
+
+            }
             $opts.isGridDirty = false;
             enableInterface();
             clearSubmitBtnAndCheckboxes();
@@ -700,8 +714,8 @@ $(document).ready(function () {
                 $("th.col_select").children().hide();
                 hideAllCheckBoxes();
                 if ($opts.initialPageLoad) {
-
-
+                    $opts.initialPageLoad = false;
+                    table.page(parseInt($opts.pageNumber)).draw(false);
                 }
                 break;
             default:
