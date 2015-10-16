@@ -42,7 +42,9 @@
             </div>
             <div id="downloadProgressBox">
                 <div id="downloadSpin"></div><div id="downloadText">Download Link being generated...</div>
-            </div>     
+            </div>
+            
+            <div id="generalProgressBox"><span>processing...</span></div>   
         </div>
 
 

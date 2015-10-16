@@ -47,6 +47,7 @@ $(document).ready(function () {
             $opts.filterHash = locationHash[0];
             $opts.actionHash = locationHash[1];
             $opts.pageNumber = locationHash[2];
+            $opts.filterlist = $opts.filterHash;
             $opts.hashExists = true;
         }
     }
@@ -274,7 +275,12 @@ $(document).ready(function () {
                 $("#DTable").show();
                 $("#tableContainer").show();
                 //reset submit button
-                $("#subButton").removeClass("yes").addClass("no");
+                if ($opts.selectedItems.length == 0) {
+                    $("#subButton").removeClass("yes").addClass("no");
+                }
+                else {
+
+                }
 
 
                 $("div#tableContainer").show();
@@ -1062,12 +1068,13 @@ $(document).ready(function () {
 
     $("input#subButton").on("click", function (evt) {
         if ($(this).hasClass("yes")) {
-            console.log("enabled ::");
-
+            console.log("submit button click enabled ::");
+            $(this).addClass("no").removeClass("yes");
             switch ($opts.actionlist) {
 
                 case "addreview":
 
+                    $("div#generalProgressBox").show();
                     $.ajax({
                         type: "GET",
                         url: "/Evaluation/Handlers/AbstractReview.ashx",
@@ -1076,6 +1083,7 @@ $(document).ready(function () {
                     })
                       .done(function (data) {
                           console.log(" add : " + data);
+                          $("div#generalProgressBox").hide();
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) added to review list.");
                               resetSubmitBtnAndCheckboxes();
@@ -1092,7 +1100,7 @@ $(document).ready(function () {
                     break;
 
                 case "removereview":
-
+                    $("div#generalProgressBox").show();
                     $.ajax({
                         type: "GET",
                         url: "/Evaluation/Handlers/AbstractReview.ashx",
@@ -1101,6 +1109,7 @@ $(document).ready(function () {
                     })
                       .done(function (data) {
                           console.log(" remove : " + data);
+                          $("div#generalProgressBox").hide();
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from review list.");
                               resetSubmitBtnAndCheckboxes();
@@ -1116,7 +1125,7 @@ $(document).ready(function () {
                     break;
 
                 case "closeabstract":
-
+                    $("div#generalProgressBox").show();
                     $.ajax({
                         type: "GET",
                         url: "/Evaluation/Handlers/AbstractClose.ashx",
@@ -1125,6 +1134,7 @@ $(document).ready(function () {
                     })
                       .done(function (data) {
                           console.log(" closed abstract : " + data);
+                          $("div#generalProgressBox").hide();
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been closed.");
                               resetSubmitBtnAndCheckboxes();
@@ -1141,7 +1151,7 @@ $(document).ready(function () {
                     break;
 
                 case "reopenabstracts":
-
+                    $("div#generalProgressBox").show();
                     $.ajax({
                         type: "GET",
                         url: "/Evaluation/Handlers/AbstractClose.ashx",
@@ -1150,6 +1160,7 @@ $(document).ready(function () {
                     })
                       .done(function (data) {
                           console.log(" reopen abstract : " + data);
+                          $("div#generalProgressBox").hide();
                           if (data.success == true) {
                               alertify.success($opts.selectedItems.length + " " + "Abstract(s) have been Re-opened.");
                               resetSubmitBtnAndCheckboxes();
