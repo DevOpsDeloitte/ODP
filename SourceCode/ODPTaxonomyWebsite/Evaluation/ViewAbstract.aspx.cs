@@ -720,18 +720,16 @@ namespace ODPTaxonomyWebsite.Evaluation
                 }
                 else //Evaluation has NOT started yet
                 {
+                    string messageProcess = null;
                     //Start Evaluation process
-                    try
-                    {
-                        evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId);
-                        abstr = Common.GetAbstractByAbstractId(connString, abstractId);
-                    }
-                    catch (Exception ex)
+                    evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId, out messageProcess);
+                    if (!String.IsNullOrEmpty(messageProcess))
                     {
                         lbl_messageUsers.Visible = true;
-                        lbl_messageUsers.Text = ex.Message;
+                        lbl_messageUsers.Text = messageProcess;
+                        return;
                     }
-                    
+                    abstr = Common.GetAbstractByAbstractId(connString, abstractId);
                 }
 
                 if (abstr != null)
@@ -813,17 +811,16 @@ namespace ODPTaxonomyWebsite.Evaluation
                     if (abstr != null)
                     {
                         abstractId = abstr.AbstractID;
+                        string messageProcess = null;
+            
                         //Start Evaluation process
-                        try
-                        {
-                            evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId); 
-                        }
-                        catch (Exception ex)
+                        evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId, out messageProcess);
+                        if (!String.IsNullOrEmpty(messageProcess))
                         {
                             lbl_messageUsers.Visible = true;
-                            lbl_messageUsers.Text = ex.Message;
+                            lbl_messageUsers.Text = messageProcess;
+                            return;
                         }
-                                               
                     }
                     else
                     {

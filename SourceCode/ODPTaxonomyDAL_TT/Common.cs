@@ -334,8 +334,9 @@ namespace ODPTaxonomyDAL_TT
         }
 
 
-        public static int StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId)
+        public static int StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId, out string message)
         {
+            message = null;
             int evaluationId = -1;
             int abstractStatusId = -1;
 
@@ -399,7 +400,7 @@ namespace ODPTaxonomyDAL_TT
                     }
                     if (evaluationStarted)
                     {
-                        throw new Exception("You are trying to start a new process for abstract " + abstractId + ". Another team works on this abstract. Please refresh your screen and start again.");
+                        message = "You are trying to start a new process for abstract " + abstractId + ". Another team works on this abstract. Please log out and start again.";
                     }
                     
                 }
