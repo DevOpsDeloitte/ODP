@@ -371,14 +371,15 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
+                    bool evaluationStarted = false;
                     TransactionOptions TransOpt = new TransactionOptions();
                     TransOpt.IsolationLevel = System.Transactions.IsolationLevel.Serializable; 
                     //Check if record with the same fields values exists                    
                     using (TransactionScope tr = new TransactionScope(TransactionScopeOption.Required, TransOpt))
                     {
                         if (!(from e in db.tbl_Evaluations
-                                where (e.EvaluationTypeId == (short)evaluationTypeId) && (e.TeamID == teamId)
-                                && (e.IsComplete == false) && (e.IsStopped == false)
+                                where (e.EvaluationTypeId == (short)evaluationTypeId) && (e.AbstractID == abstractId)
+                                && (e.IsStopped == false)
                                 select e).Any())
                         {
                             db.tbl_Evaluations.InsertOnSubmit(evaluation);
@@ -390,8 +391,16 @@ namespace ODPTaxonomyDAL_TT
                             db.SubmitChanges();
                             
                         }
+                        else
+                        {
+                            evaluationStarted = true;
+                        }
                         tr.Complete();
-                    }                                       
+                    }
+                    if (evaluationStarted)
+                    {
+                        throw new Exception("You are trying to start a new process for abstract " + abstractId + ". Another team works on this abstract. Please refresh your screen and start again.");
+                    }
                     
                 }
                 catch(Exception ex)

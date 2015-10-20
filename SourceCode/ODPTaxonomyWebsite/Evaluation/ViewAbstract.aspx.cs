@@ -721,8 +721,17 @@ namespace ODPTaxonomyWebsite.Evaluation
                 else //Evaluation has NOT started yet
                 {
                     //Start Evaluation process
-                    evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId);
-                    abstr = Common.GetAbstractByAbstractId(connString, abstractId);
+                    try
+                    {
+                        evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId);
+                        abstr = Common.GetAbstractByAbstractId(connString, abstractId);
+                    }
+                    catch (Exception ex)
+                    {
+                        lbl_messageUsers.Visible = true;
+                        lbl_messageUsers.Text = ex.Message;
+                    }
+                    
                 }
 
                 if (abstr != null)
@@ -805,7 +814,16 @@ namespace ODPTaxonomyWebsite.Evaluation
                     {
                         abstractId = abstr.AbstractID;
                         //Start Evaluation process
-                        evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId);                        
+                        try
+                        {
+                            evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId); 
+                        }
+                        catch (Exception ex)
+                        {
+                            lbl_messageUsers.Visible = true;
+                            lbl_messageUsers.Text = ex.Message;
+                        }
+                                               
                     }
                     else
                     {
