@@ -22,6 +22,24 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.Label lbl_messageUsers;
         
         /// <summary>
+        /// linkRestartCoding control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label linkRestartCoding;
+        
+        /// <summary>
+        /// hl_restart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton hl_restart;
+        
+        /// <summary>
         /// hf_abstractId control.
         /// </summary>
         /// <remarks>

@@ -20,6 +20,7 @@ namespace ODPTaxonomyWebsite.Evaluation
     public partial class ViewAbstract : System.Web.UI.Page
     {
         #region Fields
+        public string duplicatedAbstractId = "";
         public string absid = "";
         private string userCurrentName = "";
         private string role_coder = null;
@@ -52,6 +53,11 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         }
 
+        protected void linkBtn_restart(Object sender, EventArgs e)
+        {
+            Response.Redirect("/Evaluation/ViewAbstract.aspx", false);
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -68,6 +74,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                 {
                     
                     lbl_messageUsers.Visible = false;
+                    linkRestartCoding.Visible = false;
 
                     bool isLoggedIn = HttpContext.Current.User.Identity.IsAuthenticated;
                     if (isLoggedIn)
@@ -725,8 +732,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                     evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId, out messageProcess);
                     if (!String.IsNullOrEmpty(messageProcess))
                     {
-                        lbl_messageUsers.Visible = true;
-                        lbl_messageUsers.Text = messageProcess;
+                        duplicatedAbstractId = messageProcess;
+                        linkRestartCoding.Visible = true;
                         return;
                     }
                     abstr = Common.GetAbstractByAbstractId(connString, abstractId);
@@ -784,7 +791,6 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         private void GetAbstract_CoderEvaluation(Guid userId, int evaluationTypeId)
         {
-            string message = "";
             int abstractId = -1;
             int evaluationId = -1;
             int teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.Coder;
@@ -806,27 +812,32 @@ namespace ODPTaxonomyWebsite.Evaluation
                 }
                 else //Evaluation has NOT started yet
                 {                    
-                    //Generate AbstractID available for coding
-                    abstr = Common.GetAbstract_CoderEvaluation(connString, out message);
-                    if (abstr != null)
-                    {
-                        abstractId = abstr.AbstractID;
-                        string messageProcess = null;
-            
-                        //Start Evaluation process
-                        evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId, out messageProcess);
-                        if (!String.IsNullOrEmpty(messageProcess))
-                        {
-                            lbl_messageUsers.Visible = true;
-                            lbl_messageUsers.Text = messageProcess;
-                            return;
-                        }
-                    }
-                    else
+                    //Generate AbstractID available for coding and start evaluation process
+                    //TEST
+    //                System.Threading.Thread.Sleep(
+    //(int)System.TimeSpan.FromSeconds(10).TotalMilliseconds);
+
+                    AbstractEvaluation ae = null;
+                    ae = Common.StartAbstractCoding(connString, evaluationTypeId, i_teamId, userId);
+                    abstr = ae.Abstract;
+
+                    if (!ae.IsAbstractEvailable)
                     {
                         lbl_messageUsers.Visible = true;
-                        lbl_messageUsers.Text = message;
+                        lbl_messageUsers.Text = ae.Message;
+                        return;
                     }
+                    else 
+                    {
+                        if (ae.IsAbstractTaken)
+                        {
+                            duplicatedAbstractId = ae.Message;
+                            linkRestartCoding.Visible = true;
+                            return;
+                        }
+                        
+                    }
+                    
                 }
 
                 if (abstr != null)
