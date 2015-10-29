@@ -350,6 +350,7 @@ namespace ODPTaxonomyDAL_TT
             output.EvaluationId = -1;
             output.IsAbstractEvailable = true;
             output.IsAbstractTaken = false;
+            output.EvaluationId = -1;
 
             int abstractId = -1;
             string message = null;
@@ -395,7 +396,7 @@ namespace ODPTaxonomyDAL_TT
                             message = "No abstracts are available.";
                             output.IsAbstractEvailable = false;
                         }
-
+                        
                         if (abstr != null)
                         {
                             evaluation.ConsensusStartedBy = null;

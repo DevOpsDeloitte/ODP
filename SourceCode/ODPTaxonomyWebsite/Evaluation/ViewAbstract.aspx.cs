@@ -820,6 +820,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     AbstractEvaluation ae = null;
                     ae = Common.StartAbstractCoding(connString, evaluationTypeId, i_teamId, userId);
                     abstr = ae.Abstract;
+                    evaluationId = ae.EvaluationId;
 
                     if (!ae.IsAbstractEvailable)
                     {
