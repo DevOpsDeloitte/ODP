@@ -445,8 +445,9 @@ namespace ODPTaxonomyDAL_TT
                 }
                 catch (Exception ex)
                 {
-                    Utils.LogError(ex);
-                    throw new Exception("An error has occured on starting abstract coding.");
+                    throw ex;
+                    //Utils.LogError(ex);
+                    //throw new Exception("An error has occured on starting abstract coding.");
                 }
 
             }
