@@ -40,6 +40,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         private string messWrongFileType = "Only PDF files are allowed to upload.";
         private string messProsessIsStopped = "The evaluaiton process was stopped by supervisor. You will be redirected to the homepage in 10 seconds.";
         private int maxLen = 20971520;
+        private string messServerError = "An error has occurred on the server while loading page data. You will be redirected to the homepage in 10 seconds.";
 
         #endregion
 
@@ -106,7 +107,10 @@ namespace ODPTaxonomyWebsite.Evaluation
             catch (Exception ex)
             {
                 Utils.LogError(ex);
-                throw new Exception("An error has occured while loading page data.");
+                lbl_messageUsers.Visible = true;
+                lbl_messageUsers.Text = messServerError;
+                Response.AddHeader("REFRESH", "10;URL=/Default.aspx");
+                //throw new Exception("An error has occured while loading page data.");
             }
         }
 
