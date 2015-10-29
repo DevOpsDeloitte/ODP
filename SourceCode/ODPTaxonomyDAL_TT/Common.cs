@@ -17,6 +17,15 @@ namespace ODPTaxonomyDAL_TT
 
     }
 
+    public class AbstractEvaluation
+    {
+        public int EvaluationId;
+        public tbl_Abstract Abstract;
+        public string Message;
+        public bool IsAbstractEvailable;
+        public bool IsAbstractTaken;
+    }
+
     public enum SubmissionTypeId
     {
         CoderEvaluation = 1,
@@ -333,9 +342,125 @@ namespace ODPTaxonomyDAL_TT
             return mess;
         }
 
-
-        public static int StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId)
+        public static AbstractEvaluation StartAbstractCoding(string connString, int evaluationTypeId, int teamId, Guid userId)
         {
+            AbstractEvaluation output = new AbstractEvaluation();
+            output.Message = "";
+            output.Abstract = null;
+            output.EvaluationId = -1;
+            output.IsAbstractEvailable = true;
+            output.IsAbstractTaken = false;
+            output.EvaluationId = -1;
+
+            int abstractId = -1;
+            string message = null;
+            int evaluationId = -1;
+            int abstractStatusId = -1;
+            tbl_Abstract abstr = null;
+
+            if (evaluationTypeId == (int)EvaluationType.CoderEvaluation)
+            {
+                abstractStatusId = (int)AbstractStatusID._1;
+            }
+
+            if (evaluationTypeId == (int)EvaluationType.ODPEvaluation)
+            {
+                abstractStatusId = (int)AbstractStatusID._2;
+            }
+
+            tbl_Evaluation evaluation = new tbl_Evaluation();
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    bool evaluationStarted = false;
+                    TransactionOptions TransOpt = new TransactionOptions();
+                    TransOpt.IsolationLevel = System.Transactions.IsolationLevel.Serializable;
+                    //Check if record with the same fields values exists                    
+                    using (TransactionScope tr = new TransactionScope(TransactionScopeOption.Required, TransOpt))
+                    {
+                        //get abstract first
+                        var matches = db.select_abstracts_coding_tt((int)AbstractStatusID._0);
+                        try
+                        {
+                            abstractId = (int)matches.FirstOrDefault().AbstractID;
+                            var matches2 = from a in db.tbl_Abstracts
+                                           where a.AbstractID == abstractId
+                                           select a;
+                            abstr = matches2.ToList<tbl_Abstract>().First();
+                        }
+                        catch (Exception ex)
+                        {
+                            message = "No abstracts are available.";
+                            output.IsAbstractEvailable = false;
+                        }
+                        
+                        if (abstr != null)
+                        {
+                            evaluation.ConsensusStartedBy = null;
+                            evaluation.AbstractID = abstractId;
+                            evaluation.TeamID = teamId;
+                            evaluation.DateTimeEnded = null;
+                            evaluation.DateTimeStarted = DateTime.Now;
+                            evaluation.EvaluationTypeId = (short)evaluationTypeId;
+                            evaluation.IsComplete = false;
+                            evaluation.StoppedBy = null;
+                            evaluation.StoppedDateTime = null;
+
+                            history.AbstractID = abstractId;
+                            history.AbstractStatusID = abstractStatusId;
+                            history.CreatedDate = DateTime.Now;
+                            history.CreatedBy = userId;
+
+                            //start evaluation process for selected abstract
+                            if (!(from e in db.tbl_Evaluations
+                                where (e.EvaluationTypeId == (short) evaluationTypeId) && (e.AbstractID == abstractId)
+                                      && (e.IsStopped == false)
+                                select e).Any())
+                            {
+                                db.tbl_Evaluations.InsertOnSubmit(evaluation);
+                                db.SubmitChanges();
+                                evaluationId = evaluation.EvaluationId;
+
+                                history.EvaluationId = evaluationId;
+                                db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                                db.SubmitChanges();
+
+                            }
+                            else
+                            {
+                                evaluationStarted = true;
+                            }
+                        }
+                        tr.Complete();
+                    }
+                    if (evaluationStarted)
+                    {
+                        message = abstractId.ToString();
+                        output.IsAbstractTaken = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw new Exception("An error has occured on starting abstract coding.");
+                }
+
+            }
+            //update output object
+            output.Message = message;
+            output.Abstract = abstr;
+            output.EvaluationId = evaluationId;
+
+            return output;
+        }
+
+        public static int StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId, out string message)
+        {
+            message = null;
             int evaluationId = -1;
             int abstractStatusId = -1;
 
@@ -371,14 +496,15 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
+                    bool evaluationStarted = false;
                     TransactionOptions TransOpt = new TransactionOptions();
                     TransOpt.IsolationLevel = System.Transactions.IsolationLevel.Serializable; 
                     //Check if record with the same fields values exists                    
                     using (TransactionScope tr = new TransactionScope(TransactionScopeOption.Required, TransOpt))
                     {
                         if (!(from e in db.tbl_Evaluations
-                                where (e.EvaluationTypeId == (short)evaluationTypeId) && (e.TeamID == teamId)
-                                && (e.IsComplete == false) && (e.IsStopped == false)
+                                where (e.EvaluationTypeId == (short)evaluationTypeId) && (e.AbstractID == abstractId)
+                                && (e.IsStopped == false)
                                 select e).Any())
                         {
                             db.tbl_Evaluations.InsertOnSubmit(evaluation);
@@ -390,8 +516,16 @@ namespace ODPTaxonomyDAL_TT
                             db.SubmitChanges();
                             
                         }
+                        else
+                        {
+                            evaluationStarted = true;
+                        }
                         tr.Complete();
-                    }                                       
+                    }
+                    if (evaluationStarted)
+                    {
+                        message = abstractId.ToString();
+                    }
                     
                 }
                 catch(Exception ex)
