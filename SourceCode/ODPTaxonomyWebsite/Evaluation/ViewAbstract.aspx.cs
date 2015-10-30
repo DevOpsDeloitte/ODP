@@ -823,20 +823,21 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                     AbstractEvaluation ae = null;
                     ae = Common.StartAbstractCoding(connString, evaluationTypeId, i_teamId, userId);
-                    abstr = ae.Abstract;
-                    evaluationId = ae.EvaluationId;
 
                     if (!ae.IsAbstractEvailable)
                     {
                         lbl_messageUsers.Visible = true;
-                        lbl_messageUsers.Text = ae.Message;
+                        lbl_messageUsers.Text = "No abstract is available for coding.";
                         return;
                     }
                     else 
                     {
+                        abstr = ae.Abstract;
+                        evaluationId = ae.EvaluationId;
+
                         if (ae.IsAbstractTaken)
                         {
-                            duplicatedAbstractId = ae.Message;
+                            duplicatedAbstractId = abstr.AbstractID.ToString();
                             linkRestartCoding.Visible = true;
                             return;
                         }
