@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=1sql234;Initial Catalog=ODP_Taxonomy_DEV;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_TT.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Dev" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_TT.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.aspnet_Users" Member="tbl_aspnet_Users">
     <Type Name="tbl_aspnet_User">
       <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
@@ -356,5 +356,22 @@
       <Column Name="FileName" Type="System.String" DbType="NVarChar(393)" CanBeNull="true" />
       <Column Name="EvaluationType" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
+  </Function>
+  <Function Name="dbo.start_abstract_coding_tt" Method="start_abstract_coding_tt">
+    <Parameter Name="TeamID" Parameter="teamID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="EvaluationId" Parameter="evaluationId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="IsAbstractTaken" Parameter="isAbstractTaken" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Parameter Name="IsAbstractAvailable" Parameter="isAbstractAvailable" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.start_evaluation_odp_tt" Method="start_evaluation_odp_tt">
+    <Parameter Name="TeamID" Parameter="teamID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EvaluationId" Parameter="evaluationId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="IsAbstractTaken" Parameter="isAbstractTaken" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
   </Function>
 </Database>

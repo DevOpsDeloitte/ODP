@@ -10,8 +10,13 @@
     <asp:Label runat="server" CssClass="regularMessage" ID="lbl_messageUsers" Visible="false"></asp:Label>
     <asp:Label runat="server" ID="linkRestartCoding" Visible="false" CssClass="regularMessage">
         You are trying to start a new process for abstract <span><%=duplicatedAbstractId %></span>.
-        Another team works on this abstract. Please click the link below to start over.<br/>
+        This abstract is already taken. Please click the link below to start over.<br/>
         <asp:LinkButton runat="server" ID="hl_restart" OnClick="linkBtn_restart">Get New Abstract</asp:LinkButton>
+    </asp:Label>
+    <asp:Label runat="server" ID="linkRestartProcessODP" Visible="false" CssClass="regularMessage">
+        You are trying to start a new process for abstract <span><%=duplicatedAbstractId %></span>.
+        This abstract is already taken. Please click the link below to pick a different abstract.<br/>
+        <asp:LinkButton runat="server" ID="hl_restart_odp" OnClick="linkBtn_restartOdp">View Abstract List</asp:LinkButton>
     </asp:Label>
     <asp:HiddenField runat="server" ID="hf_abstractId" />
     <asp:HiddenField runat="server" ID="hf_evaluationId_coder" />

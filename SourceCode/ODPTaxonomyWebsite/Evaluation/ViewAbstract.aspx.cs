@@ -14,6 +14,7 @@ using System.ComponentModel;
 using ODPTaxonomyDAL_TT;
 using ODPTaxonomyUtility_TT;
 using ODPTaxonomyCommon;
+using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite.Evaluation
 {
@@ -40,6 +41,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         private string messWrongFileType = "Only PDF files are allowed to upload.";
         private string messProsessIsStopped = "The evaluaiton process was stopped by supervisor. You will be redirected to the homepage in 10 seconds.";
         private int maxLen = 20971520;
+        private string messServerError = "An error has occurred on the server while loading page data. You will be redirected to the homepage in 10 seconds.";
 
         #endregion
 
@@ -56,6 +58,11 @@ namespace ODPTaxonomyWebsite.Evaluation
         protected void linkBtn_restart(Object sender, EventArgs e)
         {
             Response.Redirect("/Evaluation/ViewAbstract.aspx", false);
+        }
+
+        protected void linkBtn_restartOdp(Object sender, EventArgs e)
+        {
+            Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff, false);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -106,7 +113,10 @@ namespace ODPTaxonomyWebsite.Evaluation
             catch (Exception ex)
             {
                 Utils.LogError(ex);
-                throw new Exception("An error has occured while loading page data.");
+                lbl_messageUsers.Visible = true;
+                lbl_messageUsers.Text = messServerError;
+                Response.AddHeader("REFRESH", "10;URL=/Default.aspx");
+                //throw new Exception("An error has occured while loading page data.");
             }
         }
 
@@ -727,15 +737,19 @@ namespace ODPTaxonomyWebsite.Evaluation
                 }
                 else //Evaluation has NOT started yet
                 {
-                    string messageProcess = null;
                     //Start Evaluation process
-                    evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId, out messageProcess);
-                    if (!String.IsNullOrEmpty(messageProcess))
+                    AbstractEvaluation ae = null;
+                    ae = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId);
+
+                    evaluationId = ae.EvaluationId;
+
+                    if (ae.IsAbstractTaken)
                     {
-                        duplicatedAbstractId = messageProcess;
-                        linkRestartCoding.Visible = true;
+                        duplicatedAbstractId = abstractId.ToString();
+                        linkRestartProcessODP.Visible = true;
                         return;
                     }
+                    
                     abstr = Common.GetAbstractByAbstractId(connString, abstractId);
                 }
 
@@ -812,27 +826,23 @@ namespace ODPTaxonomyWebsite.Evaluation
                 }
                 else //Evaluation has NOT started yet
                 {                    
-                    //Generate AbstractID available for coding and start evaluation process
-                    //TEST
-    //                System.Threading.Thread.Sleep(
-    //(int)System.TimeSpan.FromSeconds(10).TotalMilliseconds);
-
                     AbstractEvaluation ae = null;
                     ae = Common.StartAbstractCoding(connString, evaluationTypeId, i_teamId, userId);
-                    abstr = ae.Abstract;
-                    evaluationId = ae.EvaluationId;
 
                     if (!ae.IsAbstractEvailable)
                     {
                         lbl_messageUsers.Visible = true;
-                        lbl_messageUsers.Text = ae.Message;
+                        lbl_messageUsers.Text = "No abstract is available for coding.";
                         return;
                     }
                     else 
                     {
+                        abstr = ae.Abstract;
+                        evaluationId = ae.EvaluationId;
+
                         if (ae.IsAbstractTaken)
                         {
-                            duplicatedAbstractId = ae.Message;
+                            duplicatedAbstractId = abstr.AbstractID.ToString();
                             linkRestartCoding.Visible = true;
                             return;
                         }
@@ -1018,13 +1028,13 @@ namespace ODPTaxonomyWebsite.Evaluation
                         currentStatus = Common.GetAbstractStatus(connString, i_abstractId);
                         if (((int)currentStatus >= (int)AbstractStatusID._1N) && ((int)currentStatus <= (int)AbstractStatusID._2B))
                         {
-                            isViewMode =!Common.OdpMemberIsAllowedToCode(connString, i_abstractId, (int)TeamType.ODPStaff, (int)EvaluationType.ODPEvaluation, userId);
+                            isViewMode = !Common.OdpMemberIsAllowedToCode(connString, i_abstractId, (int)TeamType.ODPStaff, (int)EvaluationType.ODPEvaluation, userId);
                         }
                         else
                         {
                             isViewMode = true;
                         }
-
+                        
                         if (isViewMode)
                         {
                             //Show Abstract
