@@ -40,6 +40,24 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.LinkButton hl_restart;
         
         /// <summary>
+        /// linkRestartProcessODP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label linkRestartProcessODP;
+        
+        /// <summary>
+        /// hl_restart_odp control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton hl_restart_odp;
+        
+        /// <summary>
         /// hf_abstractId control.
         /// </summary>
         /// <remarks>

@@ -366,4 +366,12 @@
     <Parameter Name="IsAbstractAvailable" Parameter="isAbstractAvailable" Type="System.Boolean" DbType="Bit" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.start_evaluation_odp_tt" Method="start_evaluation_odp_tt">
+    <Parameter Name="TeamID" Parameter="teamID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserID" Parameter="userID" Type="System.Guid" DbType="UniqueIdentifier" />
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.Int32" DbType="Int" />
+    <Parameter Name="EvaluationId" Parameter="evaluationId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="IsAbstractTaken" Parameter="isAbstractTaken" Type="System.Boolean" DbType="Bit" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

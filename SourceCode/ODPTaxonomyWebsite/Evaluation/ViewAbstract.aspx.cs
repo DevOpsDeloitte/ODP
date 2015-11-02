@@ -14,6 +14,7 @@ using System.ComponentModel;
 using ODPTaxonomyDAL_TT;
 using ODPTaxonomyUtility_TT;
 using ODPTaxonomyCommon;
+using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite.Evaluation
 {
@@ -57,6 +58,11 @@ namespace ODPTaxonomyWebsite.Evaluation
         protected void linkBtn_restart(Object sender, EventArgs e)
         {
             Response.Redirect("/Evaluation/ViewAbstract.aspx", false);
+        }
+
+        protected void linkBtn_restartOdp(Object sender, EventArgs e)
+        {
+            Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff, false);
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -731,15 +737,19 @@ namespace ODPTaxonomyWebsite.Evaluation
                 }
                 else //Evaluation has NOT started yet
                 {
-                    string messageProcess = null;
                     //Start Evaluation process
-                    evaluationId = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId, out messageProcess);
-                    if (!String.IsNullOrEmpty(messageProcess))
+                    AbstractEvaluation ae = null;
+                    ae = Common.StartEvaluationProcess(connString, evaluationTypeId, abstractId, i_teamId, userId);
+
+                    evaluationId = ae.EvaluationId;
+
+                    if (ae.IsAbstractTaken)
                     {
-                        duplicatedAbstractId = messageProcess;
-                        linkRestartCoding.Visible = true;
+                        duplicatedAbstractId = abstractId.ToString();
+                        linkRestartProcessODP.Visible = true;
                         return;
                     }
+                    
                     abstr = Common.GetAbstractByAbstractId(connString, abstractId);
                 }
 
@@ -816,11 +826,6 @@ namespace ODPTaxonomyWebsite.Evaluation
                 }
                 else //Evaluation has NOT started yet
                 {                    
-                    //Generate AbstractID available for coding and start evaluation process
-                    //TEST
-    //                System.Threading.Thread.Sleep(
-    //(int)System.TimeSpan.FromSeconds(10).TotalMilliseconds);
-
                     AbstractEvaluation ae = null;
                     ae = Common.StartAbstractCoding(connString, evaluationTypeId, i_teamId, userId);
 
@@ -1023,13 +1028,13 @@ namespace ODPTaxonomyWebsite.Evaluation
                         currentStatus = Common.GetAbstractStatus(connString, i_abstractId);
                         if (((int)currentStatus >= (int)AbstractStatusID._1N) && ((int)currentStatus <= (int)AbstractStatusID._2B))
                         {
-                            isViewMode =!Common.OdpMemberIsAllowedToCode(connString, i_abstractId, (int)TeamType.ODPStaff, (int)EvaluationType.ODPEvaluation, userId);
+                            isViewMode = !Common.OdpMemberIsAllowedToCode(connString, i_abstractId, (int)TeamType.ODPStaff, (int)EvaluationType.ODPEvaluation, userId);
                         }
                         else
                         {
                             isViewMode = true;
                         }
-
+                        
                         if (isViewMode)
                         {
                             //Show Abstract

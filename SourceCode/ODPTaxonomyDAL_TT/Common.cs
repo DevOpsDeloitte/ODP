@@ -413,87 +413,52 @@ namespace ODPTaxonomyDAL_TT
             
         }
 
-        public static int StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId, out string message)
+        public static AbstractEvaluation StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId)
         {
-            message = null;
-            int evaluationId = -1;
-            int abstractStatusId = -1;
+            AbstractEvaluation output = new AbstractEvaluation();
+            output.Message = "";
+            output.Abstract = null;
+            output.EvaluationId = -1;
+            output.IsAbstractEvailable = true;
+            output.IsAbstractTaken = false;
+            output.EvaluationId = -1;
 
-            if (evaluationTypeId == (int)EvaluationType.CoderEvaluation)
-            {
-                abstractStatusId = (int)AbstractStatusID._1;
-            }
+            int? evaluationId = -1;
+            bool? isAbstractTaken = false;
 
-            if (evaluationTypeId == (int)EvaluationType.ODPEvaluation)
-            {
-                abstractStatusId = (int)AbstractStatusID._2;
-            }
-
-            tbl_Evaluation evaluation = new tbl_Evaluation();
-            evaluation.ConsensusStartedBy = null;
-            evaluation.AbstractID = abstractId;
-            evaluation.TeamID = teamId;
-            evaluation.DateTimeEnded = null;
-            evaluation.DateTimeStarted = DateTime.Now;
-            evaluation.EvaluationTypeId = (short)evaluationTypeId;
-            evaluation.IsComplete = false;
-            evaluation.StoppedBy = null;
-            evaluation.StoppedDateTime = null;
-
-            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
-
-            history.AbstractID = abstractId;
-            history.AbstractStatusID = abstractStatusId;
-            history.CreatedDate = DateTime.Now;
-            history.CreatedBy = userId;
-            
             using (DataDataContext db = new DataDataContext(connString))
             {
                 try
                 {
-                    bool evaluationStarted = false;
-                    TransactionOptions TransOpt = new TransactionOptions();
-                    TransOpt.IsolationLevel = System.Transactions.IsolationLevel.Serializable; 
-                    //Check if record with the same fields values exists                    
-                    using (TransactionScope tr = new TransactionScope(TransactionScopeOption.Required, TransOpt))
-                    {
-                        if (!(from e in db.tbl_Evaluations
-                                where (e.EvaluationTypeId == (short)evaluationTypeId) && (e.AbstractID == abstractId)
-                                && (e.IsStopped == false)
-                                select e).Any())
-                        {
-                            db.tbl_Evaluations.InsertOnSubmit(evaluation);
-                            db.SubmitChanges();
-                            evaluationId = evaluation.EvaluationId;
+                    int returnValue = -1;
+                    returnValue = db.start_evaluation_odp_tt(teamId, userId, abstractId, ref evaluationId,
+                        ref isAbstractTaken);
 
-                            history.EvaluationId = evaluationId;
-                            db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
-                            db.SubmitChanges();
-                            
-                        }
-                        else
-                        {
-                            evaluationStarted = true;
-                        }
-                        tr.Complete();
-                    }
-                    if (evaluationStarted)
+                    if (returnValue == 0)
                     {
-                        message = abstractId.ToString();
+                        goto Finish;
                     }
-                    
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Utils.LogError(ex);
-                    throw new Exception("An error has occured while saving data.");
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine("An error has occured on starting evaluation process for odp team.");
+                    sb.AppendLine("TeamId: " + teamId + "; UserId: " + userId + "; AbstractId: " + abstractId);
+                    sb.AppendLine(ex.Message);
+
+                    throw new Exception(sb.ToString());
                 }
-                
-                
-                              
             }
 
-            return evaluationId;
+            //update output object
+            output.EvaluationId = evaluationId.HasValue ? (int)evaluationId : -1;
+            output.IsAbstractTaken = isAbstractTaken.HasValue ? (bool)isAbstractTaken : false;
+
+            return output;
+
+        Finish:
+            throw new Exception("An error has occured on SQL server on starting evaluation process for odp team. TeamId: " + teamId + "; UserId: " + userId + "; AbstractId: " + abstractId);
+            
         }
 
         

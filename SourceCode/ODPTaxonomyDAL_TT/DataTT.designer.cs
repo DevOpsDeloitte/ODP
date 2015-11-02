@@ -350,6 +350,15 @@ namespace ODPTaxonomyDAL_TT
 			isAbstractAvailable = ((System.Nullable<bool>)(result.GetParameterValue(5)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.start_evaluation_odp_tt")]
+		public int start_evaluation_odp_tt([global::System.Data.Linq.Mapping.ParameterAttribute(Name="TeamID", DbType="Int")] System.Nullable<int> teamID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="UserID", DbType="UniqueIdentifier")] System.Nullable<System.Guid> userID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="Int")] System.Nullable<int> abstractID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EvaluationId", DbType="Int")] ref System.Nullable<int> evaluationId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="IsAbstractTaken", DbType="Bit")] ref System.Nullable<bool> isAbstractTaken)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), teamID, userID, abstractID, evaluationId, isAbstractTaken);
+			evaluationId = ((System.Nullable<int>)(result.GetParameterValue(3)));
+			isAbstractTaken = ((System.Nullable<bool>)(result.GetParameterValue(4)));
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.aspnet_Users")]
