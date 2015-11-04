@@ -223,7 +223,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                                             //lbl_messageUsers.Text = messUploadNotesSuccess;
                                             Session["ShowUploadNotesMessage"] = "true";
                                             string url = Request.Url.ToString();
-                                            Response.Redirect(url);
+                                            Response.Redirect(url, false);
                                         }
                                     }                                    
                                     
@@ -279,7 +279,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                                             //lbl_messageUsers.Text = messUploadNotesSuccess;
                                             Session["ShowUploadNotesMessage"] = "true";
                                             string url = Request.Url.ToString();
-                                            Response.Redirect(url);
+                                            Response.Redirect(url, false);
                                         }
                                     }                
                                     
