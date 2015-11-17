@@ -1076,7 +1076,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderEntitiesStudiedQuestions()
         {
             //var db = DBData.GetDataContext();
-            var questions = db.B_EntitiesStudieds.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.B_EntitiesStudieds.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1084,11 +1084,25 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("B_EntitiesStudied", question.EntitiesStudiedID);
                 var getComparerVals = getComparerValues("B_EntitiesStudied", question.EntitiesStudiedID);
                 StringBuilder row = new StringBuilder();
-                row.AppendLine("<tr>");
-                row.AppendLine("<td scope=\"row\">" + question.EntitiesStudiedID.ToString() + ". " + question.EntitiesStudied + "<div class=\"icon open\" ng-click=\"showDescription('entitiesstudied-" + question.EntitiesStudiedID.ToString() + "')\"><div>" + "</td>");
-                row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.entitiesstudied[" + question.EntitiesStudiedID + "]\" is-checked='" + getViewVals[0] + "'  show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"entitiesstudied-" + question.EntitiesStudiedID + "\" data-cat-id=\"entitiesstudied\" data-q-id =\"" + question.EntitiesStudiedID + "\"></div></td>");
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">" + question.EntitiesStudiedID.ToString() + ". " + question.EntitiesStudied + "<div class=\"icon open\" ng-click=\"showDescription('entitiesstudied-" + question.EntitiesStudiedID.ToString() + "')\"><div>" + "</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.entitiesstudied[" + question.EntitiesStudiedID + "]\" is-checked='" + getViewVals[0] + "'  show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"entitiesstudied-" + question.EntitiesStudiedID + "\" data-cat-id=\"entitiesstudied\" data-q-id =\"" + question.EntitiesStudiedID + "\"></div></td>");
                 
-                row.AppendLine("</tr>");
+                //row.AppendLine("</tr>");
+                if (question.Status.Status1 == "Active")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.EntitiesStudiedID.ToString() + ". " + question.EntitiesStudied + "<div class=\"icon open\" ng-click=\"showDescription('entitiesstudied-" + question.EntitiesStudiedID.ToString() + "')\"><div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.entitiesstudied[" + question.EntitiesStudiedID + "]\" is-checked='" + getViewVals[0] + "'  show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"entitiesstudied-" + question.EntitiesStudiedID + "\" data-cat-id=\"entitiesstudied\" data-q-id =\"" + question.EntitiesStudiedID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
+                if (question.Status.Status1 == "InActive")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.EntitiesStudiedID.ToString() + ". " + question.EntitiesStudied + "<div class=\" open\" ng-click=\"showDescription('entitiesstudied-" + question.EntitiesStudiedID.ToString() + "')\"><div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.entitiesstudied[" + question.EntitiesStudiedID + "]\" is-checked='" + getViewVals[0] + "'  show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='no' " + " name=\"entitiesstudied-" + question.EntitiesStudiedID + "\" data-cat-id=\"entitiesstudied\" data-q-id =\"" + question.EntitiesStudiedID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
                 finalStr.Append(row);
             }
 
@@ -1100,7 +1114,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderStudySettingsQuestions()
         {
             //var db = DBData.GetDataContext();
-            var questions = db.C_StudySettings.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.C_StudySettings.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1108,11 +1122,25 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("C_StudySettings", question.StudySettingID);
                 var getComparerVals = getComparerValues("C_StudySettings", question.StudySettingID);
                 StringBuilder row = new StringBuilder();
-                row.AppendLine("<tr>");
-                row.AppendLine("<td scope=\"row\">"  + question.StudySettingID.ToString() + ". " + question.StudySetting + "<div class=\"icon open\" ng-click=\"showDescription('studysetting-" + question.StudySettingID.ToString() + "')\"></div>"+"</td>");
-                row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studysetting[" + question.StudySettingID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studysetting-" + question.StudySettingID + "\" data-cat-id=\"studysetting\" data-q-id =\"" + question.StudySettingID + "\"></div></td>");
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">"  + question.StudySettingID.ToString() + ". " + question.StudySetting + "<div class=\"icon open\" ng-click=\"showDescription('studysetting-" + question.StudySettingID.ToString() + "')\"></div>"+"</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studysetting[" + question.StudySettingID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studysetting-" + question.StudySettingID + "\" data-cat-id=\"studysetting\" data-q-id =\"" + question.StudySettingID + "\"></div></td>");
                 
-                row.AppendLine("</tr>");
+                //row.AppendLine("</tr>");
+                if (question.Status.Status1 == "Active")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.StudySettingID.ToString() + ". " + question.StudySetting + "<div class=\"icon open\" ng-click=\"showDescription('studysetting-" + question.StudySettingID.ToString() + "')\"></div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studysetting[" + question.StudySettingID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studysetting-" + question.StudySettingID + "\" data-cat-id=\"studysetting\" data-q-id =\"" + question.StudySettingID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
+                if (question.Status.Status1 == "InActive")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.StudySettingID.ToString() + ". " + question.StudySetting + "<div class=\" open\" ng-click=\"showDescription('studysetting-" + question.StudySettingID.ToString() + "')\"></div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studysetting[" + question.StudySettingID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='no' " + " name=\"studysetting-" + question.StudySettingID + "\" data-cat-id=\"studysetting\" data-q-id =\"" + question.StudySettingID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
                 finalStr.Append(row);
             }
 
@@ -1123,7 +1151,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderPopulationFocusQuestions()
         {
             //var db = new DBDataContext();
-            var questions = db.D_PopulationFocus.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.D_PopulationFocus.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1131,11 +1159,25 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("D_PopulationFocus", question.PopulationFocusID);
                 var getComparerVals = getComparerValues("D_PopulationFocus", question.PopulationFocusID);
                 StringBuilder row = new StringBuilder();
-                row.AppendLine("<tr>");
-                row.AppendLine("<td scope=\"row\">" + question.PopulationFocusID.ToString() + ". " + question.PopulationFocus +"<div class=\"icon open\" ng-click=\"showDescription('populationfocus-" + question.PopulationFocusID.ToString() + "')\"></div>"+ "</td>");
-                row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.populationfocus[" + question.PopulationFocusID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"populationfocus-" + question.PopulationFocusID + "\" data-cat-id=\"populationfocus\" data-q-id =\"" + question.PopulationFocusID + "\"></div></td>");
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">" + question.PopulationFocusID.ToString() + ". " + question.PopulationFocus +"<div class=\"icon open\" ng-click=\"showDescription('populationfocus-" + question.PopulationFocusID.ToString() + "')\"></div>"+ "</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.populationfocus[" + question.PopulationFocusID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"populationfocus-" + question.PopulationFocusID + "\" data-cat-id=\"populationfocus\" data-q-id =\"" + question.PopulationFocusID + "\"></div></td>");
                 
-                row.AppendLine("</tr>");
+                //row.AppendLine("</tr>");
+                if (question.Status.Status1 == "Active")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.PopulationFocusID.ToString() + ". " + question.PopulationFocus + "<div class=\"icon open\" ng-click=\"showDescription('populationfocus-" + question.PopulationFocusID.ToString() + "')\"></div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.populationfocus[" + question.PopulationFocusID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"populationfocus-" + question.PopulationFocusID + "\" data-cat-id=\"populationfocus\" data-q-id =\"" + question.PopulationFocusID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
+                if (question.Status.Status1 == "InActive")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.PopulationFocusID.ToString() + ". " + question.PopulationFocus + "<div class=\" open\" ng-click=\"showDescription('populationfocus-" + question.PopulationFocusID.ToString() + "')\"></div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.populationfocus[" + question.PopulationFocusID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='no' " + " name=\"populationfocus-" + question.PopulationFocusID + "\" data-cat-id=\"populationfocus\" data-q-id =\"" + question.PopulationFocusID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
                 finalStr.Append(row);
             }
 
@@ -1146,7 +1188,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderStudyDesignPurposeQuestions()
         {
             //var db = new DBDataContext();
-            var questions = db.E_StudyDesignPurposes.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.E_StudyDesignPurposes.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1154,11 +1196,24 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("E_StudyDesignPurpose", question.StudyDesignPurposeID);
                 var getComparerVals = getComparerValues("E_StudyDesignPurpose", question.StudyDesignPurposeID);
                 StringBuilder row = new StringBuilder();
-                row.AppendLine("<tr>");
-                row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\"icon open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>"+"</td>");
-                row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");
-                
-                row.AppendLine("</tr>");
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\"icon open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>"+"</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");      
+                //row.AppendLine("</tr>");
+                if (question.Status.Status1 == "Active")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\"icon open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
+                if (question.Status.Status1 == "InActive")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\" open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='no' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
                 finalStr.Append(row);
             }
 
@@ -1169,7 +1224,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderPreventionCategoryQuestions()
         {
             //var db = new DBDataContext();
-            var questions = db.F_PreventionCategories.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.F_PreventionCategories.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1177,11 +1232,24 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("F_PreventionCategory", question.PreventionCategoryID);
                 var getComparerVals = getComparerValues("F_PreventionCategory", question.PreventionCategoryID);
                 StringBuilder row = new StringBuilder();
-                row.AppendLine("<tr>");
-                row.AppendLine("<td scope=\"row\">"+ question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory +"<div class=\"icon open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
-                row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"   is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");
-                
-                row.AppendLine("</tr>");
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">"+ question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory +"<div class=\"icon open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"   is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");         
+                //row.AppendLine("</tr>");
+                if (question.Status.Status1 == "Active")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory + "<div class=\"icon open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"   is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
+                if (question.Status.Status1 == "InActive")
+                {
+                    row.AppendLine("<tr>");
+                    row.AppendLine("<td scope=\"row\">" + question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory + "<div class=\" open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
+                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"   is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='no' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");
+                    row.AppendLine("</tr>");
+                }
                 finalStr.Append(row);
             }
 
