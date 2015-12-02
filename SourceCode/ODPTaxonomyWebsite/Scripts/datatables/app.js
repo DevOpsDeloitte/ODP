@@ -136,6 +136,20 @@ $(document).ready(function () {
                         "targets": 7
                     },
 
+                    {
+                    //mask out odp staff role kappa values
+                        "render": function (data, type, row) {
+                            if (config.role == "ODPStaff") {
+                                return "&mdash;";
+                            }
+                            else {
+                                return data;
+                            }
+
+                        },
+                        "targets": [8,9,10,11,12,13,14,15]
+                    },
+
                     { "visible": true, "targets": [5] },
                     {
 
