@@ -72,6 +72,14 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<KappaData>();
         }
 
+        public IEnumerable<KappaData> getAllKappaRecordsK1K2Only()
+        {
+            var query = from k in db2.KappaDatas
+                        where k.KappaTypeID == 1 || k.KappaTypeID == 2
+                        select k;
+            return query.ToList<KappaData>();
+        }
+
         public IEnumerable<KappaData> getAllKappaRecords(int AbstractID)
         {
             var query = from k in db2.KappaDatas
@@ -126,6 +134,13 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<E_StudyDesignPurposeAnswer>();
         }
 
+        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecordsID7()
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswers
+                        where k.StudyDesignPurposeID == 7
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer>();
+        }
         public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecords(IEnumerable<int> SubmissionIds)
         {
             var query = from k in db2.E_StudyDesignPurposeAnswers
@@ -137,6 +152,13 @@ namespace ODPTaxonomyDAL_JY
         public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords()
         {
             var query = from k in db2.F_PreventionCategoryAnswers
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer>();
+        }
+        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecordsID6()
+        {
+            var query = from k in db2.F_PreventionCategoryAnswers
+                        where k.PreventionCategoryID == 6
                         select k;
             return query.ToList<F_PreventionCategoryAnswer>();
         }
