@@ -1196,7 +1196,7 @@ $(document).ready(function () {
                     $("div#downloadProgressBox").show();
 
                     $.ajax({
-                        type: "GET",
+                        type: "POST",
                         url: "/Evaluation/Handlers/AbstractExport.ashx",
                         dataType: 'json',
                         data: { abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
