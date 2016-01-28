@@ -1,4 +1,4 @@
-app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $timeout) {
+app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $firebaseObject, $timeout) {
 
 
 
@@ -214,12 +214,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             var teamRef = new Firebase(firebaseURL);
             teamRef.onDisconnect().remove();
 
-            var sync = $firebase(teamRef);
-            var syncObject = sync.$asObject();
+            var sync = $firebaseObject(teamRef);
+            //var syncObject = sync.$asObject();
 
-            syncObject.$bindTo($scope, "data");
-            $scope.mdata.firebaseOn = true;
-            $scope.data = $scope.syncObjects($scope.mdata);
+            sync.$bindTo($scope, "data").then(function () {
+                $scope.mdata.firebaseOn = true;
+                $scope.data = $scope.syncObjects($scope.mdata);
+            });
+            
 
         }
 
@@ -401,7 +403,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         }
 
 
-        var studyfocuscol1 = studyfocuscol2 = studyfocuscol3 = entitiesstudiedBox =  studysettingBox = populationfocusBox = studydesignpurposeBox = preventioncategoryBox = false;
+        var studyfocuscol1 = studyfocuscol2 = studyfocuscol3 = entitiesstudiedBox = studysettingBox = populationfocusBox = studydesignpurposeBox = preventioncategoryBox = false;
         for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
             //console.log(i);
             if ($scope.mdata.studyfocus[1][i].isChecked) {

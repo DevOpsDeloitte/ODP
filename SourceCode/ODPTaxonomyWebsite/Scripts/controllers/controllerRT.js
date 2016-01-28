@@ -1,4 +1,4 @@
-app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, $timeout) {
+app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, $firebaseObject, $timeout) {
 
 
 
@@ -8,7 +8,6 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         window.MYSCOPE = $scope;
         $scope.mdata = {};
         $scope.local = {};
-        //$scope.FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
         $scope.FIREBASE_LOCATION = window.FIREBASE_CONFIG;
         FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
         $scope.mdata.studyfocus = [];
@@ -41,9 +40,15 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         console.log(" model team id :: " + $scope.mdata.teamid);
 
         var teamRef = new Firebase(FIREBASE_LOCATION + "/teams" + "/" + $scope.mdata.teamid);
-        var sync = $firebase(teamRef);
-        var syncObject = sync.$asObject();
-        syncObject.$bindTo($scope, "mdata");
+        //var sync = $firebase(teamRef);
+        var sync = $firebaseObject(teamRef);
+
+        sync.$bindTo($scope, "mdata").then(function () {
+            
+        });
+
+        //var syncObject = sync.$asObject();
+        //syncObject.$bindTo($scope, "mdata");
 
         $scope.$watch("mdata", function () {
 
@@ -54,53 +59,6 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
             }
         });
 
-        // check & listen for team consensus in progress + exist otherwise.
-
-        //        var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
-        //        var teamdetectObj = new Firebase(firebasedetectURL);
-        //        $timeout(function () {
-        //       
-        //            teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
-        //                var exists = (snapshot.val() !== null);
-        //                if (exists) {
-        //                    console.log("Team Exists :: all good ");
-
-        //                }
-        //                else {
-        //                    console.log(" time to redirect -- watch over. ");
-        //                    window.location = "Evaluation.aspx";
-        //                }
-        //            });
-
-
-
-        //            teamdetectObj.on("value", function (snap) {
-        //                var teamexists = false;
-        //                if (snap.val()) {
-        //                    console.log(" team detect object :: value change " + snap.val());
-        //                    $globdata = snap.val();
-        //                    if (snap.val() !== undefined) {
-        //                        console.log(typeof (snap.val()));
-        //                        $team.keys = Object.keys(snap.val());
-        //                        for (var i = 0; i < $team.keys.length; i++) {
-        //                            console.log(" team keys " + i + "    " + $team.keys[i]);
-        //                            if ($team.keys[i] == $scope.mdata.teamid) {
-        //                                teamexists = true;
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //                else {
-        //                    teamexists = false;
-        //                }
-        //                if (!teamexists) {
-        //                    console.log(" time to redirect -- watch over. ");
-        //                    window.location = "Evaluation.aspx";
-        //                }
-        //            });
-        //         
-
-        //        }, 300);
 
         $scope.detectTeam();
 
