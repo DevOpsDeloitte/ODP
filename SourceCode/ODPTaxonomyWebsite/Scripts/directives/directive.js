@@ -322,10 +322,10 @@ app.directive("outcomeBox", function ($rootScope) {
           
 
             $scope.updatestate = function () {
-                console.log("update state ::" + $attrs.isEnabled);
+                //console.log("update state ::" + $attrs.isEnabled);
                 // this works.
-                console.log(" In controller : " + $rootScope.mode);
-                console.log(" In controller : " + $rootScope.displaymode);
+                //console.log(" In controller : " + $rootScope.mode);
+                //console.log(" In controller : " + $rootScope.displaymode);
                 if( $rootScope.displaymode == "View" ){
                         return; // return to update states allowed.
                         }

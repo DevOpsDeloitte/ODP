@@ -8,7 +8,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         var FIREBASE_LOCATION;
 
         $scope.mdata = {};
-        //$scope.FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
         $scope.FIREBASE_LOCATION = window.FIREBASE_CONFIG;
         FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
         $scope.mdata.superusername = "";
@@ -176,7 +175,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         $scope.mdata.firebaseOn = true;
         $scope.data = $scope.syncObjects($scope.mdata);
 
-        //$scope.checkForConsensusProgress();
         $scope.checkForConsensusProgress2();
 
         $scope.turnOnSyncing();
@@ -566,7 +564,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             headers: { 'Content-Type': 'application/x-www-form-urlencoded'}  // set the headers so angular passing info as form data (not request payload)
         })
            .success(function (data) {
-               console.log("response received : " + data.success);
+               //console.log("response received : " + data.success);
 
                if (!data.success) {
                    $scope.showSaveButton = true;
@@ -604,7 +602,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                    //$scope.message = data.message;
 
 
-                   console.log(" here assignment complete :: ");
+                   //console.log(" here assignment complete :: ");
                    //$scope.$apply();
                }
            });
@@ -615,7 +613,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
     $scope.processForm = function () {
         $scope.postmessages = "";
         $scope.errormessagesdisplay = "";
-        console.log("process form clicked..");
+        //console.log("process form clicked..");
 
         window.alertify.set({
             labels: {
