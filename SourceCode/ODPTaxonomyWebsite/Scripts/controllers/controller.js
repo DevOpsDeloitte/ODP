@@ -401,7 +401,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         }
 
 
-        var studyfocuscol1 = studyfocuscol2 = studyfocuscol3 = false;
+        var studyfocuscol1 = studyfocuscol2 = studyfocuscol3 = entitiesstudiedBox =  studysettingBox = populationfocusBox = studydesignpurposeBox = preventioncategoryBox = false;
         for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
             //console.log(i);
             if ($scope.mdata.studyfocus[1][i].isChecked) {
@@ -422,7 +422,40 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
             }
         }
 
-        if (studyfocuscol1 && studyfocuscol2 && studyfocuscol3 && boxColors) {
+        // Adding business logic for A - F Mandatory Coding.
+
+        for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
+            if ($scope.mdata.entitiesstudied[i].isChecked) {
+                entitiesstudiedBox = true;
+                break;
+            }
+        }
+        for (i = 1; i < $scope.mdata.studysetting.length; i++) {
+            if ($scope.mdata.studysetting[i].isChecked) {
+                studysettingBox = true;
+                break;
+            }
+        }
+        for (i = 1; i < $scope.mdata.populationfocus.length; i++) {
+            if ($scope.mdata.populationfocus[i].isChecked) {
+                populationfocusBox = true;
+                break;
+            }
+        }
+        for (i = 1; i < $scope.mdata.studydesignpurpose.length; i++) {
+            if ($scope.mdata.studydesignpurpose[i].isChecked) {
+                studydesignpurposeBox = true;
+                break;
+            }
+        }
+        for (i = 1; i < $scope.mdata.preventioncategory.length; i++) {
+            if ($scope.mdata.preventioncategory[i].isChecked) {
+                preventioncategoryBox = true;
+                break;
+            }
+        }
+
+        if (studyfocuscol1 && studyfocuscol2 && studyfocuscol3 && entitiesstudiedBox && studysettingBox && populationfocusBox && studydesignpurposeBox && preventioncategoryBox && boxColors) {
             console.log(" form is valid :: ");
             $scope.formIsValid = true;
             $scope.disallowSave = false;
@@ -521,6 +554,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
         var formArray = $("form").serializeArray();
         //var formArray = $("form").serialize();
         //var fa = JSON.stringify(formArray);
+        $scope.showSaveButton = false; // for concurrency issue.
         $http({
             method: 'POST',
             url: 'Handlers/Evaluation.ashx',
@@ -533,7 +567,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $t
                console.log("response received : " + data.success);
 
                if (!data.success) {
-
+                   $scope.showSaveButton = true;
                    // Logic for Supervisor User Auth Failure.
                    if (data.supervisorauthfailed != undefined && data.supervisorauthfailed) {
                        $scope.errormessagesdisplay = "Supervisor authentication Failed!";

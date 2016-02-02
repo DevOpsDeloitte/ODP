@@ -58,7 +58,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             }
             processAndOrganize(context);
-            addAbstractChangeHistory();
+            //addAbstractChangeHistory(); // should move to the submission block below - tighten logic for multiple records being created.
             context.Response.ContentType = "application/json";
             if (submissionID > 0)
             {
@@ -98,6 +98,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 }
 
                 //
+                addAbstractChangeHistory(); // should move to the submission block below - tighten logic for multiple records being created.
                 context.Response.Write(JsonConvert.SerializeObject(new { success = true, submissionID = submissionID, showConsensusButton = showButton, showComparisonButton = showComparison }));
             }
             else
@@ -259,6 +260,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 sb.ApproveSupervisorUserID = superuserID;
             }
             sb.Comments = comments;
+
+            // Possible check for submission record, for concurreny issue in training. Multiple submission detected due to time delay.
+            var rec = db.Submissions.Where(s => s.SubmissionTypeId == submissiontypeID && s.EvaluationId == evaluationID && s.UserId == userID).FirstOrDefault();
+            if (rec != null)
+            {
+                submissionID = rec.SubmissionID;
+                return rec.SubmissionID;
+            }
+            // End of new code block.
 
             db.Submissions.InsertOnSubmit(sb);
             try

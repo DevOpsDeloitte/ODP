@@ -60,7 +60,8 @@ namespace ODPTaxonomyDAL_JY
         K9 = 9,
         K10 = 10,
         K11 = 11,
-        K12 = 12
+        K12 = 12,
+        K13 = 13
     }
 
     public enum TeamTypeEnum

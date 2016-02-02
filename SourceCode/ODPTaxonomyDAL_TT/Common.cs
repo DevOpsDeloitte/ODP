@@ -17,6 +17,15 @@ namespace ODPTaxonomyDAL_TT
 
     }
 
+    public class AbstractEvaluation
+    {
+        public int EvaluationId;
+        public tbl_Abstract Abstract;
+        public string Message;
+        public bool IsAbstractEvailable;
+        public bool IsAbstractTaken;
+    }
+
     public enum SubmissionTypeId
     {
         CoderEvaluation = 1,
@@ -333,68 +342,123 @@ namespace ODPTaxonomyDAL_TT
             return mess;
         }
 
-
-        public static int StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId)
+        public static AbstractEvaluation StartAbstractCoding(string connString, int evaluationTypeId, int teamId, Guid userId)
         {
-            int evaluationId = -1;
-            int abstractStatusId = -1;
+            AbstractEvaluation output = new AbstractEvaluation();
+            output.Message = "";
+            output.Abstract = null;
+            output.EvaluationId = -1;
+            output.IsAbstractEvailable = true;
+            output.IsAbstractTaken = false;
+            output.EvaluationId = -1;
 
-            if (evaluationTypeId == (int)EvaluationType.CoderEvaluation)
-            {
-                abstractStatusId = (int)AbstractStatusID._1;
-            }
-
-            if (evaluationTypeId == (int)EvaluationType.ODPEvaluation)
-            {
-                abstractStatusId = (int)AbstractStatusID._2;
-            }
-
-            tbl_Evaluation evaluation = new tbl_Evaluation();
-            evaluation.ConsensusStartedBy = null;
-            evaluation.AbstractID = abstractId;
-            evaluation.TeamID = teamId;
-            evaluation.DateTimeEnded = null;
-            evaluation.DateTimeStarted = DateTime.Now;
-            evaluation.EvaluationTypeId = (short)evaluationTypeId;
-            evaluation.IsComplete = false;
-            evaluation.StoppedBy = null;
-            evaluation.StoppedDateTime = null;
-
-            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
-
-            history.AbstractID = abstractId;
-            history.AbstractStatusID = abstractStatusId;
-            history.CreatedDate = DateTime.Now;
-            history.CreatedBy = userId;
+            int? abstractId = -1;
+            int? evaluationId = -1;
+            bool? isAbstractTaken = false;
+            bool? isAbstractEvailable = true;
+            tbl_Abstract abstr = null;
             
+
             using (DataDataContext db = new DataDataContext(connString))
             {
                 try
                 {
-                    using (TransactionScope tr = new TransactionScope())
+                    int returnValue = -1;
+                    returnValue = db.start_abstract_coding_tt(teamId, userId, ref abstractId, ref evaluationId,
+                        ref isAbstractTaken, ref isAbstractEvailable);
+
+                    if (returnValue == 0)
                     {
-                        db.tbl_Evaluations.InsertOnSubmit(evaluation);
-                        db.SubmitChanges();
-                        evaluationId = evaluation.EvaluationId;
-
-                        history.EvaluationId = evaluationId;
-                        db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
-                        db.SubmitChanges();
-
-                        tr.Complete();
+                        goto Finish;
                     }
+                    else
+                    {
+                        if (abstractId.HasValue)
+                        {
+                            int id = (int) abstractId;
+                            if (id >= 0)
+                            {
+                                var matches = from a in db.tbl_Abstracts
+                                              where a.AbstractID == id
+                                              select a;
+                                abstr = matches.ToList<tbl_Abstract>().First();
+                            }
+                            
+                        }
+                        
+                    }
+
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Utils.LogError(ex);
-                    throw new Exception("An error has occured while saving data.");
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine("An error has occured on starting abstract coding.");
+                    sb.AppendLine("TeamId: " + teamId + "; UserId: " + userId);
+                    sb.AppendLine(ex.Message);
+                    
+                    throw new Exception(sb.ToString());
                 }
-                
-                
-                              
             }
 
-            return evaluationId;
+            //update output object
+            output.Abstract = abstr;
+            output.EvaluationId = evaluationId.HasValue ? (int)evaluationId : -1;
+            output.IsAbstractTaken = isAbstractTaken.HasValue ? (bool)isAbstractTaken : false;
+            output.IsAbstractEvailable = isAbstractEvailable.HasValue ? (bool)isAbstractEvailable : true;
+
+            return output;
+
+        Finish:
+            throw new Exception("An error has occured on SQL server on starting abstract coding. TeamId: " + teamId + "; UserId: " + userId);
+            
+        }
+
+        public static AbstractEvaluation StartEvaluationProcess(string connString, int evaluationTypeId, int abstractId, int teamId, Guid userId)
+        {
+            AbstractEvaluation output = new AbstractEvaluation();
+            output.Message = "";
+            output.Abstract = null;
+            output.EvaluationId = -1;
+            output.IsAbstractEvailable = true;
+            output.IsAbstractTaken = false;
+            output.EvaluationId = -1;
+
+            int? evaluationId = -1;
+            bool? isAbstractTaken = false;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    int returnValue = -1;
+                    returnValue = db.start_evaluation_odp_tt(teamId, userId, abstractId, ref evaluationId,
+                        ref isAbstractTaken);
+
+                    if (returnValue == 0)
+                    {
+                        goto Finish;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.AppendLine("An error has occured on starting evaluation process for odp team.");
+                    sb.AppendLine("TeamId: " + teamId + "; UserId: " + userId + "; AbstractId: " + abstractId);
+                    sb.AppendLine(ex.Message);
+
+                    throw new Exception(sb.ToString());
+                }
+            }
+
+            //update output object
+            output.EvaluationId = evaluationId.HasValue ? (int)evaluationId : -1;
+            output.IsAbstractTaken = isAbstractTaken.HasValue ? (bool)isAbstractTaken : false;
+
+            return output;
+
+        Finish:
+            throw new Exception("An error has occured on SQL server on starting evaluation process for odp team. TeamId: " + teamId + "; UserId: " + userId + "; AbstractId: " + abstractId);
+            
         }
 
         
@@ -447,8 +511,8 @@ namespace ODPTaxonomyDAL_TT
             message = "OK";
             int abstractId = -1;
             tbl_Abstract abstr = null;
-            List<int> abstracts =  new List<int>();
-            
+            List<int> abstracts = new List<int>();
+
             using (DataDataContext db = new DataDataContext(connString))
             {
                 var matches = db.select_abstracts_coding_tt((int)AbstractStatusID._0);
@@ -460,13 +524,13 @@ namespace ODPTaxonomyDAL_TT
                                    select a;
                     abstr = matches2.ToList<tbl_Abstract>().First();
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     message = "No abstracts are available.";
                     Utils.LogError(ex);
                     return abstr;
                 }
-                
+
             }
 
             return abstr;
@@ -543,5 +607,379 @@ namespace ODPTaxonomyDAL_TT
 
             return teamCode;
         }
+
+        public static void ExportAbstract(string connString, int abstractId, Guid userId)
+        {
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            history.AbstractID = abstractId;
+            history.AbstractStatusID = (int)AbstractStatusID._4;
+            history.CreatedDate = DateTime.Now;
+            history.CreatedBy = userId;
+            history.EvaluationId = null;
+
+            tbl_Abstract abstractItem = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    //verify user
+                    var matches = from m in db.tbl_aspnet_Memberships
+                                  where m.UserId == userId && m.IsApproved == true && m.IsLockedOut == false
+                                  select m.UserId;
+                    if (matches.Any())
+                    {
+                        //verify abstract
+                        var matchesAbstract = from a in db.tbl_Abstracts
+                                              where a.AbstractID == abstractId
+                                              select a;
+                        foreach (var i in matchesAbstract)
+                        {
+                            abstractItem = i;
+                        }
+
+                        if (abstractItem != null)
+                        {
+                            using (TransactionScope tr = new TransactionScope())
+                            {
+                                db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                                db.SubmitChanges();
+
+                                abstractItem.LastExportDate = DateTime.Now;
+                                db.SubmitChanges();
+
+                                tr.Complete();
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Abstract is NOT valid");
+                        }
+                        
+                    }
+                    else
+                    {
+                        throw new Exception("User is NOT valid");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw ex;
+                }
+            }
+        }
+
+        public static void CloseAbstract(string connString, int abstractId, Guid userId)
+        {
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            history.AbstractID = abstractId;
+            history.AbstractStatusID = (int)AbstractStatusID._3;
+            history.CreatedDate = DateTime.Now;
+            history.CreatedBy = userId;
+            history.EvaluationId = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    //verify user
+                    var matches = from m in db.tbl_aspnet_Memberships
+                                  where m.UserId == userId && m.IsApproved == true && m.IsLockedOut == false
+                                  select m.UserId;
+                    if (matches.Any())
+                    {
+                        //verify abstract
+                        var matchesAbstract = from a in db.tbl_Abstracts
+                                              where a.AbstractID == abstractId
+                                              select a;
+                        if (matchesAbstract.Any())
+                        {
+                            db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                            db.SubmitChanges();
+                        }
+                        else
+                        {
+                            throw new Exception("Abstract is NOT valid");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("User is NOT valid");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw ex;
+                }
+            }
+        }
+
+        public static void OpenClosedAbstract(string connString, int abstractId, Guid userId)
+        {
+            tbl_AbstractStatusChangeHistory history = new tbl_AbstractStatusChangeHistory();
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    //verify user
+                    var matches1 = from m in db.tbl_aspnet_Memberships
+                                  where m.UserId == userId && m.IsApproved == true && m.IsLockedOut == false
+                                  select m.UserId;
+                    if (matches1.Any())
+                    {
+                        //verify abstract
+                        var matchesAbstract = from a in db.tbl_Abstracts
+                                              where a.AbstractID == abstractId
+                                              select a;
+                        if (matchesAbstract.Any())
+                        {
+                            var matches = db.select_abstracts_no_reopen_tt();
+                            bool isInList = matches.Any(x => x.AbstractID == abstractId);
+
+                            if (!isInList)
+                            {
+                                //could be re-opened
+                                history.AbstractID = abstractId;
+                                history.AbstractStatusID = (int)AbstractStatusID._1N;
+                                history.CreatedDate = DateTime.Now;
+                                history.CreatedBy = userId;
+                                history.EvaluationId = null;
+
+                                db.tbl_AbstractStatusChangeHistories.InsertOnSubmit(history);
+                                db.SubmitChanges();
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception("Abstract is NOT valid");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("User is NOT valid");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw ex;
+                }
+            }
+        }
+
+        public static List<int> GetAbstractsNotToReopen(string connString, Guid userId)
+        {
+            List<int> abstractIds = null;
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    //verify user
+                    var matches1 = from m in db.tbl_aspnet_Memberships
+                                  where m.UserId == userId && m.IsApproved == true && m.IsLockedOut == false
+                                  select m.UserId;
+                    if (matches1.Any())
+                    {
+                        var matches = db.select_abstracts_no_reopen_tt();
+                        if (matches != null)
+                        {
+                            abstractIds = matches.Select(x => x.AbstractID).ToList();
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("User is NOT valid");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Utils.LogError(ex);
+                    throw ex;
+                }
+            }
+
+            return abstractIds;
+        }
+        
+
+        public static IEnumerable<T> ListMerge<T>(params List<T>[] objects)
+        {
+            foreach (var obj in objects)
+            {
+                var enumerable = obj as System.Collections.IEnumerable;
+                if (enumerable != null)
+                    foreach (var item in enumerable)
+                        yield return (T)item;
+                else
+                    yield return default(T);
+            }
+        }
+
+
+
+        public static List<rpt_OPAResult> GetReportData_OpaData(string connString, string abstracts)
+        {
+            List<rpt_OPAResult> matches = null;
+            
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    matches = db.rpt_OPA(abstracts).ToList<rpt_OPAResult>();
+                                       
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+        }
+
+        public static List<rpt_KappaDataResult> GetReportData_KappaData(string connString, string abstracts)
+        {
+            List<rpt_KappaDataResult> matches = null;
+            
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    matches = db.rpt_KappaData(abstracts).ToList<rpt_KappaDataResult>();
+                    
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+        }
+
+        public static List<rpt_Cdr_ODPNotesPDFResult> GetReportData_Cdr_ODPNotesPDF(string connString, string abstracts, string domain)
+        {
+            List<rpt_Cdr_ODPNotesPDFResult> matches = null;
+            
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    matches = db.rpt_Cdr_ODPNotesPDF(abstracts, domain).ToList<rpt_Cdr_ODPNotesPDFResult>();
+                   
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+        }
+
+        public static List<rpt_AbstractStatusTrailResult> GetReportData_AbstractStatusTrail(string connString, string abstracts)
+        {
+            List<rpt_AbstractStatusTrailResult> matches = null;
+             
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    matches = db.rpt_AbstractStatusTrail(abstracts).ToList<rpt_AbstractStatusTrailResult>();
+                   
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+        }
+
+        public static List<rpt_Cdr_ODP_IndividualCodingResult> GetReportData_Cdr_ODP_IndividualCoding(string connString, string abstracts)
+        {
+            List<rpt_Cdr_ODP_IndividualCodingResult> matches = null;
+            
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    matches = db.rpt_Cdr_ODP_IndividualCoding(abstracts).ToList<rpt_Cdr_ODP_IndividualCodingResult>();
+                    
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+        }
+
+        public static List<rpt_Team_User_UCResult> GetReportData_Team_User_UCResult(string connString, string abstracts)
+        {
+            List<rpt_Team_User_UCResult> matches = null;
+           
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    matches = db.rpt_Team_User_UC(abstracts).ToList<rpt_Team_User_UCResult>();                    
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+        }
+
+        public static List<rpt_AbstractExportedResult> GetReportData_AbstractExported(string connString, string abstracts)
+        {
+            List<rpt_AbstractExportedResult> matches = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                try
+                {
+                    matches = db.rpt_AbstractExported(abstracts).ToList<rpt_AbstractExportedResult>();
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+        }
+
+        public static string GetAbstarctIdForTeamMember(string connString, string userCurrentName)
+        {
+            string abstractId = null;
+            string abstractTitle = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                var matches = db.select_abstractId_team_member_tt(userCurrentName);
+                foreach (var m in matches)
+                {
+                    abstractId = m.AbstractID.ToString();
+                    abstractTitle = m.ProjectTitle;
+                    break;
+                }
+
+            }
+
+            return abstractId + "," + abstractTitle;
+        }
+
+
     }
 }

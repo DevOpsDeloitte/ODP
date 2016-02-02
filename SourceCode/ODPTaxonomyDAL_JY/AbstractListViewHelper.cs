@@ -13,6 +13,7 @@ namespace ODPTaxonomyDAL_JY
     {
         private static string KappaSpecifier = "f";
 
+
         public static bool UserCanView(AbstractViewRole View)
         {
             switch (View)
@@ -63,9 +64,9 @@ namespace ODPTaxonomyDAL_JY
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
-                ParentAbstracts[i].GetSubmissionData(SubmissionTypeEnum.CODER_CONSENSUS);
+                //ParentAbstracts[i].GetSubmissionData(SubmissionTypeEnum.CODER_CONSENSUS);
                 ParentAbstracts[i].GetAbstractScan(AbstractView);
-
+                //ParentAbstracts[i].ChildRows = new List<AbstractListRow>();
                 // gets all kappa data for abstract
                 var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
 
@@ -92,18 +93,21 @@ namespace ODPTaxonomyDAL_JY
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                         else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
                                         {
                                             AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, "IQS " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
                                             Abstracts.Add(CoderEvaluation);
                                         }
                                     }
@@ -141,18 +145,21 @@ namespace ODPTaxonomyDAL_JY
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                         else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                         else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
                                         {
                                             AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName, ParentAbstracts[i].AbstractID);
                                             ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            //ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
                                             Abstracts.Add(ODPEvaluation);
                                         }
                                     }
@@ -222,6 +229,653 @@ namespace ODPTaxonomyDAL_JY
             return Abstracts;
         }
 
+        private static string getContractorName()
+        {
+            string retVal = "";
+            try
+            {
+                retVal = System.Configuration.ConfigurationManager.AppSettings["contractorName"];
+            }
+            catch (Exception)
+            {
+               retVal = "IQS";
+            }
+
+            return retVal;
+        }
+
+        public static List<AbstractListRow> ProcessAbstracts2(List<AbstractListRow> ParentAbstracts, AbstractViewRole AbstractView)
+        {
+            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
+            AbstractListViewData data = new AbstractListViewData();
+            string contractorName = getContractorName();
+            var cacheKappaData = data.getAllKappaRecords();
+            var cacheSubmissions = data.getAllSubmissionRecords();
+            var cacheEvaluations = data.getAllEvaluationRecords();
+            var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecords();
+            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecords();
+
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+                //HttpContext.Current.Response.Write("done :: " + i + "<br>");
+                //HttpContext.Current.Response.Flush();
+                ParentAbstracts[i].GetSubmissionData2(SubmissionTypeEnum.CODER_CONSENSUS, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                ParentAbstracts[i].GetAbstractScan(AbstractView);
+                ParentAbstracts[i].ChildRows = new List<AbstractListRow>();
+
+                //var KappaData2 = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
+                var KappaData = data.GetAbstractKappaData2(ParentAbstracts[i].AbstractID, cacheKappaData);
+                //IEnumerable<KappaData> KappaData = null;
+
+                if (KappaData.Count() > 0)
+                {
+                    // fill in k1 value
+                    Abstracts.Add(FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));             
+                    ParentAbstracts[i].KappaCount = KappaData.Count();
+                    
+                    if (1 == 2) // Emulating no Entry here.
+                    {
+
+                        if (AbstractView == AbstractViewRole.CoderSupervisor || AbstractView == AbstractViewRole.ODPSupervisor)
+                        {
+                            // get coder evaluation row
+                            // and fill in k2 - k4 value
+                            var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                            if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
+                            {
+                                var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value);
+                                if (CoderKapperIdentities.Count() > 0)
+                                {
+                                    foreach (var iden in CoderKapperIdentities)
+                                    {
+                                        foreach (var kappa in KappaData)
+                                        {
+                                            if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // fill in k5 value
+                        foreach (var kappa in KappaData)
+                        {
+                            if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
+                            {
+                                AbstractListRow ODPConsensus = ConstructNewAbstractListRow(kappa, "ODP Avg", ParentAbstracts[i].AbstractID);
+                                ODPConsensus.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_CONSENSUS, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                ParentAbstracts[i].ChildRows.Add(ODPConsensus);
+                                //Abstracts.Add(ODPConsensus);
+                            }
+                        }
+
+                        if (AbstractView == AbstractViewRole.ODPSupervisor)
+                        {
+                            // get odp staff evaluation row
+                            // and fill in k6 - k8 value
+                            var ODPEvaluations = data.GetODPEvaluations(ParentAbstracts[i].AbstractID);
+                            if (ODPEvaluations != null && ODPEvaluations.TeamID != null)
+                            {
+                                var ODPCoderKapperIdentities = data.GetKappaIdentities(ODPEvaluations.TeamID.Value);
+                                if (ODPCoderKapperIdentities.Count() > 0)
+                                {
+                                    foreach (var iden in ODPCoderKapperIdentities)
+                                    {
+                                        foreach (var kappa in KappaData)
+                                        {
+                                            if (iden.UserAlias == "ODPA" && kappa.KappaTypeID == (int)KappaTypeEnum.K6)
+                                            {
+                                                AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                ODPEvaluation.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                                //Abstracts.Add(ODPEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
+                                            {
+                                                AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                ODPEvaluation.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                                //Abstracts.Add(ODPEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
+                                            {
+                                                AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                ODPEvaluation.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                                //Abstracts.Add(ODPEvaluation);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // fill in k9 value
+                        foreach (var kappa in KappaData)
+                        {
+                            if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
+                            {
+                                AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, contractorName + " " + "vs R", ParentAbstracts[i].AbstractID);
+                                ODPCoderComparison.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_COMPARISON, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                ParentAbstracts[i].ChildRows.Add(ODPCoderComparison);
+                                //Abstracts.Add(ODPCoderComparison);
+                            }
+                        }
+
+                        /* add k10-k12 */
+                        if (AbstractView == AbstractViewRole.ODPSupervisor)
+                        {
+                            // get coder evaluation row
+                            // and fill in k10 - k12 value
+                            var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                            if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
+                            {
+                                var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value);
+                                if (CoderKapperIdentities.Count() > 0)
+                                {
+                                    foreach (var iden in CoderKapperIdentities)
+                                    {
+                                        foreach (var kappa in KappaData)
+                                        {
+                                            if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K10)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K11)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K12)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        /* end of add k10-k12 */
+
+                        /* add k13 */
+                        if (AbstractView == AbstractViewRole.ODPSupervisor)
+                        {
+                            // fill in k13 value
+                            foreach (var kappa in KappaData)
+                            {
+                                if (kappa.KappaTypeID == (int)KappaTypeEnum.K13)
+                                {
+                                    AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, "ODP" + " " + "vs R", ParentAbstracts[i].AbstractID);
+                                    ODPCoderComparison.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_COMPARISON, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                    ParentAbstracts[i].ChildRows.Add(ODPCoderComparison);
+                                    //Abstracts.Add(ODPCoderComparison);
+                                }
+                            }
+                        }
+                        /* end k13 */
+
+                    }
+
+                }
+                else
+                {
+                    ParentAbstracts[i].KappaCount = 0;
+                    Abstracts.Add(ParentAbstracts[i]);
+                }
+            }
+
+            return Abstracts;
+        }
+
+        public static List<AbstractListRow> ProcessAbstractsIndividual(List<AbstractListRow> ParentAbstracts, AbstractViewRole AbstractView)
+        {
+            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
+            AbstractListViewData data = new AbstractListViewData();
+            string contractorName = getContractorName();
+            var AbstractId = ParentAbstracts[0].AbstractID;
+            
+            var cacheKappaData = data.getAllKappaRecords(AbstractId);
+            var cacheEvaluations = data.getAllEvaluationRecords(AbstractId);
+            var EvaluationIds = cacheEvaluations.Select(s => s.EvaluationId).ToList();
+            var SubmissionIds = data.getSubmissionIds(EvaluationIds);
+            var cacheSubmissions = data.getAllSubmissionRecords(EvaluationIds);      
+            var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecords();
+            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecords(SubmissionIds);
+
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+                //HttpContext.Current.Response.Write("done :: " + i + "<br>");
+                //HttpContext.Current.Response.Flush();
+                ParentAbstracts[i].GetSubmissionData2(SubmissionTypeEnum.CODER_CONSENSUS, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                ParentAbstracts[i].GetAbstractScan(AbstractView);
+                ParentAbstracts[i].ChildRows = new List<AbstractListRow>();
+
+                //var KappaData2 = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID);
+                var KappaData = data.GetAbstractKappaData2(ParentAbstracts[i].AbstractID, cacheKappaData);
+                //IEnumerable<KappaData> KappaData = null;
+
+                if (KappaData.Count() > 0)
+                {
+                    // fill in k1 value
+                    Abstracts.Add(FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));
+                    ParentAbstracts[i].KappaCount = KappaData.Count();
+
+
+                        if (AbstractView == AbstractViewRole.CoderSupervisor || AbstractView == AbstractViewRole.ODPSupervisor)
+                        {
+                            // get coder evaluation row
+                            // and fill in k2 - k4 value
+                            var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                            if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
+                            {
+                                var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value);
+                                if (CoderKapperIdentities.Count() > 0)
+                                {
+                                    foreach (var iden in CoderKapperIdentities)
+                                    {
+                                        foreach (var kappa in KappaData)
+                                        {
+                                            if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // fill in k5 value
+                        foreach (var kappa in KappaData)
+                        {
+                            if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
+                            {
+                                AbstractListRow ODPConsensus = ConstructNewAbstractListRow(kappa, "ODP Avg", ParentAbstracts[i].AbstractID);
+                                ODPConsensus.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_CONSENSUS, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                ParentAbstracts[i].ChildRows.Add(ODPConsensus);
+                                //Abstracts.Add(ODPConsensus);
+                            }
+                        }
+
+                        if (AbstractView == AbstractViewRole.ODPSupervisor)
+                        {
+                            // get odp staff evaluation row
+                            // and fill in k6 - k8 value
+                            var ODPEvaluations = data.GetODPEvaluations(ParentAbstracts[i].AbstractID);
+                            if (ODPEvaluations != null && ODPEvaluations.TeamID != null)
+                            {
+                                var ODPCoderKapperIdentities = data.GetKappaIdentities(ODPEvaluations.TeamID.Value);
+                                if (ODPCoderKapperIdentities.Count() > 0)
+                                {
+                                    foreach (var iden in ODPCoderKapperIdentities)
+                                    {
+                                        foreach (var kappa in KappaData)
+                                        {
+                                            if (iden.UserAlias == "ODPA" && kappa.KappaTypeID == (int)KappaTypeEnum.K6)
+                                            {
+                                                AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                ODPEvaluation.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                                //Abstracts.Add(ODPEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
+                                            {
+                                                AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                ODPEvaluation.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                                //Abstracts.Add(ODPEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
+                                            {
+                                                AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                ODPEvaluation.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                                //Abstracts.Add(ODPEvaluation);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        // fill in k9 value
+                        foreach (var kappa in KappaData)
+                        {
+                            if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
+                            {
+                                AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, contractorName + " " + "vs R", ParentAbstracts[i].AbstractID);
+                                ODPCoderComparison.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_COMPARISON, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                ParentAbstracts[i].ChildRows.Add(ODPCoderComparison);
+                                //Abstracts.Add(ODPCoderComparison);
+                            }
+                        }
+
+                        /* add k10-k12 */
+                        if (AbstractView == AbstractViewRole.ODPSupervisor)
+                        {
+                            // get coder evaluation row
+                            // and fill in k10 - k12 value
+                            var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                            if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
+                            {
+                                var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value);
+                                if (CoderKapperIdentities.Count() > 0)
+                                {
+                                    foreach (var iden in CoderKapperIdentities)
+                                    {
+                                        foreach (var kappa in KappaData)
+                                        {
+                                            if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K10)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K11)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                            else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K12)
+                                            {
+                                                AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                                CoderEvaluation.GetSubmissionData2(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                                ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                                //Abstracts.Add(CoderEvaluation);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        /* end of add k10-k12 */
+
+                        /* add k13 */
+                        if (AbstractView == AbstractViewRole.ODPSupervisor)
+                        {
+                            // fill in k13 value
+                            foreach (var kappa in KappaData)
+                            {
+                                if (kappa.KappaTypeID == (int)KappaTypeEnum.K13)
+                                {
+                                    AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, "ODP" + " " + "vs R", ParentAbstracts[i].AbstractID);
+                                    ODPCoderComparison.GetSubmissionData2(SubmissionTypeEnum.ODP_STAFF_COMPARISON, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
+                                    ParentAbstracts[i].ChildRows.Add(ODPCoderComparison);
+                                    //Abstracts.Add(ODPCoderComparison);
+                                }
+                            }
+                        }
+                        /* end k13 */
+
+                    
+
+                }
+                else
+                {
+                    ParentAbstracts[i].KappaCount = 0;
+                    Abstracts.Add(ParentAbstracts[i]);
+                }
+            }
+
+            return Abstracts;
+        }
+
+        public static List<AbstractListRow> ProcessAbstractsIndividualNoCache(List<AbstractListRow> ParentAbstracts, AbstractViewRole AbstractView)
+        {
+            List<AbstractListRow> Abstracts = new List<AbstractListRow>();
+            AbstractListViewData data = new AbstractListViewData();
+            string contractorName = getContractorName();
+
+            //HttpContext.Current.Response.Write("Step 1<br>");
+            //HttpContext.Current.Response.Flush();
+
+            //
+           
+            for (int i = 0; i < ParentAbstracts.Count; i++)
+            {
+
+                ParentAbstracts[i].GetSubmissionData(SubmissionTypeEnum.CODER_CONSENSUS);
+                ParentAbstracts[i].GetAbstractScan(AbstractView);
+                ParentAbstracts[i].ChildRows = new List<AbstractListRow>();
+                // gets all kappa data for abstract
+                var KappaData = data.GetAbstractKappaData(ParentAbstracts[i].AbstractID).ToList() ;
+
+                //HttpContext.Current.Response.Write("Step 2<br>");
+                //HttpContext.Current.Response.Flush();
+
+                if (KappaData.Count() > 0)
+                {
+                    // fill in k1 value
+                    Abstracts.Add(FillInKappaValue(ParentAbstracts[i], KappaData, KappaTypeEnum.K1));
+
+                    if (AbstractView == AbstractViewRole.CoderSupervisor || AbstractView == AbstractViewRole.ODPSupervisor)
+                    {
+                        // get coder evaluation row
+                        // and fill in k2 - k4 value
+                        var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                        if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
+                        {
+                            var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value).ToList();
+                            if (CoderKapperIdentities.Count() > 0)
+                            {
+                                foreach (var iden in CoderKapperIdentities)
+                                {
+                                    foreach (var kappa in KappaData)
+                                    {
+                                        if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K2)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                            //Abstracts.Add(CoderEvaluation);
+                                        }
+                                        else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K3)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                            //Abstracts.Add(CoderEvaluation);
+                                        }
+                                        else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K4)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName, ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                            //Abstracts.Add(CoderEvaluation);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // fill in k5 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K5)
+                        {
+                            AbstractListRow ODPConsensus = ConstructNewAbstractListRow(kappa, "ODP Avg", ParentAbstracts[i].AbstractID);
+                            ODPConsensus.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_CONSENSUS);
+                            ParentAbstracts[i].ChildRows.Add(ODPConsensus);
+                            //Abstracts.Add(ODPConsensus);
+                        }
+                    }
+
+                    if (AbstractView == AbstractViewRole.ODPSupervisor)
+                    {
+                        // get odp staff evaluation row
+                        // and fill in k6 - k8 value
+                        var ODPEvaluations = data.GetODPEvaluations(ParentAbstracts[i].AbstractID);
+                        if (ODPEvaluations != null && ODPEvaluations.TeamID != null)
+                        {
+                            var ODPCoderKapperIdentities = data.GetKappaIdentities(ODPEvaluations.TeamID.Value).ToList();
+                            if (ODPCoderKapperIdentities.Count() > 0)
+                            {
+                                foreach (var iden in ODPCoderKapperIdentities)
+                                {
+                                    foreach (var kappa in KappaData)
+                                    {
+                                        if (iden.UserAlias == "ODPA" && kappa.KappaTypeID == (int)KappaTypeEnum.K6)
+                                        {
+                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                            ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                            //Abstracts.Add(ODPEvaluation);
+                                        }
+                                        else if (iden.UserAlias == "ODPB" && kappa.KappaTypeID == (int)KappaTypeEnum.K7)
+                                        {
+                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                            ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                            //Abstracts.Add(ODPEvaluation);
+                                        }
+                                        else if (iden.UserAlias == "ODPC" && kappa.KappaTypeID == (int)KappaTypeEnum.K8)
+                                        {
+                                            AbstractListRow ODPEvaluation = ConstructNewAbstractListRow(kappa, "ODP " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                            ODPEvaluation.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(ODPEvaluation);
+                                            //Abstracts.Add(ODPEvaluation);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // fill in k9 value
+                    foreach (var kappa in KappaData)
+                    {
+                        if (kappa.KappaTypeID == (int)KappaTypeEnum.K9)
+                        {
+                            AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, contractorName + " " + "vs R", ParentAbstracts[i].AbstractID);
+                            ODPCoderComparison.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_COMPARISON);
+                            ParentAbstracts[i].ChildRows.Add(ODPCoderComparison);
+                            //Abstracts.Add(ODPCoderComparison);
+                        }
+                    }
+
+                    /* add k10-k12 */
+                    if (AbstractView == AbstractViewRole.ODPSupervisor)
+                    {
+                        // get coder evaluation row
+                        // and fill in k10 - k12 value
+                        var CoderEvaluations = data.GetCoderEvaluations(ParentAbstracts[i].AbstractID);
+                        if (CoderEvaluations != null && CoderEvaluations.TeamID != null)
+                        {
+                            var CoderKapperIdentities = data.GetKappaIdentities(CoderEvaluations.TeamID.Value).ToList();
+                            if (CoderKapperIdentities.Count() > 0)
+                            {
+                                foreach (var iden in CoderKapperIdentities)
+                                {
+                                    foreach (var kappa in KappaData)
+                                    {
+                                        if (iden.UserAlias == "CdrA" && kappa.KappaTypeID == (int)KappaTypeEnum.K10)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                            //Abstracts.Add(CoderEvaluation);
+                                        }
+                                        else if (iden.UserAlias == "CdrB" && kappa.KappaTypeID == (int)KappaTypeEnum.K11)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                            //Abstracts.Add(CoderEvaluation);
+                                        }
+                                        else if (iden.UserAlias == "CdrC" && kappa.KappaTypeID == (int)KappaTypeEnum.K12)
+                                        {
+                                            AbstractListRow CoderEvaluation = ConstructNewAbstractListRow(kappa, contractorName + " " + iden.UserName + " vs R", ParentAbstracts[i].AbstractID);
+                                            CoderEvaluation.GetSubmissionData(SubmissionTypeEnum.CODER_EVALUATION, iden.UserId);
+                                            ParentAbstracts[i].ChildRows.Add(CoderEvaluation);
+                                            //Abstracts.Add(CoderEvaluation);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    /* end of add k10-k12 */
+
+                    /* add k13 */
+                    if (AbstractView == AbstractViewRole.ODPSupervisor)
+                    {
+                        // fill in k13 value
+                        foreach (var kappa in KappaData)
+                        {
+                            if (kappa.KappaTypeID == (int)KappaTypeEnum.K13)
+                            {
+                                AbstractListRow ODPCoderComparison = ConstructNewAbstractListRow(kappa, "ODP" + " " + "vs R", ParentAbstracts[i].AbstractID);
+                                ODPCoderComparison.GetSubmissionData(SubmissionTypeEnum.ODP_STAFF_COMPARISON);
+                                ParentAbstracts[i].ChildRows.Add(ODPCoderComparison);
+                                //Abstracts.Add(ODPCoderComparison);
+                            }
+                        }
+                    }
+                    /* end k13 */
+
+                }
+                else
+                {
+                    Abstracts.Add(ParentAbstracts[i]);
+                }
+            }
+
+            return Abstracts;
+        }
+
+
         public static List<AbstractListRow> SortAbstracts(List<AbstractListRow> Abstracts, string Sort, SortDirection SortDirection)
         {
             switch (Sort)
@@ -264,16 +918,7 @@ namespace ODPTaxonomyDAL_JY
             {
                 AbstractID = AbstractID,
                 ProjectTitle = Title,
-                //A1 = ((decimal)(Kappa.A1)).ToString(KappaSpecifier),
-                //A2 = ((decimal)(Kappa.A2)).ToString(KappaSpecifier),
-                //A3 = ((decimal)(Kappa.A3)).ToString(KappaSpecifier),
-                //B = ((decimal)(Kappa.B)).ToString(KappaSpecifier),
-                //C = ((decimal)(Kappa.C)).ToString(KappaSpecifier),
-                //D = ((decimal)(Kappa.D)).ToString(KappaSpecifier),
-                //E = ((decimal)(Kappa.E)).ToString(KappaSpecifier),
-                //F = ((decimal)(Kappa.F)).ToString(KappaSpecifier)
-
-                   A1 = convertKappa(Kappa.A1),
+                A1 = convertKappa(Kappa.A1),
                 A2 = convertKappa(Kappa.A2),
                 A3 = convertKappa(Kappa.A3),
                 B = convertKappa(Kappa.B),
@@ -290,14 +935,6 @@ namespace ODPTaxonomyDAL_JY
             {
                 if (Kappa.KappaTypeID == (int)KappaType)
                 {
-                    //Abstract.A1 = ((decimal)(Kappa.A1)).ToString(KappaSpecifier);
-                    //Abstract.A2 = ((decimal)(Kappa.A2)).ToString(KappaSpecifier);
-                    //Abstract.A3 = ((decimal)(Kappa.A3)).ToString(KappaSpecifier);
-                    //Abstract.B = ((decimal)(Kappa.B)).ToString(KappaSpecifier);
-                    //Abstract.C = ((decimal)(Kappa.C)).ToString(KappaSpecifier);
-                    //Abstract.D = ((decimal)(Kappa.D)).ToString(KappaSpecifier);
-                    //Abstract.E = ((decimal)(Kappa.E)).ToString(KappaSpecifier);
-                    //Abstract.F = ((decimal)(Kappa.F)).ToString(KappaSpecifier);
 
                     Abstract.A1 = convertKappa(Kappa.A1);
                     Abstract.A2 = convertKappa(Kappa.A2);

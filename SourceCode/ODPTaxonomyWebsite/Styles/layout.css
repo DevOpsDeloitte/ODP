@@ -31,17 +31,24 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#456777', end
 h1, h2 { font-family: 'open_sansbold', "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 h3, h4, h5, h6 { font-family: 'open_sanssemibold',"HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
-h1 { color: #fff; position: absolute; top: 5px; left: 0; font-size: 2em; text-align: center; right: 0; z-index: 1; }
+h1 { color: #fff; position: absolute; top: 0; font-size: 1.8em; text-align: center; right: 0; left: 0; z-index: 1; }
 .title, h2 { display: block; color: #fff; text-transform: uppercase; font-size: 1.65em; margin: 0 10px; }
 .subtitle, h3{ display: block; font-size: 1.25em; font-weight: normal; text-align: left; color: #0C3966; margin: 0 0 4px 10px; }
 .center, .container .column .center, .container .columns .center { text-align: center; float: none; display: block; margin: 20px auto; }
 .hidden { display:none;}
-.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0; }
+.container .button, .container a.button { color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; background: #fff; margin: 10px 0;  -webkit-appearance: none; }
 	.container .button.yes { background: #24AA7A; color: #fff }
 	.container .button.no { background: #9B0202; color: #fff; }
 	.container .button.no#disabledSaveButton, .container .button.no#disabledcomparisonButton, .container .button.no#disabledconsensusButton, .button.no#disabledwatchConsensusButton, .button.no#disabledwatchComparisonButton { opacity: 0.4; cursor: default; }
 	.container .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
 	.container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
+	.button,
+	button,
+	input[type="search"],
+	input[type="submit"],
+	input[type="reset"],
+	input[type="button"] { -webkit-appearance:none; }
+
 
 .container { margin: 0 auto; padding-top: 80px; }
 
@@ -64,25 +71,30 @@ table .coders { position: absolute; z-index: 9; color: #FFF; right: 4px; top: 6p
 table#MainContent_rdl_activeYN { background: transparent; box-shadow: none; -webkit-box-shadow: none; }
 	table#MainContent_rdl_activeYN td { padding: 0}
 
-input[type="checkbox"] + label, input[type="radio"] + label, label + select { display: inline;}
+input[type="checkbox"] + label, input[type="radio"] + label { display: inline; -webkit-appearance:none; }
 	select { padding: 5px}
 input[type="submit"].review { margin-left: 10px; }
 	input[type="submit"].review.no { opacity: 0.4; }
+	
+label + select { display: inline; -webkit-appearance:normal; }
 
 .table-40 { width: 100%; }
 
-table.persist-area {
-position: relative; }
+table.persist-area { position: relative; }
 table.persist-area th { }
 tr.floatingHeader { position: fixed; top: 62px; visibility: hidden; z-index: 999; background: #D3D3D3; width: inherit; }
 tr.floatingHeader th { width: inherit; }
 
 /* Sticky Header */
-#header_container { background:rgba(47, 85, 124, 0.9); height:60px; position:fixed; width:100%; top:0; z-index: 999; }
-.header{ margin: 15px 24px; width:95%; }
+#header_container { background:rgba(47, 85, 124, 0.9); height:50px; position:fixed; width:100%; top:0; z-index: 999; }
+.header{ margin: 8px 5px; width:95%; }
 .header .button { background: #fff; color: #666; font-weight: bold; text-align: center; font-size: 14px; border: 1px solid #CFCFCF; -webkit-box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1); padding: 8px 20px; position: relative; z-index: 2; margin-left: 5px; }
  .header .button:hover { background: #eee; border: 1px solid #eee; }
-.login-display { color: #fff; position: absolute; top: 14px; right: 14px;  }
+.header .login-display .button, .header .login-display .button:hover { background: none; border: none; box-shadow: none; color: #FFF; }
+ .header .login-display .button:hover { text-decoration: underline; }
+.login-display { color: #fff; position: absolute; top: 11px; right: 10px;  }
+
+.role-display { color:#fff; padding-left:10px; }
 
 /* #Login
 ================================================== */
@@ -92,6 +104,7 @@ fieldset.login { background: #fff; width: 40%; -webkit-border-radius: 6px; borde
 fieldset.login legend { font-weight:bold; position:absolute; top:20px; left:20px; font-size: 18px; color: #57616D; }
 fieldset.login input[type=text], fieldset.login input[type=password] { width: 85% }
 fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 11px; text-align: right; }
+a.logout { color: #FFF; font-size: 16px; margin-left: 10px; }
 
 /* #Page Styles
 ================================================== */
@@ -182,10 +195,10 @@ div.icon.open { width: 16px; height: 16px; background: #FFFFFF; display: inline-
 top: 3px; }
 div.icon.open:before { content: "?"; position: absolute; font-weight: bold; top: -1px; left: 4px; font-size: 11px; color: #BDBABA; }
 div.commentsHeader { text-align: left; font-size: 17px; font-weight: bold; padding: 14px 0px; }
-div.subnav { position: fixed; top: 60px; width: 100%; z-index: 999; background: rgba(196, 196, 196, 0.5); height: 40px; right: 0; }
+div.subnav { position: fixed; top: 50px; width: 100%; z-index: 999; background: rgba(239, 239, 239, 0.7); height: 40px; right: 0; }
 div.subnav ul { position: absolute; right: 10px; top: -6px; margin: 0; }
 div.subnav input, div.subnav li { display: inline-block }
-.container div.subnav .button { padding: 4px 8px }
+.container div.subnav .button { padding: 7px 12px; }
 table tbody th.box-three.big, table tbody td.box-three.big { width: 55% }
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak { display: none !important }
 h2.errormessages { color: Red }
@@ -218,6 +231,12 @@ td[scope="row"] { cursor: pointer }
  td.hidestaffcols { /*visibility: hidden;*/ color: transparent;}
  .clearbothf{ clear: both;}
  tr.data-row.hide{ display: none;}
+ 
+ div#unablecontain.hidden-functionality
+{
+    display: none;
+}
+
 
 /* MISC  
    ================================================== */
@@ -239,13 +258,27 @@ table.form input { display: inline-block }
 #pnl_extraData { clear: both }
 .viewSubmissionLink { display: block }
 
+body.training { background: url('/images/training-background-gradient.png') repeat-x, url('/images/training-background.png') repeat; }
+body.training .title, body.training h2 { color: #073966; }
+
+table.dataTable thead .sorting_desc { background: url("../images/sort_desc.png") no-repeat center -8px !important; }
+table.dataTable thead .sorting_asc { background: url("../images/sort_asc.png") no-repeat center 0 !important; }
+table.dataTable thead .sorting {background: none !important; }
 /* #Media Queries
 ================================================== */
 	/* Smaller than standard 960 (devices and browsers) */
-	@media only screen and (max-width: 959px) {}
+	@media only screen and (max-width: 959px) {
+
+		h1 { color: #fff; position: absolute; top: 2px; font-size: 1.5em; text-align: center; right: 225px;  left: auto; z-index: 1; }
+	}
 
 	/* Tablet Portrait size to standard 960 (devices and browsers) */
-	@media only screen and (min-width: 768px) and (max-width: 959px) {}
+	@media only screen and (min-width: 768px) and (max-width: 959px) {
+
+		.container .column, .container .columns { margin-right: 5px; margin-left: 5px; }
+		h2 { margin: 0 5px; }
+		.subtitle, h3 { margin: 0 0 4px 5px; }
+	}
 
 	/* All Mobile Sizes (devices and browser) */
 	@media only screen and (max-width: 767px) {}

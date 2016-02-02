@@ -6,15 +6,24 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.Security;
 using ODPTaxonomyDAL_JY;
+using ODPTaxonomyDAL_TT;
+using ODPTaxonomyUtility_TT;
 
 namespace ODPTaxonomyWebsite.Evaluation
 {
     public partial class ViewAbstractList : System.Web.UI.Page
     {
+        public string userGUID = "";
+        public string userROLE = "";
+        public string userNAME = "";
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int ViewInt = 0;
             List<string> UserRoles = Roles.GetRolesForUser().ToList();
+            MembershipUser user = Membership.GetUser();
+            userGUID = ((Guid)user.ProviderUserKey).ToString();
+            userNAME = user.UserName;
             IDictionary<int, string> ViewRoles = AbstractListViewHelper.GetViewRoles(UserRoles);
 
             if (string.IsNullOrEmpty(Request.QueryString["view"]))
@@ -40,13 +49,16 @@ namespace ODPTaxonomyWebsite.Evaluation
 
             if (!AbstractListViewHelper.UserCanView(Mainview))
             {
+                // commenting out just for testing..
+                //return;
                 return;
+                
             }
 
             LoadViewDropDownData(ViewRoles, Mainview);
             LoadSubviewDropDownData(Mainview, Subview);
             RenderAbstractListView(Mainview, Subview);
-            SetPager();
+            //SetPager();
         }
 
         protected void MainviewChangeHandler(object sender, EventArgs e)
@@ -117,35 +129,35 @@ namespace ODPTaxonomyWebsite.Evaluation
             }
         }
 
-        protected void SetPager()
-        {
-            if (!IsPostBack)
-            {
-                if (HttpContext.Current.Request.Cookies["Pager"] != null)
-                {
-                    int TempPagerSize;
+        //protected void SetPager()
+        //{
+        //    if (!IsPostBack)
+        //    {
+        //        if (HttpContext.Current.Request.Cookies["Pager"] != null)
+        //        {
+        //            int TempPagerSize;
 
-                    if (int.TryParse(HttpContext.Current.Request.Cookies["Pager"]["Size"].ToString(), out TempPagerSize))
-                    {
-                        switch (TempPagerSize)
-                        {
-                            case 25:
-                                PagerSizeDDL.SelectedIndex = 0;
-                                break;
-                            case 50:
-                                PagerSizeDDL.SelectedIndex = 1;
-                                break;
-                            case 100:
-                                PagerSizeDDL.SelectedIndex = 2;
-                                break;
-                            default:
-                                break;
-                        }
-                        PagerWrapper.Visible = true;
-                    }
-                }
-            }
-        }
+        //            if (int.TryParse(HttpContext.Current.Request.Cookies["Pager"]["Size"].ToString(), out TempPagerSize))
+        //            {
+        //                switch (TempPagerSize)
+        //                {
+        //                    case 25:
+        //                        PagerSizeDDL.SelectedIndex = 0;
+        //                        break;
+        //                    case 50:
+        //                        PagerSizeDDL.SelectedIndex = 1;
+        //                        break;
+        //                    case 100:
+        //                        PagerSizeDDL.SelectedIndex = 2;
+        //                        break;
+        //                    default:
+        //                        break;
+        //                }
+        //                PagerWrapper.Visible = true;
+        //            }
+        //        }
+        //    }
+        //}
 
         /**
          * Loads data for select a view dropdown
@@ -261,22 +273,29 @@ namespace ODPTaxonomyWebsite.Evaluation
             ODPSupervisorView_Review.Visible = false;
             ODPSupervisorView_Review_Uncoded.Visible = false;
 
+            Response.Write(" Main View Role :: " + Mainview.ToString());
             switch (Mainview)
             {
                 case AbstractViewRole.Admin:
-                    AdminView.Visible = true;
+                    ODPSupervisorView_Default.Visible = true;
+                    //AdminView.Visible = true;
+                    userROLE = "Admin";
                     break;
-                case AbstractViewRole.CoderSupervisor:
+                case AbstractViewRole.CoderSupervisor: // 4
+                    userROLE = "CoderSupervisor";
                     if (Subview == "open")
                     {
-                        CoderSupervisor_Open.Visible = true;
+                        CoderSupervisor_Open.Visible = false;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     else
                     {
-                        CoderSupervisor_Coded.Visible = true;
+                        CoderSupervisor_Coded.Visible = false;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     break;
                 case AbstractViewRole.ODPSupervisor:
+                    userROLE = "ODPSupervisor";
                     if (Subview == "open")
                     {
                         ODPSupervisorView_Open.Visible = true;
@@ -295,17 +314,21 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
                     break;
                 case AbstractViewRole.ODPStaff:
+                    userROLE = "ODPStaff";
                     if (Subview == "review")
                     {
-                        ODPStaffView_Review.Visible = true;
+                        ODPStaffView_Review.Visible = false;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     else if (Subview == "uncoded")
                     {
-                        ODPStaffView_Review_Uncoded.Visible = true;
+                        ODPStaffView_Review_Uncoded.Visible = false;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     else
                     {
-                        ODPStaffView_Default.Visible = true;
+                        ODPStaffView_Default.Visible = false;
+                        ODPSupervisorView_Default.Visible = true;
                     }
                     break;
                 default:
@@ -313,29 +336,33 @@ namespace ODPTaxonomyWebsite.Evaluation
             }
         }
 
-        protected void PagerSizeChangeHandler(object sender, EventArgs e)
-        {
-            int NewPagerSize;
+        
 
-            if (int.TryParse(PagerSizeDDL.SelectedValue, out NewPagerSize))
-            {
-                switch (NewPagerSize)
-                {
-                    case 25:
-                    case 50:
-                    case 100:
-                        HttpCookie PagerCookie = new HttpCookie("Pager");
-                        PagerCookie["size"] = NewPagerSize.ToString();
-                        PagerCookie.Expires = DateTime.Now.AddYears(1);
+        
 
-                        Response.Cookies.Add(PagerCookie);
-                        break;
-                    default:
-                        break;
-                }
-            }
+        //protected void PagerSizeChangeHandler(object sender, EventArgs e)
+        //{
+        //    int NewPagerSize;
 
-            Response.Redirect("~/Evaluation/ViewAbstractList.aspx?view=" + (!string.IsNullOrEmpty(Request.QueryString["view"]) ? Request.QueryString["view"] : ""));
-        }
+        //    if (int.TryParse(PagerSizeDDL.SelectedValue, out NewPagerSize))
+        //    {
+        //        switch (NewPagerSize)
+        //        {
+        //            case 25:
+        //            case 50:
+        //            case 100:
+        //                HttpCookie PagerCookie = new HttpCookie("Pager");
+        //                PagerCookie["size"] = NewPagerSize.ToString();
+        //                PagerCookie.Expires = DateTime.Now.AddYears(1);
+
+        //                Response.Cookies.Add(PagerCookie);
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //    }
+
+        //    Response.Redirect("~/Evaluation/ViewAbstractList.aspx?view=" + (!string.IsNullOrEmpty(Request.QueryString["view"]) ? Request.QueryString["view"] : ""));
+        //}
     }
 }

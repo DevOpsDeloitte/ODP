@@ -9,10 +9,12 @@ namespace ODPTaxonomyDAL_JY
     public class AbstractListViewData
     {
         private DataJYDataContext db;
+        private DataJYDataContext db2;
        
         public AbstractListViewData()
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            db2 = new DataJYDataContext(connString) { CommandTimeout = 0, ObjectTrackingEnabled = false };
             db = new DataJYDataContext(connString);
         }
 
@@ -61,6 +63,101 @@ namespace ODPTaxonomyDAL_JY
                         select k;
 
             return query;
+        }
+
+        public IEnumerable<KappaData> getAllKappaRecords()
+        {
+            var query = from k in db2.KappaDatas
+                        select k;
+            return query.ToList<KappaData>();
+        }
+
+        public IEnumerable<KappaData> getAllKappaRecords(int AbstractID)
+        {
+            var query = from k in db2.KappaDatas
+                        where k.AbstractID == AbstractID
+                        select k;
+            return query.ToList<KappaData>();
+        }
+
+        public IEnumerable<Submission> getAllSubmissionRecords()
+        {
+            var query = from k in db2.Submissions
+                        select k;
+            return query.ToList<Submission>();
+        }
+
+        public IEnumerable<int> getSubmissionIds(List<int> EvaluationIds)
+        {
+            var query = from k in db2.Submissions
+                        where EvaluationIds.Contains(k.EvaluationId ?? 0)
+                        select k.SubmissionID;
+            return query.ToList<int>();
+
+        }
+
+        public IEnumerable<Submission> getAllSubmissionRecords(List<int> EvaluationIds)
+        {
+            var query = from k in db2.Submissions
+                        where EvaluationIds.Contains( k.EvaluationId ?? 0)
+                        select k;
+            return query.ToList<Submission>();
+        }
+
+        public IEnumerable<Evaluation> getAllEvaluationRecords()
+        {
+            var query = from k in db2.Evaluations
+                        select k;
+            return query.ToList<Evaluation>();
+        }
+
+        public IEnumerable<Evaluation> getAllEvaluationRecords(int AbstractID)
+        {
+            var query = from k in db2.Evaluations
+                        where k.AbstractID == AbstractID
+                        select k;
+            return query.ToList<Evaluation>();
+        }
+
+        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecords()
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswers
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer>();
+        }
+
+        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecords(IEnumerable<int> SubmissionIds)
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswers
+                        where SubmissionIds.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer>();
+        }
+
+        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords()
+        {
+            var query = from k in db2.F_PreventionCategoryAnswers
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer>();
+        }
+
+        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords(IEnumerable<int> SubmissionIds)
+        {
+            var query = from k in db2.F_PreventionCategoryAnswers
+                        where SubmissionIds.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer>();
+        }
+
+
+        public IEnumerable<KappaData> GetAbstractKappaData2(int AbstractID, IEnumerable<KappaData> cacheKappaData)
+        {
+            var query = from k in cacheKappaData
+                        where k.AbstractID == AbstractID
+                        orderby k.KappaTypeID ascending
+                        select k;
+
+            return query.ToList<KappaData>();
         }
 
         

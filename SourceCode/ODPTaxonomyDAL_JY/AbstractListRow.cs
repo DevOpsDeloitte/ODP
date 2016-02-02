@@ -18,12 +18,16 @@ namespace ODPTaxonomyDAL_JY
         /**
          * Determine if a row is a parent row
          */
+        
         public bool IsParent { get; set; }
+        public bool InReview { get; set; }
 
         public int AbstractID { get; set; }
         public int? ApplicationID { get; set; }
 
         public string ProjectTitle { get; set; }
+        public string PIProjectLeader { get; set; }
+        public DateTime? LastExportDate { get; set; }
 
         public int? TeamID { get; set; }
         public Guid? UserID { get; set; }
@@ -81,6 +85,10 @@ namespace ODPTaxonomyDAL_JY
         public string F { get; set; }
         public string G { get; set; }
 
+        public int KappaCount { get; set; }
+
+        public List<AbstractListRow> ChildRows { get; set; }
+
         public AbstractListRow()
         {
             this.IsParent = false;
@@ -112,6 +120,37 @@ namespace ODPTaxonomyDAL_JY
                     .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
                     .Count() > 0;
                 this.Flag_F6 = db.F_PreventionCategoryAnswers
+                    .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                    .Count() > 0;
+            }
+        }
+
+        public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers)
+        {
+            //string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            //DataJYDataContext db = new DataJYDataContext(connStr);
+
+            var query = (from s in cacheSubmissions
+                         join e in cacheEvaluations on s.EvaluationId equals e.EvaluationId
+                         where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+                         s.SubmissionTypeId == (int)SubmissionType
+                         orderby s.SubmissionDateTime descending
+                         select new SubmissionData
+                         {
+                             SubmissionID = s.SubmissionID,
+                             UnableToCode = s.UnableToCode,
+                             Comment = s.comments
+                         }).FirstOrDefault();
+
+            if (query != null)
+            {
+                this.G = query.UnableToCode ? "UC" : "";
+                this.Comment = query.Comment;
+
+                this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
+                    .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                    .Count() > 0;
+                this.Flag_F6 = cacheF_PreventionCategoryAnswers
                     .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
                     .Count() > 0;
             }
@@ -156,12 +195,51 @@ namespace ODPTaxonomyDAL_JY
 
         }
 
+        public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, Guid? UserID, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers)
+        {
+            if (UserID != null)
+            {
+                //string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                //DataJYDataContext db = new DataJYDataContext(connStr);
+
+                var query = (from s in cacheSubmissions
+                             join e in cacheEvaluations on s.EvaluationId equals e.EvaluationId
+                             where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+                             s.SubmissionTypeId == (int)SubmissionType && s.UserId == UserID.Value
+                             orderby s.SubmissionDateTime descending
+                             select new SubmissionData
+                             {
+                                 SubmissionID = s.SubmissionID,
+                                 UnableToCode = s.UnableToCode,
+                                 Comment = s.comments
+                             }).FirstOrDefault();
+
+                if (query != null)
+                {
+                    this.G = query.UnableToCode ? "UC" : "";
+                    this.Comment = query.Comment;
+
+                    this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
+                    .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                    .Count() > 0;
+                    this.Flag_F6 = cacheF_PreventionCategoryAnswers
+                        .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                        .Count() > 0;
+                }
+            }
+            else
+            {
+                this.G = "-";
+            }
+
+        }
+
         public void GetAbstractScan(AbstractViewRole AbstractViewRole)
         {
             if (this.EvaluationID != null)
             {
-                string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-                DataJYDataContext db = new DataJYDataContext(connStr);
+                //string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                //DataJYDataContext db = new DataJYDataContext(connStr);
 
                 if (this.AbstractStatusID >= 6 && AbstractViewRole.CoderSupervisor == AbstractViewRole)
                 {

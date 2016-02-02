@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -14,6 +15,14 @@
     <AssemblyName>ODPTaxonomyWebsite</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>4.0</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,8 +79,8 @@
     <Content Include="bin\ODPTaxonomyDAL_JY.pdb" />
     <Content Include="bin\ODPTaxonomyDAL_TT.dll" />
     <Content Include="bin\ODPTaxonomyDAL_TT.pdb" />
-    <Content Include="bin\ODPTaxonomyUtility_TT.dll" />
-    <Content Include="bin\ODPTaxonomyUtility_TT.pdb" />
+    <Content Include="bin\ODPTaxonomyReportDAL.dll" />
+    <Content Include="bin\ODPTaxonomyReportDAL.pdb" />
     <Content Include="bin\ODPTaxonomyWebsite.dll" />
     <Content Include="bin\ODPTaxonomyWebsite.pdb" />
     <Content Include="ErrorPage.html" />
@@ -91,12 +100,21 @@
     <Content Include="Evaluation\Evaluation.aspx" />
     <Content Include="Evaluation\EvaluationRT.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
+    <Content Include="Evaluation\Handlers\json.js" />
+    <Content Include="Evaluation\Handlers\reopen.js" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\PrintAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Images\clip.png" />
+    <Content Include="Images\details_close.png" />
+    <Content Include="Images\details_open.png" />
+    <Content Include="Images\sort_asc.png" />
+    <Content Include="Images\sort_asc_disabled.png" />
+    <Content Include="Images\sort_both.png" />
+    <Content Include="Images\sort_desc.png" />
+    <Content Include="Libraries\DocumentFormat.OpenXml.dll" />
     <Content Include="Libraries\Newtonsoft.Json.dll" />
     <Content Include="Libraries\Newtonsoft.Json.xml" />
     <Content Include="Login.aspx" />
@@ -113,6 +131,11 @@
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\controllers\controller.js" />
     <Content Include="Scripts\controllers\controllerRT.js" />
+    <Content Include="Scripts\datatables\app.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\datatables\spin.min.js" />
+    <Content Include="Scripts\datatables\underscore-min.js" />
+    <Content Include="Scripts\datatables\util.js" />
     <Content Include="Scripts\directives\directive.js" />
     <Content Include="Scripts\directives\directiveRT.js" />
     <Content Include="Scripts\html5.js" />
@@ -127,6 +150,7 @@
     <Content Include="Styles\base.css" />
     <Content Include="Styles\component.css" />
     <Content Include="Styles\evaluation.css" />
+    <Content Include="Styles\jquery.dataTables.min.css" />
     <Content Include="Styles\layout.css" />
     <Content Include="Styles\line\aero.css" />
     <Content Include="Styles\line\blue.css" />
@@ -164,6 +188,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WeeklyIQCoderReport.aspx" />
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
   <ItemGroup>
@@ -323,7 +348,37 @@
     <Compile Include="Evaluation\Glossary.aspx.designer.cs">
       <DependentUpon>Glossary.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractClose.ashx.cs">
+      <DependentUpon>AbstractClose.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractDetail.ashx.cs">
+      <DependentUpon>AbstractDetail.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractExport.ashx.cs">
+      <DependentUpon>AbstractExport.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractReview.ashx.cs">
+      <DependentUpon>AbstractReview.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\Abstracts.ashx.cs">
+      <DependentUpon>Abstracts.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractsListCheck.ashx.cs">
+      <DependentUpon>AbstractsListCheck.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\AbstractsReopen.ashx.cs">
+      <DependentUpon>AbstractsReopen.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\Evaluations.cs" />
+    <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
+      <DependentUpon>Filters.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\GenerateExcelReport.ashx.cs">
+      <DependentUpon>GenerateExcelReport.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\RedirectionMessage.ashx.cs">
+      <DependentUpon>RedirectionMessage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\ManageTeams.aspx.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -384,10 +439,18 @@
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
+    <Compile Include="WeeklyIQCoderReport.aspx.cs">
+      <DependentUpon>WeeklyIQCoderReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeeklyIQCoderReport.aspx.designer.cs">
+      <DependentUpon>WeeklyIQCoderReport.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="log\" />
+    <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Site.Master" />
@@ -416,6 +479,10 @@
     <ProjectReference Include="..\ODPTaxonomyDAL_TT\ODPTaxonomyDAL_TT.csproj">
       <Project>{D3B28058-2182-41A6-9C85-3105F700F24A}</Project>
       <Name>ODPTaxonomyDAL_TT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ODPTaxonomyReportDAL\ODPTaxonomyReportDAL.csproj">
+      <Project>{421210c5-4b8b-46c3-af1a-1f18b65eeda9}</Project>
+      <Name>ODPTaxonomyReportDAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\ODPTaxonomyUtility_TT\ODPTaxonomyUtility_TT.csproj">
       <Project>{7E34DBE4-C73A-4646-B9F2-EC26CC7551A5}</Project>
@@ -473,6 +540,16 @@
   <ItemGroup>
     <Content Include="bin\ODPTaxonomyDAL_TT.dll.config" />
     <Content Include="Evaluation\Handlers\Evaluation.ashx" />
+    <Content Include="Evaluation\Handlers\Abstracts.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractReview.ashx" />
+    <Content Include="Evaluation\Handlers\Filters.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractsReopen.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractClose.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractExport.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractsListCheck.ashx" />
+    <Content Include="Evaluation\Handlers\GenerateExcelReport.ashx" />
+    <Content Include="Evaluation\Handlers\RedirectionMessage.ashx" />
+    <Content Include="Evaluation\Handlers\AbstractDetail.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
@@ -493,8 +570,13 @@
     <None Include="Styles\OpenSans-Semibold-webfont.ttf" />
     <None Include="Styles\OpenSans-Semibold-webfont.woff" />
   </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">

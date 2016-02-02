@@ -18,18 +18,20 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
             if (!this.Visible)
                 return;
 
-            AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
-            AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
-            AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
+            //Response.Write("I am here!!");
+
+            //AbstractViewGridView.Sorting += new GridViewSortEventHandler(this.AbstractSortHandler);
+            //AbstractViewGridView.RowCreated += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowCreatedHandler);
+            //AbstractViewGridView.RowDataBound += new GridViewRowEventHandler(AbstractListViewHelper.AbstractListRowBindingHandler);
 
             try
             {
                 if (!IsPostBack)
                 {
-                    var parentAbstracts = GetParentAbstracts();
+                   // var parentAbstracts = GetParentAbstracts();
 
-                    AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
-                    AbstractViewGridView.DataBind();
+                   // AbstractViewGridView.DataSource = AbstractListViewHelper.ProcessAbstracts(parentAbstracts, AbstractViewRole.ODPSupervisor);
+                   // AbstractViewGridView.DataBind();
                 }
             }
             catch (Exception exp)

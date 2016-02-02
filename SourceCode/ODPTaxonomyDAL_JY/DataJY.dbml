@@ -1,33 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="DataJYDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=dexxa-pc\sqlexpress;Initial Catalog=ODP_Taxonomy_DEV;Integrated Security=True" SettingsObjectName="ODPTaxonomyDAL_JY.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Abstract" Member="Abstracts">
-    <Type Name="Abstract">
-      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="AdministeringIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Abstract" Member="Abstract1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractProjTeamPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Activity" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="SerialNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SupportYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Association Name="Abstract_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractStatusChangeHistory" />
-      <Association Name="Abstract_Evaluation" Member="Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
-      <Association Name="Abstract_Evaluation1" Member="Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
-      <Association Name="Abstract_AbstractReviewList" Member="AbstractReviewLists" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractReviewList" />
-      <Association Name="Abstract_AbstractReviewList1" Member="AbstractReviewLists1" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractReviewList" />
-      <Association Name="Abstract_KappaData" Member="KappaDatas" ThisKey="AbstractID" OtherKey="AbstractID" Type="KappaData" />
-    </Type>
-  </Table>
+  <Connection Mode="AppSettings" ConnectionString="Data Source=10.7.5.234;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odptaxonomy" SettingsObjectName="ODPTaxonomyDAL_JY.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString1" Provider="System.Data.SqlClient" />
   <Table Name="dbo.AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories">
     <Type Name="AbstractStatusChangeHistory">
       <Column Name="AbstractStatusChangeHistoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -36,10 +8,10 @@
       <Column Name="AbstractStatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Association Name="Abstract_AbstractStatusChangeHistory" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
       <Association Name="AbstractStatus_AbstractStatusChangeHistory" Member="AbstractStatus" ThisKey="AbstractStatusID" OtherKey="AbstractStatusID" Type="AbstractStatus" IsForeignKey="true" />
       <Association Name="Evaluation_AbstractStatusChangeHistory" Member="Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Evaluation" IsForeignKey="true" />
       <Association Name="Evaluation_AbstractStatusChangeHistory1" Member="Evaluation1" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Evaluation" IsForeignKey="true" />
+      <Association Name="Abstract_AbstractStatusChangeHistory" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AbstractStatus" Member="AbstractStatus">
@@ -135,7 +107,6 @@
       <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
-      <Association Name="Abstract_KappaData" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="Abstract" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.KappaUserIdentify" Member="KappaUserIdentifies">
@@ -161,6 +132,34 @@
       <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="PreventionCategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Submission_F_PreventionCategoryAnswer" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Abstract" Member="Abstracts">
+    <Type Name="Abstract">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AdministeringIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Abstract" Member="Abstract1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractProjTermPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activity" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupportYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LastExportDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Abstract_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractStatusChangeHistory" />
+      <Association Name="Abstract_Evaluation" Member="Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
+      <Association Name="Abstract_Evaluation1" Member="Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
+      <Association Name="Abstract_AbstractReviewList" Member="AbstractReviewLists" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractReviewList" />
+      <Association Name="Abstract_AbstractReviewList1" Member="AbstractReviewLists1" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractReviewList" />
     </Type>
   </Table>
 </Database>

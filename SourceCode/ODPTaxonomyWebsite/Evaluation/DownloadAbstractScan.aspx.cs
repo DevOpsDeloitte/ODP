@@ -23,22 +23,26 @@ namespace ODPTaxonomyWebsite.Evaluation
                     Response.BufferOutput = false;
                     Response.ContentType = "application/pdf";
                     Response.AddHeader("content-disposition", "filename=" + fileName);
-
+                    
                     Response.TransmitFile(fName);
                 }
                 else
                 {
-                    goto End;
+                    Response.ContentType = "text/plain";
+                    Response.Write("File name is either wrong or not specified.");
+                    //goto End;
                 }
             }
             else
             {
-                goto End;
+                Response.ContentType = "text/plain";
+                Response.Write("File name is either wrong or not specified.");
+                //goto End;
             }
 
-            End:
-            Response.ContentType = "text/plain";
-            Response.Write("File name is either wrong or not specified.");
+            //End:
+            //Response.ContentType = "text/plain";
+            //Response.Write("File name is either wrong or not specified.");
         }
     }
 }
