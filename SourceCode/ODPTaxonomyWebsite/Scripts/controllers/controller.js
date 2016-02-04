@@ -91,12 +91,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         }
 
         $scope.startConsensus = function () {
-            //            if (!$scope.mdata.consensusalreadystarted) {
+            
             window.location.replace($scope.cleanURL(window.location.href) + "?startConsenus=true");
-            //            }
-            //            else {
-            //                $scope.errormessagesdisplay = "Consensus Already started!";
-            //            }
+           
 
         };
 
@@ -122,14 +119,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         };
 
         $scope.$watch("mdata", function () {
-            //console.log("form data changed :: " + $scope.mdata);
+            console.log("form data changed :: " + $scope.mdata);
             if ($scope.displaymode != "View") {
                 $scope.$broadcast("disableboxes");
                 $scope.$broadcast("validate.formdata");
 
                 // sync mdata with data - remove all function properties
                 if ($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) {
-                    console.log(" watch fired to sync mdata - data ");
+                    console.log(" watch fired to sync mdata - data :: 1 ");
                     if ($watchSyncCounter < 5) {
                         $timeout(function () {
                             $scope.data = $scope.syncObjects($scope.mdata);
@@ -148,7 +145,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                 // sync mdata with data - remove all function properties
                 if ($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) {
                     $scope.mdata.displaymode = $scope.displaymode;
-                    console.log(" watch fired to sync mdata - data ");
+                    console.log(" watch fired to sync mdata - data :: 2 ");
                     if ($watchSyncCounter < 5) {
                         $timeout(function () {
                             $scope.data = $scope.syncObjects($scope.mdata);
@@ -192,23 +189,29 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         if (($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) && $scope.displaymode == "Insert") {
 
             // Add ourselves to presence list when online.
-            var listRef = new Firebase(FIREBASE_LOCATION + "/presence/");
+            var listRef = new Firebase(FIREBASE_LOCATION + "/presence/" + $scope.mdata.teamid);
             var presenceRef = new Firebase(FIREBASE_LOCATION + "/.info/connected");
-            var userRef = listRef.push();
+            listRef.onDisconnect().remove();
+            //var userRef = listRef.push();
 
             presenceRef.on("value", function (snap) {
                 if (snap.val()) {
-                    //userRef.set(true);
-                    userRef.set({ teamid: $scope.mdata.teamid, abstractid: $scope.mdata.abstractid, mode: $scope.mode });
+                    //userRef.set({ teamid: $scope.mdata.teamid, abstractid: $scope.mdata.abstractid, mode: $scope.mode });
+                    listRef.remove();
+                    var teamPushed = listRef.push({ teamid: $scope.mdata.teamid, abstractid: $scope.mdata.abstractid, mode: $scope.mode, datetime: new Date().toLocaleString() });
                     // Remove ourselves when we disconnect.
-                    userRef.onDisconnect().remove();
+                    //userRef.onDisconnect().remove();
+                    listRef.onDisconnect().remove();
 
+
+                }
+                else {
+                    //console.log(" presence ref dis-connected :: " + snap.val());
 
                 }
             });
 
             var firebaseURL = FIREBASE_LOCATION + "/teams" + "/" + $scope.mdata.teamid;
-            console.log(firebaseURL);
             var teamRef = new Firebase(firebaseURL);
             teamRef.onDisconnect().remove();
 
@@ -219,7 +222,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                 $scope.mdata.firebaseOn = true;
                 $scope.data = $scope.syncObjects($scope.mdata);
             });
-            
+
 
         }
 
@@ -234,7 +237,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         // check for team consensus in progress
         $scope.showWatchConsensusButton = false;
-        var firebasedetectURL = FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
+        //var firebasedetectURL = FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
+        var firebasedetectURL = FIREBASE_LOCATION + "/presence" + "/" + $scope.mdata.teamid;
         var teamdetectObj = new Firebase(firebasedetectURL);
         $timeout(function () {
             //Check for team id existence and show consensus & show comparison button in view/insert individual evaluation.

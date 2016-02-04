@@ -67,7 +67,7 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
     }
 
     $scope.detectTeam = function () {
-        var firebasedetectURL = $scope.FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
+        var firebasedetectURL = $scope.FIREBASE_LOCATION + "/presence"  +"/" + $scope.mdata.teamid;
         var teamdetectObj = new Firebase(firebasedetectURL);
 
         $timeout(function () {
