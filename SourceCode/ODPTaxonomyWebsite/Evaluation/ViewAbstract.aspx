@@ -40,7 +40,7 @@
     <asp:Panel runat="server" ID="pnl_overrideBtns" ClientIDMode="Static" Visible="false">
         <asp:Button runat="server" ID="btn_override" class="button" Text="Abstract Override" Visible="true" 
             onclick="btn_override_Click" 
-            OnClientClick="return confirm('You are about to force close this abstract. Would you like to proceed?');" />
+            OnClientClick="return confirm('You are about to override this abstract and reset it back to its previous status 1N/0. Would you like to proceed?');" />
         
     </asp:Panel>
     </div>
