@@ -28,11 +28,16 @@
     
     <!-- Favicons
   ================================================== -->
-    <link rel="shortcut icon" href="~/Images/favicon.ico">
-    <link rel="apple-touch-icon" href="~/Images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="~/Images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="~/Images/apple-touch-icon-114x114.png">
+    <link rel="shortcut icon" href="~/Images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="~/Images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Images/apple-touch-icon-114x114.png"/>
     <script src="/Scripts/jquery.js" type="text/javascript"></script>
+          <!-- DatePicker
+  ================================================== --> 
+    <link href="Styles/jquery-ui.css" rel="stylesheet" />
+    <script src="Scripts/jquery-ui.js" type="text/javascript"></script>
+
 </head>
 <body>
 <form id="Form1" runat="server">
@@ -61,9 +66,8 @@
                               
 
         <div class="sixteen columns">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
-        </div>
-
+           <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+         </div>
 
 
     
@@ -107,7 +111,7 @@
             };
 
         </script>
-
+      
 </form>
 </body>
 </html>
