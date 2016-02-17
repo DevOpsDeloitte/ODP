@@ -3,9 +3,7 @@
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
     <!-- ++++++++++++++++DatePicker+++++++++++++++++++++++++++-------- -->
-     <script src="Scripts/jquery.js" type="text/javascript"></script>
-     <link href="Styles/jquery-ui.css" rel="stylesheet" />
-    <script src="Scripts/jquery-ui.js" type="text/javascript"></script>
+
     <script type="text/javascript">
         // DOM Ready      
         $(function () {

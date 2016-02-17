@@ -5,10 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyTrainingAdminWeb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyTrainingAdminDAL", "ODPTaxonomyTrainingAdminDAL\ODPTaxonomyTrainingAdminDAL.csproj", "{7A489397-24FA-43C8-85A3-846E03FEB55B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eInternship", "..\..\..\..\..\Desktop\SOF 552 C# Q3-2014\Project Documents\eInternship\eInternship\eInternship\eInternship.csproj", "{AE2B1FC7-E56A-4B36-85D6-E8F71A6C6C56}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationTask", "..\..\..\..\..\Desktop\SOF 552 C# Q3-2014\Project Documents\eInternship\eInternship\WebApplication1\RegistrationTask.csproj", "{5E2B46DD-5040-4156-A895-03718261EB57}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,14 +19,6 @@ Global
 		{7A489397-24FA-43C8-85A3-846E03FEB55B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A489397-24FA-43C8-85A3-846E03FEB55B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A489397-24FA-43C8-85A3-846E03FEB55B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AE2B1FC7-E56A-4B36-85D6-E8F71A6C6C56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE2B1FC7-E56A-4B36-85D6-E8F71A6C6C56}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AE2B1FC7-E56A-4B36-85D6-E8F71A6C6C56}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AE2B1FC7-E56A-4B36-85D6-E8F71A6C6C56}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E2B46DD-5040-4156-A895-03718261EB57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E2B46DD-5040-4156-A895-03718261EB57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E2B46DD-5040-4156-A895-03718261EB57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E2B46DD-5040-4156-A895-03718261EB57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
