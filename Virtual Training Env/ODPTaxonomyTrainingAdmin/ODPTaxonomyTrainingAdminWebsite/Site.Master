@@ -21,11 +21,6 @@
     <link href="~/Styles/layout.css" rel="Stylesheet" type="text/css" />
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
 
-     <!-- ASP
-  ================================================== -->     
-    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
-    </asp:ContentPlaceHolder>
-    
     <!-- Favicons
   ================================================== -->
     <link rel="shortcut icon" href="~/Images/favicon.ico"/>
@@ -33,11 +28,15 @@
     <link rel="apple-touch-icon" sizes="72x72" href="~/Images/apple-touch-icon-72x72.png"/>
     <link rel="apple-touch-icon" sizes="114x114" href="~/Images/apple-touch-icon-114x114.png"/>
     <script src="/Scripts/jquery.js" type="text/javascript"></script>
-          <!-- DatePicker
+    <!-- DatePicker
   ================================================== --> 
-    <link href="Styles/jquery-ui.css" rel="stylesheet" />
-    <script src="Scripts/jquery-ui.js" type="text/javascript"></script>
-
+    <link href="~/Styles/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script src="/Scripts/jquery-ui.js" type="text/javascript"></script>
+    <script src="/Scripts/datePicker.js" type="text/javascript"></script>
+     <!-- ASP
+  ================================================== -->     
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
 <form id="Form1" runat="server">
@@ -68,17 +67,14 @@
         <div class="sixteen columns">
            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
          </div>
-
-
-    
-    </div>
+        
+</div>
 
 <!-- JS
 ================================================== -->
 
 <script src="/Scripts/classie.js" type="text/javascript"></script>
 <script src="/Scripts/persist.js" type="text/javascript"></script>     
-
         <script type="text/javascript">
                 <!--
             function showMenu() {
@@ -111,7 +107,6 @@
             };
 
         </script>
-      
 </form>
 </body>
 </html>

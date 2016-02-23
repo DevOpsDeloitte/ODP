@@ -104,6 +104,8 @@ fieldset.login .forgot-password { display: block; padding-top: 10px; font-size: 
 .sub-title { margin-bottom: 20px; }
 
 .panel {  float: left; width: 28%; background: #FFF; margin-right: 2%; padding: 0 10px;-webkit-border-radius: 6px; border-radius: 6px; border: solid 1px #DDD; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); }
+.panelAnswerUpdate {  float: left; width: 100%; background: #FFF; margin-right: 2%; padding: 0 10px;-webkit-border-radius: 6px; border-radius: 6px; border: solid 1px #DDD; -webkit-box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.1); }
+
 
 .has-file .scan-file { position: absolute; top: 0; right: 0; background: #2F557C; padding: 3px; }
 .pager-size-wrapper { text-align: right; }

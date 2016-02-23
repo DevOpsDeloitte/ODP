@@ -44,7 +44,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
                 Com.Connection = prodConn;
                 Com.CommandText = "Report_Answerkey_ConnectionString";
                 Com.CommandType = CommandType.StoredProcedure;
-                Com.Parameters.Add("@RCCC", SqlDbType.VarChar, 10).Value = consensus; //"CC";//
+                Com.Parameters.Add("@RCCC", SqlDbType.VarChar, 10).Value = consensus; 
             }
             else       //Training
             {
@@ -52,7 +52,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
                 Com.CommandText = "Report_Tr_Answerkey_ConnectionString";
                 Com.CommandType = CommandType.StoredProcedure;
             }
-           // SqlCommand Com = new SqlCommand("Report_Answerkey_ConnectionString", prodConn);
+           
 
             if (appID != null)
                 Com.Parameters.Add("@ApplicationID_p", SqlDbType.Int).Value = appID;

@@ -13,6 +13,15 @@ namespace ODPTaxonomyTrainingAdminWebsite {
     public partial class AnswerkeyUpdate {
         
         /// <summary>
+        /// pnl_training control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnl_training;
+        
+        /// <summary>
         /// rdoValUpEnv control.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,33 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         protected global::System.Web.UI.WebControls.Button btn_update;
         
         /// <summary>
+        /// btn_prodMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_prodMethod;
+        
+        /// <summary>
+        /// btn_trainMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_trainMethod;
+        
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel1;
+        
+        /// <summary>
         /// rdoValRepEnv control.
         /// </summary>
         /// <remarks>
@@ -191,60 +227,6 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdoValRepEnv;
-        
-        /// <summary>
-        /// lbl_app_id1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_app_id1;
-        
-        /// <summary>
-        /// txt_app_id1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txt_app_id1;
-        
-        /// <summary>
-        /// ValChkAppId1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CompareValidator ValChkAppId1;
-        
-        /// <summary>
-        /// lbl_consensus1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_consensus1;
-        
-        /// <summary>
-        /// ddl_consensus1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_consensus1;
-        
-        /// <summary>
-        /// ConsensusRequired1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ConsensusRequired1;
         
         /// <summary>
         /// lbl_report control.
@@ -272,6 +254,33 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ddlReportRequired;
+        
+        /// <summary>
+        /// lbl_consensus1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_consensus1;
+        
+        /// <summary>
+        /// ddl_consensus1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_consensus1;
+        
+        /// <summary>
+        /// ConsensusRequired1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ConsensusRequired1;
         
         /// <summary>
         /// lbl_frm_date control.
@@ -328,6 +337,33 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         protected global::System.Web.UI.WebControls.CompareValidator toDateValidator;
         
         /// <summary>
+        /// lbl_app_id1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_app_id1;
+        
+        /// <summary>
+        /// txt_app_id1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txt_app_id1;
+        
+        /// <summary>
+        /// ValChkAppId1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator ValChkAppId1;
+        
+        /// <summary>
         /// btn_chk_val control.
         /// </summary>
         /// <remarks>
@@ -335,6 +371,42 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_chk_val;
+        
+        /// <summary>
+        /// Panel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel2;
+        
+        /// <summary>
+        /// lbl_consensus2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_consensus2;
+        
+        /// <summary>
+        /// ddl_consensus2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_consensus2;
+        
+        /// <summary>
+        /// ConsensusRequired2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator ConsensusRequired2;
         
         /// <summary>
         /// lbl_app_id2 control.
@@ -373,33 +445,6 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         protected global::System.Web.UI.WebControls.CompareValidator ValChkAppId2;
         
         /// <summary>
-        /// lbl_consensus2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_consensus2;
-        
-        /// <summary>
-        /// ddl_consensus2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_consensus2;
-        
-        /// <summary>
-        /// ConsensusRequired2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator ConsensusRequired2;
-        
-        /// <summary>
         /// btn_rerun_kappa control.
         /// </summary>
         /// <remarks>
@@ -407,5 +452,14 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_rerun_kappa;
+        
+        /// <summary>
+        /// btn_rkMethod control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_rkMethod;
     }
 }
