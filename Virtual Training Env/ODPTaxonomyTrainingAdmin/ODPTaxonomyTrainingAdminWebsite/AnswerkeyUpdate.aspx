@@ -2,60 +2,7 @@
     CodeBehind="AnswerkeyUpdate.aspx.cs" Inherits="ODPTaxonomyTrainingAdminWebsite.AnswerkeyUpdate" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-     <script type="text/javascript">
-        
-         function reportOptions() {
-             var report = document.getElementById('<%=ddlReport.ClientID%>').value;
-
-            if (report == "1") {
-                document.getElementById('trDate').style.display = 'none';
-                document.getElementById('trAppID').style.display = 'table-row';
-                document.getElementById('<%=txt_app_id1.ClientID%>').focus();
-                  document.getElementById('<%=txt_frm_date.ClientID%>').value = '';
-                  document.getElementById('<%=txt_to_date.ClientID%>').value = '';
-              }
-              else if (report == "2") {
-                  document.getElementById('trAppID').style.display = 'none';
-                  document.getElementById('trDate').style.display = 'table-row';
-                  //  document.getElementById('<%=txt_frm_date.ClientID%>').focus();
-                 document.getElementById('<%=txt_app_id1.ClientID%>').value = '';
-             } else if (report == "0") {
-                 document.getElementById("trAppID").style.display = 'none';
-                 document.getElementById("trDate").style.display = 'none';
-                 document.getElementById('<%=txt_app_id1.ClientID%>').value = '';
-                document.getElementById('<%=txt_frm_date.ClientID%>').value = '';
-                document.getElementById('<%=txt_to_date.ClientID%>').value = '';
-            }
-
-          } window.onload = reportOptions;
-
-
-         function ConfirmUpdateValue(objMsg) {
-             
-             var valUPEnvProdTrain = $('#<%= rdoValUpEnv.ClientID %> input:checked').val()
-            
-             if (confirm(objMsg)) {
-                 if (valUPEnvProdTrain == "1") //production
-                     document.getElementById('<%=btn_prodMethod.ClientID%>').click();
-                 else if (valUPEnvProdTrain == "2") //training
-                    document.getElementById('<%=btn_trainMethod.ClientID%>').click();
-             }
-             else
-             {
-                 window.location.href = "AnswerkeyUpdate.aspx";
-             }
-         }
-         function ConfirmRerunKappa(objMsg) {
-
-             if (confirm(objMsg)) {
-                 document.getElementById('<%=btn_rkMethod.ClientID%>').click();
-             }
-             else {
-                 window.location.href = "AnswerkeyUpdate.aspx";
-             }
-        }
-
-    </script>
+  
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 
@@ -86,7 +33,7 @@
                 <asp:RequiredFieldValidator ID="AppIDRequired" runat="server" ControlToValidate="txt_app_id" ErrorMessage="(Required)"  ForeColor="Red" Display="Dynamic" ValidationGroup="ValueUpdates"></asp:RequiredFieldValidator>
                 <asp:CompareValidator ID="ValChkAppId" runat="server" Operator="DataTypeCheck" Type="Integer" ControlToValidate="txt_app_id" ErrorMessage="Value must be a whole number" Display="Dynamic" ForeColor="Red" ValidationGroup="ValueUpdates"/>
             </td>
-            <td style="width: 160px">
+            <td runat="server"  id ="tdDdlCons" style="width: 160px">
                 <asp:Label ID="lbl_consensus" runat="server" Text="*Consensus" /><br />
                 <asp:DropDownList ID="ddl_consensus" runat="server" Width="150px" >
                      <asp:ListItem Value="0">Options</asp:ListItem>
@@ -100,7 +47,7 @@
 
             <td style="width: 160px">
                 <asp:Label ID="lbl_frm_section" runat="server" Text="*Form Section" /><br />
-                <asp:DropDownList ID="ddl_frm_section" runat="server" Width="150px">
+                <asp:DropDownList ID="ddl_frm_section" runat="server" Width="150px" AutoPostBack="True" OnSelectedIndexChanged="ddl_frm_section_SelectedIndexChanged">
                      <asp:ListItem Value="0">Options</asp:ListItem>
                      <asp:ListItem Value ="A1">A1</asp:ListItem>
                      <asp:ListItem Value ="A2">A2</asp:ListItem>
@@ -116,7 +63,7 @@
               
             </td>
   
-            <td style="width: 160px">
+            <td runat="server"  id ="tdTxtUpdVal" style="width: 160px">
                 <asp:Label ID="lbl_upd_values" runat="server" Text="*Update Values" /><br />
                 <asp:TextBox ID="txt_upd_values" runat="server" TextMode="SingleLine" ToolTip="Update Values is required (Ex.1,4,5)" MaxLength="200" Width="150px"  />
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txt_upd_values" ErrorMessage="(Required)"  ForeColor="Red" Display="Dynamic" ValidationGroup="ValueUpdates"></asp:RequiredFieldValidator>
@@ -154,7 +101,7 @@
         <tr>            
             <td>
                 <asp:Label ID="lbl_report" runat="server" Text="*Select an option" /><br />          
-                <asp:DropDownList ID="ddlReport" runat="server" style="text-align: left" Width="150px" onchange="reportOptions()" >
+                <asp:DropDownList ID="ddlReport" runat="server" style="text-align: left" Width="150px" AutoPostBack="True" OnSelectedIndexChanged="ddlReport_SelectedIndexChanged">
                     <asp:ListItem Value="0">Select Report By</asp:ListItem>
                     <asp:ListItem Value="1">ApplicationID</asp:ListItem>
                     <asp:ListItem Value="2">Date Range</asp:ListItem>
@@ -162,7 +109,7 @@
                 <asp:RequiredFieldValidator ID="ddlReportRequired" runat="server" ControlToValidate="ddlReport" ErrorMessage="(Required)" ForeColor="Red" InitialValue="0"  Display="Dynamic" ValidationGroup="ValueReport"></asp:RequiredFieldValidator>
             </td>  
             
-            <td>
+            <td runat="server"  id ="tdDdlCons1">
                 <asp:Label ID="lbl_consensus1" runat="server" Text="*Consensus" /><br />
                 <asp:DropDownList ID="ddl_consensus1" runat="server" Width="150px">
                      <asp:ListItem Value="0">Options</asp:ListItem>
@@ -174,7 +121,7 @@
             <td>&nbsp;</td>
            
         </tr>
-        <tr  id="trDate">
+        <tr runat="server" id="trDate">
            <td>
                 <asp:Label ID="lbl_frm_date" runat="server" Text="From Date:" /><br />
                 <asp:TextBox ID="txt_frm_date" runat="server"  Width="100px" CssClass="date"/><br />
@@ -187,7 +134,7 @@
             </td>      
             <td>&nbsp;</td>
         </tr>  
-         <tr id="trAppID">
+         <tr runat="server" id="trAppID">
             <td colspan="3">
                 <asp:Label ID="lbl_app_id1" runat="server" Text="Application ID" /><br />
                 <asp:TextBox ID="txt_app_id1" runat="server" TextMode="SingleLine" Width="150px" /><br />

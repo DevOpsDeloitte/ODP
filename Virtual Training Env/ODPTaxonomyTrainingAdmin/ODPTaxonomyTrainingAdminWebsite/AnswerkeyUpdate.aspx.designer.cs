@@ -94,6 +94,15 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         protected global::System.Web.UI.WebControls.CompareValidator ValChkAppId;
         
         /// <summary>
+        /// tdDdlCons control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdDdlCons;
+        
+        /// <summary>
         /// lbl_consensus control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,15 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator FrmSectionRequired;
+        
+        /// <summary>
+        /// tdTxtUpdVal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdTxtUpdVal;
         
         /// <summary>
         /// lbl_upd_values control.
@@ -256,6 +274,15 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ddlReportRequired;
         
         /// <summary>
+        /// tdDdlCons1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell tdDdlCons1;
+        
+        /// <summary>
         /// lbl_consensus1 control.
         /// </summary>
         /// <remarks>
@@ -281,6 +308,15 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator ConsensusRequired1;
+        
+        /// <summary>
+        /// trDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trDate;
         
         /// <summary>
         /// lbl_frm_date control.
@@ -335,6 +371,15 @@ namespace ODPTaxonomyTrainingAdminWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator toDateValidator;
+        
+        /// <summary>
+        /// trAppID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trAppID;
         
         /// <summary>
         /// lbl_app_id1 control.

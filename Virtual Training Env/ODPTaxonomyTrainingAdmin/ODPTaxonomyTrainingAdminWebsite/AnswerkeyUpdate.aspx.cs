@@ -26,7 +26,8 @@ namespace ODPTaxonomyTrainingAdminWebsite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            trDate.Visible = false;
+            trAppID.Visible = false;
         }
 
         protected void btn_update_Click(object sender, EventArgs e)
@@ -129,7 +130,8 @@ namespace ODPTaxonomyTrainingAdminWebsite
                      else
                      {  
                          ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Please fill Application ID!')" , true);
-                        txt_app_id1.Focus();
+                        //txt_app_id1.Focus();
+                         ddlReport_changed();
                      }
                  }
                  else if (ddlReport.SelectedItem.Value == "2") //Data Range
@@ -161,7 +163,8 @@ namespace ODPTaxonomyTrainingAdminWebsite
                        else
                        {
                            ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('To date must be after From date!')", true);
-                           txt_frm_date.Focus();
+                           //txt_frm_date.Focus();
+                           ddlReport_changed();
                        }
                      }
                      else
@@ -169,11 +172,13 @@ namespace ODPTaxonomyTrainingAdminWebsite
                        if (txt_frm_date.Text == string.Empty)
                          {
                              ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Please fill From Date!')", true);
+                             ddlReport_changed();
                              txt_frm_date.Focus();
                          }
                          else if (txt_to_date.Text == string.Empty)
                          {
                              ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('Please fill To Date!')", true);
+                             ddlReport_changed();
                              txt_to_date.Focus();
                          }
                      }
@@ -214,15 +219,17 @@ namespace ODPTaxonomyTrainingAdminWebsite
         {
             if (rdoValUpEnv.SelectedItem.Value.ToString() == "1") //Prod
             {
-                lbl_consensus.Visible = true;
+                tdDdlCons.Visible = true;
+              /*  lbl_consensus.Visible = true;
                 ddl_consensus.Visible = true;
-                ConsensusRequired.Visible = true;
+                ConsensusRequired.Visible = true;*/
             }
             else if (rdoValUpEnv.SelectedItem.Value.ToString() == "2") //Training
             {
-                lbl_consensus.Visible = false;
+                tdDdlCons.Visible = false;
+               /* lbl_consensus.Visible = false;
                 ddl_consensus.Visible = false;
-                ConsensusRequired.Visible = false;
+                ConsensusRequired.Visible = false;*/
                 ddl_consensus.SelectedIndex = 0;
             }
 
@@ -232,9 +239,10 @@ namespace ODPTaxonomyTrainingAdminWebsite
         {
             if (rdoValRepEnv.SelectedItem.Value.ToString() == "1") //Prod 
             {
-                lbl_consensus1.Visible = true;
+                tdDdlCons1.Visible = true;
+               /* lbl_consensus1.Visible = true;
                 ddl_consensus1.Visible = true;
-                ConsensusRequired1.Visible = true;
+                ConsensusRequired1.Visible = true;*/
                 ddlReport.SelectedIndex = 0;
                 ddl_consensus1.SelectedIndex = 0;
                 txt_app_id1.Text = string.Empty;
@@ -243,15 +251,40 @@ namespace ODPTaxonomyTrainingAdminWebsite
             }
             else if (rdoValRepEnv.SelectedItem.Value.ToString() == "2") //Training
             {
-                lbl_consensus1.Visible = false;
+                tdDdlCons1.Visible = false;
+              /*  lbl_consensus1.Visible = false;
                 ddl_consensus1.Visible = false;
-                ConsensusRequired1.Visible = false;
+                ConsensusRequired1.Visible = false;*/
                 ddl_consensus1.SelectedIndex = 0;
                 ddlReport.SelectedIndex = 0;
                 txt_app_id1.Text = string.Empty;
                 txt_frm_date.Text = string.Empty;
                 txt_to_date.Text = string.Empty;
             }
+        }
+        protected void ddl_frm_section_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selected = ddl_frm_section.SelectedItem.Value;
+           // ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('"+selected+"')", true);
+            if (selected == "E7F6") //E7F6
+            {
+                tdTxtUpdVal.Visible = false;
+               // lbl_upd_values.Visible = false;
+              //  txt_upd_values.Visible = false;
+                txt_upd_values.Text = "1";
+            }
+            else
+            {
+                tdTxtUpdVal.Visible = true;
+              //  lbl_upd_values.Visible = true;
+               // txt_upd_values.Visible = true;
+                txt_upd_values.Text = "";
+            }
+        }
+
+       protected void ddlReport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlReport_changed();
         }
 
         #region MethodBtn
@@ -358,6 +391,34 @@ namespace ODPTaxonomyTrainingAdminWebsite
         #endregion
 
         #region MethodsResetVal
+        protected void ddlReport_changed()
+        {
+            string report = ddlReport.SelectedItem.Value;
+           // ScriptManager.RegisterStartupScript(this, this.GetType(), "Message", "alert('" + report + "')", true);
+            if (report == "1") //ApplicationID
+            {
+                trDate.Visible = false;
+                trAppID.Visible = true;
+                txt_app_id1.Focus();
+                txt_frm_date.Text = "";
+                txt_to_date.Text = "";
+            }
+            if (report == "2") //Date
+            {
+                trDate.Visible = true;
+                trAppID.Visible = false;
+                txt_frm_date.Focus();
+                txt_app_id1.Text = "";
+            }
+            else if (report == "0") //None
+            {
+                trDate.Visible = false;
+                trAppID.Visible = false;
+                txt_app_id1.Text = "";
+                txt_frm_date.Text = "";
+                txt_to_date.Text = "";
+            }
+        }
 
         protected void resetValueUpdates() 
         {
@@ -386,6 +447,10 @@ namespace ODPTaxonomyTrainingAdminWebsite
         }
 
         #endregion
+
+       
+
+       
 
     }
 }
