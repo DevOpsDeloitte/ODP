@@ -52,8 +52,8 @@
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <LoggedInTemplate>
                             Welcome <asp:LoginName ID="HeadLoginName" runat="server" />
-                            
-                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
+<%--                            
+                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>--%>
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
@@ -69,6 +69,11 @@
                         <a href="#" id="showLeftPushed" class="close-menu">Close Menu</a>
 
                         <a href="/Default.aspx">Home</a>
+                        <asp:LoginView ID="LoginView1" runat="server" EnableViewState="false">
+                                    <LoggedInTemplate>
+                                             <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="buttonx" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
+                                    </LoggedInTemplate>
+                        </asp:LoginView>
                         
                         <div runat="server" visible="false" id="pnl_admin"><div class="nav-role">Role: Admin</div>
                             <asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" />
