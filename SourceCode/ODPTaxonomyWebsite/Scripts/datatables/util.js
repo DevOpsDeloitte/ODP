@@ -216,6 +216,7 @@ function Utility() {
     this.hideE7F6 = function (inVal) {
 
         if (config.role == "ODPStaff") {
+            return "&mdash;";
             return inVal.replace(", E7F6", "").replace("E7F6", "");
         }
         else {
