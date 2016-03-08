@@ -120,6 +120,7 @@
     <Content Include="Libraries\Newtonsoft.Json.xml" />
     <Content Include="Login.aspx" />
     <Content Include="notes\notesFor_16_CoderEvaluation_10.xml" />
+    <Content Include="ReportingApp\default.aspx" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-csp.css" />
@@ -433,6 +434,13 @@
       <DependentUpon>Print.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportingApp\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportingApp\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
