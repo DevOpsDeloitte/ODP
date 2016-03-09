@@ -120,7 +120,12 @@
     <Content Include="Libraries\Newtonsoft.Json.xml" />
     <Content Include="Login.aspx" />
     <Content Include="notes\notesFor_16_CoderEvaluation_10.xml" />
+    <Content Include="ReportingApp\css\report.css" />
     <Content Include="ReportingApp\default.aspx" />
+    <Content Include="ReportingApp\scripts\app.js" />
+    <Content Include="ReportingApp\scripts\controllers\ReportController.js" />
+    <Content Include="ReportingApp\scripts\directives\directives.js" />
+    <Content Include="ReportingApp\scripts\templates\report.html" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-csp.css" />
@@ -459,6 +464,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="log\" />
+    <Folder Include="ReportingApp\handlers\" />
     <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
@@ -565,6 +571,7 @@
     <Content Include="Print.Master" />
     <None Include="Properties\PublishProfiles\ODP Taxonomy Publish.pubxml" />
     <None Include="Properties\PublishProfiles\ODPTaxonomy.pubxml" />
+    <Content Include="ReportingApp\css\report.scss" />
     <None Include="Scripts\angular\.bower.json" />
     <None Include="Scripts\angular\angular.min.js.gzip" />
     <None Include="Scripts\angular\angular.min.js.map" />
