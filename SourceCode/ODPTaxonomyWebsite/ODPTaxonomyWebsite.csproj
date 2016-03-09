@@ -446,6 +446,10 @@
     <Compile Include="ReportingApp\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ReportingApp\handlers\ReportingService.cs" />
+    <Compile Include="ReportingApp\handlers\ReportService.ashx.cs">
+      <DependentUpon>ReportService.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -464,7 +468,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="log\" />
-    <Folder Include="ReportingApp\handlers\" />
     <Folder Include="Reports\" />
   </ItemGroup>
   <ItemGroup>
@@ -572,6 +575,7 @@
     <None Include="Properties\PublishProfiles\ODP Taxonomy Publish.pubxml" />
     <None Include="Properties\PublishProfiles\ODPTaxonomy.pubxml" />
     <Content Include="ReportingApp\css\report.scss" />
+    <Content Include="ReportingApp\handlers\ReportService.ashx" />
     <None Include="Scripts\angular\.bower.json" />
     <None Include="Scripts\angular\angular.min.js.gzip" />
     <None Include="Scripts\angular\angular.min.js.map" />

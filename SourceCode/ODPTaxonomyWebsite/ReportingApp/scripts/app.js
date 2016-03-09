@@ -5,7 +5,9 @@
       .module('reportingapp', [
         'ngRoute'
       ])
-      .config(configFunction);
+      .config(configFunction)
+      .constant('ROOT_URL', '');
+
       //.run(runFunction);
 
     configFunction.$inject = ['$routeProvider'];

@@ -20,6 +20,7 @@
 <script src="https://code.angularjs.org/1.4.4/angular-route.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
 <script type="text/javascript" src="scripts/directives/directives.js"></script>
+<script type="text/javascript" src="scripts/services/services.js"></script>
 <script type="text/javascript" src="scripts/controllers/ReportController.js"></script>
 
 <%--<script src="../scripts/angular/firebase.js"></script>

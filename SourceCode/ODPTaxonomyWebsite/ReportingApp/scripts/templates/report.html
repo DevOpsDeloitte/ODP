@@ -3,36 +3,34 @@
     <div class="col-lg-12">
 
 
-        <bs-dropdown data-menu-type="button" select-val="vm.selected_status = selectedVal"
-                     preselected-item="vm.selected_status" data-dropdown-data="vm.statuses" data-drop-text="'From'"></bs-dropdown>  &nbsp; Selected Value : {{vm.selected_status}}
-
         <div class="row">
 
-            <div class="col-lg-3">
-                <span>From : </span>
+            <div class="col-lg-2">
+                <strong>From : </strong>
                 <div class="input-group">               
-                    <input type="text" class="form-control" placeholder="Search for...">
+                    <!--input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+                    </span>-->
+                    <bs-dropdown id="start" data-menu-type="button" select-valx="vm.startdateid = selectedID; vm.startdate = selectedVal"
+                                 preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'From'"></bs-dropdown> 
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
 
-            <div class="col-lg-3">
-                <span>To : </span>
+            <div class="col-lg-2">
+                <strong>To : </strong>
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>
+                    <bs-dropdown id="end" data-menu-type="button" select-valx="vm.enddateid = selectedID; vm.enddate = selectedVal"
+                                 preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'End'"></bs-dropdown> 
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
 
         </div>
 
         <div class="row">
-            <button class="btn btn-default btn-danger">Run Report</button>
-        </div>
+            <div class="col-lg-2">
+                <button class="btn btn-default btn-danger">Run Report</button>
+            </div>
 
     </div>
 

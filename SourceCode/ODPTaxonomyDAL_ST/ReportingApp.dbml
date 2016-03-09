@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Dev" Class="ReportingAppDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Integrated Security=True" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString4" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Report_QC_Week" Member="Report_QC_Weeks">
+    <Type Name="Report_QC_Week">
+      <Column Name="QC_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="QC_week" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Dates_IQ_Coded" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Rpt_Year" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Rpt_Month" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.Report_KappaAvg_ByQCWeeks" Method="Report_KappaAvg_ByQCWeeks">
+    <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="KType" Parameter="kType" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="Report_KappaAvg_ByQCWeeksResult">
+      <Column Name="QCWeek" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="IQDate" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="KappaTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NumbAbs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+      <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+      <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+      <Column Name="B" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+      <Column Name="C" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+      <Column Name="D" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+      <Column Name="E" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+      <Column Name="F" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Report_KappaE7F6_ByQCWeeks" Method="Report_KappaE7F6_ByQCWeeks">
+    <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="KType" Parameter="kType" Type="System.String" DbType="VarChar(10)" />
+    <ElementType Name="Report_KappaE7F6_ByQCWeeksResult">
+      <Column Name="QC_week" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Dates_IQ_Coded" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="KappaTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="totalAbs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

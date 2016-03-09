@@ -1,6 +1,6 @@
 ﻿(function () {
     'use strict';
-
+    // http://jsfiddle.net/cojahmetov/3DS49/
     angular
       .module('reportingapp')
       .directive('bsDropdown', function ($compile) {
@@ -8,7 +8,7 @@
               restrict: 'E',
               scope: {
                   items: '=dropdownData',
-                  doSelect: '&selectVal',
+                  doSelect: '&selectValx',
                   selectedItem: '=preselectedItem',
                   dropText: '='
               },
@@ -16,7 +16,7 @@
                   var html = '';
                   switch (attrs.menuType) {
                       case "button":
-                          html += '<div class="btn-group"><button class="btn btn-default btn-info" data-toggle="dropdown">{{dropText}}</button><button class="btn btn-info btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
+                          html += '<div class="btn-group"><button class="btn btn-default btn-main" data-toggle="dropdown">{{dropText}}</button><button class="btn btn-info btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>';
                           break;
                       default:
                           html += '<div class="dropdown"><a class="dropdown-toggle" role="button" data-toggle="dropdown"  href="javascript:;">Dropdown<b class="caret"></b></a>';
@@ -24,26 +24,29 @@
                   }
                   html += '<ul class="dropdown-menu"><li ng-repeat="item in items"><a tabindex="-1" ng-click="selectVal(item)">{{item.name}}</a></li></ul></div>';
                   element.append($compile(html)(scope));
-                  for (var i = 0; i < scope.items.length; i++) {
-                      if (scope.items[i].id === scope.selectedItem) {
-                          scope.bSelectedItem = scope.items[i];
-                          break;
+                  if (scope.items) {
+                      for (var i = 0; i < scope.items.length; i++) {
+                          if (scope.items[i].id === scope.selectedItem) {
+                              scope.bSelectedItem = scope.items[i];
+                              break;
+                          }
                       }
+                      scope.selectVal(scope.bSelectedItem);
                   }
                   scope.selectVal = function (item) {
                       switch (attrs.menuType) {
                           case "button":
-                              $('button.button-label', element).html(item.name);
+                              $('button.btn-main', element).html(item.name);
                               break;
                           default:
                               $('a.dropdown-toggle', element).html('<b class="caret"></b> ' + item.name);
                               break;
                       }
                       scope.doSelect({
-                          selectedVal: item.id
+                          selectedID: item.id, selectedVal : item.name
                       });
                   };
-                  scope.selectVal(scope.bSelectedItem);
+                  
               }
           };
       });
