@@ -89,22 +89,22 @@ namespace ODPTaxonomyDAL_ST
 	public partial class Report_QC_Week
 	{
 		
-		private int _QC_ID;
+		private System.Nullable<double> _QC_ID;
 		
 		private string _QC_week;
 		
 		private string _Dates_IQ_Coded;
 		
-		private System.Nullable<int> _Rpt_Year;
+		private System.Nullable<double> _Rpt_Year;
 		
-		private System.Nullable<int> _Rpt_Month;
+		private System.Nullable<double> _Rpt_Month;
 		
 		public Report_QC_Week()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_ID", DbType="Int NOT NULL")]
-		public int QC_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_ID", DbType="Float")]
+		public System.Nullable<double> QC_ID
 		{
 			get
 			{
@@ -119,7 +119,7 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_week", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_week", DbType="NVarChar(255)")]
 		public string QC_week
 		{
 			get
@@ -135,7 +135,7 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dates_IQ_Coded", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dates_IQ_Coded", DbType="NVarChar(255)")]
 		public string Dates_IQ_Coded
 		{
 			get
@@ -151,8 +151,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rpt_Year", DbType="Int")]
-		public System.Nullable<int> Rpt_Year
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rpt_Year", DbType="Float")]
+		public System.Nullable<double> Rpt_Year
 		{
 			get
 			{
@@ -167,8 +167,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rpt_Month", DbType="Int")]
-		public System.Nullable<int> Rpt_Month
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Rpt_Month", DbType="Float")]
+		public System.Nullable<double> Rpt_Month
 		{
 			get
 			{

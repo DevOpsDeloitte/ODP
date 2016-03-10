@@ -27,7 +27,7 @@
 
         <div class="row">
             <div class="col-lg-2">
-                <button class="btn btn-default" ng-class="{ 'btn-danger' : vm.formerror, 'btn-success' : vm.formready }">Run Report</button>
+                <button class="btn btn-default" ng-disabled="!vm.checkForm()" ng-click="vm.runReport()" ng-class="{ 'btn-danger' : !vm.checkForm(), 'btn-success' : vm.checkForm() }">Run Report</button>
             </div>
         </div>
 

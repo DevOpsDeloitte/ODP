@@ -5,9 +5,9 @@
       .module('reportingapp')
       .controller('ReportController', ReportController);
 
-    ReportController.$inject = ['$http', '$log', '$q', '$window','ROOT_URL', 'report'];
+    ReportController.$inject = ['$http', '$log', '$q', '$window','ROOT_URL', 'report', '$scope'];
 
-    function ReportController($http, $log, $q, $window,  ROOT_URL, report) {
+    function ReportController($http, $log, $q, $window,  ROOT_URL, report, $scope) {
         var vm = this;
 
         vm.defaultdateid = 1;
@@ -23,9 +23,9 @@
 
                         vm.initForm();
                         
-                        $log.info("dates loaded ::" + JSON.stringify(response.data));
+                        //$log.info("dates loaded ::" + JSON.stringify(response.data));
                         
-                    }, onerror);
+                    }, vm.onerror);
 
         vm.initForm = function () {
 
@@ -41,13 +41,46 @@
 
         };
 
-       
+        //$scope.$watchCollection("vm.datestart", function (n, o) {
+        //    if (n !== undefined) {
+        //        if (n.id != 0) {
+        //            vm.formready = true;
+        //        }
+        //    }
+        //});
+
+        vm.runReport = function () {
+
+            report.runReport(vm.datestart.name, vm.dateend.name,'K9')
+                   .then(function (response) {
+                       
+                   }, vm.onerror);
+
+        };
+
+        vm.checkForm = function () {
+            //$log.info("check form ::")
+            if (vm.datestart !== undefined && vm.dateend !== undefined) {
+                if (vm.datestart.id == 0 || vm.dateend.id == 0) {
+                    return false;
+                }
+                if (vm.datestart.id <= vm.dateend.id) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+            else {
+                return false;
+            }
+        };
 
 
 
 
 
-        function onerror(response) {
+        vm.onerror = function(response) {
 
             if (response.code == 404) {
                 //alert('Invalid URl')
