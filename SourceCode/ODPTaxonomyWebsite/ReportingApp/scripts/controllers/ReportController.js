@@ -11,10 +11,7 @@
         var vm = this;
 
         vm.defaultdateid = 1;
-        //vm.dateranges = [{
-        //    id: 1,
-        //    name: "Low"
-        //}];
+
         report.getDateRanges()
                     .then(function (response) {                    
                         vm.dateranges = response.data.map(function (x)
@@ -24,19 +21,43 @@
                             return x;
                         });
 
+                        vm.initForm();
+                        
                         $log.info("dates loaded ::" + JSON.stringify(response.data));
-                        vm.loading = false;
+                        
                     }, onerror);
 
-    }
+        vm.initForm = function () {
 
-    function onerror(response) {
+            vm.dateranges.unshift({ id: 0, name: 'Select' });
+            vm.datestart = vm.dateranges[0];
+            vm.dateend = vm.dateranges[0];
 
-        if (response.code == 404) {
-            //alert('Invalid URl')
-            return;
+            if (vm.datestart.id != 0) {
+                vm.formready = true;
+            }
+
+            vm.loading = false;
+
+        };
+
+       
+
+
+
+
+
+        function onerror(response) {
+
+            if (response.code == 404) {
+                //alert('Invalid URl')
+                return;
+            }
+
         }
 
     }
+
+    
 
 })();

@@ -5,23 +5,21 @@
 
         <div class="row">
 
-            <div class="col-lg-2">
+            <div class="col-md-3">
                 <strong>From : </strong>
                 <div class="input-group">               
-                    <!--input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Go!</button>
-                    </span>-->
-                    <bs-dropdown id="start" data-menu-type="button" select-valx="vm.startdateid = selectedID; vm.startdate = selectedVal"
-                                 preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'From'"></bs-dropdown> 
+                    <select ng-options="item.name for item in vm.dateranges track by item.id" ng-model="vm.datestart"></select>
+                    <!--<bs-dropdown id="start" data-menu-type="button" select-valx="vm.startdateid = selectedID; vm.startdate = selectedVal"
+                                 preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'From'"></bs-dropdown>--> 
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
 
-            <div class="col-lg-2">
+            <div class="col-md-2">
                 <strong>To : </strong>
                 <div class="input-group">
-                    <bs-dropdown id="end" data-menu-type="button" select-valx="vm.enddateid = selectedID; vm.enddate = selectedVal"
-                                 preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'End'"></bs-dropdown> 
+                    <select ng-options="item.name for item in vm.dateranges track by item.id" ng-model="vm.dateend"></select>
+                    <!--<bs-dropdown id="end" data-menu-type="button" select-valx="vm.enddateid = selectedID; vm.enddate = selectedVal"
+                                 preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'End'"></bs-dropdown>--> 
                 </div><!-- /input-group -->
             </div><!-- /.col-lg-6 -->
 
@@ -29,9 +27,14 @@
 
         <div class="row">
             <div class="col-lg-2">
-                <button class="btn btn-default btn-danger">Run Report</button>
+                <button class="btn btn-default" ng-class="{ 'btn-danger' : vm.formerror, 'btn-success' : vm.formready }">Run Report</button>
             </div>
+        </div>
 
-    </div>
+        <div class="row">
+            <div class="col-lg-2">
+              
+            </div>
+        </div>
 
 </div>

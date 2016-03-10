@@ -4,7 +4,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!--Optional theme-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/report.css">   
+    <link rel="stylesheet" href="css/report.css">
+    <link rel="stylesheet" href="css/chosen.min.css"> 
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -18,6 +19,7 @@
 <script type="text/javascript" src="../scripts/alertify.js"></script>
 <script type="text/javascript" src="../scripts/angular/angular-latest.min.js"></script>
 <script src="https://code.angularjs.org/1.4.4/angular-route.js"></script>
+<script type="text/javascript" src="scripts/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
 <script type="text/javascript" src="scripts/directives/directives.js"></script>
 <script type="text/javascript" src="scripts/services/services.js"></script>
