@@ -49,11 +49,31 @@
         //    }
         //});
 
-        vm.runReport = function () {
+        vm.runReport = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
 
             report.runReport(vm.datestart.name, vm.dateend.name,'K9')
                    .then(function (response) {
-                       
+                       var fileName = "test.csv";
+                       //http://stackoverflow.com/questions/20904151/download-text-csv-content-as-files-from-server-in-angular
+                       if (window.navigator.msSaveOrOpenBlob) {
+                           var blob = new Blob([response]);  //csv data string as an array.
+                           // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+                           window.navigator.msSaveBlob(blob, fileName);
+                       } else {
+                           var anchor = angular.element('<a/>');
+                           anchor.css({ display: 'block' }); // Make sure it's not visible
+                           $log.info(response);
+                           angular.element(document.body).append(anchor); // Attach to document for FireFox
+
+                           anchor.attr({
+                               href: 'data:attachment/csv;charset=utf-8,' + encodeURI(response),
+                               target: '_blank',
+                               download: fileName
+                           })[0].click();
+                           //anchor.remove();
+                       }
                    }, vm.onerror);
 
         };

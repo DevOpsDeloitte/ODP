@@ -30,8 +30,41 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
         public void ProcessRequest(HttpContext context)
         {
             type = context.Request["type"] ?? "";
-            context.Response.Write(getTimePeriods());
+            switch (type)
+            {
+                case "dates":
+                    context.Response.Write(getTimePeriods());
+                    break;
+                case "run":
+                    string csvPath = context.Server.MapPath("Book1.csv");
+                    context.Response.Clear();
+                    context.Response.ContentType = "application/csv";
+                    context.Response.AppendHeader("content-disposition",
+                            "attachment; filename=" + csvPath);
+                    context.Response.TransmitFile(csvPath);
+                    context.Response.End();
 
+                    //context.Response.Write(getReport(context));
+                    break;
+                default:
+                    context.Response.Write("NA");
+                    break;
+            }
+           
+
+        }
+
+        private string getReport(HttpContext context)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            using (ReportingAppDataContext db = new ReportingAppDataContext(connString))
+            {
+                string start = context.Request["start"] ?? "";
+                string end = context.Request["end"] ?? "";
+                string ktype = context.Request["ktype"] ?? "";
+                var reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
+                return JsonConvert.SerializeObject(reportvals);
+            }
         }
 
         private string getTimePeriods()

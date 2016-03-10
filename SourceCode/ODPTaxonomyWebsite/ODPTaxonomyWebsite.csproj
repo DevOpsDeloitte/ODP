@@ -127,7 +127,6 @@
     <Content Include="ReportingApp\scripts\chosen.jquery.min.js" />
     <Content Include="ReportingApp\scripts\controllers\ReportController.js" />
     <Content Include="ReportingApp\scripts\directives\directives.js" />
-    <Content Include="ReportingApp\scripts\services.js" />
     <Content Include="ReportingApp\scripts\services\services.js" />
     <Content Include="ReportingApp\scripts\templates\report.html" />
     <Content Include="Scripts\alertify.js" />
@@ -580,6 +579,9 @@
     <None Include="Properties\PublishProfiles\ODPTaxonomy.pubxml" />
     <Content Include="ReportingApp\css\report.scss" />
     <Content Include="ReportingApp\handlers\ReportService.ashx" />
+    <Content Include="ReportingApp\handlers\testdoc.pdf" />
+    <Content Include="ReportingApp\handlers\test.csv" />
+    <Content Include="ReportingApp\handlers\Book1.csv" />
     <None Include="Scripts\angular\.bower.json" />
     <None Include="Scripts\angular\angular.min.js.gzip" />
     <None Include="Scripts\angular\angular.min.js.map" />

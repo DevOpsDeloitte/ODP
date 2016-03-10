@@ -76,13 +76,6 @@ namespace ODPTaxonomyDAL_ST
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType);
 			return ((ISingleResult<Report_KappaAvg_ByQCWeeksResult>)(result.ReturnValue));
 		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaE7F6_ByQCWeeks")]
-		public ISingleResult<Report_KappaE7F6_ByQCWeeksResult> Report_KappaE7F6_ByQCWeeks([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType);
-			return ((ISingleResult<Report_KappaE7F6_ByQCWeeksResult>)(result.ReturnValue));
-		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_QC_Week")]
@@ -187,13 +180,17 @@ namespace ODPTaxonomyDAL_ST
 	public partial class Report_KappaAvg_ByQCWeeksResult
 	{
 		
-		private string _QCWeek;
+		private string _QC_week;
 		
-		private string _IQDate;
+		private string _IQ_StartDate;
 		
-		private System.Nullable<int> _KappaTypeID;
+		private string _IQ_EndDate;
 		
-		private System.Nullable<int> _NumbAbs;
+		private string _Kappa;
+		
+		private System.Nullable<int> _E7F6Ct;
+		
+		private System.Nullable<int> _Number_Abs;
 		
 		private System.Nullable<decimal> _A1;
 		
@@ -215,66 +212,98 @@ namespace ODPTaxonomyDAL_ST
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QCWeek", DbType="VarChar(10)")]
-		public string QCWeek
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_week", DbType="NVarChar(20)")]
+		public string QC_week
 		{
 			get
 			{
-				return this._QCWeek;
+				return this._QC_week;
 			}
 			set
 			{
-				if ((this._QCWeek != value))
+				if ((this._QC_week != value))
 				{
-					this._QCWeek = value;
+					this._QC_week = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQDate", DbType="VarChar(100)")]
-		public string IQDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_StartDate", DbType="NVarChar(50)")]
+		public string IQ_StartDate
 		{
 			get
 			{
-				return this._IQDate;
+				return this._IQ_StartDate;
 			}
 			set
 			{
-				if ((this._IQDate != value))
+				if ((this._IQ_StartDate != value))
 				{
-					this._IQDate = value;
+					this._IQ_StartDate = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaTypeID", DbType="Int")]
-		public System.Nullable<int> KappaTypeID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_EndDate", DbType="NVarChar(50)")]
+		public string IQ_EndDate
 		{
 			get
 			{
-				return this._KappaTypeID;
+				return this._IQ_EndDate;
 			}
 			set
 			{
-				if ((this._KappaTypeID != value))
+				if ((this._IQ_EndDate != value))
 				{
-					this._KappaTypeID = value;
+					this._IQ_EndDate = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NumbAbs", DbType="Int")]
-		public System.Nullable<int> NumbAbs
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kappa", DbType="VarChar(10)")]
+		public string Kappa
 		{
 			get
 			{
-				return this._NumbAbs;
+				return this._Kappa;
 			}
 			set
 			{
-				if ((this._NumbAbs != value))
+				if ((this._Kappa != value))
 				{
-					this._NumbAbs = value;
+					this._Kappa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E7F6Ct", DbType="Int")]
+		public System.Nullable<int> E7F6Ct
+		{
+			get
+			{
+				return this._E7F6Ct;
+			}
+			set
+			{
+				if ((this._E7F6Ct != value))
+				{
+					this._E7F6Ct = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Number_Abs", DbType="Int")]
+		public System.Nullable<int> Number_Abs
+		{
+			get
+			{
+				return this._Number_Abs;
+			}
+			set
+			{
+				if ((this._Number_Abs != value))
+				{
+					this._Number_Abs = value;
 				}
 			}
 		}
@@ -403,86 +432,6 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._F != value))
 				{
 					this._F = value;
-				}
-			}
-		}
-	}
-	
-	public partial class Report_KappaE7F6_ByQCWeeksResult
-	{
-		
-		private string _QC_week;
-		
-		private string _Dates_IQ_Coded;
-		
-		private System.Nullable<int> _KappaTypeID;
-		
-		private System.Nullable<int> _totalAbs;
-		
-		public Report_KappaE7F6_ByQCWeeksResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_week", DbType="NVarChar(20)")]
-		public string QC_week
-		{
-			get
-			{
-				return this._QC_week;
-			}
-			set
-			{
-				if ((this._QC_week != value))
-				{
-					this._QC_week = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dates_IQ_Coded", DbType="NVarChar(50)")]
-		public string Dates_IQ_Coded
-		{
-			get
-			{
-				return this._Dates_IQ_Coded;
-			}
-			set
-			{
-				if ((this._Dates_IQ_Coded != value))
-				{
-					this._Dates_IQ_Coded = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaTypeID", DbType="Int")]
-		public System.Nullable<int> KappaTypeID
-		{
-			get
-			{
-				return this._KappaTypeID;
-			}
-			set
-			{
-				if ((this._KappaTypeID != value))
-				{
-					this._KappaTypeID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_totalAbs", DbType="Int")]
-		public System.Nullable<int> totalAbs
-		{
-			get
-			{
-				return this._totalAbs;
-			}
-			set
-			{
-				if ((this._totalAbs != value))
-				{
-					this._totalAbs = value;
 				}
 			}
 		}

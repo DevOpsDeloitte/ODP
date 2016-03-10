@@ -14,10 +14,12 @@
     <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="KType" Parameter="kType" Type="System.String" DbType="VarChar(10)" />
     <ElementType Name="Report_KappaAvg_ByQCWeeksResult">
-      <Column Name="QCWeek" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
-      <Column Name="IQDate" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
-      <Column Name="KappaTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NumbAbs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="QC_week" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="IQ_StartDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IQ_EndDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Kappa" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="E7F6Ct" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Number_Abs" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
       <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
       <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
@@ -26,17 +28,6 @@
       <Column Name="D" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
       <Column Name="E" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
       <Column Name="F" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.Report_KappaE7F6_ByQCWeeks" Method="Report_KappaE7F6_ByQCWeeks">
-    <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="KType" Parameter="kType" Type="System.String" DbType="VarChar(10)" />
-    <ElementType Name="Report_KappaE7F6_ByQCWeeksResult">
-      <Column Name="QC_week" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Dates_IQ_Coded" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="KappaTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="totalAbs" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
