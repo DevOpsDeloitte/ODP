@@ -579,9 +579,7 @@
     <None Include="Properties\PublishProfiles\ODPTaxonomy.pubxml" />
     <Content Include="ReportingApp\css\report.scss" />
     <Content Include="ReportingApp\handlers\ReportService.ashx" />
-    <Content Include="ReportingApp\handlers\testdoc.pdf" />
     <Content Include="ReportingApp\handlers\test.csv" />
-    <Content Include="ReportingApp\handlers\Book1.csv" />
     <None Include="Scripts\angular\.bower.json" />
     <None Include="Scripts\angular\angular.min.js.gzip" />
     <None Include="Scripts\angular\angular.min.js.map" />

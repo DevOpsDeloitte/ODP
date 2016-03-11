@@ -7,6 +7,8 @@ using System.Data;
 using System.Web.UI.WebControls;
 using System.Configuration;
 using ODPTaxonomyDAL_ST;
+using ODPTaxonomyDAL_TT;
+using ODPTaxonomyUtility_TT;
 
 namespace ODPTaxonomyWebsite.ReportingApp.handlers
 {
@@ -36,13 +38,16 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                     context.Response.Write(getTimePeriods());
                     break;
                 case "run":
-                    string csvPath = context.Server.MapPath("Book1.csv");
-                    context.Response.Clear();
-                    context.Response.ContentType = "application/csv";
-                    context.Response.AppendHeader("content-disposition",
-                            "attachment; filename=" + csvPath);
-                    context.Response.TransmitFile(csvPath);
-                    context.Response.End();
+                    //string csvPath = context.Server.MapPath("Book1.csv");
+                    //context.Response.Clear();
+                    //context.Response.ContentType = "application/csv";
+                    //context.Response.AppendHeader("content-disposition",
+                    //        "attachment; filename=" + csvPath);
+                    //context.Response.TransmitFile(csvPath);
+                    //context.Response.End();
+
+                    getReport(context);
+
 
                     //context.Response.Write(getReport(context));
                     break;
@@ -54,7 +59,7 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
 
         }
 
-        private string getReport(HttpContext context)
+        private void getReport(HttpContext context)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             using (ReportingAppDataContext db = new ReportingAppDataContext(connString))
@@ -62,8 +67,12 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 string start = context.Request["start"] ?? "";
                 string end = context.Request["end"] ?? "";
                 string ktype = context.Request["ktype"] ?? "";
-                var reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
-                return JsonConvert.SerializeObject(reportvals);
+                List<Report_KappaAvg_ByQCWeeksResult> reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
+
+                DataSet ds = new DataSet();
+                CreateExcelFile.CreateExcelDocument<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-"+ktype, ds);
+                CreateExcelFile.CreateExcelDocumentAsStream(ds, "KappaAvg-"+start+"-"+end+"-"+ktype+".xlsx", context.Response);
+                //return JsonConvert.SerializeObject(reportvals);
             }
         }
 
