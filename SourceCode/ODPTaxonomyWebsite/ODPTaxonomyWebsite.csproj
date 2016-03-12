@@ -121,6 +121,9 @@
     <Content Include="Login.aspx" />
     <Content Include="notes\notesFor_16_CoderEvaluation_10.xml" />
     <Content Include="ReportingApp\css\report.css" />
+    <Content Include="ReportingApp\css\report.min.css">
+      <DependentUpon>report.css</DependentUpon>
+    </Content>
     <Content Include="ReportingApp\default.aspx" />
     <Content Include="ReportingApp\scripts\app.js" />
     <Content Include="ReportingApp\scripts\chosen.jquery.js" />

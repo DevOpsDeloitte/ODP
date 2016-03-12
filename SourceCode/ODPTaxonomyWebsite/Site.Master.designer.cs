@@ -139,6 +139,15 @@ namespace ODPTaxonomyWebsite {
         protected global::System.Web.UI.WebControls.LinkButton btn_viewAbstractList_odpSup;
         
         /// <summary>
+        /// btn_KappaLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btn_KappaLink;
+        
+        /// <summary>
         /// pnl_odp control.
         /// </summary>
         /// <remarks>
