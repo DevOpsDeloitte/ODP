@@ -84,7 +84,7 @@ namespace ODPTaxonomyDAL_TT
     #endregion
 		
 		public DataDataContext() : 
-				base(global::ODPTaxonomyDAL_TT.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString1, mappingSource)
+				base(global::ODPTaxonomyDAL_TT.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -291,13 +291,6 @@ namespace ODPTaxonomyDAL_TT
 			return ((ISingleResult<select_abstractId_team_member_ttResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_AbstractExported")]
-		public ISingleResult<rpt_AbstractExportedResult> rpt_AbstractExported([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
-			return ((ISingleResult<rpt_AbstractExportedResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_AbstractStatusTrail")]
 		public ISingleResult<rpt_AbstractStatusTrailResult> rpt_AbstractStatusTrail([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
 		{
@@ -358,6 +351,13 @@ namespace ODPTaxonomyDAL_TT
 			evaluationId = ((System.Nullable<int>)(result.GetParameterValue(3)));
 			isAbstractTaken = ((System.Nullable<bool>)(result.GetParameterValue(4)));
 			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.rpt_AbstractExported")]
+		public ISingleResult<rpt_AbstractExportedResult> rpt_AbstractExported([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="VarChar(MAX)")] string abstractID)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), abstractID);
+			return ((ISingleResult<rpt_AbstractExportedResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -5380,50 +5380,6 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	public partial class rpt_AbstractExportedResult
-	{
-		
-		private System.Nullable<int> _ApplicationID_Data_exported;
-		
-		private System.DateTime _Exported_Date;
-		
-		public rpt_AbstractExportedResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID_Data_exported", DbType="Int")]
-		public System.Nullable<int> ApplicationID_Data_exported
-		{
-			get
-			{
-				return this._ApplicationID_Data_exported;
-			}
-			set
-			{
-				if ((this._ApplicationID_Data_exported != value))
-				{
-					this._ApplicationID_Data_exported = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Exported Date]", Storage="_Exported_Date", DbType="DateTime NOT NULL")]
-		public System.DateTime Exported_Date
-		{
-			get
-			{
-				return this._Exported_Date;
-			}
-			set
-			{
-				if ((this._Exported_Date != value))
-				{
-					this._Exported_Date = value;
-				}
-			}
-		}
-	}
-	
 	public partial class rpt_AbstractStatusTrailResult
 	{
 		
@@ -6511,6 +6467,68 @@ namespace ODPTaxonomyDAL_TT
 				if ((this._EvaluationType != value))
 				{
 					this._EvaluationType = value;
+				}
+			}
+		}
+	}
+	
+	public partial class rpt_AbstractExportedResult
+	{
+		
+		private System.Nullable<int> _ApplicationID_Data_exported;
+		
+		private string _Fiscal_Year;
+		
+		private System.DateTime _Exported_Date;
+		
+		public rpt_AbstractExportedResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID_Data_exported", DbType="Int")]
+		public System.Nullable<int> ApplicationID_Data_exported
+		{
+			get
+			{
+				return this._ApplicationID_Data_exported;
+			}
+			set
+			{
+				if ((this._ApplicationID_Data_exported != value))
+				{
+					this._ApplicationID_Data_exported = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Fiscal_Year", DbType="NVarChar(20)")]
+		public string Fiscal_Year
+		{
+			get
+			{
+				return this._Fiscal_Year;
+			}
+			set
+			{
+				if ((this._Fiscal_Year != value))
+				{
+					this._Fiscal_Year = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Exported Date]", Storage="_Exported_Date", DbType="DateTime NOT NULL")]
+		public System.DateTime Exported_Date
+		{
+			get
+			{
+				return this._Exported_Date;
+			}
+			set
+			{
+				if ((this._Exported_Date != value))
+				{
+					this._Exported_Date = value;
 				}
 			}
 		}

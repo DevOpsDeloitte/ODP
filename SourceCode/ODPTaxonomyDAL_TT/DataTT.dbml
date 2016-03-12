@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Dev" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_TT.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Integrated Security=True" SettingsObjectName="ODPTaxonomyDAL_TT.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.aspnet_Users" Member="tbl_aspnet_Users">
     <Type Name="tbl_aspnet_User">
       <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
@@ -261,13 +261,6 @@
       <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.rpt_AbstractExported" Method="rpt_AbstractExported">
-    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(MAX)" />
-    <ElementType Name="rpt_AbstractExportedResult">
-      <Column Name="ApplicationID_Data_exported" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[Exported Date]" Member="Exported_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.rpt_AbstractStatusTrail" Method="rpt_AbstractStatusTrail">
     <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(MAX)" />
     <ElementType Name="rpt_AbstractStatusTrailResult">
@@ -373,5 +366,13 @@
     <Parameter Name="EvaluationId" Parameter="evaluationId" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Parameter Name="IsAbstractTaken" Parameter="isAbstractTaken" Type="System.Boolean" DbType="Bit" Direction="InOut" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.rpt_AbstractExported" Method="rpt_AbstractExported">
+    <Parameter Name="AbstractID" Parameter="abstractID" Type="System.String" DbType="VarChar(MAX)" />
+    <ElementType Name="rpt_AbstractExportedResult">
+      <Column Name="ApplicationID_Data_exported" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Fiscal_Year" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="[Exported Date]" Member="Exported_Date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+    </ElementType>
   </Function>
 </Database>
