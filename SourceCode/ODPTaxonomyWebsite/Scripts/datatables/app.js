@@ -126,6 +126,7 @@ $(document).ready(function () {
                         // this case `data: 0`.
                         "render": function (data, type, row) {
                             if (config.role == "ODPStaff") {
+                                return "&mdash;";
                                 return "&nbsp;";
                                 return data.length == 0 ? "&nbsp;" : data.replace(", E7F6", "").replace("E7F6", "");
                             }
