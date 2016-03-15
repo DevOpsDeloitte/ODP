@@ -5,6 +5,7 @@
   ================================================== -->
   <link rel="stylesheet" href="../styles/alertify.css">    
   <link rel="stylesheet" href="../styles/line/tax.css">
+  <link rel="stylesheet" href="../styles/print-evaluation.css">
 
 
 	<!-- Favicons
@@ -17,7 +18,7 @@
    // $scope.mdata.formmode = "<%= FormMode %>"
 </script>
 
-<div class="container" id="tax-form" ng-controller="ODPFormCtrl">
+<div class="container evaluation" id="tax-form" ng-controller="ODPFormCtrl">
 
     <div class="sixteen columns" ng-cloak>
     <h2 ng-show="mdata.formmode.indexOf('Evaluation') != -1">Individual Coding</h2>
@@ -106,7 +107,7 @@
         </div>
 
      <div class="sixteen columns">
-         <div>
+         <div class="evaluation-details">
              <span class="titles">Application ID :</span>
              <span class="titlevals"><%= applicationID %></span>
              <br />
@@ -115,23 +116,16 @@
              <br />
              <span class="titles">PI Project Leader :</span>
              <span class="titlevals"><%= piProjectLeader %></span>
-         </div>
-   
-     </div>
-
-    <!-- <div class="sixteen columns">
-         <div>
+             <!--<br>
              <span class="titles">Last Name :</span>
              <span class="titlevals"><%= lastName %></span>
-         </div>  
-     </div>-->
-
-       <div class="sixteen columns">
-         <div>
+             -->
+             <br>
              <span class="titles">User ID :</span>
              <span class="titlevals"><%= userName %></span>
-         </div>  
-     
+         </div>
+   
+     </div>    
 
        <div class="sixteen columns tax-form-buttons">
           
@@ -159,7 +153,8 @@
     
 
 
-    <div class="sixteen columns"> 
+    <div class="sixteen columns">
+    <div class="print-left">
 
         <table class="bordered zebra-striped" id="study-focus" class="study-focus">
             <div class="captionTitle">A. Study Focus</div>
@@ -178,6 +173,9 @@
 
             </tbody>
         </table>
+
+        </div>
+        <div class="print-right">
 
         <table class="bordered zebra-striped" id="entities-studied">
 <%--            <caption>B. Entities Studied</caption>--%>
@@ -246,6 +244,8 @@
 
 
 
+
+        </div>
 
         </div>
 
