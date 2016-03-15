@@ -65,19 +65,33 @@
 
         vm.checkForm = function () {
             //$log.info("check form ::")
-            if (vm.datestart !== undefined && vm.dateend !== undefined) {
-                if (vm.datestart.id == 0 || vm.dateend.id == 0) {
+
+
+            if (vm.datestart !== undefined || vm.dateend !== undefined) {
+
+                if (vm.datestart.id == 0) {
                     vm.errormessage = {};
                     vm.errormessage.enterstartandend = true;
+                    vm.errormessage.enterstart = true; // set to true when there is an error, removed otherwise.
                     return false;
                 }
+
+                if (vm.dateend.id == 0) {
+                    vm.errormessage = {};
+                    vm.errormessage.enterstartandend = true;
+                    vm.errormessage.enterend = true;
+                    return false;
+                }
+
                 if (vm.datestart.id <= vm.dateend.id) {
                     vm.errormessage = {};
+                    
                     return true;
                 }
                 else {
                     vm.errormessage = {};
                     vm.errormessage.startgreaterthanend = true;
+
                     return false;
                 }
             }

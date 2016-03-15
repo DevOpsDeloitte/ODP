@@ -12,6 +12,7 @@
     <div ng-app="reportingapp">
     <!--Main content that changes based on route-->
     <div ng-view class="container"></div>
+
     </div>
 
 <%--    http://jsfiddle.net/cojahmetov/3DS49/ --%>

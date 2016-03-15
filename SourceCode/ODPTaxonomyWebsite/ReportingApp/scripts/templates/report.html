@@ -1,15 +1,18 @@
 ﻿<div class="row rowsp">
 
-    <div class="col-lg-12 col-md-12">
+    <div class="col-lg-12 col-md-12 sixteen columns">
+        <div id="pagetitlebox">
+            <h2>Kappa Reporting</h2>
+        </div>
         <!--<form ng-submit="vm.runReport($event)">-->
         <fieldset>
             <legend>
-                Kappa Report Generation
+                Kappa Report Download
             </legend>
                 <div class="row">
 
                     <div class="col-md-3 three columns">
-                        <strong>From : </strong>
+                        <strong ng-class="{'no': vm.datestart.id == 0 || vm.datestart.id > vm.dateend.id  , 'yes' : vm.datestart.id > 0 && vm.datestart.id <= vm.dateend.id }">From : </strong>
                         <div class="input-group">
                             <select ng-options="item.name for item in vm.dateranges track by item.id" ng-model="vm.datestart"></select>
                             <!--<bs-dropdown id="start" data-menu-type="button" select-valx="vm.startdateid = selectedID; vm.startdate = selectedVal"
@@ -18,7 +21,7 @@
                     </div>
 
                     <div class="col-md-3 three columns">
-                        <strong>To : </strong>
+                        <strong ng-class="{'no': vm.dateend.id == 0 || vm.datestart.id > vm.dateend.id , 'yes' : vm.dateend.id > 0 && vm.datestart.id <= vm.dateend.id }">To : </strong>
                         <div class="input-group">
                             <select ng-options="item.name for item in vm.dateranges track by item.id" ng-model="vm.dateend"></select>
                             <!--<bs-dropdown id="end" data-menu-type="button" select-valx="vm.enddateid = selectedID; vm.enddate = selectedVal"

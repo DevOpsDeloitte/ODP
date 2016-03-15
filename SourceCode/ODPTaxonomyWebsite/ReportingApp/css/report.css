@@ -1,4 +1,13 @@
-﻿body h1 {
+﻿body .container {
+  padding-top: 50px; }
+
+body .container .yes {
+  color: #24AA7A; }
+
+body .container .no {
+  color: #9B0202; }
+
+body h1 {
   color: #fff;
   position: absolute;
   top: 10px;

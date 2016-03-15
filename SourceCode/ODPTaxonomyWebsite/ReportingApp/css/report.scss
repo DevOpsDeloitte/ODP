@@ -1,4 +1,12 @@
 ﻿body {
+
+    .container {
+        padding-top: 50px;
+    }
+
+    .container .yes { color: #24AA7A; }
+	.container .no { color: #9B0202; }
+
     h1 {
     color: #fff;
     position: absolute;
