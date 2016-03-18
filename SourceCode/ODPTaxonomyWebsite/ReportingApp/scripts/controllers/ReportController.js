@@ -5,9 +5,9 @@
       .module('reportingapp')
       .controller('ReportController', ReportController);
 
-    ReportController.$inject = ['$http', '$log', '$q', '$window','ROOT_URL', 'report', '$scope'];
+    ReportController.$inject = ['$http', '$log', '$q', '$window','ROOT_URL', 'report', '$scope', '$timeout'];
 
-    function ReportController($http, $log, $q, $window,  ROOT_URL, report, $scope) {
+    function ReportController($http, $log, $q, $window,  ROOT_URL, report, $scope, $timeout) {
         var vm = this;
 
         vm.defaultdateid = 1;
@@ -64,7 +64,8 @@
         };
 
         vm.checkForm = function () {
-            //$log.info("check form ::")
+            //$log.info("check form ::");
+            var retVal;
 
 
             if (vm.datestart !== undefined || vm.dateend !== undefined) {
@@ -73,33 +74,40 @@
                     vm.errormessage = {};
                     vm.errormessage.enterstartandend = true;
                     vm.errormessage.enterstart = true; // set to true when there is an error, removed otherwise.
-                    return false;
+                    retVal = false;
+                    return retVal;
+                    
                 }
 
                 if (vm.dateend.id == 0) {
                     vm.errormessage = {};
                     vm.errormessage.enterstartandend = true;
                     vm.errormessage.enterend = true;
-                    return false;
+                    retVal = false;
+                    return retVal;
                 }
 
-                if (vm.datestart.id <= vm.dateend.id) {
+                if ((vm.datestart.id <= vm.dateend.id)) {
                     vm.errormessage = {};
                     
-                    return true;
+                    retVal = true;
+                    return retVal;
                 }
                 else {
                     vm.errormessage = {};
                     vm.errormessage.startgreaterthanend = true;
-
-                    return false;
+                    retVal = false;
+                    return retVal;
                 }
             }
             else {
                 vm.errormessage = {};
                 vm.errormessage.enterstartandend = true;
-                return false;
+                retVal = false;
+                return retVal;
             }
+
+            return retVal;
         };
 
 

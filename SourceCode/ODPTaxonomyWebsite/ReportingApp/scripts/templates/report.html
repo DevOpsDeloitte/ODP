@@ -46,8 +46,8 @@
 
                 <div class="row">
                     <div class="col-lg-2 columns ten">
-                        <div style="color: #000;" ng-if="vm.errormessage.enterstartandend">Enter From and To date ranges.</div>
-                        <div style="color:red;" ng-if="vm.errormessage.startgreaterthanend">From date greater than To</div>
+                        <div style="color: #000;" ng-show="!vm.checkForm() && vm.errormessage.enterstartandend">Enter From and To date ranges.</div>
+                        <div style="color:red;" class="errorMessage u-pull-left" ng-show="!vm.checkForm() && vm.errormessage.startgreaterthanend">From date greater than To date.</div>
                     </div>
                 </div>
                 <div class="row">

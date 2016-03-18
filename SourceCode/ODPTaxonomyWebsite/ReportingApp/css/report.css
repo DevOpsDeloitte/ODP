@@ -1,5 +1,7 @@
 ﻿body .container {
   padding-top: 50px; }
+  body .container .u-pull-left {
+    float: left; }
 
 body .container .yes {
   color: #24AA7A; }
