@@ -20,14 +20,14 @@
       <Column Name="Kappa" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="E7F6Ct" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Number_Abs" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
-      <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
-      <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
-      <Column Name="B" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
-      <Column Name="C" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
-      <Column Name="D" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
-      <Column Name="E" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
-      <Column Name="F" Type="System.Decimal" DbType="Decimal(10,4)" CanBeNull="true" />
+      <Column Name="A1" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="A2" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="A3" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="B" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="C" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="D" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="E" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="F" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>

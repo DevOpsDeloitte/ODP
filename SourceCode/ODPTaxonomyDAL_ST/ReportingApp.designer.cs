@@ -192,21 +192,21 @@ namespace ODPTaxonomyDAL_ST
 		
 		private System.Nullable<int> _Number_Abs;
 		
-		private System.Nullable<decimal> _A1;
+		private string _A1;
 		
-		private System.Nullable<decimal> _A2;
+		private string _A2;
 		
-		private System.Nullable<decimal> _A3;
+		private string _A3;
 		
-		private System.Nullable<decimal> _B;
+		private string _B;
 		
-		private System.Nullable<decimal> _C;
+		private string _C;
 		
-		private System.Nullable<decimal> _D;
+		private string _D;
 		
-		private System.Nullable<decimal> _E;
+		private string _E;
 		
-		private System.Nullable<decimal> _F;
+		private string _F;
 		
 		public Report_KappaAvg_ByQCWeeksResult()
 		{
@@ -308,8 +308,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,4)")]
-		public System.Nullable<decimal> A1
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="NVarChar(30)")]
+		public string A1
 		{
 			get
 			{
@@ -324,8 +324,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,4)")]
-		public System.Nullable<decimal> A2
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="NVarChar(30)")]
+		public string A2
 		{
 			get
 			{
@@ -340,8 +340,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,4)")]
-		public System.Nullable<decimal> A3
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="NVarChar(30)")]
+		public string A3
 		{
 			get
 			{
@@ -356,8 +356,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,4)")]
-		public System.Nullable<decimal> B
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="NVarChar(30)")]
+		public string B
 		{
 			get
 			{
@@ -372,8 +372,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,4)")]
-		public System.Nullable<decimal> C
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="NVarChar(30)")]
+		public string C
 		{
 			get
 			{
@@ -388,8 +388,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,4)")]
-		public System.Nullable<decimal> D
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="NVarChar(30)")]
+		public string D
 		{
 			get
 			{
@@ -404,8 +404,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,4)")]
-		public System.Nullable<decimal> E
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="NVarChar(30)")]
+		public string E
 		{
 			get
 			{
@@ -420,8 +420,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,4)")]
-		public System.Nullable<decimal> F
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="NVarChar(30)")]
+		public string F
 		{
 			get
 			{

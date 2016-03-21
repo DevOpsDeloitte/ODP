@@ -70,7 +70,7 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 List<Report_KappaAvg_ByQCWeeksResult> reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
 
                 DataSet ds = new DataSet();
-                CreateExcelFile.CreateExcelDocument<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-"+ktype, ds);
+                CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-"+ktype, ds);
                 CreateExcelFile.CreateExcelDocumentAsStream(ds, "KappaAvg-"+start+"-"+end+"-"+ktype+".xlsx", context.Response);
                 //return JsonConvert.SerializeObject(reportvals);
             }
