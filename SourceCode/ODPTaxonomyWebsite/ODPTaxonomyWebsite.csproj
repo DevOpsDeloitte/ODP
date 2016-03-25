@@ -321,7 +321,6 @@
     <Compile Include="Evaluation\Classes\DBData.cs" />
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
@@ -381,6 +380,9 @@
     </Compile>
     <Compile Include="Evaluation\Handlers\AbstractsReopen.ashx.cs">
       <DependentUpon>AbstractsReopen.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\Comments.ashx.cs">
+      <DependentUpon>Comments.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Handlers\Evaluations.cs" />
     <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
@@ -574,6 +576,7 @@
     <Content Include="Evaluation\Handlers\GenerateExcelReport.ashx" />
     <Content Include="Evaluation\Handlers\RedirectionMessage.ashx" />
     <Content Include="Evaluation\Handlers\AbstractDetail.ashx" />
+    <Content Include="Evaluation\Handlers\Comments.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />

@@ -11,10 +11,23 @@ using ODPTaxonomyDAL_ST;
 using ODPTaxonomyWebsite.Evaluation.Classes;
 using System.Text;
 using ODPTaxonomyCommon;
+using Newtonsoft.Json;
 
 
 namespace ODPTaxonomyWebsite.Evaluation.Controls
 {
+    public class Comments
+    {
+        public List<TeamUser> IQCoders;
+        public List<TeamUser> ODPCoders;
+
+        public Comments()
+        {
+            this.IQCoders = new List<TeamUser>();
+            this.ODPCoders = new List<TeamUser>();
+        }
+    }
+
     public class TeamUser // Team user class
     {
         public Guid UserId {get;set;}
@@ -24,6 +37,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string UserFirstName { get; set; }
         public string UserLastName { get; set; }
         public int UserSubmissionID { get; set; }
+        public string UserComment { get; set; }
     }
 
     public class ComparisonTeamUser
@@ -32,7 +46,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public int? TeamId { get; set; }
         public string TeamType { get; set; }
         public int ComparisonSubmissionID { get; set; }
-
+        public string UserComment { get; set; }
     }
 
 
@@ -68,10 +82,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string isChecked = string.Empty;
     
         private DataDataContext db = null;
-        private Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
+        public Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
         private Dictionary<string, ComparisonTeamUser> ComparisonTeamUsers = new Dictionary<string, ComparisonTeamUser>();
 
         public int? teamID = null;
+        public Comments EvaluationComments = new Comments();
+        public string CommentsJSON = string.Empty;
 
         
 
@@ -388,10 +404,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             showComparison();
 
 
-            //if (FormMode.IndexOf("Evaluation") != -1)
-            //{
-                assignTeam();
-            //}
+            assignTeam();
+
 
             if (FormMode.IndexOf("Consensus") != -1)
             {
@@ -400,9 +414,23 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 submissiontypesEval = FormMode.IndexOf("ODP Staff Member") != -1 ? 3 : 1;  // ODP Staff = 3
 
                 foreach( var tu in TeamUsers ){
-                    tu.Value.UserSubmissionID = db.Submissions.Where(s => s.EvaluationId == EvaluationID && s.SubmissionTypeId == submissiontypesEval && s.UserId == tu.Value.UserId).Select(s => s.SubmissionID).FirstOrDefault();
+                    var subUs = db.Submissions.Where(s => s.EvaluationId == EvaluationID && s.SubmissionTypeId == submissiontypesEval && s.UserId == tu.Value.UserId).Select(s => new { SubmissionID = s.SubmissionID, Comment = s.Comments }).FirstOrDefault();
+                    tu.Value.UserSubmissionID = subUs.SubmissionID;
+                    tu.Value.UserComment = subUs.Comment;
+                    if(submissiontypesEval == 1)
+                    {
+                        this.EvaluationComments.IQCoders.Add(tu.Value);
+                    }
+                    else
+                    {
+                        this.EvaluationComments.ODPCoders.Add(tu.Value);
+                    }
+                    
                 }
-             
+
+                this.CommentsJSON = JsonConvert.SerializeObject(EvaluationComments);
+
+
             }
 
             if (FormMode.IndexOf("Comparison") != -1)
@@ -410,8 +438,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var comparisonTeams = db.Evaluations
                                          .Where(e => e.AbstractID == AbstractID /*&& e.IsComplete*/ && e.ConsensusStartedBy.HasValue)
                                          .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
-                //Dictionary<Guid?, int?> cteamusers = new Dictionary<Guid?, int?>();
-                //Response.Write(" Comparison Team Count : " + comparisonTeams.Count.ToString()+ "<br>");
+
                 if (comparisonTeams.Count == 2)
                 {   // we are all good
                     // need to get team type.
@@ -444,10 +471,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                             }
                         }
 
-                        
-                        //Response.Write(" Comparison Team   -- Consensus Started by : " + cteam.ConsensusStartedBy + "   Team Type : " + TeamType.TeamType + "<br>");
-
-
                     }
                     
 
@@ -469,11 +492,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             }
 
 
-
-            // NO Submission ID should exist for UserId / EvaluationID / SubmissionTypeId ( This will put the form in View Mode automatically. )
-
-
-            
 
         }
 

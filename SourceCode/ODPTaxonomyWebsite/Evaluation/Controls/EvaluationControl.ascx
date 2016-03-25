@@ -15,7 +15,8 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png">
 <script type="text/javascript">
-   // $scope.mdata.formmode = "<%= FormMode %>"
+    // $scope.mdata.formmode = "<%= FormMode %>"
+    window.CoderComments '<%= CommentsJSON %>'
 </script>
 
 <div class="container evaluation" id="tax-form" ng-controller="ODPFormCtrl">
