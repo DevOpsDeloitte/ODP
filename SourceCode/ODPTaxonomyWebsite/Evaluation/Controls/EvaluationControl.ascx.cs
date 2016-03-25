@@ -20,6 +20,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
     {
         public List<TeamUser> IQCoders;
         public List<TeamUser> ODPCoders;
+        public TeamUser IQConsensusUser;
+        public TeamUser ODPConsensusUser;
 
         public Comments()
         {
@@ -389,20 +391,64 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         }
 
+
+        protected void loadAllComments()
+        {
+            var allTeams = db.Evaluations
+                                         .Where(e => e.AbstractID == AbstractID && e.ConsensusStartedBy.HasValue)
+                                         .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
+
+            if (allTeams.Count == 2)
+            {   
+                foreach (var cteam in allTeams)
+                {
+
+                    var TeamType = db.Teams
+                                        .Join(db.TeamTypes, t => t.TeamTypeID, tt => tt.TeamTypeID,
+                                             (t, tt) => new { TeamID = t.TeamID, TeamType = tt.TeamType1, TeamStatusID = t.StatusID })
+                                             .Where(tx => tx.TeamID == cteam.TeamID).FirstOrDefault();
+
+                    //Please add TeamStatusID ==1
+                    if (TeamType.TeamType == "Coder")
+                    {
+                        var rec = db.Submissions.Where(sb => sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 2 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).FirstOrDefault();
+                        if (rec != null)
+                        {
+                            this.EvaluationComments.IQConsensusUser.UserId = cteam.ConsensusStartedBy.Value;
+                            this.EvaluationComments.IQConsensusUser.UserComment = rec.Comments;
+                        }
+                        var coderSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 1 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
+                        foreach(var coder in coderSubmissionRecs)
+                        {
+                            coder.
+                        }
+                    }
+                    if (TeamType.TeamType == "ODP Staff")
+                    {
+                        var rec = db.Submissions.Where(sb => sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 4 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).FirstOrDefault();
+                        if (rec != null)
+                        {
+                            this.EvaluationComments.ODPConsensusUser.UserId = cteam.ConsensusStartedBy.Value;
+                            this.EvaluationComments.ODPConsensusUser.UserComment = rec.Comments;
+                        }
+                        var odpSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 3 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
+                    }
+
+                }
+            }
+        }
+
+
+        // Comment updates for Consensus and Comparision.
         protected void setAndrenderPageVars()
         {
-
-            
-            
-            
-        
+ 
             startConsensus();
             startComparison();
             performSecurityChecks();
             loadAbstractInfo();
             showConsensus();
             showComparison();
-
 
             assignTeam();
 
