@@ -57,6 +57,10 @@
                         </LoggedInTemplate>
                     </asp:LoginView>
                 </div>
+
+                <div class="comments-display" id="comments-button">
+                    <a href="" id="showRight" class="button">Comments</a>
+                </div>
             </div>    
         </div>
 
@@ -103,7 +107,60 @@
                             <asp:HyperLink runat="server" ID="link_editProfile" NavigateUrl="~/AccountManagement/EditProfile.aspx" Text="Edit Profile"></asp:HyperLink>
                         </div>
         </nav>                
+       <%-- <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right comments" id="cbp-spmenu-s2" style="height: 253px;">
+    <div class="comments-close-group">
+      <a href="http://odptaxtraining1.iqsolutions.com/Evaluation/Evaluation.aspx#" id="showRightPushed" class="close-menu active">Close Comments</a>
+      <a href="" class="expand-comments">Expand</a>
+    </div>  
 
+   <ul class="tabs-menu">
+        <li class=""><a href="#IQS">IQS Coders</a></li>
+        <li class="current"><a href="#ODP">ODP Coders</a></li>
+    </ul>
+
+    <div class="tab">
+    <div id="IQS" class="tab-content current" style="display: none;">
+        <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>
+
+        <hr>
+        
+        <div class="comment disabled">
+        <h5>003</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+
+        <div class="comment disabled">
+        <h5>012</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+
+        <div class="comment disabled">
+        <h5>004</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+    </div>
+    <div id="ODP" class="tab-content" style="display: block;">
+        <textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>
+
+        <hr>
+        
+        <div class="comment disabled">
+        <h5>005</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+
+        <div class="comment disabled">
+        <h5>011</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+
+        <div class="comment disabled">
+        <h5>004</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+    </div>
+
+    </div></nav>--%>
         <div class="sixteen columns">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         </div>
@@ -148,7 +205,6 @@
                 classie.toggle(menuLeft, 'cbp-spmenu-open');
                 return false;
             };
-
         </script>
 
         <script type="text/javascript">
