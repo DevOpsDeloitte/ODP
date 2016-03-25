@@ -27,6 +27,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         {
             this.IQCoders = new List<TeamUser>();
             this.ODPCoders = new List<TeamUser>();
+            this.IQConsensusUser = new TeamUser();
+            this.ODPConsensusUser = new TeamUser();
         }
     }
 
@@ -420,7 +422,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                         var coderSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 1 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
                         foreach(var coder in coderSubmissionRecs)
                         {
-                            coder.
+                            this.EvaluationComments.IQCoders.Add(new TeamUser { UserName = (db.aspnet_Users.Where(u => u.UserId == coder.UserId).Select(u => u.UserName).First()), UserComment = coder.Comments });
+
                         }
                     }
                     if (TeamType.TeamType == "ODP Staff")
@@ -432,10 +435,17 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                             this.EvaluationComments.ODPConsensusUser.UserComment = rec.Comments;
                         }
                         var odpSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 3 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
+                        foreach (var coder in odpSubmissionRecs)
+                        {
+                            this.EvaluationComments.ODPCoders.Add(new TeamUser { UserName = (db.aspnet_Users.Where(u => u.UserId == coder.UserId).Select(u => u.UserName).First()), UserComment = coder.Comments });
+
+                        }
                     }
 
                 }
             }
+
+            this.CommentsJSON = JsonConvert.SerializeObject(EvaluationComments);
         }
 
 
@@ -533,8 +543,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 {
                     //Response.Write(" Comparison Team  :::: " + ct.Value.ComparisonSubmissionID + "   Team Type : " + ct.Value.TeamType + "<br>");
                 }
-                
 
+                this.loadAllComments();
             }
 
 
