@@ -417,6 +417,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                         if (rec != null)
                         {
                             this.EvaluationComments.IQConsensusUser.UserId = cteam.ConsensusStartedBy.Value;
+                            this.EvaluationComments.IQConsensusUser.UserName = (db.aspnet_Users.Where(u => u.UserId == cteam.ConsensusStartedBy.Value).Select(u => u.UserName).First());
                             this.EvaluationComments.IQConsensusUser.UserComment = rec.Comments;
                         }
                         var coderSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 1 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
@@ -432,6 +433,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                         if (rec != null)
                         {
                             this.EvaluationComments.ODPConsensusUser.UserId = cteam.ConsensusStartedBy.Value;
+                            this.EvaluationComments.ODPConsensusUser.UserName = (db.aspnet_Users.Where(u => u.UserId == cteam.ConsensusStartedBy.Value).Select(u => u.UserName).First());
                             this.EvaluationComments.ODPConsensusUser.UserComment = rec.Comments;
                         }
                         var odpSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 3 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
@@ -535,7 +537,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 else
                 {
                     //Comparison can't be done. No two consensuses exist.
-
                     //Response.Write(" NO COMPARISON -- Comparison Team Count : " + comparisonTeams.Count.ToString() + "<br>");
                 }
 
