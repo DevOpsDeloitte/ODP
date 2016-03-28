@@ -644,6 +644,13 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
     };
 
 
+    $scope.loadComments = function () {
+        $scope.mdata.CoderComments = window.CoderComments;
+    };
+
+    $scope.loadComments();
+
+
 
 
 

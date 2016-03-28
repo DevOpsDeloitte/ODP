@@ -21,60 +21,77 @@
 </script>
 
 <div class="container evaluation" id="tax-form" ng-controller="ODPFormCtrl">
-     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right comments" id="cbp-spmenu-s2" style="height: 253px;">
-    <div class="comments-close-group">
-      <a href="http://odptaxtraining1.iqsolutions.com/Evaluation/Evaluation.aspx#" id="showRightPushed" class="close-menu active">Close Comments</a>
-      <a href="" class="expand-comments">Expand</a>
-    </div>  
 
-   <ul class="tabs-menu">
-        <li class=""><a href="#IQS">IQS Coders</a></li>
-        <li class="current"><a href="#ODP">ODP Coders</a></li>
-    </ul>
-
-    <div class="tab">
-    <div id="IQS" class="tab-content current" style="display: none;">
-        <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>
-
-        <hr>
-        
-        <div class="comment disabled">
-        <h5>003</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right comments" id="cbp-spmenu-s2" style="height: 253px;">
+        <div class="comments-close-group">
+            <a href="http://odptaxtraining1.iqsolutions.com/Evaluation/Evaluation.aspx#" id="showRightPushed" class="close-menu active">Close Comments</a>
+            <a href="" class="expand-comments">Expand</a>
         </div>
 
-        <div class="comment disabled">
-        <h5>012</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+
+        <ul class="tabs-menu">
+            <li class=""><a href="#IQS">IQS Coders</a></li>
+            <li class="current"><a href="#ODP">ODP Coders</a></li>
+        </ul>
+
+        <div class="comment-box">
+            <div class="comment-entry" ng-show="mdata.displaymode=='Insert'">
+                <div class="commentsHeader">Comments</div>
+                <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
+            </div>
+
+            <div class="comment-entry" ng-show="mdata.displaymode=='View'">
+                <div class="commentsHeader">Comments</div>
+                <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
+            </div>
         </div>
 
-        <div class="comment disabled">
-        <h5>004</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
-        </div>
-    </div>
-    <div id="ODP" class="tab-content" style="display: block;">
-        <textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>
 
-        <hr>
-        
-        <div class="comment disabled">
-        <h5>005</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        <div class="tab">
+            <div id="IQS" class="tab-content current" style="display: none;">
+                <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
+
+                <hr>
+
+                <div class="comment disabled">
+                    <h5>003</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                </div>
+
+                <div class="comment disabled">
+                    <h5>012</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                </div>
+
+                <div class="comment disabled">
+                    <h5>004</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                </div>
+            </div>
+            <div id="ODP" class="tab-content" style="display: block;">
+                <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
+
+                <hr>
+
+                <div class="comment disabled">
+                    <h5>005</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                </div>
+
+                <div class="comment disabled">
+                    <h5>011</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                </div>
+
+                <div class="comment disabled">
+                    <h5>004</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                </div>
+            </div>
+
         </div>
 
-        <div class="comment disabled">
-        <h5>011</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
-        </div>
-
-        <div class="comment disabled">
-        <h5>004</h5>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
-        </div>
-    </div>
-
-    </div></nav>
+    </nav>
     <div class="sixteen columns" ng-cloak>
     <h2 ng-show="mdata.formmode.indexOf('Evaluation') != -1">Individual Coding</h2>
     <h2 ng-show="mdata.formmode.indexOf('Consensus') != -1">Consensus Coding</h2>
@@ -304,14 +321,14 @@
 
         </div>
 
-    <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
+    <%--<div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
         <div class="commentsHeader">Comments</div>
         <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
     </div>
      <div class="sixteen columns" ng-show="mdata.displaymode=='View'"> 
          <div class="commentsHeader">Comments</div>
          <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
-     </div>
+     </div>--%>
 
     </div>
 </div>

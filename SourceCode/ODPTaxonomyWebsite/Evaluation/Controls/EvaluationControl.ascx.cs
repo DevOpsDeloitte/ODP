@@ -396,6 +396,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         protected void loadAllComments()
         {
+            this.EvaluationComments = new Comments();
+
             var allTeams = db.Evaluations
                                          .Where(e => e.AbstractID == AbstractID && e.ConsensusStartedBy.HasValue)
                                          .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
@@ -487,6 +489,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 }
 
                 this.CommentsJSON = JsonConvert.SerializeObject(EvaluationComments);
+                // In view mode all the comments need to be read.
+                if(this.DisplayMode == "View")
+                {
+                    this.loadAllComments();
+                }
 
 
             }
