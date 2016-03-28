@@ -63,6 +63,17 @@
 
         };
 
+        vm.runAbsSummaryReport = function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            report.runAbstractSummaryReport()
+                   .then(function (response) {
+
+                   }, vm.onerror);
+
+        };
+
         vm.checkForm = function () {
             //$log.info("check form ::");
             var retVal;

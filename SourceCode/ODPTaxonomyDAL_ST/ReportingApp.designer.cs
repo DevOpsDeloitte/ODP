@@ -76,6 +76,13 @@ namespace ODPTaxonomyDAL_ST
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType);
 			return ((ISingleResult<Report_KappaAvg_ByQCWeeksResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_AbstractSummary")]
+		public ISingleResult<Report_AbstractSummaryResult> Report_AbstractSummary()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Report_AbstractSummaryResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_QC_Week")]
@@ -432,6 +439,194 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._F != value))
 				{
 					this._F = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Report_AbstractSummaryResult
+	{
+		
+		private string _FY;
+		
+		private string _Prevention_vs__5_;
+		
+		private System.Nullable<int> _Total_abtracts_loaded_into_PACT;
+		
+		private System.Nullable<int> _Total_number_abstracts_coded_by_IQ_coders__1N_;
+		
+		private string ___abstracts_coded_by_IQ_coders__1N_;
+		
+		private System.Nullable<int> _Total_number_abstracts_coded_by_ODP__2N_;
+		
+		private string ___of_total_abstracts_coded_by_ODP__2N_;
+		
+		private string ___of_IQ_coded_abtracts_coded_by_ODP;
+		
+		private System.Nullable<int> _Total_number_of_uncoded_abstracts_remaning;
+		
+		private string ___of_abstracts_that_are_uncoded;
+		
+		public Report_AbstractSummaryResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
+		public string FY
+		{
+			get
+			{
+				return this._FY;
+			}
+			set
+			{
+				if ((this._FY != value))
+				{
+					this._FY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Prevention vs. 5%]", Storage="_Prevention_vs__5_", DbType="NVarChar(50)")]
+		public string Prevention_vs__5_
+		{
+			get
+			{
+				return this._Prevention_vs__5_;
+			}
+			set
+			{
+				if ((this._Prevention_vs__5_ != value))
+				{
+					this._Prevention_vs__5_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total abtracts loaded into PACT]", Storage="_Total_abtracts_loaded_into_PACT", DbType="Int")]
+		public System.Nullable<int> Total_abtracts_loaded_into_PACT
+		{
+			get
+			{
+				return this._Total_abtracts_loaded_into_PACT;
+			}
+			set
+			{
+				if ((this._Total_abtracts_loaded_into_PACT != value))
+				{
+					this._Total_abtracts_loaded_into_PACT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number abstracts coded by IQ coders (1N)]", Storage="_Total_number_abstracts_coded_by_IQ_coders__1N_", DbType="Int")]
+		public System.Nullable<int> Total_number_abstracts_coded_by_IQ_coders__1N_
+		{
+			get
+			{
+				return this._Total_number_abstracts_coded_by_IQ_coders__1N_;
+			}
+			set
+			{
+				if ((this._Total_number_abstracts_coded_by_IQ_coders__1N_ != value))
+				{
+					this._Total_number_abstracts_coded_by_IQ_coders__1N_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[% abstracts coded by IQ coders (1N)]", Storage="___abstracts_coded_by_IQ_coders__1N_", DbType="NVarChar(20)")]
+		public string @__abstracts_coded_by_IQ_coders__1N_
+		{
+			get
+			{
+				return this.___abstracts_coded_by_IQ_coders__1N_;
+			}
+			set
+			{
+				if ((this.___abstracts_coded_by_IQ_coders__1N_ != value))
+				{
+					this.___abstracts_coded_by_IQ_coders__1N_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number abstracts coded by ODP (2N)]", Storage="_Total_number_abstracts_coded_by_ODP__2N_", DbType="Int")]
+		public System.Nullable<int> Total_number_abstracts_coded_by_ODP__2N_
+		{
+			get
+			{
+				return this._Total_number_abstracts_coded_by_ODP__2N_;
+			}
+			set
+			{
+				if ((this._Total_number_abstracts_coded_by_ODP__2N_ != value))
+				{
+					this._Total_number_abstracts_coded_by_ODP__2N_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[% of total abstracts coded by ODP (2N)]", Storage="___of_total_abstracts_coded_by_ODP__2N_", DbType="NVarChar(20)")]
+		public string @__of_total_abstracts_coded_by_ODP__2N_
+		{
+			get
+			{
+				return this.___of_total_abstracts_coded_by_ODP__2N_;
+			}
+			set
+			{
+				if ((this.___of_total_abstracts_coded_by_ODP__2N_ != value))
+				{
+					this.___of_total_abstracts_coded_by_ODP__2N_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[% of IQ coded abtracts coded by ODP]", Storage="___of_IQ_coded_abtracts_coded_by_ODP", DbType="NVarChar(20)")]
+		public string @__of_IQ_coded_abtracts_coded_by_ODP
+		{
+			get
+			{
+				return this.___of_IQ_coded_abtracts_coded_by_ODP;
+			}
+			set
+			{
+				if ((this.___of_IQ_coded_abtracts_coded_by_ODP != value))
+				{
+					this.___of_IQ_coded_abtracts_coded_by_ODP = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number of uncoded abstracts remaning]", Storage="_Total_number_of_uncoded_abstracts_remaning", DbType="Int")]
+		public System.Nullable<int> Total_number_of_uncoded_abstracts_remaning
+		{
+			get
+			{
+				return this._Total_number_of_uncoded_abstracts_remaning;
+			}
+			set
+			{
+				if ((this._Total_number_of_uncoded_abstracts_remaning != value))
+				{
+					this._Total_number_of_uncoded_abstracts_remaning = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[% of abstracts that are uncoded]", Storage="___of_abstracts_that_are_uncoded", DbType="NVarChar(20)")]
+		public string @__of_abstracts_that_are_uncoded
+		{
+			get
+			{
+				return this.___of_abstracts_that_are_uncoded;
+			}
+			set
+			{
+				if ((this.___of_abstracts_that_are_uncoded != value))
+				{
+					this.___of_abstracts_that_are_uncoded = value;
 				}
 			}
 		}
