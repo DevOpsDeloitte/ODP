@@ -67,6 +67,28 @@
                   //      $log.error(msg, code);
                   //  });
                   return deferred.promise;
+              },
+
+              runAbstractSummaryReport: function () {
+                  var deferred = $q.defer();
+                  var fileName = "test.csv";
+                  //http://stackoverflow.com/questions/20904151/download-text-csv-content-as-files-from-server-in-angular
+                
+                  var anchor = angular.element('<a/>');
+                  anchor.css({ display: 'block' }); // Make sure it's not visible
+
+                  angular.element(document.body).append(anchor); // Attach to document for FireFox
+
+                  anchor.attr({
+                      href: root_url + '/ReportingApp/handlers/ReportService.ashx?type=' + 'avgreport'
+                      //target: '_blank'
+
+                  })[0].click();
+                  deferred.resolve({
+                      success: true
+                  });
+                  
+                  return deferred.promise;
               }
 
 
