@@ -2,7 +2,7 @@
   <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Integrated Security=True" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString4" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Report_QC_Week" Member="Report_QC_Weeks">
     <Type Name="Report_QC_Week">
-      <Column Name="QC_ID" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="QC_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="QC_week" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Dates_IQ_Coded" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Rpt_Year" Type="System.Double" DbType="Float" CanBeNull="true" />

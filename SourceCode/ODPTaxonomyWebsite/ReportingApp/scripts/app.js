@@ -3,29 +3,31 @@
 
     angular
       .module('reportingapp', [
-        'ngRoute'
+         'ui.router'
       ])
       .config(configFunction)
       .constant('ROOT_URL', '');
 
       //.run(runFunction);
 
-    configFunction.$inject = ['$routeProvider'];
+    configFunction.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function configFunction($routeProvider) {
-        $routeProvider.otherwise({
-            redirectTo: '/report'
-        });
+    function configFunction($stateProvider, $urlRouterProvider) {
 
-        $routeProvider.when('/report', {
+        $urlRouterProvider.otherwise('/kappareport');
+        //console.log(" routes setup ::");
+
+        $stateProvider.state('kappareport', {
+            url: '/kappareport',
             templateUrl: 'scripts/templates/report.html',
             controller: 'ReportController',
             controllerAs: 'vm'
         });
 
-        $routeProvider.when('/report2', {
-            templateUrl: 'scripts/templates/report.html',
-            controller: 'ReportController',
+        $stateProvider.state('summaryreport', {
+            url : '/summaryreport',
+            templateUrl: 'scripts/templates/summary.html',
+            controller: 'AbstractSummaryReportController',
             controllerAs: 'vm'
         });
     }

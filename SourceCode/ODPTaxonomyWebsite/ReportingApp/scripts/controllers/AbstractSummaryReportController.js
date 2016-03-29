@@ -3,11 +3,11 @@
 
     angular
       .module('reportingapp')
-      .controller('ReportController', ReportController);
+      .controller('AbstractSummaryReportController', AbstractSummaryReportController);
 
-    ReportController.$inject = ['$http', '$log', '$q', '$window','ROOT_URL', 'report', '$scope', '$timeout'];
+    AbstractSummaryReportController.$inject = ['$http', '$log', '$q', '$window', 'ROOT_URL', 'report', '$scope', '$timeout'];
 
-    function ReportController($http, $log, $q, $window,  ROOT_URL, report, $scope, $timeout) {
+    function AbstractSummaryReportController($http, $log, $q, $window, ROOT_URL, report, $scope, $timeout) {
         var vm = this;
 
         vm.defaultdateid = 1;
