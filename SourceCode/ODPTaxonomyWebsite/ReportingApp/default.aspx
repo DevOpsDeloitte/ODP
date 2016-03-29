@@ -20,6 +20,7 @@
 <script type="text/javascript" src="../scripts/alertify.js"></script>
 <script type="text/javascript" src="../scripts/angular/angular-latest.min.js"></script>
 <script src="https://code.angularjs.org/1.4.4/angular-route.js"></script>
+<script type="text/javascript" src="scripts/angular-ui-router.min.js"></script>
 <script type="text/javascript" src="scripts/chosen.jquery.min.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
 <script type="text/javascript" src="scripts/directives/directives.js"></script>

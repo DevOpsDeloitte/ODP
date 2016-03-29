@@ -3,14 +3,14 @@
 
     angular
       .module('reportingapp', [
-        'ngRoute'
+        'ngRoute', 'ui-router'
       ])
       .config(configFunction)
       .constant('ROOT_URL', '');
 
       //.run(runFunction);
 
-    configFunction.$inject = ['$routeProvider'];
+    configFunction.$inject = ['$routeProvider', ];
 
     function configFunction($routeProvider) {
         $routeProvider.otherwise({

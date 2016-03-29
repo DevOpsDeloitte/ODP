@@ -125,12 +125,14 @@
       <DependentUpon>report.css</DependentUpon>
     </Content>
     <Content Include="ReportingApp\default.aspx" />
+    <Content Include="ReportingApp\scripts\angular-ui-router.min.js" />
     <Content Include="ReportingApp\scripts\app.js" />
     <Content Include="ReportingApp\scripts\chosen.jquery.js" />
     <Content Include="ReportingApp\scripts\chosen.jquery.min.js" />
     <Content Include="ReportingApp\scripts\controllers\ReportController.js" />
     <Content Include="ReportingApp\scripts\directives\directives.js" />
     <Content Include="ReportingApp\scripts\services\services.js" />
+    <Content Include="ReportingApp\scripts\templates\reportsummary.html" />
     <Content Include="ReportingApp\scripts\templates\report.html" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
