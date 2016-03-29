@@ -33,8 +33,8 @@ body legend {
   color: #000;
   font-size: 18px; }
 
-body rowsp {
-  background-color: #fff; }
+body .rowsp {
+  margin: 56px 0 0 0; }
 
 body bs-dropdown ul {
   height: 300px;
@@ -91,12 +91,10 @@ body .report-spmenu li:active {
   color: #fff; }
 
 body .report-spmenu .tabs-menu li {
-  margin: 0; }
-
-body .report-spmenu .tabs-menu li {
   float: left;
   width: 50%;
   margin: 0;
   padding: .5em 0;
-  text-align: center; }
+  text-align: center;
+  cursor: pointer; }
 

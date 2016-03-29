@@ -10,12 +10,6 @@
     function ReportController($http, $log, $q, $window,  ROOT_URL, report, $scope, $timeout) {
         var vm = this;
 
-        vm.tabs = [
-
-            { "type": "kappa", title: "Kappa Report", panestate: "report" },
-            { "type": "summary", title: "Abstract Summary Report", panestate: "report2" }
-        ];
-
         vm.defaultdateid = 1;
 
         vm.errormessage = {};

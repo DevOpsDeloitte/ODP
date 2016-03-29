@@ -14,20 +14,20 @@
 
     function configFunction($stateProvider, $urlRouterProvider) {
 
-        $urlRouterProvider.otherwise('/report');
-        console.log(" routes setup ::");
+        $urlRouterProvider.otherwise('/kappareport');
+        //console.log(" routes setup ::");
 
-        $stateProvider.state('report', {
-            url: '/report',
+        $stateProvider.state('kappareport', {
+            url: '/kappareport',
             templateUrl: 'scripts/templates/report.html',
             controller: 'ReportController',
             controllerAs: 'vm'
         });
 
-        $stateProvider.state('report2', {
-            url : '/report2',
+        $stateProvider.state('summaryreport', {
+            url : '/summaryreport',
             templateUrl: 'scripts/templates/summary.html',
-            controller: 'ReportController',
+            controller: 'AbstractSummaryReportController',
             controllerAs: 'vm'
         });
     }

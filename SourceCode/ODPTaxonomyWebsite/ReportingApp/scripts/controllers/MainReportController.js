@@ -12,8 +12,8 @@
 
         vm.tabs = [
 
-            { "type": "kappa", title: "Kappa Report", panestate: "report" },
-            { "type": "summary", title: "Abstract Summary Report", panestate: "report2" }
+            { "type": "kappa", title: "Kappa Report", panestate: "kappareport" },
+            { "type": "summary", title: "Abstract Summary Report", panestate: "summaryreport" }
         ];
 
         vm.Go = function (state) {
