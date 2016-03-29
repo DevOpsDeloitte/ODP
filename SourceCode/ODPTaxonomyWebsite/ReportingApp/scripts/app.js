@@ -3,28 +3,30 @@
 
     angular
       .module('reportingapp', [
-        'ngRoute', 'ui-router'
+         'ui.router'
       ])
       .config(configFunction)
       .constant('ROOT_URL', '');
 
       //.run(runFunction);
 
-    configFunction.$inject = ['$routeProvider', ];
+    configFunction.$inject = ['$stateProvider', '$urlRouterProvider'];
 
-    function configFunction($routeProvider) {
-        $routeProvider.otherwise({
-            redirectTo: '/report'
-        });
+    function configFunction($stateProvider, $urlRouterProvider) {
 
-        $routeProvider.when('/report', {
+        $urlRouterProvider.otherwise('/report');
+        console.log(" routes setup ::");
+
+        $stateProvider.state('report', {
+            url: '/report',
             templateUrl: 'scripts/templates/report.html',
             controller: 'ReportController',
             controllerAs: 'vm'
         });
 
-        $routeProvider.when('/report2', {
-            templateUrl: 'scripts/templates/report.html',
+        $stateProvider.state('report2', {
+            url : '/report2',
+            templateUrl: 'scripts/templates/summary.html',
             controller: 'ReportController',
             controllerAs: 'vm'
         });
