@@ -34,7 +34,7 @@ body legend {
   font-size: 18px; }
 
 body .rowsp {
-  margin: 56px 0 0 0; }
+  margin: 46px 0 0 0; }
 
 body bs-dropdown ul {
   height: 300px;
@@ -47,7 +47,7 @@ body .report-spmenu {
   background: #FDFDFD;
   -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.3);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
-  margin: 20px 0 0 0;
+  margin: 20px 0 0 10px;
   display: table;
   width: 400px; }
 
