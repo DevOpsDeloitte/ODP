@@ -89,7 +89,7 @@ namespace ODPTaxonomyDAL_ST
 	public partial class Report_QC_Week
 	{
 		
-		private System.Nullable<double> _QC_ID;
+		private System.Nullable<int> _QC_ID;
 		
 		private string _QC_week;
 		
@@ -103,8 +103,8 @@ namespace ODPTaxonomyDAL_ST
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_ID", DbType="Float")]
-		public System.Nullable<double> QC_ID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_ID", DbType="Int")]
+		public System.Nullable<int> QC_ID
 		{
 			get
 			{
