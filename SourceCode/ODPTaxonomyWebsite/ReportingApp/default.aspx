@@ -21,9 +21,11 @@
                         <h2>Kappa Reporting</h2>
                     </div>
 
-                    <ul>
-                        <li ng-repeat="t in vm.tabs" ng-click="vm.Go(t.panestate)" ng-class="{ 'current' : vm.Active(t.panestate) }">{{t.title}}</li>
-                    </ul>
+                    <div class="report-spmenu">
+                        <ul class="tabs-menu">
+                            <li ng-repeat="t in vm.tabs" ng-click="vm.Go(t.panestate)" ng-class="{ 'current' : vm.Active(t.panestate) }">{{t.title}}</li>
+                        </ul>
+                    </div>
 
                     <!--Main content that changes based on route-->
                     <div ui-view class="container"></div>
