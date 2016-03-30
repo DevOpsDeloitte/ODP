@@ -68,6 +68,10 @@ namespace ODPTaxonomyUtility_TT
                 }
                 dt.Rows.Add(row);
             }
+            foreach (DataColumn col in dt.Columns)
+            {
+                col.ColumnName = col.ColumnName.Replace("_", " ").Replace("u0025","%");
+            }
             return dt;
         }
         private static Type GetNullableType(Type t)
