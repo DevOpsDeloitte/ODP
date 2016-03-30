@@ -402,7 +402,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                                          .Where(e => e.AbstractID == AbstractID && e.ConsensusStartedBy.HasValue)
                                          .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
 
-            if (allTeams.Count == 2)
+            if (allTeams.Count == allTeams.Count)
             {   
                 foreach (var cteam in allTeams)
                 {
@@ -465,6 +465,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             showComparison();
 
             assignTeam();
+            this.CommentsJSON = "{}";
 
 
             if (FormMode.IndexOf("Consensus") != -1)

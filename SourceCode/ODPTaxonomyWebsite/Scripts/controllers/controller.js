@@ -648,6 +648,21 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         $scope.mdata.CoderComments = window.CoderComments;
     };
 
+    $scope.showIQSCoders = function () {
+        //angular.element(document.getElementById('IQS')).scope().showIQSCoders()
+        return $scope.mdata.formmode == "Coder Consensus";
+    };
+
+    $scope.showODPCoders = function () {
+        return $scope.mdata.formmode != "Coder Consensus";
+    };
+
+    $scope.showComments = function () {
+        //angular.element(document.getElementById('IQS')).scope().showComments()
+        //return ($scope.mdata.displaymode != 'Insert') && ($scope.mdata.formmode.indexOf("Evaluation") == -1);
+        return ($scope.mdata.formmode.indexOf("Consensus") != -1);
+    };
+
     $scope.loadComments();
 
 

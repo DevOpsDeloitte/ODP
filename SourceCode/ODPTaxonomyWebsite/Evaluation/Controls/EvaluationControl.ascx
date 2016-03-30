@@ -29,9 +29,9 @@
         </div>
 
 
-        <ul class="tabs-menu">
-            <li class=""><a href="#IQS">IQS Coders</a></li>
-            <li class="current"><a href="#ODP">ODP Coders</a></li>
+        <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
+            <li class="" ><a href="#IQS">IQS Coders</a></li>
+            <li class="current" ><a href="#ODP">ODP Coders</a></li>
         </ul>
 
         <div class="comment-box">
@@ -47,45 +47,45 @@
         </div>
 
 
-        <div class="tab">
-            <div id="IQS" class="tab-content current" style="display: none;">
+        <div class="tab" ng-show="showComments()">
+            <div id="IQS" class="tab-content" style="display: block;"  ng-show="showIQSCoders()">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
 
                 <hr>
 
                 <div class="comment disabled">
-                    <h5>003</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                    <h5>{{mdata.CoderComments.IQCoders[0].UserName}}</h5>
+                    <p>{{mdata.CoderComments.IQCoders[0].UserComment}}</p>
                 </div>
 
                 <div class="comment disabled">
-                    <h5>012</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                    <h5>{{mdata.CoderComments.IQCoders[1].UserName}}</h5>
+                    <p>{{mdata.CoderComments.IQCoders[1].UserComment}}</p>
                 </div>
 
                 <div class="comment disabled">
-                    <h5>004</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                    <h5>{{mdata.CoderComments.IQCoders[2].UserName}}</h5>
+                    <p>{{mdata.CoderComments.IQCoders[2].UserComment}}</p>
                 </div>
             </div>
-            <div id="ODP" class="tab-content" style="display: block;">
+            <div id="ODP" class="tab-content" style="display: block;" ng-show="showODPCoders()">
                 <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
 
                 <hr>
 
                 <div class="comment disabled">
-                    <h5>005</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                    <h5>{{mdata.CoderComments.ODPCoders[0].UserName}}</h5>
+                    <p>{{mdata.CoderComments.ODPCoders[0].UserComment}}</p>
                 </div>
 
                 <div class="comment disabled">
-                    <h5>011</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                    <h5>{{mdata.CoderComments.ODPCoders[1].UserName}}</h5>
+                    <p>{{mdata.CoderComments.ODPCoders[1].UserComment}}</p>
                 </div>
 
                 <div class="comment disabled">
-                    <h5>004</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+                    <h5>{{mdata.CoderComments.ODPCoders[2].UserName}}</h5>
+                    <p>{{mdata.CoderComments.ODPCoders[2].UserComment}}</p>
                 </div>
             </div>
 
