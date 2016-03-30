@@ -53,6 +53,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="ReportingApp.cs">
+      <DependentUpon>ReportingApp.dbml</DependentUpon>
+    </Compile>
     <Compile Include="ReportingApp.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
