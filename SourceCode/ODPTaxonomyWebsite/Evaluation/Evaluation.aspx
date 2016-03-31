@@ -9,7 +9,7 @@
     <uc1:EvaluationControl runat="server" ID="EvaluationControl" />
 
 
-           <script type="text/javascript">
+<%--           <script type="text/javascript">
                var menuRight = document.getElementById('cbp-spmenu-s2'),
                 body = document.body;
                 
@@ -56,7 +56,7 @@
                     });
 
                 });                
-              </script>
+              </script>--%>
 
 
 </asp:Content>

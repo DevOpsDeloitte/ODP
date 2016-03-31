@@ -50,7 +50,7 @@
         <div class="tab" ng-show="showComments()">
             <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders()">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
-                <div>
+                <div ng-show="mdata.displaymode=='View'">
                 <strong>IQ Consensus</strong>
                 <hr />
                 <div class="comment disabled">
@@ -377,6 +377,7 @@
 <script src="../scripts/controllers/controller.js"></script>
 <script src="../scripts/directives/directive.js"></script>
 <script src="../scripts/app.js"></script>
+<script src="../scripts/comments.js"></script>
 <!-- <script src="js/controllers/controller.js"></script> -->
 
 
