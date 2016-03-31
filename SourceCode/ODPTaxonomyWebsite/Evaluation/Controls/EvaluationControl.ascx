@@ -30,8 +30,8 @@
 
 
         <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
-            <li class="" ><a href="#IQS">IQS Coders</a></li>
-            <li class="current" ><a href="#ODP">ODP Coders</a></li>
+            <li class="" ng-class="{ 'current' : showCoderDefault() }" ><a href="#IQS">IQS Coders</a></li>
+            <li class="" ng-class="{ 'current' : showODPDefault() }" ><a href="#ODP">ODP Coders</a></li>
         </ul>
 
         <div class="comment-box">
@@ -48,9 +48,19 @@
 
 
         <div class="tab" ng-show="showComments()">
-            <div id="IQS" class="tab-content" style="display: block;"  ng-show="showIQSCoders()">
+            <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders()">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
+                <div>
+                <strong>IQ Consensus</strong>
+                <hr />
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.IQConsensusUser.UserName}}</h5>
+                    <p>{{mdata.CoderComments.IQConsensusUser.UserComment}}</p>
+                </div>
+                </div>
 
+
+                <strong>IQ Coders</strong>
                 <hr>
 
                 <div class="comment disabled">
@@ -68,10 +78,21 @@
                     <p>{{mdata.CoderComments.IQCoders[2].UserComment}}</p>
                 </div>
             </div>
-            <div id="ODP" class="tab-content" style="display: block;" ng-show="showODPCoders()">
+            <div id="ODP" class="tab-content" style=""  ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
                 <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
+                <div>
+                <strong>ODP Consensus</strong>
+                <hr />
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.ODPConsensusUser.UserName}}</h5>
+                    <p>{{mdata.CoderComments.ODPConsensusUser.UserComment}}</p>
+                </div>
+                </div>
 
+
+                <strong>ODP Coders</strong>
                 <hr>
+
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPCoders[0].UserName}}</h5>

@@ -42,8 +42,12 @@
                         $(this).parent().addClass("current");
                         $(this).parent().siblings().removeClass("current");
                         var tab = $(this).attr("href");
-                        $(".tab-content").not(tab).css("display", "none");
-                        $(tab).fadeIn();
+
+                        $(".tab-content").not(tab).removeClass("current");
+                        $(tab).addClass("current");
+                        //$(".tab-content").not(tab).css("display", "none");
+                        //$(tab).fadeIn();
+
                     });
 
                     $(".expand-comments").click(function(event) {

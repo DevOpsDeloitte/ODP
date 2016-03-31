@@ -663,6 +663,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         return ($scope.mdata.formmode.indexOf("Consensus") != -1 || $scope.mdata.formmode.indexOf("Comparison") != -1);
     };
 
+    $scope.showODPDefault = function () {
+        return $scope.mdata.formmode.indexOf("ODP") != -1
+    };
+
+    $scope.showCoderDefault = function () {
+        return $scope.mdata.formmode.indexOf("Coder") != -1
+    };
+
     $scope.loadComments();
 
 
