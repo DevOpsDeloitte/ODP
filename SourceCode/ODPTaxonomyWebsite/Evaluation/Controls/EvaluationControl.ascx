@@ -50,7 +50,7 @@
         <div class="tab" ng-show="showComments()">
             <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders()">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
-                <div ng-show="mdata.displaymode=='View'">
+                <div ng-show=" (mdata.displaymode=='View' && mdata.formmode != 'Coder Consensus')  || mdata.formmode != 'Coder Consensus'">
                 <strong>IQ Consensus</strong>
                 <hr />
                 <div class="comment disabled">
