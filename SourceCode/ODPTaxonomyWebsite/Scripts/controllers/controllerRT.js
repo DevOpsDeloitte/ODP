@@ -128,24 +128,29 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
     $scope.showIQSCoders = function () {
         //angular.element(document.getElementById('IQS')).scope().showIQSCoders()
+        if ($scope.mdata.formmode === undefined) return false;
         return $scope.mdata.formmode == "Coder Consensus" || $scope.mdata.formmode.indexOf("Comparison") != -1;
     };
 
     $scope.showODPCoders = function () {
+        if ($scope.mdata.formmode === undefined) return false;
         return $scope.mdata.formmode != "Coder Consensus" || $scope.mdata.formmode.indexOf("Comparison") != -1;
     };
 
     $scope.showComments = function () {
         //angular.element(document.getElementById('IQS')).scope().showComments()
         //return ($scope.mdata.displaymode != 'Insert') && ($scope.mdata.formmode.indexOf("Evaluation") == -1);
+        if ($scope.mdata.formmode === undefined) return false;
         return ($scope.mdata.formmode.indexOf("Consensus") != -1 || $scope.mdata.formmode.indexOf("Comparison") != -1);
     };
 
     $scope.showODPDefault = function () {
+        if ($scope.mdata.formmode === undefined) return false;
         return $scope.mdata.formmode.indexOf("ODP") != -1
     };
 
     $scope.showCoderDefault = function () {
+        if ($scope.mdata.formmode === undefined) return false;
         return $scope.mdata.formmode.indexOf("Coder") != -1
     };
 

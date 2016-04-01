@@ -18,6 +18,7 @@
 </script>
 
 <div class="container" id="tax-form" ng-controller="ODPFormCtrlRT">
+    <div>
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right comments" id="cbp-spmenu-s2" style="height: 253px;">
         <div class="comments-close-group">
             <a href="http://odptaxtraining1.iqsolutions.com/Evaluation/Evaluation.aspx#" id="showRightPushed" class="close-menu active">Close Comments</a>
@@ -45,7 +46,7 @@
         <div class="tab" ng-show="showComments()">
             <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }" ng-show="showIQSCoders()">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
-                <div>
+                <div ng-show="mdata.formmode == 'ODP Staff Member Consensus' || mdata.formmode == 'ODP Staff Member Comparison'">
                     <strong>IQ Consensus</strong>
                     <hr />
                     <div class="comment disabled">
@@ -108,7 +109,7 @@
         </div>
 
     </nav>
-
+    </div>
 
     <div class="sixteen columns evalheader">
         <span class="subtitle">CHECK ALL THAT APPLY IN EACH COLUMN (TOPICS ARE NOT MUTUALLY EXCLUSIVE)</span>
