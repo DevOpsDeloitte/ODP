@@ -397,7 +397,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void loadAllComments()
         {
             this.EvaluationComments = new Comments();
-
+            var aspUsers = db.aspnet_Users.ToList();
             var allTeams = db.Evaluations
                                          .Where(e => e.AbstractID == AbstractID && e.ConsensusStartedBy.HasValue)
                                          .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
@@ -419,13 +419,13 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                         if (rec != null)
                         {
                             this.EvaluationComments.IQConsensusUser.UserId = cteam.ConsensusStartedBy.Value;
-                            this.EvaluationComments.IQConsensusUser.UserName = (db.aspnet_Users.Where(u => u.UserId == cteam.ConsensusStartedBy.Value).Select(u => u.UserName).First());
+                            this.EvaluationComments.IQConsensusUser.UserName = (aspUsers.Where(u => u.UserId == cteam.ConsensusStartedBy.Value).Select(u => u.UserName).First());
                             this.EvaluationComments.IQConsensusUser.UserComment = rec.Comments;
                         }
                         var coderSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 1 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
                         foreach(var coder in coderSubmissionRecs)
                         {
-                            this.EvaluationComments.IQCoders.Add(new TeamUser { UserName = (db.aspnet_Users.Where(u => u.UserId == coder.UserId).Select(u => u.UserName).First()), UserComment = coder.Comments });
+                            this.EvaluationComments.IQCoders.Add(new TeamUser { UserName = (aspUsers.Where(u => u.UserId == coder.UserId).Select(u => u.UserName).First()), UserComment = coder.Comments });
 
                         }
                     }
@@ -435,13 +435,13 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                         if (rec != null)
                         {
                             this.EvaluationComments.ODPConsensusUser.UserId = cteam.ConsensusStartedBy.Value;
-                            this.EvaluationComments.ODPConsensusUser.UserName = (db.aspnet_Users.Where(u => u.UserId == cteam.ConsensusStartedBy.Value).Select(u => u.UserName).First());
+                            this.EvaluationComments.ODPConsensusUser.UserName = (aspUsers.Where(u => u.UserId == cteam.ConsensusStartedBy.Value).Select(u => u.UserName).First());
                             this.EvaluationComments.ODPConsensusUser.UserComment = rec.Comments;
                         }
                         var odpSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 3 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
                         foreach (var coder in odpSubmissionRecs)
                         {
-                            this.EvaluationComments.ODPCoders.Add(new TeamUser { UserName = (db.aspnet_Users.Where(u => u.UserId == coder.UserId).Select(u => u.UserName).First()), UserComment = coder.Comments });
+                            this.EvaluationComments.ODPCoders.Add(new TeamUser { UserName = (aspUsers.Where(u => u.UserId == coder.UserId).Select(u => u.UserName).First()), UserComment = coder.Comments });
 
                         }
                     }

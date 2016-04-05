@@ -32,6 +32,7 @@ $(document).ready(function () {
 
         $(".tab-content").not(tab).removeClass("current");
         $(tab).addClass("current");
+
         //$(".tab-content").not(tab).css("display", "none");
         //$(tab).fadeIn();
 
