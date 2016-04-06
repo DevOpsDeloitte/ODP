@@ -50,14 +50,24 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         //var syncObject = sync.$asObject();
         //syncObject.$bindTo($scope, "mdata");
 
-        $scope.$watch("mdata", function () {
+        $scope.$watch("mdata", function (newValue, oldValue) {
+            if (newValue.comments !== oldValue.comments) {
+                //trigger open
+                var menuElement = document.querySelector('#cbp-spmenu-s2');
+                if (!angular.element(menuElement).hasClass('cbp-spmenu-open')) {
+                    angular.element(menuElement).addClass('cbp-spmenu-open');
+                    console.log(" mdata model changed : " + newValue.comments + " old value :: " + oldValue.comments);
+                }
 
-            //console.log(" mdata model changed : " + $scope.mdata.firebaseOn);
-            if (!$scope.mdata.firebaseOn) {
+            }
+            
+            //if (!$scope.mdata.comments) {
+                //console.log(" mdata model changed : " + newValue.comments + " old value :: " + oldValue.comments);
                 // console.log(" time to redirect -- watch over. ");
                 //window.location = "Evaluation.aspx";
-            }
-        });
+            // }
+
+        }, true);
 
 
         $scope.detectTeam();

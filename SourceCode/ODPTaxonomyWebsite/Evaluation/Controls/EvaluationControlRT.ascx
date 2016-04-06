@@ -352,7 +352,7 @@
     <script src="../scripts/controllers/controllerRT.js"></script>
     <script src="../scripts/directives/directiveRT.js"></script>
     <script src="../scripts/app.js"></script>
-    <script src="../scripts/comments.js"></script>
+    <script src="../scripts/commentsRT.js"></script>
     <!-- <script src="js/controllers/controller.js"></script> -->
 
 

@@ -40,6 +40,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         $scope.mdata.teamid = $("input#teamid").val();
 
         $scope.showWatchConsensusButton = false;
+        // foe new comments feature.
+        //$scope.mdata.comments = "";
 
 
         //$scope.$apply();

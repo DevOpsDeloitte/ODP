@@ -4,7 +4,6 @@
 showRight.onclick = function () {
     classie.toggle(this, 'active');
     classie.toggle(menuRight, 'cbp-spmenu-open');
-    //changeSyncClass();
     return false;
 };
 
@@ -12,23 +11,12 @@ showRightPushed.onclick = function () {
     classie.toggle(this, 'active');
     classie.toggle(menuRight, 'cbp-spmenu-open');
     classie.remove(menuRight, 'expand');
-    //changeSyncClass();
     return false;
 };
 
 $(window).on('load resize', function () {
     $('.cbp-spmenu').height($(this).height());
 });
-
-function changeSyncClass() {
-    var appElement = document.querySelector('#tax-form');
-    var $scope = angular.element(appElement).scope();
-    var classList = document.getElementById('cbp-spmenu-s2').getAttribute("class");
-    console.log(" classes : " + classList);
-    $scope.$apply(function () {
-        $scope.mdata.matchclass = classList;
-    });
-}
 
 
 
