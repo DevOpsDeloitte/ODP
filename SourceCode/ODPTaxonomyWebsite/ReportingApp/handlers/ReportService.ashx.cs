@@ -89,7 +89,9 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 List<Report_AbstractSummaryResult> reportvals = db.Report_AbstractSummary().ToList();
                 DataSet ds = new DataSet();
                 CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "AbstractSummary" , ds);
-                CreateExcelFile.CreateExcelDocumentAsStream(ds, "AbstractSummary"+ ".xlsx", context.Response);
+                //CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "AbstractSummary2", ds);
+                string format = "-dd_MM_yyyy_h_mm_ss_tt";
+                CreateExcelFile.CreateExcelDocumentAsStream(ds, "AbstractSummary" + DateTime.Now.ToString(format) + ".xlsx", context.Response);
  
             }
         }
