@@ -361,6 +361,7 @@
 <!-- JS
 ================================================== -->
 <script src="../scripts/jquery.js"></script>
+<script src="../scripts/jquery.ns-autogrow.min.js"></script>
 <script src="../scripts/main.js"></script>
 <script src="../scripts/icheck.js"></script>
 <script src="../scripts/alertify.js"></script>

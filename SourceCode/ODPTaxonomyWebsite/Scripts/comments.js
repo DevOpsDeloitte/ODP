@@ -34,6 +34,8 @@ function changeSyncClass() {
 
 $(document).ready(function () {
 
+    $('textarea#comments').autogrow({ vertical: true, horizontal: false, flickering: false });
+
     $(".comments-display").show();
 
     $(".tabs-menu a").click(function (event) {
