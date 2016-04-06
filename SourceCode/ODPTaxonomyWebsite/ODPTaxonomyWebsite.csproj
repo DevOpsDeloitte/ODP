@@ -148,6 +148,7 @@
     <Content Include="Scripts\angular\firebase.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\classie.js" />
+    <Content Include="Scripts\commentsRT.js" />
     <Content Include="Scripts\comments.js" />
     <Content Include="Scripts\controllers\controller.js" />
     <Content Include="Scripts\controllers\controllerRT.js" />
