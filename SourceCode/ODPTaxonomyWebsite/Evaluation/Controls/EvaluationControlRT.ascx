@@ -32,13 +32,14 @@
         </ul>
 
         <div class="comment-box">
-            <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'">
+            <div class="sixteen columns" ng-show="mdata.displaymode=='Insertx'">
                     <div class="commentsHeader">Comments</div>
                     <textarea name="comments" id="comments" ng-model="mdata.comments" disabled="disabled"></textarea>
                 </div>
-            <div class="sixteen columns" ng-show="mdata.displaymode=='View'">
+            <div class="sixteen columns" ng-show="mdata.displaymode=='View' || mdata.displaymode=='Insert'">
                     <div class="commentsHeader">Comments</div>
-                    <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
+                    <%--<div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>--%>
+                   <div id="commentsBox" ng-bind-html="mdata.comments | newline"></div>
             </div>
         </div>
 
@@ -316,14 +317,14 @@
 
                 </div>
 
-                <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'">
+<%--                <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'">
                     <div class="commentsHeader">Comments</div>
                     <textarea name="comments" id="comments" ng-model="mdata.comments" disabled="disabled"></textarea>
                 </div>
                 <div class="sixteen columns" ng-show="mdata.displaymode=='View'">
                     <div class="commentsHeader">Comments</div>
                     <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
-                </div>
+                </div>--%>
 
             </div>
         </div>
@@ -335,10 +336,12 @@
     <!-- JS
 ================================================== -->
     <script src="../scripts/jquery.js"></script>
+    <script src="../scripts/jquery.ns-autogrow.min.js"></script>
     <script src="../scripts/main.js"></script>
     <script src="../scripts/icheck.js"></script>
     <script src="../scripts/alertify.js"></script>
     <script src="../scripts/angular/angular-latest.min.js"></script>
+    <script src="../scripts/angular/angular-sanitize.min.js"></script>
     <script src="../scripts/angular/firebase.js"></script>
     <script src="../scripts/angular/angularfire.min.js"></script>
 

@@ -42,7 +42,7 @@
 
             <div class="comment-entry" ng-show="mdata.displaymode=='View'">
                 <div class="commentsHeader">Comments</div>
-                <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
+                <div id="commentsBox" ng-bing-html="mdata.comments | newline"><%= Comments.Replace(Environment.NewLine, "<br />") %></div>
             </div>
         </div>
 
@@ -55,7 +55,7 @@
                 <hr />
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQConsensusUser.UserName}}</h5>
-                    <p>{{mdata.CoderComments.IQConsensusUser.UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.IQConsensusUser.UserComment | newline"><%--{{mdata.CoderComments.IQConsensusUser.UserComment}}--%></p>
                 </div>
                 </div>
 
@@ -65,17 +65,17 @@
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQCoders[0].UserName}}</h5>
-                    <p>{{mdata.CoderComments.IQCoders[0].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[0].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[0].UserComment}}--%></p>
                 </div>
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQCoders[1].UserName}}</h5>
-                    <p>{{mdata.CoderComments.IQCoders[1].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[1].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[1].UserComment}}--%></p>
                 </div>
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQCoders[2].UserName}}</h5>
-                    <p>{{mdata.CoderComments.IQCoders[2].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[2].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[2].UserComment}}--%></p>
                 </div>
             </div>
             <div id="ODP" class="tab-content" style=""  ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
@@ -85,7 +85,7 @@
                 <hr />
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPConsensusUser.UserName}}</h5>
-                    <p>{{mdata.CoderComments.ODPConsensusUser.UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.ODPConsensusUser.UserComment | newline"><%--{{mdata.CoderComments.ODPConsensusUser.UserComment}}--%></p>
                 </div>
                 </div>
 
@@ -96,17 +96,17 @@
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPCoders[0].UserName}}</h5>
-                    <p>{{mdata.CoderComments.ODPCoders[0].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[0].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[0].UserComment}}--%></p>
                 </div>
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPCoders[1].UserName}}</h5>
-                    <p>{{mdata.CoderComments.ODPCoders[1].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[1].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[1].UserComment}}--%></p>
                 </div>
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPCoders[2].UserName}}</h5>
-                    <p>{{mdata.CoderComments.ODPCoders[2].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[2].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[2].UserComment}}--%></p>
                 </div>
             </div>
 
@@ -366,6 +366,7 @@
 <script src="../scripts/icheck.js"></script>
 <script src="../scripts/alertify.js"></script>
 <script src="../scripts/angular/angular-latest.min.js"></script>
+<script src="../scripts/angular/angular-sanitize.min.js"></script>
 <script src="../scripts/angular/firebase.js"></script>
 <script src="../scripts/angular/angularfire.min.js"></script>
 

@@ -56,7 +56,8 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
                 var menuElement = document.querySelector('#cbp-spmenu-s2');
                 if (!angular.element(menuElement).hasClass('cbp-spmenu-open')) {
                     angular.element(menuElement).addClass('cbp-spmenu-open');
-                    console.log(" mdata model changed : " + newValue.comments + " old value :: " + oldValue.comments);
+                    //newValue.comments = newValue.comments.replace(/\n\r?/g, '<br />');
+                    //console.log(" mdata model changed : " + newValue.comments + " old value :: " + oldValue.comments);
                 }
 
             }

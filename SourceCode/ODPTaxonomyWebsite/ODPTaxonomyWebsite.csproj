@@ -142,6 +142,7 @@
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-csp.css" />
     <Content Include="Scripts\angular\angular-latest.min.js" />
+    <Content Include="Scripts\angular\angular-sanitize.min.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\angularfire.min.js" />
@@ -163,6 +164,7 @@
     <Content Include="Scripts\icheck.js" />
     <Content Include="Scripts\icheck.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.ns-autogrow.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modules\module.js" />
     <Content Include="Scripts\persist.js" />
