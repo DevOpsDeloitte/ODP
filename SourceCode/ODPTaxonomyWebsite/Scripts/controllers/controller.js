@@ -652,7 +652,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
     $scope.showIQSCoders = function () {
         //angular.element(document.getElementById('IQS')).scope().showIQSCoders()
-        return $scope.mdata.formmode == "Coder Consensus" || $scope.mdata.formmode.indexOf("Comparison") != -1;
+        return $scope.mdata.formmode == "Coder Consensus" || $scope.mdata.formmode.indexOf("Comparison") != -1 || $scope.mdata.formmode == "ODP Staff Member Consensus";
     };
 
     $scope.showODPCoders = function () {

@@ -208,7 +208,7 @@ a#showRightPushed { text-align: left; }
 .comment-box textarea { width: 92%; border: 1px solid #F4F4F4; background: #FDFDFD; }
 
 .comment h5 { font-weight: bold; }
-.comment p { color: #000; }
+.comment p { color: #000; margin: 0 10px 10px 0; }
 .comment.disabled p, .comment.disabled h5  { color: #6B6B6B; }
 
 /* End Comments */
