@@ -83,6 +83,13 @@ namespace ODPTaxonomyDAL_ST
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<Report_AbstractSummaryResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaAvg_DataDetail_ByQCWeeks")]
+		public ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeksResult> Report_KappaAvg_DataDetail_ByQCWeeks([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType);
+			return ((ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeksResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_QC_Week")]
@@ -627,6 +634,230 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._u0025_of_abstracts_that_are_uncoded != value))
 				{
 					this._u0025_of_abstracts_that_are_uncoded = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Report_KappaAvg_DataDetail_ByQCWeeksResult
+	{
+		
+		private string _QC_week;
+		
+		private string _IQ_StartDate;
+		
+		private string _IQ_EndDate;
+		
+		private string _Kappa;
+		
+		private System.Nullable<decimal> _A1;
+		
+		private System.Nullable<decimal> _A2;
+		
+		private System.Nullable<decimal> _A3;
+		
+		private string _B;
+		
+		private string _C;
+		
+		private System.Nullable<decimal> _D;
+		
+		private System.Nullable<decimal> _E;
+		
+		private System.Nullable<decimal> _F;
+		
+		public Report_KappaAvg_DataDetail_ByQCWeeksResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_week", DbType="NVarChar(20)")]
+		public string QC_week
+		{
+			get
+			{
+				return this._QC_week;
+			}
+			set
+			{
+				if ((this._QC_week != value))
+				{
+					this._QC_week = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_StartDate", DbType="NVarChar(50)")]
+		public string IQ_StartDate
+		{
+			get
+			{
+				return this._IQ_StartDate;
+			}
+			set
+			{
+				if ((this._IQ_StartDate != value))
+				{
+					this._IQ_StartDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_EndDate", DbType="NVarChar(50)")]
+		public string IQ_EndDate
+		{
+			get
+			{
+				return this._IQ_EndDate;
+			}
+			set
+			{
+				if ((this._IQ_EndDate != value))
+				{
+					this._IQ_EndDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kappa", DbType="VarChar(10)")]
+		public string Kappa
+		{
+			get
+			{
+				return this._Kappa;
+			}
+			set
+			{
+				if ((this._Kappa != value))
+				{
+					this._Kappa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A1
+		{
+			get
+			{
+				return this._A1;
+			}
+			set
+			{
+				if ((this._A1 != value))
+				{
+					this._A1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A2
+		{
+			get
+			{
+				return this._A2;
+			}
+			set
+			{
+				if ((this._A2 != value))
+				{
+					this._A2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A3
+		{
+			get
+			{
+				return this._A3;
+			}
+			set
+			{
+				if ((this._A3 != value))
+				{
+					this._A3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="NVarChar(30)")]
+		public string B
+		{
+			get
+			{
+				return this._B;
+			}
+			set
+			{
+				if ((this._B != value))
+				{
+					this._B = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="NVarChar(30)")]
+		public string C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this._C = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this._D = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this._E = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this._F = value;
 				}
 			}
 		}
