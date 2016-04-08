@@ -51,7 +51,7 @@
                 
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <LoggedInTemplate>
-                            <asp:LoginName ID="HeadLoginName" runat="server" />
+                            User : <asp:LoginName ID="HeadLoginName" runat="server" />
 <%--                            
                             <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>--%>
                         </LoggedInTemplate>
@@ -69,7 +69,14 @@
             
         </div>
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+            
+<%--                   <asp:LoginView ID="LoginView2" runat="server" EnableViewState="false">
+                        <LoggedInTemplate>
+                            User : <asp:LoginName ID="HeadLoginName" runat="server" />
 
+                        </LoggedInTemplate>
+                    </asp:LoginView>--%>
+               
                         <a href="#" id="showLeftPushed" class="close-menu">Close Menu</a>
 
                         <a href="/Default.aspx">Home</a>
