@@ -52,12 +52,11 @@
       <Column Name="QC_week" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="IQ_StartDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="IQ_EndDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="Kappa" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
       <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
-      <Column Name="B" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
-      <Column Name="C" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="B" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="C" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />

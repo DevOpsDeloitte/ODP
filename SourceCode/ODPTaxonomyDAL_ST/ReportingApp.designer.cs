@@ -648,17 +648,15 @@ namespace ODPTaxonomyDAL_ST
 		
 		private string _IQ_EndDate;
 		
-		private string _Kappa;
-		
 		private System.Nullable<decimal> _A1;
 		
 		private System.Nullable<decimal> _A2;
 		
 		private System.Nullable<decimal> _A3;
 		
-		private string _B;
+		private System.Nullable<decimal> _B;
 		
-		private string _C;
+		private System.Nullable<decimal> _C;
 		
 		private System.Nullable<decimal> _D;
 		
@@ -718,22 +716,6 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kappa", DbType="VarChar(10)")]
-		public string Kappa
-		{
-			get
-			{
-				return this._Kappa;
-			}
-			set
-			{
-				if ((this._Kappa != value))
-				{
-					this._Kappa = value;
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
 		public System.Nullable<decimal> A1
 		{
@@ -782,8 +764,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="NVarChar(30)")]
-		public string B
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> B
 		{
 			get
 			{
@@ -798,8 +780,8 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="NVarChar(30)")]
-		public string C
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> C
 		{
 			get
 			{
