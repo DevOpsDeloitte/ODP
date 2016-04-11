@@ -202,12 +202,13 @@ a#showRightPushed { text-align: left; }
 
 .tab-content { display: none; padding: 20px 10px; overflow: auto; width: 98%; }
 .tab-content.current { display: block; }
+.tab-content hr {margin: 10px 0 10px 0;}
 .tab-content textarea { width: 100%; border: 1px solid #F4F4F4; background: #FDFDFD; }
 .comment-box { padding: 0 10px 0 0; }
 .comment-box > div.comment-entry{  padding: 20px 10px; overflow: auto; width: 98%; }
 .comment-box textarea { width: 92%; border: 1px solid #F4F4F4; background: #FDFDFD; }
 
-.comment h5 { font-weight: bold; }
+.comment h5 { font-weight: bold; background-color: rgba(238, 238, 238, 0.04); border-bottom: 1px solid #F4F4F4;  }
 .comment p { color: #000; margin: 0 10px 10px 0; }
 .comment.disabled p, .comment.disabled h5  { color: #6B6B6B; }
 

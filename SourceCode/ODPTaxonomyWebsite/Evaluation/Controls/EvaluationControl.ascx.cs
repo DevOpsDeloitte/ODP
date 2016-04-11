@@ -491,10 +491,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                 this.CommentsJSON = JsonConvert.SerializeObject(EvaluationComments);
                 // In view mode all the comments need to be read.
-                if(this.DisplayMode == "View")
-                {
+                //if(this.DisplayMode == "View" || 1==1)
+                //{
                     this.loadAllComments();
-                }
+                //}
 
 
             }

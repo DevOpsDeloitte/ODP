@@ -32,11 +32,11 @@
         </ul>
 
         <div class="comment-box">
-            <div class="sixteen columns" ng-show="mdata.displaymode=='Insertx'">
+            <div class="" ng-show="mdata.displaymode=='Insertx'">
                     <div class="commentsHeader">Comments</div>
                     <textarea name="comments" id="comments" ng-model="mdata.comments" disabled="disabled"></textarea>
                 </div>
-            <div class="sixteen columns" ng-show="mdata.displaymode=='View' || mdata.displaymode=='Insert'">
+            <div class="comment-entry" ng-show="mdata.displaymode=='View' || mdata.displaymode=='Insert'">
                     <div class="commentsHeader">Comments</div>
                     <%--<div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>--%>
                    <div id="commentsBox" ng-bind-html="mdata.comments | newline"></div>

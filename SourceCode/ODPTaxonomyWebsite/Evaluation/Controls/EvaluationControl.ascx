@@ -18,6 +18,9 @@
     window.FormMode = '<%= FormMode %>';
     window.DisplayMode = '<%= DisplayMode %>';
     window.CoderComments = <%= CommentsJSON %>;
+    //window.Comments ='<%= Comments.Replace(Environment.NewLine, "<br />") %>';
+    window.Comments ='<%= System.Web.HttpUtility.JavaScriptStringEncode(Comments) %>';
+    //window.Comments = '';
 </script>
 
 <div class="container evaluation" id="tax-form" ng-controller="ODPFormCtrl">
@@ -42,7 +45,7 @@
 
             <div class="comment-entry" ng-show="mdata.displaymode=='View'">
                 <div class="commentsHeader">Comments</div>
-                <div id="commentsBox" ng-bing-html="mdata.comments | newline"><%= Comments.Replace(Environment.NewLine, "<br />") %></div>
+                <div id="commentsBox" ng-bind-html="mdata.comments | newline"><%= Comments.Replace(Environment.NewLine, "<br />") %></div>
             </div>
         </div>
 
@@ -80,7 +83,7 @@
             </div>
             <div id="ODP" class="tab-content" style=""  ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
                 <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
-                <div>
+                <div ng-show="mdata.formmode != 'ODP Staff Member Consensus'"">
                 <strong>ODP Consensus</strong>
                 <hr />
                 <div class="comment disabled">
