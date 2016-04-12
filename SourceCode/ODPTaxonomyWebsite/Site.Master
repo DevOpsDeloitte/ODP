@@ -51,7 +51,7 @@
                 
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <LoggedInTemplate>
-                            User : <asp:LoginName ID="HeadLoginName" runat="server" />
+                            Welcome: <asp:LoginName ID="HeadLoginName" runat="server" />
 <%--                            
                             <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>--%>
                         </LoggedInTemplate>
