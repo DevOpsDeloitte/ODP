@@ -33,7 +33,7 @@ namespace ODPTaxonomyDAL_ST
     #endregion
 		
 		public ReportingAppDataContext() : 
-				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString4, mappingSource)
+				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString5, mappingSource)
 		{
 			OnCreated();
 		}
@@ -648,6 +648,8 @@ namespace ODPTaxonomyDAL_ST
 		
 		private string _IQ_EndDate;
 		
+		private System.Nullable<int> _AbstractID;
+		
 		private System.Nullable<decimal> _A1;
 		
 		private System.Nullable<decimal> _A2;
@@ -712,6 +714,22 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._IQ_EndDate != value))
 				{
 					this._IQ_EndDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this._AbstractID = value;
 				}
 			}
 		}
