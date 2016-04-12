@@ -52,7 +52,7 @@
                     <hr />
                     <div class="comment disabled">
                         <h5>{{mdata.CoderComments.IQConsensusUser.UserName}}</h5>
-                        <p>{{mdata.CoderComments.IQConsensusUser.UserComment}}</p>
+                        <p  ng-bind-html="mdata.CoderComments.IQConsensusUser.UserComment | newline"><%--{{mdata.CoderComments.IQConsensusUser.UserComment}}--%></p>
                     </div>
                 </div>
 
@@ -62,27 +62,27 @@
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQCoders[0].UserName}}</h5>
-                    <p>{{mdata.CoderComments.IQCoders[0].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[0].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[0].UserComment}}--%></p>
                 </div>
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQCoders[1].UserName}}</h5>
-                    <p>{{mdata.CoderComments.IQCoders[1].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[1].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[1].UserComment}}--%></p>
                 </div>
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQCoders[2].UserName}}</h5>
-                    <p>{{mdata.CoderComments.IQCoders[2].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[2].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[2].UserComment}}--%></p>
                 </div>
             </div>
             <div id="ODP" class="tab-content" style="" ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
                 <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
-                <div>
+                <div ng-show="mdata.formmode != 'ODP Staff Member Consensus'"">
                     <strong>ODP Consensus</strong>
                     <hr />
                     <div class="comment disabled">
                         <h5>{{mdata.CoderComments.ODPConsensusUser.UserName}}</h5>
-                        <p>{{mdata.CoderComments.ODPConsensusUser.UserComment}}</p>
+                        <p ng-bind-html="mdata.CoderComments.ODPConsensusUser.UserComment | newline"><%--{{mdata.CoderComments.ODPConsensusUser.UserComment}}--%></p>
                     </div>
                 </div>
 
@@ -93,17 +93,17 @@
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPCoders[0].UserName}}</h5>
-                    <p>{{mdata.CoderComments.ODPCoders[0].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[0].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[0].UserComment}}--%></p>
                 </div>
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPCoders[1].UserName}}</h5>
-                    <p>{{mdata.CoderComments.ODPCoders[1].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[1].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[1].UserComment}}--%></p>
                 </div>
 
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPCoders[2].UserName}}</h5>
-                    <p>{{mdata.CoderComments.ODPCoders[2].UserComment}}</p>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[2].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[2].UserComment}}--%></p>
                 </div>
             </div>
 
