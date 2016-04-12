@@ -9,6 +9,7 @@ using System.Configuration;
 using ODPTaxonomyDAL_ST;
 using ODPTaxonomyDAL_TT;
 using ODPTaxonomyUtility_TT;
+using System.Globalization;
 
 namespace ODPTaxonomyWebsite.ReportingApp.handlers
 {
@@ -104,6 +105,31 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
             using (ReportingAppDataContext db = new ReportingAppDataContext(connString))
             {
                 var qcWeeks = db.Report_QC_Weeks.ToList();
+                
+                qcWeeks.RemoveRange(0, 9);
+                CultureInfo cul = CultureInfo.CurrentCulture;
+                int weekNum = cul.Calendar.GetWeekOfYear(
+                        DateTime.Now,
+                        CalendarWeekRule.FirstDay,
+                        DayOfWeek.Monday);
+                var cyear = DateTime.Now.Year.ToString();
+                var cweek = weekNum.ToString();
+                var maxid = qcWeeks.Max(x => x.QC_ID);
+                try {
+                    //var getcurrentIdx = qcWeeks.FindIndex(q => q.QC_week == cyear + '-' + cweek);
+                    var getcurrentId = qcWeeks.Where(q => q.QC_week == cyear + '-' + cweek).Select(q=> q.QC_ID).FirstOrDefault();
+                    if (getcurrentId.Value>0)
+                    {
+                        //qcWeeks.RemoveRange(getcurrentIdx, qcWeeks.Count - getcurrentIdx);
+                        // or
+                        qcWeeks = qcWeeks.Where(qc => qc.QC_ID.Value < getcurrentId).ToList();
+                    }
+                }
+                catch
+                {
+                    // do nothing, keep the list.
+                }
+
                 return JsonConvert.SerializeObject(qcWeeks);
             }
         }

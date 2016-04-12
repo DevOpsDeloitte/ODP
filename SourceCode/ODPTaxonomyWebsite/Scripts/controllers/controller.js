@@ -661,6 +661,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
     };
 
     $scope.showComments = function () {
+        // for console.log debugging, hook element and view scope.
         //angular.element(document.getElementById('IQS')).scope().showComments()
         //return ($scope.mdata.displaymode != 'Insert') && ($scope.mdata.formmode.indexOf("Evaluation") == -1);
         return ($scope.mdata.formmode.indexOf("Consensus") != -1 || $scope.mdata.formmode.indexOf("Comparison") != -1);
