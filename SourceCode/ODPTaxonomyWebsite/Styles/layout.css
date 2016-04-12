@@ -92,7 +92,7 @@ tr.floatingHeader th { width: inherit; }
 .header .button:hover { background: #eee; border: 1px solid #eee; }
 .header .login-display .button, .header .login-display .button:hover { background: none; border: none; box-shadow: none; color: #FFF; }
 .header .login-display .button:hover { text-decoration: underline; }
-.login-display { color: #fff; display: inline-block; top: 11px; right: 10px;  }
+.login-display { color: #fff; display: inline-block; top: 16px; right: 10px; position: absolute; }
 
 .comments-display { color: #fff; position: absolute; top: 11px; right: 10px; display: none;}
 

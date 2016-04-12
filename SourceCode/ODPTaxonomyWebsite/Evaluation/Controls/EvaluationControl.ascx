@@ -54,7 +54,7 @@
             <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders()">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
                 <div ng-show=" (mdata.displaymode=='View' && mdata.formmode != 'Coder Consensus')  || mdata.formmode != 'Coder Consensus'">
-                <strong>IQ Consensus</strong>
+                <strong>IQS Consensus</strong>
                 <hr />
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQConsensusUser.UserName}}</h5>
@@ -63,7 +63,7 @@
                 </div>
 
 
-                <strong>IQ Coders</strong>
+                <strong>IQS Coders</strong>
                 <hr>
 
                 <div class="comment disabled">

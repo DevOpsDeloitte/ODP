@@ -34,3 +34,5 @@ height:100%; }
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) { 
     .icheckbox_line-tax .icheck_line-icon, .iradio_line-tax .icheck_line-icon { background-image: url(line@2x.png); -webkit-background-size: 60px 13px; background-size: 60px 13px; }
 }
+
+.login-display { color: #fff; display: inline-block; top: 16px; right: 143px; position:absolute; }
