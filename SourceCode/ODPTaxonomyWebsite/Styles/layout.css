@@ -183,7 +183,7 @@ a#showLeftPushed { background: #7C7C7C; text-align: right; color: #FFF; padding:
 .cbp-spmenu-vertical {	width: 300px; height: 100%;	top: 0;	z-index: 1000; }
 .cbp-spmenu-left {	left: -300px; }
 .cbp-spmenu-left.cbp-spmenu-open {	left: 0px; }
-.cbp-spmenu-right {	right: -300px; }
+.cbp-spmenu-right {	right: -300px; -webkit-overflow-scrolling: touch; }
 .cbp-spmenu-right.cbp-spmenu-open { right: 0px; overflow-y: auto; overflow-x: hidden; }
 
 a#showLeftPushed, a#showRightPushed, a.expand-comments, .cbp-spmenu a.expand-comments { background: #7C7C7C; text-align: right; color: #FFF; padding: 10px 12px; font-size: 15px; border: 0; box-shadow: none; }
