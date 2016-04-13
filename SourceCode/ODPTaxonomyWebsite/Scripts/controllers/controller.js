@@ -121,14 +121,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         };
 
         $scope.$watch("mdata", function () {
-            console.log("form data changed :: " + $scope.mdata);
+            //console.log("form data changed :: " + $scope.mdata);
             if ($scope.displaymode != "View") {
                 $scope.$broadcast("disableboxes");
                 $scope.$broadcast("validate.formdata");
 
                 // sync mdata with data - remove all function properties
                 if ($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) {
-                    console.log(" watch fired to sync mdata - data :: 1 ");
+                    //console.log(" watch fired to sync mdata - data :: 1 ");
                     if ($watchSyncCounter < 5) {
                         $timeout(function () {
                             $scope.data = $scope.syncObjects($scope.mdata);

@@ -51,7 +51,7 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         //syncObject.$bindTo($scope, "mdata");
 
         $scope.$watch("mdata", function (newValue, oldValue) {
-            if (newValue.comments !== oldValue.comments) {
+            if (newValue.comments !== oldValue.comments && newValue.comments !== undefined) {
                 //trigger open
                 if (newValue.comments.length > 0) {
                     var menuElement = document.querySelector('#cbp-spmenu-s2');
