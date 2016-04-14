@@ -399,7 +399,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             this.EvaluationComments = new Comments();
             var aspUsers = db.aspnet_Users.ToList();
             var allTeams = db.Evaluations
-                                         .Where(e => e.AbstractID == AbstractID && e.ConsensusStartedBy.HasValue)
+                                         .Where(e => e.AbstractID == AbstractID && e.ConsensusStartedBy.HasValue && e.IsStopped == false)
                                          .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
             var allevalids = allTeams.Select(e => e.EvaluationId).ToList();
             var SubmissionRecsCache = db.Submissions.Where(s => allevalids.Contains(s.EvaluationId.Value)).ToList();
@@ -510,7 +510,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             if (FormMode.IndexOf("Comparison") != -1)
             {
                 var comparisonTeams = db.Evaluations
-                                         .Where(e => e.AbstractID == AbstractID /*&& e.IsComplete*/ && e.ConsensusStartedBy.HasValue)
+                                         .Where(e => e.AbstractID == AbstractID /*&& e.IsComplete*/ && e.ConsensusStartedBy.HasValue && e.IsStopped == false)
                                          .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
 
                 if (comparisonTeams.Count == 2)

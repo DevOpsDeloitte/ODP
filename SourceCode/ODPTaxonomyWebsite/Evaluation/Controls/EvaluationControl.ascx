@@ -32,29 +32,34 @@
         </div>
 
 
-        <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
+<%--        <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
             <li class="" ng-class="{ 'current' : showCoderDefault() }" ><a href="#IQS">IQS Coders</a></li>
             <li class="" ng-class="{ 'current' : showODPDefault() }" ><a href="#ODP">ODP Coders</a></li>
-        </ul>
+        </ul>--%>
 
         <div class="comment-box">
             <div class="comment-entry" ng-show="mdata.displaymode=='Insert'">
-                <div class="commentsHeader">Comments</div>
+                <div class="commentsHeader">Coding Comments</div>
                 <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
             </div>
 
             <div class="comment-entry" ng-show="mdata.displaymode=='View'">
-                <div class="commentsHeader">Comments</div>
+                <div class="commentsHeader">Coding Comments</div>
                 <div id="commentsBox" ng-bind-html="mdata.comments | newline"><%= Comments.Replace(Environment.NewLine, "<br />") %></div>
             </div>
         </div>
+
+                <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
+            <li class="" ng-class="{ 'current' : showCoderDefault() }" ><a href="#IQS">IQS Coders</a></li>
+            <li class="" ng-class="{ 'current' : showODPDefault() }" ><a href="#ODP">ODP Coders</a></li>
+        </ul>
 
 
         <div class="tab" ng-show="showComments()">
             <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders()">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
                 <div ng-show=" (mdata.displaymode=='View' && mdata.formmode != 'Coder Consensus')  || mdata.formmode != 'Coder Consensus'">
-                <strong>IQS Consensus</strong>
+                <strong>IQS Consensus Comments</strong>
                 <hr />
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.IQConsensusUser.UserName}}</h5>
@@ -63,7 +68,7 @@
                 </div>
 
 
-                <strong>IQS Coders</strong>
+                <strong>IQS Coders Comments</strong>
                 <hr>
 
                 <div class="comment disabled">
@@ -84,7 +89,7 @@
             <div id="ODP" class="tab-content" style=""  ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
                 <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
                 <div ng-show="mdata.formmode != 'ODP Staff Member Consensus'"">
-                <strong>ODP Consensus</strong>
+                <strong>ODP Consensus Comments</strong>
                 <hr />
                 <div class="comment disabled">
                     <h5>{{mdata.CoderComments.ODPConsensusUser.UserName}}</h5>
@@ -93,7 +98,7 @@
                 </div>
 
 
-                <strong>ODP Coders</strong>
+                <strong>ODP Coders Comments</strong>
                 <hr>
 
 
