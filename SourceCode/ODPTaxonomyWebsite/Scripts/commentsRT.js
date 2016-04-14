@@ -28,6 +28,7 @@ $(document).ready(function () {
 
     $(".tabs-menu a").click(function (event) {
         event.preventDefault();
+        event.stopImmediatePropagation();
         $(this).parent().addClass("current");
         $(this).parent().siblings().removeClass("current");
         var tab = $(this).attr("href");
