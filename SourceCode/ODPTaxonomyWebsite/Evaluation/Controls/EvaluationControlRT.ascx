@@ -83,7 +83,7 @@
             <div id="ODP" class="tab-content" style="" ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
                 <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
                 <div ng-show="mdata.formmode != 'ODP Staff Member Consensus'"">
-                    <strong>ODP Consensus</strong>
+                    <strong>ODP Consensus Comments</strong>
                     <hr />
                     <div class="comment disabled">
                         <h5>{{mdata.CoderComments.ODPConsensusUser.UserName}}</h5>
