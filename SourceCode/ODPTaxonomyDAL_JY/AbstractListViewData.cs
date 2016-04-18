@@ -216,5 +216,38 @@ namespace ODPTaxonomyDAL_JY
                 }
             }
         }
+
+        public bool IsAbstractInReportExclude(int AbstractID)
+        {
+            return db.Report_AbstractExcludedLists.Where(i => i.AbstractID == AbstractID).Count() > 0;
+        }
+
+        public void AddAbstractToReportExclude(int AbstractID, Guid UserID)
+        {
+            if (AbstractID > 0 && UserID != null)
+            {
+                Report_AbstractExcludedList review = new Report_AbstractExcludedList();
+                review.AbstractID = AbstractID;
+                review.CreatedBy = UserID;
+                review.CreatedDate = DateTime.Now;
+
+                db.Report_AbstractExcludedLists.InsertOnSubmit(review);
+                db.SubmitChanges();
+            }
+        }
+
+        public void RemoveAbstractFromReportExclude(int AbstractID)
+        {
+            if (AbstractID > 0)
+            {
+                var Review = db.Report_AbstractExcludedLists.Where(i => i.AbstractID == AbstractID).FirstOrDefault();
+
+                if (Review != null)
+                {
+                    db.Report_AbstractExcludedLists.DeleteOnSubmit(Review);
+                    db.SubmitChanges();
+                }
+            }
+        }
     }
 }

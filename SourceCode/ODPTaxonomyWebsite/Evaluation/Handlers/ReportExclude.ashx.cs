@@ -40,9 +40,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     {
                         foreach (var abs in abstractIDs)
                         {
-                            if (!data.IsAbstractInReview(Convert.ToInt32(abs)))
+                            if (!data.IsAbstractInReportExclude(Convert.ToInt32(abs)))
                             {
-                                data.AddAbstractToReview(Convert.ToInt32(abs), (Guid)ug);
+                                data.AddAbstractToReportExclude(Convert.ToInt32(abs), (Guid)ug);
                             }
                         }
 
@@ -60,9 +60,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                     foreach (var abs in abstractIDs)
                     {
-                        if (data.IsAbstractInReview(Convert.ToInt32(abs)))
+                        if (data.IsAbstractInReportExclude(Convert.ToInt32(abs)))
                         {
-                            data.RemoveAbstractFromReview(Convert.ToInt32(abs));
+                            data.RemoveAbstractFromReportExclude(Convert.ToInt32(abs));
                         }
                     }
 
