@@ -401,8 +401,14 @@
     <Compile Include="Evaluation\Handlers\GenerateExcelReport.ashx.cs">
       <DependentUpon>GenerateExcelReport.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\KappaExclude.ashx.cs">
+      <DependentUpon>KappaExclude.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\RedirectionMessage.ashx.cs">
       <DependentUpon>RedirectionMessage.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\ReportExclude.ashx.cs">
+      <DependentUpon>ReportExclude.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\ManageTeams.aspx.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>
@@ -587,6 +593,8 @@
     <Content Include="Evaluation\Handlers\RedirectionMessage.ashx" />
     <Content Include="Evaluation\Handlers\AbstractDetail.ashx" />
     <Content Include="Evaluation\Handlers\Comments.ashx" />
+    <Content Include="Evaluation\Handlers\KappaExclude.ashx" />
+    <Content Include="Evaluation\Handlers\ReportExclude.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
