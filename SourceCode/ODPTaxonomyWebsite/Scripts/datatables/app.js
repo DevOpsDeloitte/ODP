@@ -584,6 +584,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "removereview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -593,6 +594,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "removereview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -600,6 +602,8 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -631,6 +635,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -663,6 +668,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "selectaction";
                 break;
 
@@ -671,6 +677,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
 
