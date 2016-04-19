@@ -97,6 +97,34 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             IsParent = true
                         };
 
+            var reportexcludedata = from a in db.Abstracts
+                       //join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                       //join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                       join rv in db.Report_AbstractExcludedLists on a.AbstractID equals rv.AbstractID
+                       //where (
+                          //h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
+                      //    h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
+                      //     .Where(h2 => h2.AbstractID == a.AbstractID)
+                       //    .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
+                      //     )
+                       select new AbstractListRow
+                       {
+
+                           AbstractID = a.AbstractID,
+                           //ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                           PIProjectLeader = a.PIProjectLeader,
+                           ApplicationID = a.ApplicationID,
+                           AbstractStatusID = 14, //s.AbstractStatusID,
+                           AbstractStatusCode = "", //s.AbstractStatusCode,
+                           //StatusDate = h.CreatedDate,
+                           LastExportDate = a.LastExportDate,
+                           //EvaluationID = h.EvaluationId,
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
+                       };
+
+            List<AbstractListRow> reportexcludeabstracts = reportexcludedata.ToList();
+
             List<AbstractListRow> reviewabstracts = reviewdata.ToList();
 
             List<AbstractListRow> abstracts = data.ToList();
@@ -130,7 +158,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     FV.opts.Add(new FilterOpts() { option = "odpcompletedwonotes", text = "ODP Completed without notes" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_AND_CODER_CONSENSUS_2C).Select(s => s).ToList().Count.ToString() + ")" });
                     FV.opts.Add(new FilterOpts() { option = "closed", text = "Closed" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CLOSED_3).Select(s => s).ToList().Count.ToString() + ")" });
                     FV.opts.Add(new FilterOpts() { option = "exported", text = "Exported" + " (" + abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.DATA_EXPORTED_4).Select(s => s).ToList().Count.ToString() + ")" });
-                break;
+                    FV.opts.Add(new FilterOpts() { option = "reportexclude", text = "Report Exclude List" + " (" + reportexcludeabstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList().Count.ToString() + ")" });
+                    break;
 
                 case "ODPStaff":
                 FV.opts.Add(new FilterOpts()

@@ -43,19 +43,13 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                     switch (filter)
                     {
-                        //case "open":
-                        //    parentAbstracts = this.GetParentAbstractsODPSupervisorOpen();   
-                        //    ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
-                        //    serializeResponse(context, ALR);
-                            
-                        //    break;
+                       
 
-                        //case "uncoded":
-                        //    parentAbstracts = this.GetParentAbstractsODPSupervisorReviewUnCoded();  
-                        //    ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
-                        //    serializeResponse(context, ALR);
-
-                        //    break;
+                        case "reportexclude":
+                            parentAbstracts = this.GetParentAbstractsODPSupervisorReportExclude(filter);
+                            ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
+                            serializeResponse(context, ALR);
+                            break;
 
                         case "review" : case "reviewuncoded" :
                             parentAbstracts = this.GetParentAbstractsODPSupervisorReview(filter);
@@ -480,6 +474,51 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     //finalabstracts = abstracts.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.RETRIEVED_FOR_ODP_CODING_2 || q.AbstractStatusID == (int)AbstractStatusEnum.CODED_BY_ODP_STAFF_2A || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_STAFF_CONSENSUS_2B).Select(s => s).ToList();
                     break;
 
+            }
+
+
+            return AbstractListViewHelper.SortAbstracts(finalabstracts, sort, direction);
+        }
+        protected List<AbstractListRow> GetParentAbstractsODPSupervisorReportExclude(string query = "", string sort = "", SortDirection direction = SortDirection.Ascending)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            DataJYDataContext db = new DataJYDataContext(connString);
+
+            var data = from a in db.Abstracts
+                       join h in db.AbstractStatusChangeHistories on a.AbstractID equals h.AbstractID
+                       join s in db.AbstractStatus on h.AbstractStatusID equals s.AbstractStatusID
+                       join rv in db.Report_AbstractExcludedLists on a.AbstractID equals rv.AbstractID
+                       where (
+                          //h.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N &&
+                          h.AbstractStatusChangeHistoryID == db.AbstractStatusChangeHistories
+                           .Where(h2 => h2.AbstractID == a.AbstractID)
+                           .Select(h2 => h2.AbstractStatusChangeHistoryID).Max()
+                           )
+                       select new AbstractListRow
+                       {
+
+                           AbstractID = a.AbstractID,
+                           ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
+                           PIProjectLeader = a.PIProjectLeader,
+                           ApplicationID = a.ApplicationID,
+                           AbstractStatusID = s.AbstractStatusID,
+                           AbstractStatusCode = s.AbstractStatusCode,
+                           StatusDate = h.CreatedDate,
+                           LastExportDate = a.LastExportDate,
+                           EvaluationID = h.EvaluationId,
+                           KappaType = KappaTypeEnum.K1,
+                           IsParent = true
+                       };
+
+            List<AbstractListRow> abstracts = data.ToList();
+            List<AbstractListRow> finalabstracts = null;
+           
+            switch (query)
+            {
+                case "reportexclude":
+                    finalabstracts = abstracts.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N).Select(s => s).ToList();
+                    break;
+                
             }
 
 

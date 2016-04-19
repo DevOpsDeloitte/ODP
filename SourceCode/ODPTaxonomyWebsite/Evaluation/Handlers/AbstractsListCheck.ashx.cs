@@ -82,6 +82,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             abstracts = db.AbstractReviewLists.Select(q => q.AbstractID).ToList<int>();
                             context.Response.Write(JsonConvert.SerializeObject(new { hideboxes = abstracts, success = true }));
                             break;
+                        case "addreportexclude":
+                            abstracts = db.Report_AbstractExcludedLists.Select(q => q.AbstractID).ToList<int>();
+                            context.Response.Write(JsonConvert.SerializeObject(new { hideboxes = abstracts, success = true }));
+                            break;
                         case "removereview":
                              //abstracts = db.AbstractReviewLists.Select(q => q.AbstractID).ToList<int>();
                              context.Response.Write(JsonConvert.SerializeObject(new { hideboxes = new List<int>(), success = true }));

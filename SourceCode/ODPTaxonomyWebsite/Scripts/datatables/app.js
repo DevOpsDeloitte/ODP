@@ -491,10 +491,7 @@ $(document).ready(function () {
 
         }
 
-        //        $("select#filterlist option:selected").each(function () {
-        //            $opts.filterlist = $(this).val();
-        //        });
-        //        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+        
     }
 
     function loadFilters() {
@@ -609,6 +606,7 @@ $(document).ready(function () {
             case "activeabstracts":
                 $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -616,6 +614,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -623,6 +622,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -640,6 +640,11 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
                 $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
+                break;
+            case "reportexclude":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="removereportexclude">Remove Report Exclude</option>');
                 $opts.actionlist = "selectaction";
                 break;
 
@@ -797,11 +802,18 @@ $(document).ready(function () {
             case "odpcompletedwonotes":
                 setPageTitle("View ODP Completed Without Notes Abstracts");
                 break;
+            case "reportexclude":
+                setPageTitle("View Report Excluded List");
+                break;
 
             default:
 
                 switch (config.role) {
                     case "ODPSupervisor":
+                        setPageTitle("View Abstracts");
+                        break;
+
+                    case "CoderSupervisor":
                         setPageTitle("View Abstracts");
                         break;
 
@@ -1087,6 +1099,58 @@ $(document).ready(function () {
             console.log("submit button click enabled ::");
             $(this).addClass("no").removeClass("yes");
             switch ($opts.actionlist) {
+
+                case "addreportexclude":
+
+                    $("div#generalProgressBox").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Evaluation/Handlers/ReportExclude.ashx",
+                        dataType: 'json',
+                        data: { type: "add", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                    })
+                      .done(function (data) {
+                          console.log(" add report exclude : " + data);
+                          $("div#generalProgressBox").hide();
+                          if (data.success == true) {
+                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) added to report exclude list.");
+                              resetSubmitBtnAndCheckboxes();
+                              loadFilters();
+                              $opts.isGridDirty = true;
+
+                          }
+                          else {
+                              alertify.error("Failed to add in report exclude list.");
+                          }
+                      });
+
+
+                    break;
+
+                case "removereportexclude":
+                    $("div#generalProgressBox").show();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Evaluation/Handlers/ReportExclude.ashx",
+                        dataType: 'json',
+                        data: { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
+                    })
+                      .done(function (data) {
+                          console.log(" remove report exclude : " + data);
+                          $("div#generalProgressBox").hide();
+                          if (data.success == true) {
+                              alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from report exclude list.");
+                              resetSubmitBtnAndCheckboxes();
+                              loadFilters();
+                              $opts.isGridDirty = true;
+                          }
+                          else {
+                              alertify.error("Failed to remove from report exclude list.");
+                          }
+                      });
+
+
+                    break;
 
                 case "addreview":
 
@@ -1448,17 +1512,6 @@ $(document).ready(function () {
             rowx.find("input[type=checkbox]").prop("checked", false);
             rowx.removeClass("selected");
 
-            // instead of hiding checkboxes, we are hiding the row completely.
-
-            //            var absid = rowx.find(".abstractid").html().trim();
-            //            if (_.contains(inArr, Number(absid))) {
-            //                rowx.find("input[type=checkbox]").addClass("hidecheckbox").removeClass("visiblecheckbox");
-            //                //rowx.addClass("nodisplay");
-            //            }
-            //            else {
-            //                rowx.find("input[type=checkbox]").addClass("visiblecheckbox").removeClass("hidecheckbox");
-            //                //rowx.removeClass("nodisplay");
-            //            }
 
         });
 
