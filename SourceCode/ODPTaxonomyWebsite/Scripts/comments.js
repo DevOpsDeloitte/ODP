@@ -6,6 +6,7 @@ var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 showRight.onclick = function () {
     classie.toggle(this, 'active');
     classie.toggle(menuRight, 'cbp-spmenu-open');
+    currentScrollPosition = $(document).scrollTop();
     //currentScrollPosition = $(document).scrollTop();
     //console.log(currentScrollPosition);
     //changeSyncClass();
@@ -46,9 +47,6 @@ function changeSyncClass() {
 
 $(document).ready(function () {
 
-    //$(document).ontouchmove = function (e) {
-    //    console.log(" touch move " + $(document).scrollTop());
-    //}
 
     $('textarea').on('focusin focus', function (e) {
         e.stopImmediatePropagation();
@@ -56,8 +54,6 @@ $(document).ready(function () {
         currentScrollPosition = $(document).scrollTop();
         //console.log(" focusin focus " + currentScrollPosition);
         //$(document).scrollTop(currentScrollPosition);
-       
-     
     });
 
 
