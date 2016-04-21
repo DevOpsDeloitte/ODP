@@ -21,7 +21,7 @@
     <div>
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right comments" id="cbp-spmenu-s2" style="height: 253px;">
         <div class="comments-close-group">
-            <a href="http://odptaxtraining1.iqsolutions.com/Evaluation/Evaluation.aspx#" id="showRightPushed" class="close-menu active">Close Comments</a>
+            <a href="" id="showRightPushed" class="close-menu active">Close Comments</a>
             <a href="" class="expand-comments">Expand</a>
         </div>
 

@@ -54,7 +54,6 @@ $(document).ready(function(){
 
 });
 
-<!--Alertify-->
 
 
 //$(document).ready(function(){
