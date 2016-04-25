@@ -70,9 +70,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             parentAbstracts = GetParentAbstractsODPSupervisor(filter); // we are passing the filter as the query.
                             //System.Diagnostics.Stopwatch objStopWatch = new System.Diagnostics.Stopwatch();
                             //objStopWatch.Start();
+                            var RL = data.GetAllAbstractsInReview();
                             foreach (var abs in parentAbstracts)
                             {
-                                if (data.IsAbstractInReview(abs.AbstractID))
+                                if (data.IsAbstractInReviewCache(abs.AbstractID, RL))
                                 {
                                     abs.InReview  = true;
                                 }

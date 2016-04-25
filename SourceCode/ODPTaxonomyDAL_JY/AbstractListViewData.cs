@@ -189,6 +189,16 @@ namespace ODPTaxonomyDAL_JY
             return db.AbstractReviewLists.Where(i => i.AbstractID == AbstractID).Count() > 0;
         }
 
+        public bool IsAbstractInReviewCache(int AbstractID, IEnumerable<AbstractReviewList> AbstractRL)
+        {
+            return AbstractRL.Where(i => i.AbstractID == AbstractID).Count() > 0;
+        }
+
+        public IEnumerable<AbstractReviewList> GetAllAbstractsInReview()
+        {
+            return db.AbstractReviewLists.ToList();
+        }
+
         public void AddAbstractToReview(int AbstractID, Guid UserID)
         {
             if (AbstractID > 0 && UserID != null)
