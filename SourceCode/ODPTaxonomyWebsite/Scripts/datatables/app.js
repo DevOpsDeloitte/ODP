@@ -603,7 +603,6 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -644,6 +643,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "addreview";
                 $opts.actionlist = "selectaction";
                 break;
@@ -659,6 +659,7 @@ $(document).ready(function () {
                 $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
                 $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
                 $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
                 $opts.actionlist = "selectaction";
                 break;
 
@@ -1108,10 +1109,10 @@ $(document).ready(function () {
             switch ($opts.actionlist) {
 
                 case "addreportexclude":
-
                     $("div#generalProgressBox").show();
+                    disableInterface();
                     $.ajax({
-                        type: "GET",
+                        type: "POST",
                         url: "/Evaluation/Handlers/ReportExclude.ashx",
                         dataType: 'json',
                         data: { type: "add", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
@@ -1129,6 +1130,7 @@ $(document).ready(function () {
                           else {
                               alertify.error("Failed to add in report exclude list.");
                           }
+                          enableInterface();
                       });
 
 
@@ -1136,8 +1138,9 @@ $(document).ready(function () {
 
                 case "removereportexclude":
                     $("div#generalProgressBox").show();
+                    disableInterface();
                     $.ajax({
-                        type: "GET",
+                        type: "POST",
                         url: "/Evaluation/Handlers/ReportExclude.ashx",
                         dataType: 'json',
                         data: { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
@@ -1154,6 +1157,7 @@ $(document).ready(function () {
                           else {
                               alertify.error("Failed to remove from report exclude list.");
                           }
+                          enableInterface();
                       });
 
 
@@ -1163,7 +1167,7 @@ $(document).ready(function () {
 
                     $("div#generalProgressBox").show();
                     $.ajax({
-                        type: "GET",
+                        type: "POST",
                         url: "/Evaluation/Handlers/AbstractReview.ashx",
                         dataType: 'json',
                         data: { type: "add", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
@@ -1189,7 +1193,7 @@ $(document).ready(function () {
                 case "removereview":
                     $("div#generalProgressBox").show();
                     $.ajax({
-                        type: "GET",
+                        type: "POST",
                         url: "/Evaluation/Handlers/AbstractReview.ashx",
                         dataType: 'json',
                         data: { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
