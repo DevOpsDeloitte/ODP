@@ -38,7 +38,7 @@
         </ul>--%>
 
         <div class="comment-box">
-            <div class="comment-entry" ng-show="mdata.displaymode=='Insert'">
+            <div class="comment-entry" id="commentsInsertBox" ng-show="mdata.displaymode=='Insert'">
                 <div class="commentsHeader">Coding Comments</div>
                 <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
             </div>
@@ -55,7 +55,7 @@
         </ul>
 
 
-        <div class="tab" ng-show="showComments()">
+        <div class="tab" id="tabcontainer" ng-show="showComments()">
             <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders()">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
                 <div ng-show=" (mdata.displaymode=='View' && mdata.formmode != 'Coder Consensus')  || mdata.formmode != 'Coder Consensus'">
