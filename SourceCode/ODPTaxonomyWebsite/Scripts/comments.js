@@ -44,9 +44,10 @@ $(function () {
         //$("div#commentsInsertBox").css({ top: e.targetTouches[0].pageY });
     }, false);
 
-    $("textarea#comments div#commentsInsertBox").onclick = function (e) {
+    $("textarea#comments").on("click touchstart", function (e) {
+        updateLog("comments event "+e, 0, 0);
         e.stopPropagation();
-    };
+    });
 
 
     menuRight.onclick = function (e) {
@@ -115,7 +116,7 @@ $(document).ready(function () {
         e.stopImmediatePropagation();
         e.preventDefault();
         currentScrollPosition = $(document).scrollTop();
-        //console.log(" focusin focus " + currentScrollPosition);
+        console.log(" focusin focus " + currentScrollPosition);
         //$(document).scrollTop(currentScrollPosition);
     });
 
