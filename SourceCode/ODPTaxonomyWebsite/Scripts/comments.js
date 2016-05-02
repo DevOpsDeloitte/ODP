@@ -14,14 +14,18 @@ $(function () {
     function getBottom() {
         var $el = $('#tabcontainer');
         var bottom = $el.offset().top + $el.outerHeight(true)
-        return bottom;
+        return bottom < 120 ? 120 : bottom;
     };
 
     function onLoadSetCommentsBox() {
         var b = getBottom();
+        console.log(" bottom val :: " + b);
         if (b > 0) {
             $("textarea#comments").css({ top: b });
         }
+        //else {
+        //    $("textarea#comments").css({ top: '120px' });
+        //}
     };
     onLoadSetCommentsBox();
 
@@ -53,7 +57,6 @@ $(function () {
     menuRight.onclick = function (e) {
         if (iOS) {
             updateLog("focus event ", 0, 0);
-            //console.log($(document.activeElement));
             //$("textarea#comments").css({ top: e.targetTouches[0].pageY });
             $("textarea#comments").focus();
         }

@@ -398,11 +398,12 @@ and (min-device-width : 768px)
 and (max-device-width : 1366px)  {
 
     textarea#comments {
-        background-color: #ccc;
-        border: 1px solid #000;
+        /*background-color: #efefef; */
+        border: 1px solid #ccc;
         position: absolute;
-        right: 0px;
+        left: 3px;
         z-index: 9999999;
+        width:98%;
     }
 
     /*div#commentsInsertBox{
