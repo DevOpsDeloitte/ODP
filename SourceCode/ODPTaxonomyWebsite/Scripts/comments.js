@@ -3,6 +3,12 @@
 var currentScrollPosition = 0;
 var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
+function getBottom() {
+    var $el = $('#tabcontainer');
+    var bottom = $el.offset().top + $el.outerHeight(true)
+    return bottom < 120 ? 120 : bottom;
+};
+
 $(function () {
     var $log = $("#log");
 
@@ -11,11 +17,7 @@ $(function () {
         console.log('Type: ' + type + '; X: ' + x + '; Y: ' + y);
     };
 
-    function getBottom() {
-        var $el = $('#tabcontainer');
-        var bottom = $el.offset().top + $el.outerHeight(true)
-        return bottom < 120 ? 120 : bottom;
-    };
+
 
     function onLoadSetCommentsBox() {
         var b = getBottom();
@@ -137,6 +139,16 @@ $(document).ready(function () {
 
         $(".tab-content").not(tab).removeClass("current");
         $(tab).addClass("current");
+
+
+        // recompute the textarea overlap area.
+        if (iOS) {
+            var b = getBottom();
+            //console.log(" bottom val :: " + b);
+            if (b > 0) {
+                $("textarea#comments").css({ top: b });
+            }
+        }
 
         //$(".tab-content").not(tab).css("display", "none");
         //$(tab).fadeIn();
