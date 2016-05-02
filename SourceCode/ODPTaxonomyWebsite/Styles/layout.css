@@ -184,7 +184,7 @@ a#showLeftPushed { background: #7C7C7C; text-align: right; color: #FFF; padding:
 .cbp-spmenu-left {	left: -300px; }
 .cbp-spmenu-left.cbp-spmenu-open {	left: 0px; }
 .cbp-spmenu-right {	right: -300px; -webkit-overflow-scrolling: touch; }
-.cbp-spmenu-right.cbp-spmenu-open { right: 0px; overflow-y: auto; overflow-x: hidden; }
+.cbp-spmenu-right.cbp-spmenu-open { right: 0px; overflow-y: auto; overflow-x: hidden; height: 100%; }
 
 a#showLeftPushed, a#showRightPushed, a.expand-comments, .cbp-spmenu a.expand-comments { background: #7C7C7C; text-align: right; color: #FFF; padding: 10px 12px; font-size: 15px; border: 0; box-shadow: none; }
 a#showRightPushed { text-align: left; }
@@ -388,4 +388,32 @@ table.dataTable thead .sorting {background: none !important; }
          url('OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
     font-weight: normal;
     font-style: normal;
+}
+
+
+
+@media only screen 
+and (min-device-width : 768px) 
+/*and (max-device-width : 1024px)  {*/
+and (max-device-width : 1366px)  {
+
+    textarea#comments {
+        /*background-color: #efefef; */
+        border: 1px solid #ccc;
+        position: absolute;
+        left: 3px;
+        z-index: 9999999;
+        width:98%;
+    }
+
+    /*div#commentsInsertBox{
+        background-color: #ccc;
+        border: 1px solid #000;
+        position: absolute;
+        right: 0px;
+        z-index: 9999999;
+    }*/
+
+
+
 }
