@@ -10,10 +10,11 @@ div#mainGlossary { margin-top: 40px }
   .button:hover { background: #D3D3D3; color: #666; border: 1px solid #CFCFCF; }
   .container .button:active { background: #E6E6E6; color: #666; border: 1px solid #CFCFCF; }
   .fa { font-family: 'FontAwesome', Arial !important; }
-  
+
 div.hdesc, div.hpart
 {
-    font-size: 13px;
+    font-size: 16px;
+    line-height: 21px;
 }
 
 hr {
@@ -22,4 +23,9 @@ hr {
     clear: both;
     margin: 10px 0 10px;
     height: 0;
+}
+
+@media print {
+body { background-color: #fff; padding: 0; }
+#printButton, #closeButton { display: none; }
 }

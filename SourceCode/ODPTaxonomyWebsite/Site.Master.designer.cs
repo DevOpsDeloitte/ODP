@@ -76,6 +76,15 @@ namespace ODPTaxonomyWebsite {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl menuContainer;
         
         /// <summary>
+        /// LoginView1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LoginView LoginView1;
+        
+        /// <summary>
         /// pnl_admin control.
         /// </summary>
         /// <remarks>
@@ -130,6 +139,15 @@ namespace ODPTaxonomyWebsite {
         protected global::System.Web.UI.WebControls.LinkButton btn_viewAbstractList_odpSup;
         
         /// <summary>
+        /// btn_KappaLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btn_KappaLink;
+        
+        /// <summary>
         /// pnl_odp control.
         /// </summary>
         /// <remarks>
@@ -182,6 +200,15 @@ namespace ODPTaxonomyWebsite {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btn_viewAbstract_coderSup;
+        
+        /// <summary>
+        /// btn_KappaLink2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btn_KappaLink2;
         
         /// <summary>
         /// pnl_coder control.

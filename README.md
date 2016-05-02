@@ -1,4 +1,8 @@
-odp-taxonomy
-============
+# ODP Taxonomy - PACT Tool
+---
 
-The ODP Taxonomy Project
+
+# Please use [***Visual Studio 2015 Community edition***](https://www.visualstudio.com/en-us/products/visual-studio-community-vs.aspx)  for editing this project.
+
+
+## Current Branch in Production - **dev1.3release**

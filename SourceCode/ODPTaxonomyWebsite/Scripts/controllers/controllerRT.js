@@ -1,4 +1,4 @@
-app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, $timeout) {
+app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, $firebaseObject, $timeout) {
 
 
 
@@ -8,7 +8,6 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         window.MYSCOPE = $scope;
         $scope.mdata = {};
         $scope.local = {};
-        //$scope.FIREBASE_LOCATION = "https://intense-fire-1108.firebaseio.com";
         $scope.FIREBASE_LOCATION = window.FIREBASE_CONFIG;
         FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
         $scope.mdata.studyfocus = [];
@@ -41,66 +40,38 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
         console.log(" model team id :: " + $scope.mdata.teamid);
 
         var teamRef = new Firebase(FIREBASE_LOCATION + "/teams" + "/" + $scope.mdata.teamid);
-        var sync = $firebase(teamRef);
-        var syncObject = sync.$asObject();
-        syncObject.$bindTo($scope, "mdata");
+        //var sync = $firebase(teamRef);
+        var sync = $firebaseObject(teamRef);
 
-        $scope.$watch("mdata", function () {
-
-            //console.log(" mdata model changed : " + $scope.mdata.firebaseOn);
-            if (!$scope.mdata.firebaseOn) {
-                // console.log(" time to redirect -- watch over. ");
-                //window.location = "Evaluation.aspx";
-            }
+        sync.$bindTo($scope, "mdata").then(function () {
+            
         });
 
-        // check & listen for team consensus in progress + exist otherwise.
+        //var syncObject = sync.$asObject();
+        //syncObject.$bindTo($scope, "mdata");
 
-        //        var firebasedetectURL = FIREBASE_LOCATION + "/teams"; //  +"/" + $scope.mdata.teamid;
-        //        var teamdetectObj = new Firebase(firebasedetectURL);
-        //        $timeout(function () {
-        //       
-        //            teamdetectObj.child($scope.mdata.teamid).once('value', function (snapshot) {
-        //                var exists = (snapshot.val() !== null);
-        //                if (exists) {
-        //                    console.log("Team Exists :: all good ");
+        $scope.$watch("mdata", function (newValue, oldValue) {
+            if (newValue.comments !== oldValue.comments && newValue.comments !== undefined) {
+                //trigger open
+                if (newValue.comments.length > 0) {
+                    var menuElement = document.querySelector('#cbp-spmenu-s2');
+                    if (!angular.element(menuElement).hasClass('cbp-spmenu-open')) {
+                        angular.element(menuElement).addClass('cbp-spmenu-open');
+                        //newValue.comments = newValue.comments.replace(/\n\r?/g, '<br />');
+                        //console.log(" mdata model changed : " + newValue.comments + " old value :: " + oldValue.comments);
+                    }
+                }
 
-        //                }
-        //                else {
-        //                    console.log(" time to redirect -- watch over. ");
-        //                    window.location = "Evaluation.aspx";
-        //                }
-        //            });
+            }
+            
+            //if (!$scope.mdata.comments) {
+                //console.log(" mdata model changed : " + newValue.comments + " old value :: " + oldValue.comments);
+                // console.log(" time to redirect -- watch over. ");
+                //window.location = "Evaluation.aspx";
+            // }
 
+        }, true);
 
-
-        //            teamdetectObj.on("value", function (snap) {
-        //                var teamexists = false;
-        //                if (snap.val()) {
-        //                    console.log(" team detect object :: value change " + snap.val());
-        //                    $globdata = snap.val();
-        //                    if (snap.val() !== undefined) {
-        //                        console.log(typeof (snap.val()));
-        //                        $team.keys = Object.keys(snap.val());
-        //                        for (var i = 0; i < $team.keys.length; i++) {
-        //                            console.log(" team keys " + i + "    " + $team.keys[i]);
-        //                            if ($team.keys[i] == $scope.mdata.teamid) {
-        //                                teamexists = true;
-        //                            }
-        //                        }
-        //                    }
-        //                }
-        //                else {
-        //                    teamexists = false;
-        //                }
-        //                if (!teamexists) {
-        //                    console.log(" time to redirect -- watch over. ");
-        //                    window.location = "Evaluation.aspx";
-        //                }
-        //            });
-        //         
-
-        //        }, 300);
 
         $scope.detectTeam();
 
@@ -109,7 +80,7 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
     }
 
     $scope.detectTeam = function () {
-        var firebasedetectURL = $scope.FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
+        var firebasedetectURL = $scope.FIREBASE_LOCATION + "/presence"  +"/" + $scope.mdata.teamid;
         var teamdetectObj = new Firebase(firebasedetectURL);
 
         $timeout(function () {
@@ -163,6 +134,41 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
     },
 
     $scope.init();
+
+    $scope.loadComments = function () {
+         window.CoderComments= $scope.mdata.CoderComments;
+    };
+
+    $scope.showIQSCoders = function () {
+        //angular.element(document.getElementById('IQS')).scope().showIQSCoders()
+        if ($scope.mdata.formmode === undefined) return false;
+        //return $scope.mdata.formmode == "Coder Consensus" || $scope.mdata.formmode.indexOf("Comparison") != -1;
+        return $scope.mdata.formmode == "Coder Consensus" || $scope.mdata.formmode.indexOf("Comparison") != -1 || $scope.mdata.formmode == "ODP Staff Member Consensus";
+    };
+
+    $scope.showODPCoders = function () {
+        if ($scope.mdata.formmode === undefined) return false;
+        return $scope.mdata.formmode != "Coder Consensus" || $scope.mdata.formmode.indexOf("Comparison") != -1;
+    };
+
+    $scope.showComments = function () {
+        //angular.element(document.getElementById('IQS')).scope().showComments()
+        //return ($scope.mdata.displaymode != 'Insert') && ($scope.mdata.formmode.indexOf("Evaluation") == -1);
+        if ($scope.mdata.formmode === undefined) return false;
+        return ($scope.mdata.formmode.indexOf("Consensus") != -1 || $scope.mdata.formmode.indexOf("Comparison") != -1);
+    };
+
+    $scope.showODPDefault = function () {
+        if ($scope.mdata.formmode === undefined) return false;
+        return $scope.mdata.formmode.indexOf("ODP") != -1
+    };
+
+    $scope.showCoderDefault = function () {
+        if ($scope.mdata.formmode === undefined) return false;
+        return $scope.mdata.formmode.indexOf("Coder") != -1
+    };
+
+    //$scope.loadComments();
 
 
 

@@ -51,11 +51,15 @@
                 
                     <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                         <LoggedInTemplate>
-                            Welcome <asp:LoginName ID="HeadLoginName" runat="server" />
-                            
-                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
+                            Welcome: <asp:LoginName ID="HeadLoginName" runat="server" />
+<%--                            
+                            <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="button" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>--%>
                         </LoggedInTemplate>
                     </asp:LoginView>
+                </div>
+
+                <div class="comments-display" id="comments-button">
+                    <a href="" id="showRight" class="button">Comments</a>
                 </div>
             </div>    
         </div>
@@ -65,10 +69,22 @@
             
         </div>
         <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+            
+<%--                   <asp:LoginView ID="LoginView2" runat="server" EnableViewState="false">
+                        <LoggedInTemplate>
+                            User : <asp:LoginName ID="HeadLoginName" runat="server" />
 
+                        </LoggedInTemplate>
+                    </asp:LoginView>--%>
+               
                         <a href="#" id="showLeftPushed" class="close-menu">Close Menu</a>
 
                         <a href="/Default.aspx">Home</a>
+                        <asp:LoginView ID="LoginView1" runat="server" EnableViewState="false">
+                                    <LoggedInTemplate>
+                                             <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" class="buttonx" LogoutText="Log Out" LogoutPageUrl="~/" OnLoggingOut="HeadLoginStatus_OnLoggingOut"/>
+                                    </LoggedInTemplate>
+                        </asp:LoginView>
                         
                         <div runat="server" visible="false" id="pnl_admin"><div class="nav-role">Role: Admin</div>
                             <asp:LinkButton OnClick="btn_manageUserAccounts_admin_Click" runat="server" ID="btn_manageUserAccounts_admin" Text="Manage User Accounts" />
@@ -78,6 +94,7 @@
                         <div runat="server" visible="false" id="pnl_odpSup"><div class="nav-role">Role: ODP Supervisor</div>
                             <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></a>
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" />
+                            <asp:LinkButton runat="server" ID="btn_KappaLink" Text="Reports" OnClick="btn_KappaLink_Click" />
                         </div>
 
                         <div runat="server" visible="false" id="pnl_odp"><div class="nav-role">Role: ODP Staff Member</div>
@@ -88,6 +105,7 @@
                             <asp:LinkButton OnClick="btn_manageTeams_coderSup_Click" runat="server" ID="btn_manageTeams_coderSup" Text="Manage Teams" />
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_coderSup" Text="View Abstract List" OnClick="btn_viewAbstractList_coderSup_Click" /> 
                             <asp:LinkButton class="" OnClick="btn_viewAbstract_coderSup_Click" runat="server" ID="btn_viewAbstract_coderSup" Text="View/Code Abstract" />
+                            <asp:LinkButton runat="server" ID="btn_KappaLink2" Text="Reports" OnClick="btn_KappaLink_Click" />
                         </div>
 
                         <div runat="server" visible="false" id="pnl_coder"><div class="nav-role">Role: Coder</div>
@@ -97,7 +115,60 @@
                             <asp:HyperLink runat="server" ID="link_editProfile" NavigateUrl="~/AccountManagement/EditProfile.aspx" Text="Edit Profile"></asp:HyperLink>
                         </div>
         </nav>                
+       <%-- <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right comments" id="cbp-spmenu-s2" style="height: 253px;">
+    <div class="comments-close-group">
+      <a href="http://odptaxtraining1.iqsolutions.com/Evaluation/Evaluation.aspx#" id="showRightPushed" class="close-menu active">Close Comments</a>
+      <a href="" class="expand-comments">Expand</a>
+    </div>  
 
+   <ul class="tabs-menu">
+        <li class=""><a href="#IQS">IQS Coders</a></li>
+        <li class="current"><a href="#ODP">ODP Coders</a></li>
+    </ul>
+
+    <div class="tab">
+    <div id="IQS" class="tab-content current" style="display: none;">
+        <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>
+
+        <hr>
+        
+        <div class="comment disabled">
+        <h5>003</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+
+        <div class="comment disabled">
+        <h5>012</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+
+        <div class="comment disabled">
+        <h5>004</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+    </div>
+    <div id="ODP" class="tab-content" style="display: block;">
+        <textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>
+
+        <hr>
+        
+        <div class="comment disabled">
+        <h5>005</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+
+        <div class="comment disabled">
+        <h5>011</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+
+        <div class="comment disabled">
+        <h5>004</h5>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet purus urna. Proin dictum fringilla enim.</p>
+        </div>
+    </div>
+
+    </div></nav>--%>
         <div class="sixteen columns">
             <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
         </div>
@@ -142,7 +213,6 @@
                 classie.toggle(menuLeft, 'cbp-spmenu-open');
                 return false;
             };
-
         </script>
 
         <script type="text/javascript">

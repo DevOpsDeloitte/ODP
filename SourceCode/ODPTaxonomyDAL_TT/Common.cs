@@ -637,6 +637,8 @@ namespace ODPTaxonomyDAL_TT
                         foreach (var i in matchesAbstract)
                         {
                             abstractItem = i;
+                            int AbsStatusID = db.tbl_AbstractStatusChangeHistories.Where(h2 => h2.AbstractID == abstractId).OrderByDescending(h2 => h2.AbstractStatusChangeHistoryID).Select(h2 => h2.AbstractStatusID).FirstOrDefault();
+                            if (AbsStatusID != 13 && AbsStatusID != 14) return;
                         }
 
                         if (abstractItem != null)
@@ -828,6 +830,7 @@ namespace ODPTaxonomyDAL_TT
             
             using (DataDataContext db = new DataDataContext(connString))
             {
+                db.CommandTimeout = 0;
                 try
                 {
                     matches = db.rpt_OPA(abstracts).ToList<rpt_OPAResult>();
@@ -848,6 +851,7 @@ namespace ODPTaxonomyDAL_TT
             
             using (DataDataContext db = new DataDataContext(connString))
             {
+                db.CommandTimeout = 0;
                 try
                 {
                     matches = db.rpt_KappaData(abstracts).ToList<rpt_KappaDataResult>();
@@ -868,6 +872,7 @@ namespace ODPTaxonomyDAL_TT
             
             using (DataDataContext db = new DataDataContext(connString))
             {
+                db.CommandTimeout = 0;
                 try
                 {
                     matches = db.rpt_Cdr_ODPNotesPDF(abstracts, domain).ToList<rpt_Cdr_ODPNotesPDFResult>();
@@ -888,6 +893,7 @@ namespace ODPTaxonomyDAL_TT
              
             using (DataDataContext db = new DataDataContext(connString))
             {
+                db.CommandTimeout = 0;
                 try
                 {
                     matches = db.rpt_AbstractStatusTrail(abstracts).ToList<rpt_AbstractStatusTrailResult>();
@@ -908,6 +914,7 @@ namespace ODPTaxonomyDAL_TT
             
             using (DataDataContext db = new DataDataContext(connString))
             {
+                db.CommandTimeout = 0;
                 try
                 {
                     matches = db.rpt_Cdr_ODP_IndividualCoding(abstracts).ToList<rpt_Cdr_ODP_IndividualCodingResult>();

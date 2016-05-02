@@ -193,6 +193,20 @@ namespace ODPTaxonomyWebsite
             }
         }
 
+        protected void btn_KappaLink_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session["CurrentRole"] = role_odpSup;
+                Response.Redirect("/ReportingApp", false);
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on button click.");
+            }
+        }
+
         //Admin
         protected void btn_manageUserAccounts_admin_Click(object sender, EventArgs e)
         {

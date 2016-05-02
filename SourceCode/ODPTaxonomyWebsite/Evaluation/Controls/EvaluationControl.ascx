@@ -5,6 +5,7 @@
   ================================================== -->
   <link rel="stylesheet" href="../styles/alertify.css">    
   <link rel="stylesheet" href="../styles/line/tax.css">
+  <link rel="stylesheet" href="../styles/print-evaluation.css">
 
 
 	<!-- Favicons
@@ -14,11 +15,112 @@
 	<link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png">
 <script type="text/javascript">
-   // $scope.mdata.formmode = "<%= FormMode %>"
+    window.FormMode = '<%= FormMode %>';
+    window.DisplayMode = '<%= DisplayMode %>';
+    window.CoderComments = <%= CommentsJSON %>;
+    //window.Comments ='<%= Comments.Replace(Environment.NewLine, "<br />") %>';
+    window.Comments ='<%= System.Web.HttpUtility.JavaScriptStringEncode(Comments) %>';
+    //window.Comments = '';
 </script>
 
-<div class="container" id="tax-form" ng-controller="ODPFormCtrl">
+<div class="container evaluation" id="tax-form" ng-controller="ODPFormCtrl">
 
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right comments" id="cbp-spmenu-s2" style="height: 253px;">
+        <div class="comments-close-group">
+            <a href="" id="showRightPushed" class="close-menu active">Close Comments</a>
+            <a href="" class="expand-comments">Expand</a>
+        </div>
+
+
+<%--        <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
+            <li class="" ng-class="{ 'current' : showCoderDefault() }" ><a href="#IQS">IQS Coders</a></li>
+            <li class="" ng-class="{ 'current' : showODPDefault() }" ><a href="#ODP">ODP Coders</a></li>
+        </ul>--%>
+
+        <div class="comment-box">
+            <div class="comment-entry" id="commentsInsertBox" ng-show="mdata.displaymode=='Insert'">
+                <div class="commentsHeader">Coding Comments</div>
+                <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
+            </div>
+
+            <div class="comment-entry" ng-show="mdata.displaymode=='View'">
+                <div class="commentsHeader">Coding Comments</div>
+                <div id="commentsBox" ng-bind-html="mdata.comments | newline"><%= Comments.Replace(Environment.NewLine, "<br />") %></div>
+            </div>
+        </div>
+
+                <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
+            <li class="" ng-class="{ 'current' : showCoderDefault() }" ><a href="#IQS">IQS Coders</a></li>
+            <li class="" ng-class="{ 'current' : showODPDefault() }" ><a href="#ODP">ODP Coders</a></li>
+        </ul>
+
+
+        <div class="tab" id="tabcontainer" ng-show="showComments()">
+            <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders()">
+                <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
+                <div ng-show=" (mdata.displaymode=='View' && mdata.formmode != 'Coder Consensus')  || mdata.formmode != 'Coder Consensus'">
+                <strong>IQS Consensus Comments</strong>
+                <hr />
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.IQConsensusUser.UserName}}</h5>
+                    <p ng-bind-html="mdata.CoderComments.IQConsensusUser.UserComment | newline"><%--{{mdata.CoderComments.IQConsensusUser.UserComment}}--%></p>
+                </div>
+                </div>
+
+
+                <strong>IQS Coders Comments</strong>
+                <hr>
+
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.IQCoders[0].UserName}}</h5>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[0].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[0].UserComment}}--%></p>
+                </div>
+
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.IQCoders[1].UserName}}</h5>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[1].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[1].UserComment}}--%></p>
+                </div>
+
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.IQCoders[2].UserName}}</h5>
+                    <p ng-bind-html="mdata.CoderComments.IQCoders[2].UserComment | newline"><%--{{mdata.CoderComments.IQCoders[2].UserComment}}--%></p>
+                </div>
+            </div>
+            <div id="ODP" class="tab-content" style=""  ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
+                <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
+                <div ng-show="mdata.formmode != 'ODP Staff Member Consensus'"">
+                <strong>ODP Consensus Comments</strong>
+                <hr />
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.ODPConsensusUser.UserName}}</h5>
+                    <p ng-bind-html="mdata.CoderComments.ODPConsensusUser.UserComment | newline"><%--{{mdata.CoderComments.ODPConsensusUser.UserComment}}--%></p>
+                </div>
+                </div>
+
+
+                <strong>ODP Coders Comments</strong>
+                <hr>
+
+
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.ODPCoders[0].UserName}}</h5>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[0].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[0].UserComment}}--%></p>
+                </div>
+
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.ODPCoders[1].UserName}}</h5>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[1].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[1].UserComment}}--%></p>
+                </div>
+
+                <div class="comment disabled">
+                    <h5>{{mdata.CoderComments.ODPCoders[2].UserName}}</h5>
+                    <p ng-bind-html="mdata.CoderComments.ODPCoders[2].UserComment | newline"><%--{{mdata.CoderComments.ODPCoders[2].UserComment}}--%></p>
+                </div>
+            </div>
+
+        </div>
+
+    </nav>
     <div class="sixteen columns" ng-cloak>
     <h2 ng-show="mdata.formmode.indexOf('Evaluation') != -1">Individual Coding</h2>
     <h2 ng-show="mdata.formmode.indexOf('Consensus') != -1">Consensus Coding</h2>
@@ -106,7 +208,7 @@
         </div>
 
      <div class="sixteen columns">
-         <div>
+         <div class="evaluation-details">
              <span class="titles">Application ID :</span>
              <span class="titlevals"><%= applicationID %></span>
              <br />
@@ -115,23 +217,16 @@
              <br />
              <span class="titles">PI Project Leader :</span>
              <span class="titlevals"><%= piProjectLeader %></span>
-         </div>
-   
-     </div>
-
-    <!-- <div class="sixteen columns">
-         <div>
+             <!--<br>
              <span class="titles">Last Name :</span>
              <span class="titlevals"><%= lastName %></span>
-         </div>  
-     </div>-->
-
-       <div class="sixteen columns">
-         <div>
+             -->
+             <br>
              <span class="titles">User ID :</span>
              <span class="titlevals"><%= userName %></span>
-         </div>  
-     
+         </div>
+   
+     </div>    
 
        <div class="sixteen columns tax-form-buttons">
           
@@ -159,7 +254,8 @@
     
 
 
-    <div class="sixteen columns"> 
+    <div class="sixteen columns">
+    <div class="print-left">
 
         <table class="bordered zebra-striped" id="study-focus" class="study-focus">
             <div class="captionTitle">A. Study Focus</div>
@@ -178,6 +274,9 @@
 
             </tbody>
         </table>
+
+        </div>
+        <div class="print-right">
 
         <table class="bordered zebra-striped" id="entities-studied">
 <%--            <caption>B. Entities Studied</caption>--%>
@@ -249,14 +348,16 @@
 
         </div>
 
-    <div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
+        </div>
+
+    <%--<div class="sixteen columns" ng-show="mdata.displaymode=='Insert'"> 
         <div class="commentsHeader">Comments</div>
         <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
     </div>
      <div class="sixteen columns" ng-show="mdata.displaymode=='View'"> 
          <div class="commentsHeader">Comments</div>
          <div id="commentsBox">{{ mdata.comments }}<%= Comments %></div>
-     </div>
+     </div>--%>
 
     </div>
 </div>
@@ -267,23 +368,26 @@
 
 <!-- JS
 ================================================== -->
-<script src="../scripts/jquery.js"></script>
+<%--<script src="../scripts/jquery.js"></script>--%>
+<script src="../scripts/jquery.ns-autogrow.min.js"></script>
 <script src="../scripts/main.js"></script>
 <script src="../scripts/icheck.js"></script>
 <script src="../scripts/alertify.js"></script>
 <script src="../scripts/angular/angular-latest.min.js"></script>
+<script src="../scripts/angular/angular-sanitize.min.js"></script>
 <script src="../scripts/angular/firebase.js"></script>
 <script src="../scripts/angular/angularfire.min.js"></script>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.18/angular.min.js"></script>-->
-  <!-- Firebase -->
-<!--<script src="https://cdn.firebase.com/js/client/1.0.18/firebase.js"></script>-->
-<!-- AngularFire Library -->
-<!--<script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>-->
+
+<%--
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+<script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>--%>
 
 <script src="../scripts/modules/module.js"></script>
 <script src="../scripts/controllers/controller.js"></script>
 <script src="../scripts/directives/directive.js"></script>
 <script src="../scripts/app.js"></script>
+<script src="../scripts/comments.js"></script>
 <!-- <script src="js/controllers/controller.js"></script> -->
 
 

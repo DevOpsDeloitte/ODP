@@ -23,6 +23,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -107,6 +108,7 @@
     <Content Include="Evaluation\ViewAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
     <Content Include="ForgotPassword.aspx" />
+    <Content Include="Images\arrow-lr.png" />
     <Content Include="Images\clip.png" />
     <Content Include="Images\details_close.png" />
     <Content Include="Images\details_open.png" />
@@ -119,16 +121,36 @@
     <Content Include="Libraries\Newtonsoft.Json.xml" />
     <Content Include="Login.aspx" />
     <Content Include="notes\notesFor_16_CoderEvaluation_10.xml" />
+    <Content Include="ReportingApp\css\report.css" />
+    <Content Include="ReportingApp\css\report.min.css">
+      <DependentUpon>report.css</DependentUpon>
+    </Content>
+    <Content Include="ReportingApp\default.aspx" />
+    <Content Include="ReportingApp\scripts\angular-ui-router.min.js" />
+    <Content Include="ReportingApp\scripts\app.js" />
+    <Content Include="ReportingApp\scripts\chosen.jquery.js" />
+    <Content Include="ReportingApp\scripts\chosen.jquery.min.js" />
+    <Content Include="ReportingApp\scripts\controllers\MainReportController.js" />
+    <Content Include="ReportingApp\scripts\controllers\AbstractSummaryReportController.js" />
+    <Content Include="ReportingApp\scripts\controllers\ReportController.js" />
+    <Content Include="ReportingApp\scripts\directives\directives.js" />
+    <Content Include="ReportingApp\scripts\services\services.js" />
+    <Content Include="ReportingApp\scripts\templates\summary.html" />
+    <Content Include="ReportingApp\scripts\templates\reportsummary.html" />
+    <Content Include="ReportingApp\scripts\templates\report.html" />
     <Content Include="Scripts\alertify.js" />
     <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\angular\angular-csp.css" />
     <Content Include="Scripts\angular\angular-latest.min.js" />
+    <Content Include="Scripts\angular\angular-sanitize.min.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\angularfire.min.js" />
     <Content Include="Scripts\angular\firebase.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\classie.js" />
+    <Content Include="Scripts\commentsRT.js" />
+    <Content Include="Scripts\comments.js" />
     <Content Include="Scripts\controllers\controller.js" />
     <Content Include="Scripts\controllers\controllerRT.js" />
     <Content Include="Scripts\datatables\app.js" />
@@ -142,6 +164,7 @@
     <Content Include="Scripts\icheck.js" />
     <Content Include="Scripts\icheck.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.ns-autogrow.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modules\module.js" />
     <Content Include="Scripts\persist.js" />
@@ -308,7 +331,6 @@
     <Compile Include="Evaluation\Classes\DBData.cs" />
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
@@ -369,6 +391,9 @@
     <Compile Include="Evaluation\Handlers\AbstractsReopen.ashx.cs">
       <DependentUpon>AbstractsReopen.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\Comments.ashx.cs">
+      <DependentUpon>Comments.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\Evaluations.cs" />
     <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
       <DependentUpon>Filters.ashx</DependentUpon>
@@ -376,8 +401,14 @@
     <Compile Include="Evaluation\Handlers\GenerateExcelReport.ashx.cs">
       <DependentUpon>GenerateExcelReport.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\KappaExclude.ashx.cs">
+      <DependentUpon>KappaExclude.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\RedirectionMessage.ashx.cs">
       <DependentUpon>RedirectionMessage.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\ReportExclude.ashx.cs">
+      <DependentUpon>ReportExclude.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\ManageTeams.aspx.cs">
       <DependentUpon>ManageTeams.aspx</DependentUpon>
@@ -432,6 +463,17 @@
       <DependentUpon>Print.Master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportingApp\default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportingApp\default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportingApp\handlers\ReportingService.cs" />
+    <Compile Include="ReportingApp\handlers\ReportService.ashx.cs">
+      <DependentUpon>ReportService.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -550,11 +592,18 @@
     <Content Include="Evaluation\Handlers\GenerateExcelReport.ashx" />
     <Content Include="Evaluation\Handlers\RedirectionMessage.ashx" />
     <Content Include="Evaluation\Handlers\AbstractDetail.ashx" />
+    <Content Include="Evaluation\Handlers\Comments.ashx" />
+    <Content Include="Evaluation\Handlers\KappaExclude.ashx" />
+    <Content Include="Evaluation\Handlers\ReportExclude.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
     <Content Include="Print.Master" />
+    <None Include="Properties\PublishProfiles\ODP Taxonomy Publish.pubxml" />
     <None Include="Properties\PublishProfiles\ODPTaxonomy.pubxml" />
+    <Content Include="ReportingApp\css\report.scss" />
+    <Content Include="ReportingApp\handlers\ReportService.ashx" />
+    <Content Include="ReportingApp\handlers\test.csv" />
     <None Include="Scripts\angular\.bower.json" />
     <None Include="Scripts\angular\angular.min.js.gzip" />
     <None Include="Scripts\angular\angular.min.js.map" />

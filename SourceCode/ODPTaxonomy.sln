@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyCommon", "ODPTax
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExcelReportCleaner", "ExcelReportCleaner\ExcelReportCleaner.csproj", "{CEBC1009-4F24-49C5-808C-B61008AB2298}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyReportDAL", "ODPTaxonomyReportDAL\ODPTaxonomyReportDAL.csproj", "{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,6 +109,16 @@ Global
 		{CEBC1009-4F24-49C5-808C-B61008AB2298}.Release|Mixed Platforms.Build.0 = Release|x86
 		{CEBC1009-4F24-49C5-808C-B61008AB2298}.Release|x86.ActiveCfg = Release|x86
 		{CEBC1009-4F24-49C5-808C-B61008AB2298}.Release|x86.Build.0 = Release|x86
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{421210C5-4B8B-46C3-AF1A-1F18B65EEDA9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

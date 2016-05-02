@@ -249,16 +249,15 @@ namespace ODPTaxonomyDAL_JY
             List<AbstractListRow> Abstracts = new List<AbstractListRow>();
             AbstractListViewData data = new AbstractListViewData();
             string contractorName = getContractorName();
-            var cacheKappaData = data.getAllKappaRecords();
+            var cacheKappaData = data.getAllKappaRecordsK1K2Only();
             var cacheSubmissions = data.getAllSubmissionRecords();
             var cacheEvaluations = data.getAllEvaluationRecords();
-            var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecords();
-            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecords();
+            var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecordsID6();
+            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecordsID7();
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
-                //HttpContext.Current.Response.Write("done :: " + i + "<br>");
-                //HttpContext.Current.Response.Flush();
+
                 ParentAbstracts[i].GetSubmissionData2(SubmissionTypeEnum.CODER_CONSENSUS, cacheSubmissions, cacheEvaluations, cacheE_StudyDesignPurposeAnswers, cacheF_PreventionCategoryAnswers);
                 ParentAbstracts[i].GetAbstractScan(AbstractView);
                 ParentAbstracts[i].ChildRows = new List<AbstractListRow>();

@@ -48,6 +48,32 @@ namespace ODPTaxonomyUtility_TT
             }
             return dt;
         }
+        public static DataTable ListToDataTablePrecision<T>(List<T> list, string tableName = "")
+        {
+            DataTable dt = new DataTable();
+            dt.TableName = tableName;
+            foreach (PropertyInfo info in typeof(T).GetProperties())
+            {
+                dt.Columns.Add(new DataColumn(info.Name, GetNullableType(info.PropertyType)));
+            }
+            foreach (T t in list)
+            {
+                DataRow row = dt.NewRow();
+                foreach (PropertyInfo info in typeof(T).GetProperties())
+                {
+                    if (!IsNullableType(info.PropertyType))
+                        row[info.Name] = info.GetValue(t, null);
+                    else
+                        row[info.Name] = (info.GetValue(t, null) ?? DBNull.Value);
+                }
+                dt.Rows.Add(row);
+            }
+            foreach (DataColumn col in dt.Columns)
+            {
+                col.ColumnName = col.ColumnName.Replace("_", " ").Replace("u0025","%");
+            }
+            return dt;
+        }
         private static Type GetNullableType(Type t)
         {
             Type returnType = t;
@@ -121,6 +147,21 @@ namespace ODPTaxonomyUtility_TT
 
                 ds.Tables.Add(ListToDataTable(list, tableName));
                 
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static DataSet CreateExcelDocumentPrecision<T>(List<T> list, System.Web.HttpResponse Response, string tableName, DataSet ds)
+        {
+            try
+            {
+
+                ds.Tables.Add(ListToDataTablePrecision(list, tableName));
+
                 return ds;
             }
             catch (Exception ex)
