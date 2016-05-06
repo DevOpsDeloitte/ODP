@@ -25,10 +25,12 @@
     <asp:HiddenField runat="server" ID="hf_userId" />
     <asp:HiddenField runat="server" ID="hf_evaluationId" />
     <asp:HiddenField runat="server" ID="hf_submissionTypeId" />
+    <asp:HiddenField runat="server" ID="hf_codingType" />
     <div class="clearfix">
     <asp:Panel runat="server" ID="pnl_printBtns" ClientIDMode="Static" Visible="false">
     <script type="text/javascript">
         window.absid = <%= absid %>;
+        window.codingType = '<%= this.codingType %>';
     </script>
 
     

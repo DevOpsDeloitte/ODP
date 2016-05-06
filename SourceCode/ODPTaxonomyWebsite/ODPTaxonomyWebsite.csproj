@@ -98,7 +98,9 @@
     <Content Include="Evaluation\Controls\EvaluationControl.ascx" />
     <Content Include="Evaluation\Controls\EvaluationControlRT.ascx" />
     <Content Include="Evaluation\DownloadAbstractScan.aspx" />
+    <Content Include="Evaluation\EvaluationB.aspx" />
     <Content Include="Evaluation\Evaluation.aspx" />
+    <Content Include="Evaluation\EvaluationRTB.aspx" />
     <Content Include="Evaluation\EvaluationRT.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
     <Content Include="Evaluation\Handlers\json.js" />
@@ -349,12 +351,26 @@
     <Compile Include="Evaluation\DownloadAbstractScan.aspx.designer.cs">
       <DependentUpon>DownloadAbstractScan.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\EvaluationB.aspx.cs">
+      <DependentUpon>EvaluationB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\EvaluationB.aspx.designer.cs">
+      <DependentUpon>EvaluationB.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Evaluation.aspx.cs">
       <DependentUpon>Evaluation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Evaluation.aspx.designer.cs">
       <DependentUpon>Evaluation.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\EvaluationRTB.aspx.cs">
+      <DependentUpon>EvaluationRTB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\EvaluationRTB.aspx.designer.cs">
+      <DependentUpon>EvaluationRTB.aspx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\EvaluationRT.aspx.cs">
       <DependentUpon>EvaluationRT.aspx</DependentUpon>

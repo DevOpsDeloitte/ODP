@@ -8,14 +8,10 @@ namespace ODPTaxonomyCommon
     public class ViewAbstractToEvaluation
     {
         public int EvaluationId;       
-        
-
         public Guid UserId;
-        
-
         public int SubmissionTypeId;
-
         public Mode ViewMode;
+        public string codingType;
         
     }
 

@@ -84,7 +84,7 @@ namespace ODPTaxonomyDAL_TT
     #endregion
 		
 		public DataDataContext() : 
-				base(global::ODPTaxonomyDAL_TT.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString2, mappingSource)
+				base(global::ODPTaxonomyDAL_TT.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString3, mappingSource)
 		{
 			OnCreated();
 		}
@@ -2601,7 +2601,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Evaluation", Storage="_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_Evaluation", Storage="_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
 		public tbl_Abstract Abstract
 		{
 			get
@@ -2635,7 +2635,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Evaluation1", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_Evaluation1", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
 		public tbl_Abstract tbl_Abstract
 		{
 			get
@@ -3386,7 +3386,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_AbstractStatusChangeHistory", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_AbstractStatusChangeHistory", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
 		public tbl_Abstract tbl_Abstract
 		{
 			get
@@ -4678,6 +4678,12 @@ namespace ODPTaxonomyDAL_TT
 		
 		private string _FY;
 		
+		private string _ChrApplicationID;
+		
+		private System.Nullable<char> _NoPreventionFlag;
+		
+		private string _CodingType;
+		
 		private System.Nullable<System.DateTime> _LastExportDate;
 		
 		private EntitySet<tbl_Evaluation> _tbl_Evaluations;
@@ -4726,6 +4732,12 @@ namespace ODPTaxonomyDAL_TT
     partial void OnPIProjectLeaderChanged();
     partial void OnFYChanging(string value);
     partial void OnFYChanged();
+    partial void OnChrApplicationIDChanging(string value);
+    partial void OnChrApplicationIDChanged();
+    partial void OnNoPreventionFlagChanging(System.Nullable<char> value);
+    partial void OnNoPreventionFlagChanged();
+    partial void OnCodingTypeChanging(string value);
+    partial void OnCodingTypeChanged();
     partial void OnLastExportDateChanging(System.Nullable<System.DateTime> value);
     partial void OnLastExportDateChanged();
     #endregion
@@ -5098,6 +5110,66 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrApplicationID", DbType="NVarChar(20)")]
+		public string ChrApplicationID
+		{
+			get
+			{
+				return this._ChrApplicationID;
+			}
+			set
+			{
+				if ((this._ChrApplicationID != value))
+				{
+					this.OnChrApplicationIDChanging(value);
+					this.SendPropertyChanging();
+					this._ChrApplicationID = value;
+					this.SendPropertyChanged("ChrApplicationID");
+					this.OnChrApplicationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPreventionFlag", DbType="NChar(1)")]
+		public System.Nullable<char> NoPreventionFlag
+		{
+			get
+			{
+				return this._NoPreventionFlag;
+			}
+			set
+			{
+				if ((this._NoPreventionFlag != value))
+				{
+					this.OnNoPreventionFlagChanging(value);
+					this.SendPropertyChanging();
+					this._NoPreventionFlag = value;
+					this.SendPropertyChanged("NoPreventionFlag");
+					this.OnNoPreventionFlagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodingType", DbType="NVarChar(20)")]
+		public string CodingType
+		{
+			get
+			{
+				return this._CodingType;
+			}
+			set
+			{
+				if ((this._CodingType != value))
+				{
+					this.OnCodingTypeChanging(value);
+					this.SendPropertyChanging();
+					this._CodingType = value;
+					this.SendPropertyChanged("CodingType");
+					this.OnCodingTypeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastExportDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> LastExportDate
 		{
@@ -5118,7 +5190,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Evaluation", Storage="_tbl_Evaluations", ThisKey="AbstractID", OtherKey="AbstractID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_Evaluation", Storage="_tbl_Evaluations", ThisKey="AbstractID", OtherKey="AbstractID")]
 		public EntitySet<tbl_Evaluation> tbl_Evaluations
 		{
 			get
@@ -5131,7 +5203,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Evaluation1", Storage="_tbl_Evaluations1", ThisKey="AbstractID", OtherKey="AbstractID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_Evaluation1", Storage="_tbl_Evaluations1", ThisKey="AbstractID", OtherKey="AbstractID")]
 		public EntitySet<tbl_Evaluation> tbl_Evaluations1
 		{
 			get
@@ -5144,7 +5216,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_AbstractStatusChangeHistory", Storage="_tbl_AbstractStatusChangeHistories", ThisKey="AbstractID", OtherKey="AbstractID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_AbstractStatusChangeHistory", Storage="_tbl_AbstractStatusChangeHistories", ThisKey="AbstractID", OtherKey="AbstractID")]
 		public EntitySet<tbl_AbstractStatusChangeHistory> tbl_AbstractStatusChangeHistories
 		{
 			get
