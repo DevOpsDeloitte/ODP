@@ -58,8 +58,8 @@ namespace ODPTaxonomyDAL_ST.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.7.5.234;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=Tru" +
-            "e;User ID=odptaxonomy;Password=0dpTaxonomy!")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;U" +
+            "ser ID=odpTaxonomy;Password=0dpTaxonomy!")]
         public string ODP_Taxonomy_DEVConnectionString3 {
             get {
                 return ((string)(this["ODP_Taxonomy_DEVConnectionString3"]));

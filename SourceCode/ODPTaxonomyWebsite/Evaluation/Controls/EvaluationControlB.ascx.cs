@@ -1079,7 +1079,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderStudyFocusQuestions()
         {
 
-            var questions = db.A_StudyFocus.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.A_StudyFocus_Bs.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             var count = 1;
             foreach(var question in questions){
@@ -1088,7 +1088,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getComparerVals = getComparerValues("A_StudyFocus", question.StudyFocusID);
                 StringBuilder row = new StringBuilder();
                 row.AppendLine("<tr>");
-                if (question.A1_IsEnabled || question.A2_IsEnabled || question.A3_IsEnabled)
+                if (question.A4_IsEnabled)
                 {
                     row.AppendLine("<td scope=\"row\">" + question.StudyFocusID.ToString() + ". " + question.StudyFocus + "<div class=\"icon open\" ng-click=\"showDescription('studyfocus-" + question.StudyFocusID.ToString() + "')\"></div>"+"</td>");
                 }
@@ -1097,9 +1097,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     row.AppendLine("<td scope=\"row\">" + question.StudyFocusID.ToString() + ". " + question.StudyFocus + "</td>");
                 }
                 
-                row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[1][" + question.StudyFocusID + "]\" is-checked='"+getViewVals[0]+"' show-coders='"+getCoderVals[0]+"' show-comparers='"+getComparerVals[0]+"' is-enabled='" + (question.A1_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-1\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-1\"></div></td>");
-                row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[2][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[1] + "'  show-coders='" + getCoderVals[1] + "' show-comparers='" + getComparerVals[1] + "' is-enabled='" + (question.A2_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-2\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-2\"></div></td>");
-                row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[3][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[2] + "'  show-coders='" + getCoderVals[2] + "' show-comparers='" + getComparerVals[2] + "' is-enabled='" + (question.A3_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-3\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-3\"></div></td>");
+                row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studyfocus[1][" + question.StudyFocusID + "]\" is-checked='"+getViewVals[0]+"' show-coders='"+getCoderVals[0]+"' show-comparers='"+getComparerVals[0]+"' is-enabled='" + (question.A4_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-1\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-1\"></div></td>");
+                //row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[2][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[1] + "'  show-coders='" + getCoderVals[1] + "' show-comparers='" + getComparerVals[1] + "' is-enabled='" + (question.A2_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-2\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-2\"></div></td>");
+                //row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[3][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[2] + "'  show-coders='" + getCoderVals[2] + "' show-comparers='" + getComparerVals[2] + "' is-enabled='" + (question.A3_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-3\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-3\"></div></td>");
               
                  row.AppendLine("</tr>");
                 finalStr.Append(row);
@@ -1114,7 +1114,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderEntitiesStudiedQuestions()
         {
             //var db = DBData.GetDataContext();
-            var questions = db.B_EntitiesStudieds.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.B_EntitiesStudied_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1147,7 +1147,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderStudySettingsQuestions()
         {
             //var db = DBData.GetDataContext();
-            var questions = db.C_StudySettings.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.C_StudySetting_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1179,7 +1179,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderPopulationFocusQuestions()
         {
             //var db = new DBDataContext();
-            var questions = db.D_PopulationFocus.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.D_PopulationFocus_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1211,7 +1211,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderStudyDesignPurposeQuestions()
         {
             //var db = new DBDataContext();
-            var questions = db.E_StudyDesignPurposes.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.E_StudyDesignPurpose_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1243,7 +1243,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderPreventionCategoryQuestions()
         {
             //var db = new DBDataContext();
-            var questions = db.F_PreventionCategories.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.F_PreventionCategory_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
