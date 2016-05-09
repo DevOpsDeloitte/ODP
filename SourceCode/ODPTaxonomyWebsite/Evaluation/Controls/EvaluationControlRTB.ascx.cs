@@ -11,51 +11,15 @@ using ODPTaxonomyDAL_ST;
 using ODPTaxonomyWebsite.Evaluation.Classes;
 using System.Text;
 using ODPTaxonomyCommon;
-using Newtonsoft.Json;
 
 
 namespace ODPTaxonomyWebsite.Evaluation.Controls
 {
-    public class Comments
-    {
-        public List<TeamUser> IQCoders;
-        public List<TeamUser> ODPCoders;
-        public TeamUser IQConsensusUser;
-        public TeamUser ODPConsensusUser;
-
-        public Comments()
-        {
-            this.IQCoders = new List<TeamUser>();
-            this.ODPCoders = new List<TeamUser>();
-            this.IQConsensusUser = new TeamUser();
-            this.ODPConsensusUser = new TeamUser();
-        }
-    }
-
-    public class TeamUser // Team user class
-    {
-        public Guid UserId {get;set;}
-        public int TeamId { get; set; }
-        public string TeamType { get; set; }
-        public string UserName { get; set; }
-        public string UserFirstName { get; set; }
-        public string UserLastName { get; set; }
-        public int UserSubmissionID { get; set; }
-        public string UserComment { get; set; }
-    }
-
-    public class ComparisonTeamUser
-    {
-        public Guid? UserId { get; set; }
-        public int? TeamId { get; set; }
-        public string TeamType { get; set; }
-        public int ComparisonSubmissionID { get; set; }
-        public string UserComment { get; set; }
-    }
+   
 
 
 
-    public partial class EvaluationControl : System.Web.UI.UserControl
+    public partial class EvaluationControlRTB : System.Web.UI.UserControl
     {
         public string studyFocusQuestions = string.Empty;
         public string entitiesStudiedQuestions = string.Empty;
@@ -86,12 +50,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         public string isChecked = string.Empty;
     
         private DataDataContext db = null;
-        public Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
+        private Dictionary<int, TeamUser> TeamUsers = new Dictionary<int, TeamUser>();
         private Dictionary<string, ComparisonTeamUser> ComparisonTeamUsers = new Dictionary<string, ComparisonTeamUser>();
 
         public int? teamID = null;
-        public Comments EvaluationComments = new Comments();
-        public string CommentsJSON = string.Empty;
 
         
 
@@ -101,6 +63,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             db = DBData.GetDataContext();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load Start...");
             loadSession();
+            getTeamAbstractFromQuery();
+            loadAbstractInfoFromID();
             setAndrenderPageVars();
             unableCoders = getUnabletoCodeValues();
             renderStudyFocusQuestions();
@@ -113,10 +77,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //System.Diagnostics.Trace.WriteLine("Eval Page Load End...");
         }
 
-        protected void assignTeam()
+        protected void getTeamAbstractFromQuery()
         {
-            var TeamID = db.Evaluations.Where(e => e.EvaluationId == EvaluationID && e.AbstractID == AbstractID).Select(e => e.TeamID).FirstOrDefault();
-            this.teamID = TeamID;
+            int val = 0;
+            bool res = Int32.TryParse(Request.QueryString["teamid"], out val);
+            teamID = res ? val : 0;
+
+            res = Int32.TryParse(Request.QueryString["abstractid"], out val);
+            AbstractID = res ? val : 0;
+
         }
 
         protected Dictionary<int, TeamUser> getTeamUsers()
@@ -187,6 +156,39 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
 
         }
+
+        protected void loadAbstractInfoFromID()
+        {
+            //var evalrec = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).Select(e => e).FirstOrDefault();
+            //if (evalrec != null)
+            //{
+            //    AbstractID = Convert.ToInt32(evalrec.AbstractID);
+            //    //Response.Write(" Abstract ID : " + AbstractID);
+            //}
+            //else
+            //{
+            //    // We need to exit -- trouble.
+
+            //}
+
+            var absrec = db.Abstracts.Where(a => a.AbstractID == AbstractID).Select(a => a).FirstOrDefault();
+            if (absrec != null)
+            {
+                applicationID = absrec.ApplicationID.ToString();
+                projectTitle = absrec.ProjectTitle.ToString();
+                piProjectLeader = absrec.PIProjectLeader.ToString();
+
+            }
+            var userrec = db.aspnet_Users.Where(u => u.UserId == UserId).Select(u => u).FirstOrDefault();
+            if (userrec != null)
+            {
+                userName = userrec.UserName;
+                firstName = userrec.UserFirstName;
+                lastName = userrec.UserLastName;
+            }
+
+        }
+
         protected void loadAbstractInfo()
         {
             var evalrec = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).Select(e => e).FirstOrDefault();
@@ -206,7 +208,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             {
                 applicationID = absrec.ApplicationID.ToString();
                 projectTitle = absrec.ProjectTitle.ToString();
-                piProjectLeader = absrec.PIProjectLeader.ToString();
 
             }
             var userrec = db.aspnet_Users.Where(u => u.UserId == UserId).Select(u => u).FirstOrDefault();
@@ -393,87 +394,20 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         }
 
-
-        protected void loadAllComments()
-        {
-            this.EvaluationComments = new Comments();
-            var aspUsers = db.aspnet_Users.ToList();
-            var allTeams = db.Evaluations
-                                         .Where(e => e.AbstractID == AbstractID && e.ConsensusStartedBy.HasValue && e.IsStopped == false)
-                                         .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
-            var allevalids = allTeams.Select(e => e.EvaluationId).ToList();
-            var SubmissionRecsCache = db.Submissions.Where(s => allevalids.Contains(s.EvaluationId.Value)).ToList();
-
-            if (allTeams.Count == allTeams.Count)
-            {   
-                foreach (var cteam in allTeams)
-                {
-
-                    var TeamType = db.Teams
-                                        .Join(db.TeamTypes, t => t.TeamTypeID, tt => tt.TeamTypeID,
-                                             (t, tt) => new { TeamID = t.TeamID, TeamType = tt.TeamType1, TeamStatusID = t.StatusID })
-                                             .Where(tx => tx.TeamID == cteam.TeamID).FirstOrDefault();
-
-                    //Please add TeamStatusID ==1
-                    if (TeamType.TeamType == "Coder")
-                    {
-                        //var rec = db.Submissions.Where(sb => sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 2 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).FirstOrDefault();
-                        var rec = SubmissionRecsCache.Where(sb => sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 2 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).FirstOrDefault();
-                        if (rec != null)
-                        {
-                            this.EvaluationComments.IQConsensusUser.UserId = cteam.ConsensusStartedBy.Value;
-                            this.EvaluationComments.IQConsensusUser.UserName = (aspUsers.Where(u => u.UserId == cteam.ConsensusStartedBy.Value).Select(u => u.UserName).First());
-                            this.EvaluationComments.IQConsensusUser.UserComment = rec.Comments;
-                        }
-                        //var coderSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 1 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
-                        var coderSubmissionRecs = SubmissionRecsCache.Where(sb => sb.SubmissionTypeId == 1 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
-                        foreach (var coder in coderSubmissionRecs)
-                        {
-                            this.EvaluationComments.IQCoders.Add(new TeamUser { UserName = (aspUsers.Where(u => u.UserId == coder.UserId).Select(u => u.UserName).First()), UserComment = coder.Comments });
-
-                        }
-                        this.EvaluationComments.IQCoders = this.EvaluationComments.IQCoders.OrderBy(x => x.UserName).ToList();
-                    }
-                    if (TeamType.TeamType == "ODP Staff")
-                    {
-                        //var rec = db.Submissions.Where(sb => sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 4 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).FirstOrDefault();
-                        var rec = SubmissionRecsCache.Where(sb => sb.UserId == cteam.ConsensusStartedBy && sb.SubmissionTypeId == 4 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).FirstOrDefault();
-                        if (rec != null)
-                        {
-                            this.EvaluationComments.ODPConsensusUser.UserId = cteam.ConsensusStartedBy.Value;
-                            this.EvaluationComments.ODPConsensusUser.UserName = (aspUsers.Where(u => u.UserId == cteam.ConsensusStartedBy.Value).Select(u => u.UserName).First());
-                            this.EvaluationComments.ODPConsensusUser.UserComment = rec.Comments;
-                        }
-                        //var odpSubmissionRecs = db.Submissions.Where(sb => sb.SubmissionTypeId == 3 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
-                        var odpSubmissionRecs = SubmissionRecsCache.Where(sb => sb.SubmissionTypeId == 3 && sb.EvaluationId == cteam.EvaluationId).Select(sb => sb).ToList();
-                        foreach (var coder in odpSubmissionRecs)
-                        {
-                            this.EvaluationComments.ODPCoders.Add(new TeamUser { UserName = (aspUsers.Where(u => u.UserId == coder.UserId).Select(u => u.UserName).First()), UserComment = coder.Comments });
-
-                        }
-                        this.EvaluationComments.ODPCoders = this.EvaluationComments.ODPCoders.OrderBy(x => x.UserName).ToList();
-                    }
-
-                }
-            }
-
-            this.CommentsJSON = JsonConvert.SerializeObject(EvaluationComments);
-        }
-
-
-        // Comment updates for Consensus and Comparision.
         protected void setAndrenderPageVars()
         {
- 
-            startConsensus();
-            startComparison();
+
+            
+            
+            
+        
+            //startConsensus();
+            //startComparison();
             performSecurityChecks();
             loadAbstractInfo();
-            showConsensus();
-            showComparison();
+            //showConsensus();
+            //showComparison();
 
-            assignTeam();
-            this.CommentsJSON = "{}";
 
 
             if (FormMode.IndexOf("Consensus") != -1)
@@ -483,36 +417,18 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 submissiontypesEval = FormMode.IndexOf("ODP Staff Member") != -1 ? 3 : 1;  // ODP Staff = 3
 
                 foreach( var tu in TeamUsers ){
-                    var subUs = db.Submissions.Where(s => s.EvaluationId == EvaluationID && s.SubmissionTypeId == submissiontypesEval && s.UserId == tu.Value.UserId).Select(s => new { SubmissionID = s.SubmissionID, Comment = s.Comments }).FirstOrDefault();
-                    tu.Value.UserSubmissionID = subUs.SubmissionID;
-                    tu.Value.UserComment = subUs.Comment;
-                    if(submissiontypesEval == 1)
-                    {
-                        this.EvaluationComments.IQCoders.Add(tu.Value);
-                    }
-                    else
-                    {
-                        this.EvaluationComments.ODPCoders.Add(tu.Value);
-                    }
-                    
+                    tu.Value.UserSubmissionID = db.Submissions.Where(s => s.EvaluationId == EvaluationID && s.SubmissionTypeId == submissiontypesEval && s.UserId == tu.Value.UserId).Select(s => s.SubmissionID).FirstOrDefault();
                 }
-
-                this.CommentsJSON = JsonConvert.SerializeObject(EvaluationComments);
-                // In view mode all the comments need to be read.
-                //if(this.DisplayMode == "View" || 1==1)
-                //{
-                    this.loadAllComments();
-                //}
-
-
+             
             }
 
             if (FormMode.IndexOf("Comparison") != -1)
             {
                 var comparisonTeams = db.Evaluations
-                                         .Where(e => e.AbstractID == AbstractID /*&& e.IsComplete*/ && e.ConsensusStartedBy.HasValue && e.IsStopped == false)
+                                         .Where(e => e.AbstractID == AbstractID /*&& e.IsComplete*/ && e.ConsensusStartedBy.HasValue)
                                          .Select(e => new { e.TeamID, e.ConsensusStartedBy, e.EvaluationId }).ToList();
-
+                //Dictionary<Guid?, int?> cteamusers = new Dictionary<Guid?, int?>();
+                //Response.Write(" Comparison Team Count : " + comparisonTeams.Count.ToString()+ "<br>");
                 if (comparisonTeams.Count == 2)
                 {   // we are all good
                     // need to get team type.
@@ -545,6 +461,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                             }
                         }
 
+                        
+                        //Response.Write(" Comparison Team   -- Consensus Started by : " + cteam.ConsensusStartedBy + "   Team Type : " + TeamType.TeamType + "<br>");
+
+
                     }
                     
 
@@ -553,6 +473,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 else
                 {
                     //Comparison can't be done. No two consensuses exist.
+
                     //Response.Write(" NO COMPARISON -- Comparison Team Count : " + comparisonTeams.Count.ToString() + "<br>");
                 }
 
@@ -560,11 +481,16 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 {
                     //Response.Write(" Comparison Team  :::: " + ct.Value.ComparisonSubmissionID + "   Team Type : " + ct.Value.TeamType + "<br>");
                 }
+                
 
-                this.loadAllComments();
             }
 
 
+
+            // NO Submission ID should exist for UserId / EvaluationID / SubmissionTypeId ( This will put the form in View Mode automatically. )
+
+
+            
 
         }
 
@@ -620,9 +546,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                     if (rec2 != null)
                     {
-                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + "," + "o-" + ODPTeamID.ToString() : retval[0];
-                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + "o-" + ODPTeamID.ToString() : retval[1];
-                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + "o-" + ODPTeamID.ToString() : retval[2];
+
+                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + "," + "o-" + ODPTeamID.ToString() : "";
+                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + "o-" + ODPTeamID.ToString() : "";
+                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + "o-" + ODPTeamID.ToString() : "";
                     }
 
 
@@ -648,7 +575,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -671,7 +598,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -694,7 +621,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -717,7 +644,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -741,7 +668,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     if (rec2 != null)
                     {
 
-                        retval[0] = retval[0] + "," + "o-" + ODPTeamID.ToString();
+                        retval[0] = "," + "o-" + ODPTeamID.ToString();
 
                     }
 
@@ -1113,8 +1040,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         protected void renderStudyFocusQuestions()
         {
-
-            var questions = db.A_StudyFocus.Where(sf => sf.Status.Status1 == "Active").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            
+            var questions = db.A_StudyFocus.Where(sf => sf.Status.Status1 == "Active" && sf.StudyFocusID <= 100 ).OrderBy( sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             var count = 1;
             foreach(var question in questions){
@@ -1157,6 +1084,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("B_EntitiesStudied", question.EntitiesStudiedID);
                 var getComparerVals = getComparerValues("B_EntitiesStudied", question.EntitiesStudiedID);
                 StringBuilder row = new StringBuilder();
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">" + question.EntitiesStudiedID.ToString() + ". " + question.EntitiesStudied + "<div class=\"icon open\" ng-click=\"showDescription('entitiesstudied-" + question.EntitiesStudiedID.ToString() + "')\"><div>" + "</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.entitiesstudied[" + question.EntitiesStudiedID + "]\" is-checked='" + getViewVals[0] + "'  show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"entitiesstudied-" + question.EntitiesStudiedID + "\" data-cat-id=\"entitiesstudied\" data-q-id =\"" + question.EntitiesStudiedID + "\"></div></td>");
+                
+                //row.AppendLine("</tr>");
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
@@ -1190,6 +1122,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("C_StudySettings", question.StudySettingID);
                 var getComparerVals = getComparerValues("C_StudySettings", question.StudySettingID);
                 StringBuilder row = new StringBuilder();
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">"  + question.StudySettingID.ToString() + ". " + question.StudySetting + "<div class=\"icon open\" ng-click=\"showDescription('studysetting-" + question.StudySettingID.ToString() + "')\"></div>"+"</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studysetting[" + question.StudySettingID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studysetting-" + question.StudySettingID + "\" data-cat-id=\"studysetting\" data-q-id =\"" + question.StudySettingID + "\"></div></td>");
+                
+                //row.AppendLine("</tr>");
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
@@ -1222,6 +1159,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("D_PopulationFocus", question.PopulationFocusID);
                 var getComparerVals = getComparerValues("D_PopulationFocus", question.PopulationFocusID);
                 StringBuilder row = new StringBuilder();
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">" + question.PopulationFocusID.ToString() + ". " + question.PopulationFocus +"<div class=\"icon open\" ng-click=\"showDescription('populationfocus-" + question.PopulationFocusID.ToString() + "')\"></div>"+ "</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.populationfocus[" + question.PopulationFocusID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"populationfocus-" + question.PopulationFocusID + "\" data-cat-id=\"populationfocus\" data-q-id =\"" + question.PopulationFocusID + "\"></div></td>");
+                
+                //row.AppendLine("</tr>");
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
@@ -1254,6 +1196,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("E_StudyDesignPurpose", question.StudyDesignPurposeID);
                 var getComparerVals = getComparerValues("E_StudyDesignPurpose", question.StudyDesignPurposeID);
                 StringBuilder row = new StringBuilder();
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\"icon open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>"+"</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");      
+                //row.AppendLine("</tr>");
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
@@ -1286,6 +1232,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("F_PreventionCategory", question.PreventionCategoryID);
                 var getComparerVals = getComparerValues("F_PreventionCategory", question.PreventionCategoryID);
                 StringBuilder row = new StringBuilder();
+                //row.AppendLine("<tr>");
+                //row.AppendLine("<td scope=\"row\">"+ question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory +"<div class=\"icon open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
+                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"   is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");         
+                //row.AppendLine("</tr>");
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");

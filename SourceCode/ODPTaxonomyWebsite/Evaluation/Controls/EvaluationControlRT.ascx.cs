@@ -521,14 +521,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     CoderTeamID =  ComparisonTeamUsers["Coder"].TeamId;
 
                 }
-                catch (Exception ex) { }
+                catch (Exception) { }
                 try
                 {
 
                     ODPTeamSubmissionID = ComparisonTeamUsers["ODP Staff"].ComparisonSubmissionID;
                     ODPTeamID = ComparisonTeamUsers["ODP Staff"].TeamId;
                 }
-                catch (Exception ex) { }
+                catch (Exception) { }
 
                 //Response.Write(" ODP TEAM Submission ID : "+ODPTeamSubmissionID);
 

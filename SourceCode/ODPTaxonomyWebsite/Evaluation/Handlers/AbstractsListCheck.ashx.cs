@@ -20,7 +20,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
         private string connString = null;
         private List<int> abstracts = null;
         private List<AbstractListRow> finalabstracts = null;
-        private List<AbstractListRow> finalabstracts2 = null;
+        //private List<AbstractListRow> finalabstracts2 = null;
         private string userguid = "";
         private string action = "";
 

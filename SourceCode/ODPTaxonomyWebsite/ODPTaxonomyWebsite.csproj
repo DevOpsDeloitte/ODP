@@ -95,7 +95,9 @@
     <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx" />
+    <Content Include="Evaluation\Controls\EvaluationControlB.ascx" />
     <Content Include="Evaluation\Controls\EvaluationControl.ascx" />
+    <Content Include="Evaluation\Controls\EvaluationControlRTB.ascx" />
     <Content Include="Evaluation\Controls\EvaluationControlRT.ascx" />
     <Content Include="Evaluation\DownloadAbstractScan.aspx" />
     <Content Include="Evaluation\EvaluationB.aspx" />
@@ -331,11 +333,26 @@
       <DependentUpon>ODPSupervisorView_Open.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Classes\DBData.cs" />
+    <Compile Include="Evaluation\Classes\EvaluationCommon.cs" />
+    <Compile Include="Evaluation\Controls\EvaluationControlB.ascx.cs">
+      <DependentUpon>EvaluationControlB.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Controls\EvaluationControlB.ascx.designer.cs">
+      <DependentUpon>EvaluationControlB.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Controls\EvaluationControlRTB.ascx.cs">
+      <DependentUpon>EvaluationControlRTB.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Controls\EvaluationControlRTB.ascx.designer.cs">
+      <DependentUpon>EvaluationControlRTB.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControlRT.ascx.cs">
       <DependentUpon>EvaluationControlRT.ascx</DependentUpon>
