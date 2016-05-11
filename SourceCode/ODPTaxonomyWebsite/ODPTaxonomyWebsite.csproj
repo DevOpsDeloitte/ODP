@@ -155,6 +155,7 @@
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\commentsRT.js" />
     <Content Include="Scripts\comments.js" />
+    <Content Include="Scripts\controllers\controllerB.js" />
     <Content Include="Scripts\controllers\controller.js" />
     <Content Include="Scripts\controllers\controllerRT.js" />
     <Content Include="Scripts\datatables\app.js" />
@@ -162,6 +163,7 @@
     <Content Include="Scripts\datatables\spin.min.js" />
     <Content Include="Scripts\datatables\underscore-min.js" />
     <Content Include="Scripts\datatables\util.js" />
+    <Content Include="Scripts\directives\directiveB.js" />
     <Content Include="Scripts\directives\directive.js" />
     <Content Include="Scripts\directives\directiveRT.js" />
     <Content Include="Scripts\html5.js" />
