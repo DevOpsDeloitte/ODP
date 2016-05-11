@@ -384,8 +384,8 @@
 <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>--%>
 
 <script src="../scripts/modules/module.js"></script>
-<script src="../scripts/controllers/controller.js"></script>
-<script src="../scripts/directives/directive.js"></script>
+<script src="../scripts/controllers/controllerB.js"></script>
+<script src="../scripts/directives/directiveB.js"></script>
 <script src="../scripts/app.js"></script>
 <script src="../scripts/comments.js"></script>
 <!-- <script src="js/controllers/controller.js"></script> -->
