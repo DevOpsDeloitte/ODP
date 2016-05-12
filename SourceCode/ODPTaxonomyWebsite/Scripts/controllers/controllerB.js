@@ -301,9 +301,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
     $scope.$on("disableboxes", function () {
         //console.log($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length-1]);
-        if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked) {
-            for (i = 1; i < $scope.mdata.preventioncategory.length - 1; i++) {
-                $scope.mdata.preventioncategory[i].resetBoxCC();
+        if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 2] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 2].isChecked) {
+            for (i = 1; i < $scope.mdata.preventioncategory.length; i++) {
+                if (i != 6) {
+                    $scope.mdata.preventioncategory[i].resetBoxCC();
+                }
             }
         }
 
@@ -311,6 +313,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
     $scope.$on("validate.formdata", function () {
         // No need to validate if user has checked unable to code.
+        console.log(" validate.formdata :: ");
         if ($scope.mdata.unabletocode) {
 
             if ($scope.mdata.superusername != "" && $scope.mdata.superpassword != "") {
@@ -328,8 +331,8 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
             return;
         }
-        if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
-            console.log(" new rule :: form is valid :: ");
+        if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 2] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 2].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
+            console.log(" new rule E7F6 :: form is valid :: ");
             $scope.formIsValid = true;
             $scope.disallowSave = false;
             $scope.showSaveButton = true;
@@ -347,21 +350,21 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                 }
             }
 
-            for (i = 1; i < $scope.mdata.studyfocus[2].length; i++) {
-                if ($scope.mdata.studyfocus[2][i].modelcolorState != "SolidGreen" && $scope.mdata.studyfocus[2][i].modelcolorState != "Transparent" && $scope.mdata.studyfocus[2][i].modelcolorState != "Disabled") {
-                    boxColors = false;
-                    //console.log(" bad box color : 2 :" + i);
-                    break;
-                }
-            }
+            //for (i = 1; i < $scope.mdata.studyfocus[2].length; i++) {
+            //    if ($scope.mdata.studyfocus[2][i].modelcolorState != "SolidGreen" && $scope.mdata.studyfocus[2][i].modelcolorState != "Transparent" && $scope.mdata.studyfocus[2][i].modelcolorState != "Disabled") {
+            //        boxColors = false;
+            //        //console.log(" bad box color : 2 :" + i);
+            //        break;
+            //    }
+            //}
 
-            for (i = 1; i < $scope.mdata.studyfocus[3].length; i++) {
-                if ($scope.mdata.studyfocus[3][i].modelcolorState != "SolidGreen" && $scope.mdata.studyfocus[3][i].modelcolorState != "Transparent" && $scope.mdata.studyfocus[3][i].modelcolorState != "Disabled") {
-                    boxColors = false;
-                    //console.log(" bad box color : 3 :" + i);
-                    break;
-                }
-            }
+            //for (i = 1; i < $scope.mdata.studyfocus[3].length; i++) {
+            //    if ($scope.mdata.studyfocus[3][i].modelcolorState != "SolidGreen" && $scope.mdata.studyfocus[3][i].modelcolorState != "Transparent" && $scope.mdata.studyfocus[3][i].modelcolorState != "Disabled") {
+            //        boxColors = false;
+            //        //console.log(" bad box color : 3 :" + i);
+            //        break;
+            //    }
+            //}
 
             for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
                 if ($scope.mdata.entitiesstudied[i].modelcolorState != "SolidGreen" && $scope.mdata.entitiesstudied[i].modelcolorState != "Transparent" && $scope.mdata.entitiesstudied[i].modelcolorState != "Disabled") {
@@ -415,18 +418,20 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                 break;
             }
         }
-        for (i = 1; i < $scope.mdata.studyfocus[2].length; i++) {
-            if ($scope.mdata.studyfocus[2][i].isChecked) {
-                studyfocuscol2 = true;
-                break;
-            }
-        }
-        for (i = 1; i < $scope.mdata.studyfocus[3].length; i++) {
-            if ($scope.mdata.studyfocus[3][i].isChecked) {
-                studyfocuscol3 = true;
-                break;
-            }
-        }
+        //for (i = 1; i < $scope.mdata.studyfocus[2].length; i++) {
+        //    if ($scope.mdata.studyfocus[2][i].isChecked) {
+        //        studyfocuscol2 = true;
+        //        break;
+        //    }
+        //}
+        //for (i = 1; i < $scope.mdata.studyfocus[3].length; i++) {
+        //    if ($scope.mdata.studyfocus[3][i].isChecked) {
+        //        studyfocuscol3 = true;
+        //        break;
+        //    }
+        //}
+        studyfocuscol2 = true;
+        studyfocuscol3 = true;
 
         // Adding business logic for A - F Mandatory Coding.
 
@@ -436,24 +441,29 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                 break;
             }
         }
-        for (i = 1; i < $scope.mdata.studysetting.length; i++) {
-            if ($scope.mdata.studysetting[i].isChecked) {
-                studysettingBox = true;
-                break;
-            }
-        }
-        for (i = 1; i < $scope.mdata.populationfocus.length; i++) {
-            if ($scope.mdata.populationfocus[i].isChecked) {
-                populationfocusBox = true;
-                break;
-            }
-        }
-        for (i = 1; i < $scope.mdata.studydesignpurpose.length; i++) {
-            if ($scope.mdata.studydesignpurpose[i].isChecked) {
-                studydesignpurposeBox = true;
-                break;
-            }
-        }
+        //for (i = 1; i < $scope.mdata.studysetting.length; i++) {
+        //    if ($scope.mdata.studysetting[i].isChecked) {
+        //        studysettingBox = true;
+        //        break;
+        //    }
+        //}
+        //for (i = 1; i < $scope.mdata.populationfocus.length; i++) {
+        //    if ($scope.mdata.populationfocus[i].isChecked) {
+        //        populationfocusBox = true;
+        //        break;
+        //    }
+        //}
+        studysettingBox = true;
+        populationfocusBox = true;
+
+        //for (i = 1; i < $scope.mdata.studydesignpurpose.length; i++) {
+        //    if ($scope.mdata.studydesignpurpose[i].isChecked) {
+        //        studydesignpurposeBox = true;
+        //        break;
+        //    }
+        //}
+        studydesignpurposeBox = true;
+
         for (i = 1; i < $scope.mdata.preventioncategory.length; i++) {
             if ($scope.mdata.preventioncategory[i].isChecked) {
                 preventioncategoryBox = true;
