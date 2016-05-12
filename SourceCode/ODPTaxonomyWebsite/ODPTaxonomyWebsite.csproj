@@ -110,6 +110,7 @@
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\PrintAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
+    <Content Include="Evaluation\ViewAbstractListV2.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Images\arrow-lr.png" />
@@ -465,6 +466,13 @@
     </Compile>
     <Compile Include="Evaluation\ViewAbstract.aspx.designer.cs">
       <DependentUpon>ViewAbstract.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\ViewAbstractListV2.aspx.cs">
+      <DependentUpon>ViewAbstractListV2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\ViewAbstractListV2.aspx.designer.cs">
+      <DependentUpon>ViewAbstractListV2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\ViewAbstractList.aspx.cs">
       <DependentUpon>ViewAbstractList.aspx</DependentUpon>
