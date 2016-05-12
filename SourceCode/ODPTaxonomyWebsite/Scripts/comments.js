@@ -57,16 +57,15 @@ $(function () {
 
 
     menuRight.onclick = function (e) {
+
         if (iOS) {
+
             if ($(e.target).is('p') || $(e.target).is('h5')) {
                 //e.preventDefault();
                 return true;
             }
-        }
 
-        if (iOS) {
             updateLog("focus event ", 0, 0);
-            //$("textarea#comments").css({ top: e.targetTouches[0].pageY });
             $("textarea#comments").focus();
         }
         return true;
