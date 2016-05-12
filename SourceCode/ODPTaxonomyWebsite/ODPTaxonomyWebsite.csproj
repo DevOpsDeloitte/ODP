@@ -430,6 +430,9 @@
     <Compile Include="Evaluation\Handlers\Comments.ashx.cs">
       <DependentUpon>Comments.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\Handlers\EvaluationB.ashx.cs">
+      <DependentUpon>EvaluationB.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Handlers\Evaluations.cs" />
     <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
       <DependentUpon>Filters.ashx</DependentUpon>
@@ -638,6 +641,7 @@
     <Content Include="Evaluation\Handlers\Comments.ashx" />
     <Content Include="Evaluation\Handlers\KappaExclude.ashx" />
     <Content Include="Evaluation\Handlers\ReportExclude.ashx" />
+    <Content Include="Evaluation\Handlers\EvaluationB.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
