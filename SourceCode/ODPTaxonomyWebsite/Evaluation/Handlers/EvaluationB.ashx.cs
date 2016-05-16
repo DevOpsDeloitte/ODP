@@ -147,7 +147,7 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                         // Adding Stored Procedure call for Kappa Data Calculations.
                         try
                         {
-                            db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 4);
+                            db.KappaBaseData_Insert_ByAbs_EvlID_B(abstractID, evaluationID, 4);
                         }
                         catch (Exception ex)
                         {
@@ -175,7 +175,7 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                         // Adding Stored Procedure call for Kappa Data Calculations.
                         try
                         {
-                            db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 9);
+                            db.KappaBaseData_Insert_ByAbs_EvlID_B(abstractID, evaluationID, 9);
                         }
                         catch (Exception ex)
                         {
@@ -193,7 +193,7 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                         // Adding Stored Procedure call for Kappa Data Calculations.
                         try
                         {
-                            db.ODPComparison_ByAbs_EvlID(abstractID, evaluationID, 10);
+                            db.ODPComparison_ByAbs_EvlID_B(abstractID, evaluationID, 10);
                         }
                         catch (Exception ex)
                         {
@@ -454,14 +454,14 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                 // insert study focus 
                 foreach (var sfi in studyfocusInsertList)
                 {
-                    A_StudyFocusAnswer a_sfa = new A_StudyFocusAnswer();
+                    A_StudyFocusAnswer_B a_sfa = new A_StudyFocusAnswer_B();
                     a_sfa.SubmissionID = submissionID;
                     a_sfa.StudyFocusID = sfi.StudyFocusId;
-                    a_sfa.StudyFocus_A1 = sfi.StudyFocus1;
-                    a_sfa.StudyFocus_A2 = sfi.StudyFocus2;
-                    a_sfa.StudyFocus_A3 = sfi.StudyFocus3;
+                    a_sfa.StudyFocus_A4 = sfi.StudyFocus1;
+                    //a_sfa.StudyFocus_A2 = sfi.StudyFocus2;
+                    //a_sfa.StudyFocus_A3 = sfi.StudyFocus3;
 
-                    db.A_StudyFocusAnswers.InsertOnSubmit(a_sfa);
+                    db.A_StudyFocusAnswer_Bs.InsertOnSubmit(a_sfa);
                 }
 
                 db.SubmitChanges();
@@ -554,12 +554,12 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                             case 1:
                                 sfexists.StudyFocus1 = true;
                                 break;
-                            case 2:
-                                sfexists.StudyFocus2 = true;
-                                break;
-                            case 3:
-                                sfexists.StudyFocus3 = true;
-                                break;
+                            //case 2:
+                            //    sfexists.StudyFocus2 = true;
+                            //    break;
+                            //case 3:
+                            //    sfexists.StudyFocus3 = true;
+                            //    break;
                         }
 
                     }
@@ -573,12 +573,12 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                             case 1:
                                 sfnew.StudyFocus1 = true;
                                 break;
-                            case 2:
-                                sfnew.StudyFocus2 = true;
-                                break;
-                            case 3:
-                                sfnew.StudyFocus3 = true;
-                                break;
+                            //case 2:
+                            //    sfnew.StudyFocus2 = true;
+                            //    break;
+                            //case 3:
+                            //    sfnew.StudyFocus3 = true;
+                            //    break;
                         }
 
                         studyfocusInsertList.Add(sfnew);

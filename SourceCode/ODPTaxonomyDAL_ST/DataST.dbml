@@ -461,6 +461,18 @@
       <Association Name="Submission_F_PreventionCategoryAnswer_B" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
     </Type>
   </Table>
+  <Table Name="dbo.Protocol_B" Member="Protocol_Bs">
+    <Type Name="Protocol_B">
+      <Column Name="ProtocolID_B" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubTitle" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="Protocol" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProtocolLoad" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LookUpTable" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
   <Function Name="dbo.KappaBaseData_Insert_ByAbs_EvlID" Method="KappaBaseData_Insert_ByAbs_EvlID">
     <Parameter Name="AbstractID" Parameter="abstractID" Type="System.Int32" DbType="Int" />
     <Parameter Name="EvaluationId" Parameter="evaluationId" Type="System.Int32" DbType="Int" />

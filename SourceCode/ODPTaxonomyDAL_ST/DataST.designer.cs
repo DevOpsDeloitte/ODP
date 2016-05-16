@@ -147,6 +147,9 @@ namespace ODPTaxonomyDAL_ST
     partial void InsertF_PreventionCategoryAnswer_B(F_PreventionCategoryAnswer_B instance);
     partial void UpdateF_PreventionCategoryAnswer_B(F_PreventionCategoryAnswer_B instance);
     partial void DeleteF_PreventionCategoryAnswer_B(F_PreventionCategoryAnswer_B instance);
+    partial void InsertProtocol_B(Protocol_B instance);
+    partial void UpdateProtocol_B(Protocol_B instance);
+    partial void DeleteProtocol_B(Protocol_B instance);
     #endregion
 		
 		public DataDataContext() : 
@@ -496,6 +499,14 @@ namespace ODPTaxonomyDAL_ST
 			get
 			{
 				return this.GetTable<F_PreventionCategoryAnswer_B>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Protocol_B> Protocol_Bs
+		{
+			get
+			{
+				return this.GetTable<Protocol_B>();
 			}
 		}
 		
@@ -10148,6 +10159,236 @@ namespace ODPTaxonomyDAL_ST
 						this._SubmissionID = default(int);
 					}
 					this.SendPropertyChanged("Submission");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Protocol_B")]
+	public partial class Protocol_B : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _ProtocolID_B;
+		
+		private string _Title;
+		
+		private string _SubTitle;
+		
+		private string _Protocol;
+		
+		private string _ProtocolLoad;
+		
+		private string _LookUpTable;
+		
+		private System.Nullable<int> _LookUpID;
+		
+		private System.Nullable<System.DateTime> _LoadedDate;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnProtocolID_BChanging(int value);
+    partial void OnProtocolID_BChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnSubTitleChanging(string value);
+    partial void OnSubTitleChanged();
+    partial void OnProtocolChanging(string value);
+    partial void OnProtocolChanged();
+    partial void OnProtocolLoadChanging(string value);
+    partial void OnProtocolLoadChanged();
+    partial void OnLookUpTableChanging(string value);
+    partial void OnLookUpTableChanged();
+    partial void OnLookUpIDChanging(System.Nullable<int> value);
+    partial void OnLookUpIDChanged();
+    partial void OnLoadedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLoadedDateChanged();
+    #endregion
+		
+		public Protocol_B()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProtocolID_B", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int ProtocolID_B
+		{
+			get
+			{
+				return this._ProtocolID_B;
+			}
+			set
+			{
+				if ((this._ProtocolID_B != value))
+				{
+					this.OnProtocolID_BChanging(value);
+					this.SendPropertyChanging();
+					this._ProtocolID_B = value;
+					this.SendPropertyChanged("ProtocolID_B");
+					this.OnProtocolID_BChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Title", DbType="NVarChar(255)")]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubTitle", DbType="NVarChar(1000)")]
+		public string SubTitle
+		{
+			get
+			{
+				return this._SubTitle;
+			}
+			set
+			{
+				if ((this._SubTitle != value))
+				{
+					this.OnSubTitleChanging(value);
+					this.SendPropertyChanging();
+					this._SubTitle = value;
+					this.SendPropertyChanged("SubTitle");
+					this.OnSubTitleChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Protocol", DbType="NVarChar(MAX)")]
+		public string Protocol
+		{
+			get
+			{
+				return this._Protocol;
+			}
+			set
+			{
+				if ((this._Protocol != value))
+				{
+					this.OnProtocolChanging(value);
+					this.SendPropertyChanging();
+					this._Protocol = value;
+					this.SendPropertyChanged("Protocol");
+					this.OnProtocolChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ProtocolLoad", DbType="NVarChar(MAX)")]
+		public string ProtocolLoad
+		{
+			get
+			{
+				return this._ProtocolLoad;
+			}
+			set
+			{
+				if ((this._ProtocolLoad != value))
+				{
+					this.OnProtocolLoadChanging(value);
+					this.SendPropertyChanging();
+					this._ProtocolLoad = value;
+					this.SendPropertyChanged("ProtocolLoad");
+					this.OnProtocolLoadChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LookUpTable", DbType="NVarChar(100)")]
+		public string LookUpTable
+		{
+			get
+			{
+				return this._LookUpTable;
+			}
+			set
+			{
+				if ((this._LookUpTable != value))
+				{
+					this.OnLookUpTableChanging(value);
+					this.SendPropertyChanging();
+					this._LookUpTable = value;
+					this.SendPropertyChanged("LookUpTable");
+					this.OnLookUpTableChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LookUpID", DbType="Int")]
+		public System.Nullable<int> LookUpID
+		{
+			get
+			{
+				return this._LookUpID;
+			}
+			set
+			{
+				if ((this._LookUpID != value))
+				{
+					this.OnLookUpIDChanging(value);
+					this.SendPropertyChanging();
+					this._LookUpID = value;
+					this.SendPropertyChanged("LookUpID");
+					this.OnLookUpIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LoadedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> LoadedDate
+		{
+			get
+			{
+				return this._LoadedDate;
+			}
+			set
+			{
+				if ((this._LoadedDate != value))
+				{
+					this.OnLoadedDateChanging(value);
+					this.SendPropertyChanging();
+					this._LoadedDate = value;
+					this.SendPropertyChanged("LoadedDate");
+					this.OnLoadedDateChanged();
 				}
 			}
 		}

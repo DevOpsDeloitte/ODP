@@ -85,7 +85,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         $scope.showDescription = function (inID) {
             //console.log("show description.." + inID);
-            window.open("./Glossary.aspx#" + inID, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, width=768, height=700");
+            window.open("./GlossaryB.aspx#" + inID, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, width=768, height=700");
         };
 
         $scope.cleanURL = function (instr) {
@@ -101,12 +101,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         $scope.watchConsensus = function () {
 
-            window.location.replace("/Evaluation/EvaluationRT.aspx?modetype=watchconsensus&teamid=" + $scope.mdata.teamid + "&abstractid=" + $scope.mdata.abstractid);
+            window.location.replace("/Evaluation/EvaluationRTB.aspx?modetype=watchconsensus&teamid=" + $scope.mdata.teamid + "&abstractid=" + $scope.mdata.abstractid);
         }
 
         $scope.watchComparison = function () {
 
-            window.location.replace("/Evaluation/EvaluationRT.aspx?modetype=watchcomparison&teamid=" + $scope.mdata.teamid + "&abstractid=" + $scope.mdata.abstractid);
+            window.location.replace("/Evaluation/EvaluationRTB.aspx?modetype=watchcomparison&teamid=" + $scope.mdata.teamid + "&abstractid=" + $scope.mdata.abstractid);
         }
 
         $scope.startComparison = function () {
