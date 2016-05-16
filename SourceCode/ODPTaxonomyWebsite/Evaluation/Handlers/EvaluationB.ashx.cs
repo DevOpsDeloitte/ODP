@@ -362,13 +362,6 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
             private bool processAndOrganize(HttpContext context)
             {
                 Boolean retVal = false;
-                //Stream s = context.Request.InputStream;
-                //StreamReader sr = new StreamReader(s);
-                //var jsonString = sr.ReadToEnd().ToString();
-                //List<nvClass> NVs = JsonConvert.DeserializeObject<List<nvClass>>(jsonString);
-                //System.Diagnostics.Trace.WriteLine("In Submission --- Submission ID : " + submissionID.ToString());
-                //formVals = NVs;
-                //submissionID = Int32.Parse(getFormVal("submissionid"));
 
                 if (submissionID > 0)
                 {
@@ -385,10 +378,10 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                     foreach (var es in entitiesstudiedNVs)
                     {
                         var ids = es.name.Split('-');
-                        B_EntitiesStudiedAnswer b_es = new B_EntitiesStudiedAnswer();
+                        B_EntitiesStudiedAnswer_B b_es = new B_EntitiesStudiedAnswer_B();
                         b_es.SubmissionID = submissionID;
                         b_es.EntitiesStudiedID = Int32.Parse(ids[1]);
-                        db.B_EntitiesStudiedAnswers.InsertOnSubmit(b_es);
+                        db.B_EntitiesStudiedAnswer_Bs.InsertOnSubmit(b_es);
 
                     }
                     db.SubmitChanges();
@@ -397,10 +390,10 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                     foreach (var ss in studysettingNVs)
                     {
                         var ids = ss.name.Split('-');
-                        C_StudySettingAnswer c_ss = new C_StudySettingAnswer();
+                        C_StudySettingAnswer_B c_ss = new C_StudySettingAnswer_B();
                         c_ss.SubmissionID = submissionID;
                         c_ss.StudySettingID = Int32.Parse(ids[1]);
-                        db.C_StudySettingAnswers.InsertOnSubmit(c_ss);
+                        db.C_StudySettingAnswer_Bs.InsertOnSubmit(c_ss);
 
                     }
                     db.SubmitChanges();
@@ -409,10 +402,10 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                     foreach (var pf in polulationfocusNVs)
                     {
                         var ids = pf.name.Split('-');
-                        D_PopulationFocusAnswer d_pf = new D_PopulationFocusAnswer();
+                        D_PopulationFocusAnswer_B d_pf = new D_PopulationFocusAnswer_B();
                         d_pf.SubmissionID = submissionID;
                         d_pf.PopulationFocusID = Int32.Parse(ids[1]);
-                        db.D_PopulationFocusAnswers.InsertOnSubmit(d_pf);
+                        db.D_PopulationFocusAnswer_Bs.InsertOnSubmit(d_pf);
 
                     }
                     db.SubmitChanges();
@@ -421,10 +414,10 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                     foreach (var sdp in studydesignpurposeNVs)
                     {
                         var ids = sdp.name.Split('-');
-                        E_StudyDesignPurposeAnswer e_sdp = new E_StudyDesignPurposeAnswer();
+                        E_StudyDesignPurposeAnswer_B e_sdp = new E_StudyDesignPurposeAnswer_B();
                         e_sdp.SubmissionID = submissionID;
                         e_sdp.StudyDesignPurposeID = Int32.Parse(ids[1]);
-                        db.E_StudyDesignPurposeAnswers.InsertOnSubmit(e_sdp);
+                        db.E_StudyDesignPurposeAnswer_Bs.InsertOnSubmit(e_sdp);
 
                     }
                     db.SubmitChanges();
@@ -435,10 +428,10 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                     {
                         //System.Diagnostics.Trace.WriteLine(" detected prevention category ");
                         var ids = pc.name.Split('-');
-                        F_PreventionCategoryAnswer f_pc = new F_PreventionCategoryAnswer();
+                        F_PreventionCategoryAnswer_B f_pc = new F_PreventionCategoryAnswer_B();
                         f_pc.SubmissionID = submissionID;
                         f_pc.PreventionCategoryID = Int32.Parse(ids[1]);
-                        db.F_PreventionCategoryAnswers.InsertOnSubmit(f_pc);
+                        db.F_PreventionCategoryAnswer_Bs.InsertOnSubmit(f_pc);
 
                     }
                     db.SubmitChanges();
@@ -477,42 +470,42 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
             private void DeleteAnswers(DataDataContext db)
             {
                 // code only for testing ::
-                var delanswers = db.A_StudyFocusAnswers.Where(x => x.SubmissionID == submissionID).Select(x => x);
+                var delanswers = db.A_StudyFocusAnswer_Bs.Where(x => x.SubmissionID == submissionID).Select(x => x);
                 foreach (var dela in delanswers)
                 {
-                    db.A_StudyFocusAnswers.DeleteOnSubmit(dela);
+                    db.A_StudyFocusAnswer_Bs.DeleteOnSubmit(dela);
                 }
                 db.SubmitChanges();
-                var esanswers = db.B_EntitiesStudiedAnswers.Where(x => x.SubmissionID == submissionID).Select(x => x);
+                var esanswers = db.B_EntitiesStudiedAnswer_Bs.Where(x => x.SubmissionID == submissionID).Select(x => x);
                 foreach (var es in esanswers)
                 {
-                    db.B_EntitiesStudiedAnswers.DeleteOnSubmit(es);
+                    db.B_EntitiesStudiedAnswer_Bs.DeleteOnSubmit(es);
                 }
                 db.SubmitChanges();
-                var ssanswers = db.C_StudySettingAnswers.Where(x => x.SubmissionID == submissionID).Select(x => x);
+                var ssanswers = db.C_StudySettingAnswer_Bs.Where(x => x.SubmissionID == submissionID).Select(x => x);
                 foreach (var ss in ssanswers)
                 {
-                    db.C_StudySettingAnswers.DeleteOnSubmit(ss);
+                    db.C_StudySettingAnswer_Bs.DeleteOnSubmit(ss);
                 }
                 db.SubmitChanges();
-                var pfanswers = db.D_PopulationFocusAnswers.Where(x => x.SubmissionID == submissionID).Select(x => x);
+                var pfanswers = db.D_PopulationFocusAnswer_Bs.Where(x => x.SubmissionID == submissionID).Select(x => x);
                 foreach (var pf in pfanswers)
                 {
-                    db.D_PopulationFocusAnswers.DeleteOnSubmit(pf);
+                    db.D_PopulationFocusAnswer_Bs.DeleteOnSubmit(pf);
                 }
                 db.SubmitChanges();
 
-                var sdpanswers = db.E_StudyDesignPurposeAnswers.Where(x => x.SubmissionID == submissionID).Select(x => x);
+                var sdpanswers = db.E_StudyDesignPurposeAnswer_Bs.Where(x => x.SubmissionID == submissionID).Select(x => x);
                 foreach (var sdp in sdpanswers)
                 {
-                    db.E_StudyDesignPurposeAnswers.DeleteOnSubmit(sdp);
+                    db.E_StudyDesignPurposeAnswer_Bs.DeleteOnSubmit(sdp);
                 }
                 db.SubmitChanges();
 
-                var pcanswers = db.F_PreventionCategoryAnswers.Where(x => x.SubmissionID == submissionID).Select(x => x);
+                var pcanswers = db.F_PreventionCategoryAnswer_Bs.Where(x => x.SubmissionID == submissionID).Select(x => x);
                 foreach (var pc in pcanswers)
                 {
-                    db.F_PreventionCategoryAnswers.DeleteOnSubmit(pc);
+                    db.F_PreventionCategoryAnswer_Bs.DeleteOnSubmit(pc);
                 }
                 db.SubmitChanges();
 
