@@ -573,7 +573,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         $scope.showSaveButton = false; // for concurrency issue.
         $http({
             method: 'POST',
-            url: 'Handlers/EvaluationBx.ashx',
+            url: 'Handlers/EvaluationB.ashx',
             //data: $.param($scope.formData),  // pass in data as strings
             //data: { payload: JSON.stringify($scope.mdata) },  // pass in data as strings
             data: formArray,
