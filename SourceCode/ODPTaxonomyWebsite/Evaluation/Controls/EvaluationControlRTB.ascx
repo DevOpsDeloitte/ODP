@@ -131,14 +131,7 @@
         <ul>
             <li>
                 <input class="button yes" type="button" id="printButton" value="Print Abstract" ng-click="printAbstract()" /></li>
-            <!--<li ng-show="showResetButton"><input class="button yes" type="button" id="resetButton" value="Reset" ng-click="resetFormStart()" /></li>
-            <li ng-show="showComparisonButton"><input class="button yes" type="button" id="comparisonButton" value="Start Comparison" ng-click="startComparison()" /></li>
-            <li ng-show="!showComparisonButton && mode.indexOf('Comparison') != -1"><input class="button no" type="button" id="disabledcomparisonButton" value="Start Comparison" /></li>
-            <li ng-show="showConsensusButton"><input class="button yes" type="button" id="consensusButton" value="Start Consensus" ng-click="startConsensus()" /></li>
-            <li ng-show="!showConsensusButton && mode.indexOf('Consensus') != -1"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
-            <li ng-show="showSaveButton"><input class="button yes" type="button" id="saveButton" value="Submit" ng-click="processForm()" ng-disabled="disallowSave" /></li>
-            <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Submit"/></li>
-            -->
+
 
         </ul>
     </div>
@@ -195,12 +188,7 @@
 
             </div>
 
-            <!-- <div class="sixteen columns">
-         <div>
-             <span class="titles">Last Name :</span>
-             <span class="titlevals"><%= lastName %></span>
-         </div>  
-     </div>-->
+
 
             <div class="sixteen columns">
                 <div>
@@ -246,12 +234,12 @@
                             <tr>
                                 <th scope="col" class="question">Topics<div class="icon open" ng-click="showDescription('topics-0')"></div>
                                 </th>
-                                <th scope="col" class="answer">A.1 Rationale<div class="icon open" ng-click="showDescription('studyfocuscategory-1')"></div>
+                                <th scope="col" class="answer">A.4 Category<div class="icon open" ng-click="showDescription('studyfocuscategory-1')"></div>
                                 </th>
-                                <th scope="col" class="answer">A.2 Exposure<div class="icon open" ng-click="showDescription('studyfocuscategory-2')"></div>
+                               <%-- <th scope="col" class="answer">A.2 Exposure<div class="icon open" ng-click="showDescription('studyfocuscategory-2')"></div>
                                 </th>
                                 <th scope="col" class="answer">A.3 Outcome<div class="icon open" ng-click="showDescription('studyfocuscategory-3')"></div>
-                                </th>
+                                </th>--%>
                             </tr>
                         </thead>
                         <tbody>
@@ -357,7 +345,7 @@
 
 
     <script src="../scripts/modules/module.js"></script>
-    <script src="../scripts/controllers/controllerRT.js"></script>
+    <script src="../scripts/controllers/controllerRTB.js"></script>
     <script src="../scripts/directives/directiveRT.js"></script>
     <script src="../scripts/app.js"></script>
     <script src="../scripts/commentsRT.js"></script>

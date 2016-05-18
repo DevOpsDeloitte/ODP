@@ -64,15 +64,8 @@ app.directive("outcomeBox", function ($rootScope) {
                 }
                 }catch(e) {};
 
-                //if($rootScope.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
-                //if($rootScope.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
-                //testX = $rootScope.mdata;
-                 //scope.view.comparers = true;
-                 //console.log(scope.$parent.mdata.formmode);
                   try{
                  
-                    //if(MYSCOPE.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
-                    //if(MYSCOPE.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
                     if(scope.$parent.mdata.formmode.indexOf('Consensus') != -1) scope.view.consensus = true;
                     if(scope.$parent.mdata.formmode.indexOf('Comparison') != -1) scope.view.comparers = true;
                 }catch(e) {};

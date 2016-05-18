@@ -146,8 +146,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             }
             else
             {
-                //lbl_messageUsers.Visible = true;
-                //lbl_messageUsers.Text = "No Session";
+
                 Response.Redirect("/");
                 return;
 
@@ -159,17 +158,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         protected void loadAbstractInfoFromID()
         {
-            //var evalrec = db.Evaluations.Where(e => e.EvaluationId == EvaluationID).Select(e => e).FirstOrDefault();
-            //if (evalrec != null)
-            //{
-            //    AbstractID = Convert.ToInt32(evalrec.AbstractID);
-            //    //Response.Write(" Abstract ID : " + AbstractID);
-            //}
-            //else
-            //{
-            //    // We need to exit -- trouble.
 
-            //}
 
             var absrec = db.Abstracts.Where(a => a.AbstractID == AbstractID).Select(a => a).FirstOrDefault();
             if (absrec != null)
@@ -316,7 +305,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         protected void startComparison()
         {
-            //Request.QueryString['EQCN'] ?? "default text";
+
             string startComparison = string.IsNullOrEmpty(Request.QueryString["startComparison"]) ? "" : Request.QueryString["startComparison"];
             bool startC = startComparison == "true" ? true : false;
             if (startC)
@@ -535,27 +524,27 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 if (Type == "A_StudyFocus")
                 {
 
-                    var rec1 = db.A_StudyFocusAnswers.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.A_StudyFocusAnswers.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.A_StudyFocusAnswer_Bs.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.A_StudyFocusAnswer_Bs.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
-                        retval[0] = rec1.StudyFocus_A1 ? "c-"+CoderTeamID.ToString() : "";
-                        retval[1] = rec1.StudyFocus_A2 ? "c-" + CoderTeamID.ToString() : "";
-                        retval[2] = rec1.StudyFocus_A3 ? "c-" + CoderTeamID.ToString() : "";
+                        retval[0] = rec1.StudyFocus_A4 ? "c-"+CoderTeamID.ToString() : "";
+                        //retval[1] = rec1.StudyFocus_A2 ? "c-" + CoderTeamID.ToString() : "";
+                        //retval[2] = rec1.StudyFocus_A3 ? "c-" + CoderTeamID.ToString() : "";
                     }
 
                     if (rec2 != null)
                     {
 
-                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + "," + "o-" + ODPTeamID.ToString() : "";
-                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + "o-" + ODPTeamID.ToString() : "";
-                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + "o-" + ODPTeamID.ToString() : "";
+                        retval[0] = rec2.StudyFocus_A4 ? retval[0] + "," + "o-" + ODPTeamID.ToString() : "";
+                        //retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + "o-" + ODPTeamID.ToString() : "";
+                        //retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + "o-" + ODPTeamID.ToString() : "";
                     }
 
 
                     retval[0] = replaceComma(retval[0]);
-                    retval[1] = replaceComma(retval[1]);
-                    retval[2] = replaceComma(retval[2]);
+                    //retval[1] = replaceComma(retval[1]);
+                   // retval[2] = replaceComma(retval[2]);
 
 
 
@@ -564,8 +553,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 if (Type == "B_EntitiesStudied")
                 {
 
-                    var rec1 = db.B_EntitiesStudiedAnswers.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.B_EntitiesStudiedAnswers.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.B_EntitiesStudiedAnswer_Bs.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.B_EntitiesStudiedAnswer_Bs.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = "c-" + CoderTeamID.ToString();
@@ -587,8 +576,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 if (Type == "C_StudySettings")
                 {
 
-                    var rec1 = db.C_StudySettingAnswers.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.C_StudySettingAnswers.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.C_StudySettingAnswer_Bs.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.C_StudySettingAnswer_Bs.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = "c-" + CoderTeamID.ToString();
@@ -610,8 +599,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 if (Type == "D_PopulationFocus")
                 {
 
-                    var rec1 = db.D_PopulationFocusAnswers.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.D_PopulationFocusAnswers.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.D_PopulationFocusAnswer_Bs.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.D_PopulationFocusAnswer_Bs.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = "c-" + CoderTeamID.ToString();
@@ -633,8 +622,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 if (Type == "E_StudyDesignPurpose")
                 {
 
-                    var rec1 = db.E_StudyDesignPurposeAnswers.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.E_StudyDesignPurposeAnswers.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.E_StudyDesignPurposeAnswer_Bs.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.E_StudyDesignPurposeAnswer_Bs.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = "c-" + CoderTeamID.ToString();
@@ -657,8 +646,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 if (Type == "F_PreventionCategory")
                 {
 
-                    var rec1 = db.F_PreventionCategoryAnswers.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.PreventionCategoryID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.F_PreventionCategoryAnswers.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.PreventionCategoryID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.F_PreventionCategoryAnswer_Bs.Where(x => x.SubmissionID == CoderTeamSubmissionID && x.PreventionCategoryID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.F_PreventionCategoryAnswer_Bs.Where(x => x.SubmissionID == ODPTeamSubmissionID && x.PreventionCategoryID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = "c-" + CoderTeamID.ToString();
@@ -782,29 +771,29 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                 if (Type == "A_StudyFocus")
                 {
-                    var rec1 = db.A_StudyFocusAnswers.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.A_StudyFocusAnswers.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
-                    var rec3 = db.A_StudyFocusAnswers.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.A_StudyFocusAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.A_StudyFocusAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec3 = db.A_StudyFocusAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
 
                     if (rec1 != null)
                     {
-                        retval[0] = rec1.StudyFocus_A1 ? TeamUsers[1].UserName : "";
-                        retval[1] = rec1.StudyFocus_A2 ? TeamUsers[1].UserName : "";
-                        retval[2] = rec1.StudyFocus_A3 ? TeamUsers[1].UserName : "";
+                        retval[0] = rec1.StudyFocus_A4 ? TeamUsers[1].UserName : "";
+                        //retval[1] = rec1.StudyFocus_A2 ? TeamUsers[1].UserName : "";
+                        //retval[2] = rec1.StudyFocus_A3 ? TeamUsers[1].UserName : "";
                     }
 
                     if (rec2 != null)
                     {
-                        retval[0] = rec2.StudyFocus_A1 ? retval[0] + ","+TeamUsers[2].UserName : retval[0] + "";
-                        retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + TeamUsers[2].UserName : retval[1] + "";
-                        retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + TeamUsers[2].UserName : retval[2] + "";
+                        retval[0] = rec2.StudyFocus_A4 ? retval[0] + ","+TeamUsers[2].UserName : retval[0] + "";
+                        //retval[1] = rec2.StudyFocus_A2 ? retval[1] + "," + TeamUsers[2].UserName : retval[1] + "";
+                        //retval[2] = rec2.StudyFocus_A3 ? retval[2] + "," + TeamUsers[2].UserName : retval[2] + "";
                     }
 
                     if (rec3 != null)
                     {
-                        retval[0] = rec3.StudyFocus_A1 ? retval[0] + "," + TeamUsers[3].UserName : retval[0] + "";
-                        retval[1] = rec3.StudyFocus_A2 ? retval[1] + "," + TeamUsers[3].UserName : retval[1] + "";
-                        retval[2] = rec3.StudyFocus_A3 ? retval[2] + "," + TeamUsers[3].UserName : retval[2] + "";
+                        retval[0] = rec3.StudyFocus_A4 ? retval[0] + "," + TeamUsers[3].UserName : retval[0] + "";
+                        //retval[1] = rec3.StudyFocus_A2 ? retval[1] + "," + TeamUsers[3].UserName : retval[1] + "";
+                        //retval[2] = rec3.StudyFocus_A3 ? retval[2] + "," + TeamUsers[3].UserName : retval[2] + "";
                     }
 
                     retval[0] = replaceComma(retval[0]);
@@ -814,9 +803,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                 if (Type == "B_EntitiesStudied")
                 {
-                    var rec1 = db.B_EntitiesStudiedAnswers.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.B_EntitiesStudiedAnswers.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
-                    var rec3 = db.B_EntitiesStudiedAnswers.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.B_EntitiesStudiedAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.B_EntitiesStudiedAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
+                    var rec3 = db.B_EntitiesStudiedAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = TeamUsers[1].UserName;
@@ -839,9 +828,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                 if (Type == "C_StudySettings")
                 {
-                    var rec1 = db.C_StudySettingAnswers.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.C_StudySettingAnswers.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
-                    var rec3 = db.C_StudySettingAnswers.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.C_StudySettingAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.C_StudySettingAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
+                    var rec3 = db.C_StudySettingAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = TeamUsers[1].UserName;
@@ -863,9 +852,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 }
                 if (Type == "D_PopulationFocus")
                 {
-                    var rec1 = db.D_PopulationFocusAnswers.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.D_PopulationFocusAnswers.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
-                    var rec3 = db.D_PopulationFocusAnswers.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.D_PopulationFocusAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.D_PopulationFocusAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
+                    var rec3 = db.D_PopulationFocusAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = TeamUsers[1].UserName;
@@ -888,9 +877,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                 if (Type == "E_StudyDesignPurpose")
                 {
-                    var rec1 = db.E_StudyDesignPurposeAnswers.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.E_StudyDesignPurposeAnswers.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
-                    var rec3 = db.E_StudyDesignPurposeAnswers.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.E_StudyDesignPurposeAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.E_StudyDesignPurposeAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
+                    var rec3 = db.E_StudyDesignPurposeAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = TeamUsers[1].UserName;
@@ -913,9 +902,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                 if (Type == "F_PreventionCategory")
                 {
-                    var rec1 = db.F_PreventionCategoryAnswers.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.PreventionCategoryID == ID).Select(x => x).FirstOrDefault();
-                    var rec2 = db.F_PreventionCategoryAnswers.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.PreventionCategoryID  == ID).Select(x => x).FirstOrDefault();
-                    var rec3 = db.F_PreventionCategoryAnswers.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.PreventionCategoryID  == ID).Select(x => x).FirstOrDefault();
+                    var rec1 = db.F_PreventionCategoryAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[1].UserSubmissionID && x.PreventionCategoryID == ID).Select(x => x).FirstOrDefault();
+                    var rec2 = db.F_PreventionCategoryAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[2].UserSubmissionID && x.PreventionCategoryID  == ID).Select(x => x).FirstOrDefault();
+                    var rec3 = db.F_PreventionCategoryAnswer_Bs.Where(x => x.SubmissionID == TeamUsers[3].UserSubmissionID && x.PreventionCategoryID  == ID).Select(x => x).FirstOrDefault();
                     if (rec1 != null)
                     {
                         retval[0] = TeamUsers[1].UserName;
@@ -967,18 +956,18 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 {
                     if (Type == "A_StudyFocus")
                     {
-                        var rec = db.A_StudyFocusAnswers.Where(x => x.SubmissionID == SubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
+                        var rec = db.A_StudyFocusAnswer_Bs.Where(x => x.SubmissionID == SubmissionID && x.StudyFocusID == ID).Select(x => x).FirstOrDefault();
                         if (rec != null)
                         {
-                            retval[0] = rec.StudyFocus_A1 ? "yes" : "no";
-                            retval[1] = rec.StudyFocus_A2 ? "yes" : "no";
-                            retval[2] = rec.StudyFocus_A3 ? "yes" : "no";
+                            retval[0] = rec.StudyFocus_A4 ? "yes" : "no";
+                            //retval[1] = rec.StudyFocus_A2 ? "yes" : "no";
+                           // retval[2] = rec.StudyFocus_A3 ? "yes" : "no";
                         }
                     }
 
                     if (Type == "B_EntitiesStudied")
                     {
-                        var rec = db.B_EntitiesStudiedAnswers.Where(x => x.SubmissionID == SubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
+                        var rec = db.B_EntitiesStudiedAnswer_Bs.Where(x => x.SubmissionID == SubmissionID && x.EntitiesStudiedID == ID).Select(x => x).FirstOrDefault();
                         if (rec != null)
                         {
                             retval[0] = "yes";
@@ -989,7 +978,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                     if (Type == "C_StudySettings")
                     {
-                        var rec = db.C_StudySettingAnswers.Where(x => x.SubmissionID == SubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
+                        var rec = db.C_StudySettingAnswer_Bs.Where(x => x.SubmissionID == SubmissionID && x.StudySettingID == ID).Select(x => x).FirstOrDefault();
                         if (rec != null)
                         {
                             retval[0] = "yes";
@@ -1000,7 +989,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                     if (Type == "D_PopulationFocus")
                     {
-                        var rec = db.D_PopulationFocusAnswers.Where(x => x.SubmissionID == SubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
+                        var rec = db.D_PopulationFocusAnswer_Bs.Where(x => x.SubmissionID == SubmissionID && x.PopulationFocusID == ID).Select(x => x).FirstOrDefault();
                         if (rec != null)
                         {
                             retval[0] = "yes";
@@ -1010,7 +999,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                     if (Type == "E_StudyDesignPurpose")
                     {
-                        var rec = db.E_StudyDesignPurposeAnswers.Where(x => x.SubmissionID == SubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
+                        var rec = db.E_StudyDesignPurposeAnswer_Bs.Where(x => x.SubmissionID == SubmissionID && x.StudyDesignPurposeID == ID).Select(x => x).FirstOrDefault();
                         if (rec != null)
                         {
                             retval[0] = "yes";
@@ -1020,7 +1009,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
                     if (Type == "F_PreventionCategory")
                     {
-                        var rec = db.F_PreventionCategoryAnswers.Where(x => x.SubmissionID == SubmissionID && x.PreventionCategoryID == ID).Select(x => x).FirstOrDefault();
+                        var rec = db.F_PreventionCategoryAnswer_Bs.Where(x => x.SubmissionID == SubmissionID && x.PreventionCategoryID == ID).Select(x => x).FirstOrDefault();
                         if (rec != null)
                         {
                             retval[0] = "yes";
@@ -1041,7 +1030,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderStudyFocusQuestions()
         {
             
-            var questions = db.A_StudyFocus.Where(sf => sf.Status.Status1 == "Active" && sf.StudyFocusID <= 100 ).OrderBy( sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.A_StudyFocus_Bs.Where(sf => sf.Status.Status1 == "Active" && sf.StudyFocusID <= 100 ).OrderBy( sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             var count = 1;
             foreach(var question in questions){
@@ -1050,7 +1039,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getComparerVals = getComparerValues("A_StudyFocus", question.StudyFocusID);
                 StringBuilder row = new StringBuilder();
                 row.AppendLine("<tr>");
-                if (question.A1_IsEnabled || question.A2_IsEnabled || question.A3_IsEnabled)
+                if (question.A4_IsEnabled)
                 {
                     row.AppendLine("<td scope=\"row\">" + question.StudyFocusID.ToString() + ". " + question.StudyFocus + "<div class=\"icon open\" ng-click=\"showDescription('studyfocus-" + question.StudyFocusID.ToString() + "')\"></div>"+"</td>");
                 }
@@ -1059,9 +1048,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                     row.AppendLine("<td scope=\"row\">" + question.StudyFocusID.ToString() + ". " + question.StudyFocus + "</td>");
                 }
                 
-                row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[1][" + question.StudyFocusID + "]\" is-checked='"+getViewVals[0]+"' show-coders='"+getCoderVals[0]+"' show-comparers='"+getComparerVals[0]+"' is-enabled='" + (question.A1_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-1\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-1\"></div></td>");
-                row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[2][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[1] + "'  show-coders='" + getCoderVals[1] + "' show-comparers='" + getComparerVals[1] + "' is-enabled='" + (question.A2_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-2\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-2\"></div></td>");
-                row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[3][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[2] + "'  show-coders='" + getCoderVals[2] + "' show-comparers='" + getComparerVals[2] + "' is-enabled='" + (question.A3_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-3\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-3\"></div></td>");
+                row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studyfocus[1][" + question.StudyFocusID + "]\" is-checked='"+getViewVals[0]+"' show-coders='"+getCoderVals[0]+"' show-comparers='"+getComparerVals[0]+"' is-enabled='" + (question.A4_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-1\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-1\"></div></td>");
+                //row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[2][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[1] + "'  show-coders='" + getCoderVals[1] + "' show-comparers='" + getComparerVals[1] + "' is-enabled='" + (question.A2_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-2\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-2\"></div></td>");
+                //row.AppendLine("<td class=\"box-three\"><div outcome-box=\"mdata.studyfocus[3][" + question.StudyFocusID + "]\" is-checked='" + getViewVals[2] + "'  show-coders='" + getCoderVals[2] + "' show-comparers='" + getComparerVals[2] + "' is-enabled='" + (question.A3_IsEnabled == true ? "yes" : "no") + "' name=\"studyfocus-" + question.StudyFocusID + "-3\" data-cat-id=\"studyfocus\" data-q-id =\"" + question.StudyFocusID + "-3\"></div></td>");
               
                  row.AppendLine("</tr>");
                 finalStr.Append(row);
@@ -1075,8 +1064,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         protected void renderEntitiesStudiedQuestions()
         {
-            //var db = DBData.GetDataContext();
-            var questions = db.B_EntitiesStudieds.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+
+            var questions = db.B_EntitiesStudied_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1084,11 +1073,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("B_EntitiesStudied", question.EntitiesStudiedID);
                 var getComparerVals = getComparerValues("B_EntitiesStudied", question.EntitiesStudiedID);
                 StringBuilder row = new StringBuilder();
-                //row.AppendLine("<tr>");
-                //row.AppendLine("<td scope=\"row\">" + question.EntitiesStudiedID.ToString() + ". " + question.EntitiesStudied + "<div class=\"icon open\" ng-click=\"showDescription('entitiesstudied-" + question.EntitiesStudiedID.ToString() + "')\"><div>" + "</td>");
-                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.entitiesstudied[" + question.EntitiesStudiedID + "]\" is-checked='" + getViewVals[0] + "'  show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"entitiesstudied-" + question.EntitiesStudiedID + "\" data-cat-id=\"entitiesstudied\" data-q-id =\"" + question.EntitiesStudiedID + "\"></div></td>");
                 
-                //row.AppendLine("</tr>");
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
@@ -1113,8 +1098,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         protected void renderStudySettingsQuestions()
         {
-            //var db = DBData.GetDataContext();
-            var questions = db.C_StudySettings.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+
+            var questions = db.C_StudySetting_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1122,11 +1107,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("C_StudySettings", question.StudySettingID);
                 var getComparerVals = getComparerValues("C_StudySettings", question.StudySettingID);
                 StringBuilder row = new StringBuilder();
-                //row.AppendLine("<tr>");
-                //row.AppendLine("<td scope=\"row\">"  + question.StudySettingID.ToString() + ". " + question.StudySetting + "<div class=\"icon open\" ng-click=\"showDescription('studysetting-" + question.StudySettingID.ToString() + "')\"></div>"+"</td>");
-                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studysetting[" + question.StudySettingID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studysetting-" + question.StudySettingID + "\" data-cat-id=\"studysetting\" data-q-id =\"" + question.StudySettingID + "\"></div></td>");
-                
-                //row.AppendLine("</tr>");
+
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
@@ -1150,8 +1131,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         protected void renderPopulationFocusQuestions()
         {
-            //var db = new DBDataContext();
-            var questions = db.D_PopulationFocus.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+
+            var questions = db.D_PopulationFocus_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1159,11 +1140,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("D_PopulationFocus", question.PopulationFocusID);
                 var getComparerVals = getComparerValues("D_PopulationFocus", question.PopulationFocusID);
                 StringBuilder row = new StringBuilder();
-                //row.AppendLine("<tr>");
-                //row.AppendLine("<td scope=\"row\">" + question.PopulationFocusID.ToString() + ". " + question.PopulationFocus +"<div class=\"icon open\" ng-click=\"showDescription('populationfocus-" + question.PopulationFocusID.ToString() + "')\"></div>"+ "</td>");
-                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.populationfocus[" + question.PopulationFocusID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"populationfocus-" + question.PopulationFocusID + "\" data-cat-id=\"populationfocus\" data-q-id =\"" + question.PopulationFocusID + "\"></div></td>");
-                
-                //row.AppendLine("</tr>");
+
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
@@ -1187,8 +1164,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         }
         protected void renderStudyDesignPurposeQuestions()
         {
-            //var db = new DBDataContext();
-            var questions = db.E_StudyDesignPurposes.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+
+            var questions = db.E_StudyDesignPurpose_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1196,10 +1173,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("E_StudyDesignPurpose", question.StudyDesignPurposeID);
                 var getComparerVals = getComparerValues("E_StudyDesignPurpose", question.StudyDesignPurposeID);
                 StringBuilder row = new StringBuilder();
-                //row.AppendLine("<tr>");
-                //row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\"icon open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>"+"</td>");
-                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");      
-                //row.AppendLine("</tr>");
+
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
@@ -1224,7 +1198,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
         protected void renderPreventionCategoryQuestions()
         {
             //var db = new DBDataContext();
-            var questions = db.F_PreventionCategories.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
+            var questions = db.F_PreventionCategory_Bs.Where(sf => sf.Status.Status1 == "Active" || sf.Status.Status1 == "InActive").OrderBy(sf => sf.Sort).Select(sf => sf).ToList();
             StringBuilder finalStr = new StringBuilder();
             foreach (var question in questions)
             {
@@ -1232,10 +1206,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 var getCoderVals = getCoderValues("F_PreventionCategory", question.PreventionCategoryID);
                 var getComparerVals = getComparerValues("F_PreventionCategory", question.PreventionCategoryID);
                 StringBuilder row = new StringBuilder();
-                //row.AppendLine("<tr>");
-                //row.AppendLine("<td scope=\"row\">"+ question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory +"<div class=\"icon open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
-                //row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"   is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");         
-                //row.AppendLine("</tr>");
+
                 if (question.Status.Status1 == "Active")
                 {
                     row.AppendLine("<tr>");
