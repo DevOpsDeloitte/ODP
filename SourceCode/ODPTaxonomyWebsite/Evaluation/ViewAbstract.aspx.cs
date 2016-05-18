@@ -722,7 +722,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             AbstractPublicHeathPart.InnerText = abstr.AbstractPublicHeathPart;
             ProjectTitle.InnerText = abstr.ProjectTitle;
             AdministeringIC.InnerText = abstr.AdministeringIC;
-            ApplicationID.InnerText = abstr.ApplicationID.ToString();
+            ApplicationID.InnerText = abstr.ChrApplicationID.ToString();
             PIProjectLeader.InnerText = abstr.PIProjectLeader;
             FY.InnerText = abstr.FY;
             ProjectNumber.InnerHtml = abstr.ProjectNumber;

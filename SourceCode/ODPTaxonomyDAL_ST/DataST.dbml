@@ -263,31 +263,6 @@
       <Association Name="AbstractStatus_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="AbstractStatusID" OtherKey="AbstractStatusID" Type="AbstractStatusChangeHistory" />
     </Type>
   </Table>
-  <Table Name="dbo.Abstract" Member="Abstracts">
-    <Type Name="Abstract">
-      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="AdministeringIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Abstract" Member="Abstract1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractProjTermPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Activity" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="IC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="SerialNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SupportYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Association Name="Abstract_Evaluation" Member="Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
-      <Association Name="Abstract_Evaluation1" Member="Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
-      <Association Name="Abstract_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractStatusChangeHistory" />
-    </Type>
-  </Table>
   <Table Name="dbo.Submission" Member="Submissions">
     <Type Name="Submission">
       <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -471,6 +446,35 @@
       <Column Name="LookUpTable" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="LookUpID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="LoadedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Abstract" Member="Abstracts">
+    <Type Name="Abstract">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AdministeringIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Abstract" Member="Abstract1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractProjTermPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Activity" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SerialNumber" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SupportYear" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ChrApplicationID" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="NoPreventionFlag" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="CodingType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="LastExportDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Abstract_Evaluation" Member="Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
+      <Association Name="Abstract_Evaluation1" Member="Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="Evaluation" />
+      <Association Name="Abstract_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractStatusChangeHistory" />
     </Type>
   </Table>
   <Function Name="dbo.KappaBaseData_Insert_ByAbs_EvlID" Method="KappaBaseData_Insert_ByAbs_EvlID">
