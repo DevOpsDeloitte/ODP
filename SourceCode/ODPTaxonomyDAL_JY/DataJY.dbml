@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Dev" Class="DataJYDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_JY.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString2" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_JY.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories">
     <Type Name="AbstractStatusChangeHistory">
       <Column Name="AbstractStatusChangeHistoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -37,6 +37,8 @@
       <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Submission_E_StudyDesignPurposeAnswer" Member="E_StudyDesignPurposeAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="E_StudyDesignPurposeAnswer" />
       <Association Name="Submission_F_PreventionCategoryAnswer" Member="F_PreventionCategoryAnswers" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="F_PreventionCategoryAnswer" />
+      <Association Name="Submission_F_PreventionCategoryAnswer_B" Member="F_PreventionCategoryAnswer_Bs" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="F_PreventionCategoryAnswer_B" />
+      <Association Name="Submission_E_StudyDesignPurposeAnswer_B" Member="E_StudyDesignPurposeAnswer_Bs" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="E_StudyDesignPurposeAnswer_B" />
       <Association Name="Evaluation_Submission" Member="Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="Evaluation" IsForeignKey="true" />
     </Type>
   </Table>
@@ -167,6 +169,22 @@
       <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="CreatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.F_PreventionCategoryAnswer_B" Member="F_PreventionCategoryAnswer_Bs">
+    <Type Name="F_PreventionCategoryAnswer_B">
+      <Column Name="F_PreventionCategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="PreventionCategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Submission_F_PreventionCategoryAnswer_B" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.E_StudyDesignPurposeAnswer_B" Member="E_StudyDesignPurposeAnswer_Bs">
+    <Type Name="E_StudyDesignPurposeAnswer_B">
+      <Column Name="E_StudyDesignPurposeAnswerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SubmissionID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="StudyDesignPurposeID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Submission_E_StudyDesignPurposeAnswer_B" Member="Submission" ThisKey="SubmissionID" OtherKey="SubmissionID" Type="Submission" IsForeignKey="true" />
     </Type>
   </Table>
 </Database>
