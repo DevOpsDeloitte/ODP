@@ -23,7 +23,7 @@ namespace ODPTaxonomyDAL_JY
         public bool InReview { get; set; }
 
         public int AbstractID { get; set; }
-        public int? ApplicationID { get; set; }
+        public string ApplicationID { get; set; }
 
         public string ProjectTitle { get; set; }
         public string PIProjectLeader { get; set; }

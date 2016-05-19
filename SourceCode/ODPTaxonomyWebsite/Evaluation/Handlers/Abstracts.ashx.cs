@@ -195,7 +195,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            PIProjectLeader = a.PIProjectLeader,
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -206,22 +206,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             List<AbstractListRow> abstracts = data.ToList();
             List<AbstractListRow> finalabstracts = null;
-            //public enum AbstractStatusEnum
-            //      {
-            //          OPEN_0 = 1,
-            //          RETRIEVED_FOR_CODING_1 = 2,
-            //          CODED_BY_CODER_1A = 3,
-            //          CONSENSUS_COMPLETE_1B = 4,
-            //          CONSENSUS_COMPLETE_WITH_NOTES_1N = 6,
-            //          RETRIEVED_FOR_ODP_CODING_2 = 7,
-            //          CODED_BY_ODP_STAFF_2A = 8,
-            //          ODP_STAFF_CONSENSUS_2B = 9,
-            //          ODP_STAFF_AND_CODER_CONSENSUS_2C = 10,
-            //          ODP_CONSENSUS_WITH_NOTES_2N = 12,
-            //          CLOSED_3 = 13,
-            //          DATA_EXPORTED_4 = 14,
-            //          REOPEN_FOR_REVIEW_BY_ODP = 15
-            //      }
+          
             switch (query)
             {
                 case "uncoded":
@@ -276,7 +261,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        {
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -308,7 +293,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        {
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -347,7 +332,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            PIProjectLeader = a.PIProjectLeader,
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -436,7 +421,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            PIProjectLeader = a.PIProjectLeader,
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -501,7 +486,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            PIProjectLeader = a.PIProjectLeader,
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -545,7 +530,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            PIProjectLeader = a.PIProjectLeader,
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -611,7 +596,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            PIProjectLeader = a.PIProjectLeader,
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -678,7 +663,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                            PIProjectLeader = a.PIProjectLeader,
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -763,7 +748,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        {
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -801,7 +786,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        {
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
@@ -834,7 +819,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                        {
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,
