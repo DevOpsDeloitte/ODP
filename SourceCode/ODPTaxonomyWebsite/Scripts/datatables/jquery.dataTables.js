@@ -1550,7 +1550,7 @@
 					that = this,
 					now = +new Date(),
 					args = arguments;
-
+                
                 if (last && now < last + frequency) {
                     clearTimeout(timer);
 
@@ -3964,7 +3964,7 @@
 			_fnDataSource(settings) === 'ssp' ?
 				400 :
 				0;
-
+        
         var jqFilter = $('input', filter)
 			.val(previousSearch.sSearch)
 			.attr('placeholder', language.sSearchPlaceholder)
@@ -3981,7 +3981,7 @@
 			    }
 			})
 			.attr('aria-controls', tableId);
-
+        
         // Update the input elements whenever the table is filtered
         $(settings.nTable).on('search.dt.DT', function (ev, s) {
             if (settings === s) {
@@ -5434,7 +5434,7 @@
 	 *  @memberof DataTable#oApi
 	 */
     var _fnThrottle = DataTable.util.throttle;
-
+    
 
     /**
 	 * Convert a CSS unit width to pixels (e.g. 2em)

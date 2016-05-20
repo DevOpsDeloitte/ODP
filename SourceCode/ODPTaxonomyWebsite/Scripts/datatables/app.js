@@ -199,7 +199,7 @@ $(document).ready(function () {
 
 
             ],
-            "searchDelay": 500,
+            "searchDelay": 1000,
             "processing": true,
             "serverSide": true,
             "ajax": config.baseURL + "&filter=" + $opts.filterlist,
@@ -726,30 +726,32 @@ $(document).ready(function () {
         }
         $opts.hideboxes = [];
 
+        if (!$opts.initialPageLoad) {
+            table.ajax.reload(function (json) {
+                childrenRedraw(table.data());
+                if (config.role == "ODPSupervisor") {
+                    // change check of action checkboxes happens here - when Filter re-loads.. same block repeated table.init.
+                    serverCheckForActions();
 
-        $opts.initialPageLoad = false;
-        //table.ajax.reload(function (json) {
-        //    childrenRedraw(table.data());
-        //    if (config.role == "ODPSupervisor") {
-        //        // change check of action checkboxes happens here - when Filter re-loads.. same block repeated table.init.
-        //        serverCheckForActions();
-
-        //    }
-        //    else {
-        //        // for all other roles
-        //        if ($opts.initialPageLoad) {
-        //            if ($opts.hashExists) {
-        //                $opts.initialPageLoad = false;
-        //                table.page(parseInt($opts.pageNumber)).draw(false);
-        //            }
-        //        }
+                }
+                else {
+                    // for all other roles
+                    if ($opts.initialPageLoad) {
+                        if ($opts.hashExists) {
+                            $opts.initialPageLoad = false;
+                            table.page(parseInt($opts.pageNumber)).draw(false);
+                        }
+                    }
 
 
-        //    }
-        //    $opts.isGridDirty = false;
-        //    enableInterface();
-        //    clearSubmitBtnAndCheckboxes();
-        //});
+                }
+                $opts.isGridDirty = false;
+                enableInterface();
+                clearSubmitBtnAndCheckboxes();
+            });
+        } else {
+            $opts.initialPageLoad = false;
+        }
 
     }
 

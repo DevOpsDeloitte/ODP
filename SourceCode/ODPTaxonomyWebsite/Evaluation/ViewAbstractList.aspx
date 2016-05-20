@@ -114,7 +114,7 @@
 <link rel="stylesheet" href="../styles/alertify.css">    
 <link type="text/css" rel="Stylesheet" href="../styles/jquery.dataTables.min.css" /> 
 <link type="text/css" rel="Stylesheet" href="/Styles/evaluation.css" />
-<script type="text/javascript" src="../scripts/datatables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="../scripts/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../scripts/datatables/underscore-min.js"></script>
 <script src="../scripts/alertify.js"></script>
 <script src="../scripts/datatables/spin.min.js"></script>
