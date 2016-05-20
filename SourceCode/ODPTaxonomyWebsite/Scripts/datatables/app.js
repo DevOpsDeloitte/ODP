@@ -139,7 +139,7 @@ $(document).ready(function () {
                     },
 
                     {
-                    //mask out odp staff role kappa values
+                        //mask out odp staff role kappa values
                         "render": function (data, type, row) {
                             if (config.role == "ODPStaff") {
                                 return "&mdash;";
@@ -149,7 +149,7 @@ $(document).ready(function () {
                             }
 
                         },
-                        "targets": [8,9,10,11,12,13,14,15]
+                        "targets": [8, 9, 10, 11, 12, 13, 14, 15]
                     },
 
                     { "visible": true, "targets": [5] },
@@ -198,10 +198,11 @@ $(document).ready(function () {
                     }
 
 
-                ],
-
+            ],
+            "searchDelay": 500,
             "processing": true,
-            //"ajax": config.baseURL,
+            "serverSide": true,
+            "ajax": config.baseURL + "&filter=" + $opts.filterlist,
             "order": [[4, "desc"]],
             "columns": [
                  {
@@ -491,7 +492,7 @@ $(document).ready(function () {
 
         }
 
-        
+
     }
 
     function loadFilters() {
@@ -726,29 +727,29 @@ $(document).ready(function () {
         $opts.hideboxes = [];
 
 
+        $opts.initialPageLoad = false;
+        //table.ajax.reload(function (json) {
+        //    childrenRedraw(table.data());
+        //    if (config.role == "ODPSupervisor") {
+        //        // change check of action checkboxes happens here - when Filter re-loads.. same block repeated table.init.
+        //        serverCheckForActions();
 
-        table.ajax.reload(function (json) {
-            childrenRedraw(table.data());
-            if (config.role == "ODPSupervisor") {
-                // change check of action checkboxes happens here - when Filter re-loads.. same block repeated table.init.
-                serverCheckForActions();
-
-            }
-            else {
-                // for all other roles
-                if ($opts.initialPageLoad) {
-                    if ($opts.hashExists) {
-                        $opts.initialPageLoad = false;
-                        table.page(parseInt($opts.pageNumber)).draw(false);
-                    }
-                }
+        //    }
+        //    else {
+        //        // for all other roles
+        //        if ($opts.initialPageLoad) {
+        //            if ($opts.hashExists) {
+        //                $opts.initialPageLoad = false;
+        //                table.page(parseInt($opts.pageNumber)).draw(false);
+        //            }
+        //        }
 
 
-            }
-            $opts.isGridDirty = false;
-            enableInterface();
-            clearSubmitBtnAndCheckboxes();
-        });
+        //    }
+        //    $opts.isGridDirty = false;
+        //    enableInterface();
+        //    clearSubmitBtnAndCheckboxes();
+        //});
 
     }
 

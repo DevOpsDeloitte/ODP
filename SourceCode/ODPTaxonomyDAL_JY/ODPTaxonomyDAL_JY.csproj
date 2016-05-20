@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractData.cs" />
     <Compile Include="AbstractGridView.cs" />
     <Compile Include="AbstractListRow.cs" />
     <Compile Include="AbstractListViewData.cs" />

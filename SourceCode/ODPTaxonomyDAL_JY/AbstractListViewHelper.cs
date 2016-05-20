@@ -911,6 +911,52 @@ namespace ODPTaxonomyDAL_JY
             }
         }
 
+        public static IQueryable<AbstractListRow> SortAbstracts(IQueryable<AbstractListRow> Abstracts,string Sort,SortDirection SortDirection)
+        {
+            switch (Sort)
+            {
+                case "AbstractID":
+                    return SortDirection == SortDirection.Ascending ?
+                        Abstracts.OrderBy(a => a.AbstractID) :
+                        Abstracts.OrderByDescending(a => a.AbstractID);
+                case "ApplicationID":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.ApplicationID);
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.ApplicationID);
+                    }
+                case "Title":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.ProjectTitle);
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.ProjectTitle);
+                    }
+                case "Date":
+                case "StatusDate":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.StatusDate);
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.StatusDate);
+                    }
+                case "PIProjectLeader":
+                    return SortDirection == SortDirection.Ascending ?
+                        Abstracts.OrderBy(a => a.PIProjectLeader) :
+                        Abstracts.OrderByDescending(a => a.PIProjectLeader);
+                    break;
+                default:
+                    return Abstracts.OrderByDescending(d => d.StatusDate);
+            }
+        }
+
         public static AbstractListRow ConstructNewAbstractListRow(KappaData Kappa, string Title, int AbstractID = 0)
         {
             return new AbstractListRow
