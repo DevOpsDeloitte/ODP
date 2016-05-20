@@ -141,6 +141,15 @@ namespace ODPTaxonomyDAL_JY
                         select k;
             return query.ToList<E_StudyDesignPurposeAnswer>();
         }
+
+        public IEnumerable<E_StudyDesignPurposeAnswer_B> getAllE_StudyDesignPurposeRecord_BsID7()
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswer_Bs
+                        where k.StudyDesignPurposeID == 7
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer_B>();
+        }
+
         public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecords(IEnumerable<int> SubmissionIds)
         {
             var query = from k in db2.E_StudyDesignPurposeAnswers
@@ -161,6 +170,14 @@ namespace ODPTaxonomyDAL_JY
                         where k.PreventionCategoryID == 6
                         select k;
             return query.ToList<F_PreventionCategoryAnswer>();
+        }
+
+        public IEnumerable<F_PreventionCategoryAnswer_B> getAllF_PreventionCategoryRecord_BsID6()
+        {
+            var query = from k in db2.F_PreventionCategoryAnswer_Bs
+                        where k.PreventionCategoryID == 6
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer_B>();
         }
 
         public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords(IEnumerable<int> SubmissionIds)

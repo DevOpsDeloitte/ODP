@@ -125,7 +125,7 @@ namespace ODPTaxonomyDAL_JY
             }
         }
 
-        public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers)
+        public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers, IEnumerable<E_StudyDesignPurposeAnswer_B> cacheE_StudyDesignPurposeAnswer_Bs, IEnumerable<F_PreventionCategoryAnswer_B> cacheF_PreventionCategoryAnswer_Bs)
         {
             //string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             //DataJYDataContext db = new DataJYDataContext(connStr);
