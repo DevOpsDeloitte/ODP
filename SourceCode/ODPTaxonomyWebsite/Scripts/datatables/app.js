@@ -195,6 +195,11 @@ $(document).ready(function () {
 
                         },
                         "targets": 16 //date column
+                    },
+
+                    {
+                        "type" : "natural",
+                        "targets": 3 // Application ID 
                     }
 
 
