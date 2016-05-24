@@ -202,7 +202,12 @@ $(document).ready(function () {
             "searchDelay": 1000,
             "processing": true,
             "serverSide": true,
-            "ajax": config.baseURL + "&filter=" + $opts.filterlist,
+            "ajax": {
+                "url": config.baseURL + "&filter=" + $opts.filterlist,
+                "data": function (data) {
+                    data.action = $opts.actionlist;
+                }
+            },
             "order": [[4, "desc"]],
             "columns": [
                  {
@@ -1426,7 +1431,8 @@ $(document).ready(function () {
 
         }
         else {
-            ListCheck(type);
+            //ListCheck(type);
+            table.page(parseInt($opts.pageNumber)).draw(false);
             clearSubmitBtnAndCheckboxes();
         }
 
