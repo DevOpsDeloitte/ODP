@@ -117,6 +117,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                     break;
                 case "CoderSupervisor":
+                    action = string.Empty;
                     abstractData = this.GetParentAbstractsCoderSupervisor(filter, action, searchString, start, length, sortCol, sortDir);
                     parentAbstracts = abstractData.data;
 
@@ -128,6 +129,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
 
                 case "ODPStaff":
+                    action = string.Empty;
                     switch (filter)
                     {
                         case "": // first call default is review list.
@@ -168,6 +170,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     }
                     break;
                 case "Admin":
+                    action = string.Empty;
                     abstractData = this.GetParentAbstractsAdmin(filter, action, searchString, start, length, sortCol, sortDir);
                     parentAbstracts = abstractData.data;
 
