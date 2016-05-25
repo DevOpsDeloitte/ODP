@@ -224,6 +224,9 @@
              <br>
              <span class="titles">User ID :</span>
              <span class="titlevals"><%= userName %></span>
+             <br>
+             <span class="titles">Type :</span>
+             <span class="titlevals">Basic</span>
          </div>
    
      </div>    
