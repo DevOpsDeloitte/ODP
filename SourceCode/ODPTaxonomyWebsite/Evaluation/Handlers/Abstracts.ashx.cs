@@ -316,9 +316,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         q.ProjectTitle.Contains(search)
                         select q;
             }
-
-            query = AbstractListViewHelper.SortAbstracts(query, sort, direction);
-
+                       
             switch (filter)
             {
                 case "default":
@@ -355,6 +353,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             {
                 abstracts = abstracts.Where(a => !actionAbstracts.Contains(a.AbstractID)).ToList();
             }
+
+            abstracts = AbstractListViewHelper.SortAbstracts(abstracts, sort, direction);
 
             total = abstracts.Count();
 
