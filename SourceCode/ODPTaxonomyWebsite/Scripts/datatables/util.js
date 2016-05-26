@@ -113,9 +113,58 @@ function Utility() {
         return out;
     };
 
-    this.selectAllRows = function (flag) {
-        $("table tr td input[type=checkbox]").prop("checked", flag);
+    this.selectAllRows = function (table) {
+console.log('utils.selectAllRows() :: ');
+        // $opts.selectedItems = [];
+
+        table.rows().eq(0).each(function (rowIdx, val) {
+            var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
+            var abstractId = rowx.find(".abstractid").html()
+
+            $opts.selectedItems.push(rowx.find(".abstractid").html());
+
+            rowx.addClass("selected");
+            rowx.find("input[type=checkbox]").prop("checked", true);
+        });
     };
+
+    this.unselectAllRows = function (table) {
+console.log('utils.unselectAllRows() :: ');
+        // $opts.selectedItems = [];
+
+        table.rows().eq(0).each(function (rowIdx, val) {
+            var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
+            var abstractId = rowx.find(".abstractid").html()
+
+            var rowNdx = _.indexOf($opts.selectedItems, abstractId);
+            $opts.selectedItems.splice(rowNdx, 1);
+
+            rowx.removeClass("selected");
+            rowx.find("input[type=checkbox]").prop("checked", false);
+        });
+    };
+
+    this.checkIfAllBoxesChecked(table) {
+console.log('utils.checkIfAllBoxesChecked() :: ');
+        if($opts.actionlist !== 'selectaction') {
+            var allselected = true;
+
+            table.rows().eq(0).each(function (rowIdx, val) {
+                var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
+                if (!rowx.find("input[type=checkbox]").parents("tr").hasClass("selected")) {
+                    allselected = false;
+
+                    return;
+                }
+            });
+
+            if (allselected) {
+                $("#selectAllBox").prop("checked", true);
+            } else {
+                $("#selectAllBox").prop("checked", false);
+            }
+        }
+    }
 
     this.removeRows = function (hideItems) {
 

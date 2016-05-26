@@ -10,18 +10,20 @@ $(document).ready(function () {
     function setupTableEvents() {
         table.on('draw.dt', function () {
 console.log('draw.dt - Redraw occurred at: ' + new Date().getTime());
-            var alb = $("#allBox").is(':checked');
-            var salb = $("#selectallBox").is(':checked');
+            var sab = $("#selectAllBox").is(':checked');    // Select/Unselect All Checkbox
+            var ab = $("#allBox").is(':checked');           // Expand/Collapse All Checkbox
+
+            //util.selectAllRows(table, sab);
 
             // NOTE (TR): Why ???
             setTimeout(function () {
-                //util.showOpenRows(alb);  // Not needed Datatables is maintaining state on table draws.
-                util.selectAllRows(salb);
+                //util.showOpenRows(ab);  // Not needed Datatables is maintaining state on table draws.
+                //util.selectAllRows(sab);
             }, 0);
 
             // added for search event :: to make sure checkboxes are selected when items have been selected. On search there is a re-draw.
             setTimeout(function () {
-                setCheckboxStates();
+                setTableState(sab, ab);
             }, 10);
         });
 
@@ -39,13 +41,12 @@ console.log("on processing.dt " + processing);
                 //reset submit button
                 if ($opts.selectedItems.length == 0) {
                     $("#subButton").removeClass("yes").addClass("no");
-                }
-                else {
+                } else {
 
                 }
-
 
                 $("div#tableContainer").show();
+
                 showActionsInterface();
 
                 switch (config.role) {
@@ -124,18 +125,21 @@ console.log("on click (details row clicked) :: ");
 
         $("#allBox").on("click", function (evt) {
             util.showOpenRows(this.checked);
-
         });
 
-        $("#selectallBox").on("click", function (evt) {
-            util.selectAllRows(this.checked);
+        $("#selectAllBox").on("click", function (evt) {
+            if (this.checked) {
+                util.selectAllRows(table);
+            } else {
+                util.unselectAllRows(table);
+            }
 
-            doAllSubmitCheck(this.checked);
-
+            doSubmitChecks();
         });
 
         $("#tbutton").on("click", function (evt) {
             config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
+
             table.ajax.reload(function (json) {
                 childrenRedraw(table.data());
             });
@@ -168,7 +172,7 @@ console.log("on click (details row clicked) :: ");
                 turnOffSelectAll();
             }
 
-            checkIfAllBoxesChecked();
+            utils.checkIfAllBoxesChecked();
 
             doSubmitChecks();
         });
@@ -434,30 +438,11 @@ console.log('setupPageEvents() ::');
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Supporting Methods
-    function checkIfAllBoxesChecked() {
-console.log('checkIfAllBoxesChecked() :: ');
-        if($opts.actionlist !== 'selectaction') {
-            var allselected = true;
+    function setTableState(selectAllCheckboxes, expandAllCheckoxes) {
+console.log('setTableState() ::');
+        var numRows = table.rows().eq(0).length;
+        var cnt = null;
 
-            table.rows().eq(0).each(function (rowIdx, val) {
-                var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
-                if (!rowx.find("input[type=checkbox]").parents("tr").hasClass("selected")) {
-                    allselected = false;
-
-                    return false;
-                }
-            });
-
-            if (allselected) {
-                $("#selectallBox").prop("checked", true);
-            }
-        }
-    }
-    // END: Supporting Methods
-    ///////////////////////////////////////////////////////////////////////////////////////////
-
-    function setCheckboxStates() {
-console.log('setCheckboxStates() ::');
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
 
@@ -474,6 +459,8 @@ console.log('setCheckboxStates() ::');
                     $(rowx).addClass('selected');
 
                     rowx.find("input[type=checkbox]").prop("checked", true);
+
+                    cnt++;
                 } else {
                     $(rowx).removeClass('selected');
 
@@ -481,6 +468,12 @@ console.log('setCheckboxStates() ::');
                 }
             }
         });
+
+        if (cnt == numRows) {
+            $("#selectAllBox").prop("checked", true);
+        } else {
+            $("#selectAllBox").prop("checked", false);
+        }
     }
 
     function loadChildContainer(abstractid) {
@@ -581,11 +574,11 @@ console.log('progressBarReset() ::');
     }
     function hideSubActionsInterface() {
         $(".subactions.interface").hide();
-        $("#selectallBox").addClass("hidecheckbox");
+        $("#selectAllBox").addClass("hidecheckbox");
     }
     function showSubActionsInterface() {
         $(".subactions.interface").show();
-        $("#selectallBox").removeClass("hidecheckbox");
+        $("#selectAllBox").removeClass("hidecheckbox");
     }
     function setPageTitle(title) {
         $("#pagetitlebox span").text(title);
@@ -901,7 +894,7 @@ console.log('clearSubmitBtnAndCheckboxes() :: ');
         $opts.hiderowItems = [];
 
         $("#subButton").removeClass("yes").addClass("no");
-        $("#selectallBox").prop("checked", false);
+        $("#selectAllBox").prop("checked", false);
 
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
@@ -963,29 +956,24 @@ console.log('clearSubmitBtnAndCheckboxes() :: ');
     }
 
     function doAllSubmitCheck(flag) {
-        $opts.selectedItems = [];
         $opts.hiderowItems = [];
+
         var filteredRows = table.$('tr', { "filter": "applied" });
         var filteredRowsAbstractIDs = [];
+
         $(filteredRows).each(function (i, val) {
             //console.log(val);
             //console.log($(val).find(".abstractid").html());
             filteredRowsAbstractIDs.push($(val).find(".abstractid").html());
         });
-        //        
-        //         filteredRows.map(function (frow) {
-        //            console.log($(frow));
-        //            return $(frow).find(".abstractid").html();
-
-        //        });
 
 console.log(filteredRowsAbstractIDs);
+
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
 
-            //console.log(rowx.find("input[type=checkbox]"));
             if (flag) {
-                if (rowx.find("input[type=checkbox].visiblecheckbox").length > 0) {
+                if (!rowx.find("input[type=checkbox].hidecheckbox")) {
                     //console.log(rowx.find(".abstractid").html());
                     if (_.contains(filteredRowsAbstractIDs, rowx.find(".abstractid").html())) {
                         $opts.selectedItems.push(rowx.find(".abstractid").html());
@@ -993,20 +981,18 @@ console.log(filteredRowsAbstractIDs);
                         rowx.addClass("selected");
                     }
                 }
-            }
-            else {
+            } else {
                 rowx.removeClass("selected");
             }
         });
 
         doSubmitChecks();
-
     }
 
     function turnOffSelectAll() {
 console.log('turnOffSelectAll() ::');
-        if ($("#selectallBox").is(":checked")) {
-            $("#selectallBox").prop("checked", false);
+        if ($("#selectAllBox").is(":checked")) {
+            $("#selectAllBox").prop("checked", false);
         }
     }
 
