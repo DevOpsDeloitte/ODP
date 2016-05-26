@@ -349,6 +349,7 @@
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
