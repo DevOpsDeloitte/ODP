@@ -172,7 +172,7 @@ console.log("on click (details row clicked) :: ");
                 turnOffSelectAll();
             }
 
-            utils.checkIfAllBoxesChecked();
+            util.checkIfAllBoxesChecked(table);
 
             doSubmitChecks();
         });
