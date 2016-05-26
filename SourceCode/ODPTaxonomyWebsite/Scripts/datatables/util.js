@@ -144,7 +144,7 @@ console.log('utils.unselectAllRows() :: ');
         });
     };
 
-    this.checkIfAllBoxesChecked(table) {
+    this.checkIfAllBoxesChecked = function (table) {
 console.log('utils.checkIfAllBoxesChecked() :: ');
         if($opts.actionlist !== 'selectaction') {
             var allselected = true;
