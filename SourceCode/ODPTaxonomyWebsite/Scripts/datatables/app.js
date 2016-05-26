@@ -434,19 +434,6 @@ console.log('setupPageEvents() ::');
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Supporting Methods
-    function retrievePageHash() {
-        console.log('retrievePageHash() :: ');
-        if (window.location.hash.replace("#", "") != "") {
-            var locationHash = window.location.hash.replace("#", "").split("|");
-
-            $opts.filterHash = locationHash[0];
-            $opts.actionHash = locationHash[1];
-            $opts.pageNumber = locationHash[2];
-            $opts.filterlist = $opts.filterHash;
-            $opts.hashExists = true;
-        }
-    }
-
     function checkIfAllBoxesChecked() {
 console.log('checkIfAllBoxesChecked() :: ');
         if($opts.actionlist !== 'selectaction') {
@@ -486,14 +473,10 @@ console.log('setCheckboxStates() ::');
                 if(selectedItemsNdx != -1) {
                     $(rowx).addClass('selected');
 
-console.log(abstractId + " BEFORE", rowx.find("input[type=checkbox]").prop("checked"));
                     rowx.find("input[type=checkbox]").prop("checked", true);
-                    //$(rowx).find("input[type=checkbox]").prop("checked", true);
-console.log(abstractId + " AFTER", rowx.find("input[type=checkbox]").prop("checked"));
                 } else {
                     $(rowx).removeClass('selected');
 
-                    //rowx.find("input[type=checkbox]").prop("checked", false);
                     $(rowx).find("input[type=checkbox]").prop("checked", false);
                 }
             }
@@ -538,48 +521,6 @@ console.log('progressBarReset() ::');
         }, 0);
     }
 
-    // sets up the filters and does the load filters.
-    function filtersManager() {
-console.log('filtersManager() :: ' + config.role);
-        $("select#filterlist").empty();
-
-        hideSubActionsInterface();
-        assignPageTitle();
-
-        switch (config.role) {
-
-            case "CoderSupervisor":
-
-                showFiltersInterface();
-                hideActionsInterface();
-                loadFilters();
-                break;
-
-            case "ODPSupervisor":
-
-                showFiltersInterface();
-                hideActionsInterface();
-                hideSubActionsInterface();
-                loadFilters();
-                break;
-
-            case "ODPStaff":
-
-                showFiltersInterface();
-                hideActionsInterface();
-                hideSubActionsInterface();
-                loadFilters();
-                break;
-
-            case "Admin":
-                showFiltersInterface();
-                hideActionsInterface();
-                hideSubActionsInterface();
-                loadFilters();
-                break;
-        }
-    }
-
     function loadFilters() {
         $.ajax({
             type: "GET",
@@ -587,50 +528,40 @@ console.log('filtersManager() :: ' + config.role);
             dataType: 'json',
             data: { guid: window.user.GUID }
         })
-                      .done(function (data) {
-                          if (data.opts.length > 0) {
-                              //console.log(" filters received..");
-                              $("select#filterlist").empty();
+            .done(function (data) {
+              if (data.opts.length > 0) {
+                  //console.log(" filters received..");
+                  $("select#filterlist").empty();
 
-                              if ($opts.hashExists) {
-                                  //                              if (window.location.hash.replace("#", "") != "") {
-                                  //                                  var locationHash = window.location.hash.replace("#", "").split("|");
-                                  //                                  var filterVal = locationHash[0], actionVal = locationHash[1];
-                                  //                                  $opts.pageNumber = locationHash[2];
-                                  if ($opts.initialPageLoad) {
-                                      $opts.lastfilterSelection = $opts.filterHash;
-                                      //$opts.lastfilterSelection = filterVal;
-                                      //$opts.initialPageLoad = false;
-                                  }
-                              }
+                  if ($opts.hashExists) {
+                      //                              if (window.location.hash.replace("#", "") != "") {
+                      //                                  var locationHash = window.location.hash.replace("#", "").split("|");
+                      //                                  var filterVal = locationHash[0], actionVal = locationHash[1];
+                      //                                  $opts.pageNumber = locationHash[2];
+                      if ($opts.initialPageLoad) {
+                          $opts.lastfilterSelection = $opts.filterHash;
+                          //$opts.lastfilterSelection = filterVal;
+                          //$opts.initialPageLoad = false;
+                      }
+                  }
 
-                              for (var i = 0; i < data.opts.length; i++) {
-                                  if ($opts.lastfilterSelection == '') {
-                                      $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
-                                  }
-                                  else {
-                                      $("select#filterlist").append('<option ' + ($opts.lastfilterSelection == data.opts[i].option ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
-                                  }
-                              }
+                  for (var i = 0; i < data.opts.length; i++) {
+                      if ($opts.lastfilterSelection == '') {
+                          $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                      }
+                      else {
+                          $("select#filterlist").append('<option ' + ($opts.lastfilterSelection == data.opts[i].option ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                      }
+                  }
 
-                          }
+              }
 
-
-
-                          $("select#filterlist option:selected").each(function () {
-                              $opts.filterlist = $(this).val();
-                          });
-                          config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
-                          changeFilters();
-
-                          //                          table.ajax.url(config.baseURL);
-                          //                          setTimeout(function () {
-                          //                              table.ajax.reload(function (json) {
-
-                          //                              });
-                          //                          }, 0);
-                          //InitializeTable();
-                      });
+              $("select#filterlist option:selected").each(function () {
+                  $opts.filterlist = $(this).val();
+              });
+              config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+              changeFilters();
+            });
     }
 
 
@@ -1255,6 +1186,66 @@ console.log('hideCheckBoxes() :: ');
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Initialization Methods
+    function retrievePageHash() {
+console.log('retrievePageHash() :: ');
+        if (window.location.hash.replace("#", "") != "") {
+            var locationHash = window.location.hash.replace("#", "").split("|");
+
+            $opts.filterHash = locationHash[0];
+            $opts.actionHash = locationHash[1];
+            $opts.pageNumber = locationHash[2];
+            $opts.filterlist = $opts.filterHash;
+            $opts.hashExists = true;
+        }
+    }
+
+    // sets up the filters and does the load filters.
+    function filtersManager() {
+        console.log('filtersManager() :: ' + config.role);
+        $("select#filterlist").empty();
+
+        hideSubActionsInterface();
+
+        assignPageTitle();
+
+        switch (config.role) {
+
+            case "CoderSupervisor":
+
+                showFiltersInterface();
+                hideActionsInterface();
+                loadFilters();
+
+                break;
+
+            case "ODPSupervisor":
+
+                showFiltersInterface();
+                hideActionsInterface();
+                hideSubActionsInterface();
+                loadFilters();
+
+                break;
+
+            case "ODPStaff":
+
+                showFiltersInterface();
+                hideActionsInterface();
+                hideSubActionsInterface();
+                loadFilters();
+
+                break;
+
+            case "Admin":
+                showFiltersInterface();
+                hideActionsInterface();
+                hideSubActionsInterface();
+                loadFilters();
+
+                break;
+        }
+    }
+
     function InitializeTable() {
         console.log("invoking InitializeTable() ::");
         $("div.progressBar").show();
@@ -1469,8 +1460,9 @@ console.log('hideCheckBoxes() :: ');
         });
 
         retrievePageHash(); //Init
-        filtersManager(); //Init
-        actionsManager(); // Init
+        filtersManager();   //Init
+
+        actionsManager();
         disableFilters();
 
         InitializeTable();
