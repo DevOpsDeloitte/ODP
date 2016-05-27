@@ -97,7 +97,7 @@ function Utility() {
     this.ajaxCall = function(url, type, data, callback) {
         $.ajax(url, {
             type: type,
-            contentType: "application/json; charset=utf-8",
+            //contentType: "application/json; charset=utf-8",
             data: data,
             dataType: 'json',
             success: function (data, textStatus, jqXHR) {
@@ -105,9 +105,6 @@ function Utility() {
             }
         });
     };
-
-    //this.
-
 
     this.getRows = function () {
         return Rows;
@@ -130,13 +127,13 @@ function Utility() {
 
     this.selectAllRows = function (table) {
 console.log('utils.selectAllRows() :: ');
-        // $opts.selectedItems = [];
-
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
             var abstractId = rowx.find(".abstractid").html()
 
-            $opts.selectedItems.push(rowx.find(".abstractid").html());
+            if(_.indexOf($opts.selectedItems, abstractId) == -1) {
+                $opts.selectedItems.push(rowx.find(".abstractid").html());
+            }
 
             rowx.addClass("selected");
             rowx.find("input[type=checkbox]").prop("checked", true);
@@ -145,8 +142,6 @@ console.log('utils.selectAllRows() :: ');
 
     this.unselectAllRows = function (table) {
 console.log('utils.unselectAllRows() :: ');
-        // $opts.selectedItems = [];
-
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
             var abstractId = rowx.find(".abstractid").html()

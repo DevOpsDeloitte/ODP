@@ -196,7 +196,9 @@ console.log("submit button click enabled ::");
 
                     case "addreportexclude":
                         $("div#generalProgressBox").show();
+
                         disableInterface();
+
                         $.ajax({
                                 type: "POST",
                                 url: "/Evaluation/Handlers/ReportExclude.ashx",
@@ -252,52 +254,41 @@ console.log("submit button click enabled ::");
                     case "addreview":
 
                         $("div#generalProgressBox").show();
-                        $.ajax({
-                                type: "POST",
-                                url: "/Evaluation/Handlers/AbstractReview.ashx",
-                                dataType: 'json',
-                                data: { type: "add", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
-                            })
-                            .done(function (data) {
-                                console.log(" add : " + data);
-                                $("div#generalProgressBox").hide();
-                                if (data.success == true) {
-                                    alertify.success($opts.selectedItems.length + " " + "Abstract(s) added to review list.");
-                                    resetSubmitBtnAndCheckboxes();
-                                    loadFilters();
-                                    $opts.isGridDirty = true;
 
-                                }
-                                else {
-                                    alertify.error("Failed to add in review list.");
-                                }
-                            });
+                        util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", { type: "add", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }, function(data, textStatus, jqXHR) {
+console.log(" add : " + data);
+                            $("div#generalProgressBox").hide();
 
+                            if (data.success == true) {
+                                alertify.success($opts.selectedItems.length + " " + "Abstract(s) added to review list.");
+
+                                resetSubmitBtnAndCheckboxes();
+                                loadFilters();
+
+                                $opts.isGridDirty = true;
+                            } else {
+                                alertify.error("Failed to add in review list.");
+                            }
+                        });
 
                         break;
 
                     case "removereview":
                         $("div#generalProgressBox").show();
-                        $.ajax({
-                                type: "POST",
-                                url: "/Evaluation/Handlers/AbstractReview.ashx",
-                                dataType: 'json',
-                                data: { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
-                            })
-                            .done(function (data) {
-                                console.log(" remove : " + data);
-                                $("div#generalProgressBox").hide();
-                                if (data.success == true) {
-                                    alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from review list.");
-                                    resetSubmitBtnAndCheckboxes();
-                                    loadFilters();
-                                    $opts.isGridDirty = true;
-                                }
-                                else {
-                                    alertify.error("Failed to remove from review list.");
-                                }
-                            });
 
+                        util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }, function(data, textStatus, jqXHR) {
+console.log(" remove : " + data);
+                            $("div#generalProgressBox").hide();
+
+                            if (data.success == true) {
+                                alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from review list.");
+                                resetSubmitBtnAndCheckboxes();
+                                loadFilters();
+                                $opts.isGridDirty = true;
+                            } else {
+                                alertify.error("Failed to remove from review list.");
+                            }
+                        });
 
                         break;
 
@@ -1523,7 +1514,6 @@ console.log('retrievePageHash() :: ');
     }
     // END: Initialization Methods
     ///////////////////////////////////////////////////////////////////////////////////////////
-
 
     init();
 
