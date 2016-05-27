@@ -3,6 +3,17 @@ $(document).ready(function () {
     var cellPadding = 20;
     var util;
 
+    var currentRow = null;
+    var currentTR = null;
+
+    $opts.selectedItems = [];
+
+    // NOTE (TR):
+    // This is temporary until I determine if the datatable caches the children or
+    // I unify the $opts.selectedItems and $opts.selectedItemChildren arrays
+    $opts.selectedItemChildrenCache = [];
+
+
     config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
 
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -96,31 +107,31 @@ console.log("on page.dt (page navigation) ::");
             window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + info.page;
 
 console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
-
-            // NOTE (TR): Remove ??
-            setTimeout(function () {
-                //$("tr[role=row].selected").find("input").prop("checked", "checked");
-            }, 500);
         });
 
         // logic to open and close child rows. // 1.3 dynamically load child rows.
         $('#DTable tbody').on('click', 'td.details-control', function (evt) {
 console.log("on click (details row clicked) :: ");
-            var tr = $(this).closest('tr');
-            var row = table.row(tr);
             var absid = $(this).parent().find("td.abstractid").html();
-            var data = getDetailChildRow(absid);
 
-            if (row.child.isShown()) {
+            currentTR = $(this).closest('tr');  // Reference to the DOM TR
+            currentRow = table.row(currentTR);  // Reference to the Datatable row ??
+
+            if (currentRow.child.isShown()) {
                 // This row is already open - close it
-                row.child.hide();
-                tr.removeClass('open').addClass('closed');
+                currentRow.child.hide();
+
+                currentTR.removeClass('open').addClass('closed');
+
+                var rowDataNdx = util.findObjNdxChildCache(absid);
+
+                if(rowDataNdx > -1) {
+                    $opts.selectedItemChildrenCache.splice(rowDataNdx, 1);
+                }
+            } else {
+                var data = getDetailChildRow(absid);
             }
-            else {
-                // Open this row
-                row.child(loadChildContainer(absid)).show();
-                tr.removeClass('closed').addClass('open');
-            }
+console.log('$opts.selectedItemChildrenCache: ', $opts.selectedItemChildrenCache);
         });
 
         $("#allBox").on("click", function (evt) {
@@ -445,6 +456,7 @@ console.log('setTableState() ::');
 
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
+            var abstractId = rowx.find(".abstractid").html()
 
             if($opts.actionlist === 'selectaction') {
                 $(rowx).removeClass('selected');
@@ -452,7 +464,6 @@ console.log('setTableState() ::');
                 rowx.find("input[type=checkbox]").prop("checked", false);
                 rowx.find("input[type=checkbox]").addClass("hidecheckbox");
             } else {
-                var abstractId = rowx.find(".abstractid").html()
                 var selectedItemsNdx = _.indexOf($opts.selectedItems, abstractId);
 
                 if(selectedItemsNdx != -1) {
@@ -467,6 +478,22 @@ console.log('setTableState() ::');
                     $(rowx).find("input[type=checkbox]").prop("checked", false);
                 }
             }
+
+            // Reset previously expanded rows
+            if($opts.selectedItemChildrenCache.length > 0) {
+                var rowDataObj = util.findObjInChildCache(abstractId);
+
+                if(rowDataObj) {
+console.log('getting children of '+abstractId+' from cache');
+                    this.row(rowx).child(loadChildContainer(abstractId)).show();
+
+                    content = unescape(util.showTableChildRows(rowDataObj.data));
+                    $("div#" + abstractId).html(content);
+
+                    currentTR = rowx.closest('tr');
+                    currentTR.removeClass('closed').addClass('open');
+                }
+            }
         });
 
         if (cnt == numRows) {
@@ -477,27 +504,58 @@ console.log('setTableState() ::');
     }
 
     function loadChildContainer(abstractid) {
+console.log('loadChildContainer() :: ');
         //load initial child container with loading message.
         return '<div class="loadingAbstractDetail" id="' + abstractid + '"><div class="loader"></div><div class="text">loading...</div></div>';
-    };
+    }
+
+    // NOTE (TR): This pattern is being used until I Angular-ize the code to use Angular promises
+    function callbackGetDetailChildRow(data, textStatus, jqXHR) {
+        var rowNdx = null;
+
+        if (data.data[0].ChildRows.length > 0) {
+            data = data.data[0];
+console.log('callbackGetDetailChildRow() :: ', data.ChildRows);
+            currentRow.child(loadChildContainer(data.AbstractID)).show();
+
+            content = unescape(util.showTableChildRows(data));
+            $("div#" + data.AbstractID).html(content);
+
+            currentTR.removeClass('closed').addClass('open');
+
+            $opts.selectedItemChildrenCache.push({'abstractId': data.AbstractID, 'data': data, 'displContent': content});
+        }
+    }
 
     function getDetailChildRow(abstractid) {
+console.log('getDetailChildRow() :: ', abstractid);
         var content = "";
+        var rowNdx = null;
+        var cacheFound = false;
+        var url = 'Handlers/AbstractDetail.ashx';
+        var type = 'GET';
+        var data = { role: config.role, 'abstractId': abstractid };
 
-        $.ajax('Handlers/AbstractDetail.ashx', {
-            type: 'GET',
-            contentType: "application/json; charset=utf-8",
-            data: { role: config.role, 'abstractId': abstractid },
-            dataType: 'json',
-            success: function (data, textStatus, jqXHR) {
-                if (data) {
-console.log('getDetailChildRow() :: ', data.data[0].ChildRows);
-                    content = unescape(util.getTableChildRowsV3(data.data[0]));
-                    $("div#" + abstractid).html(content);
-                }
+        if($opts.selectedItemChildrenCache.length > 0) {
+            var rowDataObj = _.find($opts.selectedItemChildrenCache, function(obj) {
+                return obj.abstractId === parseInt(abstractid);
+            });
+
+            if(rowDataObj == undefined) {
+console.log('calling to get children of ', abstractid);
+                util.ajaxCall(url, type, data, callbackGetDetailChildRow);
+            } else {
+console.log('getting children of '+abstractid+' from cache');
+                content = unescape(util.showTableChildRows(rowDataObj.data));
+                $("div#" + abstractid).html(content);
+
+                currentTR.removeClass('closed').addClass('open');
             }
-        });
-    };
+        } else {
+console.log('calling to get children of ', abstractid);
+            util.ajaxCall(url, type, data, callbackGetDetailChildRow)
+        }
+    }
 
     function progressBarReset() {
 console.log('progressBarReset() ::');
@@ -892,6 +950,7 @@ console.log('progressBarReset() ::');
 console.log('clearSubmitBtnAndCheckboxes() :: ');
         $opts.selectedItems = [];
         $opts.hiderowItems = [];
+        $opts.selectedItemChildrenCache = [];
 
         $("#subButton").removeClass("yes").addClass("no");
         $("#selectAllBox").prop("checked", false);
@@ -907,7 +966,7 @@ console.log('clearSubmitBtnAndCheckboxes() :: ');
 
     //called after action submitted ::
     function resetSubmitBtnAndCheckboxes() {
-        util.removeRowsV2($opts.hiderowItems);
+        util.removeRowsV2(table, $opts.hiderowItems);
 
         clearSubmitBtnAndCheckboxes();
 

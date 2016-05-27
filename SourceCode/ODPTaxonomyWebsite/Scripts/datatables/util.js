@@ -79,6 +79,7 @@ function Utility() {
     var Rows = null;
     this.RowsP = null;
 
+    // Public Functions
     this.isMobile = function() {
         if (navigator.userAgent.match(/Android/i)
             || navigator.userAgent.match(/iPhone/i)
@@ -91,9 +92,23 @@ function Utility() {
         ) {
             return true;
         }
-    }
+    };
 
-    // public function
+    this.ajaxCall = function(url, type, data, callback) {
+        $.ajax(url, {
+            type: type,
+            contentType: "application/json; charset=utf-8",
+            data: data,
+            dataType: 'json',
+            success: function (data, textStatus, jqXHR) {
+                callback(data, textStatus, jqXHR);
+            }
+        });
+    };
+
+    //this.
+
+
     this.getRows = function () {
         return Rows;
     };
@@ -166,35 +181,27 @@ console.log('utils.checkIfAllBoxesChecked() :: ');
         }
     }
 
-    this.removeRows = function (hideItems) {
+    // NOTE (TR); Remove - Not Used ????
+    //this.removeRows = function (hideItems) {
+    //
+    //    for (var i = 0; i < hideItems.length; i++) {
+    //        var ele = $("table td:contains('" + hideItems[i] + "')");
+    //        table
+    //            .row($(ele).parents('tr'))
+    //            .remove()
+    //            .draw();
+    //    }
+    //
+    //};
 
-        for (var i = 0; i < hideItems.length; i++) {
-            var ele = $("table td:contains('" + hideItems[i] + "')");
-            table
-                .row($(ele).parents('tr'))
-                .remove()
-                .draw();
-        }
-
-    };
-
-    this.removeRowsV2 = function (hiderowItems) {
-
-//        for (var i = 0; i < hiderowItems.length; i++) {
-//            console.log(" remove row :: " + hiderowItems[i]);
-//            table.row(hiderowItems[i]).remove();
-//        }
-
+    this.removeRowsV2 = function (table, hiderowItems) {
         table
-        .rows('.selected')
-        .remove()
-        .draw();
-
-
+            .rows('.selected')
+            .remove()
+            .draw();
     };
 
     this.showOpenRows = function (flag) {
-
         if (flag) {
             $("#DTable tr[role='row'].haschildren").removeClass("closed").addClass("open");
             $("#DTable tr.child").removeClass("hide").addClass("show");
@@ -298,30 +305,33 @@ console.log('utils.checkIfAllBoxesChecked() :: ');
     };
 
 
-    this.getTableChildRowsV3 = function (parentRowData) {
+    this.showTableChildRows = function (parentRowData) {
+console.log('util.showTableChildRows() :: ');
         var rowData = parentRowData;
         var childTable = '';
+
         for (var i = 0; i < rowData.ChildRows.length; i++) {
             var ctRow = '<tr>' +
-                    '<td class="ccol col_select">' + '&nbsp;' + '</td>' + // Col 1
-                    '<td class="ccol col_openclose">' + '&nbsp;' + '</td>' + // Col 1a
-                    '<td class="ccol col_abstractid">' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
-                    '<td class="ccol col_applicationid">' + '&nbsp;' + '</td>' + // Col 3
-                    '<td class="ccol col_statusdate">' + '&nbsp;' + '</td>' + // Col 4
-                    '<td class="ccol col_piname">' + '&nbsp;' + '</td>' + // Col 4
-                    '<td class="ccol col_title"><div class="titlebox">' + rowData.ChildRows[i].ProjectTitle + '</div></td>' + // Col 3
-                    '<td class="ccol col_flags">' + this.hideE7F6(this.coalesceCol(rowData.ChildRows[i].Flags)) + '</td>' + // Col 4
-                    '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A1) + '</td>' + // Col 5
-                    '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A2) + '</td>' + // Col 6
-                    '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A3) + '</td>' + // Col 7
-                    '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].B) + '</td>' + // Col 8
-                    '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].C) + '</td>' + // Col 9
-                    '<td class="ccol col_kappa" >' + this.MaskKappa(rowData.ChildRows[i].D) + '</td>' + // Col 10
-                    '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].E) + '</td>' + // Col 11
-                    '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].F) + '</td>' + // Col 12
-                    '<td class="ccol col_exportdate">' + this.coalesceCol(rowData.ChildRows[i].LastExportDate) + '</td>' + // Col 13
+                '<td class="ccol col_select">' + '&nbsp;' + '</td>' + // Col 1
+                '<td class="ccol col_openclose">' + '&nbsp;' + '</td>' + // Col 1a
+                '<td class="ccol col_abstractid">' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
+                '<td class="ccol col_applicationid">' + '&nbsp;' + '</td>' + // Col 3
+                '<td class="ccol col_statusdate">' + '&nbsp;' + '</td>' + // Col 4
+                '<td class="ccol col_piname">' + '&nbsp;' + '</td>' + // Col 4
+                '<td class="ccol col_title"><div class="titlebox">' + rowData.ChildRows[i].ProjectTitle + '</div></td>' + // Col 3
+                '<td class="ccol col_flags">' + this.hideE7F6(this.coalesceCol(rowData.ChildRows[i].Flags)) + '</td>' + // Col 4
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A1) + '</td>' + // Col 5
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A2) + '</td>' + // Col 6
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A3) + '</td>' + // Col 7
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].B) + '</td>' + // Col 8
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].C) + '</td>' + // Col 9
+                '<td class="ccol col_kappa" >' + this.MaskKappa(rowData.ChildRows[i].D) + '</td>' + // Col 10
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].E) + '</td>' + // Col 11
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].F) + '</td>' + // Col 12
+                '<td class="ccol col_exportdate">' + this.coalesceCol(rowData.ChildRows[i].LastExportDate) + '</td>' + // Col 13
 
-                '</tr>'
+                '</tr>';
+
             childTable = childTable + ctRow;
         }
         if (rowData.ChildRows.length > 0) {
@@ -331,6 +341,25 @@ console.log('utils.checkIfAllBoxesChecked() :: ');
         return childTable;
     };
 
+    this.findObjInChildCache = function(abstractId) {
+        var rowDataObj = _.find($opts.selectedItemChildrenCache, function(obj) {
+            return obj.abstractId === parseInt(abstractId);
+        });
 
+        return rowDataObj;
+    };
+
+    this.findObjNdxChildCache = function(abstractId) {
+
+        var rowDataNdx;
+        _.find($opts.selectedItemChildrenCache, function(obj, ndx) {
+            if(obj.abstractId === parseInt(abstractId)){
+                rowDataNdx = ndx;
+                return true;
+            }
+        });
+
+        return rowDataNdx;
+    };
 
 }
