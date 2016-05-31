@@ -162,6 +162,7 @@
     <Content Include="Scripts\controllers\controllerRTB.js" />
     <Content Include="Scripts\controllers\controllerRT.js" />
     <Content Include="Scripts\datatables\app.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.js" />
     <Content Include="Scripts\datatables\jquery.dataTables.min.js" />
     <Content Include="Scripts\datatables\natural.js" />
     <Content Include="Scripts\datatables\spin.min.js" />
@@ -349,6 +350,7 @@
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>

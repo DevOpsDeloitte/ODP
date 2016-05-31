@@ -293,7 +293,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         }, 300);
 
-
     };
 
     $scope.init();
