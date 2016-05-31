@@ -12,6 +12,10 @@
      {
          margin: 8px 0px 0px 0px;
      }
+
+     .Regular {
+         display: none !important;
+     }
     
     </style>
 
@@ -21,10 +25,15 @@
             <span class="printValue"><%= userID %></span>
         </div>
 
-         <div class="five columns">
+         <div class="four columns">
             <span class="printTitle">Date : </span>
             <span class="printValue"><%= System.DateTime.Now.ToString("MM/dd/yyyy") %></span>
         </div>
+
+         <div class="five columns <%= codingType %>"><!-- being controlled by CSS -->
+        <span class="printTitle">Coding Type : </span>
+        <span class="printValue"><%= codingType %></span>
+    </div>
     </div>
 
     <div class="row container">
@@ -44,6 +53,8 @@
         <span class="printTitle">Application ID: </span>
         <span class="printValue"><%= applicationID %></span>
     </div>
+
+    
     </div>
 
      
