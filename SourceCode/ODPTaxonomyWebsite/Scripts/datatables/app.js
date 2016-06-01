@@ -1436,6 +1436,7 @@ console.log('retrievePageHash() :: ');
                 "url": config.baseURL + "&filter=" + $opts.filterlist,
                 "data": function (data) {
                     data.action = $opts.actionlist;
+                    // data.codingType = "All" / "Basic"
                 }
             },
             "order": [[4, "desc"]],

@@ -588,7 +588,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 draw = 1,
                 recordsTotal = total,
                 recordsFiltered = totalFilter,
-                data = Abstracts.Skip(start).Take(length).ToList()
+                data = length == -1 ? Abstracts.Skip(start).ToList() : Abstracts.Skip(start).Take(length).ToList()
             };
         }
 
