@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var table;
     var cellPadding = 20;
+    var debounceVal = 750;
     var util;
 
     var currentRow = null;
@@ -24,7 +25,7 @@ $(document).ready(function () {
             if (search != null) {
                 table.search(search).draw();
             }
-        }, 750);
+        }, debounceVal);
 
         $('input[type=search]').off('keyup.DT input.DT');
 
