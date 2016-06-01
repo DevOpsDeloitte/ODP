@@ -68,6 +68,14 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<F_PreventionCategoryAnswer>();
         }
 
+        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecordsID6(List<int> SubmissionIDs)
+        {
+            var query = from k in db2.F_PreventionCategoryAnswers
+                        where k.PreventionCategoryID == 6 && SubmissionIDs.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer>();
+        }
+
         public IEnumerable<F_PreventionCategoryAnswer_B> getAllF_PreventionCategoryRecord_BsID6()
         {
             var query = from k in db2.F_PreventionCategoryAnswer_Bs
@@ -84,12 +92,28 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<E_StudyDesignPurposeAnswer>();
         }
 
+        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecordsID7(IEnumerable<int> SubmissionIDs)
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswers
+                        where k.StudyDesignPurposeID == 7 && SubmissionIDs.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer>();
+        }
+
         public IEnumerable<E_StudyDesignPurposeAnswer_B> getAllE_StudyDesignPurposeRecord_BsID7()
         {
             var query = from k in db2.E_StudyDesignPurposeAnswer_Bs
                         where k.StudyDesignPurposeID == 7
                         select k;
             return query.ToList<E_StudyDesignPurposeAnswer_B>();
+        }
+
+        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecords(IEnumerable<int> SubmissionIds)
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswers
+                        where SubmissionIds.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer>();
         }
 
         #endregion
@@ -153,15 +177,6 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<int>();
 
         }
-
-        //public IEnumerable<Submission> getAllSubmissionRecords(List<int> EvaluationIds)
-        //{
-        //    var query = from k in db2.Submissions
-        //                where EvaluationIds.Contains( k.EvaluationId ?? 0)
-        //                select k;
-        //    return query.ToList<Submission>();
-        //}
-
        
 
         public IEnumerable<Evaluation> getAllEvaluationRecords(int AbstractID)
@@ -181,13 +196,7 @@ namespace ODPTaxonomyDAL_JY
 
 
 
-        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecords(IEnumerable<int> SubmissionIds)
-        {
-            var query = from k in db2.E_StudyDesignPurposeAnswers
-                        where SubmissionIds.Contains(k.SubmissionID)
-                        select k;
-            return query.ToList<E_StudyDesignPurposeAnswer>();
-        }
+
 
         public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords()
         {

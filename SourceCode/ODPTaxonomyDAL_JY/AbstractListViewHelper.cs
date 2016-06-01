@@ -256,10 +256,10 @@ namespace ODPTaxonomyDAL_JY
             var cacheEvaluations = data.getAllEvaluationRecords(RelevantAbstractIDs);
             List<int> RelevantEvaluationIDs = cacheEvaluations.Select(e => e.EvaluationId).ToList();
             var cacheSubmissions = data.getAllSubmissionRecords(RelevantEvaluationIDs);
-            
+            List<int> RelevantSubmissionIDs = cacheSubmissions.Select(e => e.SubmissionID).ToList();
             var cacheKappaData = data.getAllKappaRecordsK1K2Only(RelevantAbstractIDs);
-            var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecordsID6();
-            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecordsID7();
+            var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecordsID6(RelevantSubmissionIDs);
+            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecordsID7(RelevantSubmissionIDs);
             var cacheF_PreventionCategoryAnswer_Bs = data.getAllF_PreventionCategoryRecord_BsID6();
             var cacheE_StudyDesignPurposeAnswer_Bs = data.getAllE_StudyDesignPurposeRecord_BsID7();
 
