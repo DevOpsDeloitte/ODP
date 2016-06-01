@@ -258,6 +258,7 @@ namespace ODPTaxonomyDAL_JY
             var cacheSubmissions = data.getAllSubmissionRecords(RelevantEvaluationIDs);
             List<int> RelevantSubmissionIDs = cacheSubmissions.Select(e => e.SubmissionID).ToList();
             var cacheKappaData = data.getAllKappaRecordsK1K2Only(RelevantAbstractIDs);
+
             var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecordsID6(RelevantSubmissionIDs);
             var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecordsID7(RelevantSubmissionIDs);
             var cacheF_PreventionCategoryAnswer_Bs = data.getAllF_PreventionCategoryRecord_BsID6();
@@ -470,15 +471,15 @@ namespace ODPTaxonomyDAL_JY
             string contractorName = getContractorName();
             var AbstractId = ParentAbstracts[0].AbstractID;
 
-            var cacheKappaData = data.getAllKappaRecords(AbstractId);
-            var cacheEvaluations = data.getAllEvaluationRecords(AbstractId);
+            var cacheKappaData = data.getIndividualKappaRecords(AbstractId);
+            var cacheEvaluations = data.getIndividualEvaluationRecords(AbstractId);
             var EvaluationIds = cacheEvaluations.Select(s => s.EvaluationId).ToList();
             var SubmissionIds = data.getSubmissionIds(EvaluationIds);
-            var cacheSubmissions = data.getAllSubmissionRecords(EvaluationIds);
-            var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecords();
-            var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecords(SubmissionIds);
-            var cacheF_PreventionCategoryAnswer_Bs = data.getAllF_PreventionCategoryRecord_BsID6();
-            var cacheE_StudyDesignPurposeAnswer_Bs = data.getAllE_StudyDesignPurposeRecord_BsID7();
+            var cacheSubmissions = data.getIndividualSubmissionRecords(EvaluationIds);
+            var cacheF_PreventionCategoryAnswers = data.getIndividualF_PreventionCategoryRecords(SubmissionIds);
+            var cacheE_StudyDesignPurposeAnswers = data.getIndividualE_StudyDesignPurposeRecords(SubmissionIds);
+            var cacheF_PreventionCategoryAnswer_Bs = data.getIndividualF_PreventionCategoryRecord_Bs(SubmissionIds);
+            var cacheE_StudyDesignPurposeAnswer_Bs = data.getIndividualE_StudyDesignPurposeRecord_Bs(SubmissionIds);
 
             for (int i = 0; i < ParentAbstracts.Count; i++)
             {
