@@ -6,6 +6,7 @@ $(document).ready(function () {
     var currentRow = null;
     var currentTR = null;
 
+    $opts.allSelected = false;
     $opts.selectedItems = [];
 
     // NOTE (TR):
@@ -141,8 +142,12 @@ console.log('$opts.selectedItemChildrenCache: ', $opts.selectedItemChildrenCache
         $("#selectAllBox").on("click", function (evt) {
             if (this.checked) {
                 util.selectAllRows(table);
+
+                $opts.allSelected = true;
             } else {
                 util.unselectAllRows(table);
+
+                $opts.allSelected = false;
             }
 
             doSubmitChecks();
@@ -443,7 +448,6 @@ console.log('setupPageEvents() ::');
     function setTableState(selectAllCheckboxes, expandAllCheckoxes) {
 console.log('setTableState() ::');
         var numRows = table.rows().eq(0).length;
-        var cnt = null;
 
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
@@ -455,18 +459,22 @@ console.log('setTableState() ::');
                 rowx.find("input[type=checkbox]").prop("checked", false);
                 rowx.find("input[type=checkbox]").addClass("hidecheckbox");
             } else {
-                var selectedItemsNdx = _.indexOf($opts.selectedItems, abstractId);
-
-                if(selectedItemsNdx != -1) {
+                if($opts.allSelected){
                     $(rowx).addClass('selected');
 
                     rowx.find("input[type=checkbox]").prop("checked", true);
-
-                    cnt++;
                 } else {
-                    $(rowx).removeClass('selected');
+                    var selectedItemsNdx = _.indexOf($opts.selectedItems, abstractId);
 
-                    $(rowx).find("input[type=checkbox]").prop("checked", false);
+                    if(selectedItemsNdx != -1) {
+                        $(rowx).addClass('selected');
+
+                        rowx.find("input[type=checkbox]").prop("checked", true);
+                    } else {
+                        $(rowx).removeClass('selected');
+
+                        $(rowx).find("input[type=checkbox]").prop("checked", false);
+                    }
                 }
             }
 
@@ -487,7 +495,8 @@ console.log('getting children of '+abstractId+' from cache');
             }
         });
 
-        if (cnt == numRows) {
+        // Set the Select All checkbox
+        if($opts.allSelected) {
             $("#selectAllBox").prop("checked", true);
         } else {
             $("#selectAllBox").prop("checked", false);
@@ -564,46 +573,40 @@ console.log('progressBarReset() ::');
     }
 
     function loadFilters() {
-        $.ajax({
-            type: "GET",
-            url: "/Evaluation/Handlers/Filters.ashx?role=" + config.role,
-            dataType: 'json',
-            data: { guid: window.user.GUID }
-        })
-            .done(function (data) {
-              if (data.opts.length > 0) {
-                  //console.log(" filters received..");
-                  $("select#filterlist").empty();
+console.log('loadFilters() ::');
+        util.ajaxCall("/Evaluation/Handlers/Filters.ashx?role=" + config.role, "GET", { guid: window.user.GUID }, function(data, textStatus, jqXHR) {
+            if (data.opts.length > 0) {
+                $("select#filterlist").empty();
 
-                  if ($opts.hashExists) {
-                      //                              if (window.location.hash.replace("#", "") != "") {
-                      //                                  var locationHash = window.location.hash.replace("#", "").split("|");
-                      //                                  var filterVal = locationHash[0], actionVal = locationHash[1];
-                      //                                  $opts.pageNumber = locationHash[2];
-                      if ($opts.initialPageLoad) {
-                          $opts.lastfilterSelection = $opts.filterHash;
-                          //$opts.lastfilterSelection = filterVal;
-                          //$opts.initialPageLoad = false;
-                      }
-                  }
+                if ($opts.hashExists) {
+                    //                              if (window.location.hash.replace("#", "") != "") {
+                    //                                  var locationHash = window.location.hash.replace("#", "").split("|");
+                    //                                  var filterVal = locationHash[0], actionVal = locationHash[1];
+                    //                                  $opts.pageNumber = locationHash[2];
+                    if ($opts.initialPageLoad) {
+                        $opts.lastfilterSelection = $opts.filterHash;
+                        //$opts.lastfilterSelection = filterVal;
+                        //$opts.initialPageLoad = false;
+                    }
+                }
 
-                  for (var i = 0; i < data.opts.length; i++) {
-                      if ($opts.lastfilterSelection == '') {
-                          $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
-                      }
-                      else {
-                          $("select#filterlist").append('<option ' + ($opts.lastfilterSelection == data.opts[i].option ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
-                      }
-                  }
+                for (var i = 0; i < data.opts.length; i++) {
+                    if ($opts.lastfilterSelection == '') {
+                        $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                    } else {
+                        $("select#filterlist").append('<option ' + ($opts.lastfilterSelection == data.opts[i].option ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                    }
+                }
+            }
 
-              }
-
-              $("select#filterlist option:selected").each(function () {
-                  $opts.filterlist = $(this).val();
-              });
-              config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
-              changeFilters();
+            $("select#filterlist option:selected").each(function () {
+                $opts.filterlist = $(this).val();
             });
+
+            config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+
+            changeFilters();
+        });
     }
 
 
@@ -769,28 +772,32 @@ console.log('progressBarReset() ::');
 
     function changeFilters() {
         config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+
         table.ajax.url(config.baseURL);
+
         $opts.lastfilterSelection = $opts.filterlist;
-        console.log(config.baseURL);
+
+console.log(config.baseURL);
         $("div#downloadLinkBox").hide();
+
         assignPageTitle();
+
         if ($opts.initialPageLoad) {
             window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.pageNumber;
-        }
-        else {
+        } else {
             window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + "0";
         }
+
         $opts.hideboxes = [];
 
         if (!$opts.initialPageLoad) {
             table.ajax.reload(function (json) {
                 childrenRedraw(table.data());
+
                 if (config.role == "ODPSupervisor") {
                     // change check of action checkboxes happens here - when Filter re-loads.. same block repeated table.init.
                     serverCheckForActions();
-
-                }
-                else {
+                } else {
                     // for all other roles
                     if ($opts.initialPageLoad) {
                         if ($opts.hashExists) {
@@ -798,17 +805,17 @@ console.log('progressBarReset() ::');
                             table.page(parseInt($opts.pageNumber)).draw(false);
                         }
                     }
-
-
                 }
+
                 $opts.isGridDirty = false;
+
                 enableInterface();
+
                 clearSubmitBtnAndCheckboxes();
             });
         } else {
             $opts.initialPageLoad = false;
         }
-
     }
 
     function serverCheckForActions() {
@@ -942,6 +949,7 @@ console.log('clearSubmitBtnAndCheckboxes() :: ');
         $opts.selectedItems = [];
         $opts.hiderowItems = [];
         $opts.selectedItemChildrenCache = [];
+        $opts.allSelected = false;
 
         $("#subButton").removeClass("yes").addClass("no");
         $("#selectAllBox").prop("checked", false);
