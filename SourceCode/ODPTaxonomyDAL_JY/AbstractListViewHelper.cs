@@ -250,9 +250,14 @@ namespace ODPTaxonomyDAL_JY
             List<AbstractListRow> Abstracts = new List<AbstractListRow>();
             AbstractListViewData data = new AbstractListViewData();
             string contractorName = getContractorName();
-            var cacheKappaData = data.getAllKappaRecordsK1K2Only();
-            var cacheSubmissions = data.getAllSubmissionRecords();
-            var cacheEvaluations = data.getAllEvaluationRecords();
+
+            // retrieve evaluations first and use to get submissions without a join.
+            List<int> RelevantAbstractIDs = ParentAbstracts.Select(a => a.AbstractID).ToList<int>();
+            var cacheEvaluations = data.getAllEvaluationRecords(RelevantAbstractIDs);
+            List<int> RelevantEvaluationIDs = cacheEvaluations.Select(e => e.EvaluationId).ToList();
+            var cacheSubmissions = data.getAllSubmissionRecords(RelevantEvaluationIDs);
+            
+            var cacheKappaData = data.getAllKappaRecordsK1K2Only(RelevantAbstractIDs);
             var cacheF_PreventionCategoryAnswers = data.getAllF_PreventionCategoryRecordsID6();
             var cacheE_StudyDesignPurposeAnswers = data.getAllE_StudyDesignPurposeRecordsID7();
             var cacheF_PreventionCategoryAnswer_Bs = data.getAllF_PreventionCategoryRecord_BsID6();
