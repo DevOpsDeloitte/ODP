@@ -1087,6 +1087,8 @@ $(document).ready(function () {
 
                 $opts.hideboxes = [];
 
+                reloadForAction(null);
+
                 clearSubmitBtnAndCheckboxes();
 
                 hideAllCheckBoxes();
