@@ -14,6 +14,7 @@ $(document).ready(function () {
     // I unify the $opts.selectedItems and $opts.selectedItemChildren arrays
     $opts.selectedItemChildrenCache = [];
 
+
     config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
 
     ///////////////////////////////////////////////////////////////////////////////////////////
@@ -32,7 +33,7 @@ $(document).ready(function () {
         $('input[type=search]').on('keyup', mySearchFn);
 
         table.on('draw.dt', function () {
-console.log('draw.dt - Redraw occurred at: ' + new Date().getTime());
+            console.log('draw.dt - Redraw occurred at: ' + new Date().getTime());
             var sab = $("#selectAllBox").is(':checked');    // Select/Unselect All Checkbox
             var ab = $("#allBox").is(':checked');           // Expand/Collapse All Checkbox
 
@@ -45,7 +46,7 @@ console.log('draw.dt - Redraw occurred at: ' + new Date().getTime());
 
 
         table.on('processing.dt', function (e, settings, processing) {
-console.log("on processing.dt " + processing);
+            console.log("on processing.dt " + processing);
             $('div.progressBar').css('display', processing ? 'block' : 'none');
             if (!processing) {
                 // show it all
@@ -91,7 +92,7 @@ console.log("on processing.dt " + processing);
 
         //is this needed?
         table.on('init.dtx', function () {
-console.log("on init.dtx (datable initialized) :: init.dt ::");
+            console.log("on init.dtx (datable initialized) :: init.dt ::");
 
             childrenRedraw(table.data());
 
@@ -106,17 +107,17 @@ console.log("on init.dtx (datable initialized) :: init.dt ::");
         });
 
         table.on('page.dt', function () {
-console.log("on page.dt (page navigation) ::");
+            console.log("on page.dt (page navigation) ::");
             var info = table.page.info();
 
             window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + info.page;
 
-console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
+            console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
         });
 
         // logic to open and close child rows. // 1.3 dynamically load child rows.
         $('#DTable tbody').on('click', 'td.details-control', function (evt) {
-console.log("on click (details row clicked) :: ");
+            console.log("on click (details row clicked) :: ");
             var absid = $(this).parent().find("td.abstractid").html();
 
             currentTR = $(this).closest('tr');  // Reference to the DOM TR
@@ -134,9 +135,9 @@ console.log("on click (details row clicked) :: ");
                     $opts.selectedItemChildrenCache.splice(rowDataNdx, 1);
                 }
             } else {
-                var data = getDetailChildRow(absid);
+                var data = getDetailChildRow(currentRow, absid);
             }
-console.log('$opts.selectedItemChildrenCache: ', $opts.selectedItemChildrenCache);
+            console.log('$opts.selectedItemChildrenCache: ', $opts.selectedItemChildrenCache);
         });
 
         $("#allBox").on("click", function (evt) {
@@ -195,7 +196,7 @@ console.log('$opts.selectedItemChildrenCache: ', $opts.selectedItemChildrenCache
 
         $("input#subButton").on("click", function (evt) {
             if ($(this).hasClass("yes")) {
-console.log("submit button click enabled ::");
+                console.log("submit button click enabled ::");
                 $(this).addClass("no").removeClass("yes");
                 switch ($opts.actionlist) {
 
@@ -261,7 +262,7 @@ console.log("submit button click enabled ::");
                         $("div#generalProgressBox").show();
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", { type: "add", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }, function(data, textStatus, jqXHR) {
-console.log(" add : " + data);
+                            console.log(" add : " + data);
                             $("div#generalProgressBox").hide();
 
                             if (data.success == true) {
@@ -282,7 +283,7 @@ console.log(" add : " + data);
                         $("div#generalProgressBox").show();
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }, function(data, textStatus, jqXHR) {
-console.log(" remove : " + data);
+                            console.log(" remove : " + data);
                             $("div#generalProgressBox").hide();
 
                             if (data.success == true) {
@@ -410,7 +411,7 @@ console.log(" remove : " + data);
     }
 
     function setupPageEvents() {
-console.log('setupPageEvents() ::');
+        console.log('setupPageEvents() ::');
         $("select#filterlist").change(function () {
             var str = "";
             //disableFilters();
@@ -428,6 +429,7 @@ console.log('setupPageEvents() ::');
 
         // Select Action List Event
         $("select#actionlist").change(function () {
+            console.log('actionlist changed');
             $("select#actionlist option:selected").each(function () {
                 $opts.actionlist = $(this).val();
             });
@@ -446,7 +448,7 @@ console.log('setupPageEvents() ::');
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Supporting Methods
     function setTableState(selectAllCheckboxes, expandAllCheckoxes) {
-console.log('setTableState() ::');
+        console.log('setTableState() ::');
         var numRows = table.rows().eq(0).length;
         var cnt = null;
 
@@ -480,7 +482,7 @@ console.log('setTableState() ::');
                 var rowDataObj = util.findObjInChildCache(abstractId);
 
                 if(rowDataObj) {
-console.log('getting children of '+abstractId+' from cache');
+                    console.log('getting children of '+abstractId+' from cache');
                     this.row(rowx).child(loadChildContainer(abstractId)).show();
 
                     content = unescape(util.showTableChildRows(rowDataObj.data));
@@ -500,7 +502,7 @@ console.log('getting children of '+abstractId+' from cache');
     }
 
     function loadChildContainer(abstractid) {
-console.log('loadChildContainer() :: ');
+        console.log('loadChildContainer() :: ');
         //load initial child container with loading message.
         return '<div class="loadingAbstractDetail" id="' + abstractid + '"><div class="loader"></div><div class="text">loading...</div></div>';
     }
@@ -511,8 +513,8 @@ console.log('loadChildContainer() :: ');
 
         if (data.data[0].ChildRows.length > 0) {
             data = data.data[0];
-console.log('callbackGetDetailChildRow() :: ', data.ChildRows);
-            currentRow.child(loadChildContainer(data.AbstractID)).show();
+            console.log('callbackGetDetailChildRow() :: ', data.ChildRows);
+            //currentRow.child(loadChildContainer(data.AbstractID)).show();
 
             content = unescape(util.showTableChildRows(data));
             $("div#" + data.AbstractID).html(content);
@@ -523,91 +525,96 @@ console.log('callbackGetDetailChildRow() :: ', data.ChildRows);
         }
     }
 
-    function getDetailChildRow(abstractid) {
-console.log('getDetailChildRow() :: ', abstractid);
+    function getDetailChildRow(row, abstractId) {
+        console.log('getDetailChildRow() :: ', abstractId);
         var content = "";
         var rowNdx = null;
         var cacheFound = false;
         var url = 'Handlers/AbstractDetail.ashx';
         var type = 'GET';
-        var data = { role: config.role, 'abstractId': abstractid };
+        var data = { role: config.role, 'abstractId': abstractId };
+
+        row.child(loadChildContainer(abstractId)).show();
 
         if($opts.selectedItemChildrenCache.length > 0) {
             var rowDataObj = _.find($opts.selectedItemChildrenCache, function(obj) {
-                return obj.abstractId === parseInt(abstractid);
+                return obj.abstractId === parseInt(abstractId);
             });
 
             if(rowDataObj == undefined) {
-console.log('calling to get children of ', abstractid);
+                console.log('calling to get children of ', abstractId);
+
                 util.ajaxCall(url, type, data, callbackGetDetailChildRow);
             } else {
-console.log('getting children of '+abstractid+' from cache');
+                console.log('getting children of '+abstractId+' from cache');
+
                 content = unescape(util.showTableChildRows(rowDataObj.data));
-                $("div#" + abstractid).html(content);
+                $("div#" + abstractId).html(content);
 
                 currentTR.removeClass('closed').addClass('open');
             }
         } else {
-console.log('calling to get children of ', abstractid);
+            console.log('calling to get children of ', abstractId);
+
             util.ajaxCall(url, type, data, callbackGetDetailChildRow)
         }
     }
 
     function progressBarReset() {
-console.log('progressBarReset() ::');
+        console.log('progressBarReset() ::');
         $("div.progressBar div.meter.animate").empty().append('<span style="width: 100%"><span></span></span>');
         setTimeout(function () {
             $(".meter > span").each(function () {
                 $(this)
-					.data("origWidth", "100%")
-					.width(0)
-					.animate({
-					    width: "100%"
-					}, 30000);
+                    .data("origWidth", "100%")
+                    .width(0)
+                    .animate({
+                        width: "100%"
+                    }, 30000);
             });
         }, 0);
     }
 
     function loadFilters() {
         $.ajax({
-            type: "GET",
-            url: "/Evaluation/Handlers/Filters.ashx?role=" + config.role,
-            dataType: 'json',
-            data: { guid: window.user.GUID }
-        })
+                type: "GET",
+                url: "/Evaluation/Handlers/Filters.ashx?role=" + config.role,
+                dataType: 'json',
+                data: { guid: window.user.GUID }
+            })
             .done(function (data) {
-              if (data.opts.length > 0) {
-                  //console.log(" filters received..");
-                  $("select#filterlist").empty();
+                if (data.opts.length > 0) {
+                    //console.log(" filters received..");
+                    $("select#filterlist").empty();
 
-                  if ($opts.hashExists) {
-                      //                              if (window.location.hash.replace("#", "") != "") {
-                      //                                  var locationHash = window.location.hash.replace("#", "").split("|");
-                      //                                  var filterVal = locationHash[0], actionVal = locationHash[1];
-                      //                                  $opts.pageNumber = locationHash[2];
-                      if ($opts.initialPageLoad) {
-                          $opts.lastfilterSelection = $opts.filterHash;
-                          //$opts.lastfilterSelection = filterVal;
-                          //$opts.initialPageLoad = false;
-                      }
-                  }
+                    if ($opts.hashExists) {
+                        //                              if (window.location.hash.replace("#", "") != "") {
+                        //                                  var locationHash = window.location.hash.replace("#", "").split("|");
+                        //                                  var filterVal = locationHash[0], actionVal = locationHash[1];
+                        //                                  $opts.pageNumber = locationHash[2];
+                        if ($opts.initialPageLoad) {
+                            $opts.lastfilterSelection = $opts.filterHash;
+                            //$opts.lastfilterSelection = filterVal;
+                            //$opts.initialPageLoad = false;
+                        }
+                    }
 
-                  for (var i = 0; i < data.opts.length; i++) {
-                      if ($opts.lastfilterSelection == '') {
-                          $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
-                      }
-                      else {
-                          $("select#filterlist").append('<option ' + ($opts.lastfilterSelection == data.opts[i].option ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
-                      }
-                  }
+                    for (var i = 0; i < data.opts.length; i++) {
+                        if ($opts.lastfilterSelection == '') {
+                            $("select#filterlist").append('<option ' + (i == 0 ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                        }
+                        else {
+                            $("select#filterlist").append('<option ' + ($opts.lastfilterSelection == data.opts[i].option ? 'selected="selected"' : '') + 'value="' + data.opts[i].option + '">' + data.opts[i].text + '</option>');
+                        }
+                    }
 
-              }
+                }
 
-              $("select#filterlist option:selected").each(function () {
-                  $opts.filterlist = $(this).val();
-              });
-              config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
-              changeFilters();
+                $("select#filterlist option:selected").each(function () {
+                    $opts.filterlist = $(this).val();
+                });
+                config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+                changeFilters();
             });
     }
 
@@ -943,7 +950,7 @@ console.log('progressBarReset() ::');
 
     // called on change of filter and action ::
     function clearSubmitBtnAndCheckboxes() {
-console.log('clearSubmitBtnAndCheckboxes() :: ');
+        console.log('clearSubmitBtnAndCheckboxes() :: ');
         $opts.selectedItems = [];
         $opts.hiderowItems = [];
         $opts.selectedItemChildrenCache = [];
@@ -1022,7 +1029,7 @@ console.log('clearSubmitBtnAndCheckboxes() :: ');
             filteredRowsAbstractIDs.push($(val).find(".abstractid").html());
         });
 
-console.log(filteredRowsAbstractIDs);
+        console.log(filteredRowsAbstractIDs);
 
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
@@ -1045,14 +1052,14 @@ console.log(filteredRowsAbstractIDs);
     }
 
     function turnOffSelectAll() {
-console.log('turnOffSelectAll() ::');
+        console.log('turnOffSelectAll() ::');
         if ($("#selectAllBox").is(":checked")) {
             $("#selectAllBox").prop("checked", false);
         }
     }
 
     function watchActionsHandler() {
-console.log(" watchActionsHandler() ::" + $opts.actionlist);
+        console.log(" watchActionsHandler() ::" + $opts.actionlist);
         $("div#downloadLinkBox").hide();
 
         switch ($opts.actionlist) {
@@ -1067,9 +1074,9 @@ console.log(" watchActionsHandler() ::" + $opts.actionlist);
                     changeFilters();
                     clearSubmitBtnAndCheckboxes();
 
-                }
-                else {
+                } else {
                     reopenListCheck();
+
                     clearSubmitBtnAndCheckboxes();
                 }
 
@@ -1099,7 +1106,7 @@ console.log(" watchActionsHandler() ::" + $opts.actionlist);
     }
 
     function reloadForAction(type) {
-console.log('reloadForAction(type) ::');
+        console.log('reloadForAction(type) ::');
         if ($opts.isGridDirty) {
             disableFilters();
             //actionsManager();
@@ -1107,11 +1114,7 @@ console.log('reloadForAction(type) ::');
             changeFilters();
             clearSubmitBtnAndCheckboxes();
 
-        }
-        else {
-            // NOTE (TR): Remove ???
-            // ListCheck(type);
-
+        } else {
             table.page(parseInt($opts.pageNumber)).draw(false);
 
             clearSubmitBtnAndCheckboxes();
@@ -1119,63 +1122,63 @@ console.log('reloadForAction(type) ::');
     }
 
     function reopenListCheck() {
-console.log('reopenListCheck() ::');
+        console.log('reopenListCheck() ::');
         $.ajax({
-            type: "GET",
-            url: "/Evaluation/Handlers/AbstractsReopen.ashx",
-            dataType: 'json',
-            data: { guid: window.user.GUID }
-        })
-        .done(function (data) {
-            console.log(" reopen : " + data);
-            if (data.success) {
-                //alertify.success(" reopen data :: " + data.nottoreopen);
-                $opts.hideboxes = data.nottoreopen;
-                hideCheckBoxes(data.nottoreopen);
-                setTimeout(function () {
-                    if ($opts.initialPageLoad) {
-                        $opts.initialPageLoad = false;
-                        table.page(parseInt($opts.pageNumber)).draw(false);
-                    }
-                }, 200);
-            }
-            else {
-              //alertify.error("Failed to get reopen data");
-            }
-        });
+                type: "GET",
+                url: "/Evaluation/Handlers/AbstractsReopen.ashx",
+                dataType: 'json',
+                data: { guid: window.user.GUID }
+            })
+            .done(function (data) {
+                console.log(" reopen : " + data);
+                if (data.success) {
+                    //alertify.success(" reopen data :: " + data.nottoreopen);
+                    $opts.hideboxes = data.nottoreopen;
+                    hideCheckBoxes(data.nottoreopen);
+                    setTimeout(function () {
+                        if ($opts.initialPageLoad) {
+                            $opts.initialPageLoad = false;
+                            table.page(parseInt($opts.pageNumber)).draw(false);
+                        }
+                    }, 200);
+                }
+                else {
+                    //alertify.error("Failed to get reopen data");
+                }
+            });
     }
 
     function ListCheck(type) {
-console.log('ListCheck(type) ::');
+        console.log('ListCheck(type) ::');
         switch (type) {
 
             case "":
                 break;
             default:
                 $.ajax({
-                    type: "GET",
-                    url: "/Evaluation/Handlers/AbstractsListCheck.ashx",
-                    dataType: 'json',
-                    data: { guid: window.user.GUID, action: type }
-                })
-                        .done(function (data) {
-                            console.log(" reopen : " + data);
-                            if (data.success) {
-                                //alertify.success(" reopen data :: " + data.nottoreopen);
-                                $opts.hideboxes = data.hideboxes;
-                                hideCheckBoxes(data.hideboxes);
-                                setTimeout(function () {
-                                    if ($opts.initialPageLoad) {
-                                        $opts.initialPageLoad = false;
-                                        table.page(parseInt($opts.pageNumber)).draw(false);
-                                    }
-                                }, 200);
+                        type: "GET",
+                        url: "/Evaluation/Handlers/AbstractsListCheck.ashx",
+                        dataType: 'json',
+                        data: { guid: window.user.GUID, action: type }
+                    })
+                    .done(function (data) {
+                        console.log(" reopen : " + data);
+                        if (data.success) {
+                            //alertify.success(" reopen data :: " + data.nottoreopen);
+                            $opts.hideboxes = data.hideboxes;
+                            hideCheckBoxes(data.hideboxes);
+                            setTimeout(function () {
+                                if ($opts.initialPageLoad) {
+                                    $opts.initialPageLoad = false;
+                                    table.page(parseInt($opts.pageNumber)).draw(false);
+                                }
+                            }, 200);
 
-                            }
-                            else {
-                                //alertify.error("Failed to get reopen data");
-                            }
-                        });
+                        }
+                        else {
+                            //alertify.error("Failed to get reopen data");
+                        }
+                    });
 
                 break;
 
@@ -1184,7 +1187,7 @@ console.log('ListCheck(type) ::');
     }
 
     function hideAllCheckBoxes() {
-console.log('hideAllCheckBoxes() :: ');
+        console.log('hideAllCheckBoxes() :: ');
         // NOTE (TR): Why ???
         // table.draw();
 
@@ -1198,7 +1201,7 @@ console.log('hideAllCheckBoxes() :: ');
     }
 
     function showAllCheckBoxes() {
-console.log('showAllCheckBoxes() :: ');
+        console.log('showAllCheckBoxes() :: ');
         // NOTE (TR): Why ??
         // table.draw();
 
@@ -1212,7 +1215,7 @@ console.log('showAllCheckBoxes() :: ');
     }
 
     function hideCheckBoxes(inArr) {
-console.log('hideCheckBoxes() :: ');
+        console.log('hideCheckBoxes() :: ');
         table.draw();
 
         table.rows().eq(0).each(function (rowIdx, val) {
@@ -1230,7 +1233,7 @@ console.log('hideCheckBoxes() :: ');
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Initialization Methods
     function retrievePageHash() {
-console.log('retrievePageHash() :: ');
+        console.log('retrievePageHash() :: ');
         if (window.location.hash.replace("#", "") != "") {
             var locationHash = window.location.hash.replace("#", "").split("|");
 
@@ -1497,46 +1500,18 @@ console.log('retrievePageHash() :: ');
             $opts.lastfilterSelection = "review";
         }
 
+        //$.fn.dataTableExt.afnFiltering.push(function (oSettings, aData, iDataIndex) {
 
         $.fn.dataTableExt.afnFiltering.push(
             function (oSettings, aData, iDataIndex) {
-console.log('$.fn.dataTableExt.afnFiltering.push');
-            if (_.contains($opts.hideboxes, Number(aData[2]))) {
-                return false;
-            } else {
-                return true;
-            }
-
-        });
-
-        $.fn.dataTable.ext.search.push(
-            function( settings, data, dataIndex ) {
-console.log('$.fn.dataTable.ext.search.push');
-                var min = parseInt( $('#min').val(), 10 );
-                var max = parseInt( $('#max').val(), 10 );
-                var age = parseFloat( data[3] ) || 0; // use data for the age column
-
-                if ( ( isNaN( min ) && isNaN( max ) ) ||
-                    ( isNaN( min ) && age <= max ) ||
-                    ( min <= age   && isNaN( max ) ) ||
-                    ( min <= age   && age <= max ) )
-                {
+                console.log('$.fn.dataTableExt.afnFiltering.push');
+                if (_.contains($opts.hideboxes, Number(aData[2]))) {
+                    return false;
+                } else {
                     return true;
                 }
-                return false;
-            }
-        );
 
-        $('input[type=search]')
-            .unbind('keypress keyup')
-            .bind('keypress keyup', function(e){
-                if ($(this).val().length < 3 && e.keyCode != 13) return;
-                myTable.fnFilter($(this).val());
             });
-
-        $("input[type=search]").on( 'keyup', function () {
-            console.log('HI');
-        } );
 
         retrievePageHash(); //Init
         filtersManager();   //Init
