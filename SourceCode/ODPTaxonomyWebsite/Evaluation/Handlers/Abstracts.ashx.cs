@@ -39,7 +39,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             AbstractData abstractData;
             AbstractParams param = new AbstractParams(context);
             AbstractListViewData data = new AbstractListViewData();
-
+            
             switch (param.role)
             {
                 case "ODPSupervisor":
@@ -197,7 +197,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             StatusDate = h.CreatedDate,
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
-                            IsParent = true
+                            IsParent = true,
+                            CodingType = a.CodingType
                         };
 
             switch (param.filter)
@@ -254,7 +255,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             StatusDate = h.CreatedDate,
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
-                            IsParent = true
+                            IsParent = true,
+                            CodingType = a.CodingType
                         };
 
             switch (param.filter)
@@ -317,7 +319,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
-                            IsParent = true
+                            IsParent = true,
+                            CodingType = a.CodingType
                         };
 
             switch (param.filter)
@@ -360,7 +363,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
-                            IsParent = true
+                            IsParent = true,
+                            CodingType = a.CodingType
                         };
 
             switch (param.filter)
@@ -399,9 +403,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
-                            IsParent = true
-
-
+                            IsParent = true,
+                            CodingType = a.CodingType
                         };
 
             switch (param.filter)
@@ -458,7 +461,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
-                            IsParent = true
+                            IsParent = true,
+                            CodingType = a.CodingType
                         };
 
             switch (param.filter)
@@ -509,7 +513,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
-                            IsParent = true
+                            IsParent = true,
+                            CodingType = a.CodingType
                         };
 
             switch (param.filter)
@@ -551,6 +556,22 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             if (actionAbstracts.Count > 0)
             {
                 Abstracts = Abstracts.Where(a => !actionAbstracts.Contains(a.AbstractID)).ToList();
+            }
+
+            switch (param.codeType.ToLower())
+            {
+                case "aonly":
+                    Abstracts = Abstracts.Where(a => a.CodingType != "Basic").ToList();
+                    break;
+
+                case "basic":
+                    Abstracts = Abstracts.Where(a => a.CodingType == "Basic").ToList();
+                    break;
+
+                case "all":
+                default:
+
+                    break;
             }
 
             int total = Abstracts.Count;

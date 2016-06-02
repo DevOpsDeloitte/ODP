@@ -73,6 +73,8 @@ namespace ODPTaxonomyDAL_JY
 
         public bool UnableToCode { get; set; }
 
+        public string CodingType { get; set; }
+
         public string KappaCoderAlias { get; set; }
         public KappaTypeEnum KappaType { get; set; }
         public string A1 { get; set; }
