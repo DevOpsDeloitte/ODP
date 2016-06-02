@@ -14,7 +14,7 @@ $(document).ready(function () {
     // I unify the $opts.selectedItems and $opts.selectedItemChildren arrays
     $opts.selectedItemChildrenCache = [];
 
-    config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
+    config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&action=" + $opts.actionlist;
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Page and Datatable Events
@@ -512,7 +512,7 @@ console.log('loadChildContainer() :: ');
         if (data.data[0].ChildRows.length > 0) {
             data = data.data[0];
 console.log('callbackGetDetailChildRow() :: ', data.ChildRows);
-            currentRow.child(loadChildContainer(data.AbstractID)).show();
+            // currentRow.child(loadChildContainer(data.AbstractID)).show();
 
             content = unescape(util.showTableChildRows(data));
             $("div#" + data.AbstractID).html(content);
@@ -531,6 +531,8 @@ console.log('getDetailChildRow() :: ', abstractid);
         var url = 'Handlers/AbstractDetail.ashx';
         var type = 'GET';
         var data = { role: config.role, 'abstractId': abstractid };
+
+        row.child(loadChildContainer(abstractId)).show();
 
         if($opts.selectedItemChildrenCache.length > 0) {
             var rowDataObj = _.find($opts.selectedItemChildrenCache, function(obj) {
@@ -1508,24 +1510,6 @@ console.log('$.fn.dataTableExt.afnFiltering.push');
             }
 
         });
-
-        $.fn.dataTable.ext.search.push(
-            function( settings, data, dataIndex ) {
-console.log('$.fn.dataTable.ext.search.push');
-                var min = parseInt( $('#min').val(), 10 );
-                var max = parseInt( $('#max').val(), 10 );
-                var age = parseFloat( data[3] ) || 0; // use data for the age column
-
-                if ( ( isNaN( min ) && isNaN( max ) ) ||
-                    ( isNaN( min ) && age <= max ) ||
-                    ( min <= age   && isNaN( max ) ) ||
-                    ( min <= age   && age <= max ) )
-                {
-                    return true;
-                }
-                return false;
-            }
-        );
 
         $('input[type=search]')
             .unbind('keypress keyup')
