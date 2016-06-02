@@ -149,12 +149,25 @@ namespace ODPTaxonomyDAL_JY
                 this.G = query.UnableToCode ? "UC" : "";
                 this.Comment = query.Comment;
 
-                this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
-                    .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
-                    .Count() > 0;
-                this.Flag_F6 = cacheF_PreventionCategoryAnswers
-                    .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
-                    .Count() > 0;
+                if (!this.ApplicationID.Contains("_B"))
+                {
+
+                    this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
+                        .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                        .Count() > 0;
+                    this.Flag_F6 = cacheF_PreventionCategoryAnswers
+                        .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                        .Count() > 0;
+                }
+                else
+                {
+                    this.Flag_E7 = cacheE_StudyDesignPurposeAnswer_Bs
+                        .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                        .Count() > 0;
+                    this.Flag_F6 = cacheF_PreventionCategoryAnswer_Bs
+                        .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                        .Count() > 0;
+                }
             }
         }
 
