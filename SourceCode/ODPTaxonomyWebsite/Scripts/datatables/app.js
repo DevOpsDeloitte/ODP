@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var table;
     var cellPadding = 20;
+    var debounceVal = 750;
     var util;
 
     var currentRow = null;
@@ -13,12 +14,23 @@ $(document).ready(function () {
     // I unify the $opts.selectedItems and $opts.selectedItemChildren arrays
     $opts.selectedItemChildrenCache = [];
 
-
     config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role;
 
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Page and Datatable Events
     function setupTableEvents() {
+        var mySearchFn = util.debounce(function() {
+            var search = $('input[type=search]').val();
+
+            if (search != null) {
+                table.search(search).draw();
+            }
+        }, debounceVal);
+
+        $('input[type=search]').off('keyup.DT input.DT');
+
+        $('input[type=search]').on('keyup', mySearchFn);
+
         table.on('draw.dt', function () {
 console.log('draw.dt - Redraw occurred at: ' + new Date().getTime());
             var sab = $("#selectAllBox").is(':checked');    // Select/Unselect All Checkbox
@@ -26,13 +38,6 @@ console.log('draw.dt - Redraw occurred at: ' + new Date().getTime());
 
             //util.selectAllRows(table, sab);
 
-            // NOTE (TR): Why ???
-            setTimeout(function () {
-                //util.showOpenRows(ab);  // Not needed Datatables is maintaining state on table draws.
-                //util.selectAllRows(sab);
-            }, 0);
-
-            // added for search event :: to make sure checkboxes are selected when items have been selected. On search there is a re-draw.
             setTimeout(function () {
                 setTableState(sab, ab);
             }, 10);
@@ -1492,16 +1497,46 @@ console.log('retrievePageHash() :: ');
             $opts.lastfilterSelection = "review";
         }
 
-        $.fn.dataTableExt.afnFiltering.push(function (oSettings, aData, iDataIndex) {
 
+        $.fn.dataTableExt.afnFiltering.push(
+            function (oSettings, aData, iDataIndex) {
+console.log('$.fn.dataTableExt.afnFiltering.push');
             if (_.contains($opts.hideboxes, Number(aData[2]))) {
                 return false;
-            }
-            else {
+            } else {
                 return true;
             }
 
         });
+
+        $.fn.dataTable.ext.search.push(
+            function( settings, data, dataIndex ) {
+console.log('$.fn.dataTable.ext.search.push');
+                var min = parseInt( $('#min').val(), 10 );
+                var max = parseInt( $('#max').val(), 10 );
+                var age = parseFloat( data[3] ) || 0; // use data for the age column
+
+                if ( ( isNaN( min ) && isNaN( max ) ) ||
+                    ( isNaN( min ) && age <= max ) ||
+                    ( min <= age   && isNaN( max ) ) ||
+                    ( min <= age   && age <= max ) )
+                {
+                    return true;
+                }
+                return false;
+            }
+        );
+
+        $('input[type=search]')
+            .unbind('keypress keyup')
+            .bind('keypress keyup', function(e){
+                if ($(this).val().length < 3 && e.keyCode != 13) return;
+                myTable.fnFilter($(this).val());
+            });
+
+        $("input[type=search]").on( 'keyup', function () {
+            console.log('HI');
+        } );
 
         retrievePageHash(); //Init
         filtersManager();   //Init
