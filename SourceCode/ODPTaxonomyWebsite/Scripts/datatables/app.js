@@ -1178,7 +1178,6 @@ console.log('ListCheck(type) ::');
                         });
 
                 break;
-
         }
 
     }
