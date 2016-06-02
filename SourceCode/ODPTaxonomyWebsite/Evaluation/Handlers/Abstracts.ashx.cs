@@ -18,9 +18,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
     /// </summary>
     public class Abstracts : IHttpHandler
     {
-        public string roleRequested = "";
-        public string filter = "";
-        public string action = "";
         public short? submissiontypeID = 0;
 
         protected void serializeResponse(HttpContext context, List<AbstractListRow> ALR)
@@ -40,39 +37,28 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             List<AbstractListRow> parentAbstracts;
             List<AbstractListRow> ALR;
             AbstractData abstractData;
-
-            roleRequested = context.Request["role"] ?? "";
-            filter = context.Request["filter"] ?? "";
-            action = context.Request["action"] ?? "";
-
-            int draw = context.Request["draw"] != null ? Convert.ToInt32(context.Request["draw"]) : 0;
-            int start = context.Request["start"] != null ? Convert.ToInt32(context.Request["start"]) : 0;
-            int length = context.Request["length"] != null ? Convert.ToInt32(context.Request["length"]) : 10;
-            string searchString = context.Request["search[value]"];
-            var sortColumnIndex = Convert.ToInt32(context.Request["order[0][column]"]);
-            string sortCol = context.Request["columns[" + sortColumnIndex + "][data]"] ?? "StatusDate";
-            SortDirection sortDir = context.Request["order[0][dir]"] == "desc" ? SortDirection.Descending : SortDirection.Ascending;
-
+            AbstractParams param = new AbstractParams(context);
             AbstractListViewData data = new AbstractListViewData();
-            switch (roleRequested)
+
+            switch (param.role)
             {
                 case "ODPSupervisor":
-                    switch (filter)
+                    switch (param.filter)
                     {
                         case "reportexclude":
-                            abstractData = GetParentAbstractsODPSupervisorReportExclude(filter, action, searchString, start, length, sortCol, sortDir);
+                            abstractData = GetParentAbstractsODPSupervisorReportExclude(param);
                             parentAbstracts = abstractData.data;
 
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
                             abstractData.data = ALR;
-                            abstractData.draw = draw;
+                            abstractData.draw = param.draw;
 
                             serializeResponse(context, abstractData);
                             break;
 
                         case "review":
                         case "reviewuncoded":
-                            abstractData = GetParentAbstractsODPSupervisorReview(filter, action, searchString, start, length, sortCol, sortDir);
+                            abstractData = GetParentAbstractsODPSupervisorReview(param);
                             parentAbstracts = abstractData.data;
 
                             foreach (var abs in parentAbstracts)
@@ -83,7 +69,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             }
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
                             abstractData.data = ALR;
-                            abstractData.draw = draw;
+                            abstractData.draw = param.draw;
 
                             serializeResponse(context, abstractData);
 
@@ -91,7 +77,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
 
                         default: // return default
-                            abstractData = GetParentAbstractsODPSupervisor(filter, action, searchString, start, length, sortCol, sortDir); // we are passing the filter as the query.
+                            abstractData = GetParentAbstractsODPSupervisor(param); // we are passing the filter as the query.
                             parentAbstracts = abstractData.data;
 
                             var RL = data.GetAllAbstractsInReview();
@@ -108,7 +94,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             }
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPSupervisor);
                             abstractData.data = ALR;
-                            abstractData.draw = draw;
+                            abstractData.draw = param.draw;
 
                             serializeResponse(context, abstractData);
                             break;
@@ -117,52 +103,52 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                     break;
                 case "CoderSupervisor":
-                    action = string.Empty;
-                    abstractData = this.GetParentAbstractsCoderSupervisor(filter, action, searchString, start, length, sortCol, sortDir);
+                    param.action = string.Empty;
+                    abstractData = this.GetParentAbstractsCoderSupervisor(param);
                     parentAbstracts = abstractData.data;
 
                     ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.CoderSupervisor);
-                    abstractData.draw = draw;
+                    abstractData.draw = param.draw;
                     abstractData.data = ALR;
                     serializeResponse(context, abstractData);
 
                     break;
 
                 case "ODPStaff":
-                    action = string.Empty;
-                    switch (filter)
+                    param.action = string.Empty;
+                    switch (param.filter)
                     {
                         case "": // first call default is review list.
-
-                            abstractData = this.GetParentAbstractsODPStaffMemberReview("review", action, searchString, start, length, sortCol, sortDir);
+                            param.filter = "review";
+                            abstractData = this.GetParentAbstractsODPStaffMemberReview(param);
                             parentAbstracts = abstractData.data;
 
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
                             abstractData.data = ALR;
-                            abstractData.draw = draw;
+                            abstractData.draw = param.draw;
 
                             serializeResponse(context, abstractData);
                             break;
 
                         case "review":
                         case "reviewuncoded":
-                            abstractData = this.GetParentAbstractsODPStaffMemberReview(filter, action, searchString, start, length, sortCol, sortDir);
+                            abstractData = this.GetParentAbstractsODPStaffMemberReview(param);
                             parentAbstracts = abstractData.data;
 
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
                             abstractData.data = ALR;
-                            abstractData.draw = draw;
+                            abstractData.draw = param.draw;
 
                             serializeResponse(context, abstractData);
                             break;
 
                         default: // return default
-                            abstractData = this.GetParentAbstractsODPStaffMember(filter, action, searchString, start, length, sortCol, sortDir);
+                            abstractData = this.GetParentAbstractsODPStaffMember(param);
                             parentAbstracts = abstractData.data;
 
                             ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.ODPStaff);
                             abstractData.data = ALR;
-                            abstractData.draw = draw;
+                            abstractData.draw = param.draw;
 
                             serializeResponse(context, abstractData);
 
@@ -170,12 +156,12 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     }
                     break;
                 case "Admin":
-                    action = string.Empty;
-                    abstractData = this.GetParentAbstractsAdmin(filter, action, searchString, start, length, sortCol, sortDir);
+                    param.action = string.Empty;
+                    abstractData = this.GetParentAbstractsAdmin(param);
                     parentAbstracts = abstractData.data;
 
                     ALR = AbstractListViewHelper.ProcessAbstracts2(parentAbstracts, AbstractViewRole.Admin);
-                    abstractData.draw = draw;
+                    abstractData.draw = param.draw;
                     abstractData.data = ALR;
 
                     serializeResponse(context, abstractData);
@@ -187,7 +173,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             return;
         }
 
-        protected AbstractData GetParentAbstractsAdmin(string filter = "", string action = "", string search = "", int start = 0, int length = 10, string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected AbstractData GetParentAbstractsAdmin(AbstractParams param)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -214,7 +200,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             IsParent = true
                         };
 
-            switch (filter)
+            switch (param.filter)
             {
                 case "uncoded":
                     query = query.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.OPEN_0);
@@ -241,10 +227,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
             }
 
-            return ProcessAbstracts(query.ToList(), action, search, start, length, sort, direction);
+            return ProcessAbstracts(query.ToList(), param);
         }
 
-        protected AbstractData GetParentAbstractsODPSupervisor(string filter = "", string action = "", string search = "", int start = 0, int length = 10, string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected AbstractData GetParentAbstractsODPSupervisor(AbstractParams param)
         {
             string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connStr);
@@ -271,7 +257,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             IsParent = true
                         };
 
-            switch (filter)
+            switch (param.filter)
             {
                 case "default":
                     query = query.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N);
@@ -302,10 +288,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
             }
 
-            return ProcessAbstracts(query.ToList(), action, search, start, length, sort, direction);
+            return ProcessAbstracts(query.ToList(), param);
         }
 
-        protected AbstractData GetParentAbstractsODPSupervisorReview(string filter = "", string action = "", string search = "", int start = 0, int length = 10, string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected AbstractData GetParentAbstractsODPSupervisorReview(AbstractParams param)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -334,7 +320,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             IsParent = true
                         };
 
-            switch (filter)
+            switch (param.filter)
             {
                 case "review":
                     query = query.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N);
@@ -344,10 +330,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
             }
 
-            return ProcessAbstracts(query.ToList(), action, search, start, length, sort, direction);
+            return ProcessAbstracts(query.ToList(), param);
         }
 
-        protected AbstractData GetParentAbstractsODPSupervisorReportExclude(string filter = "", string action = "", string search = "", int start = 0, int length = 10, string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected AbstractData GetParentAbstractsODPSupervisorReportExclude(AbstractParams param)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -377,7 +363,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             IsParent = true
                         };
 
-            switch (filter)
+            switch (param.filter)
             {
                 case "reportexclude":
                     query = query.Where(q => q.AbstractStatusID >= (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N);
@@ -385,10 +371,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             }
 
-            return ProcessAbstracts(query.ToList(), action, search, start, length, sort, direction);
+            return ProcessAbstracts(query.ToList(), param);
         }
 
-        protected AbstractData GetParentAbstractsODPStaffMember(string filter = "", string action = "", string search = "", int start = 0, int length = 10, string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected AbstractData GetParentAbstractsODPStaffMember(AbstractParams param)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -418,7 +404,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                         };
 
-            switch (filter)
+            switch (param.filter)
             {
                 case "default":
                     query = query.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N || q.AbstractStatusID == (int)AbstractStatusEnum.ODP_CONSENSUS_WITH_NOTES_2N ||
@@ -443,10 +429,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
             }
 
-            return ProcessAbstracts(query.ToList(), action, search, start, length, sort, direction);
+            return ProcessAbstracts(query.ToList(), param);
         }
 
-        protected AbstractData GetParentAbstractsODPStaffMemberReview(string filter = "", string action = "", string search = "", int start = 0, int length = 10, string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected AbstractData GetParentAbstractsODPStaffMemberReview(AbstractParams param)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -475,7 +461,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             IsParent = true
                         };
 
-            switch (filter)
+            switch (param.filter)
             {
                 case "review":
                     query = query.Where(q =>
@@ -495,10 +481,10 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
             }
 
-            return ProcessAbstracts(query.ToList(), action, search, start, length, sort, direction);
+            return ProcessAbstracts(query.ToList(), param);
         }
 
-        protected AbstractData GetParentAbstractsCoderSupervisor(string filter = "", string action = "", string search = "", int start = 0, int length = 10, string sort = "", SortDirection direction = SortDirection.Ascending)
+        protected AbstractData GetParentAbstractsCoderSupervisor(AbstractParams param)
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             DataJYDataContext db = new DataJYDataContext(connString);
@@ -526,7 +512,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                             IsParent = true
                         };
 
-            switch (filter)
+            switch (param.filter)
             {
                 case "default":
                     query = query.Where(q => q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_WITH_NOTES_1N || q.AbstractStatusID == (int)AbstractStatusEnum.CONSENSUS_COMPLETE_1B ||
@@ -556,30 +542,30 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
             }
 
-            return ProcessAbstracts(query.ToList(), action, search, start, length, sort, direction);
+            return ProcessAbstracts(query.ToList(), param);
         }
 
-        private AbstractData ProcessAbstracts(List<AbstractListRow> Abstracts, string action = "", string search = "", int start = 0, int length = 10, string sort = "", SortDirection direction = SortDirection.Ascending)
+        private AbstractData ProcessAbstracts(List<AbstractListRow> Abstracts, AbstractParams param)
         {
-            List<int> actionAbstracts = GetActionAbstracts(action);
+            List<int> actionAbstracts = GetActionAbstracts(param.action);
             if (actionAbstracts.Count > 0)
             {
                 Abstracts = Abstracts.Where(a => !actionAbstracts.Contains(a.AbstractID)).ToList();
             }
 
             int total = Abstracts.Count;
-            if (!string.IsNullOrEmpty(search))
+            if (!string.IsNullOrEmpty(param.search))
             {
                 Abstracts = (from a in Abstracts
                              where
-                                 a.AbstractID.ToString().Contains(search) ||
-                                 a.ApplicationID.ToString().Contains(search) ||
-                                 a.PIProjectLeader.ToLower().Contains(search.ToLower()) ||
-                                 a.ProjectTitle.ToLower().Contains(search.ToLower())
+                                 a.AbstractID.ToString().Contains(param.search) ||
+                                 a.ApplicationID.ToString().Contains(param.search) ||
+                                 a.PIProjectLeader.ToLower().Contains(param.search.ToLower()) ||
+                                 a.ProjectTitle.ToLower().Contains(param.search.ToLower())
                              select a).ToList();
             }
 
-            Abstracts = AbstractListViewHelper.SortAbstracts(Abstracts, sort, direction);
+            Abstracts = AbstractListViewHelper.SortAbstracts(Abstracts, param.sortColumn, param.sortDirection);
 
             int totalFilter = Abstracts.Count();
 
@@ -588,7 +574,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 draw = 1,
                 recordsTotal = total,
                 recordsFiltered = totalFilter,
-                data = length == -1 ? Abstracts.Skip(start).ToList() : Abstracts.Skip(start).Take(length).ToList()
+                data = param.length == -1 ? Abstracts.Skip(param.start).ToList() : Abstracts.Skip(param.start).Take(param.length).ToList()
             };
         }
 
