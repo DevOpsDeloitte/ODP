@@ -109,8 +109,8 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
                 }
 
                 if (!teamexists) {
-                    console.log(" time to redirect -- watch over. ");
-                    window.location = "Evaluation.aspx";
+                    console.log(" time to redirect -- watch over. Back to B Process Form. ");
+                    window.location = "EvaluationB.aspx";
                 }
 
 
