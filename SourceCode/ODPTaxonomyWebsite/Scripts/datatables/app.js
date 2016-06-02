@@ -1502,8 +1502,6 @@ $(document).ready(function () {
             $opts.lastfilterSelection = "review";
         }
 
-        //$.fn.dataTableExt.afnFiltering.push(function (oSettings, aData, iDataIndex) {
-
         $.fn.dataTableExt.afnFiltering.push(
             function (oSettings, aData, iDataIndex) {
                 console.log('$.fn.dataTableExt.afnFiltering.push');
@@ -1513,7 +1511,8 @@ $(document).ready(function () {
                     return true;
                 }
 
-            });
+            }
+        );
 
         retrievePageHash(); //Init
         filtersManager();   //Init
