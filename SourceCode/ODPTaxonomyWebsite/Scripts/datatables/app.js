@@ -1502,18 +1502,6 @@ $(document).ready(function () {
             $opts.lastfilterSelection = "review";
         }
 
-        $.fn.dataTableExt.afnFiltering.push(
-            function (oSettings, aData, iDataIndex) {
-                console.log('$.fn.dataTableExt.afnFiltering.push');
-                if (_.contains($opts.hideboxes, Number(aData[2]))) {
-                    return false;
-                } else {
-                    return true;
-                }
-
-            }
-        );
-
         retrievePageHash(); //Init
         filtersManager();   //Init
 
