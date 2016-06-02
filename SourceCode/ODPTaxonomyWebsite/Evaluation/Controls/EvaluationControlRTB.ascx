@@ -184,6 +184,7 @@
                     <br />
                     <span class="titles">PI Project Leader :</span>
                     <span class="titlevals"><%= piProjectLeader %></span>
+                    
                 </div>
 
             </div>
@@ -194,6 +195,9 @@
                 <div>
                     <span class="titles">User ID :</span>
                     <span class="titlevals"><%= userName %></span>
+                    <br>
+                    <span class="titles">Type :</span>
+                    <span class="titlevals">Basic</span>
                 </div>
 
 

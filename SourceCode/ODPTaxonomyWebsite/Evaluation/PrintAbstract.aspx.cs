@@ -22,6 +22,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         public string ProjectNumber;
         public string desc;
         public string healthpart;
+        public string codingType;
 
 
         private DataDataContext db = null;
@@ -45,12 +46,13 @@ namespace ODPTaxonomyWebsite.Evaluation
                 {
                     projectTitle = absrec.ProjectTitle;
                     administeringIC = absrec.AdministeringIC;
-                    applicationID = absrec.ApplicationID.ToString();
+                    applicationID = absrec.ChrApplicationID.ToString();
                     PIProjectLeader = absrec.PIProjectLeader;
                     FY = absrec.FY;
                     ProjectNumber = absrec.ProjectNumber;
                     desc = absrec.AbstractDescPart;
                     healthpart = absrec.AbstractPublicHeathPart;
+                    codingType = absrec.CodingType == null ? "Regular" : "Basic";
 
                 }
 

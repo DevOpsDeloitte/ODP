@@ -726,6 +726,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             PIProjectLeader.InnerText = abstr.PIProjectLeader;
             FY.InnerText = abstr.FY;
             ProjectNumber.InnerHtml = abstr.ProjectNumber;
+            CodingTypeLabel.InnerHtml = abstr.CodingType ?? "Regular";
             DateTime time = DateTime.Now;             
             string format = "MM/d/yyyy";
             userId.InnerText = userCurrentName;
