@@ -508,7 +508,7 @@ $(document).ready(function () {
         if (data.data[0].ChildRows.length > 0) {
             data = data.data[0];
             console.log('callbackGetDetailChildRow() :: ', data.ChildRows);
-            currentRow.child(loadChildContainer(data.AbstractID)).show();
+            //currentRow.child(loadChildContainer(data.AbstractID)).show();
 
             content = unescape(util.showTableChildRows(data));
             $("div#" + data.AbstractID).html(content);
@@ -528,6 +528,8 @@ $(document).ready(function () {
         var type = 'GET';
         var data = { role: config.role, 'abstractId': abstractId };
 
+        row.child(loadChildContainer(abstractId)).show();
+
         if($opts.selectedItemChildrenCache.length > 0) {
             var rowDataObj = _.find($opts.selectedItemChildrenCache, function(obj) {
                 return obj.abstractId === parseInt(abstractId);
@@ -535,9 +537,11 @@ $(document).ready(function () {
 
             if(rowDataObj == undefined) {
                 console.log('calling to get children of ', abstractId);
+
                 util.ajaxCall(url, type, data, callbackGetDetailChildRow);
             } else {
                 console.log('getting children of '+abstractId+' from cache');
+
                 content = unescape(util.showTableChildRows(rowDataObj.data));
                 $("div#" + abstractId).html(content);
 
@@ -545,7 +549,6 @@ $(document).ready(function () {
             }
         } else {
             console.log('calling to get children of ', abstractId);
-            row.child(loadChildContainer(abstractId)).show();
 
             util.ajaxCall(url, type, data, callbackGetDetailChildRow)
         }
