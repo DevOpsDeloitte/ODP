@@ -574,8 +574,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                              where
                                  a.AbstractID.ToString().Contains(search) ||
                                  a.ApplicationID.ToString().Contains(search) ||
-                                 a.PIProjectLeader.Contains(search) ||
-                                 a.ProjectTitle.Contains(search)
+                                 a.PIProjectLeader.ToLower().Contains(search.ToLower()) ||
+                                 a.ProjectTitle.ToLower().Contains(search.ToLower())
                              select a).ToList();
             }
 
