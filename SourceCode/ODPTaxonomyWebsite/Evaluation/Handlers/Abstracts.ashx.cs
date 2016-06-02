@@ -580,7 +580,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 Abstracts = (from a in Abstracts
                              where
                                  a.AbstractID.ToString().Contains(param.search) ||
-                                 a.ApplicationID.ToString().Contains(param.search) ||
+                                 a.ApplicationID.ToString().ToLower().Contains(param.search.ToLower()) ||
                                  a.PIProjectLeader.ToLower().Contains(param.search.ToLower()) ||
                                  a.ProjectTitle.ToLower().Contains(param.search.ToLower())
                              select a).ToList();
