@@ -195,7 +195,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             var absrec = db.Abstracts.Where(a => a.AbstractID == AbstractID).Select(a => a).FirstOrDefault();
             if (absrec != null)
             {
-                applicationID = absrec.ApplicationID.ToString();
+                applicationID = absrec.ChrApplicationID.ToString();
                 projectTitle = absrec.ProjectTitle.ToString();
 
             }

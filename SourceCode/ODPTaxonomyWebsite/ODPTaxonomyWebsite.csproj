@@ -164,6 +164,7 @@
     <Content Include="Scripts\datatables\app.js" />
     <Content Include="Scripts\datatables\jquery.dataTables.js" />
     <Content Include="Scripts\datatables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\datatables\natural.js" />
     <Content Include="Scripts\datatables\spin.min.js" />
     <Content Include="Scripts\datatables\underscore-min.js" />
     <Content Include="Scripts\datatables\util.js" />
