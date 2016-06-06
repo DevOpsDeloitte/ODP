@@ -37,7 +37,7 @@ $(document).ready(function () {
             var sab = $("#selectAllBox").is(':checked');    // Select/Unselect All Checkbox
             var ab = $("#allBox").is(':checked');           // Expand/Collapse All Checkbox
 
-            //util.selectAllRows(table, sab);
+            childrenRedraw(table.data());
 
             setTimeout(function () {
                 setTableState(sab, ab);
@@ -118,26 +118,29 @@ $(document).ready(function () {
         // logic to open and close child rows. // 1.3 dynamically load child rows.
         $('#DTable tbody').on('click', 'td.details-control', function (evt) {
             console.log("on click (details row clicked) :: ");
-            var absid = $(this).parent().find("td.abstractid").html();
+            if ($(this).parent().hasClass("haschildren")) {
 
-            currentTR = $(this).closest('tr');  // Reference to the DOM TR
-            currentRow = table.row(currentTR);  // Reference to the Datatable row ??
+                var absid = $(this).parent().find("td.abstractid").html();
 
-            if (currentRow.child.isShown()) {
-                // This row is already open - close it
-                currentRow.child.hide();
+                currentTR = $(this).closest('tr');  // Reference to the DOM TR
+                currentRow = table.row(currentTR);  // Reference to the Datatable row ??
 
-                currentTR.removeClass('open').addClass('closed');
+                if (currentRow.child.isShown()) {
+                    // This row is already open - close it
+                    currentRow.child.hide();
 
-                var rowDataNdx = util.findObjNdxChildCache(absid);
+                    currentTR.removeClass('open').addClass('closed');
 
-                if(rowDataNdx > -1) {
-                    $opts.selectedItemChildrenCache.splice(rowDataNdx, 1);
+                    var rowDataNdx = util.findObjNdxChildCache(absid);
+
+                    if (rowDataNdx > -1) {
+                        $opts.selectedItemChildrenCache.splice(rowDataNdx, 1);
+                    }
+                } else {
+                    var data = getDetailChildRow(currentRow, absid);
                 }
-            } else {
-                var data = getDetailChildRow(currentRow, absid);
+                console.log('$opts.selectedItemChildrenCache: ', $opts.selectedItemChildrenCache);
             }
-            console.log('$opts.selectedItemChildrenCache: ', $opts.selectedItemChildrenCache);
         });
 
         $("#allBox").on("click", function (evt) {
@@ -988,6 +991,8 @@ $(document).ready(function () {
 
     // in 1.3 we will not be pre-loading row data. childrenRedraw will add parent classes or nochildren/haschildren and return.
     function childrenRedraw(tdata) {
+        var tmpCntChildren = 0;
+        var tmpCntNoChildren = 0;
         util.setRows(tdata);
 
         table.rows().eq(0).each(function (rowIdx, val) {
@@ -997,23 +1002,16 @@ $(document).ready(function () {
             var kappaCount = table.row(rowIdx).data().KappaCount;
 
             if (kappaCount <= 1) {
+                tmpCntNoChildren++;
                 rowx.addClass('nochildren');
                 rowx.find("td.details-control").addClass('nodisplay');
             } else {
+                tmpCntChildren++;;
                 rowx.addClass('haschildren');
             }
+console.log('tmpCntChildren, tmpCntNoChildren', tmpCntChildren, tmpCntNoChildren);
 
             return;
-            // NOTE (TR): Remove ??
-            // Not needed anymore for 1.3.
-            //table
-            //.row(rowIdx)
-            //.child(
-            //$(
-            //        childrows
-            //    ), "child hide"
-            //)
-            //.show();
         });
     }
 
@@ -1313,11 +1311,7 @@ $(document).ready(function () {
             },
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                // NOTE (TR): Remove ???
-                setTimeout(function () {
-                    console.log('???');
-                    //$("tr[role=row].selected").find("input").prop("checked", "checked");
-                }, 0);
+                console.log('fnRowCallback');
             },
             "aLengthMenu": [[10, 25, 50, 100, 250, 500, -1], ["Display 10", "Display 25", "Display 50", "Display 100", "Display 250", "Display 500", "Display All"]],
             "sDom": '<"filter-wrap"f><"length-wrap"l><"paginate-wrap"p><"table-wrap"t>ip',
@@ -1378,6 +1372,26 @@ $(document).ready(function () {
                     "targets": 7
                 },
 
+/*
+                {
+                    "render": function (data, type, row) {
+console.log('render - data: ',data);
+                if (kappaCount <= 1) {
+            rowx.addClass('nochildren');
+            rowx.find("td.details-control").addClass('nodisplay');
+        } else {
+            rowx.addClass('haschildren');
+        }
+                        var colTmpl = "";
+
+                        colTmpl = "<a target='_blank' href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + ">" + data + "</a>";
+
+                        return "??";
+                    },
+                    "targets": 1
+                },
+*/
+
                 {
                     //mask out odp staff role kappa values
                     "render": function (data, type, row) {
@@ -1394,7 +1408,6 @@ $(document).ready(function () {
 
                 { "visible": true, "targets": [5] },
                 {
-
                     "render": function (data, type, row) {
                         var myDate = new Date(data);
                         return getFormattedDate(myDate);
@@ -1404,7 +1417,6 @@ $(document).ready(function () {
                 },
 
                 {
-
                     "render": function (data, type, row) {
                         var collink = "";
                         if (util.isMobile()) {
@@ -1423,7 +1435,6 @@ $(document).ready(function () {
                     "targets": 6 //title column
                 },
                 {
-
                     "render": function (data, type, row) {
                         if (data !== null) {
                             var myDate = new Date(data);
@@ -1436,8 +1447,6 @@ $(document).ready(function () {
                     },
                     "targets": 16 //date column
                 }
-
-
             ],
             "searchDelay": 1000,
             "processing": true,
