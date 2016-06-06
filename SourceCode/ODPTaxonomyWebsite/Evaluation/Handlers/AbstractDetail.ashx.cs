@@ -84,7 +84,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                            StatusDate = h.CreatedDate,
                            LastExportDate = a.LastExportDate,
                            EvaluationID = h.EvaluationId,
-                           IsParent = true
+                           IsParent = true,
+                           CodingType = a.CodingType == null ? "" : "Basic"
                        };
 
 

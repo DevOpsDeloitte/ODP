@@ -145,6 +145,14 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<KappaData>();
         }
 
+        public IEnumerable<KappaData_B> getIndividualKappaBRecords(int AbstractID)
+        {
+            var query = from k in db2.KappaData_Bs
+                        where k.AbstractID == AbstractID
+                        select k;
+            return query.ToList<KappaData_B>();
+        }
+
         public IEnumerable<Evaluation> getIndividualEvaluationRecords(int AbstractID)
         {
             var query = from k in db2.Evaluations
@@ -287,7 +295,17 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<KappaData>();
         }
 
-        
+        public IEnumerable<KappaData_B> GetAbstractKappaData2B(int AbstractID, IEnumerable<KappaData_B> cacheKappaData = null)
+        {
+            var query = from k in cacheKappaData
+                        where k.AbstractID == AbstractID
+                        orderby k.KappaTypeID ascending
+                        select k;
+
+            return query.ToList<KappaData_B>();
+        }
+
+
 
         public bool IsAbstractInReview(int AbstractID)
         {
