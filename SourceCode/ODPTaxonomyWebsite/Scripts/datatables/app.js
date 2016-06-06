@@ -110,7 +110,7 @@ $(document).ready(function () {
             console.log("on page.dt (page navigation) ::");
             var info = table.page.info();
 
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + info.page;
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + info.page;
 
             console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
         });
@@ -141,6 +141,23 @@ $(document).ready(function () {
                 }
                 console.log('$opts.selectedItemChildrenCache: ', $opts.selectedItemChildrenCache);
             }
+        });
+
+        $("#cbBasicOnly").on("click", function (evt) {
+            console.log($('#cbBasicOnly').is(":checked"));
+            var isCheckedBasicOnly = $('#cbBasicOnly').is(":checked");
+
+            if(isCheckedBasicOnly) {
+                $opts.codingType = 'basic';
+            } else {
+                $opts.codingType = 'all';
+            }
+
+            $opts.pageNumber = 0;
+
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+
+            watchBasicOnlyHandler();
         });
 
         $("#allBox").on("click", function (evt) {
@@ -439,7 +456,7 @@ $(document).ready(function () {
 
             $opts.pageNumber = 0;
 
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.pageNumber;
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
 
             watchActionsHandler();
         });
@@ -566,6 +583,7 @@ $(document).ready(function () {
     function progressBarReset() {
         console.log('progressBarReset() ::');
         $("div.progressBar div.meter.animate").empty().append('<span style="width: 100%"><span></span></span>');
+
         setTimeout(function () {
             $(".meter > span").each(function () {
                 $(this)
@@ -783,17 +801,22 @@ $(document).ready(function () {
     }
 
     function changeFilters() {
-        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
+        config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist + "&codingType=" + $opts.codingType;
+        console.log("changeFilters() :: ", config.baseURL);
+
         table.ajax.url(config.baseURL);
+
         $opts.lastfilterSelection = $opts.filterlist;
-        console.log(config.baseURL);
+
         $("div#downloadLinkBox").hide();
+
         assignPageTitle();
+
         if ($opts.initialPageLoad) {
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.pageNumber;
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
         }
         else {
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + "0";
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + "0";
         }
         $opts.hideboxes = [];
 
@@ -1056,8 +1079,15 @@ console.log('tmpCntChildren, tmpCntNoChildren', tmpCntChildren, tmpCntNoChildren
         }
     }
 
+    function watchBasicOnlyHandler() {
+        console.log('watchBasicOnlyHandler() :: ' + $opts.codingType);
+        $("div#downloadLinkBox").hide();
+
+        changeFilters();
+    }
+
     function watchActionsHandler() {
-        console.log(" watchActionsHandler() ::" + $opts.actionlist);
+        console.log(" watchActionsHandler() :: " + $opts.actionlist);
         $("div#downloadLinkBox").hide();
 
         switch ($opts.actionlist) {
@@ -1239,7 +1269,9 @@ console.log('tmpCntChildren, tmpCntNoChildren', tmpCntChildren, tmpCntNoChildren
 
             $opts.filterHash = locationHash[0];
             $opts.actionHash = locationHash[1];
-            $opts.pageNumber = locationHash[2];
+            $opts.codingType = locationHash[2];
+            $opts.pageNumber = locationHash[3];
+
             $opts.filterlist = $opts.filterHash;
             $opts.hashExists = true;
         }
@@ -1500,6 +1532,8 @@ console.log('render - data: ',data);
         var downloadSpin = document.getElementById('downloadSpin');             // NOTE (TR): Obsolete ???
         var spinner = new Spinner(spinneropts).spin(target);                    // NOTE (TR): Obsolete ???
         var spinnerdownloadSpin = new Spinner(spinneropts2).spin(downloadSpin); // NOTE (TR): Obsolete ???
+
+        $opts.codingType = $opts.codingType ? $opts.codingType : "all";
 
         util = new Utility();
 

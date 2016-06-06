@@ -36,6 +36,7 @@
             </div>
 
             <div class="three columns downloads interface">
+                <!--<input type="checkbox"><label>label</label>-->
                 <div id="downloadLinkBox">
                    <a href="">Download Excel Report</a>
                 </div>
@@ -51,7 +52,9 @@
         <span id="recordCount">0</span><span> Records selected</span>
     </div>
 
-
+    <div id="basicOnly" class="eight columns" style="z-index: 999; float: right; margin-left: 0; margin-right: 0; position: relative; top: 50px;">
+        <input type="checkbox" id="cbBasicOnly"><label style="font-weight: bold">Basic Only</label>
+    </div>
 
 
     <script type="text/javascript">
