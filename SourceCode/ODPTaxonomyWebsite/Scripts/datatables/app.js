@@ -1445,7 +1445,7 @@ console.log('render - data: ',data);
                         }
 
                     },
-                    "targets": 16 //date column
+                    "targets": 17 //date column
                 }
             ],
             "searchDelay": 1000,
@@ -1482,6 +1482,7 @@ console.log('render - data: ',data);
                 { "data": "A1" },
                 { "data": "A2" },
                 { "data": "A3" },
+                { "data": "A4" },
                 { "data": "B" },
                 { "data": "C" },
                 { "data": "D" },
