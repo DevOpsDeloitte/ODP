@@ -56,6 +56,7 @@ tr.open td.details-control:after { content: "–"; }
 
 #DTable td.ccol, table.dataTable tbody th.ccol, table.dataTable tbody td.ccol { /*display: inline-block;*/ padding: 8px 10px; border-left: 0; display: table-cell; text-align: left; border-left: 1px solid #ccc; }
 table.dataTable tbody th[colspan="17"], table.dataTable tbody td[colspan="17"] { padding: 0 }
+table.dataTable tbody th[colspan="18"], table.dataTable tbody td[colspan="18"] { padding: 0 }
 table.dataTable tbody tr.hide { display: none }
 table.dataTable tbody tr.show { display: table-row }
 div.scan-file { top : -4px; right: -4px; }
