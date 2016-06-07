@@ -110,7 +110,11 @@ $(document).ready(function () {
             console.log("on page.dt (page navigation) ::");
             var info = table.page.info();
 
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + info.page;
+            if (config.role == "ODPSupervisor") {
+                window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + info.page;
+            } else {
+                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + info.page;
+            }
 
             console.log('Showing page: ' + '    ---  ' + info.page + ' of ' + info.pages);
         });
@@ -155,7 +159,11 @@ $(document).ready(function () {
 
             $opts.pageNumber = 0;
 
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+            if (config.role == "ODPSupervisor") {
+                window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+            } else {
+                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+            }
 
             watchBasicOnlyHandler();
         });
@@ -436,14 +444,20 @@ $(document).ready(function () {
             var str = "";
             //disableFilters();
             disableInterface();
+
             $("select#filterlist option:selected").each(function () {
                 str = $(this).val();
                 $opts.filterlist = $(this).val();
             });
 
-            actionsManager();
-            $opts.actionlist = "selectaction";
+            if (config.role == "ODPSupervisor") {
+                actionsManager();
+
+                $opts.actionlist = "selectaction";
+            }
+
             changeFilters();
+
             $("div#downloadLinkBox").hide();
         });
 
@@ -667,6 +681,8 @@ $(document).ready(function () {
     }
 
     function actionsManager() {
+        console.log('actionsManager() ::');
+
         $("select#actionlist").empty();
         switch ($opts.filterlist) {
 
@@ -812,11 +828,18 @@ $(document).ready(function () {
 
         assignPageTitle();
 
-        if ($opts.initialPageLoad) {
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
-        }
-        else {
-            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + "0";
+        if (config.role == "ODPSupervisor") {
+            if ($opts.initialPageLoad) {
+                window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+            } else {
+                window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + "0";
+            }
+        } else {
+            if ($opts.initialPageLoad) {
+                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+            } else {
+                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + "0";
+            }
         }
         $opts.hideboxes = [];
 
@@ -962,6 +985,8 @@ $(document).ready(function () {
     }
 
     function doSubmitChecks() {
+        console.log('doSubmitChecks() ::');
+
         $opts.actionlist = $opts.actionlist ? $opts.actionlist : $("select#actionlist option:selected").val();
         //$opts.actionlist = $("select#actionlist option:selected").val();
 
@@ -1014,8 +1039,6 @@ $(document).ready(function () {
 
     // in 1.3 we will not be pre-loading row data. childrenRedraw will add parent classes or nochildren/haschildren and return.
     function childrenRedraw(tdata) {
-        var tmpCntChildren = 0;
-        var tmpCntNoChildren = 0;
         util.setRows(tdata);
 
         table.rows().eq(0).each(function (rowIdx, val) {
@@ -1025,14 +1048,11 @@ $(document).ready(function () {
             var kappaCount = table.row(rowIdx).data().KappaCount;
 
             if (kappaCount <= 1) {
-                tmpCntNoChildren++;
                 rowx.addClass('nochildren');
                 rowx.find("td.details-control").addClass('nodisplay');
             } else {
-                tmpCntChildren++;;
                 rowx.addClass('haschildren');
             }
-console.log('tmpCntChildren, tmpCntNoChildren', tmpCntChildren, tmpCntNoChildren);
 
             return;
         });
@@ -1325,7 +1345,7 @@ console.log('tmpCntChildren, tmpCntNoChildren', tmpCntChildren, tmpCntNoChildren
     }
 
     function InitializeTable() {
-        console.log("invoking InitializeTable() ::");
+        console.log("invoking InitializeTable() :: ");
         $("div.progressBar").show();
 
         // Datatable Definition
@@ -1404,26 +1424,6 @@ console.log('tmpCntChildren, tmpCntNoChildren', tmpCntChildren, tmpCntNoChildren
                     "targets": 7
                 },
 
-/*
-                {
-                    "render": function (data, type, row) {
-console.log('render - data: ',data);
-                if (kappaCount <= 1) {
-            rowx.addClass('nochildren');
-            rowx.find("td.details-control").addClass('nodisplay');
-        } else {
-            rowx.addClass('haschildren');
-        }
-                        var colTmpl = "";
-
-                        colTmpl = "<a target='_blank' href='/Evaluation/ViewAbstract.aspx?AbstractID=" + row.AbstractID + "'" + ">" + data + "</a>";
-
-                        return "??";
-                    },
-                    "targets": 1
-                },
-*/
-
                 {
                     //mask out odp staff role kappa values
                     "render": function (data, type, row) {
@@ -1486,8 +1486,9 @@ console.log('render - data: ',data);
             "ajax": {
                 "url": config.baseURL + "&filter=" + $opts.filterlist,
                 "data": function (data) {
-                    data.action = $opts.actionlist;
-                    // data.codingType = "All" / "Basic"
+                    if (config.role == "ODPSupervisor") {
+                        data.action = $opts.actionlist;
+                    }
                 }
             },
             "order": [[4, "desc"]],
@@ -1548,7 +1549,10 @@ console.log('render - data: ',data);
         retrievePageHash(); //Init
         filtersManager();   //Init
 
-        actionsManager();
+        if (config.role == "ODPSupervisor") {
+            actionsManager();
+        }
+
         disableFilters();
 
         InitializeTable();
