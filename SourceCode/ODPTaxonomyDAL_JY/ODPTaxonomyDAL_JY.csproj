@@ -50,7 +50,7 @@
     <Compile Include="AbstractListViewData.cs" />
     <Compile Include="AbstractListViewHelper.cs" />
     <Compile Include="AbstractParams.cs" />
-    <Compile Include="AbstractReviewParams.cs" />
+    <Compile Include="AbstractActionParams.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DataJY.designer.cs">
       <AutoGen>True</AutoGen>

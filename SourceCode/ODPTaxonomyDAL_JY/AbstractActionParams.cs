@@ -6,15 +6,20 @@ using System.Web;
 
 namespace ODPTaxonomyDAL_JY
 {
-    public class AbstractReviewParams : AbstractParams
+    public class AbstractActionParams : AbstractParams
     {
         public bool all { get; set; }
         public List<int> includeList { get; set; }
         public List<int> excludeList { get; set; }
         public Guid userGuid { get; set; }
+        public string type { get; set; }
 
-        public AbstractReviewParams(HttpContext context) : base(context)
+        public AbstractActionParams(HttpContext context) : base(context)
         {
+            includeList = new List<int>();
+            excludeList = new List<int>();
+
+            type = context.Request["type"] ?? "";
             all = context.Request["all"] != null && context.Request["all"] == "true";
 
             Guid guid;
@@ -51,7 +56,29 @@ namespace ODPTaxonomyDAL_JY
         {
             get
             {
-                return null;
+                // get all
+                start = 0;
+                length = 99999;
+
+                List<int> IDs = new List<int>();
+
+                if (all)
+                {
+                    var abstractData = AbstractHelper.GetAbstracts(this);
+                    IDs = abstractData.data.Select(a => a.AbstractID).ToList(); ;
+                    excludeList.Add(4094);
+                    if (excludeList.Count > 0)
+                    {
+                        IDs.RemoveAll(id => excludeList.Contains(id));
+                    }
+                }
+                else if (!all && includeList.Count > 0)
+                {
+                    IDs = includeList;
+                }
+
+
+                return IDs;
             }
         }
     }

@@ -12,14 +12,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
     /// </summary>
     public class AbstractReview : IHttpHandler
     {
-        public string abstracts = "";
-        public string type = "";
-        public string userguid = "";
-        public List<string> abstractIDs;
-
         public void ProcessRequest(HttpContext context)
         {
-            AbstractReviewParams param = new AbstractReviewParams(context);
+            AbstractActionParams param = new AbstractActionParams(context);
 
             if (param.userGuid==null)
             {
@@ -32,20 +27,18 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 context.Response.Write(JsonConvert.SerializeObject(new { success = false, error = "No abstract selected" }));
             }
 
-            abstractIDs = abstracts.Split(',').ToList();
             AbstractListViewData data = new AbstractListViewData();
-            switch (type)
+
+            switch (param.type)
             {
-
                 case "add":
-
                     try
                     {
-                        foreach (var abs in abstractIDs)
+                        foreach (var abs in param.Abstracts)
                         {
-                            if (!data.IsAbstractInReview(Convert.ToInt32(abs)))
+                            if (!data.IsAbstractInReview(abs))
                             {
-                                data.AddAbstractToReview(Convert.ToInt32(abs), param.userGuid);
+                                data.AddAbstractToReview(abs, param.userGuid);
                             }
                         }
 
@@ -59,13 +52,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
 
                 case "remove":
-
-
-                    foreach (var abs in abstractIDs)
+                    foreach (var abs in param.Abstracts)
                     {
-                        if (data.IsAbstractInReview(Convert.ToInt32(abs)))
+                        if (data.IsAbstractInReview(abs))
                         {
-                            data.RemoveAbstractFromReview(Convert.ToInt32(abs));
+                            data.RemoveAbstractFromReview(abs);
                         }
                     }
 
