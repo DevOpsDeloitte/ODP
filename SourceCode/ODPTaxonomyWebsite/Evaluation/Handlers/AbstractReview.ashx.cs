@@ -19,21 +19,25 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
         public void ProcessRequest(HttpContext context)
         {
-            abstracts = context.Request["abstracts"] ?? "";
-            type = context.Request["type"] ?? "";
-            userguid = context.Request["guid"] ?? "";
-            Guid ug;
-            if (!Guid.TryParse(userguid, out ug))
+            AbstractReviewParams param = new AbstractReviewParams(context);
+
+            if (param.userGuid==null)
             {
                 context.Response.Write(JsonConvert.SerializeObject(new { success = false, invalidguid = true }));
                 return;
             }
+
+            if(!param.all && param.includeList.Count == 0)
+            {
+                context.Response.Write(JsonConvert.SerializeObject(new { success = false, error = "No abstract selected" }));
+            }
+
             abstractIDs = abstracts.Split(',').ToList();
             AbstractListViewData data = new AbstractListViewData();
             switch (type)
             {
 
-                case "add" :
+                case "add":
 
                     try
                     {
@@ -41,22 +45,22 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         {
                             if (!data.IsAbstractInReview(Convert.ToInt32(abs)))
                             {
-                                data.AddAbstractToReview(Convert.ToInt32(abs), (Guid)ug);
+                                data.AddAbstractToReview(Convert.ToInt32(abs), param.userGuid);
                             }
                         }
 
                         context.Response.Write(JsonConvert.SerializeObject(new { success = true }));
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         context.Response.Write(JsonConvert.SerializeObject(new { success = false, message = ex.Message }));
                     }
 
                     break;
 
-                case "remove" :
+                case "remove":
 
-                    
+
                     foreach (var abs in abstractIDs)
                     {
                         if (data.IsAbstractInReview(Convert.ToInt32(abs)))

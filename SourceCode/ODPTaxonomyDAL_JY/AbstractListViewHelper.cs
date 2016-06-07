@@ -13,8 +13,7 @@ namespace ODPTaxonomyDAL_JY
     public static class AbstractListViewHelper
     {
         private static string KappaSpecifier = "f";
-
-
+                
         public static bool UserCanView(AbstractViewRole View)
         {
             switch (View)
@@ -1133,7 +1132,6 @@ namespace ODPTaxonomyDAL_JY
             return Abstracts;
         }
 
-
         public static List<AbstractListRow> SortAbstracts(List<AbstractListRow> Abstracts, string Sort, SortDirection SortDirection)
         {
             switch (Sort)
@@ -1297,8 +1295,7 @@ namespace ODPTaxonomyDAL_JY
                     F = convertKappa(Kappa.F)
                 };
             }
-        }
-        
+        }     
 
         public static AbstractListRow FillInKappaValue(AbstractListRow Abstract, IEnumerable<KappaData> KappaData, KappaTypeEnum KappaType)
         {
