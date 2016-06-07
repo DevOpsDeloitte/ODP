@@ -1477,7 +1477,7 @@ $(document).ready(function () {
                         }
 
                     },
-                    "targets": 16 //date column
+                    "targets": 17 //date column
                 }
             ],
             "searchDelay": 1000,
@@ -1515,6 +1515,7 @@ $(document).ready(function () {
                 { "data": "A1" },
                 { "data": "A2" },
                 { "data": "A3" },
+                { "data": "A4" },
                 { "data": "B" },
                 { "data": "C" },
                 { "data": "D" },

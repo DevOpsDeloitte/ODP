@@ -75,6 +75,9 @@ namespace ODPTaxonomyDAL_JY
     partial void InsertAbstract(Abstract instance);
     partial void UpdateAbstract(Abstract instance);
     partial void DeleteAbstract(Abstract instance);
+    partial void InsertKappaData_B(KappaData_B instance);
+    partial void UpdateKappaData_B(KappaData_B instance);
+    partial void DeleteKappaData_B(KappaData_B instance);
     #endregion
 		
 		public DataJYDataContext() : 
@@ -224,6 +227,14 @@ namespace ODPTaxonomyDAL_JY
 			get
 			{
 				return this.GetTable<Abstract>();
+			}
+		}
+		
+		public System.Data.Linq.Table<KappaData_B> KappaData_Bs
+		{
+			get
+			{
+				return this.GetTable<KappaData_B>();
 			}
 		}
 	}
@@ -4197,6 +4208,260 @@ namespace ODPTaxonomyDAL_JY
 		{
 			this.SendPropertyChanging();
 			entity.Abstract1 = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KappaData_B")]
+	public partial class KappaData_B : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _KappaDataID_B;
+		
+		private System.Nullable<int> _AbstractID;
+		
+		private System.Nullable<int> _KappaTypeID;
+		
+		private System.Nullable<decimal> _A4;
+		
+		private System.Nullable<decimal> _B;
+		
+		private System.Nullable<decimal> _C;
+		
+		private System.Nullable<decimal> _D;
+		
+		private System.Nullable<decimal> _E;
+		
+		private System.Nullable<decimal> _F;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnKappaDataID_BChanging(int value);
+    partial void OnKappaDataID_BChanged();
+    partial void OnAbstractIDChanging(System.Nullable<int> value);
+    partial void OnAbstractIDChanged();
+    partial void OnKappaTypeIDChanging(System.Nullable<int> value);
+    partial void OnKappaTypeIDChanged();
+    partial void OnA4Changing(System.Nullable<decimal> value);
+    partial void OnA4Changed();
+    partial void OnBChanging(System.Nullable<decimal> value);
+    partial void OnBChanged();
+    partial void OnCChanging(System.Nullable<decimal> value);
+    partial void OnCChanged();
+    partial void OnDChanging(System.Nullable<decimal> value);
+    partial void OnDChanged();
+    partial void OnEChanging(System.Nullable<decimal> value);
+    partial void OnEChanged();
+    partial void OnFChanging(System.Nullable<decimal> value);
+    partial void OnFChanged();
+    #endregion
+		
+		public KappaData_B()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaDataID_B", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int KappaDataID_B
+		{
+			get
+			{
+				return this._KappaDataID_B;
+			}
+			set
+			{
+				if ((this._KappaDataID_B != value))
+				{
+					this.OnKappaDataID_BChanging(value);
+					this.SendPropertyChanging();
+					this._KappaDataID_B = value;
+					this.SendPropertyChanged("KappaDataID_B");
+					this.OnKappaDataID_BChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this.OnAbstractIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractID = value;
+					this.SendPropertyChanged("AbstractID");
+					this.OnAbstractIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaTypeID", DbType="Int")]
+		public System.Nullable<int> KappaTypeID
+		{
+			get
+			{
+				return this._KappaTypeID;
+			}
+			set
+			{
+				if ((this._KappaTypeID != value))
+				{
+					this.OnKappaTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._KappaTypeID = value;
+					this.SendPropertyChanged("KappaTypeID");
+					this.OnKappaTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A4", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A4
+		{
+			get
+			{
+				return this._A4;
+			}
+			set
+			{
+				if ((this._A4 != value))
+				{
+					this.OnA4Changing(value);
+					this.SendPropertyChanging();
+					this._A4 = value;
+					this.SendPropertyChanged("A4");
+					this.OnA4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> B
+		{
+			get
+			{
+				return this._B;
+			}
+			set
+			{
+				if ((this._B != value))
+				{
+					this.OnBChanging(value);
+					this.SendPropertyChanging();
+					this._B = value;
+					this.SendPropertyChanged("B");
+					this.OnBChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this.OnCChanging(value);
+					this.SendPropertyChanging();
+					this._C = value;
+					this.SendPropertyChanged("C");
+					this.OnCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this.OnDChanging(value);
+					this.SendPropertyChanging();
+					this._D = value;
+					this.SendPropertyChanged("D");
+					this.OnDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this.OnEChanging(value);
+					this.SendPropertyChanging();
+					this._E = value;
+					this.SendPropertyChanged("E");
+					this.OnEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this.OnFChanging(value);
+					this.SendPropertyChanging();
+					this._F = value;
+					this.SendPropertyChanged("F");
+					this.OnFChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

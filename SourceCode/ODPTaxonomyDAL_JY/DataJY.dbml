@@ -190,4 +190,17 @@
       <Association Name="Abstract_AbstractReviewList1" Member="AbstractReviewLists1" ThisKey="AbstractID" OtherKey="AbstractID" Type="AbstractReviewList" />
     </Type>
   </Table>
+  <Table Name="dbo.KappaData_B" Member="KappaData_Bs">
+    <Type Name="KappaData_B">
+      <Column Name="KappaDataID_B" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="KappaTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="A4" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="B" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="C" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

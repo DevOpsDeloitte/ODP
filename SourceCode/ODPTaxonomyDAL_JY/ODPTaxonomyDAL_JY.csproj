@@ -45,10 +45,12 @@
   <ItemGroup>
     <Compile Include="AbstractData.cs" />
     <Compile Include="AbstractGridView.cs" />
+    <Compile Include="AbstractHelper.cs" />
     <Compile Include="AbstractListRow.cs" />
     <Compile Include="AbstractListViewData.cs" />
     <Compile Include="AbstractListViewHelper.cs" />
     <Compile Include="AbstractParams.cs" />
+    <Compile Include="AbstractActionParams.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="DataJY.designer.cs">
       <AutoGen>True</AutoGen>

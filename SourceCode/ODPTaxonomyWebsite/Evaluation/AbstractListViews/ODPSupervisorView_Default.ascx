@@ -93,6 +93,7 @@
                     <th class="col_kappa">A1</th>
                     <th class="col_kappa">A2</th>
                     <th class="col_kappa">A3</th>
+                    <th class="col_kappa">A4</th>
                     <th class="col_kappa">B</th>
                     <th class="col_kappa">C</th>
                     <th class="col_kappa">D</th>
