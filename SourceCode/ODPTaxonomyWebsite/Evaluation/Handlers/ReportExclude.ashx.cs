@@ -12,37 +12,27 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
     /// </summary>
     public class ReportExclude : IHttpHandler
     {
-
-        public string abstracts = "";
-        public string type = "";
-        public string userguid = "";
-        public List<string> abstractIDs;
-
         public void ProcessRequest(HttpContext context)
         {
-            abstracts = context.Request["abstracts"] ?? "";
-            type = context.Request["type"] ?? "";
-            userguid = context.Request["guid"] ?? "";
-            Guid ug;
-            if (!Guid.TryParse(userguid, out ug))
+            AbstractActionParams param = new AbstractActionParams(context);
+
+            if (param.userGuid==null)
             {
                 context.Response.Write(JsonConvert.SerializeObject(new { success = false, invalidguid = true }));
                 return;
             }
-            abstractIDs = abstracts.Split(',').ToList();
+
             AbstractListViewData data = new AbstractListViewData();
-            switch (type)
+            switch (param.type)
             {
-
                 case "add":
-
                     try
                     {
-                        foreach (var abs in abstractIDs)
+                        foreach (var abs in param.Abstracts)
                         {
-                            if (!data.IsAbstractInReportExclude(Convert.ToInt32(abs)))
+                            if (!data.IsAbstractInReportExclude(abs))
                             {
-                                data.AddAbstractToReportExclude(Convert.ToInt32(abs), (Guid)ug);
+                                data.AddAbstractToReportExclude(abs, param.userGuid);
                             }
                         }
 
@@ -56,19 +46,16 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
 
                 case "remove":
-
-
-                    foreach (var abs in abstractIDs)
+                    foreach (var abs in param.Abstracts)
                     {
-                        if (data.IsAbstractInReportExclude(Convert.ToInt32(abs)))
+                        if (data.IsAbstractInReportExclude(abs))
                         {
-                            data.RemoveAbstractFromReportExclude(Convert.ToInt32(abs));
+                            data.RemoveAbstractFromReportExclude(abs);
                         }
                     }
 
                     context.Response.Write(JsonConvert.SerializeObject(new { success = true }));
                     break;
-
             }
         }
 

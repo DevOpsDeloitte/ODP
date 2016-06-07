@@ -6,55 +6,36 @@ using Newtonsoft.Json;
 using ODPTaxonomyUtility_TT;
 using ODPTaxonomyDAL_TT;
 using System.Configuration;
+using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite.Evaluation.Handlers
 {
-    
+
     public class AbstractClose : IHttpHandler
     {
         #region Fields
-
         private string connString = null;
-        private string abstracts = "";
-        private string type = "";
-        private string userguid = "";
-        private List<string> abstractIDs;
-
         #endregion
 
         public void ProcessRequest(HttpContext context)
         {
-            int abstractId = -1;
             connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
-            abstracts = context.Request["abstracts"] ?? "";
-            type = context.Request["type"] ?? "";
-            userguid = context.Request["guid"] ?? "";
-            Guid ug;
-            if (!Guid.TryParse(userguid, out ug))
+            AbstractActionParams param = new AbstractActionParams(context);
+
+            if (param.userGuid == null)
             {
                 context.Response.Write(JsonConvert.SerializeObject(new { success = false, invalidguid = true }));
                 return;
             }
-            abstractIDs = abstracts.Split(',').ToList();
 
-            
-            switch (type)
+            switch (param.type)
             {
-
                 case "close":
-
                     try
                     {
-                        foreach (string abs in abstractIDs)
+                        foreach (var abstractId in param.Abstracts)
                         {
-                            if (Int32.TryParse(abs, out abstractId))
-                            {
-                                Common.CloseAbstract(connString, abstractId, ug);
-                            }
-                            else
-                            {
-                                throw new Exception("abstractID '" + abs + "' is incorrect");
-                            }
+                            Common.CloseAbstract(connString, abstractId, param.userGuid);
                         }
 
                         context.Response.Write(JsonConvert.SerializeObject(new { success = true }));
@@ -67,21 +48,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
 
                 case "open":
-
                     try
                     {
-                        foreach (var abs in abstractIDs)
+                        foreach (var abstractId in param.Abstracts)
                         {
-                            if (Int32.TryParse(abs, out abstractId))
-                            {
-                                Common.OpenClosedAbstract(connString, abstractId, ug);
-                            }
-                            else
-                            {
-                                throw new Exception("abstractID '" + abs + "' is incorrect");
-                            }
+                            Common.OpenClosedAbstract(connString, abstractId, param.userGuid);
                         }
-                        context.Response.Write(JsonConvert.SerializeObject(new { success = true }));                        
+
+                        context.Response.Write(JsonConvert.SerializeObject(new { success = true }));
                     }
                     catch (Exception ex)
                     {
@@ -91,10 +65,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     break;
                 default:
                     context.Response.Write(JsonConvert.SerializeObject(new { success = false, message = "incorrect URL parameters" }));
-                    break;   
-
+                    break;
             }
-            
         }
 
         public bool IsReusable

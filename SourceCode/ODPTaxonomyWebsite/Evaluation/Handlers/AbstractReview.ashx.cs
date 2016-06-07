@@ -12,56 +12,51 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
     /// </summary>
     public class AbstractReview : IHttpHandler
     {
-        public string abstracts = "";
-        public string type = "";
-        public string userguid = "";
-        public List<string> abstractIDs;
-
         public void ProcessRequest(HttpContext context)
         {
-            abstracts = context.Request["abstracts"] ?? "";
-            type = context.Request["type"] ?? "";
-            userguid = context.Request["guid"] ?? "";
-            Guid ug;
-            if (!Guid.TryParse(userguid, out ug))
+            AbstractActionParams param = new AbstractActionParams(context);
+
+            if (param.userGuid==null)
             {
                 context.Response.Write(JsonConvert.SerializeObject(new { success = false, invalidguid = true }));
                 return;
             }
-            abstractIDs = abstracts.Split(',').ToList();
-            AbstractListViewData data = new AbstractListViewData();
-            switch (type)
+
+            if(!param.all && param.includeList.Count == 0)
             {
+                context.Response.Write(JsonConvert.SerializeObject(new { success = false, error = "No abstract selected" }));
+            }
 
-                case "add" :
+            AbstractListViewData data = new AbstractListViewData();
 
+            switch (param.type)
+            {
+                case "add":
                     try
                     {
-                        foreach (var abs in abstractIDs)
+                        foreach (var abs in param.Abstracts)
                         {
-                            if (!data.IsAbstractInReview(Convert.ToInt32(abs)))
+                            if (!data.IsAbstractInReview(abs))
                             {
-                                data.AddAbstractToReview(Convert.ToInt32(abs), (Guid)ug);
+                                data.AddAbstractToReview(abs, param.userGuid);
                             }
                         }
 
                         context.Response.Write(JsonConvert.SerializeObject(new { success = true }));
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         context.Response.Write(JsonConvert.SerializeObject(new { success = false, message = ex.Message }));
                     }
 
                     break;
 
-                case "remove" :
-
-                    
-                    foreach (var abs in abstractIDs)
+                case "remove":
+                    foreach (var abs in param.Abstracts)
                     {
-                        if (data.IsAbstractInReview(Convert.ToInt32(abs)))
+                        if (data.IsAbstractInReview(abs))
                         {
-                            data.RemoveAbstractFromReview(Convert.ToInt32(abs));
+                            data.RemoveAbstractFromReview(abs);
                         }
                     }
 
