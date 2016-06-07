@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Dev" Class="ReportingAppDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString5" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString3" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Report_QC_Week" Member="Report_QC_Weeks">
     <Type Name="Report_QC_Week">
       <Column Name="QC_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -64,6 +64,17 @@
       <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
       <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Report_SelectionDatapulling" Method="Report_SelectionDatapulling">
+    <ElementType Name="Report_SelectionDatapullingResult">
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MainSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SectionName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Final Consensus]" Member="Final_Consensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
