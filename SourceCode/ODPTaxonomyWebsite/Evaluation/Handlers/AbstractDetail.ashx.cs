@@ -38,7 +38,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             roleRequested = context.Request["role"] ?? "";
             //abstractID = context.Request["abstractid"] ?? "0";
             filter = context.Request["filter"] ?? "";
-            sentAbstractID = Int16.Parse(context.Request["abstractid"] ?? "0");
+            sentAbstractID = Int32.Parse(context.Request["abstractid"] ?? "0");
             parentAbstracts = getParentRecord(sentAbstractID);
 
             switch (roleRequested)
