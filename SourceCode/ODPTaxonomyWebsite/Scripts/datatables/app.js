@@ -260,50 +260,49 @@ $(document).ready(function () {
 
                     case "removereportexclude":
                         $("div#generalProgressBox").show();
-                        disableInterface();
-                        $.ajax({
-                                type: "POST",
-                                url: "/Evaluation/Handlers/ReportExclude.ashx",
-                                dataType: 'json',
-                                data: { type: "remove", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }
-                            })
-                            .done(function (data) {
-                                console.log(" remove report exclude : " + data);
-                                $("div#generalProgressBox").hide();
-                                if (data.success == true) {
-                                    alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from report exclude list.");
-                                    resetSubmitBtnAndCheckboxes();
-                                    loadFilters();
-                                    $opts.isGridDirty = true;
-                                }
-                                else {
-                                    alertify.error("Failed to remove from report exclude list.");
-                                }
-                                enableInterface();
-                            });
 
+                        disableInterface();
+
+                        util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", { type: "remove", abstractsInclude: $opts.selectedItems.join(), guid: window.user.GUID }, function(data, textStatus, jqXHR) {
+                            console.log(" remove report exclude : " + data);
+
+                            $("div#generalProgressBox").hide();
+
+                            if (data.success == true) {
+                                alertify.success($opts.selectedItems.length + " " + "Abstract(s) removed from report exclude list.");
+                                resetSubmitBtnAndCheckboxes();
+                                loadFilters();
+                                $opts.isGridDirty = true;
+                            } else {
+                                alertify.error("Failed to remove from report exclude list.");
+                            }
+
+                            enableInterface();
+                        });
 
                         break;
 
                     case "addreview":
-
                         $("div#generalProgressBox").show();
 
-                        util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", { type: "add", abstracts: $opts.selectedItems.join(), guid: window.user.GUID }, function(data, textStatus, jqXHR) {
-                            console.log(" add : " + data);
-                            $("div#generalProgressBox").hide();
+                        var includedAbstracts = $opts.selectedItems.join();
+                        var dataObj = { type: "add", abstracts: includedAbstracts, guid: window.user.GUID }
 
-                            if (data.success == true) {
-                                alertify.success($opts.selectedItems.length + " " + "Abstract(s) added to review list.");
-
-                                resetSubmitBtnAndCheckboxes();
-                                loadFilters();
-
-                                $opts.isGridDirty = true;
-                            } else {
-                                alertify.error("Failed to add in review list.");
-                            }
-                        });
+                        //util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", { type: "add", abstracts: includedAbstracts, guid: window.user.GUID }, function(data, textStatus, jqXHR) {
+                        //    console.log(" add : " + data);
+                        //    $("div#generalProgressBox").hide();
+                        //
+                        //    if (data.success == true) {
+                        //        alertify.success($opts.selectedItems.length + " " + "Abstract(s) added to review list.");
+                        //
+                        //        resetSubmitBtnAndCheckboxes();
+                        //        loadFilters();
+                        //
+                        //        $opts.isGridDirty = true;
+                        //    } else {
+                        //        alertify.error("Failed to add in review list.");
+                        //    }
+                        //});
 
                         break;
 
