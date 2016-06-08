@@ -67,6 +67,7 @@
     </ElementType>
   </Function>
   <Function Name="dbo.Report_SelectionDatapulling" Method="Report_SelectionDatapulling">
+    <Parameter Name="FY" Parameter="fY" Type="System.String" DbType="VarChar(20)" />
     <ElementType Name="Report_SelectionDatapullingResult">
       <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />

@@ -91,11 +91,18 @@ namespace ODPTaxonomyWebsite.api
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             using (ReportingAppDataContext db = new ReportingAppDataContext(connString))
             {
+                db.CommandTimeout = 0;
                 string start = context.Request["start"] ?? "";
                 string length = context.Request["length"] ?? "";
-                string type = context.Request["type"] ?? "ALL";
 
-                List<Report_SelectionDatapullingResult> vals = db.Report_SelectionDatapulling().ToList();
+                if (context.Request["type"] == null) throw new Exception("No Type Parameter - Please provide the type parameter.");
+                if (context.Request["year"] == null) throw new Exception("No Year Provided - Please provide the year parameter.");
+
+                string type = context.Request["type"] ?? "finalselection";
+                string year = context.Request["year"] ?? "2010";
+
+                List<Report_SelectionDatapullingResult> vals = db.Report_SelectionDatapulling(year).ToList();
+
                 if (start == "" && length == "")
                 {
                     context.Response.Write(JsonConvert.SerializeObject(new ApiResponse { totalRecords = vals.Count, start = 0, length = vals.Count, type = type, data = vals.ToList() }));

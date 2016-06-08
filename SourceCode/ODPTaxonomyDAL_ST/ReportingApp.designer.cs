@@ -92,9 +92,9 @@ namespace ODPTaxonomyDAL_ST
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_SelectionDatapulling")]
-		public ISingleResult<Report_SelectionDatapullingResult> Report_SelectionDatapulling()
+		public ISingleResult<Report_SelectionDatapullingResult> Report_SelectionDatapulling([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FY", DbType="VarChar(20)")] string fY)
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fY);
 			return ((ISingleResult<Report_SelectionDatapullingResult>)(result.ReturnValue));
 		}
 	}
