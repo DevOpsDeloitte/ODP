@@ -261,6 +261,9 @@
     <Compile Include="AccountManagement\ManageAccounts.aspx.designer.cs">
       <DependentUpon>ManageAccounts.aspx</DependentUpon>
     </Compile>
+    <Compile Include="api\data.ashx.cs">
+      <DependentUpon>data.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
@@ -654,6 +657,7 @@
     <Content Include="Evaluation\Handlers\KappaExclude.ashx" />
     <Content Include="Evaluation\Handlers\ReportExclude.ashx" />
     <Content Include="Evaluation\Handlers\EvaluationB.ashx" />
+    <Content Include="api\data.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
