@@ -95,9 +95,10 @@ function Utility() {
     };
 
     this.ajaxCall = function(url, type, data, callback) {
-        $.ajax(url, {
+        var newURL = url + "?role=" + config.role + "&filter=" + $opts.filterlist + "&action=" + $opts.actionlist;
+
+        $.ajax(newURL, {
             type: type,
-            //contentType: "application/json; charset=utf-8",
             data: data,
             dataType: 'json',
             success: function (data, textStatus, jqXHR) {
@@ -127,6 +128,7 @@ function Utility() {
 
     this.selectAllRows = function (table) {
         console.log('utils.selectAllRows() :: ');
+
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
             var abstractId = rowx.find(".abstractid").html()
@@ -138,10 +140,15 @@ function Utility() {
             rowx.addClass("selected");
             rowx.find("input[type=checkbox]").prop("checked", true);
         });
+
+        $opts.totalRecordsSelected = $opts.totalRecords;
+        $("span#recordCount").text($opts.totalRecordsSelected);
+        //$("span#recordCount").text($opts.selectedItems.length);
     };
 
     this.unselectAllRows = function (table) {
         console.log('utils.unselectAllRows() :: ');
+
         table.rows().eq(0).each(function (rowIdx, val) {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
             var abstractId = rowx.find(".abstractid").html()
@@ -152,29 +159,61 @@ function Utility() {
             rowx.removeClass("selected");
             rowx.find("input[type=checkbox]").prop("checked", false);
         });
+
+        $opts.allSelected = false;
+        $opts.selectedItems = [];
+        $opts.unselectedItems = [];
+        $opts.totalRecordsSelected = null;
+
+        $("span#recordCount").text("0");
     };
 
     this.checkIfAllBoxesChecked = function (table) {
         console.log('utils.checkIfAllBoxesChecked() :: ');
+
         if($opts.actionlist !== 'selectaction') {
-            var allselected = true;
-
-            table.rows().eq(0).each(function (rowIdx, val) {
-                var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
-                if (!rowx.find("input[type=checkbox]").parents("tr").hasClass("selected")) {
-                    allselected = false;
-
-                    return;
-                }
-            });
-
-            if (allselected) {
+            if($opts.allSelected) {
                 $("#selectAllBox").prop("checked", true);
+
+                if($opts.unselectedItems.length > 0){
+                    table.rows().eq(0).each(function (rowIdx, val) {
+                        var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
+                        var abstractId = rowx.find(".abstractid").html()
+
+                        if(_.indexOf($opts.unselectedItems, abstractId) > -1) {
+                            rowx.addClass("selected");
+                            rowx.find("input[type=checkbox]").prop("checked", true);
+                        }
+                    });
+                } else {
+                    table.rows().eq(0).each(function (rowIdx, val) {
+                        rowx.addClass("selected");
+                        rowx.find("input[type=checkbox]").prop("checked", true);
+                    });
+                }
             } else {
                 $("#selectAllBox").prop("checked", false);
             }
+
+
+            //var allselected = true;
+            //
+            //table.rows().eq(0).each(function (rowIdx, val) {
+            //    var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
+            //    if (!rowx.find("input[type=checkbox]").parents("tr").hasClass("selected")) {
+            //        allselected = false;
+            //
+            //        return;
+            //    }
+            //});
+
+            //if (allselected) {
+            //    $("#selectAllBox").prop("checked", true);
+            //} else {
+            //    $("#selectAllBox").prop("checked", false);
+            //}
         }
-    }
+    };
 
     this.debounce = function(func, wait, immediate) {
         var timeout;
@@ -322,13 +361,13 @@ function Utility() {
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A1) + '</td>' + // Col 5
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A2) + '</td>' + // Col 6
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A3) + '</td>' + // Col 7
-                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A4) + '</td>' + // Col 7a
-                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].B) + '</td>' + // Col 8
-                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].C) + '</td>' + // Col 9
-                '<td class="ccol col_kappa" >' + this.MaskKappa(rowData.ChildRows[i].D) + '</td>' + // Col 10
-                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].E) + '</td>' + // Col 11
-                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].F) + '</td>' + // Col 12
-                '<td class="ccol col_exportdate">' + this.coalesceCol(rowData.ChildRows[i].LastExportDate) + '</td>' + // Col 13
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A4) + '</td>' + // Col 8
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].B) + '</td>' + // Col 9
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].C) + '</td>' + // Col 10
+                '<td class="ccol col_kappa" >' + this.MaskKappa(rowData.ChildRows[i].D) + '</td>' + // Col 11
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].E) + '</td>' + // Col 12
+                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].F) + '</td>' + // Col 13
+                '<td class="ccol col_exportdate">' + this.coalesceCol(rowData.ChildRows[i].LastExportDate) + '</td>' + // Col 14
 
                 '</tr>';
 
