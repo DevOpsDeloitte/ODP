@@ -544,10 +544,10 @@ $(document).ready(function () {
 
         if($opts.allSelected) {
             $opts.selectedItems = [];
-            dataObj.excludedAbstracts = $opts.unselectedItems.join();
+            dataObj.excludeAbstracts = $opts.unselectedItems.join();
         } else {
             $opts.unselectedItems = [];
-            dataObj.includedAbstracts = $opts.selectedItems.join();
+            dataObj.includeAbstracts = $opts.selectedItems.join();
         }
 
         return dataObj;
