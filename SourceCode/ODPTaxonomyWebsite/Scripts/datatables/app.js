@@ -54,6 +54,8 @@ $(document).ready(function () {
 
             $('div.progressBar').css('display', processing ? 'block' : 'none');
 
+            hideBasicCB(processing);
+
             if (!processing) {
                 // show it all
                 progressBarReset();
@@ -1030,9 +1032,6 @@ $(document).ready(function () {
             default:
                 $("th.col_select").children().show();
 
-                // NOTE (TR): Remove ???
-                // ListCheck($opts.actionlist);
-
                 break;
         }
     }
@@ -1111,13 +1110,23 @@ $(document).ready(function () {
     function disableInterface() {
         $("select#filterlist").attr("disabled", true);
         $("select#actionlist").attr("disabled", true);
+
+        hideBasicCB(true);
+
         $("input").attr("disabled", true);
     }
 
     function enableInterface() {
         $("select#filterlist").attr("disabled", false);
         $("select#actionlist").attr("disabled", false);
+
+        hideBasicCB(false);
+
         $("input").attr("disabled", false);
+    }
+
+    function hideBasicCB(mode) {
+        $("input#cbBasicOnly").parent().css('display', mode ? 'none' : 'inline');
     }
 
     function doSubmitChecks() {
@@ -1240,6 +1249,7 @@ $(document).ready(function () {
 
     function watchBasicOnlyHandler() {
         console.log('watchBasicOnlyHandler() :: ' + $opts.codingType);
+
         $("div#downloadLinkBox").hide();
 
         changeFilters();
@@ -1485,27 +1495,30 @@ $(document).ready(function () {
 
     function InitializeTable(inData) {
         console.log("invoking InitializeTable() :: ");
+
         $("div.progressBar").show();
+
+        hideBasicCB(true);
 
         // Datatable Definition
         table = $('#DTable').DataTable({
 
             "stateSave": true,
             "stateSaveParams": function (settings, data) {
-                console.log(" saving state params " + JSON.stringify(data));
+                //console.log(" saving state params " + JSON.stringify(data));
                 data.search.search = "";
             },
 
             "stateLoadParams": function (settings, data) {
                 //data.search.search = "";
-                console.log(" saving load params " + JSON.stringify(data));
+                //console.log(" saving load params " + JSON.stringify(data));
             },
 
             "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
-                console.log('fnRowCallback');
+                //console.log('fnRowCallback');
             },
             "fnDrawCallback": function (settings) {
-                console.log('fnDrawCallback: ', settings);
+                //console.log('fnDrawCallback: ', settings);
 
                 $opts.totalRecords = settings._iRecordsTotal;
                 if($opts.totalRecordsSelected == null){
@@ -1631,18 +1644,12 @@ $(document).ready(function () {
             "processing": true,
             "serverSide": true,
             "ajax": {
-                "url": config.baseURL + "&filter=" + $opts.filterlist,
+                "url": config.baseURL + "&filter=" + $opts.filterlist + "&codingType=" + $opts.codingType,
                 "data": function (data) {
                     if (config.role == "ODPSupervisor") {
                         data.action = $opts.actionlist;
                     }
                 }
-                //,"success": function(result) {
-                //    totalRecords = result.recordsTotal;
-                //    totalRecordsSelected = 0;
-                //
-                //    setupTableEvents();
-                //}
             },
             "order": [[4, "desc"]],
             "columns": [
@@ -1690,6 +1697,8 @@ console.log('table: ', table);
         var spinner = new Spinner(spinneropts).spin(target);                    // NOTE (TR): Obsolete ???
         var spinnerdownloadSpin = new Spinner(spinneropts2).spin(downloadSpin); // NOTE (TR): Obsolete ???
 
+        hideBasicCB(true);
+
         $opts.codingType = $opts.codingType ? $opts.codingType : "all";
 
         util = new Utility();
@@ -1703,38 +1712,20 @@ console.log('table: ', table);
         }
 
         retrievePageHash(); //Init
+
         filtersManager();   //Init
 
         if (config.role == "ODPSupervisor") {
             actionsManager();
         }
 
+        if($opts.codingType == "basic") {
+            $("input#cbBasicOnly").prop( "checked", true );
+        }
+
         disableFilters();
 
         InitializeTable();
-
-
-        //$.ajax({
-        //    "url": config.baseURL + "&filter=" + $opts.filterlist,
-        //    "data": function (data) {
-        //        if (config.role == "ODPSupervisor") {
-        //            data.action = $opts.actionlist;
-        //        }
-        //    },
-        //    //"type": 'POST',
-        //    'success': function (result) {
-        //        totalRecords = JSON.parse(result).recordsTotal;
-        //        totalRecordsSelected = 0;
-        //
-        //        InitializeTable(result);
-        //
-        //        //filtersManager();   //Init
-        //        //setupTableEvents();
-        //    },
-        //    'error': function () {
-        //        alert("failed")
-        //    }
-        //});
 
         setupPageEvents();
     }
