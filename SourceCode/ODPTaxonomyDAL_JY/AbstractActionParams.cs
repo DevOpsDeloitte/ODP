@@ -28,7 +28,7 @@ namespace ODPTaxonomyDAL_JY
                 userGuid = guid;
             }
 
-            if (context.Request["includeList"] != null)
+            if (!string.IsNullOrEmpty(context.Request["includeList"]))
             {
                 includeList = context.Request["includeList"]
                     .Split(new char[] { ',' })
@@ -43,7 +43,7 @@ namespace ODPTaxonomyDAL_JY
                     .ToList();
             }
 
-            if (context.Request["excludeList"] != null)
+            if (!string.IsNullOrEmpty(context.Request["excludeList"]))
             {
                 excludeList = context.Request["excludeList"]
                     .Split(new char[] { ',' })
@@ -66,11 +66,12 @@ namespace ODPTaxonomyDAL_JY
                 {
                     var abstractData = AbstractHelper.GetAbstracts(this);
                     IDs = abstractData.data.Select(a => a.AbstractID).ToList(); ;
-                    //excludeList.Add(4094);
+                    //excludeList.Add(4094);        
                     if (excludeList.Count > 0)
                     {
                         IDs.RemoveAll(id => excludeList.Contains(id));
                     }
+                    
                 }
                 else if (!all && includeList.Count > 0)
                 {
