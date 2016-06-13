@@ -13,7 +13,7 @@ using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite.Evaluation.Handlers
 {
-   
+
     public class GenerateExcelReport : IHttpHandler
     {
         #region Fields
@@ -27,9 +27,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
         private string filePath = "";
         private string userguid = "";
         private string domain = "";
-          
+
         #endregion
-                
+
 
         public void ProcessRequest(HttpContext context)
         {
@@ -43,6 +43,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
 
                 AbstractActionParams param = new AbstractActionParams(context);
+                var abstracts = string.Join(",", param.Abstracts.ToArray());
 
                 if (param.userGuid == null)
                 {
@@ -50,18 +51,13 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     return;
                 }
 
-                //abstracts = context.Request["abstracts"] ?? "";
-                abstracts = string.Join<int>(",", param.Abstracts);
-                if (String.IsNullOrEmpty(abstracts))
+                if (string.IsNullOrEmpty(abstracts))
                 {
                     context.Response.Write("Important parameter is missing");
                 }
                 else
                 {
 
-                    //check abstractIDs
-                    if(abstracts.Trim() != "All")
-                    {
 #if ADD_STRESS_TEST
                         //Stress TEST
                         StringBuilder sb1 = new StringBuilder();
@@ -72,17 +68,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         }
                         abstracts += sb1.ToString();
 #endif
-                        abstractIDs = abstracts.Split(',').ToList();
-
-                        foreach (string abs in abstractIDs)
-                        {
-                            if (!Int32.TryParse(abs, out abstractId))
-                            {
-                                context.Response.Write("abstractID '" + abs + "' is incorrect");
-                                break;
-                            }
-                        }   
-                    }
 
                     filename = filenameBase + DateTime.Now.ToString(format) + ".xlsx";
                     excelFileName = context.Request.PhysicalApplicationPath + "Reports\\" + filename;
@@ -98,7 +83,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     List<rpt_Team_User_UCResult> team_User_UCResult = Common.GetReportData_Team_User_UCResult(connString, abstracts);
                     List<rpt_AbstractExportedResult> abstractExportedResult = Common.GetReportData_AbstractExported(connString, abstracts);
 
-                    CreateExcelFile.CreateExcelDocument<rpt_OPAResult>(opaData, context.Response, "OPA Data", ds); 
+                    CreateExcelFile.CreateExcelDocument<rpt_OPAResult>(opaData, context.Response, "OPA Data", ds);
                     opaData.Clear();
                     CreateExcelFile.CreateExcelDocument<rpt_KappaDataResult>(kappaData, context.Response, "Kappa Data", ds);
                     kappaData.Clear();
@@ -112,7 +97,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     team_User_UCResult.Clear();
                     CreateExcelFile.CreateExcelDocument<rpt_AbstractExportedResult>(abstractExportedResult, context.Response, "AbstractExported", ds);
                     abstractExportedResult.Clear();
-                    
+
                     //Write to memory stream
                     //code below throws out of memory exception for more than 1000 abstract ids
                     //CreateExcelFile.CreateExcelDocumentAsStream(ds, filename, context.Response);
@@ -134,7 +119,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 ds.Dispose();
                 ds = null;
             }
-            
+
         }
 
         public bool IsReusable
