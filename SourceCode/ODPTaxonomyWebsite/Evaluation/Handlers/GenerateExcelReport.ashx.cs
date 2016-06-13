@@ -9,6 +9,7 @@ using System.Configuration;
 using Newtonsoft.Json;
 using System.Data;
 using System.Text;
+using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite.Evaluation.Handlers
 {
@@ -38,16 +39,19 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             try
             {
                 domain = ConfigurationManager.AppSettings["reportDomain"].ToString();
-                userguid = context.Request["guid"] ?? "";
-                Guid ug;
-                if (!Guid.TryParse(userguid, out ug))
+                string format = "yyyy-MM-dd-h-mm-ss";
+                connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
+
+                AbstractActionParams param = new AbstractActionParams(context);
+
+                if (param.userGuid == null)
                 {
                     context.Response.Write(JsonConvert.SerializeObject(new { success = false, invalidguid = true }));
                     return;
                 }
-                string format = "yyyy-MM-dd-h-mm-ss";
-                connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
-                abstracts = context.Request["abstracts"] ?? "";
+
+                //abstracts = context.Request["abstracts"] ?? "";
+                abstracts = string.Join<int>(",", param.Abstracts);
                 if (String.IsNullOrEmpty(abstracts))
                 {
                     context.Response.Write("Important parameter is missing");
