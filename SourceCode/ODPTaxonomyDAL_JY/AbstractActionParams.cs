@@ -66,7 +66,7 @@ namespace ODPTaxonomyDAL_JY
                 {
                     var abstractData = AbstractHelper.GetAbstracts(this);
                     IDs = abstractData.data.Select(a => a.AbstractID).ToList(); ;
-                    excludeList.Add(4094);
+                    //excludeList.Add(4094);
                     if (excludeList.Count > 0)
                     {
                         IDs.RemoveAll(id => excludeList.Contains(id));
