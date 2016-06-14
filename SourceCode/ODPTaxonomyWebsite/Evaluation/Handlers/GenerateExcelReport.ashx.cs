@@ -21,11 +21,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
         private string filename = "PACT-Abstract-Export-YYYY-MM-DD.xlsx";
         private string connString = null;
         private string abstracts = "";
-        private List<string> abstractIDs;
-        private int abstractId = -1;
+        //private List<string> abstractIDs;
+        //private int abstractId = -1;
         private string excelFileName = "";
         private string filePath = "";
-        private string userguid = "";
+        //private string userguid = "";
         private string domain = "";
 
         #endregion
@@ -43,7 +43,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
 
                 AbstractActionParams param = new AbstractActionParams(context);
-                var abstracts = string.Join(",", param.Abstracts.ToArray());
+                abstracts = string.Join(",", param.Abstracts.ToArray());
 
                 if (param.userGuid == null)
                 {
