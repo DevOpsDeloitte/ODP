@@ -9,10 +9,11 @@ using System.Configuration;
 using Newtonsoft.Json;
 using System.Data;
 using System.Text;
+using ODPTaxonomyDAL_JY;
 
 namespace ODPTaxonomyWebsite.Evaluation.Handlers
 {
-   
+
     public class GenerateExcelReport : IHttpHandler
     {
         #region Fields
@@ -20,15 +21,15 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
         private string filename = "PACT-Abstract-Export-YYYY-MM-DD.xlsx";
         private string connString = null;
         private string abstracts = "";
-        private List<string> abstractIDs;
-        private int abstractId = -1;
+        //private List<string> abstractIDs;
+        //private int abstractId = -1;
         private string excelFileName = "";
         private string filePath = "";
-        private string userguid = "";
+        //private string userguid = "";
         private string domain = "";
-          
+
         #endregion
-                
+
 
         public void ProcessRequest(HttpContext context)
         {
@@ -38,26 +39,25 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             try
             {
                 domain = ConfigurationManager.AppSettings["reportDomain"].ToString();
-                userguid = context.Request["guid"] ?? "";
-                Guid ug;
-                if (!Guid.TryParse(userguid, out ug))
+                string format = "yyyy-MM-dd-h-mm-ss";
+                connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
+
+                AbstractActionParams param = new AbstractActionParams(context);
+                abstracts = string.Join(",", param.Abstracts.ToArray());
+
+                if (param.userGuid == null)
                 {
                     context.Response.Write(JsonConvert.SerializeObject(new { success = false, invalidguid = true }));
                     return;
                 }
-                string format = "yyyy-MM-dd-h-mm-ss";
-                connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
-                abstracts = context.Request["abstracts"] ?? "";
-                if (String.IsNullOrEmpty(abstracts))
+
+                if (string.IsNullOrEmpty(abstracts))
                 {
                     context.Response.Write("Important parameter is missing");
                 }
                 else
                 {
 
-                    //check abstractIDs
-                    if(abstracts.Trim() != "All")
-                    {
 #if ADD_STRESS_TEST
                         //Stress TEST
                         StringBuilder sb1 = new StringBuilder();
@@ -68,17 +68,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                         }
                         abstracts += sb1.ToString();
 #endif
-                        abstractIDs = abstracts.Split(',').ToList();
-
-                        foreach (string abs in abstractIDs)
-                        {
-                            if (!Int32.TryParse(abs, out abstractId))
-                            {
-                                context.Response.Write("abstractID '" + abs + "' is incorrect");
-                                break;
-                            }
-                        }   
-                    }
 
                     filename = filenameBase + DateTime.Now.ToString(format) + ".xlsx";
                     excelFileName = context.Request.PhysicalApplicationPath + "Reports\\" + filename;
@@ -94,7 +83,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     List<rpt_Team_User_UCResult> team_User_UCResult = Common.GetReportData_Team_User_UCResult(connString, abstracts);
                     List<rpt_AbstractExportedResult> abstractExportedResult = Common.GetReportData_AbstractExported(connString, abstracts);
 
-                    CreateExcelFile.CreateExcelDocument<rpt_OPAResult>(opaData, context.Response, "OPA Data", ds); 
+                    CreateExcelFile.CreateExcelDocument<rpt_OPAResult>(opaData, context.Response, "OPA Data", ds);
                     opaData.Clear();
                     CreateExcelFile.CreateExcelDocument<rpt_KappaDataResult>(kappaData, context.Response, "Kappa Data", ds);
                     kappaData.Clear();
@@ -108,7 +97,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     team_User_UCResult.Clear();
                     CreateExcelFile.CreateExcelDocument<rpt_AbstractExportedResult>(abstractExportedResult, context.Response, "AbstractExported", ds);
                     abstractExportedResult.Clear();
-                    
+
                     //Write to memory stream
                     //code below throws out of memory exception for more than 1000 abstract ids
                     //CreateExcelFile.CreateExcelDocumentAsStream(ds, filename, context.Response);
@@ -130,7 +119,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 ds.Dispose();
                 ds = null;
             }
-            
+
         }
 
         public bool IsReusable
