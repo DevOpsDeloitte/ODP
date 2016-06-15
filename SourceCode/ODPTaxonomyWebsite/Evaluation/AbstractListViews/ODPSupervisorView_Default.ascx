@@ -31,10 +31,6 @@
             </select>
         </div>
 
-        <div id="basicOnly" class="two columns" style="z-index: 999; float: left; margin-left: 0; margin-right: 0; position: relative; top: 26px;">
-            <input type="checkbox" id="cbBasicOnly"><label style="font-weight: bold">Basic Only</label>
-        </div>
-
         <div class="two columns subactions interface">
             <input type="button" name="subButton" id="subButton" value="Submit" class="review button" />
         </div>
@@ -56,9 +52,9 @@
         <span id="recordCount">0</span><span> Records selected</span>
     </div>
 
-    <%--<div id="basicOnly" class="eight columns" style="z-index: 999; float: right; margin-left: 0; margin-right: 0; position: relative; top: 50px;">--%>
-        <%--<input type="checkbox" id="cbBasicOnly"><label style="font-weight: bold">Basic Only</label>--%>
-    <%--</div>--%>
+    <div id="basicOnly" class="two columns">
+        <input type="checkbox" id="cbBasicOnly"><label style="font-weight: bold">Basic Only</label>
+    </div>
 
     <script type="text/javascript">
 

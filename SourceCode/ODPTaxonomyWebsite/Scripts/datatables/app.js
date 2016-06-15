@@ -274,7 +274,7 @@ $(document).ready(function () {
                                 if($opts.allSelected){
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
-                                    num = $opts.unselectedItems.length;
+                                    num = $opts.selectedItems.length;
                                 }
                                 alertify.success(num + " " + "Abstract(s) added to report exclude list.");
 
@@ -1001,7 +1001,9 @@ $(document).ready(function () {
 
                 }
                 $opts.isGridDirty = false;
+
                 enableInterface();
+
                 clearSubmitBtnAndCheckboxes();
             });
         } else {

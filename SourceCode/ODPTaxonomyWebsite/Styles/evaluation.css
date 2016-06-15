@@ -146,4 +146,13 @@ div#DTable_info { /*display: none !important; */}
     .filter-wrap { display: block; position: absolute; right: auto; left: 135px; top: 5px; }
     .length-wrap { display: block; position: absolute; right: auto; left: 10px; top: 5px; }
 
-} 
+}
+
+#basicOnly {
+    z-index: 999;
+    float: left;
+    margin-left: 36%;
+    position: relative;
+    top: 45px;
+    display: inline;
+}
