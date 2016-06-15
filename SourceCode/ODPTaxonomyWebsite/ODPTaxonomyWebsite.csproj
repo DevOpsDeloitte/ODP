@@ -681,6 +681,15 @@
     <None Include="Styles\OpenSans-Semibold-webfont.eot" />
     <None Include="Styles\OpenSans-Semibold-webfont.ttf" />
     <None Include="Styles\OpenSans-Semibold-webfont.woff" />
+    <Content Include="Web.template.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.template.Debug.config">
+      <DependentUpon>Web.template.config</DependentUpon>
+    </Content>
+    <Content Include="Web.template.Release.config">
+      <DependentUpon>Web.template.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
