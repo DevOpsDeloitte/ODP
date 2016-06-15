@@ -315,7 +315,7 @@ $(document).ready(function () {
                                 if($opts.allSelected){
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
-                                    num = $opts.unselectedItems.length;
+                                    num = $opts.selectedItems.length;
                                 }
                                 alertify.success(num + " " + "Abstract(s) removed from report exclude list.");
 
@@ -353,7 +353,7 @@ $(document).ready(function () {
                                 if($opts.allSelected){
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
-                                    num = $opts.unselectedItems.length;
+                                    num = $opts.selectedItems.length;
                                 }
                                 alertify.success(num + " " + "Abstract(s) added to review list.");
 
@@ -389,7 +389,7 @@ $(document).ready(function () {
                                 if($opts.allSelected){
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
-                                    num = $opts.unselectedItems.length;
+                                    num = $opts.selectedItems.length;
                                 }
                                 alertify.success(num + " " + "Abstract(s) removed from review list.");
 
@@ -424,7 +424,7 @@ $(document).ready(function () {
                                 if($opts.allSelected){
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
-                                    num = $opts.unselectedItems.length;
+                                    num = $opts.selectedItems.length;
                                 }
                                 alertify.success(num + " " + "Abstract(s) have been closed.");
 
@@ -460,7 +460,7 @@ $(document).ready(function () {
                                 if($opts.allSelected){
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
-                                    num = $opts.unselectedItems.length;
+                                    num = $opts.selectedItems.length;
                                 }
                                 alertify.success(num + " " + "Abstract(s) have been Re-opened.");
 
@@ -495,7 +495,7 @@ $(document).ready(function () {
                                 if($opts.allSelected){
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
-                                    num = $opts.unselectedItems.length;
+                                    num = $opts.selectedItems.length;
                                 }
                                 alertify.success(num + " " + "Abstract(s) have been Exported. File being generated.");
 
