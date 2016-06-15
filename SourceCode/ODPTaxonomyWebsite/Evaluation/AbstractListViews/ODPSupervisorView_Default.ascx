@@ -11,51 +11,54 @@
 
     <div id="filtersContainer">
 
+        <div class="four columns filters interface">
+            <label for="filterlist">Filters List</label>
+            <select name="filterlist"  id="filterlist" style="width:240px;">
+                    <option selected="selected" value="">Default View</option>
+                    <option value="open">Open Abstract</option>
+                    <option value="review">In Review List</option>
+                    <option value="uncoded">In Review List - Uncoded Only</option>
+            </select>
+        </div>
 
-            <div class="four columns filters interface">
-                <label for="filterlist">Filters List</label>
-                <select name="filterlist"  id="filterlist" style="width:240px;">
-                        <option selected="selected" value="">Default View</option>
-                        <option value="open">Open Abstract</option>
-                        <option value="review">In Review List</option>
-                        <option value="uncoded">In Review List - Uncoded Only</option>
-                </select>
+        <div class="three columns subactions interface">
+            <label for="actionlistlist">Actions List</label>
+            <select name="actionlist"  id="actionlist">
+                    <option selected="selected" value="addtoreview">Add to Review List</option>
+                    <option value="closeabstracts">Close Abstracts</option>
+                    <option value="reopenabstracts">Reopen Abstracts</option>
+                    <option value="exportabstracts">Export Abstracts</option>
+            </select>
+        </div>
+
+        <div id="basicOnly" class="two columns" style="z-index: 999; float: left; margin-left: 0; margin-right: 0; position: relative; top: 26px;">
+            <input type="checkbox" id="cbBasicOnly"><label style="font-weight: bold">Basic Only</label>
+        </div>
+
+        <div class="two columns subactions interface">
+            <input type="button" name="subButton" id="subButton" value="Submit" class="review button" />
+        </div>
+
+        <div class="three columns downloads interface">
+            <!--<input type="checkbox"><label>label</label>-->
+            <div id="downloadLinkBox">
+               <a href="">Download Excel Report</a>
+            </div>
+            <div id="downloadProgressBox">
+                <div id="downloadSpin"></div><div id="downloadText">Download Link being generated...</div>
             </div>
 
-            <div class="three columns subactions interface">
-                <label for="actionlistlist">Actions List</label>
-                <select name="actionlist"  id="actionlist">
-                        <option selected="selected" value="addtoreview">Add to Review List</option>
-                        <option value="closeabstracts">Close Abstracts</option>
-                        <option value="reopenabstracts">Reopen Abstracts</option>
-                        <option value="exportabstracts">Export Abstracts</option>
-                </select>
-            </div>
-            <div class="two columns subactions interface">
-                <input type="button" name="subButton" id="subButton" value="Submit" class="review button" />
-            </div>
-
-            <div class="three columns downloads interface">
-                <!--<input type="checkbox"><label>label</label>-->
-                <div id="downloadLinkBox">
-                   <a href="">Download Excel Report</a>
-                </div>
-                <div id="downloadProgressBox">
-                    <div id="downloadSpin"></div><div id="downloadText">Download Link being generated...</div>
-                </div>
-
-                <div id="generalProgressBox"><span>processing...</span></div>
-            </div>
+            <div id="generalProgressBox"><span>processing...</span></div>
+        </div>
     </div>
 
     <div class="five columns hidden" id="selectionsBox">
         <span id="recordCount">0</span><span> Records selected</span>
     </div>
 
-    <div id="basicOnly" class="eight columns" style="z-index: 999; float: right; margin-left: 0; margin-right: 0; position: relative; top: 50px;">
-        <input type="checkbox" id="cbBasicOnly"><label style="font-weight: bold">Basic Only</label>
-    </div>
-
+    <%--<div id="basicOnly" class="eight columns" style="z-index: 999; float: right; margin-left: 0; margin-right: 0; position: relative; top: 50px;">--%>
+        <%--<input type="checkbox" id="cbBasicOnly"><label style="font-weight: bold">Basic Only</label>--%>
+    <%--</div>--%>
 
     <script type="text/javascript">
 
