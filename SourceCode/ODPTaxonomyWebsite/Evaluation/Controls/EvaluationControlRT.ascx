@@ -195,17 +195,15 @@
 
             </div>
 
-            <!-- <div class="sixteen columns">
-         <div>
-             <span class="titles">Last Name :</span>
-             <span class="titlevals"><%= lastName %></span>
-         </div>  
-     </div>-->
+  
 
             <div class="sixteen columns">
                 <div>
                     <span class="titles">User ID :</span>
                     <span class="titlevals"><%= userName %></span>
+                    <br>
+             <span class="titles">Type :</span>
+             <span class="titlevals">Regular</span>
                 </div>
 
 
