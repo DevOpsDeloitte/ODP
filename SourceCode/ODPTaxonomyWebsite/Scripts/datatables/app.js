@@ -340,6 +340,8 @@ $(document).ready(function () {
                     case "addreview":
                         $("div#generalProgressBox").show();
 
+                        disableInterface();
+
                         dataObj = compileDataObject("add");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -369,12 +371,16 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to add in review list.");
                             }
+
+                            enableInterface();
                         });
 
                         break;
 
                     case "removereview":
                         $("div#generalProgressBox").show();
+
+                        disableInterface();
 
                         dataObj = compileDataObject("remove");
 
@@ -405,12 +411,16 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to remove from review list.");
                             }
+
+                            enableInterface();
                         });
 
                         break;
 
                     case "closeabstract":
                         $("div#generalProgressBox").show();
+
+                        disableInterface();
 
                         dataObj = compileDataObject("close");
 
@@ -440,6 +450,8 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to close abstracts.");
                             }
+
+                            enableInterface();
                         });
 
 
@@ -447,6 +459,8 @@ $(document).ready(function () {
 
                     case "reopenabstracts":
                         $("div#generalProgressBox").show();
+
+                        disableInterface();
 
                         dataObj = compileDataObject("open");
 
@@ -476,6 +490,8 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to Re-open abstracts.");
                             }
+
+                            enableInterface();
                         });
 
 
@@ -483,6 +499,8 @@ $(document).ready(function () {
 
                     case "exportabstracts":
                         $("div#downloadProgressBox").show();
+
+                        disableInterface();
 
                         dataObj = compileDataObject("");
 
@@ -528,6 +546,8 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to Export abstracts.");
                             }
+
+                            enableInterface();
                         });
 
                         break;
