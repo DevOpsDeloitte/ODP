@@ -67,6 +67,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //System.Diagnostics.Trace.WriteLine("Eval Page Load Start...");
             loadSession();
             setAndrenderPageVars();
+            if (!EvaluationCommon.checkCorrectEvaluation(this.applicationID, Request))
+            {
+                db.Dispose();
+                return;
+            }
             unableCoders = getUnabletoCodeValues();
             renderStudyFocusQuestions();
             renderEntitiesStudiedQuestions();
@@ -77,6 +82,8 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             db.Dispose();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load End...");
         }
+
+
 
         protected void assignTeam()
         {
@@ -184,8 +191,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
         }
 
-        
-
         protected void performSecurityChecks()
         {
             var rec = DBData.getSubmissionRecord(UserId, EvaluationID, SubmissionTypeId);
@@ -202,13 +207,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             {
                 SubmissionID = 0;
             }
-            //SubmissionID = DBData.getSubmissionID(UserId, EvaluationID, SubmissionTypeId);
-            //Response.Write("<br> Submission ID : " + SubmissionID);
+
             if (SubmissionID > 0)
             {
                 //Is definitely view mode
                 DisplayMode = "View";
-                //Response.Write(" Is Coding :: " + DBData.isValidCoderEvaluation(UserId, EvaluationID, SubmissionTypeId).ToString() + " <br> ");
 
             }
             else
@@ -424,7 +427,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
 
             this.CommentsJSON = JsonConvert.SerializeObject(EvaluationComments);
         }
-
 
         // Comment updates for Consensus and Comparision.
         protected void setAndrenderPageVars()

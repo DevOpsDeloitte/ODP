@@ -46,6 +46,33 @@ namespace ODPTaxonomyWebsite.Evaluation
     public class EvaluationCommon
     {
 
+        public static bool checkCorrectEvaluation(string applicationID, HttpRequest Request)
+        {
+            // This is an added security check for B types.
+            if (applicationID.ToLower().Contains("_b"))
+            {
+                if (Request.Url.Segments.Last().ToLower().Contains("b.aspx"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else // Not a B type eval.
+            {
+                if (Request.Url.Segments.Last().ToLower().Contains("b.aspx"))
+                {
+                    return false; // regular evaluations should not land on this page.
+                }
+                else
+                {
+                    return true;
+                }
+            }
+
+        }
 
     }
 }

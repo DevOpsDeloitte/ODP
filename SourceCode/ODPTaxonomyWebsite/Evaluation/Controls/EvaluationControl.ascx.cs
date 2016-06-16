@@ -102,6 +102,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             //System.Diagnostics.Trace.WriteLine("Eval Page Load Start...");
             loadSession();
             setAndrenderPageVars();
+            if (!EvaluationCommon.checkCorrectEvaluation(this.applicationID, Request))
+            {
+                db.Dispose();
+                return;
+            }
             unableCoders = getUnabletoCodeValues();
             renderStudyFocusQuestions();
             renderEntitiesStudiedQuestions();
@@ -112,6 +117,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
             db.Dispose();
             //System.Diagnostics.Trace.WriteLine("Eval Page Load End...");
         }
+
 
         protected void assignTeam()
         {
