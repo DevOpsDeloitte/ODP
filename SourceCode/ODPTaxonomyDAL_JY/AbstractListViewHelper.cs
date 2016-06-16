@@ -1149,7 +1149,7 @@ namespace ODPTaxonomyDAL_JY
                     {
                         return Abstracts.OrderBy(d => d.ApplicationID, new AppIdComparer<string>(false)).ToList();
                     }
-                case "Title":
+                case "ProjectTitle":
                     if (SortDirection == SortDirection.Ascending)
                     {
                         return Abstracts.OrderBy(d => d.ProjectTitle).ToList();
