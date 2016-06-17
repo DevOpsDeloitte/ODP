@@ -11,7 +11,7 @@ namespace ODPTaxonomyDAL_JY
     {
         private DataJYDataContext db;
         private DataJYDataContext db2;
-       
+
         public AbstractListViewData()
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
@@ -36,7 +36,6 @@ namespace ODPTaxonomyDAL_JY
         }
 
         #region All Cached Methods
-
         public IEnumerable<KappaData> getAllKappaRecordsK1K2Only(List<int> AbstractIDs)
         {
             var query = from k in db2.KappaDatas
@@ -98,7 +97,7 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<F_PreventionCategoryAnswer>();
         }
 
- 
+
 
         public IEnumerable<F_PreventionCategoryAnswer> getF_PreventionCategoryRecordsID6(List<int> SubmissionIDs)
         {
@@ -173,7 +172,7 @@ namespace ODPTaxonomyDAL_JY
         public IEnumerable<Submission> getIndividualSubmissionRecords(List<int> EvaluationIDs)
         {
             var query = from k in db2.Submissions
-                            where EvaluationIDs.Contains(k.EvaluationId ?? 0)
+                        where EvaluationIDs.Contains(k.EvaluationId ?? 0)
                         select k;
             return query.ToList<Submission>();
         }
@@ -256,7 +255,7 @@ namespace ODPTaxonomyDAL_JY
 
 
 
- 
+
 
 
         public IEnumerable<int> getSubmissionIds(List<int> EvaluationIds)
@@ -267,7 +266,7 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<int>();
 
         }
-       
+
 
 
 
@@ -282,8 +281,8 @@ namespace ODPTaxonomyDAL_JY
 
 
 
-        
-       
+
+
 
         public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords(List<int> SubmissionIds)
         {

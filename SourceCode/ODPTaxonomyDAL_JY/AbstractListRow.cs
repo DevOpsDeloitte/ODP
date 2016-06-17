@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using System.Reflection;
 
 namespace ODPTaxonomyDAL_JY
 {
@@ -97,7 +98,26 @@ namespace ODPTaxonomyDAL_JY
             this.IsParent = false;
         }
 
+        public object this[string propertyName]
+        {
+            get
+            {
+                // probably faster without reflection:
+                // like:  return Properties.Settings.Default.PropertyValues[propertyName] 
+                // instead of the following
+                Type myType = typeof(AbstractListRow);
+                PropertyInfo myPropInfo = myType.GetProperty(propertyName);
+                return myPropInfo.GetValue(this, null);
+            }
+            set
+            {
+                Type myType = typeof(AbstractListRow);
+                PropertyInfo myPropInfo = myType.GetProperty(propertyName);
+                myPropInfo.SetValue(this, value, null);
 
+            }
+
+        }
 
         public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers, IEnumerable<E_StudyDesignPurposeAnswer_B> cacheE_StudyDesignPurposeAnswer_Bs, IEnumerable<F_PreventionCategoryAnswer_B> cacheF_PreventionCategoryAnswer_Bs, string sentApplicationID)
         {

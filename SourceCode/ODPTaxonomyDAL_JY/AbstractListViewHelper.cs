@@ -927,7 +927,7 @@ namespace ODPTaxonomyDAL_JY
 
             return Abstracts;
         }
-       
+
         public static List<AbstractListRow> SortAbstracts(List<AbstractListRow> Abstracts, string Sort, SortDirection SortDirection)
         {
             switch (Sort)
@@ -970,19 +970,72 @@ namespace ODPTaxonomyDAL_JY
                         Abstracts.OrderBy(a => a.PIProjectLeader).ToList() :
                         Abstracts.OrderByDescending(a => a.PIProjectLeader).ToList();
                 case "Flags":
+                case "A1":
+                case "A2":
+                case "A3":
+                case "A4":
+                case "B":
+                case "C":
+                case "D":
+                case "E":
+                case "F":
+                    AbstractListViewData data = new AbstractListViewData();
+                    var KappaData = data.getAllKappaRecordsK1K2Only(null);
+                    var KappaDataB = data.getAllKappaRecordsBK1K2Only(null);
+                    Abstracts = GetSpecificKappaValue(Abstracts, KappaData.ToList(), KappaDataB.ToList());
+
                     if (SortDirection == SortDirection.Ascending)
                     {
-                        return Abstracts.OrderBy(d => d.Flags).ToList();
+                        return Abstracts.OrderBy(d => d[Sort]).ToList();
                     }
                     else
                     {
-                        return Abstracts.OrderByDescending(d => d.Flags).ToList();
+                        return Abstracts.OrderByDescending(d => d[Sort]).ToList();
                     }
                 default:
                     return Abstracts.OrderByDescending(d => d.StatusDate).ToList();
             }
         }
-        
+
+        private static List<AbstractListRow> GetSpecificKappaValue(List<AbstractListRow> Abstracts, List<KappaData> KappaData, List<KappaData_B> KappaDataB)
+        {
+            IEnumerable<KappaData> data = null;
+            IEnumerable<KappaData_B> dataB = null;
+            List<long> times = new List<long>();
+
+            foreach (var abs in Abstracts)
+            {
+                data = KappaData
+                    .Where(k => k.AbstractID == abs.AbstractID)
+                    .OrderBy(k => k.KappaTypeID)
+                    .ToList();
+
+                if (data != null && abs.CodingType == null)
+                {
+                    if (data.Count() > 0)
+                    {
+                        FillInKappaValue(abs, data, KappaTypeEnum.K1);
+                    }
+                }
+
+                dataB = KappaDataB
+                    .Where(k => k.AbstractID == abs.AbstractID)
+                    .OrderBy(k => k.KappaTypeID)
+                    .ToList();
+
+                if (dataB != null && abs.CodingType != null)
+                {
+                    if (dataB.Count() > 0)
+                    {
+                        FillInKappaValueB(abs, dataB, KappaTypeEnum.K1);
+                    }
+                }
+
+            }
+
+            return Abstracts;
+        }
+
         public static AbstractListRow ConstructNewAbstractListRow(KappaData Kappa, string Title, int AbstractID = 0)
         {
             return new AbstractListRow
@@ -1109,7 +1162,12 @@ namespace ODPTaxonomyDAL_JY
         {
             try
             {
-                return ((decimal)(inVal)).ToString(KappaSpecifier);
+                if (inVal.HasValue)
+                {
+                    return inVal.Value.ToString(KappaSpecifier);
+                }
+
+                return "\u2014";
             }
             catch
             {
