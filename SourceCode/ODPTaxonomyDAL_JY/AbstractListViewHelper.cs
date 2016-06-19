@@ -965,10 +965,20 @@ namespace ODPTaxonomyDAL_JY
                     {
                         return Abstracts.OrderByDescending(d => d.StatusDate).ToList();
                     }
+                case "LastExportDate":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.LastExportDate).ToList();
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.LastExportDate).ToList();
+                    }
                 case "PIProjectLeader":
                     return SortDirection == SortDirection.Ascending ?
                         Abstracts.OrderBy(a => a.PIProjectLeader).ToList() :
                         Abstracts.OrderByDescending(a => a.PIProjectLeader).ToList();
+
                 case "Flags":
                 case "A1":
                 case "A2":
