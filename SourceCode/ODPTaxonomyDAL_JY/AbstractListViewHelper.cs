@@ -12,7 +12,7 @@ namespace ODPTaxonomyDAL_JY
 {
     public static class AbstractListViewHelper
     {
-        private static string KappaSpecifier = "f";
+        private static string KappaSpecifier = "#0.00";
 
         public static bool UserCanView(AbstractViewRole View)
         {
@@ -1174,7 +1174,7 @@ namespace ODPTaxonomyDAL_JY
             {
                 if (inVal.HasValue)
                 {
-                    return inVal.Value.ToString(KappaSpecifier);
+                    return ((decimal)inVal.Value).ToString(KappaSpecifier);
                 }
 
                 return "\u2014";
