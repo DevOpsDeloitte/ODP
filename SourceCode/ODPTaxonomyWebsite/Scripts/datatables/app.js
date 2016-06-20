@@ -724,7 +724,7 @@ $(document).ready(function () {
         var cacheFound = false;
         var url = 'Handlers/AbstractDetail.ashx';
         var type = 'GET';
-        var data = { role: config.role, 'abstractId': abstractId };
+        var data = { 'abstractId': abstractId };
 
         row.child(loadChildContainer(abstractId)).show();
 
