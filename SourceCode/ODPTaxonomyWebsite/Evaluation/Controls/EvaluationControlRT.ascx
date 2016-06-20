@@ -201,9 +201,9 @@
                 <div>
                     <span class="titles">User ID :</span>
                     <span class="titlevals"><%= userName %></span>
-                    <br>
+                   <%-- <br>
              <span class="titles">Type :</span>
-             <span class="titlevals">Regular</span>
+             <span class="titlevals">Regular</span>--%>
                 </div>
 
 

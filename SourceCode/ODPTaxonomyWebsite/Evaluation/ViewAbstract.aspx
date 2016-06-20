@@ -94,7 +94,7 @@
         <p><strong>PI Project Leader:</strong> <span runat="server" id="PIProjectLeader"></span></p>
         <p><strong>FY:</strong> <span runat="server" id="FY"></span></p>
         <p><strong>Project Number:</strong> <span runat="server" id="ProjectNumber"></span></p>
-        <p><strong>Type :</strong> <span runat="server" id="CodingTypeLabel"></span></p>
+        <%--<p><strong>Type :</strong> --%><span runat="server" id="CodingTypeLabel"></span><%--</p>--%>
         <p><span class="highlight">Abstract Description:</span><br /> <span runat="server" id="AbstractDescPart"></span></p>
         <p><span class="highlight">Public Health Relevance:</span><br /> <span runat="server" id="AbstractPublicHeathPart"></span></p>
          
