@@ -12,6 +12,7 @@ $(document).ready(function () {
     $opts.allSelected = false;
     $opts.selectedItems = [];
     $opts.unselectedItems = [];
+    $opts.generatingExportLink = false;
 
     // NOTE (TR):
     // This is temporary until I determine if the datatable caches the children or
@@ -440,6 +441,7 @@ $(document).ready(function () {
                             console.log(" reopenabstract - data : " + data);
 
                             $("div#generalProgressBox").hide();
+
                             if (data.success == true) {
                                 var num = null;
 
@@ -470,8 +472,13 @@ $(document).ready(function () {
                     case "exportabstracts":
                         dataObj = compileDataObject("");
 
+                        $opts.generatingExportLink = true;
+
                         util.ajaxCall("/Evaluation/Handlers/AbstractExport.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
-                            console.log(" reopen abstract - data : " + data);
+                            console.log(" reopen abstract - data : ", data);
+
+                            $("div#generalProgressBox").hide();
+                            $("div#downloadProgressBox").show();
 
                             if (data.success == true) {
                                 var num = null;
@@ -490,9 +497,13 @@ $(document).ready(function () {
                                     console.log(" generate excel report .ashx - data : " + data);
 
                                     if (data.success == true) {
+                                        $opts.generatingExportLink = false;
+
                                         $("div#downloadProgressBox").hide();
                                         $("div#downloadLinkBox a").attr("href", data.filePath);
                                         $("div#downloadLinkBox").show();
+
+                                        enableInterface();
                                     }
                                 });
 
@@ -538,10 +549,11 @@ $(document).ready(function () {
     }
 
     function setupPageEvents() {
-        console.log('setupPageEvents() ::');
         $("select#filterlist").change(function () {
+            console.log('filterlist changed');
+
             var str = "";
-            //disableFilters();
+
             disableInterface();
 
             $("select#filterlist option:selected").each(function () {
@@ -557,12 +569,16 @@ $(document).ready(function () {
 
             changeFilters();
 
+            $("div#downloadLinkBox a").attr("href", '');
             $("div#downloadLinkBox").hide();
         });
 
         // Select Action List Event
         $("select#actionlist").change(function () {
             console.log('actionlist changed');
+
+            $("div#downloadLinkBox a").attr("href", '');
+            $("div#downloadLinkBox").hide();
 
             $opts.allSelected = false;
             $opts.selectedItems = [];
@@ -1102,24 +1118,32 @@ $(document).ready(function () {
         $("select#filterlist").attr("disabled", true);
         $("select#actionlist").attr("disabled", true);
 
-        $("#submitSection").hide();
+        $("#submitLinkBox").hide();
 
         hideBasicCB(true);
 
         $("input").attr("disabled", true);
+
+        $("div#downloadLinkBox").hide();
     }
 
     function enableInterface() {
         console.log('enableInterface() ::');
 
-        $("select#filterlist").attr("disabled", false);
-        $("select#actionlist").attr("disabled", false);
+        if(!$opts.generatingExportLink) {
+            $("select#filterlist").attr("disabled", false);
+            $("select#actionlist").attr("disabled", false);
 
-        $("#submitSection").show();
+            $("#submitLinkBox").show();
 
-        hideBasicCB(false);
+            hideBasicCB(false);
 
-        $("input").attr("disabled", false);
+            $("input").attr("disabled", false);
+        }
+
+        if($("div#downloadLinkBox a").attr("href")) {
+            $("div#downloadLinkBox").show();
+        }
     }
 
     function hideBasicCB(mode) {
@@ -1495,7 +1519,6 @@ $(document).ready(function () {
         console.log("invoking InitializeTable() :: ");
 
         $("div.progressBar").show();
-        //$("submitSection").hide();
 
         hideBasicCB(true);
 
