@@ -89,11 +89,12 @@ $(document).ready(function () {
                 }
 
             } else {
+                disableInterface();
+
                 $("#DTable_paginate").hide();
                 $("#DTable_info").hide();
                 $("#DTable").hide();
                 $("#tableContainer").hide();
-
             }
         });
 
@@ -208,6 +209,8 @@ $(document).ready(function () {
 
         // logic to select and unselect checkboxes
         $("body").on("click", "table.dataTable td input[type=checkbox]", function (evt) {
+            console.log('clicked checkbox');
+
             var absid = $(this).parent().parent().find("td.abstractid").html();
             var rowIndex = table.row($(this).parent().parent()).index();
             var row = $(this).parents('tr');
@@ -252,15 +255,14 @@ $(document).ready(function () {
             if ($(this).hasClass("yes")) {
                 console.log("submit button click enabled ::");
 
+                disableInterface();
+                $("div#generalProgressBox").show();
+
                 $(this).addClass("no").removeClass("yes");
 
                 switch ($opts.actionlist) {
 
                     case "addreportexclude":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("add");
 
                         util.ajaxCall("/Evaluation/Handlers/ReportExclude.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -290,18 +292,12 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to add in report exclude list.");
                             }
-
-                            enableInterface();
                         });
 
 
                         break;
 
                     case "removereportexclude":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("remove");
 
                         util.ajaxCall("/Evaluation/Handlers/ReportExclude.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -331,17 +327,11 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to remove from report exclude list.");
                             }
-
-                            enableInterface();
                         });
 
                         break;
 
                     case "addreview":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("add");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -371,17 +361,11 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to add in review list.");
                             }
-
-                            enableInterface();
                         });
 
                         break;
 
                     case "removereview":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("remove");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -411,17 +395,11 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to remove from review list.");
                             }
-
-                            enableInterface();
                         });
 
                         break;
 
                     case "closeabstract":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("close");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractClose.ashx", "GET", dataObj, function(data, textStatus, jqXHR) {
@@ -450,18 +428,12 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to close abstracts.");
                             }
-
-                            enableInterface();
                         });
 
 
                         break;
 
                     case "reopenabstracts":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("open");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractClose.ashx", "GET", dataObj, function(data, textStatus, jqXHR) {
@@ -490,18 +462,12 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to Re-open abstracts.");
                             }
-
-                            enableInterface();
                         });
 
 
                         break;
 
                     case "exportabstracts":
-                        $("div#downloadProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractExport.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -546,8 +512,6 @@ $(document).ready(function () {
                             } else {
                                 alertify.error("Failed to Export abstracts.");
                             }
-
-                            enableInterface();
                         });
 
                         break;
@@ -754,6 +718,7 @@ $(document).ready(function () {
 
     function progressBarReset() {
         console.log('progressBarReset() ::');
+
         $("div.progressBar div.meter.animate").empty().append('<span style="width: 100%"><span></span></span>');
 
         setTimeout(function () {
@@ -766,6 +731,8 @@ $(document).ready(function () {
                     }, 30000);
             });
         }, 0);
+
+        enableInterface();
     }
 
     function loadFilters() {
@@ -1130,8 +1097,12 @@ $(document).ready(function () {
     }
 
     function disableInterface() {
+        console.log('disableInterface() ::');
+
         $("select#filterlist").attr("disabled", true);
         $("select#actionlist").attr("disabled", true);
+
+        $("#submitSection").hide();
 
         hideBasicCB(true);
 
@@ -1139,8 +1110,12 @@ $(document).ready(function () {
     }
 
     function enableInterface() {
+        console.log('enableInterface() ::');
+
         $("select#filterlist").attr("disabled", false);
         $("select#actionlist").attr("disabled", false);
+
+        $("#submitSection").show();
 
         hideBasicCB(false);
 
@@ -1169,6 +1144,7 @@ $(document).ready(function () {
     // called on change of filter and action ::
     function clearSubmitBtnAndCheckboxes() {
         console.log('clearSubmitBtnAndCheckboxes() :: ');
+
         $opts.selectedItems = [];
         $opts.hiderowItems = [];
         $opts.selectedItemChildrenCache = [];
@@ -1519,6 +1495,7 @@ $(document).ready(function () {
         console.log("invoking InitializeTable() :: ");
 
         $("div.progressBar").show();
+        //$("submitSection").hide();
 
         hideBasicCB(true);
 
@@ -1718,6 +1695,8 @@ console.log('table: ', table);
         var downloadSpin = document.getElementById('downloadSpin');             // NOTE (TR): Obsolete ???
         var spinner = new Spinner(spinneropts).spin(target);                    // NOTE (TR): Obsolete ???
         var spinnerdownloadSpin = new Spinner(spinneropts2).spin(downloadSpin); // NOTE (TR): Obsolete ???
+
+        disableInterface();
 
         hideBasicCB(true);
 

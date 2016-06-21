@@ -8,7 +8,7 @@ div.downloads { display: none }
 div#downloadLinkBox { display: none; margin-top: 24px; }
 div#downloadProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; padding-top: 0px; position: relative; /*display: block;; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; animation: ccolor 2s infinite; */ }
 div#downloadProgressBox div#downloadSpin { position: absolute; top: 20px; left: 0px; }
-div#downloadProgressBox div#downloadText { -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; position: absolute; top: 0px; left: 25px; }
+div#downloadProgressBox div#downloadText { width: 120px; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; position: absolute; top: 0px; left: 25px; }
 
 div#generalProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; padding-top: 0px; position: relative; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; }
 
@@ -149,10 +149,10 @@ div#DTable_info { /*display: none !important; */}
 }
 
 #basicOnly {
-    z-index: 999;
-    float: left;
-    margin-left: 36%;
+    /*z-index: 999;*/
+    /*float: left;*/
+    /*margin-left: 36%;*/
     position: relative;
-    top: 45px;
+    top: 26px;
     display: inline;
 }
