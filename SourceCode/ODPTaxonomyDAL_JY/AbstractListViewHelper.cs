@@ -1156,8 +1156,8 @@ namespace ODPTaxonomyDAL_JY
                     Abstract.A3 = "\u2014";
                     Abstract.A4 = convertKappa(Kappa.A4);
                     Abstract.B = convertKappa(Kappa.B);
-                    Abstract.C = convertKappa(Kappa.C);
-                    Abstract.D = convertKappa(Kappa.D);
+                    Abstract.C = "\u2014";
+                    Abstract.D = "\u2014";
                     Abstract.E = convertKappa(Kappa.E);
                     Abstract.F = convertKappa(Kappa.F);
 
