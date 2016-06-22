@@ -36,3 +36,5 @@ height:100%; }
 }
 
 .login-display { color: #fff; display: inline-block; top: 16px; right: 143px; position:absolute; }
+.opener { display: none; }
+.category-toggle{ transition: all .3s ease; cursor: pointer; }
