@@ -176,6 +176,7 @@ div#informationalSection {
 div#submitLinkBox {
     z-index: 999;
     margin-right: 10px;
+    display: none;
 }
 
 #filterlist {

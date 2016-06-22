@@ -73,7 +73,7 @@ $(document).ready(function () {
 
                 $("div#tableContainer").show();
 
-                showActionsInterface();
+                //showActionsInterface();   // NOTE (TR): This and the code below makes no sense.
 
                 switch (config.role) {
 
@@ -84,7 +84,9 @@ $(document).ready(function () {
 
                     case "ODPSupervisor":
                         showActionsInterface();
+
                         showSubActionsInterface();
+
                         break;
 
                 }
@@ -1101,7 +1103,9 @@ $(document).ready(function () {
             $("select#filterlist").attr("disabled", false);
             $("select#actionlist").attr("disabled", false);
 
-            $("#submitLinkBox").show();
+            if(config.role == "ODPSupervisor") {
+                $("#submitLinkBox").show();
+            }
 
             hideBasicCB(false);
 
