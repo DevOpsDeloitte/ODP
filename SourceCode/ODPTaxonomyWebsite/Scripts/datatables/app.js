@@ -12,6 +12,7 @@ $(document).ready(function () {
     $opts.allSelected = false;
     $opts.selectedItems = [];
     $opts.unselectedItems = [];
+    $opts.generatingExportLink = false;
 
     // NOTE (TR):
     // This is temporary until I determine if the datatable caches the children or
@@ -89,11 +90,12 @@ $(document).ready(function () {
                 }
 
             } else {
+                disableInterface();
+
                 $("#DTable_paginate").hide();
                 $("#DTable_info").hide();
                 $("#DTable").hide();
                 $("#tableContainer").hide();
-
             }
         });
 
@@ -160,22 +162,6 @@ $(document).ready(function () {
         $("#cbBasicOnly").on("click", function (evt) {
             console.log($('#cbBasicOnly').is(":checked"));
 
-            var isCheckedBasicOnly = $('#cbBasicOnly').is(":checked");
-
-            if(isCheckedBasicOnly) {
-                $opts.codingType = 'basic';
-            } else {
-                $opts.codingType = 'all';
-            }
-
-            $opts.pageNumber = 0;
-
-            if (config.role == "ODPSupervisor") {
-                window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
-            } else {
-                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
-            }
-
             watchBasicOnlyHandler();
         });
 
@@ -208,6 +194,8 @@ $(document).ready(function () {
 
         // logic to select and unselect checkboxes
         $("body").on("click", "table.dataTable td input[type=checkbox]", function (evt) {
+            console.log('clicked checkbox');
+
             var absid = $(this).parent().parent().find("td.abstractid").html();
             var rowIndex = table.row($(this).parent().parent()).index();
             var row = $(this).parents('tr');
@@ -252,15 +240,14 @@ $(document).ready(function () {
             if ($(this).hasClass("yes")) {
                 console.log("submit button click enabled ::");
 
+                disableInterface();
+                $("div#generalProgressBox").show();
+
                 $(this).addClass("no").removeClass("yes");
 
                 switch ($opts.actionlist) {
 
                     case "addreportexclude":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("add");
 
                         util.ajaxCall("/Evaluation/Handlers/ReportExclude.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -283,25 +270,17 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to add in report exclude list.");
                             }
-
-                            enableInterface();
                         });
 
 
                         break;
 
                     case "removereportexclude":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("remove");
 
                         util.ajaxCall("/Evaluation/Handlers/ReportExclude.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -324,24 +303,16 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to remove from report exclude list.");
                             }
-
-                            enableInterface();
                         });
 
                         break;
 
                     case "addreview":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("add");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -364,24 +335,16 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to add in review list.");
                             }
-
-                            enableInterface();
                         });
 
                         break;
 
                     case "removereview":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("remove");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
@@ -404,24 +367,16 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to remove from review list.");
                             }
-
-                            enableInterface();
                         });
 
                         break;
 
                     case "closeabstract":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("close");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractClose.ashx", "GET", dataObj, function(data, textStatus, jqXHR) {
@@ -443,31 +398,24 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to close abstracts.");
                             }
-
-                            enableInterface();
                         });
 
 
                         break;
 
                     case "reopenabstracts":
-                        $("div#generalProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("open");
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractClose.ashx", "GET", dataObj, function(data, textStatus, jqXHR) {
                             console.log(" reopenabstract - data : " + data);
 
                             $("div#generalProgressBox").hide();
+
                             if (data.success == true) {
                                 var num = null;
 
@@ -483,29 +431,26 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to Re-open abstracts.");
                             }
-
-                            enableInterface();
                         });
 
 
                         break;
 
                     case "exportabstracts":
-                        $("div#downloadProgressBox").show();
-
-                        disableInterface();
-
                         dataObj = compileDataObject("");
 
+                        $opts.generatingExportLink = true;
+
                         util.ajaxCall("/Evaluation/Handlers/AbstractExport.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
-                            console.log(" reopen abstract - data : " + data);
+                            console.log(" reopen abstract - data : ", data);
+
+                            $("div#generalProgressBox").hide();
+                            $("div#downloadProgressBox").show();
 
                             if (data.success == true) {
                                 var num = null;
@@ -524,9 +469,13 @@ $(document).ready(function () {
                                     console.log(" generate excel report .ashx - data : " + data);
 
                                     if (data.success == true) {
+                                        $opts.generatingExportLink = false;
+
                                         $("div#downloadProgressBox").hide();
                                         $("div#downloadLinkBox a").attr("href", data.filePath);
                                         $("div#downloadLinkBox").show();
+
+                                        enableInterface();
                                     }
                                 });
 
@@ -539,15 +488,11 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to Export abstracts.");
                             }
-
-                            enableInterface();
                         });
 
                         break;
@@ -574,10 +519,11 @@ $(document).ready(function () {
     }
 
     function setupPageEvents() {
-        console.log('setupPageEvents() ::');
         $("select#filterlist").change(function () {
+            console.log('filterlist changed');
+
             var str = "";
-            //disableFilters();
+
             disableInterface();
 
             $("select#filterlist option:selected").each(function () {
@@ -593,6 +539,7 @@ $(document).ready(function () {
 
             changeFilters();
 
+            $("div#downloadLinkBox a").attr("href", '');
             $("div#downloadLinkBox").hide();
         });
 
@@ -600,10 +547,10 @@ $(document).ready(function () {
         $("select#actionlist").change(function () {
             console.log('actionlist changed');
 
-            $opts.allSelected = false;
-            $opts.selectedItems = [];
-            $opts.unselectedItems = [];
-            $opts.totalRecordsSelected = null;
+            $("div#downloadLinkBox a").attr("href", '');
+            $("div#downloadLinkBox").hide();
+
+            resetSelections();
 
             $("select#actionlist option:selected").each(function () {
                 $opts.actionlist = $(this).val();
@@ -754,6 +701,7 @@ $(document).ready(function () {
 
     function progressBarReset() {
         console.log('progressBarReset() ::');
+
         $("div.progressBar div.meter.animate").empty().append('<span style="width: 100%"><span></span></span>');
 
         setTimeout(function () {
@@ -766,6 +714,8 @@ $(document).ready(function () {
                     }, 30000);
             });
         }, 0);
+
+        enableInterface();
     }
 
     function loadFilters() {
@@ -1130,21 +1080,37 @@ $(document).ready(function () {
     }
 
     function disableInterface() {
+        console.log('disableInterface() ::');
+
         $("select#filterlist").attr("disabled", true);
         $("select#actionlist").attr("disabled", true);
+
+        $("#submitLinkBox").hide();
 
         hideBasicCB(true);
 
         $("input").attr("disabled", true);
+
+        $("div#downloadLinkBox").hide();
     }
 
     function enableInterface() {
-        $("select#filterlist").attr("disabled", false);
-        $("select#actionlist").attr("disabled", false);
+        console.log('enableInterface() ::');
 
-        hideBasicCB(false);
+        if(!$opts.generatingExportLink) {
+            $("select#filterlist").attr("disabled", false);
+            $("select#actionlist").attr("disabled", false);
 
-        $("input").attr("disabled", false);
+            $("#submitLinkBox").show();
+
+            hideBasicCB(false);
+
+            $("input").attr("disabled", false);
+        }
+
+        if($("div#downloadLinkBox a").attr("href")) {
+            $("div#downloadLinkBox").show();
+        }
     }
 
     function hideBasicCB(mode) {
@@ -1169,6 +1135,7 @@ $(document).ready(function () {
     // called on change of filter and action ::
     function clearSubmitBtnAndCheckboxes() {
         console.log('clearSubmitBtnAndCheckboxes() :: ');
+
         $opts.selectedItems = [];
         $opts.hiderowItems = [];
         $opts.selectedItemChildrenCache = [];
@@ -1192,6 +1159,13 @@ $(document).ready(function () {
         clearSubmitBtnAndCheckboxes();
 
         return;
+    }
+
+    function resetSelections() {
+        $opts.allSelected = false;
+        $opts.selectedItems = [];
+        $opts.unselectedItems = [];
+        $opts.totalRecordsSelected = null;
     }
 
     function updateRecordsSelectedText() {
@@ -1272,9 +1246,29 @@ $(document).ready(function () {
     function watchBasicOnlyHandler() {
         console.log('watchBasicOnlyHandler() :: ' + $opts.codingType);
 
+        var isCheckedBasicOnly = $('#cbBasicOnly').is(":checked");
+
+        if(isCheckedBasicOnly) {
+            $opts.codingType = 'basic';
+        } else {
+            $opts.codingType = 'all';
+        }
+
+        $opts.pageNumber = 0;
+
+        if (config.role == "ODPSupervisor") {
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+        } else {
+            window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+        }
+
         $("div#downloadLinkBox").hide();
 
         changeFilters();
+
+        turnOffSelectAll();
+
+        resetSelections();
     }
 
     function watchActionsHandler() {
@@ -1718,6 +1712,8 @@ console.log('table: ', table);
         var downloadSpin = document.getElementById('downloadSpin');             // NOTE (TR): Obsolete ???
         var spinner = new Spinner(spinneropts).spin(target);                    // NOTE (TR): Obsolete ???
         var spinnerdownloadSpin = new Spinner(spinneropts2).spin(downloadSpin); // NOTE (TR): Obsolete ???
+
+        disableInterface();
 
         hideBasicCB(true);
 

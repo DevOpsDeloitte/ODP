@@ -5,10 +5,10 @@ select[name='DTable_length'] { /*width: 69px;; float: left; height: 25; vertical
 table.childtable { -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.0); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.0);}
 table#DTable td.child { border-left: 0px }
 div.downloads { display: none }
-div#downloadLinkBox { display: none; margin-top: 24px; }
+div#downloadLinkBox { z-index: 999; display: none; margin-top: 24px; }
 div#downloadProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; padding-top: 0px; position: relative; /*display: block;; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; animation: ccolor 2s infinite; */ }
 div#downloadProgressBox div#downloadSpin { position: absolute; top: 20px; left: 0px; }
-div#downloadProgressBox div#downloadText { -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; position: absolute; top: 0px; left: 25px; }
+div#downloadProgressBox div#downloadText { width: 120px; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; position: absolute; top: 0px; left: 25px; }
 
 div#generalProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; padding-top: 0px; position: relative; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; }
 
@@ -61,7 +61,15 @@ table.dataTable tbody tr.hide { display: none }
 table.dataTable tbody tr.show { display: table-row }
 div.scan-file { top : -4px; right: -4px; }
 div.has-file a { padding-right: 25px; display: block; }
-div#spinner { width: 50px; height: 50px; position: relative; float: left; }
+div#spinner {
+    height: 50px;
+    float: left;
+    position: absolute;
+    width: 0px;
+    z-index: 2000000000;
+    left: 0px;
+    top: 0px;
+}
 div#tableContainer { display: none }
 div.filterBoxes.hide { display: none }
 #subButton { margin: 0; margin-top: 18px; }
@@ -148,11 +156,32 @@ div#DTable_info { /*display: none !important; */}
 
 }
 
-#basicOnly {
-    z-index: 999;
-    float: left;
-    margin-left: 36%;
+div#basicOnly {
     position: relative;
-    top: 45px;
+    top: 26px;
     display: inline;
+}
+
+.bold {
+    font-weight: bold
+}
+
+div#informationalSection {
+    display: inline-flex;
+    position: absolute;
+    top: 115px;
+    left: 50%;
+}
+
+div#submitLinkBox {
+    z-index: 999;
+    margin-right: 10px;
+}
+
+#filterlist {
+    width:240px;
+}
+
+div#action-list {
+    display: block;
 }
