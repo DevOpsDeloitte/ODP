@@ -288,22 +288,22 @@
 
                     <table class="bordered zebra-striped" id="study-design-purpose">
                         <%--            <caption>E. Study Design/Purpose</caption>--%>
-                        <div class="captionTitle">E. Study Design/Purpose</div>
+                        <div id="sdp" class="captionTitle category-toggle">E. Study Design/Purpose</div>
                         <div class="icon open" ng-click="showDescription('studydesignpurpose-0')"></div>
                         <thead>
                         </thead>
-                        <tbody>
+                        <tbody class="opener opener-sdp hide-b">
                             <% = studyDesignPurposeQuestions %>
                         </tbody>
                     </table>
 
                     <table class="bordered zebra-striped" id="prevention-research-category">
                         <%--            <caption>F. Prevention Research Category</caption>--%>
-                        <div class="captionTitle">F. Prevention Research Category</div>
+                        <div id="prc" class="captionTitle category-toggle">F. Prevention Research Category</div>
                         <div class="icon open" ng-click="showDescription('preventioncategory-0')"></div>
                         <thead>
                         </thead>
-                        <tbody>
+                        <tbody class="opener opener-prc hide-b">
                             <% = preventionCategoryQuestions %>
                         </tbody>
                     </table>
