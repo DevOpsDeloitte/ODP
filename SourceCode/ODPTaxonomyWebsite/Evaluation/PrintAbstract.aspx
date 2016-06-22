@@ -13,7 +13,7 @@
          margin: 8px 0px 0px 0px;
      }
 
-     .Regular {
+     .Regular, .hide {
          display: none !important;
      }
     
@@ -30,7 +30,7 @@
             <span class="printValue"><%= System.DateTime.Now.ToString("MM/dd/yyyy") %></span>
         </div>
 
-         <div class="five columns <%= codingType %>"><!-- being controlled by CSS -->
+         <div class="five columns <%= codingType %> hide"><!-- being controlled by CSS -->
         <span class="printTitle">Coding Type : </span>
         <span class="printValue"><%= codingType %></span>
     </div>

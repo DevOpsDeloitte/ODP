@@ -12,7 +12,7 @@ namespace ODPTaxonomyDAL_JY
 {
     public static class AbstractListViewHelper
     {
-        private static string KappaSpecifier = "f";
+        private static string KappaSpecifier = "#0.00";
 
         public static bool UserCanView(AbstractViewRole View)
         {
@@ -1075,8 +1075,8 @@ namespace ODPTaxonomyDAL_JY
                 A3 = "\u2014",
                 A4 = convertKappa(Kappa.A4),
                 B = convertKappa(Kappa.B),
-                C = convertKappa(Kappa.C),
-                D = convertKappa(Kappa.D),
+                C = "\u2014",
+                D = "\u2014",
                 E = convertKappa(Kappa.E),
                 F = convertKappa(Kappa.F)
             };
@@ -1095,8 +1095,8 @@ namespace ODPTaxonomyDAL_JY
                     A3 = "\u2014",
                     A4 = convertKappa(KappaB.A4),
                     B = convertKappa(KappaB.B),
-                    C = convertKappa(KappaB.C),
-                    D = convertKappa(KappaB.D),
+                    C = "\u2014",
+                    D = "\u2014",
                     E = convertKappa(KappaB.E),
                     F = convertKappa(KappaB.F)
                 };
@@ -1156,8 +1156,8 @@ namespace ODPTaxonomyDAL_JY
                     Abstract.A3 = "\u2014";
                     Abstract.A4 = convertKappa(Kappa.A4);
                     Abstract.B = convertKappa(Kappa.B);
-                    Abstract.C = convertKappa(Kappa.C);
-                    Abstract.D = convertKappa(Kappa.D);
+                    Abstract.C = "\u2014";
+                    Abstract.D = "\u2014";
                     Abstract.E = convertKappa(Kappa.E);
                     Abstract.F = convertKappa(Kappa.F);
 
@@ -1174,7 +1174,7 @@ namespace ODPTaxonomyDAL_JY
             {
                 if (inVal.HasValue)
                 {
-                    return inVal.Value.ToString(KappaSpecifier);
+                    return ((decimal)inVal.Value).ToString(KappaSpecifier);
                 }
 
                 return "\u2014";
