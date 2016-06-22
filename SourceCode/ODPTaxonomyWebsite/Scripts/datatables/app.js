@@ -162,22 +162,6 @@ $(document).ready(function () {
         $("#cbBasicOnly").on("click", function (evt) {
             console.log($('#cbBasicOnly').is(":checked"));
 
-            var isCheckedBasicOnly = $('#cbBasicOnly').is(":checked");
-
-            if(isCheckedBasicOnly) {
-                $opts.codingType = 'basic';
-            } else {
-                $opts.codingType = 'all';
-            }
-
-            $opts.pageNumber = 0;
-
-            if (config.role == "ODPSupervisor") {
-                window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
-            } else {
-                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
-            }
-
             watchBasicOnlyHandler();
         });
 
@@ -1272,9 +1256,32 @@ $(document).ready(function () {
     function watchBasicOnlyHandler() {
         console.log('watchBasicOnlyHandler() :: ' + $opts.codingType);
 
+        var isCheckedBasicOnly = $('#cbBasicOnly').is(":checked");
+
+        if(isCheckedBasicOnly) {
+            $opts.codingType = 'basic';
+        } else {
+            $opts.codingType = 'all';
+        }
+
+        $opts.pageNumber = 0;
+
+        if (config.role == "ODPSupervisor") {
+            window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+        } else {
+            window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+        }
+
         $("div#downloadLinkBox").hide();
 
         changeFilters();
+
+        turnOffSelectAll();
+
+        $opts.allSelected = false;
+        $opts.selectedItems = [];
+        $opts.unselectedItems = [];
+        $opts.totalRecordsSelected = null;
     }
 
     function watchActionsHandler() {
