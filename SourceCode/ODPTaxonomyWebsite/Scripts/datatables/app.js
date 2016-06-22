@@ -270,10 +270,8 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to add in report exclude list.");
                             }
@@ -305,10 +303,8 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to remove from report exclude list.");
                             }
@@ -339,10 +335,8 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to add in review list.");
                             }
@@ -373,10 +367,8 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to remove from review list.");
                             }
@@ -406,10 +398,8 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to close abstracts.");
                             }
@@ -441,10 +431,8 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to Re-open abstracts.");
                             }
@@ -500,10 +488,8 @@ $(document).ready(function () {
                                 loadFilters();
 
                                 $opts.isGridDirty = true;
-                                $opts.allSelected = false;
-                                $opts.selectedItems = [];
-                                $opts.unselectedItems = [];
-                                $opts.totalRecordsSelected = null;
+
+                                resetSelections();
                             } else {
                                 alertify.error("Failed to Export abstracts.");
                             }
@@ -564,10 +550,7 @@ $(document).ready(function () {
             $("div#downloadLinkBox a").attr("href", '');
             $("div#downloadLinkBox").hide();
 
-            $opts.allSelected = false;
-            $opts.selectedItems = [];
-            $opts.unselectedItems = [];
-            $opts.totalRecordsSelected = null;
+            resetSelections();
 
             $("select#actionlist option:selected").each(function () {
                 $opts.actionlist = $(this).val();
@@ -1178,6 +1161,13 @@ $(document).ready(function () {
         return;
     }
 
+    function resetSelections() {
+        $opts.allSelected = false;
+        $opts.selectedItems = [];
+        $opts.unselectedItems = [];
+        $opts.totalRecordsSelected = null;
+    }
+
     function updateRecordsSelectedText() {
         if(!$opts.allSelected) {
             $("span#recordCount").text($opts.selectedItems.length);
@@ -1278,10 +1268,7 @@ $(document).ready(function () {
 
         turnOffSelectAll();
 
-        $opts.allSelected = false;
-        $opts.selectedItems = [];
-        $opts.unselectedItems = [];
-        $opts.totalRecordsSelected = null;
+        resetSelections();
     }
 
     function watchActionsHandler() {
