@@ -174,8 +174,10 @@ div#action-list {
     table.dataTable, #pagetitlebox { margin-left: 0px; }
     div#filtersContainer { position: relative; top: auto; left: auto; right: auto; }
     div#filtersContainer .button { padding: 5px 12px; }
-    div#selectionsBox { top: 115px; right: 0; }
+    div#selectionsBox { top: 96px; right: 0; }
     div#informationalSection { top: 155px; left: 20% }
+
+    div#downloadProgressBox { margin-top: 47px; }
 
     .filter-wrap { display: block; position: absolute; right: 0; top: -50px; z-index: 99; }
     .length-wrap { display: block; position: absolute; right: 180px; top: -50px;  z-index: 99; }
