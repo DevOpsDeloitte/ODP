@@ -21,7 +21,7 @@
             <select name="actionlist" id="actionlist"><option selected="selected" value="selectaction">Select Action</option><option value="addreview">Add to Review List</option><option value="closeabstract">Close Abstracts</option><option value="addreportexclude">Add Report Exclude</option></select>
         </div>
 
-        <div id="basicOnly" class="two columns">
+        <div id="basicOnly" class="three columns">
             <input type="checkbox" id="cbBasicOnly"><label class="bold">Basic Only</label>
         </div>
 
