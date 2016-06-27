@@ -192,6 +192,6 @@ div#action-list {
 
 /* iPad Landscape */
 @media screen and (min-device-width: 481px) and (orientation:landscape) {
-    div#informationalSection { width: 260px; top: 156px; left: 21% }
+    div#informationalSection { width: 260px; top: 140px; left: 21% }
 }
 
