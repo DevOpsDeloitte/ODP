@@ -190,8 +190,11 @@ div#action-list {
     .length-wrap { display: block; position: absolute; right: auto; left: 10px; top: 5px; }
 }
 
-/* iPad Landscape */
-@media screen and (min-device-width: 481px) and (orientation:landscape) {
-    div#informationalSection { width: 260px; top: 140px; left: 21% }
+/* iPad Portrait and Landscape */
+@media only screen
+    and (min-device-width: 768px)
+    and (max-device-width: 1024px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+        div#informationalSection { width: 260px; top: 145px; left: 21% }
 }
 
