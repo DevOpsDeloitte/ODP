@@ -94,6 +94,7 @@
                     <th class="col_kappa">D</th>
                     <th class="col_kappa">E</th>
                     <th class="col_kappa">F</th>
+                    <th class="col_kappa">G</th>
                     <th class="col_exportdate">Exported Date</th>
 
                 </tr>

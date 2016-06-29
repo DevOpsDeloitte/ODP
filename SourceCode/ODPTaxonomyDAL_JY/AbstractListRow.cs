@@ -140,8 +140,7 @@ namespace ODPTaxonomyDAL_JY
                 this.Comment = query.Comment;
 
                 if (!sentApplicationID.Contains("_B"))
-                {
-
+                {                 
                     this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
                         .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
                         .Count() > 0;
@@ -151,6 +150,7 @@ namespace ODPTaxonomyDAL_JY
                 }
                 else
                 {
+                    this.G = query.UnableToCode ? "NB" : "";
                     this.Flag_E7 = cacheE_StudyDesignPurposeAnswer_Bs
                         .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
                         .Count() > 0;
@@ -188,7 +188,6 @@ namespace ODPTaxonomyDAL_JY
 
                     if (!sentApplicationID.Contains("_B"))
                     {
-
                         this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
                             .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
                             .Count() > 0;
@@ -198,6 +197,7 @@ namespace ODPTaxonomyDAL_JY
                     }
                     else
                     {
+                        this.G = query.UnableToCode ? "NB" : "";
                         this.Flag_E7 = cacheE_StudyDesignPurposeAnswer_Bs
                             .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
                             .Count() > 0;

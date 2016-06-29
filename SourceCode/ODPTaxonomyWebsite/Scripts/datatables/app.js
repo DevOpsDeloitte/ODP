@@ -1657,7 +1657,7 @@ $(document).ready(function () {
                         }
 
                     },
-                    "targets": 17 //date column
+                    "targets": 18 //date column
                 }
             ],
             "searchDelay": 1000,
@@ -1701,6 +1701,7 @@ $(document).ready(function () {
                 { "data": "D" },
                 { "data": "E" },
                 { "data": "F" },
+                { "data": "G" },
                 { "data": "LastExportDate" }
             ]
         });
