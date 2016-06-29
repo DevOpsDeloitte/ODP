@@ -312,42 +312,42 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                 comments = getFormVal("comments");
                 unabletocode = getFormValBool("unabletocode");
                 // If unable to code the supervisor does need to be authenticated.
-                if (unabletocode)
-                {
-                    superusername = getFormVal("superusername");
-                    superpassword = getFormVal("superpassword");
-                    System.Diagnostics.Trace.WriteLine(" super username : " + superusername);
-                    if (superusername != "" && superpassword != "")
-                    {
-                        if (Membership.ValidateUser(superusername, superpassword))
-                        {
-                            System.Diagnostics.Trace.WriteLine(" validate super username : " + superusername + "     " + superpassword);
-                            MembershipUser user = Membership.GetUser(superusername);
-                            superuserID = (Guid)user.ProviderUserKey;
-                            List<string> UserRoles = Roles.GetRolesForUser(superusername).ToList();
-                            var isSupervisor = false;
-                            foreach (var role in UserRoles)
-                            {
-                                if (role.ToLower().Contains("supervisor")) isSupervisor = true;
+                //if (unabletocode)
+                //{
+                //    superusername = getFormVal("superusername");
+                //    superpassword = getFormVal("superpassword");
+                //    System.Diagnostics.Trace.WriteLine(" super username : " + superusername);
+                //    if (superusername != "" && superpassword != "")
+                //    {
+                //        if (Membership.ValidateUser(superusername, superpassword))
+                //        {
+                //            System.Diagnostics.Trace.WriteLine(" validate super username : " + superusername + "     " + superpassword);
+                //            MembershipUser user = Membership.GetUser(superusername);
+                //            superuserID = (Guid)user.ProviderUserKey;
+                //            List<string> UserRoles = Roles.GetRolesForUser(superusername).ToList();
+                //            var isSupervisor = false;
+                //            foreach (var role in UserRoles)
+                //            {
+                //                if (role.ToLower().Contains("supervisor")) isSupervisor = true;
 
-                            }
-                            if (!isSupervisor) return false;
+                //            }
+                //            if (!isSupervisor) return false;
 
-                        }
-                        else
-                        {
-                            return false;
-                        }
+                //        }
+                //        else
+                //        {
+                //            return false;
+                //        }
 
 
-                    }
-                    else
-                    {
+                //    }
+                //    else
+                //    {
 
-                        return false;
-                    }
+                //        return false;
+                //    }
 
-                }
+                //}
 
 
                 formmode = getFormVal("mode");

@@ -204,17 +204,17 @@
                 <div class="sixteen columns tax-form-buttons">
 
                     <div class="tax-form-buttons-box">
-                        <div class="unableCodeBox button hidden-functionality" id="unablecontain">
+                        <div class="unableCodeBox button" id="unablecontain">
                             <div style="display: inline-block;">
                                 <input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode" ng-disabled=" 1==1 " /><label>Unable to Code</label></div>
                             <div class="icon open" ng-click="showDescription('unabletocode')"></div>
 
-                            <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
+<%--                            <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
                                 <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername" placeholder="supervisor username" />
                                 <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword" placeholder="supervisor password" />
-                            </div>
-                            <div ng-show="mdata.formmode.indexOf('Consensus') != -1 && mdata.formmode != undefined">Users Unable to Code : {{mdata.unablecodersval}} </div>
-                            <div ng-show="mdata.formmode.indexOf('Comparison') != -1 && mdata.formmode != undefined">Teams Unable to Code : {{mdata.unablecodersval}} </div>
+                            </div>--%>
+                            <div ng-show="mdata.formmode.indexOf('Consensus') != -1 && mdata.formmode != undefined">Users Coded as Not Basic : {{mdata.unablecodersval}} </div>
+                            <div ng-show="mdata.formmode.indexOf('Comparison') != -1 && mdata.formmode != undefined">Teams Coded as Not Basic : {{mdata.unablecodersval}} </div>
 
                         </div>
                     </div>

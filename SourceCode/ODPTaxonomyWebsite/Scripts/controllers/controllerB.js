@@ -316,19 +316,19 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         console.log(" validate.formdata :: ");
         if ($scope.mdata.unabletocode) {
 
-            if ($scope.mdata.superusername != "" && $scope.mdata.superpassword != "") {
+ //          if ($scope.mdata.superusername != "" && $scope.mdata.superpassword != "") {
                 //console.log(" unable to code :: form is valid :: ");
                 $scope.formIsValid = true;
                 $scope.disallowSave = false;
                 $scope.showSaveButton = true;
-            }
-            else {
-                //console.log(" unable to code :: form is not valid :: ");
-                $scope.formIsValid = false;
-                $scope.disallowSave = true;
-                $scope.showSaveButton = false;
+ //           }
+            //else {
+            //    //console.log(" unable to code :: form is not valid :: ");
+            //    $scope.formIsValid = false;
+            //    $scope.disallowSave = true;
+            //    $scope.showSaveButton = false;
 
-            }
+            //}
             return;
         }
         if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 2] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 2].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {

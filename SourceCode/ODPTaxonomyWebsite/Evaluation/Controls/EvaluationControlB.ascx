@@ -156,10 +156,11 @@
             <li ng-show="(!showConsensusButton && mode.indexOf('Consensus') != -1)"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
             <li ng-show="showSaveButton"><input class="button yes" type="button" id="saveButton" value="Submit" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Submit"/></li>
-            <%--<li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
+            <%-- 
+            <li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
             <li ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></li>
-            <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
-            <li>
+            <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Not Basic</label></li>
+           <li>
             <div ng-show="mdata.unabletocode && mdata.displaymode!='View'">
                 <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
                 <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
@@ -233,18 +234,18 @@
 
        <div class="sixteen columns tax-form-buttons">
           
-          <div  id="unablecontain" class="tax-form-buttons-box hidden-functionality">
+          <div  id="unablecontain" class="tax-form-buttons-box">
             <div class="unableCodeBox button">              
-              <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
+              <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Not Basic</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
                 
-              <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
+<%--              <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
                     <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
                     <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword"  placeholder="supervisor password"/>
-              </div>
+              </div>--%>
 
               <input type="hidden" name="unableCodersVal" id="hiddenUnableCoders" value="<%= unableCoders %>" ng-model="mdata.unablecodersval" />
-              <div ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></div>
-              <div ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></div>
+              <div ng-show="mode.indexOf('Consensus') != -1">Users Coded as Not Basic : <%= unableCoders %></div>
+              <div ng-show="mode.indexOf('Comparison') != -1">Teams Coded as Not Basic : <%= unableCoders %></div>
             
             </div>
           </div>
