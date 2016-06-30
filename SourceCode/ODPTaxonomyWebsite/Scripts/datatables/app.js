@@ -24,7 +24,7 @@ $(document).ready(function () {
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Page and Datatable Events
     function setupTableEvents() {
-        var mySearchFn = util.debounce(function() {
+        var mySearchFn = util.debounce(function () {
             var search = $('input[type=search]').val();
 
             if (search != null) {
@@ -55,7 +55,7 @@ $(document).ready(function () {
 
             $('div.progressBar').css('display', processing ? 'block' : 'none');
 
-            hideBasicCB(processing);
+            util.hideBasicCB(processing);
 
             if (!processing) {
                 // show it all
@@ -73,26 +73,26 @@ $(document).ready(function () {
 
                 $("div#tableContainer").show();
 
-                //showActionsInterface();   // NOTE (TR): This and the code below makes no sense.
+                //util.showActionsInterface();   // NOTE (TR): This and the code below makes no sense.
 
                 switch (config.role) {
 
                     case "CoderSupervisor":
-                        showActionsInterface();
+                        util.showActionsInterface();
 
                         break;
 
                     case "ODPSupervisor":
-                        showActionsInterface();
+                        util.showActionsInterface();
 
-                        showSubActionsInterface();
+                        util.showSubActionsInterface();
 
                         break;
 
                 }
 
             } else {
-                disableInterface();
+                util.disableInterface();
 
                 $("#DTable_paginate").hide();
                 $("#DTable_info").hide();
@@ -114,8 +114,8 @@ $(document).ready(function () {
                 serverCheckForActions();
             }
 
-            //enableFilters();
-            enableInterface();
+            //util.enableFilters();
+            util.enableInterface();
         });
 
         table.on('page.dt', function () {
@@ -214,7 +214,7 @@ $(document).ready(function () {
             } else {
                 $(row).removeClass('selected');
 
-                if($opts.allSelected) {
+                if ($opts.allSelected) {
                     $opts.unselectedItems.push(absid);
 
                     $opts.totalRecordsSelected--;
@@ -224,7 +224,7 @@ $(document).ready(function () {
                     $opts.selectedItems.splice(rowNdx, 1);
                 }
 
-                if($opts.totalRecordsSelected == $opts.totalRecords) {
+                if ($opts.totalRecordsSelected == $opts.totalRecords) {
                     $opts.allSelected = true;
                 }
             }
@@ -242,7 +242,7 @@ $(document).ready(function () {
             if ($(this).hasClass("yes")) {
                 console.log("submit button click enabled ::");
 
-                disableInterface();
+                util.disableInterface();
                 $("div#generalProgressBox").show();
 
                 $(this).addClass("no").removeClass("yes");
@@ -252,7 +252,7 @@ $(document).ready(function () {
                     case "addreportexclude":
                         dataObj = compileDataObject("add");
 
-                        util.ajaxCall("/Evaluation/Handlers/ReportExclude.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
+                        util.ajaxCall("/Evaluation/Handlers/ReportExclude.ashx", "POST", dataObj, function (data, textStatus, jqXHR) {
                             console.log(" add report exclude : " + data);
 
                             $("div#generalProgressBox").hide();
@@ -260,7 +260,7 @@ $(document).ready(function () {
                             if (data.success == true) {
                                 var num = null;
 
-                                if($opts.allSelected){
+                                if ($opts.allSelected) {
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
                                     num = $opts.selectedItems.length;
@@ -285,7 +285,7 @@ $(document).ready(function () {
                     case "removereportexclude":
                         dataObj = compileDataObject("remove");
 
-                        util.ajaxCall("/Evaluation/Handlers/ReportExclude.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
+                        util.ajaxCall("/Evaluation/Handlers/ReportExclude.ashx", "POST", dataObj, function (data, textStatus, jqXHR) {
                             console.log(" removereportexclude - data : " + data);
 
                             $("div#generalProgressBox").hide();
@@ -293,7 +293,7 @@ $(document).ready(function () {
                             if (data.success == true) {
                                 var num = null;
 
-                                if($opts.allSelected){
+                                if ($opts.allSelected) {
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
                                     num = $opts.selectedItems.length;
@@ -317,7 +317,7 @@ $(document).ready(function () {
                     case "addreview":
                         dataObj = compileDataObject("add");
 
-                        util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
+                        util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function (data, textStatus, jqXHR) {
                             console.log(" addreview - data : " + data);
 
                             $("div#generalProgressBox").hide();
@@ -325,7 +325,7 @@ $(document).ready(function () {
                             if (data.success == true) {
                                 var num = null;
 
-                                if($opts.allSelected){
+                                if ($opts.allSelected) {
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
                                     num = $opts.selectedItems.length;
@@ -349,7 +349,7 @@ $(document).ready(function () {
                     case "removereview":
                         dataObj = compileDataObject("remove");
 
-                        util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
+                        util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function (data, textStatus, jqXHR) {
                             console.log(" remove - data: " + data);
 
                             $("div#generalProgressBox").hide();
@@ -357,7 +357,7 @@ $(document).ready(function () {
                             if (data.success == true) {
                                 var num = null;
 
-                                if($opts.allSelected){
+                                if ($opts.allSelected) {
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
                                     num = $opts.selectedItems.length;
@@ -381,14 +381,14 @@ $(document).ready(function () {
                     case "closeabstract":
                         dataObj = compileDataObject("close");
 
-                        util.ajaxCall("/Evaluation/Handlers/AbstractClose.ashx", "GET", dataObj, function(data, textStatus, jqXHR) {
+                        util.ajaxCall("/Evaluation/Handlers/AbstractClose.ashx", "GET", dataObj, function (data, textStatus, jqXHR) {
                             console.log(" closeabstract - data : " + data);
 
                             $("div#generalProgressBox").hide();
                             if (data.success == true) {
                                 var num = null;
 
-                                if($opts.allSelected){
+                                if ($opts.allSelected) {
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
                                     num = $opts.selectedItems.length;
@@ -413,7 +413,7 @@ $(document).ready(function () {
                     case "reopenabstracts":
                         dataObj = compileDataObject("open");
 
-                        util.ajaxCall("/Evaluation/Handlers/AbstractClose.ashx", "GET", dataObj, function(data, textStatus, jqXHR) {
+                        util.ajaxCall("/Evaluation/Handlers/AbstractClose.ashx", "GET", dataObj, function (data, textStatus, jqXHR) {
                             console.log(" reopenabstract - data : " + data);
 
                             $("div#generalProgressBox").hide();
@@ -421,7 +421,7 @@ $(document).ready(function () {
                             if (data.success == true) {
                                 var num = null;
 
-                                if($opts.allSelected){
+                                if ($opts.allSelected) {
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
                                     num = $opts.selectedItems.length;
@@ -448,7 +448,7 @@ $(document).ready(function () {
 
                         $opts.generatingExportLink = true;
 
-                        util.ajaxCall("/Evaluation/Handlers/AbstractExport.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
+                        util.ajaxCall("/Evaluation/Handlers/AbstractExport.ashx", "POST", dataObj, function (data, textStatus, jqXHR) {
                             console.log(" reopen abstract - data : ", data);
 
                             $("div#generalProgressBox").hide();
@@ -457,7 +457,7 @@ $(document).ready(function () {
                             if (data.success == true) {
                                 var num = null;
 
-                                if($opts.allSelected){
+                                if ($opts.allSelected) {
                                     num = $opts.totalRecords - $opts.unselectedItems.length;
                                 } else {
                                     num = $opts.selectedItems.length;
@@ -467,7 +467,7 @@ $(document).ready(function () {
                                 dataObj = compileDataObject("");
 
                                 // call the second handler
-                                util.ajaxCall("/Evaluation/Handlers/GenerateExcelReport.ashx", "POST", dataObj, function(data, textStatus, jqXHR) {
+                                util.ajaxCall("/Evaluation/Handlers/GenerateExcelReport.ashx", "POST", dataObj, function (data, textStatus, jqXHR) {
                                     console.log(" generate excel report .ashx - data : " + data);
 
                                     if (data.success == true) {
@@ -477,7 +477,7 @@ $(document).ready(function () {
                                         $("div#downloadLinkBox a").attr("href", data.filePath);
                                         $("div#downloadLinkBox").show();
 
-                                        enableInterface();
+                                        util.enableInterface();
                                     }
                                 });
 
@@ -507,9 +507,9 @@ $(document).ready(function () {
     }
 
     function compileDataObject(type) {
-        var dataObj = { type: type, all: $opts.allSelected, guid: window.user.GUID };
+        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID};
 
-        if($opts.allSelected) {
+        if ($opts.allSelected) {
             $opts.selectedItems = [];
             dataObj.excludeList = $opts.unselectedItems.join();
         } else {
@@ -526,7 +526,7 @@ $(document).ready(function () {
 
             var str = "";
 
-            disableInterface();
+            util.disableInterface();
 
             $("select#filterlist option:selected").each(function () {
                 str = $(this).val();
@@ -534,7 +534,7 @@ $(document).ready(function () {
             });
 
             if (config.role == "ODPSupervisor") {
-                actionsManager();
+                util.actionsManager();
 
                 $opts.actionlist = "selectaction";
             }
@@ -565,6 +565,7 @@ $(document).ready(function () {
             watchActionsHandler();
         });
     }
+
     // END: Page and Datatable Events
     ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -581,19 +582,19 @@ $(document).ready(function () {
             var rowx = table.row(rowIdx).nodes().to$();     // Convert to a jQuery object
             var abstractId = rowx.find(".abstractid").html()
 
-            if($opts.actionlist === 'selectaction') {
+            if ($opts.actionlist === 'selectaction') {
                 $(rowx).removeClass('selected');
 
                 rowx.find("input[type=checkbox]").prop("checked", false);
                 rowx.find("input[type=checkbox]").addClass("hidecheckbox");
             } else {
-                if($opts.allSelected) {
+                if ($opts.allSelected) {
                     $("#selectAllBox").prop("checked", true);
 
-                    if($opts.unselectedItems.length > 0){
+                    if ($opts.unselectedItems.length > 0) {
                         var unselectedItemsNdx = _.indexOf($opts.unselectedItems, abstractId);
 
-                        if(unselectedItemsNdx != -1) {
+                        if (unselectedItemsNdx != -1) {
                             $(rowx).removeClass('selected');
 
                             $(rowx).find("input[type=checkbox]").prop("checked", false);
@@ -610,7 +611,7 @@ $(document).ready(function () {
                 } else {
                     var selectedItemsNdx = _.indexOf($opts.selectedItems, abstractId);
 
-                    if(selectedItemsNdx != -1) {
+                    if (selectedItemsNdx != -1) {
                         $(rowx).addClass('selected');
 
                         rowx.find("input[type=checkbox]").prop("checked", true);
@@ -625,11 +626,11 @@ $(document).ready(function () {
             }
 
             // Reset previously expanded rows
-            if($opts.selectedItemChildrenCache.length > 0) {
+            if ($opts.selectedItemChildrenCache.length > 0) {
                 var rowDataObj = util.findObjInChildCache(abstractId);
 
-                if(rowDataObj) {
-                    console.log('getting children of '+abstractId+' from cache');
+                if (rowDataObj) {
+                    console.log('getting children of ' + abstractId + ' from cache');
                     this.row(rowx).child(loadChildContainer(abstractId)).show();
 
                     content = unescape(util.showTableChildRows(rowDataObj.data));
@@ -662,32 +663,37 @@ $(document).ready(function () {
 
             currentTR.removeClass('closed').addClass('open');
 
-            $opts.selectedItemChildrenCache.push({'abstractId': data.AbstractID, 'data': data, 'displContent': content});
+            $opts.selectedItemChildrenCache.push({
+                'abstractId': data.AbstractID,
+                'data': data,
+                'displContent': content
+            });
         }
     }
 
     function getDetailChildRow(row, abstractId) {
         console.log('getDetailChildRow() :: ', abstractId);
+
         var content = "";
         var rowNdx = null;
         var cacheFound = false;
         var url = 'Handlers/AbstractDetail.ashx';
         var type = 'GET';
-        var data = { 'abstractId': abstractId };
+        var data = {'abstractId': abstractId};
 
         row.child(loadChildContainer(abstractId)).show();
 
-        if($opts.selectedItemChildrenCache.length > 0) {
-            var rowDataObj = _.find($opts.selectedItemChildrenCache, function(obj) {
+        if ($opts.selectedItemChildrenCache.length > 0) {
+            var rowDataObj = _.find($opts.selectedItemChildrenCache, function (obj) {
                 return obj.abstractId === parseInt(abstractId);
             });
 
-            if(rowDataObj == undefined) {
+            if (rowDataObj == undefined) {
                 console.log('calling to get children of ', abstractId);
 
                 util.ajaxCall(url, type, data, callbackGetDetailChildRow);
             } else {
-                console.log('getting children of '+abstractId+' from cache');
+                console.log('getting children of ' + abstractId + ' from cache');
 
                 content = unescape(util.showTableChildRows(rowDataObj.data));
                 $("div#" + abstractId).html(content);
@@ -717,7 +723,7 @@ $(document).ready(function () {
             });
         }, 0);
 
-        enableInterface();
+        util.enableInterface();
     }
 
     function loadFilters() {
@@ -725,7 +731,7 @@ $(document).ready(function () {
                 type: "GET",
                 url: "/Evaluation/Handlers/Filters.ashx?role=" + config.role,
                 dataType: 'json',
-                data: { guid: window.user.GUID }
+                data: {guid: window.user.GUID}
             })
             .done(function (data) {
                 if (data.opts.length > 0) {
@@ -763,169 +769,6 @@ $(document).ready(function () {
             });
     }
 
-
-    function hideFiltersInterface() {
-        $(".filters.interface").hide();
-
-    }
-    function showFiltersInterface() {
-        $(".filters.interface").show();
-    }
-
-    function hideActionsInterface() {
-        $(".actions.interface").hide();
-    }
-    function showActionsInterface() {
-        $(".actions.interface").show();
-    }
-    function hideSubActionsInterface() {
-        $(".subactions.interface").hide();
-        $("#selectAllBox").addClass("hidecheckbox");
-    }
-    function showSubActionsInterface() {
-        $(".subactions.interface").show();
-        $("#selectAllBox").removeClass("hidecheckbox");
-    }
-    function setPageTitle(title) {
-        $("#pagetitlebox span").text(title);
-    }
-
-    function actionsManager() {
-        console.log('actionsManager() ::');
-
-        $("select#actionlist").empty();
-        switch ($opts.filterlist) {
-
-            case "review":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="removereview">Remove From Review List</option>');
-                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "removereview";
-                $opts.actionlist = "selectaction";
-                break;
-            case "reviewuncoded":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="removereview">Remove From Review List</option>');
-                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "removereview";
-                $opts.actionlist = "selectaction";
-                break;
-            case "codercompleted":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "addreview";
-                $opts.actionlist = "selectaction";
-                break;
-            case "activeabstracts":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "addreview";
-                $opts.actionlist = "selectaction";
-                break;
-            case "odpcompleted":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "addreview";
-                $opts.actionlist = "selectaction";
-                break;
-            case "odpcompletedwonotes":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "addreview";
-                $opts.actionlist = "selectaction";
-                break;
-            case "closed":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "addreview";
-                $opts.actionlist = "selectaction";
-                break;
-            case "exported":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "addreview";
-                $opts.actionlist = "selectaction";
-                break;
-            case "reportexclude":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="removereportexclude">Remove Report Exclude</option>');
-                $opts.actionlist = "selectaction";
-                break;
-
-            case "default": // default = all
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "selectaction";
-                break;
-
-            case "all":
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
-                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "selectaction";
-                break;
-
-            default: // currently same as odpcompleted, being the default.
-
-                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
-                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
-                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
-                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
-                $opts.actionlist = "addreview";
-                $opts.actionlist = "selectaction";
-
-                break;
-        }
-        //Intercept if first load to check for hash location based -- previous action.
-
-        if ($opts.hashExists) {
-            //if (window.location.hash.replace("#", "") != "") {
-            //var locationHash = window.location.hash.replace("#", "").split("|");
-            var actionVal = $opts.actionHash;
-            //$opts.pageNumber = locationHash[2];
-            if ($opts.initialPageLoad) {
-                if (actionVal != "selectaction") {
-                    $("select#actionlist option").each(function (idx, val) {
-                        $(this).attr('selected', false);
-                        if ($(this).val() == actionVal) {
-                            $(this).attr('selected', true);
-                        }
-                    });
-                }
-
-                $opts.actionlist = actionVal;
-                //$opts.initialPageLoad = false;
-            }
-        }
-
-    }
-
     function changeFilters() {
         config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist + "&codingType=" + $opts.codingType;
         console.log("changeFilters() :: ", config.baseURL);
@@ -936,7 +779,7 @@ $(document).ready(function () {
 
         $("div#downloadLinkBox").hide();
 
-        assignPageTitle();
+        util.assignPageTitle($opts.filterlist);
 
         if (config.role == "ODPSupervisor") {
             if ($opts.initialPageLoad) {
@@ -974,7 +817,7 @@ $(document).ready(function () {
                 }
                 $opts.isGridDirty = false;
 
-                enableInterface();
+                util.enableInterface();
 
                 clearSubmitBtnAndCheckboxes();
             });
@@ -1008,117 +851,6 @@ $(document).ready(function () {
 
                 break;
         }
-    }
-
-    function assignPageTitle() {
-        switch ($opts.filterlist) {
-
-            case "review":
-                setPageTitle("View Review List");
-                break;
-            case "reviewuncoded":
-                setPageTitle("View Review List Uncoded");
-                break;
-            case "open":
-                setPageTitle("View Open Abstracts");
-                break;
-            case "coded":
-                setPageTitle("View Coded Abstracts");
-                break;
-            case "closed":
-                setPageTitle("View Closed Abstracts");
-                break;
-            case "odpcompleted":
-                setPageTitle("View ODP Completed Abstracts");
-                break;
-            case "codercompleted":
-                setPageTitle("View Coder Completed Abstracts");
-                break;
-            case "activeabstracts":
-                setPageTitle("View Active Abstracts");
-                break;
-            case "exported":
-                setPageTitle("View Exported Abstracts");
-                break;
-            case "odpcompletedwonotes":
-                setPageTitle("View ODP Completed Without Notes Abstracts");
-                break;
-            case "reportexclude":
-                setPageTitle("View Report Excluded List");
-                break;
-
-            default:
-
-                switch (config.role) {
-                    case "ODPSupervisor":
-                        setPageTitle("View Abstracts");
-                        break;
-
-                    case "CoderSupervisor":
-                        setPageTitle("View Abstracts");
-                        break;
-
-                    case "ODPStaff":
-                        setPageTitle("View Abstracts");
-                        break;
-
-                    case "Admin":
-                        setPageTitle("View Abstracts");
-                        break;
-                }
-
-                break;
-
-
-        }
-
-    }
-
-    function disableFilters() {
-        $("select#filterlist").attr("disabled", true);
-    }
-    function enableFilters() {
-        $("select#filterlist").attr("disabled", false);
-    }
-
-    function disableInterface() {
-        console.log('disableInterface() ::');
-
-        $("select#filterlist").attr("disabled", true);
-        $("select#actionlist").attr("disabled", true);
-
-        $("#submitLinkBox").hide();
-
-        hideBasicCB(true);
-
-        $("input").attr("disabled", true);
-
-        $("div#downloadLinkBox").hide();
-    }
-
-    function enableInterface() {
-        console.log('enableInterface() ::');
-
-        if(!$opts.generatingExportLink) {
-            $("select#filterlist").attr("disabled", false);
-            $("select#actionlist").attr("disabled", false);
-
-            if(config.role == "ODPSupervisor") {
-                $("#submitLinkBox").show();
-            }
-
-            hideBasicCB(false);
-
-            $("input").attr("disabled", false);
-        }
-
-        if($("div#downloadLinkBox a").attr("href")) {
-            $("div#downloadLinkBox").show();
-        }
-    }
-
-    function hideBasicCB(mode) {
-        $("input#cbBasicOnly").parent().css('display', mode ? 'none' : 'inline');
     }
 
     function doSubmitChecks() {
@@ -1173,7 +905,7 @@ $(document).ready(function () {
     }
 
     function updateRecordsSelectedText() {
-        if(!$opts.allSelected) {
+        if (!$opts.allSelected) {
             $("span#recordCount").text($opts.selectedItems.length);
         }
 
@@ -1208,7 +940,7 @@ $(document).ready(function () {
     function doAllSubmitCheck(flag) {
         $opts.hiderowItems = [];
 
-        var filteredRows = table.$('tr', { "filter": "applied" });
+        var filteredRows = table.$('tr', {"filter": "applied"});
         var filteredRowsAbstractIDs = [];
 
         $(filteredRows).each(function (i, val) {
@@ -1252,7 +984,7 @@ $(document).ready(function () {
 
         var isCheckedBasicOnly = $('#cbBasicOnly').is(":checked");
 
-        if(isCheckedBasicOnly) {
+        if (isCheckedBasicOnly) {
             $opts.codingType = 'basic';
         } else {
             $opts.codingType = 'all';
@@ -1285,9 +1017,9 @@ $(document).ready(function () {
                 $("th.col_select").children().show();
                 if ($opts.isGridDirty) {
 
-                    disableFilters();
-                    //actionsManager();
-                    disableInterface();
+                    util.disableFilters();
+                    //util.actionsManager();
+                    util.disableInterface();
                     changeFilters();
                     clearSubmitBtnAndCheckboxes();
 
@@ -1327,9 +1059,9 @@ $(document).ready(function () {
     function reloadForAction(type) {
         console.log('reloadForAction(type) ::');
         if ($opts.isGridDirty) {
-            disableFilters();
-            //actionsManager();
-            disableInterface();
+            util.disableFilters();
+            //util.actionsManager();
+            util.disableInterface();
             changeFilters();
             clearSubmitBtnAndCheckboxes();
 
@@ -1346,7 +1078,7 @@ $(document).ready(function () {
                 type: "GET",
                 url: "/Evaluation/Handlers/AbstractsReopen.ashx",
                 dataType: 'json',
-                data: { guid: window.user.GUID }
+                data: {guid: window.user.GUID}
             })
             .done(function (data) {
                 console.log(" reopen : " + data);
@@ -1378,7 +1110,7 @@ $(document).ready(function () {
                         type: "GET",
                         url: "/Evaluation/Handlers/AbstractsListCheck.ashx",
                         dataType: 'json',
-                        data: { guid: window.user.GUID, action: type }
+                        data: {guid: window.user.GUID, action: type}
                     })
                     .done(function (data) {
                         console.log(" reopen : " + data);
@@ -1445,6 +1177,7 @@ $(document).ready(function () {
             rowx.removeClass("selected");
         });
     }
+
     // END: Supporting Methods
     ///////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1466,51 +1199,9 @@ $(document).ready(function () {
         }
     }
 
-    // sets up the filters and does the load filters.
-    function filtersManager() {
-        console.log('filtersManager() :: ' + config.role);
-        $("select#filterlist").empty();
-
-        hideSubActionsInterface();
-
-        assignPageTitle();
-
-        switch (config.role) {
-
-            case "CoderSupervisor":
-
-                showFiltersInterface();
-                hideActionsInterface();
-                loadFilters();
-
-                break;
-
-            case "ODPSupervisor":
-
-                showFiltersInterface();
-                hideActionsInterface();
-                hideSubActionsInterface();
-                loadFilters();
-
-                break;
-
-            case "ODPStaff":
-
-                showFiltersInterface();
-                hideActionsInterface();
-                hideSubActionsInterface();
-                loadFilters();
-
-                break;
-
-            case "Admin":
-                showFiltersInterface();
-                hideActionsInterface();
-                hideSubActionsInterface();
-                loadFilters();
-
-                break;
-        }
+    function filtersManager(filter) {
+        // calling syntax = ([filter selected], [callback method])
+        util.filtersManager(filter, loadFilters);
     }
 
     function InitializeTable(inData) {
@@ -1518,7 +1209,7 @@ $(document).ready(function () {
 
         $("div.progressBar").show();
 
-        hideBasicCB(true);
+        util.hideBasicCB(true);
 
         // Datatable Definition
         table = $('#DTable').DataTable({
@@ -1713,18 +1404,18 @@ console.log('table: ', table);
     }
 
     function init() {
+        util = new Utility();
+
         var target = document.getElementById('spinner');                        // NOTE (TR): Obsolete ???
         var downloadSpin = document.getElementById('downloadSpin');             // NOTE (TR): Obsolete ???
         var spinner = new Spinner(spinneropts).spin(target);                    // NOTE (TR): Obsolete ???
         var spinnerdownloadSpin = new Spinner(spinneropts2).spin(downloadSpin); // NOTE (TR): Obsolete ???
 
-        disableInterface();
+        util.disableInterface();
 
-        hideBasicCB(true);
+        util.hideBasicCB(true);
 
         $opts.codingType = $opts.codingType ? $opts.codingType : "all";
-
-        util = new Utility();
 
         // set search placeholder
         $('.dataTables_filter input').attr('placeholder', 'Search');
@@ -1736,17 +1427,17 @@ console.log('table: ', table);
 
         retrievePageHash(); //Init
 
-        filtersManager();   //Init
+        filtersManager($opts.filterlist);   //Init
 
         if (config.role == "ODPSupervisor") {
-            actionsManager();
+            util.actionsManager();
         }
 
         if($opts.codingType == "basic") {
             $("input#cbBasicOnly").prop( "checked", true );
         }
 
-        disableFilters();
+        util.disableFilters();
 
         InitializeTable();
 
