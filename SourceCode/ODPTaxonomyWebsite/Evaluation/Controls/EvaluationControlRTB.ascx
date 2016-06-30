@@ -206,7 +206,7 @@
                     <div class="tax-form-buttons-box">
                         <div class="unableCodeBox button" id="unablecontain">
                             <div style="display: inline-block;">
-                                <input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode" ng-disabled=" 1==1 " /><label>Unable to Code</label></div>
+                                <input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode" ng-disabled=" 1==1 " /><label>Not Basic</label></div>
                             <div class="icon open" ng-click="showDescription('unabletocode')"></div>
 
 <%--                            <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
