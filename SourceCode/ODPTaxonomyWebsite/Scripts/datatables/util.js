@@ -77,6 +77,8 @@ function Utility() {
     //    var Rows = data;
     //    this.RowsP = data;
     var Rows = null;
+    var utils = this;
+
     this.RowsP = null;
 
     // Public Functions
@@ -401,5 +403,289 @@ function Utility() {
 
         return rowDataNdx;
     };
+
+    /* *************************************** */
+    /* Refactoring Aditions                    */
+    /* *************************************** */
+
+    /* DOM Manipulation Methods ************** */
+    function setPageTitle(title) {
+        $("#pagetitlebox span").text(title);
+    }
+
+    function hideSubActionsInterface() {
+        $(".subactions.interface").hide();
+        $("#selectAllBox").addClass("hidecheckbox");
+    }
+
+    function showFiltersInterface() {
+        $(".filters.interface").show();
+    }
+
+    function hideActionsInterface() {
+        $(".actions.interface").hide();
+    }
+
+
+    this.showActionsInterface = function() {
+        $(".actions.interface").show();
+    };
+
+    this.showSubActionsInterface = function() {
+        $(".subactions.interface").show();
+        $("#selectAllBox").removeClass("hidecheckbox");
+    };
+
+    this.disableFilters = function() {
+        $("select#filterlist").attr("disabled", true);
+    };
+
+    this.enableFilters = function() {
+        $("select#filterlist").attr("disabled", false);
+    };
+
+    this.hideFiltersInterface = function() {
+        $(".filters.interface").hide();
+
+    };
+
+    this.disableInterface = function() {
+        console.log('disableInterface() ::');
+
+        $("select#filterlist").attr("disabled", true);
+        $("select#actionlist").attr("disabled", true);
+
+        $("#submitLinkBox").hide();
+
+        utils.hideBasicCB(true);
+
+        $("input").attr("disabled", true);
+
+        $("div#downloadLinkBox").hide();
+    };
+
+    this.enableInterface = function() {
+        console.log('enableInterface() ::');
+
+        if (!$opts.generatingExportLink) {
+            $("select#filterlist").attr("disabled", false);
+            $("select#actionlist").attr("disabled", false);
+
+            if (config.role == "ODPSupervisor") {
+                $("#submitLinkBox").show();
+            }
+
+            utils.hideBasicCB(false);
+
+            $("input").attr("disabled", false);
+        }
+
+        if ($("div#downloadLinkBox a").attr("href")) {
+            $("div#downloadLinkBox").show();
+        }
+    };
+
+    this.hideBasicCB = function(mode) {
+        $("input#cbBasicOnly").parent().css('display', mode ? 'none' : 'inline');
+    };
+
+    this.actionsManager = function() {
+        console.log('actionsManager() ::');
+
+        $("select#actionlist").empty();
+
+        switch ($opts.filterlist) {
+
+            case "review":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="removereview">Remove From Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "removereview";
+                $opts.actionlist = "selectaction";
+
+                break;
+            case "reviewuncoded":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="removereview">Remove From Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "removereview";
+                $opts.actionlist = "selectaction";
+
+                break;
+            case "codercompleted":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
+
+                break;
+            case "activeabstracts":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
+
+                break;
+            case "odpcompleted":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
+
+                break;
+            case "odpcompletedwonotes":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
+
+                break;
+            case "closed":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
+
+                break;
+            case "exported":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
+
+                break;
+            case "reportexclude":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="removereportexclude">Remove Report Exclude</option>');
+                $opts.actionlist = "selectaction";
+
+                break;
+
+            case "default": // default = all
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "selectaction";
+
+                break;
+
+            case "all":
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="reopenabstracts">Reopen Abstracts</option>');
+                $("select#actionlist").append('<option value="exportabstracts">Export Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "selectaction";
+
+                break;
+
+            default: // currently same as odpcompleted, being the default.
+
+                $("select#actionlist").append('<option selected="selected" value="selectaction">Select Action</option>');
+                $("select#actionlist").append('<option value="addreview">Add to Review List</option>');
+                $("select#actionlist").append('<option value="closeabstract">Close Abstracts</option>');
+                $("select#actionlist").append('<option value="addreportexclude">Add Report Exclude</option>');
+                $opts.actionlist = "addreview";
+                $opts.actionlist = "selectaction";
+
+                break;
+        }
+        //Intercept if first load to check for hash location based -- previous action.
+
+        if ($opts.hashExists) {
+            //if (window.location.hash.replace("#", "") != "") {
+            //var locationHash = window.location.hash.replace("#", "").split("|");
+            var actionVal = $opts.actionHash;
+            //$opts.pageNumber = locationHash[2];
+            if ($opts.initialPageLoad) {
+                if (actionVal != "selectaction") {
+                    $("select#actionlist option").each(function (idx, val) {
+                        $(this).attr('selected', false);
+                        if ($(this).val() == actionVal) {
+                            $(this).attr('selected', true);
+                        }
+                    });
+                }
+
+                $opts.actionlist = actionVal;
+                //$opts.initialPageLoad = false;
+            }
+        }
+
+    };
+
+    // sets up the filters and does the load filters.
+    this.filtersManager = function(filter, cb) {
+        console.log('filtersManager() :: ' + config.role);
+
+        $("select#filterlist").empty();
+
+        hideSubActionsInterface();
+
+        utils.assignPageTitle(filter);
+
+        showFiltersInterface();
+
+        hideActionsInterface();
+
+        switch (config.role) {
+            case "ODPSupervisor":
+            case "ODPStaff":
+            case "Admin":
+
+                hideSubActionsInterface();
+
+                break;
+        }
+
+        cb();   //should call loadFilters();
+    };
+
+    this.assignPageTitle = function(filter) {
+        var title, pageTitle;
+
+        var pageTitles = {
+            "review": "View Review List",
+            "reviewuncoded": "View Review List Uncoded",
+            "open": "View Open Abstracts",
+            "coded": "View Coded Abstracts",
+            "closed": "View Closed Abstracts",
+            "odpcompleted": "View ODP Completed Abstracts",
+            "codercompleted": "View Coder Completed Abstracts",
+            "activeabstracts": "View Active Abstracts",
+            "exported": "View Exported Abstracts",
+            "odpcompletedwonotes": "View ODP Completed Without Notes Abstracts",
+            "reportexclude": "View Report Excluded List",
+            "default": "View Abstracts"
+        };
+
+        pageTitle = pageTitles[filter];
+        filter = pageTitle ? pageTitle : "default";
+
+        setPageTitle(pageTitles[filter]);
+    }
 
 }
