@@ -118,7 +118,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         {
 
             var db = DBData.GetDataContext();
-            var topics = db.Protocol_Bs.Where(p => p.Title.Contains("Unable")).OrderBy(p => p.LookUpID).Select(p => p).ToList();
+            var topics = db.Protocol_Bs.Where(p => p.Title.Contains("Unable") || p.Title.Contains("Not Basic")).OrderBy(p => p.LookUpID).Select(p => p).ToList();
             StringBuilder finalStr = new StringBuilder();
             //Response.Write(topics.Count);
             var count = 1;
