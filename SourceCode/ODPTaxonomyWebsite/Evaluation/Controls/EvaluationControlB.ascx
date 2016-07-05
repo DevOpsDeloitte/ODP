@@ -230,7 +230,14 @@
              <span class="titlevals">Basic</span>--%>
          </div>
    
-     </div>    
+     </div> 
+        
+      <div class="sixteen columns tax-form-buttons">
+            <div class="specs">
+            <span class="buttonx">General Instructions<div class="icon open" id="ginst" ng-click="showDescription('generalinstructions')" ></div></span>
+            <span class="buttonx">Background<div class="icon open" ng-click="showDescription('background')" ></div></span>
+            </div>
+      </div>  
 
        <div class="sixteen columns tax-form-buttons">
           
@@ -250,15 +257,12 @@
             </div>
           </div>
 
-            <div class="specs">
-            <span class="buttonx">General Instructions<div class="icon open" id="ginst" ng-click="showDescription('generalinstructions')" ></div></span>
-            <span class="buttonx">Background<div class="icon open" ng-click="showDescription('background')" ></div></span>
-            </div>
+            
         </div>
     
 
 
-    <div class="sixteen columns">
+    <div class="sixteen columns main-buttons">
     <div class="print-left">
 
         <table class="bordered zebra-striped" id="study-focus" class="study-focus">
