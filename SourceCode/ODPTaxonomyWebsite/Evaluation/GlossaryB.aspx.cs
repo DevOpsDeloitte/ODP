@@ -86,29 +86,30 @@ namespace ODPTaxonomyWebsite.Evaluation
             var count = 0;
             foreach (var topic in topics)
             {
-
-                StringBuilder row = new StringBuilder();
-                row.AppendLine("<div class=\"topicitem\">");
-                if (topic.SubTitle == null)
+                if (topic.Protocol != null)
                 {
-                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + "0" + "\"> " + topic.Title + "</a></div>");
-                }
-                else
-                {
-                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + topic.LookUpID.ToString() + "\"> " + topic.SubTitle + "</a></div>");
-                }
-                row.AppendLine("<div class=\"content\">" + topic.Protocol + "</div>");
-                row.AppendLine("</div>");
-                finalStr.Append(row);
-                if (getFirstOnly && count == 0)
-                {
-                    break;
-                }
-                if (!getFirstOnly && count == 0)
-                {
-                    finalStr.Clear() ; // exclude first
-                }
-               
+                    StringBuilder row = new StringBuilder();
+                    row.AppendLine("<div class=\"topicitem\">");
+                    if (topic.SubTitle == null)
+                    {
+                        row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + "0" + "\"> " + topic.Title + "</a></div>");
+                    }
+                    else
+                    {
+                        row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + topic.LookUpID.ToString() + "\"> " + topic.SubTitle + "</a></div>");
+                    }
+                    row.AppendLine("<div class=\"content\">" + topic.Protocol + "</div>");
+                    row.AppendLine("</div>");
+                    finalStr.Append(row);
+                    if (getFirstOnly && count == 0)
+                    {
+                        break;
+                    }
+                    if (!getFirstOnly && count == 0)
+                    {
+                        finalStr.Clear(); // exclude first
+                    }
+                }          
                 count++;
             }
 
