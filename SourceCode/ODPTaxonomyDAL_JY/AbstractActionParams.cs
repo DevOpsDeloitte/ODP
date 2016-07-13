@@ -9,6 +9,7 @@ namespace ODPTaxonomyDAL_JY
     public class AbstractActionParams : AbstractParams
     {
         public bool all { get; set; }
+        public bool basic { get; set; }
         public List<int> includeList { get; set; }
         public List<int> excludeList { get; set; }
         public Guid userGuid { get; set; }
@@ -21,6 +22,7 @@ namespace ODPTaxonomyDAL_JY
 
             type = context.Request["type"] ?? "";
             all = context.Request["all"] != null && context.Request["all"] == "true";
+            basic = context.Request["basic"] != null && context.Request["basic"] == "true";
 
             Guid guid;
             if (context.Request["guid"] != null && Guid.TryParse(context.Request["guid"], out guid))
@@ -65,7 +67,13 @@ namespace ODPTaxonomyDAL_JY
                 if (all)
                 {
                     var abstractData = AbstractHelper.GetAbstracts(this);
-                    IDs = abstractData.data.Select(a => a.AbstractID).ToList(); ;
+
+                    if (basic) {
+                        IDs = abstractData.data.Where(a=>a.ApplicationID.Contains("_B")).Select(a => a.AbstractID).ToList(); ;
+                    }
+                    else {
+                        IDs = abstractData.data.Select(a => a.AbstractID).ToList(); ;
+                    }
                     //excludeList.Add(4094);        
                     if (excludeList.Count > 0)
                     {
