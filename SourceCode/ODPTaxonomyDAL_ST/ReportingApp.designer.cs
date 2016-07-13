@@ -22,7 +22,7 @@ namespace ODPTaxonomyDAL_ST
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_Dev")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_DEV")]
 	public partial class ReportingAppDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,7 +33,7 @@ namespace ODPTaxonomyDAL_ST
     #endregion
 		
 		public ReportingAppDataContext() : 
-				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString3, mappingSource)
+				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString6, mappingSource)
 		{
 			OnCreated();
 		}
@@ -931,6 +931,8 @@ namespace ODPTaxonomyDAL_ST
 		
 		private System.Nullable<int> _ApplicationID;
 		
+		private string _SubSet;
+		
 		private string _PIProjectLeader;
 		
 		private string _MainSection;
@@ -973,6 +975,22 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._ApplicationID != value))
 				{
 					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSet", DbType="NVarChar(100)")]
+		public string SubSet
+		{
+			get
+			{
+				return this._SubSet;
+			}
+			set
+			{
+				if ((this._SubSet != value))
+				{
+					this._SubSet = value;
 				}
 			}
 		}
