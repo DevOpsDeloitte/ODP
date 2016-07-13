@@ -931,6 +931,8 @@ namespace ODPTaxonomyDAL_ST
 		
 		private System.Nullable<int> _ApplicationID;
 		
+		private string _SubSet;
+		
 		private string _PIProjectLeader;
 		
 		private string _MainSection;
@@ -973,6 +975,22 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._ApplicationID != value))
 				{
 					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSet", DbType="NVarChar(100)")]
+		public string SubSet
+		{
+			get
+			{
+				return this._SubSet;
+			}
+			set
+			{
+				if ((this._SubSet != value))
+				{
+					this._SubSet = value;
 				}
 			}
 		}
