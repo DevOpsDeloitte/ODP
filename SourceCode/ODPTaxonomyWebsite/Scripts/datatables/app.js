@@ -316,6 +316,8 @@ $(document).ready(function () {
 
                     case "addreview":
                         dataObj = compileDataObject("add");
+console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
+
 
                         util.ajaxCall("/Evaluation/Handlers/AbstractReview.ashx", "POST", dataObj, function (data, textStatus, jqXHR) {
                             console.log(" addreview - data : " + data);
@@ -507,7 +509,11 @@ $(document).ready(function () {
     }
 
     function compileDataObject(type) {
-        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID};
+        var basicFlag = $opts.codingType == 'basic' ? true : false;
+
+        console.log('basicFlag , $opts.codingType: ', basicFlag, $opts.codingType);
+
+        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID, basic: basicFlag};
 
         if ($opts.allSelected) {
             $opts.selectedItems = [];
