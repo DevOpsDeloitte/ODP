@@ -211,6 +211,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WeeklyIQCoderConsensusReport.aspx" />
     <Content Include="WeeklyIQCoderReport.aspx" />
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
@@ -483,6 +484,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WeeklyIQCoderConsensusReport.aspx.cs">
+      <DependentUpon>WeeklyIQCoderConsensusReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeeklyIQCoderConsensusReport.aspx.designer.cs">
+      <DependentUpon>WeeklyIQCoderConsensusReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="WeeklyIQCoderReport.aspx.cs">
       <DependentUpon>WeeklyIQCoderReport.aspx</DependentUpon>
