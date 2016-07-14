@@ -12,4 +12,23 @@
       <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.rpt_IQCode_Abstracts_Consensus_ByDate" Method="rpt_IQCode_Abstracts_Consensus_ByDate">
+    <Parameter Name="DateStart" Parameter="dateStart" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="DateEnd" Parameter="dateEnd" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="rpt_IQCode_Abstracts_Consensus_ByDateResult">
+      <Column Name="Date" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="GroupUsers" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="[Appl ID]" Member="Appl_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[PI Name]" Member="PI_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="A1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="A2" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="A3" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="B" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="C" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="D" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="E" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="F" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
