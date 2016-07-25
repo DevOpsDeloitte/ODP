@@ -26,6 +26,7 @@ namespace ODPTaxonomyWebsite
         private string role_admin = null;
         private string connString = null;
         public  string firebaseConfig = string.Empty;
+        public string roleDisplay = string.Empty;
 
         #endregion
 
@@ -82,6 +83,7 @@ namespace ODPTaxonomyWebsite
                     {
                         lbl_role.Visible = true;
                         lbl_role.Text = "Current Role: " + displayRoleName;
+                        roleDisplay = displayRoleName;
                     }
                     
                 }

@@ -43,7 +43,7 @@
                 <textarea name="comments" id="comments" ng-model="mdata.comments"></textarea>
             </div>
 
-            <div class="comment-entry" ng-show="mdata.displaymode=='View'">
+            <div class="comment-entry" ng-show="mdata.displaymode=='View'  && !(mdata.formmode == 'ODP Staff Member Consensus' && mdata.Role == 'Coder Supervisor')  ">
                 <div class="commentsHeader">Coding Comments</div>
                 <div id="commentsBox" ng-bind-html="mdata.comments | newline"><%= Comments.Replace(Environment.NewLine, "<br />") %></div>
             </div>
@@ -88,7 +88,7 @@
             </div>
             <div id="ODP" class="tab-content" style=""  ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
                 <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
-                <div ng-show="mdata.formmode != 'ODP Staff Member Consensus'"">
+                <div ng-show="mdata.formmode != 'ODP Staff Member Consensus' && mdata.Role != 'Coder Supervisor'">
                 <strong>ODP Consensus Comments</strong>
                 <hr />
                 <div class="comment disabled">
