@@ -213,14 +213,14 @@
                         <div class="unableCodeBox button" id="unablecontain">
                             <div style="display: inline-block;">
                                 <input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode" ng-disabled=" 1==1 " /><label>Not Basic</label></div>
-                            <div class="icon open" ng-click="showDescription('unabletocode')"></div>
+                            <!--<div class="icon open" ng-click="showDescription('unabletocode')"></div>-->
 
 <%--                            <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
                                 <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername" placeholder="supervisor username" />
                                 <input type="password" id="superpassword" name="superpassword" ng-model="mdata.superpassword" placeholder="supervisor password" />
                             </div>--%>
-                            <div ng-show="mdata.formmode.indexOf('Consensus') != -1 && mdata.formmode != undefined">Users Coded as Not Basic : {{mdata.unablecodersval}} </div>
-                            <div ng-show="mdata.formmode.indexOf('Comparison') != -1 && mdata.formmode != undefined">Teams Coded as Not Basic : {{mdata.unablecodersval}} </div>
+                            <div ng-show="mdata.formmode.indexOf('Consensus') != -1 && mdata.formmode != undefined && mdata.unablecodersval != ''">Users Coded as Not Basic : {{mdata.unablecodersval}} </div>
+                            <div ng-show="mdata.formmode.indexOf('Comparison') != -1 && mdata.formmode != undefined && mdata.unablecodersval != ''">Teams Coded as Not Basic : {{mdata.unablecodersval}} </div>
 
                         </div>
                     </div>
@@ -356,7 +356,7 @@
 
     <script src="../scripts/modules/module.js"></script>
     <script src="../scripts/controllers/controllerRTB.js"></script>
-    <script src="../scripts/directives/directiveRT.js"></script>
+    <script src="../scripts/directives/directiveRTB.js"></script>
     <script src="../scripts/app.js"></script>
     <script src="../scripts/commentsRT.js"></script>
     <!-- <script src="js/controllers/controller.js"></script> -->

@@ -1225,10 +1225,19 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 StringBuilder row = new StringBuilder();
                 if (question.Status.Status1 == "Active")
                 {
-                    row.AppendLine("<tr>");
-                    row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\"icon open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>" + "</td>");
-                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");
-                    row.AppendLine("</tr>");
+                    if (question.StudyDesignPurposeID == 7 && DisplayMode != "View" )
+                    {
+                        row.AppendLine("<tr>");
+                        row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\"icon open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>" + "</td>");
+                        row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  no-input='true' is-checked='" + "yes" + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");
+                        row.AppendLine("</tr>");
+                    }
+                    else {
+                        row.AppendLine("<tr>");
+                        row.AppendLine("<td scope=\"row\">" + question.StudyDesignPurposeID.ToString() + ". " + question.StudyDesignPurpose + "<div class=\"icon open\" ng-click=\"showDescription('studydesignpurpose-" + question.StudyDesignPurposeID.ToString() + "')\"></div>" + "</td>");
+                        row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.studydesignpurpose[" + question.StudyDesignPurposeID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"studydesignpurpose-" + question.StudyDesignPurposeID + "\" data-cat-id=\"studydesignpurpose\" data-q-id =\"" + question.StudyDesignPurposeID + "\"></div></td>");
+                        row.AppendLine("</tr>");
+                    }
                 }
                 if (question.Status.Status1 == "InActive")
                 {

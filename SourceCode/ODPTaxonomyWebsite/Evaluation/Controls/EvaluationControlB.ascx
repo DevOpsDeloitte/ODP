@@ -243,7 +243,7 @@
           
           <div  id="unablecontain" class="tax-form-buttons-box">
             <div class="unableCodeBox button">              
-              <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Not Basic</label></div><div class="icon open" ng-click="showDescription('unabletocode')" ></div>
+              <div style="display: inline-block;"><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode" ng-click="unableClick(mdata.unabletocode)"  ng-disabled="mdata.displaymode=='View'" /><label>Not Basic</label></div><!--<div class="icon open" ng-click="showDescription('unabletocode')" >--></div>
                 
 <%--              <div id="unable-to-code" ng-show="mdata.unabletocode && mdata.displaymode!='View'">
                     <input type="text" id="superusername" name="superusername" ng-model="mdata.superusername"  placeholder="supervisor username"/>
@@ -251,8 +251,8 @@
               </div>--%>
 
               <input type="hidden" name="unableCodersVal" id="hiddenUnableCoders" value="<%= unableCoders %>" ng-model="mdata.unablecodersval" />
-              <div ng-show="mode.indexOf('Consensus') != -1">Users Coded as Not Basic : <%= unableCoders %></div>
-              <div ng-show="mode.indexOf('Comparison') != -1">Teams Coded as Not Basic : <%= unableCoders %></div>
+              <div ng-show="mode.indexOf('Consensus') != -1 && mdata.unablecodersval != ''">Users Coded as Not Basic : <%= unableCoders %></div>
+              <div ng-show="mode.indexOf('Comparison') != -1 && mdata.unablecodersval != ''">Teams Coded as Not Basic : <%= unableCoders %></div>
             
             </div>
           </div>

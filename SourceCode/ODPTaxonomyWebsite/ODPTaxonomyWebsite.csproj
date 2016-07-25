@@ -170,6 +170,7 @@
     <Content Include="Scripts\datatables\util.js" />
     <Content Include="Scripts\directives\directiveB.js" />
     <Content Include="Scripts\directives\directive.js" />
+    <Content Include="Scripts\directives\directiveRTB.js" />
     <Content Include="Scripts\directives\directiveRT.js" />
     <Content Include="Scripts\html5.js" />
     <Content Include="Scripts\icheck.js" />

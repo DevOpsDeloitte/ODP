@@ -372,6 +372,10 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
 
                     DeleteAnswers(db);
 
+                //if (unabletocode) return true;
+
+                if (!unabletocode)
+                {
                     InsertStudyFocus(db, studyfocusInsertList);
 
                     List<nvClass> entitiesstudiedNVs = NVs.FindAll(nv => nv.name.Contains("entitiesstudied"));
@@ -385,6 +389,7 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
 
                     }
                     db.SubmitChanges();
+                }
 
                     List<nvClass> studysettingNVs = NVs.FindAll(nv => nv.name.Contains("studysetting"));
                     foreach (var ss in studysettingNVs)
@@ -422,7 +427,8 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
                     }
                     db.SubmitChanges();
 
-
+                if (!unabletocode)
+                {
                     List<nvClass> preventioncategoryNVs = NVs.FindAll(nv => nv.name.Contains("preventioncategory"));
                     foreach (var pc in preventioncategoryNVs)
                     {
@@ -435,6 +441,7 @@ using ODPTaxonomyWebsite.Evaluation.Classes;
 
                     }
                     db.SubmitChanges();
+                }
 
                     retVal = true;
 

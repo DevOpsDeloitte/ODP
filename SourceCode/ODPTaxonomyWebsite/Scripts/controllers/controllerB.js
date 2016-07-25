@@ -82,9 +82,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         $scope.mdata.preventioncategory = [];
 
 
+        $scope.unableClick = function (inBool) {
+            if (inBool) {
+                $scope.mdata.studydesignpurpose[7].resetBox();
+            }
+            else {
+                $scope.mdata.studydesignpurpose[7].setBox();
+            }
+        };
 
         $scope.showDescription = function (inID) {
-            //console.log("show description.." + inID);
             window.open("./GlossaryB.aspx#" + inID, "_blank", "toolbar=yes, scrollbars=yes, resizable=yes, width=768, height=700");
         };
 
@@ -321,14 +328,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                 $scope.formIsValid = true;
                 $scope.disallowSave = false;
                 $scope.showSaveButton = true;
- //           }
-            //else {
-            //    //console.log(" unable to code :: form is not valid :: ");
-            //    $scope.formIsValid = false;
-            //    $scope.disallowSave = true;
-            //    $scope.showSaveButton = false;
 
-            //}
             return;
         }
         if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 2] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 2].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
@@ -350,21 +350,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                 }
             }
 
-            //for (i = 1; i < $scope.mdata.studyfocus[2].length; i++) {
-            //    if ($scope.mdata.studyfocus[2][i].modelcolorState != "SolidGreen" && $scope.mdata.studyfocus[2][i].modelcolorState != "Transparent" && $scope.mdata.studyfocus[2][i].modelcolorState != "Disabled") {
-            //        boxColors = false;
-            //        //console.log(" bad box color : 2 :" + i);
-            //        break;
-            //    }
-            //}
-
-            //for (i = 1; i < $scope.mdata.studyfocus[3].length; i++) {
-            //    if ($scope.mdata.studyfocus[3][i].modelcolorState != "SolidGreen" && $scope.mdata.studyfocus[3][i].modelcolorState != "Transparent" && $scope.mdata.studyfocus[3][i].modelcolorState != "Disabled") {
-            //        boxColors = false;
-            //        //console.log(" bad box color : 3 :" + i);
-            //        break;
-            //    }
-            //}
 
             for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
                 if ($scope.mdata.entitiesstudied[i].modelcolorState != "SolidGreen" && $scope.mdata.entitiesstudied[i].modelcolorState != "Transparent" && $scope.mdata.entitiesstudied[i].modelcolorState != "Disabled") {
@@ -516,6 +501,34 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
     };
 
+    $scope.resetFormUnable = function () {
+        for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
+            $scope.mdata.studyfocus[1][i].resetBox();
+        }
+        for (i = 1; i < $scope.mdata.studyfocus[2].length; i++) {
+            $scope.mdata.studyfocus[2][i].resetBox();
+        }
+        for (i = 1; i < $scope.mdata.studyfocus[3].length; i++) {
+            $scope.mdata.studyfocus[3][i].resetBox();
+        }
+
+        for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
+            $scope.mdata.entitiesstudied[i].resetBox();
+        }
+        for (i = 1; i < $scope.mdata.studysetting.length; i++) {
+            $scope.mdata.studysetting[i].resetBox();
+        }
+        for (i = 1; i < $scope.mdata.populationfocus.length; i++) {
+            $scope.mdata.populationfocus[i].resetBox();
+        }
+        //for (i = 1; i < $scope.mdata.studydesignpurpose.length; i++) {
+        //    $scope.mdata.studydesignpurpose[i].resetBox();
+        //}
+        for (i = 1; i < $scope.mdata.preventioncategory.length; i++) {
+            $scope.mdata.preventioncategory[i].resetBox();
+        }
+    };
+
     $scope.resetForm = function () {
 
 
@@ -610,16 +623,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                    if (data.showConsensusButton) $scope.showConsensusButton = true;
                    if (data.showComparisonButton) $scope.showComparisonButton = true;
 
-                   //$scope.$apply();
-                   //                   $scope.$apply(function () {
+                   if ($scope.mdata.unabletocode) {
+                       $scope.resetFormUnable();
+                       //$scope.resetFormUnable
+                   }
 
-                   //                       $scope.mdata.displaymode = "View";
-                   //                   });
-                   //$scope.message = data.message;
-
-
-                   //console.log(" here assignment complete :: ");
-                   //$scope.$apply();
+                  
                }
            });
 
@@ -643,8 +652,10 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         alertify.confirm("Please confirm save?", function (e) {
             if (e) {
-                //window.location.href = "revise.html";
-                //util.save();
+
+                if ($scope.mdata.unabletocode) {
+                    $scope.resetFormUnable();
+                }
                 window.scrollTo(0, 0);
                 $scope.submitForm();
             } else {
