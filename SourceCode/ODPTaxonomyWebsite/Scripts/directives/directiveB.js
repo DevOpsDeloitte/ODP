@@ -3,11 +3,9 @@ app.directive("outcomeBox", function ($rootScope) {
     var boxTemplate = '<div class="select-box {{view.colorstate}}" ng-class="view.classValue"  ng-click="updatestate()" >' +
        '<div class="select-box-container">' +
        '<input type="checkbox" name="{{view.iname}}"  ng-model="view.modelValue" ng-disabled="view.disabled" ng-checked="view.checked" />' +
-       //'<span ng-show="view.consensus">{{view.codervals}}</span>' +
        '<div ng-show="view.consensus"><div class="codercbox coder1">{{view.displaycoders[0]}}</div> <div class="codercbox coder2">{{view.displaycoders[1]}}</div> <div class="codercbox coder3">{{view.displaycoders[2]}}</div> </div>' +
        '<div ng-show="view.comparers"><div class="comparisoncbox ccoder">{{view.displaycoders[0]}}</div> <div class="comparisoncbox codp">{{view.displaycoders[1]}}</div> </div>' +
        '<div class="codercount">{{view.displaycoderscount}}</div>' +
-      //'<span>{{$rootScope.mdata.formmode}}</span>' +
        '<div>' +
        '</div>';
 
@@ -17,13 +15,11 @@ app.directive("outcomeBox", function ($rootScope) {
         template: boxTemplate,
         scope: {
             value: "=outcomeBox"
-            //count: "=hitCount",
-            //isEnabled: "=isEnabled"
+
         },
 
         link: function (scope, elem, attrs) {
             // this works.
-            //console.log(" In link : " + $rootScope.mode);
             //console.log(" In link : " + $scope.mdata.formmode);
             scope.view.presscount = 0;
             scope.view.iname = attrs.name;
@@ -34,7 +30,7 @@ app.directive("outcomeBox", function ($rootScope) {
 
             scope.view.noInput = attrs.noInput;
 
-            // modelcolorState is used as a model tracker for validation etc. It Uses literal values like "Transparent", "DarkGreen", "Red", "Yellow" and "LightGreen"
+            // modelcolorState is used as a model tracker for validation etc. It Uses literal values like "Transparent", "SolidGreen", "Red", "Yellow" and "LightGreen"
             // originalcolorState is used for rendering the right CSS and maintaining the original color in Consensus 
             // codercount is also maintained for consensus.
             scope.value.modelcolorState = "";
@@ -51,8 +47,7 @@ app.directive("outcomeBox", function ($rootScope) {
             }
 
 
-           
-           
+           // checks is-enabled attribute and disables box as needed.   
             scope.isEnabled = attrs.isEnabled;
             if (scope.isEnabled == "no") {
                 scope.view.disabled = true;
@@ -180,7 +175,7 @@ app.directive("outcomeBox", function ($rootScope) {
             scope.value.setBox = function () {
                 if (scope.value.modelcolorState != "Disabled") {
                     codercount = scope.value.codercount;
-                    scope.value.isChecked = true;
+                    //scope.value.isChecked = true;
                     scope.view.checked = true;
                     scope.view.colorstate = "onstate icheckbox_line-tax checked";
                     scope.value.colorstatecopy = "onstate icheckbox_line-tax checked";
@@ -227,6 +222,7 @@ app.directive("outcomeBox", function ($rootScope) {
 
             }
 
+            //variation of resetBox, used by "disableboxes" event during E7F6
             scope.value.resetBoxCC = function()
             {
 

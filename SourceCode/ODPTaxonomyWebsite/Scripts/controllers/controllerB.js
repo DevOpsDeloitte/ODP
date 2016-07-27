@@ -658,7 +658,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             buttonFocus: "none"
         });
 
-        alertify.confirm("Please confirm save?", function (e) {
+        var message_add = "";
+        if ($scope.mdata.unabletocode) {
+            message_add = " Not basic flag will reset form values.";
+        }
+
+        alertify.confirm("Please confirm save?"+message_add, function (e) {
             if (e) {
 
                 if ($scope.mdata.unabletocode) {
