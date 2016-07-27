@@ -505,28 +505,28 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
     $scope.resetFormUnable = function () {
         for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
             $scope.mdata.studyfocus[1][i].resetBox();
+            $scope.mdata.studyfocus[1][i].resetTransparent();
         }
-        for (i = 1; i < $scope.mdata.studyfocus[2].length; i++) {
-            $scope.mdata.studyfocus[2][i].resetBox();
-        }
-        for (i = 1; i < $scope.mdata.studyfocus[3].length; i++) {
-            $scope.mdata.studyfocus[3][i].resetBox();
-        }
+
 
         for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
             $scope.mdata.entitiesstudied[i].resetBox();
+            $scope.mdata.entitiesstudied[i].resetTransparent();
         }
         for (i = 1; i < $scope.mdata.studysetting.length; i++) {
             $scope.mdata.studysetting[i].resetBox();
+            $scope.mdata.studysetting[i].resetTransparent();
         }
         for (i = 1; i < $scope.mdata.populationfocus.length; i++) {
             $scope.mdata.populationfocus[i].resetBox();
+            $scope.mdata.populationfocus[i].resetTransparent();
         }
         //for (i = 1; i < $scope.mdata.studydesignpurpose.length; i++) {
         //    $scope.mdata.studydesignpurpose[i].resetBox();
         //}
         for (i = 1; i < $scope.mdata.preventioncategory.length; i++) {
             $scope.mdata.preventioncategory[i].resetBox();
+            $scope.mdata.preventioncategory[i].resetTransparent();
         }
     };
 
@@ -554,7 +554,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             $scope.mdata.populationfocus[i].resetBox();
         }
         for (i = 1; i < $scope.mdata.studydesignpurpose.length; i++) {
-            $scope.mdata.studydesignpurpose[i].resetBox();
+            if (i != 7) {
+                $scope.mdata.studydesignpurpose[i].resetBox();
+            }
+            if (i == 7) {
+                if ($scope.mdata.unabletocode) {
+                    $scope.mdata.studydesignpurpose[i].setBox();
+                }
+            }
         }
         for (i = 1; i < $scope.mdata.preventioncategory.length; i++) {
             $scope.mdata.preventioncategory[i].resetBox();

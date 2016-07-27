@@ -189,6 +189,20 @@ app.directive("outcomeBox", function ($rootScope) {
                 }
             }
 
+            scope.value.resetTransparent = function () {
+
+                if (scope.value.modelcolorState != "Disabled") {
+                  
+                    if ($rootScope.mode.indexOf("Consensus") != -1 || $rootScope.mode.indexOf("Comparison") != -1) {
+                        scope.view.colorstate = '';
+                        scope.value.colorstatecopy = scope.view.colorstate;
+                    }
+                }
+
+
+
+            }
+            //Used one.
             scope.value.resetBox = function()
             {
 
