@@ -660,7 +660,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         var message_add = "";
         if ($scope.mdata.unabletocode) {
-            message_add = " Not basic flag will reset form values.";
+            message_add = "<br>By selecting 'Not Basic' your selections in the form will be removed.";
         }
 
         alertify.confirm("Please confirm save?"+message_add, function (e) {
