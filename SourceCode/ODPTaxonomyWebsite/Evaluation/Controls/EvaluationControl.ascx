@@ -49,7 +49,7 @@
             </div>
         </div>
 
-                <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
+                <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders() && mdata.formmode != 'ODP Staff Member Consensus'">
             <li class="" ng-class="{ 'current' : showCoderDefault() }" ><a href="#IQS">IQS Coders</a></li>
             <li class="" ng-class="{ 'current' : showODPDefault() }" ><a href="#ODP">ODP Coders</a></li>
         </ul>
