@@ -660,7 +660,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         var message_add = "";
         if ($scope.mdata.unabletocode) {
-            message_add = "<br>By selecting 'Not Basic' your selections in the form will be removed.";
+            message_add = "<br>By selecting 'Not Basic' any current selections will be removed.<br>Previous selections from prior submissions for this abstract will still be preserved.";
         }
 
         alertify.confirm("Please confirm save?"+message_add, function (e) {
