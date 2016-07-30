@@ -43,14 +43,14 @@
             </div>
         </div>
 
-        <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
+        <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders() && mdata.formmode != 'ODP Staff Member Consensus'">
             <li class="" ng-class="{ 'current' : showCoderDefault() }"><a href="#IQS">IQS Coders</a></li>
             <li class="" ng-class="{ 'current' : showODPDefault() }"><a href="#ODP">ODP Coders</a></li>
         </ul>
 
 
         <div class="tab" ng-show="showComments()">
-            <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }" ng-show="showIQSCoders()">
+            <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }" ng-show="showIQSCoders() && mdata.formmode != 'ODP Staff Member Consensus'">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
                 <div ng-show="mdata.formmode == 'ODP Staff Member Consensus' || mdata.formmode == 'ODP Staff Member Comparison'">
                     <strong>IQS Consensus Comments</strong>
