@@ -1362,6 +1362,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
             "serverSide": true,
             "ajax": {
                 "url": config.baseURL + "&filter=" + $opts.filterlist + "&codingType=" + $opts.codingType,
+                "type": "POST",
                 "data": function (data) {
                     if (config.role == "ODPSupervisor") {
                         data.action = $opts.actionlist;
