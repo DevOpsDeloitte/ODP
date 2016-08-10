@@ -24,6 +24,21 @@ namespace ODPTaxonomyWebsite.api
         public string type { get; set; }
         public List<Report_SelectionDatapullingResult> data { get; set; }
     }
+
+    public class KappaApiResponse
+    {
+        public Int32 totalRecords { get; set; }
+        public Int32 start { get; set; }
+        public Int32 length { get; set; }
+        public string type { get; set; }
+        public List<Report_KappaDatapullingResult> data { get; set; }
+    }
+
+    public class ApiError
+    {
+        public string errorMessage { get; set; }
+    }
+
     public class data : IHttpHandler
     {
 
@@ -101,18 +116,66 @@ namespace ODPTaxonomyWebsite.api
                 string type = context.Request["type"] ?? "finalselection";
                 string year = context.Request["year"] ?? "2010";
 
-                List<Report_SelectionDatapullingResult> vals = db.Report_SelectionDatapulling(year).ToList();
+                List<Report_SelectionDatapullingResult> finalselection_vals = new List<Report_SelectionDatapullingResult>();
+                List<Report_KappaDatapullingResult> kappselection_vals = new List<Report_KappaDatapullingResult>();
 
-                if (start == "" && length == "")
+                switch (type.ToLower())
                 {
-                    context.Response.Write(JsonConvert.SerializeObject(new ApiResponse { totalRecords = vals.Count, start = 0, length = vals.Count, type = type, data = vals.ToList() }));
+                    case "finalselection":
+                        finalselection_vals = db.Report_SelectionDatapulling(year).ToList();
+                        var vals = finalselection_vals;
+                        if (start == "" && length == "")
+                        {
+                            context.Response.Write(JsonConvert.SerializeObject(new ApiResponse { totalRecords = vals.Count, start = 0, length = vals.Count, type = type, data = vals.ToList() }));
+                        }
+                        else
+                        {
+                            Int32 startIdx = Int32.Parse(start);
+                            Int32 lengthIdx = Int32.Parse(length);
+                            context.Response.Write(JsonConvert.SerializeObject(new ApiResponse { totalRecords = vals.Count, start = startIdx, length = lengthIdx, type = type, data = vals.Skip(startIdx).Take(lengthIdx).ToList() }));
+                        }
+                        break;
+                    case "kappa":
+                        kappselection_vals = db.Report_KappaDatapulling(year).ToList();
+                        if (start == "" && length == "")
+                        {
+                            context.Response.Write(JsonConvert.SerializeObject(new KappaApiResponse { totalRecords = kappselection_vals.Count, start = 0, length = kappselection_vals.Count, type = type, data = kappselection_vals.ToList() }));
+                        }
+                        else
+                        {
+                            Int32 startIdx = Int32.Parse(start);
+                            Int32 lengthIdx = Int32.Parse(length);
+                            context.Response.Write(JsonConvert.SerializeObject(new KappaApiResponse { totalRecords = kappselection_vals.Count, start = startIdx, length = lengthIdx, type = type, data = kappselection_vals.Skip(startIdx).Take(lengthIdx).ToList() }));
+                        }
+                        break;
+
+                    default:
+                        context.Response.Write(JsonConvert.SerializeObject(new ApiError { errorMessage = "Incorrect type provided." }));
+                        //finalselection_vals = db.Report_SelectionDatapulling(year).ToList();
+                        break;
+
+
                 }
-                else
-                {
-                    Int32 startIdx = Int32.Parse(start);
-                    Int32 lengthIdx = Int32.Parse(length);
-                    context.Response.Write(JsonConvert.SerializeObject(new ApiResponse { totalRecords = vals.Count, start = startIdx, length = lengthIdx, type = type, data = vals.Skip(startIdx).Take(lengthIdx).ToList() }));
-                }
+
+                
+                
+                //if (type == "finalselection")
+                //{
+                //    List<Report_SelectionDatapullingResult> finalselection_vals = db.Report_SelectionDatapulling(year).ToList();
+                //}
+
+                
+
+                //if (start == "" && length == "")
+                //{
+                //    context.Response.Write(JsonConvert.SerializeObject(new ApiResponse { totalRecords = vals.Count, start = 0, length = vals.Count, type = type, data = vals.ToList() }));
+                //}
+                //else
+                //{
+                //    Int32 startIdx = Int32.Parse(start);
+                //    Int32 lengthIdx = Int32.Parse(length);
+                //    context.Response.Write(JsonConvert.SerializeObject(new ApiResponse { totalRecords = vals.Count, start = startIdx, length = lengthIdx, type = type, data = vals.Skip(startIdx).Take(lengthIdx).ToList() }));
+                //}
 
             }
         }

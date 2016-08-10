@@ -91,6 +91,13 @@ namespace ODPTaxonomyDAL_ST
 			return ((ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeksResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaDatapulling")]
+		public ISingleResult<Report_KappaDatapullingResult> Report_KappaDatapulling([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FY", DbType="VarChar(20)")] string fY)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fY);
+			return ((ISingleResult<Report_KappaDatapullingResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_SelectionDatapulling")]
 		public ISingleResult<Report_SelectionDatapullingResult> Report_SelectionDatapulling([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FY", DbType="VarChar(20)")] string fY)
 		{
@@ -924,6 +931,266 @@ namespace ODPTaxonomyDAL_ST
 		}
 	}
 	
+	public partial class Report_KappaDatapullingResult
+	{
+		
+		private string _FY;
+		
+		private string _SubCategory;
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _PIProjectLeader;
+		
+		private string _KappaType;
+		
+		private System.Nullable<decimal> _A1;
+		
+		private System.Nullable<decimal> _A2;
+		
+		private System.Nullable<decimal> _A3;
+		
+		private System.Nullable<int> _A4;
+		
+		private System.Nullable<decimal> _B;
+		
+		private System.Nullable<decimal> _C;
+		
+		private System.Nullable<decimal> _D;
+		
+		private System.Nullable<decimal> _E;
+		
+		private System.Nullable<decimal> _F;
+		
+		public Report_KappaDatapullingResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
+		public string FY
+		{
+			get
+			{
+				return this._FY;
+			}
+			set
+			{
+				if ((this._FY != value))
+				{
+					this._FY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubCategory", DbType="NVarChar(255)")]
+		public string SubCategory
+		{
+			get
+			{
+				return this._SubCategory;
+			}
+			set
+			{
+				if ((this._SubCategory != value))
+				{
+					this._SubCategory = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaType", DbType="NVarChar(50)")]
+		public string KappaType
+		{
+			get
+			{
+				return this._KappaType;
+			}
+			set
+			{
+				if ((this._KappaType != value))
+				{
+					this._KappaType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A1
+		{
+			get
+			{
+				return this._A1;
+			}
+			set
+			{
+				if ((this._A1 != value))
+				{
+					this._A1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A2
+		{
+			get
+			{
+				return this._A2;
+			}
+			set
+			{
+				if ((this._A2 != value))
+				{
+					this._A2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A3
+		{
+			get
+			{
+				return this._A3;
+			}
+			set
+			{
+				if ((this._A3 != value))
+				{
+					this._A3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A4", DbType="Int")]
+		public System.Nullable<int> A4
+		{
+			get
+			{
+				return this._A4;
+			}
+			set
+			{
+				if ((this._A4 != value))
+				{
+					this._A4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> B
+		{
+			get
+			{
+				return this._B;
+			}
+			set
+			{
+				if ((this._B != value))
+				{
+					this._B = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this._C = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this._D = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this._E = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this._F = value;
+				}
+			}
+		}
+	}
+	
 	public partial class Report_SelectionDatapullingResult
 	{
 		
@@ -931,7 +1198,7 @@ namespace ODPTaxonomyDAL_ST
 		
 		private System.Nullable<int> _ApplicationID;
 		
-		private string _SubSet;
+		private string _SubCategory;
 		
 		private string _PIProjectLeader;
 		
@@ -979,18 +1246,18 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSet", DbType="NVarChar(100)")]
-		public string SubSet
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubCategory", DbType="NVarChar(255)")]
+		public string SubCategory
 		{
 			get
 			{
-				return this._SubSet;
+				return this._SubCategory;
 			}
 			set
 			{
-				if ((this._SubSet != value))
+				if ((this._SubCategory != value))
 				{
-					this._SubSet = value;
+					this._SubCategory = value;
 				}
 			}
 		}

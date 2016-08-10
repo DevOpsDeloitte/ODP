@@ -66,12 +66,31 @@
       <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Report_KappaDatapulling" Method="Report_KappaDatapulling">
+    <Parameter Name="FY" Parameter="fY" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="Report_KappaDatapullingResult">
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SubCategory" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="KappaType" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A4" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="B" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="C" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.Report_SelectionDatapulling" Method="Report_SelectionDatapulling">
     <Parameter Name="FY" Parameter="fY" Type="System.String" DbType="VarChar(20)" />
     <ElementType Name="Report_SelectionDatapullingResult">
       <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SubSet" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="SubCategory" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="MainSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="SubSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
