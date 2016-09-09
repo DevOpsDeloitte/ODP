@@ -96,6 +96,16 @@ function Utility() {
         }
     };
 
+    this.getDebounceInterval = function (desktop, mobile) {
+
+        if (this.isMobile()) {
+            return mobile;
+        }
+        else {
+            return desktop;
+        }
+    };
+
     this.ajaxCall = function(url, type, data, callback) {
         var newURL = url + "?role=" + config.role + "&filter=" + $opts.filterlist + "&action=" + $opts.actionlist;
 

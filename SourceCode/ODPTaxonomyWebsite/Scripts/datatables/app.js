@@ -1,7 +1,8 @@
 $(document).ready(function () {
     var table;
     var cellPadding = 20;
-    var debounceVal = 750;
+    var debounceVal = 950;
+    var debounceValMobile = 2200;
     var util;
 
     var currentRow = null;
@@ -13,6 +14,8 @@ $(document).ready(function () {
     $opts.selectedItems = [];
     $opts.unselectedItems = [];
     $opts.generatingExportLink = false;
+
+
 
     // NOTE (TR):
     // This is temporary until I determine if the datatable caches the children or
@@ -30,7 +33,8 @@ $(document).ready(function () {
             if (search != null) {
                 table.search(search).draw();
             }
-        }, debounceVal);
+        //}, util.getDebounceInterval(debounceVal, debounceValMobile));
+        }, ( util.isMobile() ? debounceValMobile : debounceVal) );
 
         $('input[type=search]').off('keyup.DT input.DT');
 
@@ -1357,6 +1361,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                     "targets": 18 //date column
                 }
             ],
+            // searchDelay is only applicable for client side. see debounce function for server side delays.
             "searchDelay": 1000,
             "processing": true,
             "serverSide": true,
