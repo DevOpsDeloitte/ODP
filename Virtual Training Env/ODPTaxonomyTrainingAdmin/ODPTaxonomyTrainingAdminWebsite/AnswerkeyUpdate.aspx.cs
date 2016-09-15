@@ -49,10 +49,10 @@ namespace ODPTaxonomyTrainingAdminWebsite
                  while (dr.Read())
                  {
                     getAppID = dr.GetInt32(0);
-                    getFY = dr.GetString(1);
-                    getPN = dr.GetString(2);
-                    getPI = dr.GetString(3);
-                    getPT = dr.GetString(4);
+                    getFY = dr.GetString(1).Trim();
+                    getPN = dr.GetString(2).Trim();
+                    getPI = dr.GetString(3).Trim();
+                    getPT = dr.GetString(4).Trim();
                  }
                  prodConn.Close();
              }
@@ -66,25 +66,25 @@ namespace ODPTaxonomyTrainingAdminWebsite
                   while (dr.Read())
                   {
                      getAppID = dr.GetInt32(0);
-                     getFY = dr.GetString(1);
-                     getPN = dr.GetString(2);
-                     getPI = dr.GetString(3);
-                     getPT = dr.GetString(4);
+                     getFY = dr.GetString(1).Trim();
+                     getPN = dr.GetString(2).Trim();
+                     getPI = dr.GetString(3).Trim();
+                     getPT = dr.GetString(4).Trim();
                   }
                      trainConn.Close();
              }
 
              if (temp >= 1)  //data exists
              {
-                  string message = "Data Exists as following!\\n" +
+                  string message ="Data Exists as following!\\n" +
                                 "1. Application ID =" + getAppID + "\\n" +
                                 "2. Fiscal Year =" + getFY + "\\n" +
                                 "3. Project Number =" + getPN + "\\n" +
                                 "4. PI Project Leader =" + getPI + "\\n" +
                                 "5. Project Title =" + getPT + "\\n" +
-                                "Are you sure do you want to update?";
+                                "Are you sure you want to update?";
 
-                  this.ClientScript.RegisterStartupScript(typeof(Page), "Popup", "ConfirmUpdateValue('" + message + "');", true);
+                  this.ClientScript.RegisterStartupScript(typeof(Page), "Popup", "ConfirmUpdateValue('" + message.Replace("'", "\\'") + "');", true);
               }
               else  //data not exists
               {

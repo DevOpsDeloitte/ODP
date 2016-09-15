@@ -2,7 +2,31 @@
     CodeBehind="AnswerkeyUpdate.aspx.cs" Inherits="ODPTaxonomyTrainingAdminWebsite.AnswerkeyUpdate" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
-  
+    <script type="text/javascript">
+          function ConfirmUpdateValue(objMsg) {
+
+            var valUPEnvProdTrain = $('#<%= rdoValUpEnv.ClientID %> input:checked').val()
+
+            if (confirm(objMsg)) {
+                if (valUPEnvProdTrain == "1") //production
+                    document.getElementById('<%=btn_prodMethod.ClientID%>').click();
+                else if (valUPEnvProdTrain == "2") //training
+                    document.getElementById('<%=btn_trainMethod.ClientID%>').click();
+            }
+            else {
+                window.location.href = "AnswerkeyUpdate.aspx";
+            }
+        }
+        function ConfirmRerunKappa(objMsg) {
+
+            if (confirm(objMsg)) {
+                document.getElementById('<%=btn_rkMethod.ClientID%>').click();
+            }
+            else {
+                window.location.href = "AnswerkeyUpdate.aspx";
+            }
+        }
+ </script>
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
 

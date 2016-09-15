@@ -93,7 +93,7 @@
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\angularfire.min.js" />
     <Content Include="Scripts\angular\firebase.js" />
-    <Content Include="Scripts\answerkeyUpdate.js" />
+    <Content Include="Scripts\datePicker.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\controllers\controller.js" />
@@ -103,7 +103,6 @@
     <Content Include="Scripts\html5.js" />
     <Content Include="Scripts\icheck.js" />
     <Content Include="Scripts\icheck.min.js" />
-    <Content Include="Scripts\datePicker.js" />
     <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\main.js" />
