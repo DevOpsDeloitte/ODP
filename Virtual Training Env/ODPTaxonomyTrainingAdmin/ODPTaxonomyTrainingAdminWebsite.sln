@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyTrainingAdminWebsite", "ODPTaxonomyTrainingAdminWebsite\ODPTaxonomyTrainingAdminWebsite.csproj", "{6975F9C9-8298-44E6-B03E-B58FC46DC7F8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ODPTaxonomyTrainingAdminDAL", "ODPTaxonomyTrainingAdminDAL\ODPTaxonomyTrainingAdminDAL.csproj", "{7A489397-24FA-43C8-85A3-846E03FEB55B}"
