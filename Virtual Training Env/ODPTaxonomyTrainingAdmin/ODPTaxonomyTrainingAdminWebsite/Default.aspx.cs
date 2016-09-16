@@ -54,6 +54,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
                         // clear out session
                         Session["AbstractIDList"] = "";
                         Session["TargetInstance"] = "";
+                        Session["TargetCategory"] = "";
                         LoadPageData();
                     }
                 }
@@ -163,34 +164,40 @@ namespace ODPTaxonomyTrainingAdminWebsite
                 ClearMessage();
 
                 int l_targetInstance;
+                int l_targetInstanceCategoryID;
+                string l_targetInstanceCategoryName;
                 int l_match_cnt;
                 List<Tr_Source_Target_Instance_MatchUpResult> result; 
 
-                if (ddl_instances.SelectedValue == "-1")
+                if (ddl_instances.SelectedValue == "-1" && ddl_instance_categories.SelectedValue == "-1")
                 {
-                    lbl_Error.Text = "Please select an instance.";
+                    lbl_Error.Text = "Please select an instance and category.";
                     lbl_Error.Visible = true;
                 }
                 else
                 {
 
                     l_targetInstance = Convert.ToInt32(ddl_instances.SelectedValue);
+                    l_targetInstanceCategoryID = Convert.ToInt32(ddl_instance_categories.SelectedValue);
+                    l_targetInstanceCategoryName = ddl_instance_categories.SelectedItem.Text;
+                    //l_targetInstanceCategory = Convert.ToInt32()
                     using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
                     {
-                        result = db.Tr_Source_Target_Instance_MatchUp(l_targetInstance).ToList();
+                        result = db.Tr_Source_Target_Instance_MatchUp(l_targetInstance, l_targetInstanceCategoryID).ToList();
                     }
 
                     l_match_cnt = result.Count();
 
                     if (l_match_cnt == 0)
                     {
-                        l_message = "No selections populated for Instance " + l_targetInstance.ToString() + ".  Abstracts must be a status of 1N in the target instance for population.";
+                        l_message = "No selections populated for Instance: " + l_targetInstance.ToString() + ", Category: " + l_targetInstanceCategoryName +".  Abstracts must be a status of 1N in the target instance for population.";
                         ShowMessage(l_message, false);
                     }
                     else
                     {
                         Session["TargetInstance"] = l_targetInstance;
                         Session["AbstractIDList"] = String.Join(",", result.Select(s => s.TargetAbstractID).ToArray());
+                        Session["TargetCategory"] = l_targetInstanceCategoryName;
                         Response.Redirect("PopulateODP.aspx");
                     }
 
@@ -232,6 +239,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
 
         private void LoadPageData()
         {
+            
             MembershipUser userCurrent = Membership.GetUser();
             string userCurrentName = "";
             if (userCurrent != null)
@@ -250,11 +258,29 @@ namespace ODPTaxonomyTrainingAdminWebsite
                 ddl_instances.Items.Insert(0, new ListItem("Select Active Instance", "-1"));
                 ddl_instances.SelectedValue = "-1";
             }
+
+            
         }
 
 
+        
+        protected void ddl_instances_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // populate category based on instance
+            if (ddl_instances.SelectedValue != "-1")
+            {
+                using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
+                {
+                    ddl_instance_categories.DataSource = db.TR_SelectInstanceCategories(Convert.ToInt32(ddl_instances.SelectedValue));
+                    ddl_instance_categories.DataValueField = "CategoryID";
+                    ddl_instance_categories.DataTextField = "Category";
+                    ddl_instance_categories.DataBind();
+                    ddl_instance_categories.Items.Insert(0, new ListItem("Select Category", "-1"));
+                    ddl_instance_categories.SelectedValue = "-1";
+                }
+            }
+        }
+
         #endregion
-
-
     }
 }

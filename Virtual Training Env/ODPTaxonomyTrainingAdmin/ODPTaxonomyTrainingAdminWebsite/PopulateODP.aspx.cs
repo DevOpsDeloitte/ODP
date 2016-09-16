@@ -36,6 +36,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
 
                         string l_targetInstance = Session["TargetInstance"].ToString();
                         string l_abstractIDList = Session["AbstractIDList"].ToString();
+                        string l_targetCategory = Session["TargetCategory"].ToString();
                         List<Tr_Populate_ODPAnswerResult> result;
 
                         using (TrainingAdminDALDataContext db = new TrainingAdminDALDataContext(connString))
@@ -49,13 +50,13 @@ namespace ODPTaxonomyTrainingAdminWebsite
 
                             if (l_resultCnt == 0)
                             {
-                                l_message = "Error populating ODP data for abstract(s): " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ".";
+                                l_message = "Error populating ODP data for abstract(s): " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ", Category: " + l_targetCategory + " .";
                                 ShowMessage(l_message, true);
                             }
                             else
                             {
                                 // show grid
-                                l_message = "Selections populated to Instance " + l_targetInstance + ".";
+                                l_message = "Selections populated to Instance " + l_targetInstance + ", Category: " + l_targetCategory + " .";
                                 ShowMessage(l_message, false);
                                 gvw_list.DataSource = result;
                                 gvw_list.DataBind();
@@ -64,7 +65,7 @@ namespace ODPTaxonomyTrainingAdminWebsite
                         }
                         else {
                             // error
-                            l_message = "Error populating ODP data for abstract(s): " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ".";
+                            l_message = "Error populating ODP data for abstract(s): " + l_abstractIDList + " in Target Instance: " + l_targetInstance + ", Category: " + l_targetCategory + " .";
                             ShowMessage(l_message, true);
                         }
 

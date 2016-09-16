@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Training_Main" Class="TrainingAdminDALDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Training_Main;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyTrainingAdminDAL.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_Training_MainConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235.iq.iqsolutions.com;Initial Catalog=ODP_Taxonomy_Training_Main;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyTrainingAdminDAL.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_Training_MainConnectionString1" Provider="System.Data.SqlClient" />
   <Function Name="dbo.Tr_SelectInstances" Method="Tr_SelectInstances">
     <ElementType Name="Tr_SelectInstancesResult">
       <Column Name="InstanceID" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -16,13 +16,6 @@
     <Parameter Name="returnValue" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.Tr_Source_Target_Instance_MatchUp" Method="Tr_Source_Target_Instance_MatchUp">
-    <Parameter Name="TargetInstance" Parameter="targetInstance" Type="System.Int32" DbType="Int" />
-    <ElementType Name="Tr_Source_Target_Instance_MatchUpResult">
-      <Column Name="SourceAbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TargetAbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.Tr_Populate_ODPAnswer" Method="Tr_Populate_ODPAnswer">
     <Parameter Name="TargetInstance" Parameter="targetInstance" Type="System.String" DbType="VarChar(2)" />
     <Parameter Name="AbstractList" Parameter="abstractList" Type="System.String" DbType="VarChar(1000)" />
@@ -32,6 +25,21 @@
       <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.TR_SelectInstanceCategories" Method="TR_SelectInstanceCategories">
+    <Parameter Name="InstanceID" Parameter="instanceID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="TR_SelectInstanceCategoriesResult">
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Tr_Source_Target_Instance_MatchUp" Method="Tr_Source_Target_Instance_MatchUp">
+    <Parameter Name="TargetInstance" Parameter="targetInstance" Type="System.Int32" DbType="Int" />
+    <Parameter Name="CategoryID" Parameter="categoryID" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Tr_Source_Target_Instance_MatchUpResult">
+      <Column Name="SourceAbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TargetAbstractID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
 </Database>
