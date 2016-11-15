@@ -1266,10 +1266,20 @@ namespace ODPTaxonomyWebsite.Evaluation.Controls
                 StringBuilder row = new StringBuilder();
                 if (question.Status.Status1 == "Active")
                 {
-                    row.AppendLine("<tr>");
-                    row.AppendLine("<td scope=\"row\">" + question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory + "<div class=\"icon open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
-                    row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"   is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");
-                    row.AppendLine("</tr>");
+                    if (question.PreventionCategoryID == 6 && DisplayMode != "View")
+                    {
+                        row.AppendLine("<tr>");
+                        row.AppendLine("<td scope=\"row\">" + question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory + "<div class=\"icon open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
+                        row.AppendLine("<td ng-click=\"updatePS()\" class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"  is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");
+                        row.AppendLine("</tr>");
+                    }
+                    else
+                    {
+                        row.AppendLine("<tr>");
+                        row.AppendLine("<td scope=\"row\">" + question.PreventionCategoryID.ToString() + ". " + question.PreventionCategory + "<div class=\"icon open\" ng-click=\"showDescription('preventioncategory-" + question.PreventionCategoryID.ToString() + "')\"></div>" + "</td>");
+                        row.AppendLine("<td class=\"box-three big\"><div outcome-box=\"mdata.preventioncategory[" + question.PreventionCategoryID + "]\"   is-checked='" + getViewVals[0] + "' show-coders='" + getCoderVals[0] + "' show-comparers='" + getComparerVals[0] + "' is-enabled='yes' " + " name=\"preventioncategory-" + question.PreventionCategoryID + "\" data-cat-id=\"preventioncategory\" data-q-id =\"" + question.PreventionCategoryID + "\"></div></td>");
+                        row.AppendLine("</tr>");
+                    }
                 }
                 if (question.Status.Status1 == "InActive")
                 {

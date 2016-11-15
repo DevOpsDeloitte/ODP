@@ -47,7 +47,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         //$scope.$apply();
 
-
+        $scope.mdata.F6isEnabled = false;
 
 
         $scope.disallowSave = true;
@@ -319,8 +319,66 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
     });
 
+    $scope.updatePS = function () {
+        console.log("update PS :: ");
+        if ($scope.mdata.preventioncategory[6] != undefined && $scope.mdata.preventioncategory[6].isChecked) {
+
+            alertify.confirm("F6 selection, will remove all selections in A and B.", function (e) {
+                if (e) {
+
+                    $scope.mdata.F6isEnabled = true;
+                    $scope.$apply();
+                } else {
+
+                    $scope.mdata.F6isEnabled = false;
+                    // also reset F6 back to unchecked
+                    $scope.mdata.preventioncategory[6].resetBox();
+                    $scope.mdata.preventioncategory[6].resetTransparent();
+                    $scope.$apply();
+                }
+            });
+        }
+        else {
+            $scope.mdata.F6isEnabled = false;
+        }
+
+    };
+
+    $scope.cleanAB = function () {
+        if ($scope.mdata.F6isEnabled) {
+            for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
+                $scope.mdata.studyfocus[1][i].resetBox();
+                $scope.mdata.studyfocus[1][i].resetTransparent();
+            }
+
+            for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
+                $scope.mdata.entitiesstudied[i].resetBox();
+                $scope.mdata.entitiesstudied[i].resetTransparent();
+            }
+        }
+    };
+
+    $scope.F6logic = function () {
+        console.log("validate F6logic ::");
+        if ($scope.mdata.preventioncategory[6] != undefined && $scope.mdata.preventioncategory[6].isChecked) {
+            console.log("F6 clicked..");
+            //$scope.mdata.F6isEnabled = true;
+
+          
+           
+
+        }
+        else {
+           // $scope.mdata.F6isEnabled = false;
+        }
+    };
+
     $scope.$on("validate.formdata", function () {
         // No need to validate if user has checked unable to code.
+
+        $scope.F6logic();
+        $scope.cleanAB();
+
         console.log(" validate.formdata :: ");
         if ($scope.mdata.unabletocode) {
 
