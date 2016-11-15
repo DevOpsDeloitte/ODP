@@ -320,10 +320,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
     });
 
     $scope.updatePS = function () {
-        console.log("update PS :: ");
         if ($scope.mdata.preventioncategory[6] != undefined && $scope.mdata.preventioncategory[6].isChecked) {
 
-            alertify.confirm("F6 selection, will remove all selections in A and B.", function (e) {
+            alertify.confirm("Selecting F6, will remove and not allow selections in A. Study Focus and B. Entities Studied", function (e) {
                 if (e) {
 
                     $scope.mdata.F6isEnabled = true;
@@ -348,12 +347,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         if ($scope.mdata.F6isEnabled) {
             for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
                 $scope.mdata.studyfocus[1][i].resetBox();
-                $scope.mdata.studyfocus[1][i].resetTransparent();
+                //$scope.mdata.studyfocus[1][i].resetTransparent();
             }
 
             for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
                 $scope.mdata.entitiesstudied[i].resetBox();
-                $scope.mdata.entitiesstudied[i].resetTransparent();
+                //$scope.mdata.entitiesstudied[i].resetTransparent();
             }
         }
     };
@@ -376,7 +375,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
     $scope.$on("validate.formdata", function () {
         // No need to validate if user has checked unable to code.
 
-        $scope.F6logic();
+        //$scope.F6logic();
         $scope.cleanAB();
 
         console.log(" validate.formdata :: ");
