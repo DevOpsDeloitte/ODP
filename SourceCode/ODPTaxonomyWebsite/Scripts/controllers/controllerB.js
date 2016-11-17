@@ -350,13 +350,13 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
     $scope.cleanAB = function () {
         if ($scope.mdata.F6isEnabled) {
             for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
-                //$scope.mdata.studyfocus[1][i].resetTP(); // works commented out for now.
-                $scope.mdata.studyfocus[1][i].resetBox();
+                $scope.mdata.studyfocus[1][i].resetTP();
+                //$scope.mdata.studyfocus[1][i].resetBox();
             }
 
             for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
-                //$scope.mdata.entitiesstudied[i].resetTP(); // works commented out for now.
-                $scope.mdata.entitiesstudied[i].resetBox();
+                $scope.mdata.entitiesstudied[i].resetTP(); 
+                //$scope.mdata.entitiesstudied[i].resetBox();
             }
         }
     };
