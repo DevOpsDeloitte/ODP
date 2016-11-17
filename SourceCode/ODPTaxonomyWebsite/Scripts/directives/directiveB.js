@@ -194,9 +194,34 @@ app.directive("outcomeBox", function ($rootScope) {
                     }
                 }
 
+            }
 
+            scope.value.resetTP = function () {
+                //console.log("reset TP");
+                if (scope.value.modelcolorState != "Disabled") {
+                    codercount = scope.value.codercount;
+                    scope.value.isChecked = false;
+                    scope.view.checked = false;
+                    scope.view.colorstate = scope.value.originalcolorState;
+                    scope.view.colorstate = '';
+                    if (codercount > 0) {
+
+                        if ($rootScope.mode.indexOf("Consensus") != -1) {
+                            scope.value.modelcolorState = scope.getColor(codercount);
+                            scope.value.modelcolorState = 'Transparent'
+                        }
+
+                        if ($rootScope.mode.indexOf("Comparison") != -1) {
+                            scope.value.modelcolorState = scope.getComparisonColor(codercount);
+                            scope.value.modelcolorState = 'Transparent'
+                        }
+
+                    }
+                    scope.value.colorstatecopy = scope.view.colorstate;
+                }
 
             }
+
             //Used one.
             scope.value.resetBox = function()
             {
@@ -218,8 +243,6 @@ app.directive("outcomeBox", function ($rootScope) {
                      scope.value.colorstatecopy = scope.view.colorstate;
                  }
                 
-
-
             }
 
             //variation of resetBox, used by "disableboxes" event during E7F6
