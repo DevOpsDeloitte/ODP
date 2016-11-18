@@ -17,6 +17,7 @@ namespace ODPTaxonomyWebsite.Evaluation
     {
         public string unabletocode = string.Empty;
         public string studyFocus = string.Empty;
+        public string codingApproach = string.Empty;
         public string studyFocusTitle = string.Empty;
         public string studyFocusCategory = string.Empty;
         public string topics = string.Empty;
@@ -41,6 +42,8 @@ namespace ODPTaxonomyWebsite.Evaluation
             populationFocus = RenderCategory("D_PopulationFocus_B");
             studyDesignPurpose = RenderCategory("E_StudyDesignPurpose_B");
             preventionCategory = RenderCategory("F_PreventionCategory_B");
+
+            codingApproach = RenderCategory("Coding_Approach");
 
         }
 

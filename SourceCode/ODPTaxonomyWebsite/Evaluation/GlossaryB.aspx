@@ -17,6 +17,7 @@
     <div id="mainGlossary">
 
        <%=misc %>
+       <%=codingApproach %>
        <%=studyFocusTitle %>
        
         <%=studyFocusCategory %>
