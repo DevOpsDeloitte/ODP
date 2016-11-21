@@ -97,5 +97,16 @@ namespace ODPTaxonomyDAL_ST.Properties {
                 return ((string)(this["ODP_Taxonomy_DEVConnectionString6"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=2sql235.iq.iqsolutions.com;Initial Catalog=ODP_Taxonomy_DEV;Persist S" +
+            "ecurity Info=True;User ID=odpTaxonomy")]
+        public string ODP_Taxonomy_DEVConnectionString7 {
+            get {
+                return ((string)(this["ODP_Taxonomy_DEVConnectionString7"]));
+            }
+        }
     }
 }

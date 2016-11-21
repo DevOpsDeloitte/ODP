@@ -22,7 +22,7 @@ namespace ODPTaxonomyDAL_ST
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_Dev")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_DEV")]
 	public partial class DataDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -33,9 +33,6 @@ namespace ODPTaxonomyDAL_ST
     partial void InsertA_StudyFocusAnswer(A_StudyFocusAnswer instance);
     partial void UpdateA_StudyFocusAnswer(A_StudyFocusAnswer instance);
     partial void DeleteA_StudyFocusAnswer(A_StudyFocusAnswer instance);
-    partial void InsertA_StudyFocusCategory(A_StudyFocusCategory instance);
-    partial void UpdateA_StudyFocusCategory(A_StudyFocusCategory instance);
-    partial void DeleteA_StudyFocusCategory(A_StudyFocusCategory instance);
     partial void InsertB_EntitiesStudied(B_EntitiesStudied instance);
     partial void UpdateB_EntitiesStudied(B_EntitiesStudied instance);
     partial void DeleteB_EntitiesStudied(B_EntitiesStudied instance);
@@ -150,10 +147,13 @@ namespace ODPTaxonomyDAL_ST
     partial void InsertAbstract(Abstract instance);
     partial void UpdateAbstract(Abstract instance);
     partial void DeleteAbstract(Abstract instance);
+    partial void InsertA_StudyFocusCategory(A_StudyFocusCategory instance);
+    partial void UpdateA_StudyFocusCategory(A_StudyFocusCategory instance);
+    partial void DeleteA_StudyFocusCategory(A_StudyFocusCategory instance);
     #endregion
 		
 		public DataDataContext() : 
-				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString3, mappingSource)
+				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString7, mappingSource)
 		{
 			OnCreated();
 		}
@@ -187,14 +187,6 @@ namespace ODPTaxonomyDAL_ST
 			get
 			{
 				return this.GetTable<A_StudyFocusAnswer>();
-			}
-		}
-		
-		public System.Data.Linq.Table<A_StudyFocusCategory> A_StudyFocusCategories
-		{
-			get
-			{
-				return this.GetTable<A_StudyFocusCategory>();
 			}
 		}
 		
@@ -510,6 +502,14 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
+		public System.Data.Linq.Table<A_StudyFocusCategory> A_StudyFocusCategories
+		{
+			get
+			{
+				return this.GetTable<A_StudyFocusCategory>();
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.KappaBaseData_Insert_ByAbs_EvlID")]
 		public int KappaBaseData_Insert_ByAbs_EvlID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractID", DbType="Int")] System.Nullable<int> abstractID, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="EvaluationId", DbType="Int")] System.Nullable<int> evaluationId, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="AbstractStatusID", DbType="Int")] System.Nullable<int> abstractStatusID)
 		{
@@ -778,92 +778,6 @@ namespace ODPTaxonomyDAL_ST
 						this._StudyFocusID = default(int);
 					}
 					this.SendPropertyChanged("A_StudyFocus");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.A_StudyFocusCategory")]
-	public partial class A_StudyFocusCategory : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _StudyFocusCategoryID;
-		
-		private string _StudyFocusCategory;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnStudyFocusCategoryIDChanging(int value);
-    partial void OnStudyFocusCategoryIDChanged();
-    partial void OnStudyFocusCategoryChanging(string value);
-    partial void OnStudyFocusCategoryChanged();
-    #endregion
-		
-		public A_StudyFocusCategory()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudyFocusCategoryID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int StudyFocusCategoryID
-		{
-			get
-			{
-				return this._StudyFocusCategoryID;
-			}
-			set
-			{
-				if ((this._StudyFocusCategoryID != value))
-				{
-					this.OnStudyFocusCategoryIDChanging(value);
-					this.SendPropertyChanging();
-					this._StudyFocusCategoryID = value;
-					this.SendPropertyChanged("StudyFocusCategoryID");
-					this.OnStudyFocusCategoryIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudyFocusCategory", DbType="NVarChar(20)")]
-		public string StudyFocusCategory
-		{
-			get
-			{
-				return this._StudyFocusCategory;
-			}
-			set
-			{
-				if ((this._StudyFocusCategory != value))
-				{
-					this.OnStudyFocusCategoryChanging(value);
-					this.SendPropertyChanging();
-					this._StudyFocusCategory = value;
-					this.SendPropertyChanged("StudyFocusCategory");
-					this.OnStudyFocusCategoryChanged();
 				}
 			}
 		}
@@ -10507,6 +10421,92 @@ namespace ODPTaxonomyDAL_ST
 		{
 			this.SendPropertyChanging();
 			entity.Abstract = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.A_StudyFocusCategory")]
+	public partial class A_StudyFocusCategory : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _A_StudyFocusCategoryID;
+		
+		private string _A_StudyFocusCategory1;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnA_StudyFocusCategoryIDChanging(int value);
+    partial void OnA_StudyFocusCategoryIDChanged();
+    partial void OnA_StudyFocusCategory1Changing(string value);
+    partial void OnA_StudyFocusCategory1Changed();
+    #endregion
+		
+		public A_StudyFocusCategory()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A_StudyFocusCategoryID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int A_StudyFocusCategoryID
+		{
+			get
+			{
+				return this._A_StudyFocusCategoryID;
+			}
+			set
+			{
+				if ((this._A_StudyFocusCategoryID != value))
+				{
+					this.OnA_StudyFocusCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._A_StudyFocusCategoryID = value;
+					this.SendPropertyChanged("A_StudyFocusCategoryID");
+					this.OnA_StudyFocusCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="A_StudyFocusCategory", Storage="_A_StudyFocusCategory1", DbType="NVarChar(100)")]
+		public string A_StudyFocusCategory1
+		{
+			get
+			{
+				return this._A_StudyFocusCategory1;
+			}
+			set
+			{
+				if ((this._A_StudyFocusCategory1 != value))
+				{
+					this.OnA_StudyFocusCategory1Changing(value);
+					this.SendPropertyChanging();
+					this._A_StudyFocusCategory1 = value;
+					this.SendPropertyChanged("A_StudyFocusCategory1");
+					this.OnA_StudyFocusCategory1Changed();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }
