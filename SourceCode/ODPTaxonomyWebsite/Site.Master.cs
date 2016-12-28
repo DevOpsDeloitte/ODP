@@ -178,6 +178,19 @@ namespace ODPTaxonomyWebsite
                 throw new Exception("An error has occured on button click.");
             }
         }
+        protected void btn_category_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session["CurrentRole"] = role_odpSup;
+                Response.Redirect("/Category.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on button click.");
+            }
+        }
 
         protected void btn_viewAbstractList_odpSup_Click(object sender, EventArgs e)
         {

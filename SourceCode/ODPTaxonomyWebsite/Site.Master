@@ -92,7 +92,8 @@
                         </div>                                    
                        
                         <div runat="server" visible="false" id="pnl_odpSup"><div class="nav-role">Role: ODP Supervisor</div>
-                            <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></a>
+                            <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" />
+                            <asp:LinkButton runat="server" ID="btn_category" Text="Category Abstract Selection" OnClick="btn_category_Click"   />
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" />
                             <asp:LinkButton runat="server" ID="btn_KappaLink" Text="Reports" OnClick="btn_KappaLink_Click" />
                         </div>
