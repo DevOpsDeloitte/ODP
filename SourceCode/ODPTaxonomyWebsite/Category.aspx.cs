@@ -26,29 +26,13 @@ namespace ODPTaxonomyWebsite
             
             if (!this.IsPostBack)
             {
+
                 lbl_category.Text = "";
                 lbl_message.Text = "";
                 lbl_message.Visible = false;
                 btn_submit.Enabled = false;
                 btn_reset.Enabled = false;
 
-                /*
-                using (SqlConnection con = new SqlConnection(constr))
-                {
-                    
-                   using (SqlCommand cmd = new SqlCommand("SELECT CategoryID, concat(FY,' ',Category) name FROM Category where statusID ='1'"))
-                   {
-                        cmd.CommandType = CommandType.Text;
-                        cmd.Connection = con;
-                        using (SqlDataAdapter sda = new SqlDataAdapter(cmd))
-                        {
-                            DataSet ds = new DataSet();
-                            sda.Fill(ds);
-                            ddlCategory.DataSource = ds.Tables[0];
-                            ddlCategory.DataTextField = "Name";
-                            ddlCategory.DataValueField = "CategoryID";
-                            ddlCategory.DataBind();
-                        }}*/
                 List<Select_CategoryResult> cateList = null;
                 using (ReportDataLinqDataContext db = new ReportDataLinqDataContext(ReportDAL.connString))
                
@@ -86,25 +70,12 @@ namespace ODPTaxonomyWebsite
                 lbl_category.Text = ddlCategory.SelectedItem.ToString();
              }
 
-
-         
         }
 
         protected void btn_reset_Click(object sender, EventArgs e)
         {
             resetPage();
         }
-
-        protected void btn_submit_Click(object sender, EventArgs e)
-        {
-             string message = "Category Change Confirmation\\n"+
-                              "Please confirm you would like to change categories to\\n"+
-                              "currently Coding:" + ddlCategory.SelectedItem.ToString();
-             this.ClientScript.RegisterStartupScript(typeof(Page), "Popup", "ConfirmCategory('" + message.Replace("'", "\\'") + "');", true);
-            //lbl_message.Text = "Update is Complete";
-           // lbl_message.Visible = true;
-        }
-
 
 
         #region Methods
