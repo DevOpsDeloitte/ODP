@@ -609,6 +609,7 @@
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
     <Content Include="Print.Master" />
     <None Include="Properties\PublishProfiles\ODP Taxonomy Publish.pubxml" />
+    <None Include="Properties\PublishProfiles\ODPCategory.pubxml" />
     <None Include="Properties\PublishProfiles\ODPTaxonomy.pubxml" />
     <Content Include="ReportingApp\css\report.scss" />
     <Content Include="ReportingApp\handlers\ReportService.ashx" />
