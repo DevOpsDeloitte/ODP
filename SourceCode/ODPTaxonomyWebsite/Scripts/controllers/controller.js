@@ -10,6 +10,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         $scope.mdata = {};
         $scope.FIREBASE_LOCATION = window.FIREBASE_CONFIG;
         FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
+        $scope.mdata.Role = window.Role;
         $scope.mdata.superusername = "";
         $scope.mdata.superpassword = "";
         $scope.mdata.formmode = "Consensus"; // $("input#mode").val();
@@ -292,7 +293,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
 
         }, 300);
-
 
     };
 

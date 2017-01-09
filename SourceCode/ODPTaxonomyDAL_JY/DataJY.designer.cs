@@ -63,16 +63,25 @@ namespace ODPTaxonomyDAL_JY
     partial void InsertF_PreventionCategoryAnswer(F_PreventionCategoryAnswer instance);
     partial void UpdateF_PreventionCategoryAnswer(F_PreventionCategoryAnswer instance);
     partial void DeleteF_PreventionCategoryAnswer(F_PreventionCategoryAnswer instance);
-    partial void InsertAbstract(Abstract instance);
-    partial void UpdateAbstract(Abstract instance);
-    partial void DeleteAbstract(Abstract instance);
     partial void InsertReport_AbstractExcludedList(Report_AbstractExcludedList instance);
     partial void UpdateReport_AbstractExcludedList(Report_AbstractExcludedList instance);
     partial void DeleteReport_AbstractExcludedList(Report_AbstractExcludedList instance);
+    partial void InsertF_PreventionCategoryAnswer_B(F_PreventionCategoryAnswer_B instance);
+    partial void UpdateF_PreventionCategoryAnswer_B(F_PreventionCategoryAnswer_B instance);
+    partial void DeleteF_PreventionCategoryAnswer_B(F_PreventionCategoryAnswer_B instance);
+    partial void InsertE_StudyDesignPurposeAnswer_B(E_StudyDesignPurposeAnswer_B instance);
+    partial void UpdateE_StudyDesignPurposeAnswer_B(E_StudyDesignPurposeAnswer_B instance);
+    partial void DeleteE_StudyDesignPurposeAnswer_B(E_StudyDesignPurposeAnswer_B instance);
+    partial void InsertAbstract(Abstract instance);
+    partial void UpdateAbstract(Abstract instance);
+    partial void DeleteAbstract(Abstract instance);
+    partial void InsertKappaData_B(KappaData_B instance);
+    partial void UpdateKappaData_B(KappaData_B instance);
+    partial void DeleteKappaData_B(KappaData_B instance);
     #endregion
 		
 		public DataJYDataContext() : 
-				base(global::ODPTaxonomyDAL_JY.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString2, mappingSource)
+				base(global::ODPTaxonomyDAL_JY.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString3, mappingSource)
 		{
 			OnCreated();
 		}
@@ -189,6 +198,30 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
+		public System.Data.Linq.Table<Report_AbstractExcludedList> Report_AbstractExcludedLists
+		{
+			get
+			{
+				return this.GetTable<Report_AbstractExcludedList>();
+			}
+		}
+		
+		public System.Data.Linq.Table<F_PreventionCategoryAnswer_B> F_PreventionCategoryAnswer_Bs
+		{
+			get
+			{
+				return this.GetTable<F_PreventionCategoryAnswer_B>();
+			}
+		}
+		
+		public System.Data.Linq.Table<E_StudyDesignPurposeAnswer_B> E_StudyDesignPurposeAnswer_Bs
+		{
+			get
+			{
+				return this.GetTable<E_StudyDesignPurposeAnswer_B>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Abstract> Abstracts
 		{
 			get
@@ -197,11 +230,11 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
-		public System.Data.Linq.Table<Report_AbstractExcludedList> Report_AbstractExcludedLists
+		public System.Data.Linq.Table<KappaData_B> KappaData_Bs
 		{
 			get
 			{
-				return this.GetTable<Report_AbstractExcludedList>();
+				return this.GetTable<KappaData_B>();
 			}
 		}
 	}
@@ -740,6 +773,10 @@ namespace ODPTaxonomyDAL_JY
 		
 		private EntitySet<F_PreventionCategoryAnswer> _F_PreventionCategoryAnswers;
 		
+		private EntitySet<F_PreventionCategoryAnswer_B> _F_PreventionCategoryAnswer_Bs;
+		
+		private EntitySet<E_StudyDesignPurposeAnswer_B> _E_StudyDesignPurposeAnswer_Bs;
+		
 		private EntityRef<Evaluation> _Evaluation;
 		
     #region Extensibility Method Definitions
@@ -772,6 +809,8 @@ namespace ODPTaxonomyDAL_JY
 		{
 			this._E_StudyDesignPurposeAnswers = new EntitySet<E_StudyDesignPurposeAnswer>(new Action<E_StudyDesignPurposeAnswer>(this.attach_E_StudyDesignPurposeAnswers), new Action<E_StudyDesignPurposeAnswer>(this.detach_E_StudyDesignPurposeAnswers));
 			this._F_PreventionCategoryAnswers = new EntitySet<F_PreventionCategoryAnswer>(new Action<F_PreventionCategoryAnswer>(this.attach_F_PreventionCategoryAnswers), new Action<F_PreventionCategoryAnswer>(this.detach_F_PreventionCategoryAnswers));
+			this._F_PreventionCategoryAnswer_Bs = new EntitySet<F_PreventionCategoryAnswer_B>(new Action<F_PreventionCategoryAnswer_B>(this.attach_F_PreventionCategoryAnswer_Bs), new Action<F_PreventionCategoryAnswer_B>(this.detach_F_PreventionCategoryAnswer_Bs));
+			this._E_StudyDesignPurposeAnswer_Bs = new EntitySet<E_StudyDesignPurposeAnswer_B>(new Action<E_StudyDesignPurposeAnswer_B>(this.attach_E_StudyDesignPurposeAnswer_Bs), new Action<E_StudyDesignPurposeAnswer_B>(this.detach_E_StudyDesignPurposeAnswer_Bs));
 			this._Evaluation = default(EntityRef<Evaluation>);
 			OnCreated();
 		}
@@ -1006,6 +1045,32 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_F_PreventionCategoryAnswer_B", Storage="_F_PreventionCategoryAnswer_Bs", ThisKey="SubmissionID", OtherKey="SubmissionID")]
+		public EntitySet<F_PreventionCategoryAnswer_B> F_PreventionCategoryAnswer_Bs
+		{
+			get
+			{
+				return this._F_PreventionCategoryAnswer_Bs;
+			}
+			set
+			{
+				this._F_PreventionCategoryAnswer_Bs.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_E_StudyDesignPurposeAnswer_B", Storage="_E_StudyDesignPurposeAnswer_Bs", ThisKey="SubmissionID", OtherKey="SubmissionID")]
+		public EntitySet<E_StudyDesignPurposeAnswer_B> E_StudyDesignPurposeAnswer_Bs
+		{
+			get
+			{
+				return this._E_StudyDesignPurposeAnswer_Bs;
+			}
+			set
+			{
+				this._E_StudyDesignPurposeAnswer_Bs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Evaluation_Submission", Storage="_Evaluation", ThisKey="EvaluationId", OtherKey="EvaluationId", IsForeignKey=true)]
 		public Evaluation Evaluation
 		{
@@ -1079,6 +1144,30 @@ namespace ODPTaxonomyDAL_JY
 		}
 		
 		private void detach_F_PreventionCategoryAnswers(F_PreventionCategoryAnswer entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = null;
+		}
+		
+		private void attach_F_PreventionCategoryAnswer_Bs(F_PreventionCategoryAnswer_B entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = this;
+		}
+		
+		private void detach_F_PreventionCategoryAnswer_Bs(F_PreventionCategoryAnswer_B entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = null;
+		}
+		
+		private void attach_E_StudyDesignPurposeAnswer_Bs(E_StudyDesignPurposeAnswer_B entity)
+		{
+			this.SendPropertyChanging();
+			entity.Submission = this;
+		}
+		
+		private void detach_E_StudyDesignPurposeAnswer_Bs(E_StudyDesignPurposeAnswer_B entity)
 		{
 			this.SendPropertyChanging();
 			entity.Submission = null;
@@ -3004,6 +3093,418 @@ namespace ODPTaxonomyDAL_JY
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_AbstractExcludedList")]
+	public partial class Report_AbstractExcludedList : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AbstractID;
+		
+		private System.Nullable<System.DateTime> _CreatedDate;
+		
+		private System.Nullable<System.Guid> _CreatedBy;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAbstractIDChanging(int value);
+    partial void OnAbstractIDChanged();
+    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateChanged();
+    partial void OnCreatedByChanging(System.Nullable<System.Guid> value);
+    partial void OnCreatedByChanged();
+    #endregion
+		
+		public Report_AbstractExcludedList()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this.OnAbstractIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractID = value;
+					this.SendPropertyChanged("AbstractID");
+					this.OnAbstractIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDate
+		{
+			get
+			{
+				return this._CreatedDate;
+			}
+			set
+			{
+				if ((this._CreatedDate != value))
+				{
+					this.OnCreatedDateChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDate = value;
+					this.SendPropertyChanged("CreatedDate");
+					this.OnCreatedDateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> CreatedBy
+		{
+			get
+			{
+				return this._CreatedBy;
+			}
+			set
+			{
+				if ((this._CreatedBy != value))
+				{
+					this.OnCreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedBy = value;
+					this.SendPropertyChanged("CreatedBy");
+					this.OnCreatedByChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.F_PreventionCategoryAnswer_B")]
+	public partial class F_PreventionCategoryAnswer_B : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _F_PreventionCategoryID;
+		
+		private int _SubmissionID;
+		
+		private int _PreventionCategoryID;
+		
+		private EntityRef<Submission> _Submission;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnF_PreventionCategoryIDChanging(int value);
+    partial void OnF_PreventionCategoryIDChanged();
+    partial void OnSubmissionIDChanging(int value);
+    partial void OnSubmissionIDChanged();
+    partial void OnPreventionCategoryIDChanging(int value);
+    partial void OnPreventionCategoryIDChanged();
+    #endregion
+		
+		public F_PreventionCategoryAnswer_B()
+		{
+			this._Submission = default(EntityRef<Submission>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F_PreventionCategoryID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int F_PreventionCategoryID
+		{
+			get
+			{
+				return this._F_PreventionCategoryID;
+			}
+			set
+			{
+				if ((this._F_PreventionCategoryID != value))
+				{
+					this.OnF_PreventionCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._F_PreventionCategoryID = value;
+					this.SendPropertyChanged("F_PreventionCategoryID");
+					this.OnF_PreventionCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionID", DbType="Int NOT NULL")]
+		public int SubmissionID
+		{
+			get
+			{
+				return this._SubmissionID;
+			}
+			set
+			{
+				if ((this._SubmissionID != value))
+				{
+					if (this._Submission.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSubmissionIDChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionID = value;
+					this.SendPropertyChanged("SubmissionID");
+					this.OnSubmissionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PreventionCategoryID", DbType="Int NOT NULL")]
+		public int PreventionCategoryID
+		{
+			get
+			{
+				return this._PreventionCategoryID;
+			}
+			set
+			{
+				if ((this._PreventionCategoryID != value))
+				{
+					this.OnPreventionCategoryIDChanging(value);
+					this.SendPropertyChanging();
+					this._PreventionCategoryID = value;
+					this.SendPropertyChanged("PreventionCategoryID");
+					this.OnPreventionCategoryIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_F_PreventionCategoryAnswer_B", Storage="_Submission", ThisKey="SubmissionID", OtherKey="SubmissionID", IsForeignKey=true)]
+		public Submission Submission
+		{
+			get
+			{
+				return this._Submission.Entity;
+			}
+			set
+			{
+				Submission previousValue = this._Submission.Entity;
+				if (((previousValue != value) 
+							|| (this._Submission.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Submission.Entity = null;
+						previousValue.F_PreventionCategoryAnswer_Bs.Remove(this);
+					}
+					this._Submission.Entity = value;
+					if ((value != null))
+					{
+						value.F_PreventionCategoryAnswer_Bs.Add(this);
+						this._SubmissionID = value.SubmissionID;
+					}
+					else
+					{
+						this._SubmissionID = default(int);
+					}
+					this.SendPropertyChanged("Submission");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.E_StudyDesignPurposeAnswer_B")]
+	public partial class E_StudyDesignPurposeAnswer_B : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _E_StudyDesignPurposeAnswerID;
+		
+		private int _SubmissionID;
+		
+		private int _StudyDesignPurposeID;
+		
+		private EntityRef<Submission> _Submission;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnE_StudyDesignPurposeAnswerIDChanging(int value);
+    partial void OnE_StudyDesignPurposeAnswerIDChanged();
+    partial void OnSubmissionIDChanging(int value);
+    partial void OnSubmissionIDChanged();
+    partial void OnStudyDesignPurposeIDChanging(int value);
+    partial void OnStudyDesignPurposeIDChanged();
+    #endregion
+		
+		public E_StudyDesignPurposeAnswer_B()
+		{
+			this._Submission = default(EntityRef<Submission>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E_StudyDesignPurposeAnswerID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int E_StudyDesignPurposeAnswerID
+		{
+			get
+			{
+				return this._E_StudyDesignPurposeAnswerID;
+			}
+			set
+			{
+				if ((this._E_StudyDesignPurposeAnswerID != value))
+				{
+					this.OnE_StudyDesignPurposeAnswerIDChanging(value);
+					this.SendPropertyChanging();
+					this._E_StudyDesignPurposeAnswerID = value;
+					this.SendPropertyChanged("E_StudyDesignPurposeAnswerID");
+					this.OnE_StudyDesignPurposeAnswerIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubmissionID", DbType="Int NOT NULL")]
+		public int SubmissionID
+		{
+			get
+			{
+				return this._SubmissionID;
+			}
+			set
+			{
+				if ((this._SubmissionID != value))
+				{
+					if (this._Submission.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnSubmissionIDChanging(value);
+					this.SendPropertyChanging();
+					this._SubmissionID = value;
+					this.SendPropertyChanged("SubmissionID");
+					this.OnSubmissionIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StudyDesignPurposeID", DbType="Int NOT NULL")]
+		public int StudyDesignPurposeID
+		{
+			get
+			{
+				return this._StudyDesignPurposeID;
+			}
+			set
+			{
+				if ((this._StudyDesignPurposeID != value))
+				{
+					this.OnStudyDesignPurposeIDChanging(value);
+					this.SendPropertyChanging();
+					this._StudyDesignPurposeID = value;
+					this.SendPropertyChanged("StudyDesignPurposeID");
+					this.OnStudyDesignPurposeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Submission_E_StudyDesignPurposeAnswer_B", Storage="_Submission", ThisKey="SubmissionID", OtherKey="SubmissionID", IsForeignKey=true)]
+		public Submission Submission
+		{
+			get
+			{
+				return this._Submission.Entity;
+			}
+			set
+			{
+				Submission previousValue = this._Submission.Entity;
+				if (((previousValue != value) 
+							|| (this._Submission.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Submission.Entity = null;
+						previousValue.E_StudyDesignPurposeAnswer_Bs.Remove(this);
+					}
+					this._Submission.Entity = value;
+					if ((value != null))
+					{
+						value.E_StudyDesignPurposeAnswer_Bs.Add(this);
+						this._SubmissionID = value.SubmissionID;
+					}
+					else
+					{
+						this._SubmissionID = default(int);
+					}
+					this.SendPropertyChanged("Submission");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Abstract")]
 	public partial class Abstract : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -3045,6 +3546,12 @@ namespace ODPTaxonomyDAL_JY
 		private string _PIProjectLeader;
 		
 		private string _FY;
+		
+		private string _ChrApplicationID;
+		
+		private System.Nullable<char> _NoPreventionFlag;
+		
+		private string _CodingType;
 		
 		private System.Nullable<System.DateTime> _LastExportDate;
 		
@@ -3098,6 +3605,12 @@ namespace ODPTaxonomyDAL_JY
     partial void OnPIProjectLeaderChanged();
     partial void OnFYChanging(string value);
     partial void OnFYChanged();
+    partial void OnChrApplicationIDChanging(string value);
+    partial void OnChrApplicationIDChanged();
+    partial void OnNoPreventionFlagChanging(System.Nullable<char> value);
+    partial void OnNoPreventionFlagChanged();
+    partial void OnCodingTypeChanging(string value);
+    partial void OnCodingTypeChanged();
     partial void OnLastExportDateChanging(System.Nullable<System.DateTime> value);
     partial void OnLastExportDateChanged();
     #endregion
@@ -3472,6 +3985,66 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrApplicationID", DbType="NVarChar(20)")]
+		public string ChrApplicationID
+		{
+			get
+			{
+				return this._ChrApplicationID;
+			}
+			set
+			{
+				if ((this._ChrApplicationID != value))
+				{
+					this.OnChrApplicationIDChanging(value);
+					this.SendPropertyChanging();
+					this._ChrApplicationID = value;
+					this.SendPropertyChanged("ChrApplicationID");
+					this.OnChrApplicationIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPreventionFlag", DbType="NChar(1)")]
+		public System.Nullable<char> NoPreventionFlag
+		{
+			get
+			{
+				return this._NoPreventionFlag;
+			}
+			set
+			{
+				if ((this._NoPreventionFlag != value))
+				{
+					this.OnNoPreventionFlagChanging(value);
+					this.SendPropertyChanging();
+					this._NoPreventionFlag = value;
+					this.SendPropertyChanged("NoPreventionFlag");
+					this.OnNoPreventionFlagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CodingType", DbType="NVarChar(20)")]
+		public string CodingType
+		{
+			get
+			{
+				return this._CodingType;
+			}
+			set
+			{
+				if ((this._CodingType != value))
+				{
+					this.OnCodingTypeChanging(value);
+					this.SendPropertyChanging();
+					this._CodingType = value;
+					this.SendPropertyChanged("CodingType");
+					this.OnCodingTypeChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastExportDate", DbType="DateTime")]
 		public System.Nullable<System.DateTime> LastExportDate
 		{
@@ -3638,37 +4211,81 @@ namespace ODPTaxonomyDAL_JY
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_AbstractExcludedList")]
-	public partial class Report_AbstractExcludedList : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.KappaData_B")]
+	public partial class KappaData_B : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _AbstractID;
+		private int _KappaDataID_B;
 		
-		private System.Nullable<System.DateTime> _CreatedDate;
+		private System.Nullable<int> _AbstractID;
 		
-		private System.Nullable<System.Guid> _CreatedBy;
+		private System.Nullable<int> _KappaTypeID;
+		
+		private System.Nullable<decimal> _A4;
+		
+		private System.Nullable<decimal> _B;
+		
+		private System.Nullable<decimal> _C;
+		
+		private System.Nullable<decimal> _D;
+		
+		private System.Nullable<decimal> _E;
+		
+		private System.Nullable<decimal> _F;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnAbstractIDChanging(int value);
+    partial void OnKappaDataID_BChanging(int value);
+    partial void OnKappaDataID_BChanged();
+    partial void OnAbstractIDChanging(System.Nullable<int> value);
     partial void OnAbstractIDChanged();
-    partial void OnCreatedDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateChanged();
-    partial void OnCreatedByChanging(System.Nullable<System.Guid> value);
-    partial void OnCreatedByChanged();
+    partial void OnKappaTypeIDChanging(System.Nullable<int> value);
+    partial void OnKappaTypeIDChanged();
+    partial void OnA4Changing(System.Nullable<decimal> value);
+    partial void OnA4Changed();
+    partial void OnBChanging(System.Nullable<decimal> value);
+    partial void OnBChanged();
+    partial void OnCChanging(System.Nullable<decimal> value);
+    partial void OnCChanged();
+    partial void OnDChanging(System.Nullable<decimal> value);
+    partial void OnDChanged();
+    partial void OnEChanging(System.Nullable<decimal> value);
+    partial void OnEChanged();
+    partial void OnFChanging(System.Nullable<decimal> value);
+    partial void OnFChanged();
     #endregion
 		
-		public Report_AbstractExcludedList()
+		public KappaData_B()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int AbstractID
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaDataID_B", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int KappaDataID_B
+		{
+			get
+			{
+				return this._KappaDataID_B;
+			}
+			set
+			{
+				if ((this._KappaDataID_B != value))
+				{
+					this.OnKappaDataID_BChanging(value);
+					this.SendPropertyChanging();
+					this._KappaDataID_B = value;
+					this.SendPropertyChanged("KappaDataID_B");
+					this.OnKappaDataID_BChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int")]
+		public System.Nullable<int> AbstractID
 		{
 			get
 			{
@@ -3687,42 +4304,142 @@ namespace ODPTaxonomyDAL_JY
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDate
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaTypeID", DbType="Int")]
+		public System.Nullable<int> KappaTypeID
 		{
 			get
 			{
-				return this._CreatedDate;
+				return this._KappaTypeID;
 			}
 			set
 			{
-				if ((this._CreatedDate != value))
+				if ((this._KappaTypeID != value))
 				{
-					this.OnCreatedDateChanging(value);
+					this.OnKappaTypeIDChanging(value);
 					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
+					this._KappaTypeID = value;
+					this.SendPropertyChanged("KappaTypeID");
+					this.OnKappaTypeIDChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedBy", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> CreatedBy
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A4", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A4
 		{
 			get
 			{
-				return this._CreatedBy;
+				return this._A4;
 			}
 			set
 			{
-				if ((this._CreatedBy != value))
+				if ((this._A4 != value))
 				{
-					this.OnCreatedByChanging(value);
+					this.OnA4Changing(value);
 					this.SendPropertyChanging();
-					this._CreatedBy = value;
-					this.SendPropertyChanged("CreatedBy");
-					this.OnCreatedByChanged();
+					this._A4 = value;
+					this.SendPropertyChanged("A4");
+					this.OnA4Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> B
+		{
+			get
+			{
+				return this._B;
+			}
+			set
+			{
+				if ((this._B != value))
+				{
+					this.OnBChanging(value);
+					this.SendPropertyChanging();
+					this._B = value;
+					this.SendPropertyChanged("B");
+					this.OnBChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this.OnCChanging(value);
+					this.SendPropertyChanging();
+					this._C = value;
+					this.SendPropertyChanged("C");
+					this.OnCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this.OnDChanging(value);
+					this.SendPropertyChanging();
+					this._D = value;
+					this.SendPropertyChanged("D");
+					this.OnDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this.OnEChanging(value);
+					this.SendPropertyChanging();
+					this._E = value;
+					this.SendPropertyChanged("E");
+					this.OnEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this.OnFChanging(value);
+					this.SendPropertyChanging();
+					this._F = value;
+					this.SendPropertyChanged("F");
+					this.OnFChanged();
 				}
 			}
 		}

@@ -121,6 +121,15 @@ namespace ODPTaxonomyWebsite.Evaluation {
         protected global::System.Web.UI.WebControls.HiddenField hf_submissionTypeId;
         
         /// <summary>
+        /// hf_codingType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hf_codingType;
+        
+        /// <summary>
         /// pnl_printBtns control.
         /// </summary>
         /// <remarks>
@@ -362,6 +371,15 @@ namespace ODPTaxonomyWebsite.Evaluation {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl ProjectNumber;
+        
+        /// <summary>
+        /// CodingTypeLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl CodingTypeLabel;
         
         /// <summary>
         /// AbstractDescPart control.

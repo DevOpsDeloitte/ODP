@@ -30,7 +30,7 @@
                 var displayCounts = false;
                 try
                 {
-                    totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Where(x => x.ApplicationID > 0).Select(x => x).Count();
+                    //totalCount = ((ICollection<AbstractListRow>)AbstractViewGridView.DataSource).Where(x => x.ApplicationID > 0).Select(x => x).Count();
                     //showing = (AbstractViewGridView.PageIndex + 1) * AbstractViewGridView.Rows.Count;
                     var RowSshowing = AbstractViewGridView.Rows.Cast<GridViewRow>().Where(x => x.Cells[2].Text.ToString().Replace("&nbsp;","").Trim().Length > 3);
                     showing = RowSshowing.Count() ;

@@ -363,6 +363,7 @@ namespace ODPTaxonomyDAL_TT
             {
                 try
                 {
+                    db.CommandTimeout = 0;
                     int returnValue = -1;
                     returnValue = db.start_abstract_coding_tt(teamId, userId, ref abstractId, ref evaluationId,
                         ref isAbstractTaken, ref isAbstractEvailable);

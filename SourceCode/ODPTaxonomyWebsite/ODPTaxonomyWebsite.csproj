@@ -95,17 +95,23 @@
     <Content Include="Evaluation\AbstractListViews\ODPStaffMemberView_Review_Uncoded.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Default.ascx" />
     <Content Include="Evaluation\AbstractListViews\ODPSupervisorView_Open.ascx" />
+    <Content Include="Evaluation\Controls\EvaluationControlB.ascx" />
     <Content Include="Evaluation\Controls\EvaluationControl.ascx" />
+    <Content Include="Evaluation\Controls\EvaluationControlRTB.ascx" />
     <Content Include="Evaluation\Controls\EvaluationControlRT.ascx" />
     <Content Include="Evaluation\DownloadAbstractScan.aspx" />
+    <Content Include="Evaluation\EvaluationB.aspx" />
     <Content Include="Evaluation\Evaluation.aspx" />
+    <Content Include="Evaluation\EvaluationRTB.aspx" />
     <Content Include="Evaluation\EvaluationRT.aspx" />
+    <Content Include="Evaluation\GlossaryB.aspx" />
     <Content Include="Evaluation\Glossary.aspx" />
     <Content Include="Evaluation\Handlers\json.js" />
     <Content Include="Evaluation\Handlers\reopen.js" />
     <Content Include="Evaluation\ManageTeams.aspx" />
     <Content Include="Evaluation\PrintAbstract.aspx" />
     <Content Include="Evaluation\ViewAbstract.aspx" />
+    <Content Include="Evaluation\ViewAbstractListV2.aspx" />
     <Content Include="Evaluation\ViewAbstractList.aspx" />
     <Content Include="ForgotPassword.aspx" />
     <Content Include="Images\arrow-lr.png" />
@@ -151,14 +157,20 @@
     <Content Include="Scripts\classie.js" />
     <Content Include="Scripts\commentsRT.js" />
     <Content Include="Scripts\comments.js" />
+    <Content Include="Scripts\controllers\controllerB.js" />
     <Content Include="Scripts\controllers\controller.js" />
+    <Content Include="Scripts\controllers\controllerRTB.js" />
     <Content Include="Scripts\controllers\controllerRT.js" />
     <Content Include="Scripts\datatables\app.js" />
+    <Content Include="Scripts\datatables\jquery.dataTables.js" />
     <Content Include="Scripts\datatables\jquery.dataTables.min.js" />
+    <Content Include="Scripts\datatables\natural.js" />
     <Content Include="Scripts\datatables\spin.min.js" />
     <Content Include="Scripts\datatables\underscore-min.js" />
     <Content Include="Scripts\datatables\util.js" />
+    <Content Include="Scripts\directives\directiveB.js" />
     <Content Include="Scripts\directives\directive.js" />
+    <Content Include="Scripts\directives\directiveRTB.js" />
     <Content Include="Scripts\directives\directiveRT.js" />
     <Content Include="Scripts\html5.js" />
     <Content Include="Scripts\icheck.js" />
@@ -211,6 +223,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="WeeklyIQCoderConsensusReport.aspx" />
     <Content Include="WeeklyIQCoderReport.aspx" />
     <Content Include="_App_Offline.htm" />
   </ItemGroup>
@@ -249,6 +262,9 @@
     </Compile>
     <Compile Include="AccountManagement\ManageAccounts.aspx.designer.cs">
       <DependentUpon>ManageAccounts.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="api\data.ashx.cs">
+      <DependentUpon>data.ashx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -329,11 +345,27 @@
       <DependentUpon>ODPSupervisorView_Open.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Classes\DBData.cs" />
+    <Compile Include="Evaluation\Classes\EvaluationCommon.cs" />
+    <Compile Include="Evaluation\Controls\EvaluationControlB.ascx.cs">
+      <DependentUpon>EvaluationControlB.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Controls\EvaluationControlB.ascx.designer.cs">
+      <DependentUpon>EvaluationControlB.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Controls\EvaluationControlRTB.ascx.cs">
+      <DependentUpon>EvaluationControlRTB.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\Controls\EvaluationControlRTB.ascx.designer.cs">
+      <DependentUpon>EvaluationControlRTB.ascx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControlRT.ascx.cs">
       <DependentUpon>EvaluationControlRT.ascx</DependentUpon>
@@ -349,6 +381,13 @@
     <Compile Include="Evaluation\DownloadAbstractScan.aspx.designer.cs">
       <DependentUpon>DownloadAbstractScan.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\EvaluationB.aspx.cs">
+      <DependentUpon>EvaluationB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\EvaluationB.aspx.designer.cs">
+      <DependentUpon>EvaluationB.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\Evaluation.aspx.cs">
       <DependentUpon>Evaluation.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -356,12 +395,26 @@
     <Compile Include="Evaluation\Evaluation.aspx.designer.cs">
       <DependentUpon>Evaluation.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Evaluation\EvaluationRTB.aspx.cs">
+      <DependentUpon>EvaluationRTB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\EvaluationRTB.aspx.designer.cs">
+      <DependentUpon>EvaluationRTB.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Evaluation\EvaluationRT.aspx.cs">
       <DependentUpon>EvaluationRT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\EvaluationRT.aspx.designer.cs">
       <DependentUpon>EvaluationRT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\GlossaryB.aspx.cs">
+      <DependentUpon>GlossaryB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\GlossaryB.aspx.designer.cs">
+      <DependentUpon>GlossaryB.aspx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Glossary.aspx.cs">
       <DependentUpon>Glossary.aspx</DependentUpon>
@@ -393,6 +446,9 @@
     </Compile>
     <Compile Include="Evaluation\Handlers\Comments.ashx.cs">
       <DependentUpon>Comments.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\Handlers\EvaluationB.ashx.cs">
+      <DependentUpon>EvaluationB.ashx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\Handlers\Evaluations.cs" />
     <Compile Include="Evaluation\Handlers\Filters.ashx.cs">
@@ -430,6 +486,13 @@
     </Compile>
     <Compile Include="Evaluation\ViewAbstract.aspx.designer.cs">
       <DependentUpon>ViewAbstract.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Evaluation\ViewAbstractListV2.aspx.cs">
+      <DependentUpon>ViewAbstractListV2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Evaluation\ViewAbstractListV2.aspx.designer.cs">
+      <DependentUpon>ViewAbstractListV2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Evaluation\ViewAbstractList.aspx.cs">
       <DependentUpon>ViewAbstractList.aspx</DependentUpon>
@@ -480,6 +543,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="WeeklyIQCoderConsensusReport.aspx.cs">
+      <DependentUpon>WeeklyIQCoderConsensusReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WeeklyIQCoderConsensusReport.aspx.designer.cs">
+      <DependentUpon>WeeklyIQCoderConsensusReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="WeeklyIQCoderReport.aspx.cs">
       <DependentUpon>WeeklyIQCoderReport.aspx</DependentUpon>
@@ -595,6 +665,8 @@
     <Content Include="Evaluation\Handlers\Comments.ashx" />
     <Content Include="Evaluation\Handlers\KappaExclude.ashx" />
     <Content Include="Evaluation\Handlers\ReportExclude.ashx" />
+    <Content Include="Evaluation\Handlers\EvaluationB.ashx" />
+    <Content Include="api\data.ashx" />
     <None Include="notes\notesFor_16_CoderEvaluation_10.pdf" />
     <None Include="notes\notesFor_16_ODPEvaluation_11.pdf" />
     <None Include="notes\notesFor_23_CoderEvaluation_12.pdf" />
@@ -618,6 +690,15 @@
     <None Include="Styles\OpenSans-Semibold-webfont.eot" />
     <None Include="Styles\OpenSans-Semibold-webfont.ttf" />
     <None Include="Styles\OpenSans-Semibold-webfont.woff" />
+    <Content Include="Web.template.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.template.Debug.config">
+      <DependentUpon>Web.template.config</DependentUpon>
+    </Content>
+    <Content Include="Web.template.Release.config">
+      <DependentUpon>Web.template.config</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -187,3 +187,6 @@ SourceCode/ODPTaxonomyWebsite/Web.config
 SourceCode/ODPTaxonomyWebsite/Web.config
 SourceCode/.vs/config/applicationhost.config
 SourceCode/ODPTaxonomyWebsite/Web.config
+notes/
+.idea/
+*.DS_Store

@@ -49,14 +49,14 @@
             </div>
         </div>
 
-                <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders()">
+                <ul class="tabs-menu" ng-show="showComments() && showIQSCoders() && showODPCoders() && mdata.formmode != 'ODP Staff Member Consensus'">
             <li class="" ng-class="{ 'current' : showCoderDefault() }" ><a href="#IQS">IQS Coders</a></li>
             <li class="" ng-class="{ 'current' : showODPDefault() }" ><a href="#ODP">ODP Coders</a></li>
         </ul>
 
 
         <div class="tab" id="tabcontainer" ng-show="showComments()">
-            <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders()">
+            <div id="IQS" class="tab-content" style="" ng-class="{ 'current' : showCoderDefault() }"  ng-show="showIQSCoders() && mdata.formmode != 'ODP Staff Member Consensus'">
                 <%-- <textarea placeholder="Enter Comment here" style="height: 60px;"></textarea>--%>
                 <div ng-show=" (mdata.displaymode=='View' && mdata.formmode != 'Coder Consensus')  || mdata.formmode != 'Coder Consensus'">
                 <strong>IQS Consensus Comments</strong>
@@ -88,7 +88,7 @@
             </div>
             <div id="ODP" class="tab-content" style=""  ng-class="{ 'current' : showODPDefault() }" ng-show="showODPCoders()">
                 <%--<textarea placeholder="Enter Comment here" style="height: 0px;"></textarea>--%>
-                <div ng-show="mdata.formmode != 'ODP Staff Member Consensus'"">
+                <div ng-show="mdata.formmode != 'ODP Staff Member Consensus'">
                 <strong>ODP Consensus Comments</strong>
                 <hr />
                 <div class="comment disabled">
@@ -135,14 +135,7 @@
 
     <div class="subnav" ng-cloak>
         <ul>
-            <!--<li><a href="#study-focus">Study Focus</a></li>
-            <li><a href="#entities-studied">Entities Studied</a></li>
-            <li><a href="#study-setting">Study Setting</a></li>
-            <li><a href="#population-focus">Population focus</a></li>
-            <li><a href="#study-design-purpose">Study Design/Purpose</a></li>
-            <li><a href="#prevention-research-category">Prevention Research Category</a></li>-->
-
-            <!--<li><a class="button" href="#" id="confirmX" ng-click="processForm()" ng-disabled="{{1 == 1}}">Save</a></li>-->
+            
             <li ng-show="showWatchConsensusButton"><input class="button yes" type="button" id="watchConsensus" value="Watch Consensus" ng-click="watchConsensus()" /></li>
             <li ng-show="!showWatchConsensusButton && mode.indexOf('Evaluation') != -1 && displaymode == 'View'"><input class="button no" type="button" id="disabledwatchConsensusButton" value="Watch Consensus" /></li>
              <li ng-show="showWatchComparisonButton"><input class="button yes" type="button" id="watchComparison" value="Watch Comparison" ng-click="watchComparison()" /></li>
@@ -217,13 +210,12 @@
              <br />
              <span class="titles">PI Project Leader :</span>
              <span class="titlevals"><%= piProjectLeader %></span>
-             <!--<br>
-             <span class="titles">Last Name :</span>
-             <span class="titlevals"><%= lastName %></span>
-             -->
              <br>
              <span class="titles">User ID :</span>
              <span class="titlevals"><%= userName %></span>
+             <%--<br>
+             <span class="titles">Type :</span>
+             <span class="titlevals">Regular</span>--%>
          </div>
    
      </div>    
@@ -279,7 +271,6 @@
         <div class="print-right">
 
         <table class="bordered zebra-striped" id="entities-studied">
-<%--            <caption>B. Entities Studied</caption>--%>
             <div class="captionTitle">B. Entities Studied</div>
             <div class="icon open" ng-click="showDescription('entitiesstudied-0')" ></div>
             <thead>
@@ -293,7 +284,6 @@
         </table>
 
            <table class="bordered zebra-striped" id="study-setting">
-<%--            <caption>C. Study Setting</caption>--%>
             <div class="captionTitle">C. Study Setting</div>
             <div class="icon open" ng-click="showDescription('studysetting-0')" ></div>
             <thead>
@@ -306,7 +296,6 @@
         </table>
 
            <table class="bordered zebra-striped" id="population-focus">
-<%--            <caption>D. Population Focus</caption>--%>
             <div class="captionTitle">D. Population Focus</div>
             <div class="icon open" ng-click="showDescription('populationfocus-0')" ></div>
             <thead>
@@ -319,7 +308,6 @@
         </table>
 
            <table class="bordered zebra-striped" id="study-design-purpose">
-<%--            <caption>E. Study Design/Purpose</caption>--%>
             <div class="captionTitle">E. Study Design/Purpose</div>
             <div class="icon open" ng-click="showDescription('studydesignpurpose-0')" ></div>
             <thead>
@@ -331,7 +319,6 @@
         </table>
 
            <table class="bordered zebra-striped" id="prevention-research-category">
-<%--            <caption>F. Prevention Research Category</caption>--%>
             <div class="captionTitle">F. Prevention Research Category</div>
             <div class="icon open" ng-click="showDescription('preventioncategory-0')" ></div>
             <thead>
@@ -368,7 +355,6 @@
 
 <!-- JS
 ================================================== -->
-<%--<script src="../scripts/jquery.js"></script>--%>
 <script src="../scripts/jquery.ns-autogrow.min.js"></script>
 <script src="../scripts/main.js"></script>
 <script src="../scripts/icheck.js"></script>
@@ -388,7 +374,6 @@
 <script src="../scripts/directives/directive.js"></script>
 <script src="../scripts/app.js"></script>
 <script src="../scripts/comments.js"></script>
-<!-- <script src="js/controllers/controller.js"></script> -->
 
 
     <!--[if lt IE 9]>

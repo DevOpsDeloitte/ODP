@@ -1,41 +1,4 @@
 ﻿
-//(function(window, document, undefined){
-
-//    util = {};
-//    
-//    util.save = function(){
-//        var formArray = $("form").serializeArray();
-//        console.log("saved ..."+ JSON.stringify(formArray));
-//    };
-
-//    util.reset = function () {
-
-//        alertify.set({
-//            labels: {
-//                ok: "OK",
-//                cancel: "Cancel"
-//            },
-//            delay: 5000,
-//            buttonReverse: true,
-//            buttonFocus: "none"
-//        });
-//    };
-
-
-//    $("#confirm").on('click', function () {
-//        util.reset();
-//        alertify.confirm("Please confirm this", function (e) {
-//            if (e) {
-//                //window.location.href = "revise.html";
-//                util.save();
-//            } else {
-//                alertify.error("You've clicked Cancel");
-//            }
-//        });
-//        return false;
-//    });
-
-//})(window, document);
 
 
 
@@ -44,6 +7,23 @@ $(document).ready(function(){
     
     $("form").submit(function(evt){
         evt.preventDefault();
+    });
+
+    $('.category-toggle').click(function (e) {
+        e.preventDefault();
+
+        var $this = $(this);
+        var $id = $this.attr("id");
+        //console.log($id);
+        if ($this.parent().find(".opener-"+$id).hasClass('hide-b')) {
+            $this.parent().find(".opener-"+$id).removeClass('hide-b');
+            //$this.parent().find(".opener-"+$id).slideDown(350);
+        }
+        else {
+            $this.parent().find(".opener-"+$id).addClass('hide-b');
+            //$this.parent().find(".opener-"+$id).slideUp(350);
+        }
+        
     });
 
 
@@ -55,21 +35,6 @@ $(document).ready(function(){
 });
 
 
-
-//$(document).ready(function(){
-//    $('input').each(function(){
-//        var self = $(this),
-//            label = self.next(),
-//            label_text = label.text();
-
-//        label.remove();
-//        self.iCheck({
-//            checkboxClass: 'icheckbox_line-tax',
-//            radioClass: 'iradio_line-tax',
-//            insert: '<div class="icheck_line-icon"></div>' + label_text
-//        });
-//    });
-//});
 
 
 //Scroll for anchors

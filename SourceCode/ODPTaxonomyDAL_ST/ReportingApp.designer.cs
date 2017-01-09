@@ -33,7 +33,7 @@ namespace ODPTaxonomyDAL_ST
     #endregion
 		
 		public ReportingAppDataContext() : 
-				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString5, mappingSource)
+				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString3, mappingSource)
 		{
 			OnCreated();
 		}
@@ -70,13 +70,6 @@ namespace ODPTaxonomyDAL_ST
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaAvg_ByQCWeeks")]
-		public ISingleResult<Report_KappaAvg_ByQCWeeksResult> Report_KappaAvg_ByQCWeeks([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType);
-			return ((ISingleResult<Report_KappaAvg_ByQCWeeksResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_AbstractSummary")]
 		public ISingleResult<Report_AbstractSummaryResult> Report_AbstractSummary()
 		{
@@ -84,11 +77,32 @@ namespace ODPTaxonomyDAL_ST
 			return ((ISingleResult<Report_AbstractSummaryResult>)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaAvg_ByQCWeeks")]
+		public ISingleResult<Report_KappaAvg_ByQCWeeksResult> Report_KappaAvg_ByQCWeeks([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType);
+			return ((ISingleResult<Report_KappaAvg_ByQCWeeksResult>)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaAvg_DataDetail_ByQCWeeks")]
 		public ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeksResult> Report_KappaAvg_DataDetail_ByQCWeeks([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType)
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType);
 			return ((ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeksResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaDatapulling")]
+		public ISingleResult<Report_KappaDatapullingResult> Report_KappaDatapulling([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FY", DbType="VarChar(20)")] string fY)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fY);
+			return ((ISingleResult<Report_KappaDatapullingResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_SelectionDatapulling")]
+		public ISingleResult<Report_SelectionDatapullingResult> Report_SelectionDatapulling([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FY", DbType="VarChar(20)")] string fY)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fY);
+			return ((ISingleResult<Report_SelectionDatapullingResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -191,6 +205,194 @@ namespace ODPTaxonomyDAL_ST
 		}
 	}
 	
+	public partial class Report_AbstractSummaryResult
+	{
+		
+		private string _FY;
+		
+		private string _Prevention_vs_5u0025;
+		
+		private System.Nullable<int> _Total_abstracts_loaded_into_PACT;
+		
+		private System.Nullable<int> _Total_number_abstracts_coded_by_IQ_coders__1N_;
+		
+		private string _u0025_abstracts_coded_by_IQ_coders__1N_;
+		
+		private System.Nullable<int> _Total_number_abstracts_coded_by_ODP__2N_;
+		
+		private string _u0025_of_total_abstracts_coded_by_ODP__2N_;
+		
+		private string _u0025_of_IQ_coded_abtracts_coded_by_ODP;
+		
+		private System.Nullable<int> _Total_number_of_uncoded_abstracts_remaning;
+		
+		private string _u0025_of_abstracts_that_are_uncoded;
+		
+		public Report_AbstractSummaryResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
+		public string FY
+		{
+			get
+			{
+				return this._FY;
+			}
+			set
+			{
+				if ((this._FY != value))
+				{
+					this._FY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Prevention vs 5u0025]", Storage="_Prevention_vs_5u0025", DbType="NVarChar(50)")]
+		public string Prevention_vs_5u0025
+		{
+			get
+			{
+				return this._Prevention_vs_5u0025;
+			}
+			set
+			{
+				if ((this._Prevention_vs_5u0025 != value))
+				{
+					this._Prevention_vs_5u0025 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total abstracts loaded into PACT]", Storage="_Total_abstracts_loaded_into_PACT", DbType="Int")]
+		public System.Nullable<int> Total_abstracts_loaded_into_PACT
+		{
+			get
+			{
+				return this._Total_abstracts_loaded_into_PACT;
+			}
+			set
+			{
+				if ((this._Total_abstracts_loaded_into_PACT != value))
+				{
+					this._Total_abstracts_loaded_into_PACT = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number abstracts coded by IQ coders (1N)]", Storage="_Total_number_abstracts_coded_by_IQ_coders__1N_", DbType="Int")]
+		public System.Nullable<int> Total_number_abstracts_coded_by_IQ_coders__1N_
+		{
+			get
+			{
+				return this._Total_number_abstracts_coded_by_IQ_coders__1N_;
+			}
+			set
+			{
+				if ((this._Total_number_abstracts_coded_by_IQ_coders__1N_ != value))
+				{
+					this._Total_number_abstracts_coded_by_IQ_coders__1N_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[u0025 abstracts coded by IQ coders (1N)]", Storage="_u0025_abstracts_coded_by_IQ_coders__1N_", DbType="NVarChar(20)")]
+		public string u0025_abstracts_coded_by_IQ_coders__1N_
+		{
+			get
+			{
+				return this._u0025_abstracts_coded_by_IQ_coders__1N_;
+			}
+			set
+			{
+				if ((this._u0025_abstracts_coded_by_IQ_coders__1N_ != value))
+				{
+					this._u0025_abstracts_coded_by_IQ_coders__1N_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number abstracts coded by ODP (2N)]", Storage="_Total_number_abstracts_coded_by_ODP__2N_", DbType="Int")]
+		public System.Nullable<int> Total_number_abstracts_coded_by_ODP__2N_
+		{
+			get
+			{
+				return this._Total_number_abstracts_coded_by_ODP__2N_;
+			}
+			set
+			{
+				if ((this._Total_number_abstracts_coded_by_ODP__2N_ != value))
+				{
+					this._Total_number_abstracts_coded_by_ODP__2N_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[u0025 of total abstracts coded by ODP (2N)]", Storage="_u0025_of_total_abstracts_coded_by_ODP__2N_", DbType="NVarChar(20)")]
+		public string u0025_of_total_abstracts_coded_by_ODP__2N_
+		{
+			get
+			{
+				return this._u0025_of_total_abstracts_coded_by_ODP__2N_;
+			}
+			set
+			{
+				if ((this._u0025_of_total_abstracts_coded_by_ODP__2N_ != value))
+				{
+					this._u0025_of_total_abstracts_coded_by_ODP__2N_ = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[u0025 of IQ coded abtracts coded by ODP]", Storage="_u0025_of_IQ_coded_abtracts_coded_by_ODP", DbType="NVarChar(20)")]
+		public string u0025_of_IQ_coded_abtracts_coded_by_ODP
+		{
+			get
+			{
+				return this._u0025_of_IQ_coded_abtracts_coded_by_ODP;
+			}
+			set
+			{
+				if ((this._u0025_of_IQ_coded_abtracts_coded_by_ODP != value))
+				{
+					this._u0025_of_IQ_coded_abtracts_coded_by_ODP = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number of uncoded abstracts remaning]", Storage="_Total_number_of_uncoded_abstracts_remaning", DbType="Int")]
+		public System.Nullable<int> Total_number_of_uncoded_abstracts_remaning
+		{
+			get
+			{
+				return this._Total_number_of_uncoded_abstracts_remaning;
+			}
+			set
+			{
+				if ((this._Total_number_of_uncoded_abstracts_remaning != value))
+				{
+					this._Total_number_of_uncoded_abstracts_remaning = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[u0025 of abstracts that are uncoded]", Storage="_u0025_of_abstracts_that_are_uncoded", DbType="NVarChar(20)")]
+		public string u0025_of_abstracts_that_are_uncoded
+		{
+			get
+			{
+				return this._u0025_of_abstracts_that_are_uncoded;
+			}
+			set
+			{
+				if ((this._u0025_of_abstracts_that_are_uncoded != value))
+				{
+					this._u0025_of_abstracts_that_are_uncoded = value;
+				}
+			}
+		}
+	}
+	
 	public partial class Report_KappaAvg_ByQCWeeksResult
 	{
 		
@@ -221,6 +423,8 @@ namespace ODPTaxonomyDAL_ST
 		private string _E;
 		
 		private string _F;
+		
+		private string _Weekly_Avg;
 		
 		public Report_KappaAvg_ByQCWeeksResult()
 		{
@@ -449,191 +653,19 @@ namespace ODPTaxonomyDAL_ST
 				}
 			}
 		}
-	}
-	
-	public partial class Report_AbstractSummaryResult
-	{
 		
-		private string _FY;
-		
-		private string _Prevention_vs_5u0025;
-		
-		private System.Nullable<int> _Total_abstracts_loaded_into_PACT;
-		
-		private System.Nullable<int> _Total_number_abstracts_coded_by_IQ_coders__1N_;
-		
-		private string _u0025_abstracts_coded_by_IQ_coders__1N_;
-		
-		private System.Nullable<int> _Total_number_abstracts_coded_by_ODP__2N_;
-		
-		private string _u0025_of_total_abstracts_coded_by_ODP__2N_;
-		
-		private string _u0025_of_IQ_coded_abtracts_coded_by_ODP;
-		
-		private System.Nullable<int> _Total_number_of_uncoded_abstracts_remaning;
-		
-		private string _u0025_of_abstracts_that_are_uncoded;
-		
-		public Report_AbstractSummaryResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
-		public string FY
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weekly_Avg", DbType="NVarChar(30)")]
+		public string Weekly_Avg
 		{
 			get
 			{
-				return this._FY;
+				return this._Weekly_Avg;
 			}
 			set
 			{
-				if ((this._FY != value))
+				if ((this._Weekly_Avg != value))
 				{
-					this._FY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Prevention vs 5u0025]", Storage="_Prevention_vs_5u0025", DbType="NVarChar(50)")]
-		public string Prevention_vs_5u0025
-		{
-			get
-			{
-				return this._Prevention_vs_5u0025;
-			}
-			set
-			{
-				if ((this._Prevention_vs_5u0025 != value))
-				{
-					this._Prevention_vs_5u0025 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total abstracts loaded into PACT]", Storage="_Total_abstracts_loaded_into_PACT", DbType="Int")]
-		public System.Nullable<int> Total_abstracts_loaded_into_PACT
-		{
-			get
-			{
-				return this._Total_abstracts_loaded_into_PACT;
-			}
-			set
-			{
-				if ((this._Total_abstracts_loaded_into_PACT != value))
-				{
-					this._Total_abstracts_loaded_into_PACT = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number abstracts coded by IQ coders (1N)]", Storage="_Total_number_abstracts_coded_by_IQ_coders__1N_", DbType="Int")]
-		public System.Nullable<int> Total_number_abstracts_coded_by_IQ_coders__1N_
-		{
-			get
-			{
-				return this._Total_number_abstracts_coded_by_IQ_coders__1N_;
-			}
-			set
-			{
-				if ((this._Total_number_abstracts_coded_by_IQ_coders__1N_ != value))
-				{
-					this._Total_number_abstracts_coded_by_IQ_coders__1N_ = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[u0025 abstracts coded by IQ coders (1N)]", Storage="_u0025_abstracts_coded_by_IQ_coders__1N_", DbType="NVarChar(20)")]
-		public string u0025_abstracts_coded_by_IQ_coders__1N_
-		{
-			get
-			{
-				return this._u0025_abstracts_coded_by_IQ_coders__1N_;
-			}
-			set
-			{
-				if ((this._u0025_abstracts_coded_by_IQ_coders__1N_ != value))
-				{
-					this._u0025_abstracts_coded_by_IQ_coders__1N_ = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number abstracts coded by ODP (2N)]", Storage="_Total_number_abstracts_coded_by_ODP__2N_", DbType="Int")]
-		public System.Nullable<int> Total_number_abstracts_coded_by_ODP__2N_
-		{
-			get
-			{
-				return this._Total_number_abstracts_coded_by_ODP__2N_;
-			}
-			set
-			{
-				if ((this._Total_number_abstracts_coded_by_ODP__2N_ != value))
-				{
-					this._Total_number_abstracts_coded_by_ODP__2N_ = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[u0025 of total abstracts coded by ODP (2N)]", Storage="_u0025_of_total_abstracts_coded_by_ODP__2N_", DbType="NVarChar(20)")]
-		public string u0025_of_total_abstracts_coded_by_ODP__2N_
-		{
-			get
-			{
-				return this._u0025_of_total_abstracts_coded_by_ODP__2N_;
-			}
-			set
-			{
-				if ((this._u0025_of_total_abstracts_coded_by_ODP__2N_ != value))
-				{
-					this._u0025_of_total_abstracts_coded_by_ODP__2N_ = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[u0025 of IQ coded abtracts coded by ODP]", Storage="_u0025_of_IQ_coded_abtracts_coded_by_ODP", DbType="NVarChar(20)")]
-		public string u0025_of_IQ_coded_abtracts_coded_by_ODP
-		{
-			get
-			{
-				return this._u0025_of_IQ_coded_abtracts_coded_by_ODP;
-			}
-			set
-			{
-				if ((this._u0025_of_IQ_coded_abtracts_coded_by_ODP != value))
-				{
-					this._u0025_of_IQ_coded_abtracts_coded_by_ODP = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Total number of uncoded abstracts remaning]", Storage="_Total_number_of_uncoded_abstracts_remaning", DbType="Int")]
-		public System.Nullable<int> Total_number_of_uncoded_abstracts_remaning
-		{
-			get
-			{
-				return this._Total_number_of_uncoded_abstracts_remaning;
-			}
-			set
-			{
-				if ((this._Total_number_of_uncoded_abstracts_remaning != value))
-				{
-					this._Total_number_of_uncoded_abstracts_remaning = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[u0025 of abstracts that are uncoded]", Storage="_u0025_of_abstracts_that_are_uncoded", DbType="NVarChar(20)")]
-		public string u0025_of_abstracts_that_are_uncoded
-		{
-			get
-			{
-				return this._u0025_of_abstracts_that_are_uncoded;
-			}
-			set
-			{
-				if ((this._u0025_of_abstracts_that_are_uncoded != value))
-				{
-					this._u0025_of_abstracts_that_are_uncoded = value;
+					this._Weekly_Avg = value;
 				}
 			}
 		}
@@ -649,6 +681,10 @@ namespace ODPTaxonomyDAL_ST
 		private string _IQ_EndDate;
 		
 		private System.Nullable<int> _AbstractID;
+		
+		private System.Nullable<int> _Appl_ID;
+		
+		private string _PI_Name;
 		
 		private System.Nullable<decimal> _A1;
 		
@@ -730,6 +766,38 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._AbstractID != value))
 				{
 					this._AbstractID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Appl_ID", DbType="Int")]
+		public System.Nullable<int> Appl_ID
+		{
+			get
+			{
+				return this._Appl_ID;
+			}
+			set
+			{
+				if ((this._Appl_ID != value))
+				{
+					this._Appl_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
+		public string PI_Name
+		{
+			get
+			{
+				return this._PI_Name;
+			}
+			set
+			{
+				if ((this._PI_Name != value))
+				{
+					this._PI_Name = value;
 				}
 			}
 		}
@@ -858,6 +926,418 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._F != value))
 				{
 					this._F = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Report_KappaDatapullingResult
+	{
+		
+		private string _FY;
+		
+		private string _SubCategory;
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _PIProjectLeader;
+		
+		private string _KappaType;
+		
+		private System.Nullable<decimal> _A1;
+		
+		private System.Nullable<decimal> _A2;
+		
+		private System.Nullable<decimal> _A3;
+		
+		private System.Nullable<int> _A4;
+		
+		private System.Nullable<decimal> _B;
+		
+		private System.Nullable<decimal> _C;
+		
+		private System.Nullable<decimal> _D;
+		
+		private System.Nullable<decimal> _E;
+		
+		private System.Nullable<decimal> _F;
+		
+		public Report_KappaDatapullingResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
+		public string FY
+		{
+			get
+			{
+				return this._FY;
+			}
+			set
+			{
+				if ((this._FY != value))
+				{
+					this._FY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubCategory", DbType="NVarChar(255)")]
+		public string SubCategory
+		{
+			get
+			{
+				return this._SubCategory;
+			}
+			set
+			{
+				if ((this._SubCategory != value))
+				{
+					this._SubCategory = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_KappaType", DbType="NVarChar(50)")]
+		public string KappaType
+		{
+			get
+			{
+				return this._KappaType;
+			}
+			set
+			{
+				if ((this._KappaType != value))
+				{
+					this._KappaType = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A1
+		{
+			get
+			{
+				return this._A1;
+			}
+			set
+			{
+				if ((this._A1 != value))
+				{
+					this._A1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A2
+		{
+			get
+			{
+				return this._A2;
+			}
+			set
+			{
+				if ((this._A2 != value))
+				{
+					this._A2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A3
+		{
+			get
+			{
+				return this._A3;
+			}
+			set
+			{
+				if ((this._A3 != value))
+				{
+					this._A3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A4", DbType="Int")]
+		public System.Nullable<int> A4
+		{
+			get
+			{
+				return this._A4;
+			}
+			set
+			{
+				if ((this._A4 != value))
+				{
+					this._A4 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_B", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> B
+		{
+			get
+			{
+				return this._B;
+			}
+			set
+			{
+				if ((this._B != value))
+				{
+					this._B = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_C", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> C
+		{
+			get
+			{
+				return this._C;
+			}
+			set
+			{
+				if ((this._C != value))
+				{
+					this._C = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this._D = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this._E = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this._F = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Report_SelectionDatapullingResult
+	{
+		
+		private string _FY;
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _SubCategory;
+		
+		private string _PIProjectLeader;
+		
+		private string _MainSection;
+		
+		private string _SubSection;
+		
+		private string _SectionName;
+		
+		private System.Nullable<short> _Final_Consensus;
+		
+		public Report_SelectionDatapullingResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
+		public string FY
+		{
+			get
+			{
+				return this._FY;
+			}
+			set
+			{
+				if ((this._FY != value))
+				{
+					this._FY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubCategory", DbType="NVarChar(255)")]
+		public string SubCategory
+		{
+			get
+			{
+				return this._SubCategory;
+			}
+			set
+			{
+				if ((this._SubCategory != value))
+				{
+					this._SubCategory = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainSection", DbType="NVarChar(255)")]
+		public string MainSection
+		{
+			get
+			{
+				return this._MainSection;
+			}
+			set
+			{
+				if ((this._MainSection != value))
+				{
+					this._MainSection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSection", DbType="NVarChar(255)")]
+		public string SubSection
+		{
+			get
+			{
+				return this._SubSection;
+			}
+			set
+			{
+				if ((this._SubSection != value))
+				{
+					this._SubSection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionName", DbType="NVarChar(255)")]
+		public string SectionName
+		{
+			get
+			{
+				return this._SectionName;
+			}
+			set
+			{
+				if ((this._SectionName != value))
+				{
+					this._SectionName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Final Consensus]", Storage="_Final_Consensus", DbType="SmallInt")]
+		public System.Nullable<short> Final_Consensus
+		{
+			get
+			{
+				return this._Final_Consensus;
+			}
+			set
+			{
+				if ((this._Final_Consensus != value))
+				{
+					this._Final_Consensus = value;
 				}
 			}
 		}

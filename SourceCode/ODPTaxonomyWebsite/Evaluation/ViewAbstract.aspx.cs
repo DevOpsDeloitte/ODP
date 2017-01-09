@@ -31,6 +31,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         private string role_admin = null;
         private string connString = null;
         private string currentRole = null;
+        public string codingType = string.Empty;
         private string messUserNotInTeam = "You have not been added to a team at this time. Once you are on a team, refresh this page and you can begin.";
         private string messNoCurrentRole = "Your current role is not identified. You will be redirected to the homepage in 10 seconds.";
         private string messStatusIsChanged = "You are not allowed to override as the abstract's status was changed.";
@@ -120,6 +121,18 @@ namespace ODPTaxonomyWebsite.Evaluation
             }
         }
 
+        protected void routeToEvaluation()
+        {
+            if (hf_codingType.Value.Trim().ToLower() == "basic") // done based on hidden field value.
+            {
+                Response.Redirect("EvaluationB.aspx", false);
+            }
+            else {
+                Response.Redirect("Evaluation.aspx", false);
+            }
+            return;
+        }
+
         protected void btn_code_Click(object sender, EventArgs e)
         {
             try
@@ -153,7 +166,15 @@ namespace ODPTaxonomyWebsite.Evaluation
                                 values.UserId = userId;
                                 Session["ViewAbstractToEvaluation"] = values;
 
-                                Response.Redirect("Evaluation.aspx", false);
+                                //Response.Redirect("Evaluation.aspx", false);
+                                this.routeToEvaluation();
+                                //if (codingType.ToLower() == "basic")
+                                //{
+                                //    Response.Redirect("EvaluationB.aspx", false);
+                                //}
+                                //else {
+                                //    Response.Redirect("Evaluation.aspx", false);
+                                //}
                             }
                         }
                     }
@@ -442,7 +463,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                                 submissionData.UserId = userId;
                                 submissionData.ViewMode = Mode.view;
                                 Session["ViewAbstractToEvaluation"] = submissionData;
-                                Response.Redirect("Evaluation.aspx", false);
+                                //Response.Redirect("Evaluation.aspx", false);
+                                this.routeToEvaluation();
                             }
                         }
                     }
@@ -700,10 +722,12 @@ namespace ODPTaxonomyWebsite.Evaluation
             AbstractPublicHeathPart.InnerText = abstr.AbstractPublicHeathPart;
             ProjectTitle.InnerText = abstr.ProjectTitle;
             AdministeringIC.InnerText = abstr.AdministeringIC;
-            ApplicationID.InnerText = abstr.ApplicationID.ToString();
+            ApplicationID.InnerText = abstr.ChrApplicationID.ToString();
             PIProjectLeader.InnerText = abstr.PIProjectLeader;
             FY.InnerText = abstr.FY;
             ProjectNumber.InnerHtml = abstr.ProjectNumber;
+            CodingTypeLabel.InnerHtml = abstr.CodingType ?? "Regular";
+            CodingTypeLabel.Visible = false;
             DateTime time = DateTime.Now;             
             string format = "MM/d/yyyy";
             userId.InnerText = userCurrentName;
@@ -714,6 +738,9 @@ namespace ODPTaxonomyWebsite.Evaluation
             pnl_extraData.Visible = true;
 
             absid = abstr.AbstractID.ToString();
+
+            codingType = abstr.CodingType ?? "codingA"; // if codingType is null in DB set to codingA. ST
+            hf_codingType.Value = codingType; // set the hidden field to retain the codingType on postback. ST
         }
 
         private void GetAbstract_OdpEvaluation(Guid userId, int evaluationTypeId, int abstractId)

@@ -58,7 +58,7 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews
                        {
                            AbstractID = a.AbstractID,
                            ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
-                           ApplicationID = a.ApplicationID,
+                           ApplicationID = a.ChrApplicationID,
                            AbstractStatusID = s.AbstractStatusID,
                            AbstractStatusCode = s.AbstractStatusCode,
                            StatusDate = h.CreatedDate,

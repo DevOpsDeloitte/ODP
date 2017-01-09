@@ -116,6 +116,7 @@
 <link type="text/css" rel="Stylesheet" href="/Styles/evaluation.css" />
 <script type="text/javascript" src="../scripts/datatables/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="../scripts/datatables/underscore-min.js"></script>
+<script type="text/javascript" src="../scripts/datatables/natural.js"></script>
 <script src="../scripts/alertify.js"></script>
 <script src="../scripts/datatables/spin.min.js"></script>
 <script type="text/javascript" src="/Scripts/datatables/util.js"></script>

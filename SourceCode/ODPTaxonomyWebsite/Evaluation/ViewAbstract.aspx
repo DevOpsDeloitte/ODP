@@ -25,10 +25,12 @@
     <asp:HiddenField runat="server" ID="hf_userId" />
     <asp:HiddenField runat="server" ID="hf_evaluationId" />
     <asp:HiddenField runat="server" ID="hf_submissionTypeId" />
+    <asp:HiddenField runat="server" ID="hf_codingType" />
     <div class="clearfix">
     <asp:Panel runat="server" ID="pnl_printBtns" ClientIDMode="Static" Visible="false">
     <script type="text/javascript">
         window.absid = <%= absid %>;
+        window.codingType = '<%= this.codingType %>';
     </script>
 
     
@@ -92,6 +94,7 @@
         <p><strong>PI Project Leader:</strong> <span runat="server" id="PIProjectLeader"></span></p>
         <p><strong>FY:</strong> <span runat="server" id="FY"></span></p>
         <p><strong>Project Number:</strong> <span runat="server" id="ProjectNumber"></span></p>
+        <%--<p><strong>Type :</strong> --%><span runat="server" id="CodingTypeLabel"></span><%--</p>--%>
         <p><span class="highlight">Abstract Description:</span><br /> <span runat="server" id="AbstractDescPart"></span></p>
         <p><span class="highlight">Public Health Relevance:</span><br /> <span runat="server" id="AbstractPublicHeathPart"></span></p>
          

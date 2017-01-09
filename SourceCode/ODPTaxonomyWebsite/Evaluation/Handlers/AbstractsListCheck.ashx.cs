@@ -20,7 +20,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
         private string connString = null;
         private List<int> abstracts = null;
         private List<AbstractListRow> finalabstracts = null;
-        private List<AbstractListRow> finalabstracts2 = null;
+        //private List<AbstractListRow> finalabstracts2 = null;
         private string userguid = "";
         private string action = "";
 
@@ -43,7 +43,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                                AbstractID = a.AbstractID,
                                ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                                PIProjectLeader = a.PIProjectLeader,
-                               ApplicationID = a.ApplicationID,
+                               ApplicationID = a.ChrApplicationID,
                                AbstractStatusID = s.AbstractStatusID,
                                AbstractStatusCode = s.AbstractStatusCode,
                                StatusDate = h.CreatedDate,

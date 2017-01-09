@@ -26,6 +26,7 @@ namespace ODPTaxonomyWebsite
         private string role_admin = null;
         private string connString = null;
         public  string firebaseConfig = string.Empty;
+        public string roleDisplay = string.Empty;
 
         #endregion
 
@@ -82,6 +83,7 @@ namespace ODPTaxonomyWebsite
                     {
                         lbl_role.Visible = true;
                         lbl_role.Text = "Current Role: " + displayRoleName;
+                        roleDisplay = displayRoleName;
                     }
                     
                 }
@@ -129,6 +131,20 @@ namespace ODPTaxonomyWebsite
             {
                 Session["CurrentRole"] = role_coderSup;
                 Response.Redirect("/Evaluation/ViewAbstractList.aspx?view=" + (int)AbstractViewRole.CoderSupervisor, false);
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on button click.");
+            }
+        }
+
+        protected void btn_ReportLink_coderSup_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session["CurrentRole"] = role_coderSup;
+                Response.Redirect("/ReportingApp", false);
             }
             catch (Exception ex)
             {
@@ -193,7 +209,7 @@ namespace ODPTaxonomyWebsite
             }
         }
 
-        protected void btn_KappaLink_Click(object sender, EventArgs e)
+        protected void btn_ReportLink_odpSup_Click(object sender, EventArgs e)
         {
             try
             {

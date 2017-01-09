@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using System.Reflection;
 
 namespace ODPTaxonomyDAL_JY
 {
@@ -23,7 +24,7 @@ namespace ODPTaxonomyDAL_JY
         public bool InReview { get; set; }
 
         public int AbstractID { get; set; }
-        public int? ApplicationID { get; set; }
+        public string ApplicationID { get; set; }
 
         public string ProjectTitle { get; set; }
         public string PIProjectLeader { get; set; }
@@ -73,11 +74,14 @@ namespace ODPTaxonomyDAL_JY
 
         public bool UnableToCode { get; set; }
 
+        public string CodingType { get; set; }
+
         public string KappaCoderAlias { get; set; }
         public KappaTypeEnum KappaType { get; set; }
         public string A1 { get; set; }
         public string A2 { get; set; }
         public string A3 { get; set; }
+        public string A4 { get; set; }
         public string B { get; set; }
         public string C { get; set; }
         public string D { get; set; }
@@ -93,6 +97,126 @@ namespace ODPTaxonomyDAL_JY
         {
             this.IsParent = false;
         }
+
+        public object this[string propertyName]
+        {
+            get
+            {
+                // probably faster without reflection:
+                // like:  return Properties.Settings.Default.PropertyValues[propertyName] 
+                // instead of the following
+                Type myType = typeof(AbstractListRow);
+                PropertyInfo myPropInfo = myType.GetProperty(propertyName);
+                return myPropInfo.GetValue(this, null);
+            }
+            set
+            {
+                Type myType = typeof(AbstractListRow);
+                PropertyInfo myPropInfo = myType.GetProperty(propertyName);
+                myPropInfo.SetValue(this, value, null);
+
+            }
+
+        }
+
+        public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers, IEnumerable<E_StudyDesignPurposeAnswer_B> cacheE_StudyDesignPurposeAnswer_Bs, IEnumerable<F_PreventionCategoryAnswer_B> cacheF_PreventionCategoryAnswer_Bs, string sentApplicationID)
+        {
+
+            var query = (from s in cacheSubmissions
+                         join e in cacheEvaluations on s.EvaluationId equals e.EvaluationId
+                         where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+                         s.SubmissionTypeId == (int)SubmissionType
+                         orderby s.SubmissionDateTime descending
+                         select new SubmissionData
+                         {
+                             SubmissionID = s.SubmissionID,
+                             UnableToCode = s.UnableToCode,
+                             Comment = s.comments
+                         }).FirstOrDefault();
+
+            if (query != null)
+            {
+                this.G = query.UnableToCode ? "UC" : "";
+                this.Comment = query.Comment;
+
+                if (!sentApplicationID.Contains("_B"))
+                {                 
+                    this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
+                        .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                        .Count() > 0;
+                    this.Flag_F6 = cacheF_PreventionCategoryAnswers
+                        .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                        .Count() > 0;
+                }
+                else
+                {
+                    this.G = query.UnableToCode ? "NB" : "";
+                    this.Flag_E7 = cacheE_StudyDesignPurposeAnswer_Bs
+                        .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                        .Count() > 0;
+                    this.Flag_F6 = cacheF_PreventionCategoryAnswer_Bs
+                        .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                        .Count() > 0;
+                }
+            }
+        }
+
+
+        public void GetSubmissionDataIndividual(SubmissionTypeEnum SubmissionType, Guid? UserID, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers, IEnumerable<E_StudyDesignPurposeAnswer_B> cacheE_StudyDesignPurposeAnswer_Bs, IEnumerable<F_PreventionCategoryAnswer_B> cacheF_PreventionCategoryAnswer_Bs, string sentApplicationID)
+        {
+            if (UserID != null)
+            {
+                //string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+                //DataJYDataContext db = new DataJYDataContext(connStr);
+
+                var query = (from s in cacheSubmissions
+                             join e in cacheEvaluations on s.EvaluationId equals e.EvaluationId
+                             where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+                             s.SubmissionTypeId == (int)SubmissionType && s.UserId == UserID.Value
+                             orderby s.SubmissionDateTime descending
+                             select new SubmissionData
+                             {
+                                 SubmissionID = s.SubmissionID,
+                                 UnableToCode = s.UnableToCode,
+                                 Comment = s.comments
+                             }).FirstOrDefault();
+
+                if (query != null)
+                {
+                    this.G = query.UnableToCode ? "UC" : "";
+                    this.Comment = query.Comment;
+
+                    if (!sentApplicationID.Contains("_B"))
+                    {
+                        this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
+                            .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                            .Count() > 0;
+                        this.Flag_F6 = cacheF_PreventionCategoryAnswers
+                            .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                            .Count() > 0;
+                    }
+                    else
+                    {
+                        this.G = query.UnableToCode ? "NB" : "";
+                        this.Flag_E7 = cacheE_StudyDesignPurposeAnswer_Bs
+                            .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+                            .Count() > 0;
+                        this.Flag_F6 = cacheF_PreventionCategoryAnswer_Bs
+                            .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+                            .Count() > 0;
+                    }
+                }
+            }
+            else
+            {
+                this.G = "-";
+            }
+
+        }
+
+
+
+        #region Legacy methods
 
         public void GetSubmissionData(SubmissionTypeEnum SubmissionType)
         {
@@ -120,37 +244,6 @@ namespace ODPTaxonomyDAL_JY
                     .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
                     .Count() > 0;
                 this.Flag_F6 = db.F_PreventionCategoryAnswers
-                    .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
-                    .Count() > 0;
-            }
-        }
-
-        public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers)
-        {
-            //string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
-            //DataJYDataContext db = new DataJYDataContext(connStr);
-
-            var query = (from s in cacheSubmissions
-                         join e in cacheEvaluations on s.EvaluationId equals e.EvaluationId
-                         where e.AbstractID == this.AbstractID && e.IsComplete == true &&
-                         s.SubmissionTypeId == (int)SubmissionType
-                         orderby s.SubmissionDateTime descending
-                         select new SubmissionData
-                         {
-                             SubmissionID = s.SubmissionID,
-                             UnableToCode = s.UnableToCode,
-                             Comment = s.comments
-                         }).FirstOrDefault();
-
-            if (query != null)
-            {
-                this.G = query.UnableToCode ? "UC" : "";
-                this.Comment = query.Comment;
-
-                this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
-                    .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
-                    .Count() > 0;
-                this.Flag_F6 = cacheF_PreventionCategoryAnswers
                     .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
                     .Count() > 0;
             }
@@ -194,7 +287,6 @@ namespace ODPTaxonomyDAL_JY
             }
 
         }
-
         public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, Guid? UserID, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers)
         {
             if (UserID != null)
@@ -233,6 +325,54 @@ namespace ODPTaxonomyDAL_JY
             }
 
         }
+        #endregion
+
+        //public void GetSubmissionData2(SubmissionTypeEnum SubmissionType, IEnumerable<Submission> cacheSubmissions, IEnumerable<Evaluation> cacheEvaluations, IEnumerable<E_StudyDesignPurposeAnswer> cacheE_StudyDesignPurposeAnswers, IEnumerable<F_PreventionCategoryAnswer> cacheF_PreventionCategoryAnswers, IEnumerable<E_StudyDesignPurposeAnswer_B> cacheE_StudyDesignPurposeAnswer_Bs, IEnumerable<F_PreventionCategoryAnswer_B> cacheF_PreventionCategoryAnswer_Bs)
+        //{
+        //    //string connStr = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+        //    //DataJYDataContext db = new DataJYDataContext(connStr);
+
+        //    var query = (from s in cacheSubmissions
+        //                 join e in cacheEvaluations on s.EvaluationId equals e.EvaluationId
+        //                 where e.AbstractID == this.AbstractID && e.IsComplete == true &&
+        //                 s.SubmissionTypeId == (int)SubmissionType
+        //                 orderby s.SubmissionDateTime descending
+        //                 select new SubmissionData
+        //                 {
+        //                     SubmissionID = s.SubmissionID,
+        //                     UnableToCode = s.UnableToCode,
+        //                     Comment = s.comments
+        //                 }).FirstOrDefault();
+
+        //    if (query != null)
+        //    {
+        //        this.G = query.UnableToCode ? "UC" : "";
+        //        this.Comment = query.Comment;
+
+        //        if (!this.ApplicationID.Contains("_B"))
+        //        {
+
+        //            this.Flag_E7 = cacheE_StudyDesignPurposeAnswers
+        //                .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+        //                .Count() > 0;
+        //            this.Flag_F6 = cacheF_PreventionCategoryAnswers
+        //                .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+        //                .Count() > 0;
+        //        }
+        //        else
+        //        {
+        //            this.Flag_E7 = cacheE_StudyDesignPurposeAnswer_Bs
+        //                .Where(e => e.SubmissionID == query.SubmissionID && e.StudyDesignPurposeID == 7)
+        //                .Count() > 0;
+        //            this.Flag_F6 = cacheF_PreventionCategoryAnswer_Bs
+        //                .Where(f => f.SubmissionID == query.SubmissionID && f.PreventionCategoryID == 6)
+        //                .Count() > 0;
+        //        }
+        //    }
+        //}
+
+
+
 
         public void GetAbstractScan(AbstractViewRole AbstractViewRole)
         {

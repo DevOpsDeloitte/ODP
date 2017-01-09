@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Configuration;
+using System.Web;
 
 namespace ODPTaxonomyDAL_JY
 {
@@ -10,7 +11,7 @@ namespace ODPTaxonomyDAL_JY
     {
         private DataJYDataContext db;
         private DataJYDataContext db2;
-       
+
         public AbstractListViewData()
         {
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
@@ -33,6 +34,186 @@ namespace ODPTaxonomyDAL_JY
 
             return query;
         }
+
+        #region All Cached Methods
+        public IEnumerable<KappaData> getAllKappaRecordsK1K2Only(List<int> AbstractIDs)
+        {
+            var query = from k in db2.KappaDatas
+                        where k.KappaTypeID == 1 || k.KappaTypeID == 2
+                        select k;
+            //return query.ToList<KappaData>().Where(q => AbstractIDs.Contains(q.AbstractID ?? 0));
+            return query.ToList<KappaData>();
+        }
+
+        public IEnumerable<KappaData_B> getAllKappaRecordsBK1K2Only(List<int> AbstractIDs)
+        {
+            var query = from k in db2.KappaData_Bs
+                        where k.KappaTypeID == 1 || k.KappaTypeID == 2
+                        select k;
+            //return query.ToList<KappaData>().Where(q => AbstractIDs.Contains(q.AbstractID ?? 0));
+            return query.ToList<KappaData_B>();
+        }
+
+        public IEnumerable<Submission> getAllSubmissionRecords(List<int> EvaluationIDs)
+        {
+
+            if (EvaluationIDs.Count < 2100)
+            {
+                var query = from k in db2.Submissions
+                            where EvaluationIDs.Contains(k.EvaluationId ?? 0)
+                            select k;
+                return query.ToList<Submission>();
+            }
+            else
+            {
+                var query = from k in db2.Submissions
+                            select k;
+                return query.ToList<Submission>();
+            }
+        }
+
+        public IEnumerable<Evaluation> getAllEvaluationRecords(List<int> AbstractIDs)
+        {
+            if (AbstractIDs.Count < 2100)
+            {
+                var query = from k in db2.Evaluations
+                            where AbstractIDs.Contains(k.AbstractID ?? 0)
+                            select k;
+                return query.ToList<Evaluation>();
+            }
+            else
+            {
+                var query = from k in db2.Evaluations
+                            select k;
+                return query.ToList<Evaluation>();
+            }
+        }
+
+        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecordsID6(List<int> SubmissionIDs)
+        {
+            var query = from k in db2.F_PreventionCategoryAnswers
+                        where k.PreventionCategoryID == 6
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer>();
+        }
+
+
+
+        public IEnumerable<F_PreventionCategoryAnswer> getF_PreventionCategoryRecordsID6(List<int> SubmissionIDs)
+        {
+            var query = from k in db2.F_PreventionCategoryAnswers
+                        where k.PreventionCategoryID == 6 && SubmissionIDs.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer>();
+        }
+
+        public IEnumerable<F_PreventionCategoryAnswer_B> getAllF_PreventionCategoryRecord_BsID6()
+        {
+            var query = from k in db2.F_PreventionCategoryAnswer_Bs
+                        where k.PreventionCategoryID == 6
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer_B>();
+        }
+
+        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecordsID7()
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswers
+                        where k.StudyDesignPurposeID == 7
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer>();
+        }
+
+        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecordsID7(IEnumerable<int> SubmissionIDs)
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswers
+                        where k.StudyDesignPurposeID == 7 // && SubmissionIDs.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer>();
+        }
+
+        public IEnumerable<E_StudyDesignPurposeAnswer_B> getAllE_StudyDesignPurposeRecord_BsID7()
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswer_Bs
+                        where k.StudyDesignPurposeID == 7
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer_B>();
+        }
+
+
+
+        #endregion
+
+        #region Individual Cache Methods
+
+        public IEnumerable<KappaData> getIndividualKappaRecords(int AbstractID)
+        {
+            var query = from k in db2.KappaDatas
+                        where k.AbstractID == AbstractID
+                        select k;
+            return query.ToList<KappaData>();
+        }
+
+        public IEnumerable<KappaData_B> getIndividualKappaBRecords(int AbstractID)
+        {
+            var query = from k in db2.KappaData_Bs
+                        where k.AbstractID == AbstractID
+                        select k;
+            return query.ToList<KappaData_B>();
+        }
+
+        public IEnumerable<Evaluation> getIndividualEvaluationRecords(int AbstractID)
+        {
+            var query = from k in db2.Evaluations
+                        where k.AbstractID == AbstractID
+                        select k;
+            return query.ToList<Evaluation>();
+        }
+
+        public IEnumerable<Submission> getIndividualSubmissionRecords(List<int> EvaluationIDs)
+        {
+            var query = from k in db2.Submissions
+                        where EvaluationIDs.Contains(k.EvaluationId ?? 0)
+                        select k;
+            return query.ToList<Submission>();
+        }
+
+
+        public IEnumerable<E_StudyDesignPurposeAnswer> getIndividualE_StudyDesignPurposeRecords(IEnumerable<int> SubmissionIds)
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswers
+                        where SubmissionIds.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer>();
+        }
+
+        public IEnumerable<F_PreventionCategoryAnswer> getIndividualF_PreventionCategoryRecords(IEnumerable<int> SubmissionIds)
+        {
+            var query = from k in db2.F_PreventionCategoryAnswers
+                        where SubmissionIds.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer>();
+        }
+
+        public IEnumerable<F_PreventionCategoryAnswer_B> getIndividualF_PreventionCategoryRecord_Bs(IEnumerable<int> SubmissionIds)
+        {
+            var query = from k in db2.F_PreventionCategoryAnswer_Bs
+                        where SubmissionIds.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<F_PreventionCategoryAnswer_B>();
+        }
+
+        public IEnumerable<E_StudyDesignPurposeAnswer_B> getIndividualE_StudyDesignPurposeRecord_Bs(IEnumerable<int> SubmissionIds)
+        {
+            var query = from k in db2.E_StudyDesignPurposeAnswer_Bs
+                        where SubmissionIds.Contains(k.SubmissionID)
+                        select k;
+            return query.ToList<E_StudyDesignPurposeAnswer_B>();
+        }
+
+
+
+        #endregion
+
 
         public Evaluation GetODPEvaluations(int AbstractID)
         {
@@ -72,28 +253,10 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<KappaData>();
         }
 
-        public IEnumerable<KappaData> getAllKappaRecordsK1K2Only()
-        {
-            var query = from k in db2.KappaDatas
-                        where k.KappaTypeID == 1 || k.KappaTypeID == 2
-                        select k;
-            return query.ToList<KappaData>();
-        }
 
-        public IEnumerable<KappaData> getAllKappaRecords(int AbstractID)
-        {
-            var query = from k in db2.KappaDatas
-                        where k.AbstractID == AbstractID
-                        select k;
-            return query.ToList<KappaData>();
-        }
 
-        public IEnumerable<Submission> getAllSubmissionRecords()
-        {
-            var query = from k in db2.Submissions
-                        select k;
-            return query.ToList<Submission>();
-        }
+
+
 
         public IEnumerable<int> getSubmissionIds(List<int> EvaluationIds)
         {
@@ -104,28 +267,8 @@ namespace ODPTaxonomyDAL_JY
 
         }
 
-        public IEnumerable<Submission> getAllSubmissionRecords(List<int> EvaluationIds)
-        {
-            var query = from k in db2.Submissions
-                        where EvaluationIds.Contains( k.EvaluationId ?? 0)
-                        select k;
-            return query.ToList<Submission>();
-        }
 
-        public IEnumerable<Evaluation> getAllEvaluationRecords()
-        {
-            var query = from k in db2.Evaluations
-                        select k;
-            return query.ToList<Evaluation>();
-        }
 
-        public IEnumerable<Evaluation> getAllEvaluationRecords(int AbstractID)
-        {
-            var query = from k in db2.Evaluations
-                        where k.AbstractID == AbstractID
-                        select k;
-            return query.ToList<Evaluation>();
-        }
 
         public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecords()
         {
@@ -134,36 +277,14 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<E_StudyDesignPurposeAnswer>();
         }
 
-        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecordsID7()
-        {
-            var query = from k in db2.E_StudyDesignPurposeAnswers
-                        where k.StudyDesignPurposeID == 7
-                        select k;
-            return query.ToList<E_StudyDesignPurposeAnswer>();
-        }
-        public IEnumerable<E_StudyDesignPurposeAnswer> getAllE_StudyDesignPurposeRecords(IEnumerable<int> SubmissionIds)
-        {
-            var query = from k in db2.E_StudyDesignPurposeAnswers
-                        where SubmissionIds.Contains(k.SubmissionID)
-                        select k;
-            return query.ToList<E_StudyDesignPurposeAnswer>();
-        }
 
-        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords()
-        {
-            var query = from k in db2.F_PreventionCategoryAnswers
-                        select k;
-            return query.ToList<F_PreventionCategoryAnswer>();
-        }
-        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecordsID6()
-        {
-            var query = from k in db2.F_PreventionCategoryAnswers
-                        where k.PreventionCategoryID == 6
-                        select k;
-            return query.ToList<F_PreventionCategoryAnswer>();
-        }
 
-        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords(IEnumerable<int> SubmissionIds)
+
+
+
+
+
+        public IEnumerable<F_PreventionCategoryAnswer> getAllF_PreventionCategoryRecords(List<int> SubmissionIds)
         {
             var query = from k in db2.F_PreventionCategoryAnswers
                         where SubmissionIds.Contains(k.SubmissionID)
@@ -182,7 +303,17 @@ namespace ODPTaxonomyDAL_JY
             return query.ToList<KappaData>();
         }
 
-        
+        public IEnumerable<KappaData_B> GetAbstractKappaData2B(int AbstractID, IEnumerable<KappaData_B> cacheKappaData = null)
+        {
+            var query = from k in cacheKappaData
+                        where k.AbstractID == AbstractID
+                        orderby k.KappaTypeID ascending
+                        select k;
+
+            return query.ToList<KappaData_B>();
+        }
+
+
 
         public bool IsAbstractInReview(int AbstractID)
         {

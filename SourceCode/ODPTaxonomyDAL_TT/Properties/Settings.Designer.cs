@@ -54,5 +54,16 @@ namespace ODPTaxonomyDAL_TT.Properties {
                 return ((string)(this["ODP_Taxonomy_DevConnectionString2"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;U" +
+            "ser ID=odpTaxonomy")]
+        public string ODP_Taxonomy_DevConnectionString3 {
+            get {
+                return ((string)(this["ODP_Taxonomy_DevConnectionString3"]));
+            }
+        }
     }
 }

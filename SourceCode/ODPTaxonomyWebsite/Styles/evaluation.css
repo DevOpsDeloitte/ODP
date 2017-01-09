@@ -1,14 +1,13 @@
-﻿table, table.dataTable { border-collapse: collapse; table-layout: fixed;
- }
+﻿table, table.dataTable { border-collapse: collapse; table-layout: fixed; }
 table.dataTable {  width: 1200px;} 
 select[name='DTable_length'] { /*width: 69px;; float: left; height: 25; vertical-align: middle; */ }
 table.childtable { -webkit-box-shadow: 2px 2px 2px 2px rgba(0,0,0,.0); box-shadow: 2px 2px 2px 2px rgba(0,0,0,.0);}
 table#DTable td.child { border-left: 0px }
 div.downloads { display: none }
-div#downloadLinkBox { display: none; margin-top: 24px; }
+div#downloadLinkBox { z-index: 999; display: none; margin-top: 24px; }
 div#downloadProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; padding-top: 0px; position: relative; /*display: block;; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; animation: ccolor 2s infinite; */ }
 div#downloadProgressBox div#downloadSpin { position: absolute; top: 20px; left: 0px; }
-div#downloadProgressBox div#downloadText { -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; position: absolute; top: 0px; left: 25px; }
+div#downloadProgressBox div#downloadText { width: 220px; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; position: absolute; top: 9px; left: 25px; }
 
 div#generalProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; padding-top: 0px; position: relative; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; }
 
@@ -27,6 +26,7 @@ div#generalProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; pa
     from { background: red }
     to { background: yellow }
 }
+
 div#functionsbox{ position: relative;}
 div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px; z-index: 999; display: inline; }
 div#selectionsBox.hidden { display: none }
@@ -51,16 +51,23 @@ td.details-control:after { content: "+"; font-size: 28px; top: 6px; position: re
 td.details-control.nodisplay { background-image: none }
 tr.open td.details-control:after { content: "–"; }
 
-
-
-
 #DTable td.ccol, table.dataTable tbody th.ccol, table.dataTable tbody td.ccol { /*display: inline-block;*/ padding: 8px 10px; border-left: 0; display: table-cell; text-align: left; border-left: 1px solid #ccc; }
 table.dataTable tbody th[colspan="17"], table.dataTable tbody td[colspan="17"] { padding: 0 }
+table.dataTable tbody th[colspan="18"], table.dataTable tbody td[colspan="18"] { padding: 0 }
+table.dataTable tbody th[colspan="18"], table.dataTable tbody td[colspan="19"] { padding: 0 }
 table.dataTable tbody tr.hide { display: none }
 table.dataTable tbody tr.show { display: table-row }
 div.scan-file { top : -4px; right: -4px; }
 div.has-file a { padding-right: 25px; display: block; }
-div#spinner { width: 50px; height: 50px; position: relative; float: left; }
+div#spinner {
+    height: 50px;
+    float: left;
+    position: absolute;
+    width: 0px;
+    z-index: 2000000000;
+    left: 0px;
+    top: 0px;
+}
 div#tableContainer { display: none }
 div.filterBoxes.hide { display: none }
 #subButton { margin: 0; margin-top: 18px; }
@@ -125,6 +132,40 @@ div#DTable_info { /*display: none !important; */}
 .loadingAbstractDetail div.text { float: left; line-height: 52px;  padding: 0 0 0 5px; font-size: 15px;  float: left; }
 .loadingAbstractDetail div.loader { background: url("../images/loader.gif");  width: 30px; height: 30px;float:left; background-repeat: no-repeat; background-size: 30px 30px; margin: 10px 10px 10px 9px; }
 
+
+/* Styles added during work on Abstract table */
+div#basicOnly {
+    position: relative;
+    top: 26px;
+    display: inline;
+}
+
+.bold {
+    font-weight: bold
+}
+
+div#informationalSection {
+    display: inline-flex;
+    position: absolute;
+    top: 115px;
+    left: 50%;
+}
+
+div#submitLinkBox {
+    z-index: 999;
+    margin-right: 10px;
+    display: none;
+}
+
+#filterlist {
+    width:240px;
+}
+
+div#action-list {
+    display: block;
+}
+
+/* Media Queries */
 @media screen and (min-width: 1200px) {
     div#tableContainer { width: 1200px; margin-left: -100px; margin-top: 32px;}
 }
@@ -134,15 +175,27 @@ div#DTable_info { /*display: none !important; */}
     table.dataTable, #pagetitlebox { margin-left: 0px; }
     div#filtersContainer { position: relative; top: auto; left: auto; right: auto; }
     div#filtersContainer .button { padding: 5px 12px; }
-    div#selectionsBox { top: 115px; right: 0; }
+    div#selectionsBox { top: 96px; right: 0; }
+    div#informationalSection { top: 155px; left: 20% }
+
+    div#downloadProgressBox { margin-top: 47px; }
 
     .filter-wrap { display: block; position: absolute; right: 0; top: -50px; z-index: 99; }
     .length-wrap { display: block; position: absolute; right: 180px; top: -50px;  z-index: 99; }
 }
 
 @media screen and (max-width: 960px) {
+    div#informationalSection { width: 260px; top: 99px; left: 62% }
 
     .filter-wrap { display: block; position: absolute; right: auto; left: 135px; top: 5px; }
     .length-wrap { display: block; position: absolute; right: auto; left: 10px; top: 5px; }
+}
 
-} 
+/* iPad Portrait and Landscape */
+@media only screen
+    and (min-device-width: 768px)
+    and (max-device-width: 1024px)
+    and (-webkit-min-device-pixel-ratio: 1) {
+        div#informationalSection { width: 260px; top: 145px; left: 21% }
+}
+
