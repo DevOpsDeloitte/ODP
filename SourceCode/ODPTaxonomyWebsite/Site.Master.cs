@@ -181,6 +181,19 @@ namespace ODPTaxonomyWebsite
             }
         }
         //ODP Supervisor
+        protected void btn_category_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session["CurrentRole"] = role_odpSup;
+                Response.Redirect("/SwitchCategories/Category.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Utils.LogError(ex);
+                throw new Exception("An error has occured on button click.");
+            }
+        }
         protected void btn_manageTeams_odpSup_Click(object sender, EventArgs e)
         {
             try

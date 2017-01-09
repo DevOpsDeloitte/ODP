@@ -75,6 +75,13 @@ namespace ODPTaxonomyReportDAL
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), dateStart, dateEnd);
 			return ((ISingleResult<rpt_IQCode_Abstracts_Consensus_ByDateResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Select_Category")]
+		public ISingleResult<Select_CategoryResult> Select_Category()
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			return ((ISingleResult<Select_CategoryResult>)(result.ReturnValue));
+		}
 	}
 	
 	public partial class rpt_IQCode_Abstracts_ByDateResult
@@ -430,6 +437,86 @@ namespace ODPTaxonomyReportDAL
 				if ((this._F != value))
 				{
 					this._F = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Select_CategoryResult
+	{
+		
+		private int _CategoryID;
+		
+		private string _Category;
+		
+		private string _Status;
+		
+		private string _Coding;
+		
+		public Select_CategoryResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CategoryID", DbType="Int NOT NULL")]
+		public int CategoryID
+		{
+			get
+			{
+				return this._CategoryID;
+			}
+			set
+			{
+				if ((this._CategoryID != value))
+				{
+					this._CategoryID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="NVarChar(255)")]
+		public string Category
+		{
+			get
+			{
+				return this._Category;
+			}
+			set
+			{
+				if ((this._Category != value))
+				{
+					this._Category = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Status", DbType="VarChar(20)")]
+		public string Status
+		{
+			get
+			{
+				return this._Status;
+			}
+			set
+			{
+				if ((this._Status != value))
+				{
+					this._Status = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Coding", DbType="VarChar(12) NOT NULL", CanBeNull=false)]
+		public string Coding
+		{
+			get
+			{
+				return this._Coding;
+			}
+			set
+			{
+				if ((this._Coding != value))
+				{
+					this._Coding = value;
 				}
 			}
 		}
