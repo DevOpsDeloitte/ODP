@@ -187,28 +187,7 @@ namespace ODPTaxonomyUtility_TT
                 {
                     WriteExcelFile(ds, document);
                 }
-                /* Code for POST Back button option: START */
-                //stream.Flush();
-                //stream.Position = 0;
 
-                //Response.ClearContent();
-                //Response.Clear();
-                //Response.Buffer = true;
-                //Response.Charset = "";
-
-                ////  NOTE: If you get an "HttpCacheability does not exist" error on the following line, make sure you have
-                ////  manually added System.Web to this project's References.
-
-                //Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
-                //Response.AddHeader("content-disposition", "attachment; filename=" + filename);
-                //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                //byte[] data1 = new byte[stream.Length];
-                //stream.Read(data1, 0, data1.Length);
-                //stream.Close();
-                //Response.BinaryWrite(data1);
-                //Response.Flush();
-                //Response.End();
-                /* Code for POST Back button option:END */
 
                 /* Code for client-side option: START */
                 Response.AppendHeader("Content-Disposition", "attachment;filename=" + filename);
@@ -226,6 +205,34 @@ namespace ODPTaxonomyUtility_TT
             {
                 throw ex;
                 
+            }
+        }
+
+        public static void CreateExcelDocumentAsStreamSpecialHeaders(DataSet ds, string filename, System.Web.HttpResponse Response, string start, string end)
+        {
+            try
+            {
+                System.IO.MemoryStream stream = new System.IO.MemoryStream();
+                using (SpreadsheetDocument document = SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook, true))
+                {
+                    WriteExcelFileSpecialHeaders(ds, document, start, end);
+                }
+
+                Response.AppendHeader("Content-Disposition", "attachment;filename=" + filename);
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                stream.WriteTo(Response.OutputStream);
+                //Response.End();
+                /* Use 3 lines below instead of Response.End() which always throws an exception */
+                Response.Flush(); // Sends all currently buffered output to the client.
+                Response.SuppressContent = true;  // Gets or sets a value indicating whether to send HTTP content to the client.
+                System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest(); // Causes ASP.NET to bypass all 
+                                                                                      /* Code for client-side option: START */
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
             }
         }
 #endif      //  End of "INCLUDE_WEB_FUNCTIONS" section
@@ -441,7 +448,71 @@ namespace ODPTaxonomyUtility_TT
                 newWorksheetPart.Worksheet.AppendChild(new DocumentFormat.OpenXml.Spreadsheet.SheetData());
 
                 // save worksheet
+               
                 WriteDataTableToExcelWorksheet(dt, newWorksheetPart);
+                
+              
+                //WriteDataTableToExcelWorksheet_KappaHeaders(dt, newWorksheetPart);
+                //newWorksheetPart.Worksheet.Save(); 
+
+                // create the worksheet to workbook relation
+                if (worksheetNumber == 1)
+                    spreadsheet.WorkbookPart.Workbook.AppendChild(new DocumentFormat.OpenXml.Spreadsheet.Sheets());
+
+                spreadsheet.WorkbookPart.Workbook.GetFirstChild<DocumentFormat.OpenXml.Spreadsheet.Sheets>().AppendChild(new DocumentFormat.OpenXml.Spreadsheet.Sheet()
+                {
+                    Id = spreadsheet.WorkbookPart.GetIdOfPart(newWorksheetPart),
+                    SheetId = (uint)worksheetNumber,
+                    Name = dt.TableName
+                });
+
+                worksheetNumber++;
+                dt.Clear();
+            }
+
+            spreadsheet.WorkbookPart.Workbook.Save();
+        }
+        private static void WriteExcelFileSpecialHeaders(DataSet ds, SpreadsheetDocument spreadsheet, string start, string end)
+        {
+            //  Create the Excel file contents.  This function is used when creating an Excel file either writing 
+            //  to a file, or writing to a MemoryStream.
+            spreadsheet.AddWorkbookPart();
+            spreadsheet.WorkbookPart.Workbook = new DocumentFormat.OpenXml.Spreadsheet.Workbook();
+
+            //  The following line of code prevents crashes in Excel 2010
+            spreadsheet.WorkbookPart.Workbook.Append(new BookViews(new WorkbookView()));
+
+            //  If we don't add a "WorkbookStylesPart", OLEDB will refuse to connect to this .xlsx file !
+            WorkbookStylesPart workbookStylesPart = spreadsheet.WorkbookPart.AddNewPart<WorkbookStylesPart>("rIdStyles");
+            //Stylesheet stylesheet = new Stylesheet();
+            workbookStylesPart.Stylesheet = CreateStylesheet();
+            workbookStylesPart.Stylesheet.Save();
+
+            //  Loop through each of the DataTables in our DataSet, and create a new Excel Worksheet for each.
+            uint worksheetNumber = 1;
+            foreach (DataTable dt in ds.Tables)
+            {
+                //  For each worksheet you want to create
+                string workSheetID = "rId" + worksheetNumber.ToString();
+                string worksheetName = dt.TableName;
+
+                WorksheetPart newWorksheetPart = spreadsheet.WorkbookPart.AddNewPart<WorksheetPart>();
+                newWorksheetPart.Worksheet = new DocumentFormat.OpenXml.Spreadsheet.Worksheet();
+
+                // create sheet data
+                newWorksheetPart.Worksheet.AppendChild(new DocumentFormat.OpenXml.Spreadsheet.SheetData());
+
+                // save worksheet
+                if (dt.TableName.Contains("KappaAvg-"))
+                {
+                    WriteDataTableToExcelWorksheet_KappaHeaders(dt, newWorksheetPart, start, end);
+                }
+                else
+                {
+                    WriteDataTableToExcelWorksheet(dt, newWorksheetPart);
+                }
+
+                //WriteDataTableToExcelWorksheet_KappaHeaders(dt, newWorksheetPart);
                 //newWorksheetPart.Worksheet.Save(); 
 
                 // create the worksheet to workbook relation
@@ -496,26 +567,6 @@ namespace ODPTaxonomyUtility_TT
                 IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
             }
 
-            var headerRow2 = new Row { RowIndex = ++rowIndex };  // add a row at the top of spreadsheet
-            sheetData.Append(headerRow2);
-
-            for (int colInx = 0; colInx < numberOfColumns; colInx++)
-            {
-                DataColumn col = dt.Columns[colInx];
-                AppendTextCell(excelColumnNames[colInx] + "2", col.ColumnName, headerRow2, true);
-                IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
-            }
-
-            var headerRow3 = new Row { RowIndex = ++rowIndex };  // add a row at the top of spreadsheet
-            sheetData.Append(headerRow3);
-
-            for (int colInx = 0; colInx < numberOfColumns; colInx++)
-            {
-                DataColumn col = dt.Columns[colInx];
-                AppendTextCell(excelColumnNames[colInx] + "3", col.ColumnName, headerRow3, true);
-                IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
-            }
-
 
             //
             //  Now, step through each row of data in our DataTable...
@@ -553,7 +604,7 @@ namespace ODPTaxonomyUtility_TT
             }
         }
 
-        private static void WriteDataTableToExcelWorksheet_KappaHeaders(DataTable dt, WorksheetPart worksheetPart)
+        private static void WriteDataTableToExcelWorksheet_KappaHeaders(DataTable dt, WorksheetPart worksheetPart, string start, string end)
         {
             var worksheet = worksheetPart.Worksheet;
             var sheetData = worksheet.GetFirstChild<SheetData>();
@@ -582,7 +633,24 @@ namespace ODPTaxonomyUtility_TT
             for (int colInx = 0; colInx < numberOfColumns; colInx++)
             {
                 DataColumn col = dt.Columns[colInx];
-                AppendTextCell(excelColumnNames[colInx] + "1", col.ColumnName, headerRow, true);
+                
+
+                if (colInx > 5 && colInx < 14)
+                {
+                    AppendTextCellYellow(excelColumnNames[colInx] + "1", col.ColumnName, headerRow);
+                }
+                else
+                {
+                    if (colInx == 0)
+                    {
+                        AppendTextCellYellow(excelColumnNames[colInx] + "1", "QC Report : " + start + " - " + end, headerRow);
+
+                    }
+                    else
+                    {
+                        AppendTextCellYellow(excelColumnNames[colInx] + "1", "", headerRow);
+                    }
+                }
                 IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
             }
 
@@ -592,7 +660,30 @@ namespace ODPTaxonomyUtility_TT
             for (int colInx = 0; colInx < numberOfColumns; colInx++)
             {
                 DataColumn col = dt.Columns[colInx];
-                AppendTextCell(excelColumnNames[colInx] + "2", col.ColumnName, headerRow2, true);
+                switch (colInx)
+                {
+
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 12:
+                    case 13:
+                        AppendTextCellYellow(excelColumnNames[colInx] + "2", "0.7", headerRow2);
+                        break;
+                    case 9:
+                    case 11:
+                        AppendTextCellYellow(excelColumnNames[colInx] + "2", "0.8", headerRow2);
+                        break;
+                    case 5:
+                        AppendTextCellYellow(excelColumnNames[colInx] + "2", "Threshold", headerRow2);
+                        break;
+                    default:
+                        AppendTextCellYellow(excelColumnNames[colInx] + "2", " ", headerRow2);
+                        break;
+
+                }
+                //AppendTextCellYellow(excelColumnNames[colInx] + "2", col.ColumnName, headerRow2);
                 IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
             }
 
@@ -602,7 +693,17 @@ namespace ODPTaxonomyUtility_TT
             for (int colInx = 0; colInx < numberOfColumns; colInx++)
             {
                 DataColumn col = dt.Columns[colInx];
-                AppendTextCell(excelColumnNames[colInx] + "3", col.ColumnName, headerRow3, true);
+                AppendTextCell(excelColumnNames[colInx] + "3","", headerRow3, true);
+                IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
+            }
+
+            var headerRow4 = new Row { RowIndex = ++rowIndex };  // add a row at the top of spreadsheet
+            sheetData.Append(headerRow4);
+
+            for (int colInx = 0; colInx < numberOfColumns; colInx++)
+            {
+                DataColumn col = dt.Columns[colInx];
+                AppendTextCell(excelColumnNames[colInx] + "4", col.ColumnName, headerRow4, true);
                 IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
             }
 
