@@ -36,6 +36,13 @@
         window.FIREBASE_CONFIG = '<%= this.firebaseConfig %>';
         window.CONTRACTOR_NAME = ' <%= System.Configuration.ConfigurationManager.AppSettings["contractorName"] %>';
         window.Role = '<%= this.roleDisplay %>'
+        var fconfig = {
+            // apiKey: "AIzaSyAdJz5yry23tXmin9LOALwdbrgbGbyc_Nc",
+            // authDomain: "intense-fire-1108.firebaseapp.com",
+            databaseURL: '<%= this.firebaseConfig %>',
+            // storageBucket: "intense-fire-1108.appspot.com",
+            // messagingSenderId: "101185189193"
+        };
     </script>
     <script src="/Scripts/jquery.js" type="text/javascript"></script>
 </head>
