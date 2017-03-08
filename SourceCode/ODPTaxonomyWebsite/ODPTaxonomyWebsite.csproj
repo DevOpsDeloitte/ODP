@@ -149,9 +149,11 @@
     <Content Include="Scripts\angular\angular-csp.css" />
     <Content Include="Scripts\angular\angular-latest.min.js" />
     <Content Include="Scripts\angular\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular\angular-old.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\angularfire.min.js" />
+    <Content Include="Scripts\angular\firebase-config.js" />
     <Content Include="Scripts\angular\firebase.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\classie.js" />
@@ -355,7 +357,6 @@
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
