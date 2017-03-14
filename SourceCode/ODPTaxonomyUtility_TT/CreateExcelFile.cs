@@ -637,18 +637,18 @@ namespace ODPTaxonomyUtility_TT
 
                 if (colInx > 5 && colInx < 14)
                 {
-                    AppendTextCellYellow(excelColumnNames[colInx] + "1", col.ColumnName, headerRow);
+                    AppendTextCell(excelColumnNames[colInx] + "1", col.ColumnName, headerRow);
                 }
                 else
                 {
                     if (colInx == 0)
                     {
-                        AppendTextCellYellow(excelColumnNames[colInx] + "1", "QC Report : " + start + " - " + end, headerRow);
+                        AppendTextCell(excelColumnNames[colInx] + "1", "QC Report : ", headerRow);
 
                     }
                     else
                     {
-                        AppendTextCellYellow(excelColumnNames[colInx] + "1", "", headerRow);
+                        AppendTextCell(excelColumnNames[colInx] + "1", "", headerRow);
                     }
                 }
                 IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
@@ -662,29 +662,31 @@ namespace ODPTaxonomyUtility_TT
                 DataColumn col = dt.Columns[colInx];
                 switch (colInx)
                 {
-
+                    case 0:
+                        AppendTextCell(excelColumnNames[colInx] + "2", "" + start + " - " + end, headerRow2);
+                        break;
                     case 6:
                     case 7:
                     case 8:
                     case 10:
                     case 12:
                     case 13:
-                        AppendTextCellYellow(excelColumnNames[colInx] + "2", "0.7", headerRow2);
+                        AppendTextCell(excelColumnNames[colInx] + "2", "0.7", headerRow2);
                         break;
                     case 9:
                     case 11:
-                        AppendTextCellYellow(excelColumnNames[colInx] + "2", "0.8", headerRow2);
+                        AppendTextCell(excelColumnNames[colInx] + "2", "0.8", headerRow2);
                         break;
                     case 5:
-                        AppendTextCellYellow(excelColumnNames[colInx] + "2", "Threshold", headerRow2);
+                        AppendTextCell(excelColumnNames[colInx] + "2", "Threshold", headerRow2);
                         break;
                     default:
-                        AppendTextCellYellow(excelColumnNames[colInx] + "2", " ", headerRow2);
+                        AppendTextCell(excelColumnNames[colInx] + "2", " ", headerRow2);
                         break;
 
                 }
                 //AppendTextCellYellow(excelColumnNames[colInx] + "2", col.ColumnName, headerRow2);
-                IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
+               // IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
             }
 
             var headerRow3 = new Row { RowIndex = ++rowIndex };  // add a row at the top of spreadsheet
@@ -694,7 +696,7 @@ namespace ODPTaxonomyUtility_TT
             {
                 DataColumn col = dt.Columns[colInx];
                 AppendTextCell(excelColumnNames[colInx] + "3","", headerRow3, true);
-                IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
+              //  IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
             }
 
             var headerRow4 = new Row { RowIndex = ++rowIndex };  // add a row at the top of spreadsheet
@@ -704,7 +706,7 @@ namespace ODPTaxonomyUtility_TT
             {
                 DataColumn col = dt.Columns[colInx];
                 AppendTextCell(excelColumnNames[colInx] + "4", col.ColumnName, headerRow4, true);
-                IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
+               // IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
             }
 
 
@@ -770,6 +772,19 @@ namespace ODPTaxonomyUtility_TT
 
             cell = new Cell() { CellReference = cellReference, DataType = CellValues.String, StyleIndex = 6 };
         
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+
+        private static void AppendTextCell(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = null;
+
+            cell = new Cell() { CellReference = cellReference, DataType = CellValues.String, StyleIndex = 4 };
+
             CellValue cellValue = new CellValue();
             cellValue.Text = cellStringValue;
             cell.Append(cellValue);
