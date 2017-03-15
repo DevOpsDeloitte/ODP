@@ -546,9 +546,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             data: formArray,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded'}  // set the headers so angular passing info as form data (not request payload)
         })
-           .success(function (data) {
-               //console.log("response received : " + data.success);
-
+           .then(function (dataRecieved) {
+               //console.log("response received : " + JSON.stringify(dataRecieved));
+               var data = dataRecieved.data;
                if (!data.success) {
                    $scope.showSaveButton = true;
                    // Logic for Supervisor User Auth Failure.

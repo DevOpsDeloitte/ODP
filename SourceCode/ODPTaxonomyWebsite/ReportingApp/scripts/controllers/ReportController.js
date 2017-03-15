@@ -15,7 +15,7 @@
         vm.errormessage = {};
 
         report.getDateRanges()
-                    .then(function (response) {                    
+                    .then(function (response) {
                         vm.dateranges = response.data.map(function (x)
                         {
                             x.id = x.QC_ID;
