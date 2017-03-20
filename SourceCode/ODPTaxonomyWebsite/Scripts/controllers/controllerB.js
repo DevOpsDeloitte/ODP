@@ -235,7 +235,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                     var modeval = "";
 
                     if (snap.val()) {
-                        console.log(" Function 2 team detect object :: value change " + snap.val());
+                        console.log(" checkForConsensusProgress2 team detect object :: value change " + snap.val());
                         $globdata = snap.val();
                         if (snap.val() !== undefined) {
                             $team.keys = Object.keys(snap.val());
