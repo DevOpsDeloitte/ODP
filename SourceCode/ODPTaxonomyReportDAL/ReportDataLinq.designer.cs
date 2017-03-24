@@ -358,9 +358,11 @@ namespace ODPTaxonomyReportDAL
 	public partial class rpt_IQCode_Abstracts_ByDateResult
 	{
 		
-		private string _Date;
+		private string _Mechanism;
 		
 		private string _GroupUsers;
+		
+		private string _Date;
 		
 		private string _Flagged_Y_N;
 		
@@ -376,18 +378,18 @@ namespace ODPTaxonomyReportDAL
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="VarChar(30)")]
-		public string Date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mechanism", DbType="NVarChar(50)")]
+		public string Mechanism
 		{
 			get
 			{
-				return this._Date;
+				return this._Mechanism;
 			}
 			set
 			{
-				if ((this._Date != value))
+				if ((this._Mechanism != value))
 				{
-					this._Date = value;
+					this._Mechanism = value;
 				}
 			}
 		}
@@ -404,6 +406,22 @@ namespace ODPTaxonomyReportDAL
 				if ((this._GroupUsers != value))
 				{
 					this._GroupUsers = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Date", DbType="VarChar(30)")]
+		public string Date
+		{
+			get
+			{
+				return this._Date;
+			}
+			set
+			{
+				if ((this._Date != value))
+				{
+					this._Date = value;
 				}
 			}
 		}

@@ -25,8 +25,9 @@
     <Parameter Name="DateStart" Parameter="dateStart" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="DateEnd" Parameter="dateEnd" Type="System.String" DbType="VarChar(100)" />
     <ElementType Name="rpt_IQCode_Abstracts_ByDateResult">
-      <Column Name="Date" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="Mechanism" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="GroupUsers" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Date" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Column Name="[Flagged Y/N]" Member="Flagged_Y_N" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
       <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="[Appl ID]" Member="Appl_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
