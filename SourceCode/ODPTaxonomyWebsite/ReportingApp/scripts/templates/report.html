@@ -33,7 +33,19 @@
                         <input type="radio" ng-model="vm.ktype" value="K13">
                         K13
                     </label>
+                </div>
 
+                <div class="col-md-2 three columns">
+                    <strong>Mechanism Types :</strong><br />
+                    <label>
+                        <input type="checkbox" ng-model="vm.mechanismsall" value="all" ng-init="vm.mechanismsall = true" ng-change="changeAll(vm.mechanismsall)">
+                        All
+                    </label>
+                    <label ng-repeat="(index, item) in vm.mechanismtypes" ng-init="vm.mechanisms[0] = true">
+                        <input type="checkbox" ng-model="item.selected" value="item.id">
+                         {{item.name}}
+                    </label>
+                    
                 </div>
 
             </div>
@@ -46,7 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-2 columns three">
-                    <button type="submit" class="btn btn-default button" ng-disabled="!vm.checkForm()" ng-click="vm.runReport($event);" ng-class="{ 'btn-danger no' : !vm.checkForm(), 'btn-success yes' : vm.checkForm() }">Run Report</button>
+                    <button type="submit" class="btn btn-default button" ng-disabled="!vm.checkFormValid()" ng-click="vm.runReport($event);" ng-class="{ 'btn-danger no' : !vm.checkFormValid(), 'btn-success yes' : vm.checkFormValid() }">Run Report</button>
                 </div>
             </div>
 

@@ -5,29 +5,99 @@
       .module('reportingapp')
       .controller('ReportController', ReportController);
 
-    ReportController.$inject = ['$http', '$log', '$q', '$window','ROOT_URL', 'report', '$scope', '$timeout'];
+    ReportController.$inject = ['$http', '$log', '$q', '$window','ROOT_URL', 'report', '$scope', '$timeout', '$filter'];
 
-    function ReportController($http, $log, $q, $window,  ROOT_URL, report, $scope, $timeout) {
+    function ReportController($http, $log, $q, $window,  ROOT_URL, report, $scope, $timeout, $filter) {
         var vm = this;
 
         vm.defaultdateid = 1;
+        vm.mechanisms = [];
+        vm.selectedmechanisms = [];
 
         vm.errormessage = {};
 
-        report.getDateRanges()
-                    .then(function (response) {                    
-                        vm.dateranges = response.data.map(function (x)
-                        {
-                            x.id = x.QC_ID;
-                            x.name = x.Dates_IQ_Coded;
-                            return x;
-                        });
 
-                        vm.initForm();
-                        
-                        //$log.info("dates loaded ::" + JSON.stringify(response.data));
-                        
-                    }, vm.onerror);
+        vm.startUp = function () {
+
+            // complete both requests and proceed.
+            $q.all({ dates: report.getDateRanges(), mechanisms: report.getMechanismTypes() })
+            .then(function (result) {
+                $log.info('promise result ', result);
+                vm.dateranges = result.dates.data.map(function (x) {
+                    x.id = x.QC_ID;
+                    x.name = x.Dates_IQ_Coded;
+                    return x;
+                });
+                vm.mechanismtypes = result.mechanisms.data.map(function (x) {
+                    x.id = x.Report_Mechanism_TypeID;
+                    x.name = x.Report_Mechanism_Type1;
+                    x.selected = true;
+                    return x;
+                });
+
+                vm.initForm();
+
+            });
+
+
+        }
+
+        //$scope.$watch('vm.mechanismtypes', function (newval, oldval) {
+        //    if(newval !== oldval)
+        //    {
+        //        $log.info(newval);
+        //        vm.mechanismsall = true;
+        //        if(newval.indexOf(false) > -1) {
+        //            vm.mechanismsall = false;
+        //        }
+
+        //        if(newval.indexOf(true) == -1) {
+        //            vm.mechanisms = oldval;
+        //        }
+        //    }
+       
+        //}, true);
+
+        //$scope.$watch('vm.mechanismtypes|filter:{selected:true}', function (nv, ov) {
+        $scope.$watch('vm.mechanismtypes', function (nv, ov) {
+            vm.mechanismsall = true;
+            vm.selectedmechanisms = [];
+            if (nv === undefined) return;
+            for(var i =0; i<nv.length; i++){
+                if (nv[i].selected==false) {
+                    vm.mechanismsall = false;
+                    break;
+                }
+            }
+
+            for (var i = 0; i < nv.length; i++) {
+                if (nv[i].selected == true) {
+                    vm.selectedmechanisms.push(nv[i].id + '-' + nv[i].name);
+                }
+            }
+            //vm.selectedmechanisms = nv.map(function (ids) {
+
+            //    return ids.id;
+            //});
+        }, true);
+ 
+
+
+        $scope.changeAll = function (m) {
+            $log.info(m);
+            if (m === false) vm.mechanismsall = true;
+            else {
+                vm.selectedmechanisms = [];
+                for (var i = 0; i < vm.mechanismtypes.length; i++) {
+                    vm.mechanismtypes[i].selected = true;
+                    vm.selectedmechanisms.push(vm.mechanismtypes[i].id + '-' + vm.mechanismtypes[i].name);
+                    }
+                }
+            }
+
+        
+
+        vm.startUp();
 
         vm.initForm = function () {
 
@@ -49,7 +119,7 @@
             e.preventDefault();
             e.stopPropagation();
 
-            report.runReport(vm.datestart.name, vm.dateend.name, vm.ktype)
+            report.runReport(vm.datestart.name, vm.dateend.name, vm.ktype, vm.selectedmechanisms.join(',') )
                    .then(function (response) {
                       
                    }, vm.onerror);
@@ -65,6 +135,10 @@
 
                    }, vm.onerror);
 
+        };
+
+        vm.checkFormValid = function () {
+            return vm.checkForm && vm.selectedmechanisms.length > 0
         };
 
         vm.checkForm = function () {

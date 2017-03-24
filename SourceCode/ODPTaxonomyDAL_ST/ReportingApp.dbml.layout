@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="ReportingApp">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 13.25, 8.5" name="ReportingApp">
   <DataContextMoniker Name="/ReportingAppDataContext" />
   <nestedChildShapes>
     <classShape Id="40ae016e-867c-44f1-85c1-3173c8d87be3" absoluteBounds="4.375, 2.875, 2, 1.7708968098958331">
       <DataClassMoniker Name="/ReportingAppDataContext/Report_QC_Week" />
       <nestedChildShapes>
         <elementListCompartment Id="c298844c-76b6-4d1b-88f7-70b619ff79d5" absoluteBounds="4.39, 3.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="470a10a6-2790-44ec-90ef-52dd90a2ec37" absoluteBounds="8.625, 4, 4.375, 1.7708968098958331">
+      <DataClassMoniker Name="/ReportingAppDataContext/Report_Mechanism_Type" />
+      <nestedChildShapes>
+        <elementListCompartment Id="abf06640-f8a0-40da-9f99-d3e46477dffd" absoluteBounds="8.64, 4.46, 4.3450000000000006, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>

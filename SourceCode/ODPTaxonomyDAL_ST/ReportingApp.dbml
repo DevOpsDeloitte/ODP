@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Dev" Class="ReportingAppDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString3" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="ReportingAppDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235.iq.iqsolutions.com;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_ST.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString7" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Report_QC_Week" Member="Report_QC_Weeks">
     <Type Name="Report_QC_Week">
       <Column Name="QC_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -7,6 +7,15 @@
       <Column Name="Dates_IQ_Coded" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Rpt_Year" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="Rpt_Month" Type="System.Double" DbType="Float" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Report_Mechanism_Type" Member="Report_Mechanism_Types">
+    <Type Name="Report_Mechanism_Type">
+      <Column Name="Report_Mechanism_TypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Report_Mechanism_Type" Member="Report_Mechanism_Type1" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Report_Mechanism_TypeDesc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Sorting" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.Report_AbstractSummary" Method="Report_AbstractSummary">

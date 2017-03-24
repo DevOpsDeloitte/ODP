@@ -22,7 +22,7 @@ namespace ODPTaxonomyDAL_ST
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_Dev")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_DEV")]
 	public partial class ReportingAppDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -30,10 +30,13 @@ namespace ODPTaxonomyDAL_ST
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertReport_Mechanism_Type(Report_Mechanism_Type instance);
+    partial void UpdateReport_Mechanism_Type(Report_Mechanism_Type instance);
+    partial void DeleteReport_Mechanism_Type(Report_Mechanism_Type instance);
     #endregion
 		
 		public ReportingAppDataContext() : 
-				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString3, mappingSource)
+				base(global::ODPTaxonomyDAL_ST.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString7, mappingSource)
 		{
 			OnCreated();
 		}
@@ -67,6 +70,14 @@ namespace ODPTaxonomyDAL_ST
 			get
 			{
 				return this.GetTable<Report_QC_Week>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Report_Mechanism_Type> Report_Mechanism_Types
+		{
+			get
+			{
+				return this.GetTable<Report_Mechanism_Type>();
 			}
 		}
 		
@@ -201,6 +212,164 @@ namespace ODPTaxonomyDAL_ST
 				{
 					this._Rpt_Month = value;
 				}
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_Mechanism_Type")]
+	public partial class Report_Mechanism_Type : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Report_Mechanism_TypeID;
+		
+		private string _Report_Mechanism_Type1;
+		
+		private string _Report_Mechanism_TypeDesc;
+		
+		private System.Nullable<int> _StatusID;
+		
+		private System.Nullable<int> _Sorting;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnReport_Mechanism_TypeIDChanging(int value);
+    partial void OnReport_Mechanism_TypeIDChanged();
+    partial void OnReport_Mechanism_Type1Changing(string value);
+    partial void OnReport_Mechanism_Type1Changed();
+    partial void OnReport_Mechanism_TypeDescChanging(string value);
+    partial void OnReport_Mechanism_TypeDescChanged();
+    partial void OnStatusIDChanging(System.Nullable<int> value);
+    partial void OnStatusIDChanged();
+    partial void OnSortingChanging(System.Nullable<int> value);
+    partial void OnSortingChanged();
+    #endregion
+		
+		public Report_Mechanism_Type()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Report_Mechanism_TypeID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Report_Mechanism_TypeID
+		{
+			get
+			{
+				return this._Report_Mechanism_TypeID;
+			}
+			set
+			{
+				if ((this._Report_Mechanism_TypeID != value))
+				{
+					this.OnReport_Mechanism_TypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._Report_Mechanism_TypeID = value;
+					this.SendPropertyChanged("Report_Mechanism_TypeID");
+					this.OnReport_Mechanism_TypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Report_Mechanism_Type", Storage="_Report_Mechanism_Type1", DbType="NVarChar(20)")]
+		public string Report_Mechanism_Type1
+		{
+			get
+			{
+				return this._Report_Mechanism_Type1;
+			}
+			set
+			{
+				if ((this._Report_Mechanism_Type1 != value))
+				{
+					this.OnReport_Mechanism_Type1Changing(value);
+					this.SendPropertyChanging();
+					this._Report_Mechanism_Type1 = value;
+					this.SendPropertyChanged("Report_Mechanism_Type1");
+					this.OnReport_Mechanism_Type1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Report_Mechanism_TypeDesc", DbType="NVarChar(500)")]
+		public string Report_Mechanism_TypeDesc
+		{
+			get
+			{
+				return this._Report_Mechanism_TypeDesc;
+			}
+			set
+			{
+				if ((this._Report_Mechanism_TypeDesc != value))
+				{
+					this.OnReport_Mechanism_TypeDescChanging(value);
+					this.SendPropertyChanging();
+					this._Report_Mechanism_TypeDesc = value;
+					this.SendPropertyChanged("Report_Mechanism_TypeDesc");
+					this.OnReport_Mechanism_TypeDescChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int")]
+		public System.Nullable<int> StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					this.OnStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._StatusID = value;
+					this.SendPropertyChanged("StatusID");
+					this.OnStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Sorting", DbType="Int")]
+		public System.Nullable<int> Sorting
+		{
+			get
+			{
+				return this._Sorting;
+			}
+			set
+			{
+				if ((this._Sorting != value))
+				{
+					this.OnSortingChanging(value);
+					this.SendPropertyChanging();
+					this._Sorting = value;
+					this.SendPropertyChanged("Sorting");
+					this.OnSortingChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
