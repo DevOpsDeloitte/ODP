@@ -1302,7 +1302,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": 7
+                    "targets": 10
                 },
 
                 {
@@ -1316,17 +1316,17 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+                    "targets": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
                 },
 
-                { "visible": true, "targets": [5] },
+                { "visible": true, "targets": [8] },
                 {
                     "render": function (data, type, row) {
                         var myDate = new Date(data);
                         return getFormattedDate(myDate);
 
                     },
-                    "targets": 4 //date column
+                    "targets": 7 //date column
                 },
 
                 {
@@ -1345,7 +1345,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         return collink;
 
                     },
-                    "targets": 6 //title column
+                    "targets": 9 //title column
                 },
                 {
                     "render": function (data, type, row) {
@@ -1358,7 +1358,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": 18 //date column
+                    "targets": 21 //date column
                 }
             ],
             // searchDelay is only applicable for client side. see debounce function for server side delays.
@@ -1391,6 +1391,11 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                 },
                 { "data": "AbstractID", "class": "abstractid hide_column" },
                 { "data": "ApplicationID" },
+
+                { "data": "FY" },
+                { "data": "Type" },
+                { "data": "Activity" },
+
                 { "data": "StatusDate" },
                 { "data": "PIProjectLeader" },
                 { "data": "ProjectTitle" },

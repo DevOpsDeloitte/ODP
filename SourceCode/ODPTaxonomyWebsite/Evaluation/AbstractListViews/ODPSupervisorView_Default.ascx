@@ -81,6 +81,11 @@
                     <th class="col_openclose"><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes" style="display: none;" /><label for="allBox"></label></th>
                     <th class="col_abstractid">Abstract ID</th>
                     <th class="col_applicationid">Application ID</th>
+
+                    <th class="col_fy">FY</th>
+                    <th class="col_type">Type</th>
+                    <th class="col_mechanism">Mechanism</th>
+
                     <th class="col_statusdate">Status Date</th>
                     <th class="col_piname">PI Name</th>
                     <th class="col_title">Title</th>
