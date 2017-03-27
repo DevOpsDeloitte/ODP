@@ -1,24 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="ReportDataLinqDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235.iq.iqsolutions.com;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyReportDAL.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString" Provider="System.Data.SqlClient" />
-  <Function Name="dbo.rpt_IQCode_Abstracts_ByDate" Method="rpt_IQCode_Abstracts_ByDate">
-    <Parameter Name="DateStart" Parameter="dateStart" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="DateEnd" Parameter="dateEnd" Type="System.String" DbType="VarChar(100)" />
-    <ElementType Name="rpt_IQCode_Abstracts_ByDateResult">
-      <Column Name="Date" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
-      <Column Name="GroupUsers" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="[Flagged Y/N]" Member="Flagged_Y_N" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
-      <Column Name="[Appl ID]" Member="Appl_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[PI Name]" Member="PI_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.rpt_IQCode_Abstracts_Consensus_ByDate" Method="rpt_IQCode_Abstracts_Consensus_ByDate">
     <Parameter Name="DateStart" Parameter="dateStart" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="DateEnd" Parameter="dateEnd" Type="System.String" DbType="VarChar(100)" />
     <ElementType Name="rpt_IQCode_Abstracts_Consensus_ByDateResult">
       <Column Name="Date" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
       <Column Name="GroupUsers" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
-      <Column Name="[Appl ID]" Member="Appl_ID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[Flagged Y/N]" Member="Flagged_Y_N" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Appl ID]" Member="Appl_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="[PI Name]" Member="PI_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="A1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
@@ -29,6 +19,20 @@
       <Column Name="D" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="E" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="F" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.rpt_IQCode_Abstracts_ByDate" Method="rpt_IQCode_Abstracts_ByDate">
+    <Parameter Name="DateStart" Parameter="dateStart" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="DateEnd" Parameter="dateEnd" Type="System.String" DbType="VarChar(100)" />
+    <ElementType Name="rpt_IQCode_Abstracts_ByDateResult">
+      <Column Name="Mechanism" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="GroupUsers" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="Date" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="[Flagged Y/N]" Member="Flagged_Y_N" Type="System.String" DbType="VarChar(1) NOT NULL" CanBeNull="false" />
+      <Column Name="ProjectNumber" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Appl ID]" Member="Appl_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[PI Name]" Member="PI_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
   <Function Name="dbo.Select_Category" Method="Select_Category">

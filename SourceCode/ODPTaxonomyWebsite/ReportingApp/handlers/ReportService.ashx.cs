@@ -78,7 +78,7 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 DataSet ds = new DataSet();
                 CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-"+ktype, ds);
                 CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_DataDetail_ByQCWeeksResult>(reportvalsdetail, context.Response, "KappaAvgDetail-" + ktype, ds);
-                CreateExcelFile.CreateExcelDocumentAsStream(ds, "KappaAvg-"+start+"-"+end+"-"+ktype+".xlsx", context.Response);
+                CreateExcelFile.CreateExcelDocumentAsStreamSpecialHeaders(ds, "KappaAvg-"+start+"-"+end+"-"+ktype+".xlsx", context.Response, start, end);
                 //return JsonConvert.SerializeObject(reportvals);
             }
         }

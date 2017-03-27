@@ -54,20 +54,22 @@ namespace ODPTaxonomyWebsite.Evaluation
             var count = 1;
             foreach (var topic in topics)
             {
-
-                StringBuilder row = new StringBuilder();
-                row.AppendLine("<div class=\"topicitem\">");
-                if (topic.SubTitle == null)
+                if (topic.Protocol1 != null)
                 {
-                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + "0" + "\"> " + topic.Title + "</a></div>");
+                    StringBuilder row = new StringBuilder();
+                    row.AppendLine("<div class=\"topicitem\">");
+                    if (topic.SubTitle == null)
+                    {
+                        row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + "0" + "\"> " + topic.Title + "</a></div>");
+                    }
+                    else
+                    {
+                        row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + topic.LookUpID.ToString() + "\"> " + topic.SubTitle + "</a></div>");
+                    }
+                    row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
+                    row.AppendLine("</div>");
+                    finalStr.Append(row);
                 }
-                else
-                {
-                    row.AppendLine("<div class=\"subtitle\"><a name=\"" + catname[1] + "-" + topic.LookUpID.ToString() + "\"> " + topic.SubTitle + "</a></div>");
-                }
-                row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
-                row.AppendLine("</div>");
-                finalStr.Append(row);
                 //if (count > 0) break;
                 count++;
             }
