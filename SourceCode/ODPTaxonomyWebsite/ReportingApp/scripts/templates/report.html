@@ -39,7 +39,7 @@
                     <strong>Mechanism Types :</strong><br />
                     <label>
                         <input type="checkbox" ng-model="vm.mechanismsall" value="all" ng-init="vm.mechanismsall = true" ng-change="changeAll(vm.mechanismsall)">
-                        All
+                        Select All
                     </label>
                     <label ng-repeat="(index, item) in vm.mechanismtypes" ng-init="vm.mechanisms[0] = true">
                         <input type="checkbox" ng-model="item.selected" value="item.id">

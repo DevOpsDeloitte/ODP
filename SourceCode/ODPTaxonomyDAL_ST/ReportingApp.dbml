@@ -9,11 +9,12 @@
       <Column Name="Rpt_Month" Type="System.Double" DbType="Float" CanBeNull="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Report_Mechanism_Type" Member="Report_Mechanism_Types">
-    <Type Name="Report_Mechanism_Type">
-      <Column Name="Report_Mechanism_TypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="Report_Mechanism_Type" Member="Report_Mechanism_Type1" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Report_Mechanism_TypeDesc" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+  <Table Name="dbo.Mechanism_Type" Member="Mechanism_Types">
+    <Type Name="Mechanism_Type">
+      <Column Name="Mechanism_TypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Mechanism_Type" Member="Mechanism_Type1" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mechanism" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Sorting" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>

@@ -29,8 +29,8 @@
                     return x;
                 });
                 vm.mechanismtypes = result.mechanisms.data.map(function (x) {
-                    x.id = x.Report_Mechanism_TypeID;
-                    x.name = x.Report_Mechanism_Type1;
+                    x.id = x.Mechanism_TypeID;
+                    x.name = x.Mechanism_Type1;
                     x.selected = true;
                     return x;
                 });
@@ -42,21 +42,6 @@
 
         }
 
-        //$scope.$watch('vm.mechanismtypes', function (newval, oldval) {
-        //    if(newval !== oldval)
-        //    {
-        //        $log.info(newval);
-        //        vm.mechanismsall = true;
-        //        if(newval.indexOf(false) > -1) {
-        //            vm.mechanismsall = false;
-        //        }
-
-        //        if(newval.indexOf(true) == -1) {
-        //            vm.mechanisms = oldval;
-        //        }
-        //    }
-       
-        //}, true);
 
         //$scope.$watch('vm.mechanismtypes|filter:{selected:true}', function (nv, ov) {
         $scope.$watch('vm.mechanismtypes', function (nv, ov) {
@@ -75,24 +60,28 @@
                     vm.selectedmechanisms.push(nv[i].id + '-' + nv[i].name);
                 }
             }
-            //vm.selectedmechanisms = nv.map(function (ids) {
 
-            //    return ids.id;
-            //});
         }, true);
  
 
 
         $scope.changeAll = function (m) {
-            $log.info(m);
-            if (m === false) vm.mechanismsall = true;
+            if (m === false) {
+                //vm.mechanismsall = true; // commenting out temporarily.
+                vm.selectedmechanisms = [];
+                vm.mechanismsall = false;
+                for (var i = 0; i < vm.mechanismtypes.length; i++) {
+                    vm.mechanismtypes[i].selected = false;
+                }
+
+            }
             else {
                 vm.selectedmechanisms = [];
                 for (var i = 0; i < vm.mechanismtypes.length; i++) {
                     vm.mechanismtypes[i].selected = true;
                     vm.selectedmechanisms.push(vm.mechanismtypes[i].id + '-' + vm.mechanismtypes[i].name);
-                    }
                 }
+            }
             }
 
         

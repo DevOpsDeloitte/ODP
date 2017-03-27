@@ -503,7 +503,7 @@ namespace ODPTaxonomyUtility_TT
                 newWorksheetPart.Worksheet.AppendChild(new DocumentFormat.OpenXml.Spreadsheet.SheetData());
 
                 // save worksheet
-                if (dt.TableName.Contains("KappaAvg-"))
+                if (!dt.TableName.Contains("AvgDetail"))
                 {
                     WriteDataTableToExcelWorksheet_KappaHeaders(dt, newWorksheetPart, start, end);
                 }
