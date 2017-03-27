@@ -213,7 +213,10 @@ namespace ODPTaxonomyDAL_JY
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
                             IsParent = true,
-                            CodingType = a.CodingType
+                            CodingType = a.CodingType,
+                            FY = a.FY,
+                            Activity = a.Activity,
+                            Type = a.Type
                         };
 
             switch (param.filter)

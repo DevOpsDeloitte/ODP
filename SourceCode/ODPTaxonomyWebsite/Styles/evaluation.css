@@ -11,6 +11,8 @@ div#downloadProgressBox div#downloadText { width: 220px; -webkit-animation: blin
 
 div#generalProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; padding-top: 0px; position: relative; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; }
 
+th.hide_column, td.hide_column {display: none;}
+
 .waitingForConnection { animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate }
 @-webkit-keyframes blinker { 
     from { opacity: 1 }
