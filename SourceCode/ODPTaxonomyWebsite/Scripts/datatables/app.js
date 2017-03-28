@@ -1374,7 +1374,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                     }
                 }
             },
-            "order": [[4, "desc"]],
+            "order": [[7, "desc"]],
             "columns": [
                 {
                     "class": 'checkbox-control',

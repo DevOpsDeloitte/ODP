@@ -84,7 +84,7 @@
 
                     <th class="col_fy">FY</th>
                     <th class="col_type">Type</th>
-                    <th class="col_mechanism">Mechanism</th>
+                    <th class="col_mechanism">Mech</th>
 
                     <th class="col_statusdate">Status Date</th>
                     <th class="col_piname">PI Name</th>
