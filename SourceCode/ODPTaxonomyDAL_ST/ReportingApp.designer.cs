@@ -122,6 +122,13 @@ namespace ODPTaxonomyDAL_ST
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType, mechanismType);
 			return ((ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult>)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaAvg_ByQCWeeks_New")]
+		public ISingleResult<Report_KappaAvg_ByQCWeeks_NewResult> Report_KappaAvg_ByQCWeeks_New([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MechanismType", DbType="Int")] System.Nullable<int> mechanismType)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType, mechanismType);
+			return ((ISingleResult<Report_KappaAvg_ByQCWeeks_NewResult>)(result.ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Report_QC_Week")]
@@ -1798,6 +1805,248 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._F != value))
 				{
 					this._F = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Report_KappaAvg_ByQCWeeks_NewResult
+	{
+		
+		private string _QC_week;
+		
+		private string _IQ_StartDate;
+		
+		private string _IQ_EndDate;
+		
+		private string _Kappa;
+		
+		private System.Nullable<int> _E7F6Ct;
+		
+		private System.Nullable<int> _Number_Abs;
+		
+		private string _A1;
+		
+		private string _A2;
+		
+		private string _A3;
+		
+		private string _D;
+		
+		private string _E;
+		
+		private string _F;
+		
+		private string _Weekly_Avg;
+		
+		public Report_KappaAvg_ByQCWeeks_NewResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_week", DbType="NVarChar(20)")]
+		public string QC_week
+		{
+			get
+			{
+				return this._QC_week;
+			}
+			set
+			{
+				if ((this._QC_week != value))
+				{
+					this._QC_week = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_StartDate", DbType="NVarChar(50)")]
+		public string IQ_StartDate
+		{
+			get
+			{
+				return this._IQ_StartDate;
+			}
+			set
+			{
+				if ((this._IQ_StartDate != value))
+				{
+					this._IQ_StartDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_EndDate", DbType="NVarChar(50)")]
+		public string IQ_EndDate
+		{
+			get
+			{
+				return this._IQ_EndDate;
+			}
+			set
+			{
+				if ((this._IQ_EndDate != value))
+				{
+					this._IQ_EndDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Kappa", DbType="VarChar(10)")]
+		public string Kappa
+		{
+			get
+			{
+				return this._Kappa;
+			}
+			set
+			{
+				if ((this._Kappa != value))
+				{
+					this._Kappa = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E7F6Ct", DbType="Int")]
+		public System.Nullable<int> E7F6Ct
+		{
+			get
+			{
+				return this._E7F6Ct;
+			}
+			set
+			{
+				if ((this._E7F6Ct != value))
+				{
+					this._E7F6Ct = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Number_Abs", DbType="Int")]
+		public System.Nullable<int> Number_Abs
+		{
+			get
+			{
+				return this._Number_Abs;
+			}
+			set
+			{
+				if ((this._Number_Abs != value))
+				{
+					this._Number_Abs = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="NVarChar(30)")]
+		public string A1
+		{
+			get
+			{
+				return this._A1;
+			}
+			set
+			{
+				if ((this._A1 != value))
+				{
+					this._A1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="NVarChar(30)")]
+		public string A2
+		{
+			get
+			{
+				return this._A2;
+			}
+			set
+			{
+				if ((this._A2 != value))
+				{
+					this._A2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="NVarChar(30)")]
+		public string A3
+		{
+			get
+			{
+				return this._A3;
+			}
+			set
+			{
+				if ((this._A3 != value))
+				{
+					this._A3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="NVarChar(30)")]
+		public string D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this._D = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="NVarChar(30)")]
+		public string E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this._E = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="NVarChar(30)")]
+		public string F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this._F = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Weekly_Avg", DbType="NVarChar(30)")]
+		public string Weekly_Avg
+		{
+			get
+			{
+				return this._Weekly_Avg;
+			}
+			set
+			{
+				if ((this._Weekly_Avg != value))
+				{
+					this._Weekly_Avg = value;
 				}
 			}
 		}

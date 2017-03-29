@@ -130,4 +130,25 @@
       <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Report_KappaAvg_ByQCWeeks_New" Method="Report_KappaAvg_ByQCWeeks_New">
+    <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="KType" Parameter="kType" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="MechanismType" Parameter="mechanismType" Type="System.Int32" DbType="Int" />
+    <ElementType Name="Report_KappaAvg_ByQCWeeks_NewResult">
+      <Column Name="QC_week" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="IQ_StartDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IQ_EndDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Kappa" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="E7F6Ct" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Number_Abs" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="A1" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="A2" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="A3" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="D" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="E" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="F" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="Weekly_Avg" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

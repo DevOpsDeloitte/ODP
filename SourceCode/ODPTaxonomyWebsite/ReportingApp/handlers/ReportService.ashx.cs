@@ -64,23 +64,27 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             using (ReportingAppDataContext db = new ReportingAppDataContext(connString))
             {
+                db.CommandTimeout = 0;
                 string start = context.Request["start"] ?? "";
                 string end = context.Request["end"] ?? "";
                 string ktype = context.Request["ktype"] ?? "";
                 string mechanisms = context.Request["mechanisms"] ?? "";
                 string[] allmechanisms = mechanisms.Split(',');
-                List<string> selectedMechanisms = new List<string>();
+                List<int> selectedMechanisms = new List<int>();
                 DataSet ds = new DataSet();
                 int mechCount = allmechanisms.Length;
-                List<List<Report_KappaAvg_ByQCWeeksResult>> reports = new List<List<Report_KappaAvg_ByQCWeeksResult>>();
+                List<List<Report_KappaAvg_ByQCWeeks_NewResult>> reports = new List<List<Report_KappaAvg_ByQCWeeks_NewResult>>();
                 foreach (string mechanism in allmechanisms)
                 {
                     var m = mechanism.Split('-');
-                    var mechanism_id = m[0];
+                    int? mechanism_id = Convert.ToInt32(m[0]);
                     var mechanism_name = m[1];
-                    selectedMechanisms.Add(mechanism_id);
-                    List<Report_KappaAvg_ByQCWeeksResult> reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
-                    CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, mechanism_name +"-"+ ktype, ds);
+                    selectedMechanisms.Add(mechanism_id ?? 0);
+                    //if (mechanism_id == 2)
+                    //{
+                        List<Report_KappaAvg_ByQCWeeks_NewResult> reportvals = db.Report_KappaAvg_ByQCWeeks_New(start, end, ktype, mechanism_id).ToList();
+                        CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeks_NewResult>(reportvals, context.Response, mechanism_name + "-" + ktype, ds);
+                    //}
 
                 }
 
