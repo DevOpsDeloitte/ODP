@@ -80,18 +80,17 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                     int? mechanism_id = Convert.ToInt32(m[0]);
                     var mechanism_name = m[1];
                     selectedMechanisms.Add(mechanism_id ?? 0);
-                    //if (mechanism_id == 2)
-                    //{
-                        List<Report_KappaAvg_ByQCWeeks_NewResult> reportvals = db.Report_KappaAvg_ByQCWeeks_New(start, end, ktype, mechanism_id).ToList();
-                        CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeks_NewResult>(reportvals, context.Response, mechanism_name + "-" + ktype, ds);
-                    //}
+                    List<Report_KappaAvg_ByQCWeeks_NewResult> reportvals = db.Report_KappaAvg_ByQCWeeks_New(start, end, ktype, mechanism_id).ToList();
+                    CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeks_NewResult>(reportvals, context.Response, mechanism_name + "-" + ktype, ds);
+                    
 
                 }
-
-               // List<Report_KappaAvg_ByQCWeeksResult> reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
+           
                 List<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult> reportvalsdetail = db.Report_KappaAvg_DataDetail_ByQCWeeks_New(start, end, ktype, String.Join(",",selectedMechanisms.ToArray())).ToList();
                 CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult>(reportvalsdetail, context.Response, "KappaAvgDetail-" + ktype, ds);
                 CreateExcelFile.CreateExcelDocumentAsStreamSpecialHeaders(ds, "KappaAvg-" + start + "-" + end + "-" + ktype + ".xlsx", context.Response, start, end);
+
+                //List<Report_KappaAvg_ByQCWeeksResult> reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
                 //CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-"+ktype, ds);
                 //CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-2" + ktype, ds);
                 //CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-3" + ktype, ds);

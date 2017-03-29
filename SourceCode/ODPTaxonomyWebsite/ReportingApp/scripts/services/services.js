@@ -69,22 +69,6 @@
                                });
                       //anchor.remove();
                   
-
-
-                  //$http({
-                  //    method: 'GET',
-                  //    url: root_url + '/ReportingApp/handlers/ReportService.ashx?type=' + 'run' + '&start=' + start + '&end=' + end + '&ktype=' + ktype
-                  //})
-                  //  .success(function (response) {
-                  //      //if (response.Success == true) {
-                  //      deferred.resolve({
-                  //          data: response
-                  //      });
-                  //      //}
-                  //  }).error(function (msg, code) {
-                  //      deferred.reject({ msg: msg, code: code });
-                  //      $log.error(msg, code);
-                  //  });
                   return deferred.promise;
               },
 

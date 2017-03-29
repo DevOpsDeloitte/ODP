@@ -669,11 +669,10 @@ namespace ODPTaxonomyUtility_TT
                     case 7:
                     case 8:
                     case 10:
-                    case 12:
+                    case 11:
                         AppendTextCell(excelColumnNames[colInx] + "2", "0.7", headerRow2);
                         break;
                     case 9:
-                    case 11:
                         AppendTextCell(excelColumnNames[colInx] + "2", "0.8", headerRow2);
                         break;
                     case 5:
