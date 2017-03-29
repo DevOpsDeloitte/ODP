@@ -1,68 +1,69 @@
 ﻿
         <fieldset>
-            <legend>
-                Kappa Report Download
-            </legend>
-            <div class="row">
+    <legend>
+        Kappa Report Download
+    </legend>
+    <div class="row">
 
-                <div class="col-md-3 three columns">
-                    <strong ng-class="{'no': vm.datestart.id == 0 || vm.datestart.id > vm.dateend.id  , 'yes' : vm.datestart.id > 0 && vm.datestart.id <= vm.dateend.id }">From : </strong>
-                    <div class="input-group">
-                        <select ng-options="item.name for item in vm.dateranges track by item.id" ng-model="vm.datestart"></select>
-                        <!--<bs-dropdown id="start" data-menu-type="button" select-valx="vm.startdateid = selectedID; vm.startdate = selectedVal"
-                         preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'From'"></bs-dropdown>-->
-                    </div>
-                </div>
-
-                <div class="col-md-3 three columns">
-                    <strong ng-class="{'no': vm.dateend.id == 0 || vm.datestart.id > vm.dateend.id , 'yes' : vm.dateend.id > 0 && vm.datestart.id <= vm.dateend.id }">To : </strong>
-                    <div class="input-group">
-                        <select ng-options="item.name for item in vm.dateranges track by item.id" ng-model="vm.dateend"></select>
-                        <!--<bs-dropdown id="end" data-menu-type="button" select-valx="vm.enddateid = selectedID; vm.enddate = selectedVal"
-                         preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'End'"></bs-dropdown>-->
-                    </div>
-                </div>
-
-                <div class="col-md-2 three columns">
-                    <strong>Kappa Type :</strong><br />
-                    <label>
-                        <input type="radio" ng-model="vm.ktype" value="K9">
-                        K9
-                    </label>
-                    <label>
-                        <input type="radio" ng-model="vm.ktype" value="K13">
-                        K13
-                    </label>
-                </div>
-
-                <div class="col-md-2 three columns">
-                    <strong>Mechanism Types :</strong><br />
-                    <label>
-                        <input type="checkbox" ng-model="vm.mechanismsall" value="all" ng-init="vm.mechanismsall = true" ng-change="changeAll(vm.mechanismsall)">
-                        Select All
-                    </label>
-                    <label ng-repeat="(index, item) in vm.mechanismtypes" ng-init="vm.mechanisms[0] = true">
-                        <input type="checkbox" ng-model="item.selected" value="item.id">
-                         {{item.name}}
-                    </label>
-                    
-                </div>
-
+        <div class="col-md-3 three columns">
+            <strong ng-class="{'no': vm.datestart.id == 0 || vm.datestart.id > vm.dateend.id  , 'yes' : vm.datestart.id > 0 && vm.datestart.id <= vm.dateend.id }">From : </strong>
+            <div class="input-group">
+                <select ng-options="item.name for item in vm.dateranges track by item.id" ng-model="vm.datestart"></select>
+                <!--<bs-dropdown id="start" data-menu-type="button" select-valx="vm.startdateid = selectedID; vm.startdate = selectedVal"
+                 preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'From'"></bs-dropdown>-->
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col-lg-2 columns ten">
-                    <div style="color: #000;" ng-show="!vm.checkForm() && vm.errormessage.enterstartandend">Enter From and To date ranges.</div>
-                    <div style="color:red;" class="errorMessage u-pull-left" ng-show="!vm.checkForm() && vm.errormessage.startgreaterthanend">From date greater than To date.</div>
-                </div>
+        <div class="col-md-3 three columns">
+            <strong ng-class="{'no': vm.dateend.id == 0 || vm.datestart.id > vm.dateend.id , 'yes' : vm.dateend.id > 0 && vm.datestart.id <= vm.dateend.id }">To : </strong>
+            <div class="input-group">
+                <select ng-options="item.name for item in vm.dateranges track by item.id" ng-model="vm.dateend"></select>
+                <!--<bs-dropdown id="end" data-menu-type="button" select-valx="vm.enddateid = selectedID; vm.enddate = selectedVal"
+                 preselected-item="vm.defaultdateid" data-dropdown-data="vm.dateranges" data-drop-text="'End'"></bs-dropdown>-->
             </div>
-            <div class="row">
-                <div class="col-lg-2 columns three">
-                    <button type="submit" class="btn btn-default button" ng-disabled="!vm.checkFormValid()" ng-click="vm.runReport($event);" ng-class="{ 'btn-danger no' : !vm.checkFormValid(), 'btn-success yes' : vm.checkFormValid() }">Run Report</button>
-                </div>
-            </div>
+        </div>
+
+        <div class="col-md-2 three columns">
+            <strong>Kappa Type :</strong><br />
+            <label>
+                <input type="radio" ng-model="vm.ktype" value="K9">
+                K9
+            </label>
+            <label>
+                <input type="radio" ng-model="vm.ktype" value="K13">
+                K13
+            </label>
+        </div>
+
+        <div class="col-md-2 three columns">
+            <strong ng-class="{'no': !vm.mechanismsValid() , 'yes' : vm.mechanismsValid() }">Mechanism Types :</strong>
+            <span><strong class="no" ng-if="!vm.mechanismsValid() && 1==2"> Required</strong></span><br />
+            <label>
+                <input type="checkbox" ng-model="vm.mechanismsall" value="all" ng-init="vm.mechanismsall = true" ng-change="changeAll(vm.mechanismsall)">
+                Select All
+            </label>
+            <label ng-repeat="(index, item) in vm.mechanismtypes" ng-init="vm.mechanisms[0] = true">
+                <input type="checkbox" ng-model="item.selected" value="item.id">
+                {{item.name}}
+            </label>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2 columns ten">
+            <div style="color: #000;" ng-show="!vm.checkForm() && vm.errormessage.enterstartandend">Enter From and To date ranges.</div>
+            <div style="color:red;" class="errorMessage u-pull-left" ng-show="!vm.checkForm() && vm.errormessage.startgreaterthanend">From date greater than To date.</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 columns three">
+            <button type="submit" class="btn btn-default button" ng-disabled="!vm.checkFormValid()" ng-click="vm.runReport($event);" ng-class="{ 'btn-danger no' : !vm.checkFormValid(), 'btn-success yes' : vm.checkFormValid() }">Run Report</button>
+        </div>
+    </div>
 
 
-        </fieldset>
+</fieldset>
 
 

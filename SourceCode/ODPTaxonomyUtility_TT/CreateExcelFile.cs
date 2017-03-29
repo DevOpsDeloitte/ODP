@@ -635,7 +635,7 @@ namespace ODPTaxonomyUtility_TT
                 DataColumn col = dt.Columns[colInx];
                 
 
-                if (colInx > 5 && colInx < 14)
+                if (colInx > 5 && colInx < 12)
                 {
                     AppendTextCell(excelColumnNames[colInx] + "1", col.ColumnName, headerRow);
                 }
@@ -670,7 +670,6 @@ namespace ODPTaxonomyUtility_TT
                     case 8:
                     case 10:
                     case 12:
-                    case 13:
                         AppendTextCell(excelColumnNames[colInx] + "2", "0.7", headerRow2);
                         break;
                     case 9:

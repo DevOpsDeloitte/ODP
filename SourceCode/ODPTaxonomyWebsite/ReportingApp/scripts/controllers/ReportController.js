@@ -62,6 +62,12 @@
             }
 
         }, true);
+
+
+        vm.mechanismsValid = function () {
+            if (vm.selectedmechanisms.length == 0) return false;
+            else return true;
+        };
  
 
 
