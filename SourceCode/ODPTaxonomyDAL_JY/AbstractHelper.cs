@@ -542,7 +542,10 @@ namespace ODPTaxonomyDAL_JY
                                  a.AbstractID.ToString().Contains(param.search) ||
                                  a.ApplicationID.ToString().ToLower().Contains(param.search.ToLower()) ||
                                  a.PIProjectLeader.ToLower().Contains(param.search.ToLower()) ||
-                                 a.ProjectTitle.ToLower().Contains(param.search.ToLower())
+                                 a.ProjectTitle.ToLower().Contains(param.search.ToLower()) ||
+                                 a.Activity.ToLower().Contains(param.search.ToLower()) ||
+                                 a.Type.ToString().ToLower().Contains(param.search.ToLower()) ||
+                                 a.FY.ToString().ToLower().Contains(param.search.ToLower())
                              select a).ToList();
             }
 
