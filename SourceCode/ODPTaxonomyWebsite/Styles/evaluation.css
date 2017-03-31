@@ -138,8 +138,11 @@ div#DTable_info { /*display: none !important; */}
 /* Styles added during work on Abstract table */
 div#basicOnly {
     position: relative;
-    top: 26px;
+    /*top: 26px;*/
     display: inline;
+}
+.hide_all{
+    display: none !important;
 }
 
 .bold {

@@ -22,11 +22,11 @@
         </div>
 
         <div id="basicOnly" class="three columns">
-            <input type="checkbox" id="cbBasicOnly"><label class="bold">Basic Only</label>
+            <input type="checkbox" class="hide_all" id="cbBasicOnly"><label class="bold hide_all">Basic Only</label>
             <br />
-            <label class="bold"><input type="radio" name="basicgroup" value="ExcludeBasic" checked>Exclude Basic</label>
-            <label class="bold"><input type="radio" name="basicgroup" value="IncludeBasic">Include Basic</label>
-            <label class="bold"><input type="radio" name="basicgroup" value="OnlyBasic">Only Basic</label>
+            <input type="radio" name="basicgroup" value="ExcludeBasic" id="IExcludeBasic" checked><label for="IExcludeBasic" class="bold">Exclude Basic</label><br />
+            <input type="radio" name="basicgroup" value="IncludeBasic" id="IIncludeBasic"><label for="IIncludeBasic" class="bold">Include Basic</label><br />
+            <input type="radio" name="basicgroup" value="OnlyBasic" id="IOnlyBasic"><label for="IOnlyBasic" class="bold">Only Basic</label>
         </div>
 
     </div>
