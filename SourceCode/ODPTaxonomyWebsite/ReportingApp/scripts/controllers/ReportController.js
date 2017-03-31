@@ -133,7 +133,7 @@
         };
 
         vm.checkFormValid = function () {
-            return vm.checkForm && vm.selectedmechanisms.length > 0
+            return vm.checkForm() && vm.selectedmechanisms.length > 0
         };
 
         vm.checkForm = function () {
