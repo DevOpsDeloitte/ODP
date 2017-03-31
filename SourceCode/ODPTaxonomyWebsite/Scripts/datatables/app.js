@@ -171,6 +171,13 @@ $(document).ready(function () {
             watchBasicOnlyHandler();
         });
 
+        $("#basicOnly").on("click", function (evt) {
+
+            console.log($("input:radio[name='basicgroup']:checked").val() );
+
+            watchBasicOnlyHandler();
+        });
+
         $("#allBox").on("click", function (evt) {
             util.showOpenRows(this.checked);
         });
@@ -990,15 +997,32 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
     }
 
     function watchBasicOnlyHandler() {
-        console.log('watchBasicOnlyHandler() :: ' + $opts.codingType);
+        
 
         var isCheckedBasicOnly = $('#cbBasicOnly').is(":checked");
+        var queryBasicRadioGroup = $("input:radio[name='basicgroup']:checked").val();
 
-        if (isCheckedBasicOnly) {
-            $opts.codingType = 'basic';
-        } else {
-            $opts.codingType = 'all';
+        switch (queryBasicRadioGroup) {
+            case 'ExcludeBasic':
+                $opts.codingType = 'aonly';
+                break;
+            case 'IncludeBasic':
+                $opts.codingType = 'all';
+                break;
+            case 'OnlyBasic':
+                $opts.codingType = 'basic';
+                break;
+            default:
+                break;
         }
+
+        console.log('watchBasicOnlyHandler() :: ' + $opts.codingType);
+
+        //if (isCheckedBasicOnly) {
+        //    $opts.codingType = 'basic';
+        //} else {
+        //    $opts.codingType = 'all';
+        //}
 
         $opts.pageNumber = 0;
 
@@ -1207,6 +1231,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
             $opts.filterlist = $opts.filterHash;
             $opts.hashExists = true;
         }
+        console.log("coding type :: ", $opts.codingType);
     }
 
     function filtersManager(filter) {
@@ -1452,6 +1477,20 @@ console.log('table: ', table);
 
         if($opts.codingType == "basic") {
             $("input#cbBasicOnly").prop( "checked", true );
+        }
+
+        switch ($opts.codingType) {
+            case "all":
+                $('input[type=radio][value=IncludeBasic]').prop("checked", true);
+                break;
+            case "aonly":
+                $('input[type=radio][value=ExcludeBasic]').prop("checked", true);
+                break;
+            case "basic":
+                $('input[type=radio][value=OnlyBasic]').prop("checked", true);
+                break;
+            default:
+                break;
         }
 
         util.disableFilters();
