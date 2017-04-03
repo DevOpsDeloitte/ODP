@@ -1459,7 +1459,8 @@ console.log('table: ', table);
 
         util.hideBasicCB(true);
 
-        $opts.codingType = $opts.codingType ? $opts.codingType : "all";
+        //$opts.codingType = $opts.codingType ? $opts.codingType : "all";
+        $opts.codingType = $opts.codingType ? $opts.codingType : "aonly";
 
         // set search placeholder
         $('.dataTables_filter input').attr('placeholder', 'Search');
