@@ -165,10 +165,19 @@ $(document).ready(function () {
             }
         });
 
-        $("#cbBasicOnly").on("click", function (evt) {
-            console.log($('#cbBasicOnly').is(":checked"));
+        //$("#cbBasicOnly").on("click", function (evt) {
+        //    console.log($('#cbBasicOnly').is(":checked"));
 
-            watchBasicOnlyHandler();
+        //    watchBasicOnlyHandler();
+        //});
+
+        $("#basicOnly").on("click", function (evt) {
+
+            console.log(' Basic Selector :: ' + $("input:radio[name='basicgroup']:checked").val() );
+            setTimeout(function () {
+                watchBasicOnlyHandler();
+            }, 0);
+           
         });
 
         $("#allBox").on("click", function (evt) {
@@ -515,9 +524,9 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
     function compileDataObject(type) {
         var basicFlag = $opts.codingType == 'basic' ? true : false;
 
-        console.log('basicFlag , $opts.codingType: ', basicFlag, $opts.codingType);
+        console.log(' Compile Data Object :: basicFlag , $opts.codingType: ', basicFlag, $opts.codingType);
 
-        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID, basic: basicFlag};
+        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID, basic: basicFlag, codingType: $opts.codingType };
 
         if ($opts.allSelected) {
             $opts.selectedItems = [];
@@ -990,15 +999,32 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
     }
 
     function watchBasicOnlyHandler() {
-        console.log('watchBasicOnlyHandler() :: ' + $opts.codingType);
+        
 
         var isCheckedBasicOnly = $('#cbBasicOnly').is(":checked");
+        var queryBasicRadioGroup = $("input:radio[name='basicgroup']:checked").val();
 
-        if (isCheckedBasicOnly) {
-            $opts.codingType = 'basic';
-        } else {
-            $opts.codingType = 'all';
+        switch (queryBasicRadioGroup) {
+            case 'ExcludeBasic':
+                $opts.codingType = 'aonly';
+                break;
+            case 'IncludeBasic':
+                $opts.codingType = 'all';
+                break;
+            case 'OnlyBasic':
+                $opts.codingType = 'basic';
+                break;
+            default:
+                break;
         }
+
+        console.log('watchBasicOnlyHandler() :: ' + $opts.codingType);
+
+        //if (isCheckedBasicOnly) {
+        //    $opts.codingType = 'basic';
+        //} else {
+        //    $opts.codingType = 'all';
+        //}
 
         $opts.pageNumber = 0;
 
@@ -1207,6 +1233,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
             $opts.filterlist = $opts.filterHash;
             $opts.hashExists = true;
         }
+        console.log("coding type :: ", $opts.codingType);
     }
 
     function filtersManager(filter) {
@@ -1302,7 +1329,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": 7
+                    "targets": 10
                 },
 
                 {
@@ -1316,17 +1343,17 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17]
+                    "targets": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
                 },
 
-                { "visible": true, "targets": [5] },
+                { "visible": true, "targets": [8] },
                 {
                     "render": function (data, type, row) {
                         var myDate = new Date(data);
                         return getFormattedDate(myDate);
 
                     },
-                    "targets": 4 //date column
+                    "targets": 7 //date column
                 },
 
                 {
@@ -1345,7 +1372,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         return collink;
 
                     },
-                    "targets": 6 //title column
+                    "targets": 9 //title column
                 },
                 {
                     "render": function (data, type, row) {
@@ -1358,7 +1385,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": 18 //date column
+                    "targets": 21 //date column
                 }
             ],
             // searchDelay is only applicable for client side. see debounce function for server side delays.
@@ -1374,7 +1401,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                     }
                 }
             },
-            "order": [[4, "desc"]],
+            "order": [[7, "desc"]],
             "columns": [
                 {
                     "class": 'checkbox-control',
@@ -1389,8 +1416,13 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                     "data": null,
                     "defaultContent": ''
                 },
-                { "data": "AbstractID", "class": "abstractid" },
+                { "data": "AbstractID", "class": "abstractid hide_column" },
                 { "data": "ApplicationID" },
+
+                { "data": "FY" },
+                { "data": "Type" },
+                { "data": "Activity" },
+
                 { "data": "StatusDate" },
                 { "data": "PIProjectLeader" },
                 { "data": "ProjectTitle" },
@@ -1399,8 +1431,8 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                 { "data": "A2" },
                 { "data": "A3" },
                 { "data": "A4" },
-                { "data": "B" },
-                { "data": "C" },
+                { "data": "B", "class": "hide_column" },
+                { "data": "C", "class": "hide_column" },
                 { "data": "D" },
                 { "data": "E" },
                 { "data": "F" },
@@ -1447,6 +1479,20 @@ console.log('table: ', table);
 
         if($opts.codingType == "basic") {
             $("input#cbBasicOnly").prop( "checked", true );
+        }
+
+        switch ($opts.codingType) {
+            case "all":
+                $('input[type=radio][value=IncludeBasic]').prop("checked", true);
+                break;
+            case "aonly":
+                $('input[type=radio][value=ExcludeBasic]').prop("checked", true);
+                break;
+            case "basic":
+                $('input[type=radio][value=OnlyBasic]').prop("checked", true);
+                break;
+            default:
+                break;
         }
 
         util.disableFilters();

@@ -11,14 +11,5 @@ namespace ODPTaxonomyWebsite.Evaluation.AbstractListViews {
     
     
     public partial class ODPSupervisorView_Default {
-        
-        /// <summary>
-        /// AbstractViewGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::ODPTaxonomyDAL_JY.AbstractGridView AbstractViewGridView;
     }
 }

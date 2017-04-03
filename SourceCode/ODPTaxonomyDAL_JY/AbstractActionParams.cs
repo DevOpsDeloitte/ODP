@@ -68,12 +68,29 @@ namespace ODPTaxonomyDAL_JY
                 {
                     var abstractData = AbstractHelper.GetAbstracts(this);
 
-                    if (basic) {
-                        IDs = abstractData.data.Where(a=>a.ApplicationID.Contains("_B")).Select(a => a.AbstractID).ToList(); ;
+                    // we nedd to use the codeType now, as its only basic.
+                    switch (this.codeType)
+                    {
+                        case "basic":
+                            IDs = abstractData.data.Where(a => a.ApplicationID.Contains("_B")).Select(a => a.AbstractID).ToList();
+                            break;
+                        case "aonly":
+                            IDs = abstractData.data.Where(a => !a.ApplicationID.Contains("_B")).Select(a => a.AbstractID).ToList();
+                            break;
+                        case "all":
+                            IDs = abstractData.data.Select(a => a.AbstractID).ToList();
+                            break;
+
                     }
-                    else {
-                        IDs = abstractData.data.Select(a => a.AbstractID).ToList(); ;
-                    }
+
+                    //if (basic) {
+                    //    IDs = abstractData.data.Where(a=>a.ApplicationID.Contains("_B")).Select(a => a.AbstractID).ToList();
+                    //}
+                    //else {
+                    //    IDs = abstractData.data.Select(a => a.AbstractID).ToList();
+                    //}
+
+
                     //excludeList.Add(4094);        
                     if (excludeList.Count > 0)
                     {

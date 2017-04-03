@@ -155,7 +155,10 @@ namespace ODPTaxonomyDAL_JY
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
                             IsParent = true,
-                            CodingType = a.CodingType
+                            CodingType = a.CodingType,
+                            FY = a.FY,
+                            Activity = a.Activity,
+                            Type = a.Type
                         };
 
             switch (param.filter)
@@ -213,7 +216,10 @@ namespace ODPTaxonomyDAL_JY
                             LastExportDate = a.LastExportDate,
                             EvaluationID = h.EvaluationId,
                             IsParent = true,
-                            CodingType = a.CodingType
+                            CodingType = a.CodingType,
+                            FY = a.FY,
+                            Activity = a.Activity,
+                            Type = a.Type
                         };
 
             switch (param.filter)
@@ -277,7 +283,10 @@ namespace ODPTaxonomyDAL_JY
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
                             IsParent = true,
-                            CodingType = a.CodingType
+                            CodingType = a.CodingType,
+                            FY = a.FY,
+                            Activity = a.Activity,
+                            Type = a.Type
                         };
 
             switch (param.filter)
@@ -321,7 +330,10 @@ namespace ODPTaxonomyDAL_JY
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
                             IsParent = true,
-                            CodingType = a.CodingType
+                            CodingType = a.CodingType,
+                            FY = a.FY,
+                            Activity = a.Activity,
+                            Type = a.Type
                         };
 
             switch (param.filter)
@@ -361,7 +373,10 @@ namespace ODPTaxonomyDAL_JY
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
                             IsParent = true,
-                            CodingType = a.CodingType
+                            CodingType = a.CodingType,
+                            FY = a.FY,
+                            Activity = a.Activity,
+                            Type = a.Type
                         };
 
             switch (param.filter)
@@ -419,7 +434,10 @@ namespace ODPTaxonomyDAL_JY
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
                             IsParent = true,
-                            CodingType = a.CodingType
+                            CodingType = a.CodingType,
+                            FY = a.FY,
+                            Activity = a.Activity,
+                            Type = a.Type
                         };
 
             switch (param.filter)
@@ -471,7 +489,10 @@ namespace ODPTaxonomyDAL_JY
                             EvaluationID = h.EvaluationId,
                             KappaType = KappaTypeEnum.K1,
                             IsParent = true,
-                            CodingType = a.CodingType
+                            CodingType = a.CodingType,
+                            FY = a.FY,
+                            Activity = a.Activity,
+                            Type = a.Type
                         };
 
             switch (param.filter)
@@ -539,7 +560,10 @@ namespace ODPTaxonomyDAL_JY
                                  a.AbstractID.ToString().Contains(param.search) ||
                                  a.ApplicationID.ToString().ToLower().Contains(param.search.ToLower()) ||
                                  a.PIProjectLeader.ToLower().Contains(param.search.ToLower()) ||
-                                 a.ProjectTitle.ToLower().Contains(param.search.ToLower())
+                                 a.ProjectTitle.ToLower().Contains(param.search.ToLower()) ||
+                                 a.Activity.ToLower().Contains(param.search.ToLower()) ||
+                                 a.Type.ToString().ToLower().Contains(param.search.ToLower()) ||
+                                 a.FY.ToString().ToLower().Contains(param.search.ToLower())
                              select a).ToList();
             }
 

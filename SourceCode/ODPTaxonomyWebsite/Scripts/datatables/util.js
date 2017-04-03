@@ -364,8 +364,13 @@ function Utility() {
             var ctRow = '<tr>' +
                 '<td class="ccol col_select">' + '&nbsp;' + '</td>' + // Col 1
                 '<td class="ccol col_openclose">' + '&nbsp;' + '</td>' + // Col 1a
-                '<td class="ccol col_abstractid">' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
+                //'<td class="ccol col_abstractid">' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
                 '<td class="ccol col_applicationid">' + '&nbsp;' + '</td>' + // Col 3
+
+                '<td class="ccol col_fy">' + '&nbsp;' + '</td>' + // Col 3
+                '<td class="ccol col_type">' + '&nbsp;' + '</td>' + // Col 3
+                '<td class="ccol col_mechanism">' + '&nbsp;' + '</td>' + // Col 3
+
                 '<td class="ccol col_statusdate">' + '&nbsp;' + '</td>' + // Col 4
                 '<td class="ccol col_piname">' + '&nbsp;' + '</td>' + // Col 4
                 '<td class="ccol col_title"><div class="titlebox">' + rowData.ChildRows[i].ProjectTitle + '</div></td>' + // Col 3
@@ -374,8 +379,8 @@ function Utility() {
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A2) + '</td>' + // Col 6
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A3) + '</td>' + // Col 7
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].A4) + '</td>' + // Col 8
-                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].B) + '</td>' + // Col 9
-                '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].C) + '</td>' + // Col 10
+                //'<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].B) + '</td>' + // Col 9
+                //'<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].C) + '</td>' + // Col 10
                 '<td class="ccol col_kappa" >' + this.MaskKappa(rowData.ChildRows[i].D) + '</td>' + // Col 11
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].E) + '</td>' + // Col 12
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].F) + '</td>' + // Col 13
