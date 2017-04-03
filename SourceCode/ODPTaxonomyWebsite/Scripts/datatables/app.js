@@ -522,9 +522,9 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
     function compileDataObject(type) {
         var basicFlag = $opts.codingType == 'basic' ? true : false;
 
-        console.log(' compile Data Object :: basicFlag , $opts.codingType: ', basicFlag, $opts.codingType);
+        console.log(' Compile Data Object :: basicFlag , $opts.codingType: ', basicFlag, $opts.codingType);
 
-        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID, basic: basicFlag};
+        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID, basic: basicFlag, codingType: codingType };
 
         if ($opts.allSelected) {
             $opts.selectedItems = [];
