@@ -32,13 +32,13 @@
                       method: 'GET',
                       url: root_url + '/ReportingApp/handlers/ReportService.ashx?type=' + 'mechanismtypes'
                   })
-                    .success(function (response) {
+                    .then(function (response) {
                         //if (response.Success == true) {
                         deferred.resolve({
-                            data: response
+                            data: response.data
                         });
                         //}
-                    }).error(function (msg, code) {
+                    }).catch(function (msg, code) {
                         deferred.reject({ msg: msg, code: code });
                         $log.error(msg, code);
                     });
