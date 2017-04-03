@@ -39,8 +39,7 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
         console.log(" model team id :: " + $scope.mdata.teamid);
 
-        var teamRef = new Firebase(FIREBASE_LOCATION + "/teams" + "/" + $scope.mdata.teamid);
-        //var sync = $firebase(teamRef);
+        var teamRef = firebase.database().ref().child("/teams" + "/" + $scope.mdata.teamid);
         var sync = $firebaseObject(teamRef);
 
         sync.$bindTo($scope, "mdata").then(function () {
@@ -64,11 +63,6 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
 
             }
             
-            //if (!$scope.mdata.comments) {
-                //console.log(" mdata model changed : " + newValue.comments + " old value :: " + oldValue.comments);
-                // console.log(" time to redirect -- watch over. ");
-                //window.location = "Evaluation.aspx";
-            // }
 
         }, true);
 
@@ -80,8 +74,8 @@ app.controller("ODPFormCtrlRT", function ($rootScope, $scope, $http, $firebase, 
     }
 
     $scope.detectTeam = function () {
-        var firebasedetectURL = $scope.FIREBASE_LOCATION + "/presence"  +"/" + $scope.mdata.teamid;
-        var teamdetectObj = new Firebase(firebasedetectURL);
+
+        var teamdetectObj = firebase.database().ref().child("/presence" + "/" + $scope.mdata.teamid);
 
         $timeout(function () {
 

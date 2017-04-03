@@ -347,8 +347,9 @@
     <script src="../scripts/angular/angular-sanitize.min.js"></script>
     <script src="../scripts/angular/firebase.js"></script>
     <script src="../scripts/angular/angularfire.min.js"></script>
+    <script src="../scripts/angular/firebase-config.js"></script>
 
-    <%--
+<%--
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
 <script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
 <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>--%>
