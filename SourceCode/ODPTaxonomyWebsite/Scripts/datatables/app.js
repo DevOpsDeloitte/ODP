@@ -165,17 +165,19 @@ $(document).ready(function () {
             }
         });
 
-        $("#cbBasicOnly").on("click", function (evt) {
-            console.log($('#cbBasicOnly').is(":checked"));
+        //$("#cbBasicOnly").on("click", function (evt) {
+        //    console.log($('#cbBasicOnly').is(":checked"));
 
-            watchBasicOnlyHandler();
-        });
+        //    watchBasicOnlyHandler();
+        //});
 
         $("#basicOnly").on("click", function (evt) {
 
-            console.log($("input:radio[name='basicgroup']:checked").val() );
-
-            watchBasicOnlyHandler();
+            console.log(' Basic Selector :: ' + $("input:radio[name='basicgroup']:checked").val() );
+            setTimeout(function () {
+                watchBasicOnlyHandler();
+            }, 0);
+           
         });
 
         $("#allBox").on("click", function (evt) {
@@ -524,7 +526,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
 
         console.log(' Compile Data Object :: basicFlag , $opts.codingType: ', basicFlag, $opts.codingType);
 
-        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID, basic: basicFlag, codingType: codingType };
+        var dataObj = {type: type, all: $opts.allSelected, guid: window.user.GUID, basic: basicFlag, codingType: $opts.codingType };
 
         if ($opts.allSelected) {
             $opts.selectedItems = [];
