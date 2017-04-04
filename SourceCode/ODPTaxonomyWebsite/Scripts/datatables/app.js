@@ -130,7 +130,7 @@ $(document).ready(function () {
             if (config.role == "ODPSupervisor") {
                 window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + info.page;
             } else {
-                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + info.page;
+                window.location.hash = $opts.filterlist + "|noaction|" + $opts.codingType + "|" + info.page;
             }
 
             console.log('Showing page: ', info.page + ' of ' + info.pages);
@@ -1031,7 +1031,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
         if (config.role == "ODPSupervisor") {
             window.location.hash = $opts.filterlist + "|" + $opts.actionlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
         } else {
-            window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+            window.location.hash = $opts.filterlist + "|noaction|" + $opts.codingType + "|" + $opts.pageNumber;
         }
 
         $("div#downloadLinkBox").hide();
