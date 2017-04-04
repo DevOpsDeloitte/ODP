@@ -808,9 +808,9 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
             }
         } else {
             if ($opts.initialPageLoad) {
-                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + $opts.pageNumber;
+                window.location.hash = $opts.filterlist + "|" +"noaction|" + $opts.codingType + "|" + $opts.pageNumber;
             } else {
-                window.location.hash = $opts.filterlist + "|" + $opts.codingType + "|" + "0";
+                window.location.hash = $opts.filterlist + "|" + "noaction|" + $opts.codingType + "|" + "0";
             }
         }
         $opts.hideboxes = [];
