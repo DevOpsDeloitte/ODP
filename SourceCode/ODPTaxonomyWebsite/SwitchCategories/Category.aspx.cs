@@ -19,6 +19,7 @@ namespace ODPTaxonomyWebsite.SwitchCategories
     public partial class Category : System.Web.UI.Page
     {
         SqlConnection constr = new SqlConnection(ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString);
+        public string CurrentlyCoding = String.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -38,9 +39,15 @@ namespace ODPTaxonomyWebsite.SwitchCategories
                     {
                         cateList = db.Select_Category().ToList<Select_CategoryResult>();
 
+                        var selectedValue = cateList.Where(cl => cl.Status == "Active").Select(cl => new { id = cl.CategoryID, text = cl.Category }).FirstOrDefault();
+
                         ddlCategory.DataSource = cateList;
                         ddlCategory.DataTextField = "Category";
                         ddlCategory.DataValueField = "CategoryID";
+                        ddlCategory.SelectedValue = selectedValue.id.ToString();
+                        CurrentlyCoding = selectedValue.text;
+                        lbl_active_category.Text = selectedValue.text;
+
 
                         ddlCategory.DataBind();
 
@@ -79,7 +86,7 @@ namespace ODPTaxonomyWebsite.SwitchCategories
         }
 
 
-        #region Methods
+        #region Page Methods
         protected void resetPage()
         {
             ddlCategory.SelectedIndex = 0;
@@ -110,8 +117,10 @@ namespace ODPTaxonomyWebsite.SwitchCategories
 
                 if (returnVALUE == 1)
                 {
-                    lbl_message.Text = "Update is Complete";
+                    lbl_message.Text = "Successfully updated!";
                     lbl_message.Visible = true;
+                    lbl_active_category.Text = ddlCategory.SelectedItem.Text;
+                    lbl_category.Text = "";
                 }
                 else
                 {
