@@ -107,7 +107,7 @@ $(document).ready(function () {
 
 
         //is this needed?
-        table.on('init.dtx', function () {
+        table.on('init.dt', function () {
             console.log("on init.dtx (datable initialized) :: init.dt ::");
 
             childrenRedraw(table.data());
