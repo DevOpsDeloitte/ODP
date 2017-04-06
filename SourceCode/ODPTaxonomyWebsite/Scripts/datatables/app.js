@@ -784,7 +784,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                     $opts.filterlist = $(this).val();
                 });
                 config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
-                changeFilters();
+                //changeFilters();
             });
     }
 
@@ -1478,9 +1478,9 @@ console.log('table: ', table);
             util.actionsManager();
         }
 
-        if($opts.codingType == "basic") {
-            $("input#cbBasicOnly").prop( "checked", true );
-        }
+        //if($opts.codingType == "basic") {
+        //    $("input#cbBasicOnly").prop( "checked", true );
+        //}
 
         switch ($opts.codingType) {
             case "all":
