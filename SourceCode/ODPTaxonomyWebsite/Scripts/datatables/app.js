@@ -780,7 +780,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                     $opts.filterlist = $(this).val();
                 });
                 config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist;
-                //changeFilters();
+                changeFilters();
             });
     }
 
