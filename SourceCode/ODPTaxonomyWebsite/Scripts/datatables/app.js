@@ -165,19 +165,15 @@ $(document).ready(function () {
             }
         });
 
-        //$("#cbBasicOnly").on("click", function (evt) {
-        //    console.log($('#cbBasicOnly').is(":checked"));
 
-        //    watchBasicOnlyHandler();
-        //});
+        // basic filter selection
+        $("input[type='radio'][name='basicgroup']").on("click", function (evt) {
 
-        $("#basicOnly").on("click", function (evt) {
-
-            console.log(' Basic Selector :: ' + $("input:radio[name='basicgroup']:checked").val() );
+            console.log(' Basic Selector :: ' + $("input:radio[name='basicgroup']:checked").val());
             setTimeout(function () {
                 watchBasicOnlyHandler();
             }, 0);
-           
+
         });
 
         $("#allBox").on("click", function (evt) {
