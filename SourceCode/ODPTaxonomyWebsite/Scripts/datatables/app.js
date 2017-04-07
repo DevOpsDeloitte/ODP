@@ -786,7 +786,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
 
     function changeFilters() {
         config.baseURL = "/Evaluation/Handlers/Abstracts.ashx?role=" + config.role + "&filter=" + $opts.filterlist + "&codingType=" + $opts.codingType;
-        console.log("changeFilters() :: ", config.baseURL);
+        console.log("CALLED :: changeFilters() :: ", config.baseURL);
 
         table.ajax.url(config.baseURL);
 
@@ -905,8 +905,8 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
 
     //called after action submitted ::
     function resetSubmitBtnAndCheckboxes() {
-        util.removeRowsV2(table, $opts.hiderowItems);
-
+        // this is a legacy function, when client side removal was done.
+        //util.removeRowsV2(table, $opts.hiderowItems);
         clearSubmitBtnAndCheckboxes();
 
         return;
@@ -1388,6 +1388,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
             "searchDelay": 1000,
             "processing": true,
             "serverSide": true,
+            //"deferLoading" : 100,
             "ajax": {
                 "url": config.baseURL + "&filter=" + $opts.filterlist + "&codingType=" + $opts.codingType,
                 "type": "POST",
