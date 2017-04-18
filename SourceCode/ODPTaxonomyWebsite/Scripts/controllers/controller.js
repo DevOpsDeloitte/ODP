@@ -430,18 +430,20 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         // Adding business logic for A - F Mandatory Coding.
 
-        for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
-            if ($scope.mdata.entitiesstudied[i].isChecked) {
-                entitiesstudiedBox = true;
-                break;
-            }
-        }
-        for (i = 1; i < $scope.mdata.studysetting.length; i++) {
-            if ($scope.mdata.studysetting[i].isChecked) {
-                studysettingBox = true;
-                break;
-            }
-        }
+        //for (i = 1; i < $scope.mdata.entitiesstudied.length; i++) {
+        //    if ($scope.mdata.entitiesstudied[i].isChecked) {
+        //        entitiesstudiedBox = true;
+        //        break;
+        //    }
+        //}
+        //for (i = 1; i < $scope.mdata.studysetting.length; i++) {
+        //    if ($scope.mdata.studysetting[i].isChecked) {
+        //        studysettingBox = true;
+        //        break;
+        //    }
+        //}
+        entitiesstudiedBox = true; studysettingBox = true;
+
         for (i = 1; i < $scope.mdata.populationfocus.length; i++) {
             if ($scope.mdata.populationfocus[i].isChecked) {
                 populationfocusBox = true;

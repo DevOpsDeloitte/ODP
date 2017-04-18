@@ -46,6 +46,23 @@ $(document).ready(function(){
         evt.preventDefault();
     });
 
+    $('.category-toggle').click(function (e) {
+        e.preventDefault();
+
+        var $this = $(this);
+        var $id = $this.attr("id");
+        //console.log($id);
+        if ($this.parent().find(".opener-" + $id).hasClass('hide-b')) {
+            $this.parent().find(".opener-" + $id).removeClass('hide-b');
+            //$this.parent().find(".opener-"+$id).slideDown(350);
+        }
+        else {
+            $this.parent().find(".opener-" + $id).addClass('hide-b');
+            //$this.parent().find(".opener-"+$id).slideUp(350);
+        }
+
+    });
+
 
 
 

@@ -280,12 +280,12 @@
 
         <table class="bordered zebra-striped" id="entities-studied">
 <%--            <caption>B. Entities Studied</caption>--%>
-            <div class="captionTitle">B. Entities Studied</div>
+            <div id="estudied" class="captionTitle category-toggle">B. Entities Studied</div>
             <div class="icon open" ng-click="showDescription('entitiesstudied-0')" ></div>
             <thead>
 
             </thead>
-            <tbody>
+            <tbody class="opener opener-estudied hide-b">
 
                 <% = entitiesStudiedQuestions %>
                                               
@@ -294,12 +294,12 @@
 
            <table class="bordered zebra-striped" id="study-setting">
 <%--            <caption>C. Study Setting</caption>--%>
-            <div class="captionTitle">C. Study Setting</div>
+            <div id="sstudied" class="captionTitle category-toggle">C. Study Setting</div>
             <div class="icon open" ng-click="showDescription('studysetting-0')" ></div>
             <thead>
 
             </thead>
-            <tbody>
+            <tbody class="opener opener-sstudied hide-b">
                 <% = studySettingsQuestions %>
                                      
             </tbody>
