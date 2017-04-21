@@ -49,7 +49,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     applicationID = absrec.ChrApplicationID.ToString();
                     PIProjectLeader = absrec.PIProjectLeader;
                     FY = absrec.FY;
-                    ProjectNumber = absrec.ProjectNumber;
+                    ProjectNumber = absrec.Type+absrec.ProjectNumber;
                     desc = absrec.AbstractDescPart;
                     healthpart = absrec.AbstractPublicHeathPart;
                     codingType = absrec.CodingType == null ? "Regular" : "Basic";

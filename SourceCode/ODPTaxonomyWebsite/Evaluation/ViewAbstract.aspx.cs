@@ -725,7 +725,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             ApplicationID.InnerText = abstr.ChrApplicationID.ToString();
             PIProjectLeader.InnerText = abstr.PIProjectLeader;
             FY.InnerText = abstr.FY;
-            ProjectNumber.InnerHtml = abstr.ProjectNumber;
+            ProjectNumber.InnerHtml = abstr.Type+abstr.ProjectNumber;
             CodingTypeLabel.InnerHtml = abstr.CodingType ?? "Regular";
             CodingTypeLabel.Visible = false;
             DateTime time = DateTime.Now;             
