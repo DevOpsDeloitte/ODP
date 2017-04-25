@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Dev" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_TT.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString3" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235.iq.iqsolutions.com;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_TT.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString4" Provider="System.Data.SqlClient" />
   <Table Name="dbo.aspnet_Users" Member="tbl_aspnet_Users">
     <Type Name="tbl_aspnet_User">
       <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
@@ -201,15 +201,21 @@
       <Association Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole" Member="tbl_aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="tbl_aspnet_UsersInRole" />
     </Type>
   </Table>
+  <Table Name="dbo.Abstract_Text" Member="tbl_Abstract_Texts">
+    <Type Name="tbl_Abstract_Text">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Abstract" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractProjTermPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="Abstract_tbl_Abstract_Text" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Abstract" Member="tbl_Abstracts">
     <Type Name="tbl_Abstract">
       <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="AdministeringIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Abstract" Member="Abstract1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractProjTermPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Activity" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
@@ -221,13 +227,15 @@
       <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="ChrApplicationID" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="NoPreventionFlag" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="ChrApplicationID" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NoPreventionFlag" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SubSet" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="CodingType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="LastExportDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Abstract_tbl_Evaluation" Member="tbl_Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
       <Association Name="Abstract_tbl_Evaluation1" Member="tbl_Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
       <Association Name="Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_AbstractStatusChangeHistory" />
+      <Association Name="Abstract_tbl_Abstract_Text" Member="tbl_Abstract_Text" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract_Text" Cardinality="One" />
     </Type>
   </Table>
   <Function Name="dbo.select_abstract_status_tt" Method="select_abstract_status_tt">

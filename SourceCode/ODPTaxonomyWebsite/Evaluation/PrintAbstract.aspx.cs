@@ -42,7 +42,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                 userID = user.UserName;
 
                 var absrec = db.Abstracts.Where(a => a.AbstractID == abstractId).FirstOrDefault();
-                if (absrec != null)
+                var absrec_text = db.Abstract_Texts.Where(a => a.AbstractID == abstractId).FirstOrDefault();
+                if (absrec != null && absrec_text !=null)
                 {
                     projectTitle = absrec.ProjectTitle;
                     administeringIC = absrec.AdministeringIC;
@@ -50,8 +51,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                     PIProjectLeader = absrec.PIProjectLeader;
                     FY = absrec.FY;
                     ProjectNumber = absrec.ProjectNumber;
-                    desc = absrec.AbstractDescPart;
-                    healthpart = absrec.AbstractPublicHeathPart;
+                    desc = absrec_text.AbstractDescPart;
+                    healthpart = absrec_text.AbstractPublicHeathPart;
                     codingType = absrec.CodingType == null ? "Regular" : "Basic";
 
                 }

@@ -718,8 +718,11 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         private void LoadAbstract(tbl_Abstract abstr)
         {
-            AbstractDescPart.InnerText = abstr.AbstractDescPart;
-            AbstractPublicHeathPart.InnerText = abstr.AbstractPublicHeathPart;
+            tbl_Abstract_Text abstr_text = Common.GetAbstractText(connString, abstr.AbstractID);
+
+            AbstractDescPart.InnerText = abstr_text.AbstractDescPart;
+            AbstractPublicHeathPart.InnerText = abstr_text.AbstractPublicHeathPart;
+
             ProjectTitle.InnerText = abstr.ProjectTitle;
             AdministeringIC.InnerText = abstr.AdministeringIC;
             ApplicationID.InnerText = abstr.ChrApplicationID.ToString();
