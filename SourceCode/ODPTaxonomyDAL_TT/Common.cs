@@ -888,6 +888,28 @@ namespace ODPTaxonomyDAL_TT
             return matches;
         }
 
+        public static tbl_Abstract_Text GetAbstractText(string connString, int abstractID)
+        {
+            tbl_Abstract_Text matches = null;
+
+            using (DataDataContext db = new DataDataContext(connString))
+            {
+                db.CommandTimeout = 0;
+                try
+                {
+                    matches = db.tbl_Abstract_Texts.Where(x => x.AbstractID == abstractID).FirstOrDefault();
+
+                }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+
+            return matches;
+
+        }
+
         public static List<rpt_AbstractStatusTrailResult> GetReportData_AbstractStatusTrail(string connString, string abstracts)
         {
             List<rpt_AbstractStatusTrailResult> matches = null;

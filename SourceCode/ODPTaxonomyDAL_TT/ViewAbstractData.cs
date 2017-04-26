@@ -10,9 +10,8 @@ namespace ODPTaxonomyCommon
     {
         
         public int EvaluationId;     
-        
-
         public tbl_Abstract Abstract;
+        public tbl_Abstract_Text Abstract_Text;
         
     }
 }
