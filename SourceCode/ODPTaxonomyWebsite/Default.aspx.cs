@@ -253,16 +253,22 @@ namespace ODPTaxonomyWebsite
                 {
                     //ODP Staff
                     pnl_odp.Visible = true;
+                    // assigning default role.
+                    Session["CurrentRole"] = this.role_odp;
                 }
                 if (Roles.IsUserInRole(userCurrent.UserName, role_odpSup))
                 {
                     //ODP Supervisor
                     pnl_odpSup.Visible = true;
+                    // assigning default role.
+                    Session["CurrentRole"] = this.role_odpSup;
                 }
                 if (Roles.IsUserInRole(userCurrent.UserName, role_admin))
                 {
                     //Admin
                     pnl_admin.Visible = true;
+                    // assigning default role.
+                    Session["CurrentRole"] = role_admin;
                 }
 
             }
