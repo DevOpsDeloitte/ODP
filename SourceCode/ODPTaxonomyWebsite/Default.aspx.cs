@@ -228,6 +228,8 @@ namespace ODPTaxonomyWebsite
                         lbl_messCoder.Visible = true;
                         lbl_messCoder.Text = messUserNotInTeam;
                     }
+
+                    
                 }
 
                 if (Roles.IsUserInRole(userCurrent.UserName, role_coderSup))
@@ -248,28 +250,52 @@ namespace ODPTaxonomyWebsite
                         //lbl_messageUsers.Visible = true;
                         //lbl_messageUsers.Text = messUserNotInTeam;
                     }
-                }
-                if (Roles.IsUserInRole(userCurrent.UserName, role_odp))
-                {
-                    //ODP Staff
-                    pnl_odp.Visible = true;
+
                     // assigning default role.
-                    Session["CurrentRole"] = this.role_odp;
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_coderSup;
+                    }
+
                 }
-                if (Roles.IsUserInRole(userCurrent.UserName, role_odpSup))
-                {
-                    //ODP Supervisor
-                    pnl_odpSup.Visible = true;
-                    // assigning default role.
-                    Session["CurrentRole"] = this.role_odpSup;
-                }
+
                 if (Roles.IsUserInRole(userCurrent.UserName, role_admin))
                 {
                     //Admin
                     pnl_admin.Visible = true;
                     // assigning default role.
-                    Session["CurrentRole"] = role_admin;
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_admin;
+                    }
                 }
+
+                if (Roles.IsUserInRole(userCurrent.UserName, role_odpSup))
+                {
+                    //ODP Supervisor
+                    pnl_odpSup.Visible = true;
+                    // assigning default role.
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_odpSup;
+                    }
+                }
+
+                if (Roles.IsUserInRole(userCurrent.UserName, role_odp))
+                {
+                    //ODP Staff
+                    pnl_odp.Visible = true;
+                    // assigning default role.
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_odp;
+                    }
+    
+                }
+
+
+
+
 
             }
 
