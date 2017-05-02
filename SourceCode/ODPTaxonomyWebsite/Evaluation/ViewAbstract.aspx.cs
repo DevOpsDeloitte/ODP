@@ -718,7 +718,16 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         private void LoadAbstract(tbl_Abstract abstr)
         {
-            tbl_Abstract_Text abstr_text = Common.GetAbstractText(connString, abstr.AbstractID);
+            tbl_Abstract_Text abstr_text = new tbl_Abstract_Text();
+            try
+            {
+                abstr_text = Common.GetAbstractText(connString, abstr.AbstractID);        
+            }
+            catch(Exception ex)
+            {
+                Utils.LogError(ex);
+                abstr_text.AbstractDescPart = "No Abstract Text Found!";
+            }
 
             AbstractDescPart.InnerText = abstr_text.AbstractDescPart;
             AbstractPublicHeathPart.InnerText = abstr_text.AbstractPublicHeathPart;

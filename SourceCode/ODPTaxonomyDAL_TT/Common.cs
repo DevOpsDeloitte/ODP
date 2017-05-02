@@ -898,6 +898,10 @@ namespace ODPTaxonomyDAL_TT
                 try
                 {
                     matches = db.tbl_Abstract_Texts.Where(x => x.AbstractID == abstractID).FirstOrDefault();
+                    if(matches == null)
+                    {
+                        throw new Exception("No Abstract Text Record found in DB.");
+                    }
 
                 }
                 catch (Exception ex)
