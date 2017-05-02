@@ -47,13 +47,12 @@ namespace ODPTaxonomyWebsite.Evaluation
             AbstractViewRole Mainview = (AbstractViewRole)ViewInt;
             string Subview = !string.IsNullOrEmpty(Request.QueryString["subview"]) ? Request.QueryString["subview"] : "";
 
-            if (!AbstractListViewHelper.UserCanView(Mainview))
+            if (!AbstractListViewHelper.UserCanView(Mainview)) // we check if the user has the role or retrun with nothing here.
             {
-                // commenting out just for testing..
-                //return;
-                return;
-                
+                return;          
             }
+            // As users with multiple roles can enter this page, via a bookmark we need a security feature to only show the correct view, based on their current session.
+            this.CheckSessionRoleWithViewID(Mainview);
 
             LoadViewDropDownData(ViewRoles, Mainview);
             LoadSubviewDropDownData(Mainview, Subview);
@@ -129,35 +128,6 @@ namespace ODPTaxonomyWebsite.Evaluation
             }
         }
 
-        //protected void SetPager()
-        //{
-        //    if (!IsPostBack)
-        //    {
-        //        if (HttpContext.Current.Request.Cookies["Pager"] != null)
-        //        {
-        //            int TempPagerSize;
-
-        //            if (int.TryParse(HttpContext.Current.Request.Cookies["Pager"]["Size"].ToString(), out TempPagerSize))
-        //            {
-        //                switch (TempPagerSize)
-        //                {
-        //                    case 25:
-        //                        PagerSizeDDL.SelectedIndex = 0;
-        //                        break;
-        //                    case 50:
-        //                        PagerSizeDDL.SelectedIndex = 1;
-        //                        break;
-        //                    case 100:
-        //                        PagerSizeDDL.SelectedIndex = 2;
-        //                        break;
-        //                    default:
-        //                        break;
-        //                }
-        //                PagerWrapper.Visible = true;
-        //            }
-        //        }
-        //    }
-        //}
 
         /**
          * Loads data for select a view dropdown
@@ -260,6 +230,39 @@ namespace ODPTaxonomyWebsite.Evaluation
             }
         }
 
+
+        protected void CheckSessionRoleWithViewID(AbstractViewRole Mainview)
+        {
+            string RedirectURL = string.Empty;
+
+            if ((string)Session["CurrentRole"] == Common.RoleNames["admin"] && Mainview != AbstractViewRole.Admin)
+            {
+                RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.Admin;
+            }
+
+            if ((string)Session["CurrentRole"] == Common.RoleNames["odpSup"] && Mainview != AbstractViewRole.ODPSupervisor)
+            {
+                RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPSupervisor;
+            }
+
+            if ((string)Session["CurrentRole"] == Common.RoleNames["odp"] && Mainview != AbstractViewRole.ODPStaff)
+            {
+                RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.ODPStaff;
+            }
+
+            if ((string)Session["CurrentRole"] == Common.RoleNames["coderSup"] && Mainview != AbstractViewRole.CoderSupervisor)
+            {
+                RedirectURL = "ViewAbstractList.aspx?view=" + (int)AbstractViewRole.CoderSupervisor;
+            }
+
+
+            if (RedirectURL != "")
+            {
+                Response.Redirect(RedirectURL);
+            }
+
+        }
+
         protected void RenderAbstractListView(AbstractViewRole Mainview, string Subview = "")
         {
             AdminView.Visible = false;
@@ -268,12 +271,15 @@ namespace ODPTaxonomyWebsite.Evaluation
             ODPStaffView_Default.Visible = false;
             ODPStaffView_Review.Visible = false;
             ODPStaffView_Review_Uncoded.Visible = false;
-            ODPSupervisorView_Default.Visible = false;
+           
             ODPSupervisorView_Open.Visible = false;
             ODPSupervisorView_Review.Visible = false;
             ODPSupervisorView_Review_Uncoded.Visible = false;
 
+            ODPSupervisorView_Default.Visible = false;
+
             Response.Write(" Main View Role :: " + Mainview.ToString());
+            
             switch (Mainview)
             {
                 case AbstractViewRole.Admin:
@@ -338,31 +344,6 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         
 
-        
-
-        //protected void PagerSizeChangeHandler(object sender, EventArgs e)
-        //{
-        //    int NewPagerSize;
-
-        //    if (int.TryParse(PagerSizeDDL.SelectedValue, out NewPagerSize))
-        //    {
-        //        switch (NewPagerSize)
-        //        {
-        //            case 25:
-        //            case 50:
-        //            case 100:
-        //                HttpCookie PagerCookie = new HttpCookie("Pager");
-        //                PagerCookie["size"] = NewPagerSize.ToString();
-        //                PagerCookie.Expires = DateTime.Now.AddYears(1);
-
-        //                Response.Cookies.Add(PagerCookie);
-        //                break;
-        //            default:
-        //                break;
-        //        }
-        //    }
-
-        //    Response.Redirect("~/Evaluation/ViewAbstractList.aspx?view=" + (!string.IsNullOrEmpty(Request.QueryString["view"]) ? Request.QueryString["view"] : ""));
-        //}
+       
     }
 }
