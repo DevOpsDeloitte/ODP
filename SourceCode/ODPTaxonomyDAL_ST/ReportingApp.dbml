@@ -95,19 +95,6 @@
       <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.Report_SelectionDatapulling" Method="Report_SelectionDatapulling">
-    <Parameter Name="FY" Parameter="fY" Type="System.String" DbType="VarChar(20)" />
-    <ElementType Name="Report_SelectionDatapullingResult">
-      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SubCategory" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="MainSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SubSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="SectionName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="[Final Consensus]" Member="Final_Consensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.Report_KappaAvg_DataDetail_ByQCWeeks_New" Method="Report_KappaAvg_DataDetail_ByQCWeeks_New">
     <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
@@ -149,6 +136,22 @@
       <Column Name="E" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
       <Column Name="F" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
       <Column Name="Weekly_Avg" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Report_SelectionDatapulling" Method="Report_SelectionDatapulling">
+    <Parameter Name="FY" Parameter="fY" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="Report_SelectionDatapullingResult">
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Category" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubCategory" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="ML_v1_3_prev_only_03_2017" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="ML_v1_3_and_RCDC_prev_03_2017" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="MainSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SubSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="SectionName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Final Consensus]" Member="Final_Consensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
