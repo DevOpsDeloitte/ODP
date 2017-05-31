@@ -19,20 +19,6 @@
       <Column Name="Sorting" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
-  <Function Name="dbo.Report_AbstractSummary" Method="Report_AbstractSummary">
-    <ElementType Name="Report_AbstractSummaryResult">
-      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="[Prevention vs 5u0025]" Member="Prevention_vs_5u0025" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="[Total abstracts loaded into PACT]" Member="Total_abstracts_loaded_into_PACT" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[Total number abstracts coded by IQ coders (1N)]" Member="Total_number_abstracts_coded_by_IQ_coders__1N_" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[u0025 abstracts coded by IQ coders (1N)]" Member="u0025_abstracts_coded_by_IQ_coders__1N_" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="[Total number abstracts coded by ODP (2N)]" Member="Total_number_abstracts_coded_by_ODP__2N_" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[u0025 of total abstracts coded by ODP (2N)]" Member="u0025_of_total_abstracts_coded_by_ODP__2N_" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="[u0025 of IQ coded abtracts coded by ODP]" Member="u0025_of_IQ_coded_abtracts_coded_by_ODP" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="[Total number of uncoded abstracts remaning]" Member="Total_number_of_uncoded_abstracts_remaning" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="[u0025 of abstracts that are uncoded]" Member="u0025_of_abstracts_that_are_uncoded" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.Report_KappaAvg_ByQCWeeks" Method="Report_KappaAvg_ByQCWeeks">
     <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
@@ -152,6 +138,21 @@
       <Column Name="SubSection" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="SectionName" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="[Final Consensus]" Member="Final_Consensus" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Report_AbstractSummary" Method="Report_AbstractSummary">
+    <ElementType Name="Report_AbstractSummaryResult">
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Category" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="[Prevention vs 5u0025]" Member="Prevention_vs_5u0025" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="[Total abstracts loaded into PACT]" Member="Total_abstracts_loaded_into_PACT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[Total number abstracts coded by IQ coders (1N)]" Member="Total_number_abstracts_coded_by_IQ_coders__1N_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[u0025 abstracts coded by IQ coders (1N)]" Member="u0025_abstracts_coded_by_IQ_coders__1N_" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="[Total number abstracts coded by ODP (2N)]" Member="Total_number_abstracts_coded_by_ODP__2N_" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[u0025 of total abstracts coded by ODP (2N)]" Member="u0025_of_total_abstracts_coded_by_ODP__2N_" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="[u0025 of IQ coded abtracts coded by ODP]" Member="u0025_of_IQ_coded_abtracts_coded_by_ODP" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="[Total number of uncoded abstracts remaning]" Member="Total_number_of_uncoded_abstracts_remaning" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[u0025 of abstracts that are uncoded]" Member="u0025_of_abstracts_that_are_uncoded" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
