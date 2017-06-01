@@ -150,7 +150,7 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                     {
                         //qcWeeks.RemoveRange(getcurrentIdx, qcWeeks.Count - getcurrentIdx);
                         // or
-                        qcWeeks = qcWeeks.Where(qc => qc.QC_ID.Value < getcurrentId).ToList();
+                        qcWeeks = qcWeeks.Where(qc => qc.QC_ID.Value < getcurrentId).OrderByDescending(qc=> qc.QC_ID).ToList();
                     }
                 }
                 catch

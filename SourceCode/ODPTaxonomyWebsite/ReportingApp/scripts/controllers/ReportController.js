@@ -25,7 +25,7 @@
                 $log.info('promise result ', result);
                 vm.dateranges = result.dates.data.map(function (x) {
                     x.id = x.QC_ID;
-                    x.name = x.Dates_IQ_Coded;
+                    x.name = x.QC_week+ ':  '+x.Dates_IQ_Coded;
                     return x;
                 });
                 vm.mechanismtypes = result.mechanisms.data.map(function (x) {
