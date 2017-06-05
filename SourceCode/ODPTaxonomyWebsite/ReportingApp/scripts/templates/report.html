@@ -35,20 +35,35 @@
             </label>
         </div>
 
-        <div class="col-md-2 three columns">
+        <div class="col-md-2 four columns">
             <strong ng-class="{'no': !vm.mechanismsValid() , 'yes' : vm.mechanismsValid() }">Mechanism Types :</strong>
             <span><strong class="no" ng-if="!vm.mechanismsValid() && 1==2"> Required</strong></span><br />
-            <label>
-                <input type="checkbox" ng-model="vm.mechanismsall" value="all" ng-init="vm.mechanismsall = true" ng-change="changeAll(vm.mechanismsall)">
-                Select All
-            </label>
-            <label ng-repeat="(index, item) in vm.mechanismtypes" ng-init="vm.mechanisms[0] = true">
-                <input type="checkbox" ng-model="item.selected" value="item.id">
-                {{item.name}}
-            </label>
 
-        </div>
+            <div class="four columns">
+                <label>
+                    <input type="checkbox" ng-model="vm.mechanismsall" value="all" ng-init="vm.mechanismsall = true" ng-change="changeAll(vm.mechanismsall)">
+                    Select All
+                </label>
+            </div>
 
+            <div style="clear: both;"></div>
+
+                <div class="two columns" style="width:58px;">
+                    <label ng-repeat="(index, item) in vm.mechanismtypes" ng-init="vm.mechanisms[0] = true" ng-if="$even">
+                        <input type="checkbox" ng-model="item.selected" value="item.id">
+                        {{item.name}}
+                    </label>
+                </div>
+                <div class="two columns" style="width:58px;">
+                    <label ng-repeat="(index, item) in vm.mechanismtypes" ng-init="vm.mechanisms[0] = true" ng-if="$odd">
+                        <input type="checkbox" ng-model="item.selected" value="item.id">
+                        {{item.name}}
+                    </label>
+
+                </div>
+
+
+       </div>
     </div>
 
     <div class="row">
