@@ -114,7 +114,7 @@
             e.preventDefault();
             e.stopPropagation();
 
-            report.runReport(vm.datestart.name, vm.dateend.name, vm.ktype, vm.selectedmechanisms.join(',') )
+            report.runReport(vm.datestart.name.split(":  ")[1], vm.dateend.name.split(":  ")[1], vm.ktype, vm.selectedmechanisms.join(','))
                    .then(function (response) {
                       
                    }, vm.onerror);
