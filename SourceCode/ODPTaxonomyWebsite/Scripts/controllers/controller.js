@@ -563,6 +563,13 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                        return;
                    }
 
+                   if (data.submissionexists != undefined && data.submissionexists) {
+                       $scope.errormessagesdisplay = "Submission record already exists. Save Failed!";
+                       return;
+                   }
+
+
+
                } else {
 
 
@@ -596,7 +603,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
     $scope.processForm = function () {
         $scope.postmessages = "";
         $scope.errormessagesdisplay = "";
-        //console.log("process form clicked..");
+        console.log("process form clicked..");
 
         window.alertify.set({
             labels: {
@@ -610,8 +617,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         alertify.confirm("Please confirm save?", function (e) {
             if (e) {
-                //window.location.href = "revise.html";
-                //util.save();
+                
+                console.log("submitForm executed :: ");
+
                 window.scrollTo(0, 0);
                 $scope.submitForm();
             } else {

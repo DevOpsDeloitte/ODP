@@ -16,6 +16,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Classes
             string connString = null;
             connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ToString();
             var db = new DataDataContext(connString);
+            db.CommandTimeout = 0;
             return db;
 
         }

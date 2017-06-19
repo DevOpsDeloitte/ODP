@@ -149,6 +149,7 @@
             <li ng-show="(!showConsensusButton && mode.indexOf('Consensus') != -1)"><input class="button no" type="button" id="disabledconsensusButton" value="Start Consensus" /></li>
             <li ng-show="showSaveButton"><input class="button yes" type="button" id="saveButton" value="Submit" ng-click="processForm()" ng-disabled="disallowSave" /></li>
             <li ng-show="!showSaveButton"><input class="button no" type="button" id="disabledSaveButton" value="Submit"/></li>
+
             <%--<li ng-show="mode.indexOf('Consensus') != -1">Users Unable to Code : <%= unableCoders %></li>
             <li ng-show="mode.indexOf('Comparison') != -1">Teams Unable to Code : <%= unableCoders %></li>
             <li><input type="checkbox" name="unabletocode" id="unabletocode" ng-model="mdata.unabletocode"  ng-disabled="mdata.displaymode=='View'" /><label>Unable to Code</label></li>
