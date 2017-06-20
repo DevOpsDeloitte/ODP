@@ -62,11 +62,11 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             //addAbstractChangeHistory(); // should move to the submission block below - tighten logic for multiple records being created.
             context.Response.ContentType = "application/json";
 
-           // var numberOfMilisecondsToSleep = 6000;
-           // System.Threading.Thread.Sleep(numberOfMilisecondsToSleep);
+            //var numberOfMilisecondsToSleep = 6000;
+            //System.Threading.Thread.Sleep(numberOfMilisecondsToSleep);
 
-           // await Task.Delay(5000);
-           // return;
+            // await Task.Delay(5000);
+            // return;
 
             if (submissionID > 0)
             {
@@ -324,6 +324,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     return -2;
                 }
             }
+
             Submission sb = new Submission();
             sb.SubmissionTypeId = submissiontypeID;
             sb.SubmissionDateTime = DateTime.Now;
@@ -337,35 +338,47 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             }
             sb.Comments = comments;
 
-            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable }))
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = System.Transactions.IsolationLevel.Serializable, Timeout = new TimeSpan(0, 2, 0) }) )
             {
-                // Possible check for submission record, for concurreny issue in training. Multiple submission detected due to time delay.
-                var rec = db.Submissions.Where(s => s.SubmissionTypeId == submissiontypeID && s.EvaluationId == evaluationID && s.UserId == userID).FirstOrDefault();
-                if (rec != null)
-                {
-                    //submissionID = rec.SubmissionID;
-                    //return rec.SubmissionID;
-                    return -1;
-                }
-                // End of new code block.
 
-                //var numberOfMilisecondsToSleep = 20000;
-               // System.Threading.Thread.Sleep(numberOfMilisecondsToSleep);
-
-
-                db.Submissions.InsertOnSubmit(sb);
                 try
                 {
-                    db.SubmitChanges();
-                    submissionID = sb.SubmissionID;
+                    // Possible check for submission record, for concurreny issue in training. Multiple submission detected due to time delay.
+                    var rec = db.Submissions.Where(s => s.SubmissionTypeId == submissiontypeID && s.EvaluationId == evaluationID && s.UserId == userID).FirstOrDefault();
+                    if (rec != null)
+                    {
+                        //submissionID = rec.SubmissionID;
+                        //return rec.SubmissionID;
+                        return -1;
+                    }
+                    // End of new code block.
+
+                    var numberOfMilisecondsToSleep = 20000;
+                    System.Threading.Thread.Sleep(numberOfMilisecondsToSleep);
+
+
+                    db.Submissions.InsertOnSubmit(sb);
+                    try
+                    {
+                        db.SubmitChanges();
+                        submissionID = sb.SubmissionID;
+                    }
+                    catch (Exception)
+                    {
+                        scope.Dispose();
+                        return 0;
+                    }
+
+                    addAbstractChangeHistory();
+
                 }
-                catch(Exception ex)
+                catch(TransactionException)
                 {
+                    scope.Dispose();
                     return 0;
                 }
 
-                addAbstractChangeHistory();
-
+                
                 scope.Complete();
 
             }
