@@ -99,6 +99,7 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
                 //
                 addAbstractChangeHistory(); // should move to the submission block below - tighten logic for multiple records being created.
+                runKappaProcedures();
                 context.Response.Write(JsonConvert.SerializeObject(new { success = true, submissionID = submissionID, showConsensusButton = showButton, showComparisonButton = showComparison }));
             }
             else
@@ -107,9 +108,13 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 {
                     context.Response.Write(JsonConvert.SerializeObject(new { success = false, multipleconsensusexists = true }));
                 }
+                else if (submissionID == -1)
+                {
+                    context.Response.Write(JsonConvert.SerializeObject(new { success = false, submissionexists = true }));
+                }
                 else
                 {
-                    context.Response.Write(JsonConvert.SerializeObject(new { success = false }));
+                    context.Response.Write(JsonConvert.SerializeObject(new { success = false, unabletocreatesubmission = true }));
                 }
             }
         }
@@ -119,6 +124,71 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
 
         #region Process Forms
 
+
+        private void runKappaProcedures()
+        {
+            switch (submissiontypeID)
+            {
+                case 1:
+                    //FormMode = "Coder Evaluation";
+                    // Insert Status 1A record or ID = 3 
+                    break;
+
+                case 2:
+                    //FormMode = "Coder Consensus";
+                    // Insert Status 1B record or ID = 4
+
+                    // Adding Stored Procedure call for Kappa Data Calculations.
+                    try
+                    {
+                        db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 4);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 1B/4 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
+                    }
+
+                    break;
+                case 3:
+                    //FormMode = "ODP Staff Member Evaluation";
+                    // Insert Status 2A record or ID = 8 
+
+                    break;
+                case 4:
+                    //FormMode = "ODP Staff Member Consensus";
+                    // Insert Status 2B record or ID = 9
+
+                    // Adding Stored Procedure call for Kappa Data Calculations.
+                    try
+                    {
+                        db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 9);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 2B/9 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
+                    }
+
+
+                    break;
+                case 5:
+                    //FormMode = "ODP Staff Member Comparison";
+                    // Insert Status 2C record or ID = 10
+
+                    // Adding Stored Procedure call for Kappa Data Calculations.
+                    try
+                    {
+                        db.ODPComparison_ByAbs_EvlID(abstractID, evaluationID, 10);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 2C/10 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
+                    }
+
+                    break;
+            }
+
+
+        }
         private void addAbstractChangeHistory()
         {
             switch (submissiontypeID)
@@ -146,14 +216,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     //System.Diagnostics.Trace.WriteLine("abstract change history 1B : " + evaluationID + " abstract ID : " + abstractID);
 
                     // Adding Stored Procedure call for Kappa Data Calculations.
-                    try
-                    {
-                        db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 4);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 1B/4 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : "+ ex.Message);
-                    }
+                    //try
+                    //{
+                    //    db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 4);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    System.Diagnostics.Trace.WriteLine("Kappa Procedure 1B/4 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : "+ ex.Message);
+                    //}
 
                     break;
                 case 3:
@@ -174,14 +244,14 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     insertAbstractChangeHistory(getAbstractStatusID("2B"));
 
                     // Adding Stored Procedure call for Kappa Data Calculations.
-                    try
-                    {
-                        db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 9);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 2B/9 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
-                    }
+                    //try
+                    //{
+                    //    db.KappaBaseData_Insert_ByAbs_EvlID(abstractID, evaluationID, 9);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    System.Diagnostics.Trace.WriteLine("Kappa Procedure 2B/9 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
+                    //}
                     
 
                     break;
@@ -192,21 +262,17 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                     //update is complete to 1 on the evaluation record.
                     updateEvaluationRecordToComplete();
                     // Adding Stored Procedure call for Kappa Data Calculations.
-                    try
-                    {
-                        db.ODPComparison_ByAbs_EvlID(abstractID, evaluationID, 10);
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Trace.WriteLine("Kappa Procedure 2C/10 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
-                    }
+                    //try
+                    //{
+                    //    db.ODPComparison_ByAbs_EvlID(abstractID, evaluationID, 10);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    System.Diagnostics.Trace.WriteLine("Kappa Procedure 2C/10 Error : " + evaluationID + " abstract ID : " + abstractID + " exception message : " + ex.Message);
+                    //}
                     
 
                     break;
-
-           
-
-
 
             }
 
@@ -220,8 +286,6 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
                 evalrec.IsComplete = true;
                 db.SubmitChanges();
             }
-
-
         }
 
         private int getAbstractStatusID(string code)
@@ -265,8 +329,9 @@ namespace ODPTaxonomyWebsite.Evaluation.Handlers
             var rec = db.Submissions.Where(s => s.SubmissionTypeId == submissiontypeID && s.EvaluationId == evaluationID && s.UserId == userID).FirstOrDefault();
             if (rec != null)
             {
-                submissionID = rec.SubmissionID;
-                return rec.SubmissionID;
+                //submissionID = rec.SubmissionID;
+                //return rec.SubmissionID;
+                return -1;
             }
             // End of new code block.
 

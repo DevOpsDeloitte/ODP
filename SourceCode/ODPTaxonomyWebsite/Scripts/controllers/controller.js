@@ -563,6 +563,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                        return;
                    }
 
+                   if (data.submissionexists != undefined && data.submissionexists) {
+                       $scope.errormessagesdisplay = "Submission record already exists. Save Failed!";
+                       return;
+                   }
+
+                   if (data.unabletocreatesubmission != undefined && data.unabletocreatesubmission) {
+                       $scope.errormessagesdisplay = "Unable to create submission. Save Failed, Try Again!";
+                       return;
+                   }
+
                } else {
 
 
