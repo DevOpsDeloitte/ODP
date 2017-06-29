@@ -109,8 +109,8 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 List<Report_AbstractSummaryResult> reportvals = db.Report_AbstractSummary().ToList();
                 List<Report_AbstractSummary_MergeResult> reportvalsAB = db.Report_AbstractSummary_Merge().ToList();
                 DataSet ds = new DataSet();
-                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummary_MergeResult>(reportvalsAB, context.Response, "AbstractSummary", ds);
-                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "AbstractSummaryDetails" , ds);
+                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummary_MergeResult>(reportvalsAB, context.Response, "Abstract Summary", ds);
+                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "Abstract Summary Details" , ds);
                 string format = "-dd_MM_yyyy_h_mm_ss_tt";
                 CreateExcelFile.CreateExcelDocumentAsStream(ds, "AbstractSummary" + DateTime.Now.ToString(format) + ".xlsx", context.Response);
  
