@@ -210,26 +210,17 @@ namespace ODPTaxonomyWebsite
 
             if (userCurrent != null)
             {
-                if (Roles.IsUserInRole(userCurrent.UserName, role_coder))
-                {
-                    //Coder
-                    pnl_coder.Visible = true;
-                    //Checking Abstract Coding Option Evailuability
-                    teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.Coder;
-                    bool userIsInTeam = Common.UserIsInTeam(connString, teamTypeID, userId);
-                    if (userIsInTeam)
-                    {
-                        btn_viewAbstract_coder.Visible = true;
-                        lbl_messCoder.Visible = false;
-                    }
-                    else
-                    {
-                        btn_viewAbstract_coder.Visible = false;
-                        lbl_messCoder.Visible = true;
-                        lbl_messCoder.Text = messUserNotInTeam;
-                    }
 
-                    
+
+                if (Roles.IsUserInRole(userCurrent.UserName, role_admin))
+                {
+                    //Admin
+                    pnl_admin.Visible = true;
+                    // assigning default role.
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_admin;
+                    }
                 }
 
                 if (Roles.IsUserInRole(userCurrent.UserName, role_coderSup))
@@ -259,16 +250,35 @@ namespace ODPTaxonomyWebsite
 
                 }
 
-                if (Roles.IsUserInRole(userCurrent.UserName, role_admin))
+                if (Roles.IsUserInRole(userCurrent.UserName, role_coder))
                 {
-                    //Admin
-                    pnl_admin.Visible = true;
+                    //Coder
+                    pnl_coder.Visible = true;
+                    //Checking Abstract Coding Option Evailuability
+                    teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.Coder;
+                    bool userIsInTeam = Common.UserIsInTeam(connString, teamTypeID, userId);
+                    if (userIsInTeam)
+                    {
+                        btn_viewAbstract_coder.Visible = true;
+                        lbl_messCoder.Visible = false;
+                    }
+                    else
+                    {
+                        btn_viewAbstract_coder.Visible = false;
+                        lbl_messCoder.Visible = true;
+                        lbl_messCoder.Text = messUserNotInTeam;
+                    }
+
                     // assigning default role.
                     if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
                     {
-                        Session["CurrentRole"] = this.role_admin;
+                        Session["CurrentRole"] = this.role_coder;
                     }
+
                 }
+
+
+
 
                 if (Roles.IsUserInRole(userCurrent.UserName, role_odpSup))
                 {
@@ -281,6 +291,7 @@ namespace ODPTaxonomyWebsite
                     }
                 }
 
+
                 if (Roles.IsUserInRole(userCurrent.UserName, role_odp))
                 {
                     //ODP Staff
@@ -290,8 +301,15 @@ namespace ODPTaxonomyWebsite
                     {
                         Session["CurrentRole"] = this.role_odp;
                     }
-    
+
                 }
+
+
+
+
+
+
+               
 
 
 
