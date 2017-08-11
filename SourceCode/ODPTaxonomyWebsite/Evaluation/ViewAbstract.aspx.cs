@@ -729,8 +729,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                 abstr_text.AbstractDescPart = "No Abstract Text Found!";
             }
 
-            AbstractDescPart.InnerText = abstr_text.AbstractDescPart;
-            AbstractPublicHeathPart.InnerText = abstr_text.AbstractPublicHeathPart;
+            AbstractDescPart.InnerHtml = abstr_text.AbstractDescPart;
+            AbstractPublicHeathPart.InnerHtml = abstr_text.AbstractPublicHeathPart;
 
             ProjectTitle.InnerText = abstr.ProjectTitle;
             AdministeringIC.InnerText = abstr.AdministeringIC;
