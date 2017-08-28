@@ -670,10 +670,10 @@ namespace ODPTaxonomyUtility_TT
                     case 8:
                     case 10:
                     case 11:
-                        AppendTextCell(excelColumnNames[colInx] + "2", "0.7", headerRow2);
+                        AppendNumericCellKappaHeader(excelColumnNames[colInx] + "2", "0.7", headerRow2);
                         break;
                     case 9:
-                        AppendTextCell(excelColumnNames[colInx] + "2", "0.8", headerRow2);
+                        AppendNumericCellKappaHeader(excelColumnNames[colInx] + "2", "0.8", headerRow2);
                         break;
                     case 5:
                         AppendTextCell(excelColumnNames[colInx] + "2", "Threshold", headerRow2);
@@ -793,6 +793,15 @@ namespace ODPTaxonomyUtility_TT
         {
             //  Add a new Excel Cell to our Row 
             Cell cell = new Cell() { CellReference = cellReference };
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+        private static void AppendNumericCellKappaHeader(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row - center alignment.
+            Cell cell = new Cell() { CellReference = cellReference, StyleIndex = 7 };
             CellValue cellValue = new CellValue();
             cellValue.Text = cellStringValue;
             cell.Append(cellValue);
@@ -960,8 +969,10 @@ namespace ODPTaxonomyUtility_TT
 
             borders1.Append(border1);
 
+
             CellStyleFormats cellStyleFormats1 = new CellStyleFormats() 
-            { Count = (UInt32Value)1U };             
+            { Count = (UInt32Value)1U }; 
+                        
             CellFormat cellFormat1 = new CellFormat() { NumberFormatId = (UInt32Value)0U, 
                 FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U };
 
@@ -998,6 +1009,27 @@ namespace ODPTaxonomyUtility_TT
             (UInt32Value)4U, BorderId = (UInt32Value)0U, FormatId = 
             (UInt32Value)0U, ApplyFill = true };
 
+            Alignment center = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
+
+
+            // Style Index 7
+            CellFormat cellFormat9 = new CellFormat()
+            {
+                NumberFormatId =
+            (UInt32Value)0U,
+                FontId = (UInt32Value)1U,
+                FillId =
+            (UInt32Value)3U,
+                BorderId = (UInt32Value)0U,
+                FormatId =
+            (UInt32Value)0U,
+                ApplyFill = true,
+               Alignment = center
+               
+            };
+
+          
+
             cellFormats1.Append(cellFormat2);             
             cellFormats1.Append(cellFormat3);             
             cellFormats1.Append(cellFormat4);             
@@ -1005,6 +1037,9 @@ namespace ODPTaxonomyUtility_TT
             cellFormats1.Append(cellFormat6);             
             cellFormats1.Append(cellFormat7);             
             cellFormats1.Append(cellFormat8);
+
+            //id = 7
+            cellFormats1.Append(cellFormat9);
 
             CellStyles cellStyles1 = new CellStyles() 
             { Count = (UInt32Value)1U };             
