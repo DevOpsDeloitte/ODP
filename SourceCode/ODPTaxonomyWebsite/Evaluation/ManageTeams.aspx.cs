@@ -127,6 +127,9 @@ namespace ODPTaxonomyWebsite.Evaluation
                     btn_saveteam.Visible = true;
                     LoadUsers(list_roles, teamTypeID);
                     LoadTeams(teamTypeID);
+
+                    if (teamTypeID == 1) { LoadTeamLabels(); TeamPanel.Visible = true; }
+                        
                 }
             }
         }
@@ -176,6 +179,48 @@ namespace ODPTaxonomyWebsite.Evaluation
 
         }
 
+        protected void LoadTeamLabels()
+        {
+            List<TeamLabel> team_labels = new List<TeamLabel>();
+            if (!String.IsNullOrEmpty(connString))
+            {
+                using (DataDataContext db = new DataDataContext(connString))
+                {
+
+                    var teamActives = from t in db.tbl_Teams
+                                      where (t.StatusID == (int)ODPTaxonomyDAL_TT.Status.Active)
+                                      select t.TeamLabelID;
+
+                    var matches = from tl in db.TeamLabels
+                                  where ( tl.StatusID == (int)ODPTaxonomyDAL_TT.Status.Active && !teamActives.Contains(tl.TeamLabelID) )
+                                  select tl;
+
+                    team_labels = matches.ToList<TeamLabel>();
+                    if (team_labels.Count > 0)
+                    {
+                        this.TeamLabelDropDown.DataSource = team_labels;
+                        this.TeamLabelDropDown.DataBind();
+                        this.TeamLabelMessage.Visible = false;
+                        this.TeamLabelDropDown.Visible = true;
+                        this.TeamPanel.Visible = true;
+                        this.TeamLabel.Visible = true;
+                    }
+                    else
+                    {
+                        //gc_noTeam.Visible = true;
+                        this.TeamLabelMessage.Text = "No More Team Labels Available.";
+                        this.TeamLabelMessage.Visible = true;
+                        this.TeamLabelDropDown.Visible = false;
+                        this.TeamPanel.Visible = false;
+                        this.TeamLabel.Visible = false;
+                    }
+
+                }
+
+
+            }
+
+        }
         protected void LoadTeams(int teamTypeID)
         {
             List<tbl_Team> list_teams = new List<tbl_Team>();
@@ -427,9 +472,29 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                     }
 
+                    int? labelID = null;
+                    if (teamtypeId == 1)
+                    {
+                        try
+                        {
+                            labelID = Convert.ToInt16(this.TeamLabelDropDown.SelectedValue);
+                        }
+                        catch (Exception)
+                        {
+                            labelID = -1;
+                        }
+                    }
+
+                    if(labelID == -1 && teamtypeId == 1)
+                    {
+                        lbl_messageUsers.Text = "Cannot Save a Coder team without a Team Label.";
+                        lbl_messageUsers.Visible = true;
+                        return;
+                    }
 
                     if (membersCheckedCount == membersTotal)
                     {
+                        
                         //Save new Team
                         using (DataDataContext db = new DataDataContext(connString))
                         {
@@ -448,8 +513,16 @@ namespace ODPTaxonomyWebsite.Evaluation
                             team.TeamTypeID = teamtypeId;
                             team.Createdby = userCurrentId;
                             team.CreatedDateTime = DateTime.Now;
-                            team.TeamCode = Common.GetTeamCode(initials);
+                            if (teamtypeId == 1)
+                            {
+                                team.TeamLabelID = Convert.ToInt16(this.TeamLabelDropDown.SelectedValue);
+                               
+                            }
+                            else
+                            {
 
+                            }
+                            team.TeamCode = Common.GetTeamCode(initials);
                             db.tbl_Teams.InsertOnSubmit(team);
                             db.SubmitChanges();
 
@@ -464,6 +537,7 @@ namespace ODPTaxonomyWebsite.Evaluation
                     }
                     else
                     {
+                        //Response.Write($" <br>-------<br>----<br>Selected Value of Team :  {this.TeamLabelDropDown.SelectedValue} ");
                         lbl_messageUsers.Text = "To save a team, three team members must be selected.";
                         lbl_messageUsers.Visible = true;
                     }
