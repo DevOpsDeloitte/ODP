@@ -196,6 +196,8 @@ namespace ODPTaxonomyWebsite.Evaluation
                                   select tl;
 
                     team_labels = matches.ToList<TeamLabel>();
+                    team_labels.Insert(0, new ODPTaxonomyDAL_TT.TeamLabel { TeamLabel1 = "Select One", TeamLabelID = -1 });
+
                     if (team_labels.Count > 0)
                     {
                         this.TeamLabelDropDown.DataSource = team_labels;
