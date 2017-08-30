@@ -14,7 +14,7 @@ using ODPTaxonomyUtility_TT;
 
 namespace ODPTaxonomyWebsite.Evaluation
 {
-    
+
     public partial class ManageTeams : System.Web.UI.Page
     {
         private string role_coder = null;
@@ -228,7 +228,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             int currentTeamID = 0;
             tbl_aspnet_User currentUser = null;
             List<tbl_aspnet_User> currentUserList = null;
-
+            List<TeamSet> TS = new List<TeamSet>();
             //Check current user's role
             if (!String.IsNullOrEmpty(connString))
             {
@@ -238,6 +238,22 @@ namespace ODPTaxonomyWebsite.Evaluation
                                   where (t.StatusID == (int)ODPTaxonomyDAL_TT.Status.Active) && (t.TeamTypeID == teamTypeID)
                                   select t;
                     list_teams = matches.ToList<tbl_Team>();
+                 
+                    foreach(var t in list_teams)
+                    {
+                        if (teamTypeID == 1)
+                        {
+                            List<TeamLabel> TeamLabels = (from lab in db.TeamLabels
+                                              where (lab.StatusID == (int)ODPTaxonomyDAL_TT.Status.Active)
+                                              select lab).ToList();
+                            string label = TeamLabels.Where(x => x.TeamLabelID == t.TeamLabelID).Select(x => x.TeamLabel1).FirstOrDefault();
+                            TS.Add(new TeamSet() { TeamID = t.TeamID, TeamLabel = "<strong>Team :</strong> " + label  + "<br />", TeamTypeID = teamTypeID });
+                        }
+                        else
+                        {
+                            TS.Add(new TeamSet() { TeamID = t.TeamID, TeamLabel = "", TeamTypeID = teamTypeID });
+                        }
+                    }
 
                     var matches_2 = from t in db.tbl_Teams
                                     join tu in db.tbl_TeamUsers on t.TeamID equals tu.TeamID
@@ -276,7 +292,7 @@ namespace ODPTaxonomyWebsite.Evaluation
 
                 if (list_teams.Count > 0)
                 {
-                    rpt_teams.DataSource = list_teams;
+                    rpt_teams.DataSource = TS;
                     rpt_teams.DataBind();
                 }
                 else

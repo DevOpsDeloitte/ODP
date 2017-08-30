@@ -26,6 +26,14 @@ namespace ODPTaxonomyDAL_TT
         public bool IsAbstractTaken;
     }
 
+    public class TeamSet
+    {
+        public int TeamID { get; set; }
+        public string TeamLabel { get; set; }
+        public string TeamCode { get; set; }
+        public int TeamTypeID { get; set; }
+    }
+
     public enum SubmissionTypeId
     {
         CoderEvaluation = 1,

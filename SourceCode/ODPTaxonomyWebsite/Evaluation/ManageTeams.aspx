@@ -112,6 +112,7 @@
         <ItemTemplate>
             <tr>
                 <td><!--<%# DataBinder.Eval(Container.DataItem, "TeamCode")%>:<br />-->
+                    <%# DataBinder.Eval(Container.DataItem, "TeamLabel") %>
                     <asp:Repeater runat="server" ID="rpt_teamMembers">
                         <ItemTemplate>
                             <%# DataBinder.Eval(Container.DataItem, "UserFirstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "UserLastName")%><br />
