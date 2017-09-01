@@ -30,6 +30,7 @@
         <%=studyDesignPurpose %>
         <%=preventionCategory %>
         <%=unabletocode %>
+        <%=appendix %>
     
     
     </div>
