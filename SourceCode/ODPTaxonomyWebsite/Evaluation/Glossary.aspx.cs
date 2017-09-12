@@ -174,7 +174,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         {
 
             var db = DBData.GetDataContext();
-            var topics = db.Protocols.Where(p => p.Title.Contains("Appendix")).OrderBy(p => p.LookUpID).Select(p => p).ToList();
+            var topics = db.Protocols.Where(p => p.LookUpTable == "Appendix").OrderBy(p => p.LookUpID).Select(p => p).ToList();
             StringBuilder finalStr = new StringBuilder();
             //Response.Write(topics.Count);
             var count = 1;
