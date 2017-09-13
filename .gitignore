@@ -190,3 +190,4 @@ SourceCode/ODPTaxonomyWebsite/Web.config
 notes/
 .idea/
 *.DS_Store
+SourceCode/.vs/ODPTaxonomy/v15/sqlite3/storage.ide
