@@ -604,6 +604,7 @@ namespace ODPTaxonomyUtility_TT
             }
         }
 
+        // specialized kappa report formats
         private static void WriteDataTableToExcelWorksheet_KappaHeaders(DataTable dt, WorksheetPart worksheetPart, string start, string end)
         {
             var worksheet = worksheetPart.Worksheet;
@@ -637,13 +638,13 @@ namespace ODPTaxonomyUtility_TT
 
                 if (colInx > 5 && colInx < 12)
                 {
-                    AppendTextCell(excelColumnNames[colInx] + "1", col.ColumnName, headerRow);
+                    AppendTextCellHeaderCenter(excelColumnNames[colInx] + "1", col.ColumnName, headerRow);
                 }
                 else
                 {
                     if (colInx == 0)
                     {
-                        AppendTextCell(excelColumnNames[colInx] + "1", "QC Report : ", headerRow);
+                        AppendTextCell(excelColumnNames[colInx] + "1", "" + dt.TableName, headerRow);
 
                     }
                     else
@@ -703,8 +704,15 @@ namespace ODPTaxonomyUtility_TT
             for (int colInx = 0; colInx < numberOfColumns; colInx++)
             {
                 DataColumn col = dt.Columns[colInx];
-                AppendTextCell(excelColumnNames[colInx] + "4", col.ColumnName, headerRow4, true);
-               // IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
+                if ((colInx > 5 && colInx < 12))
+                {
+                    AppendTextCellHeaderCenter(excelColumnNames[colInx] + "4", col.ColumnName, headerRow4);
+                }
+                else
+                {
+                    AppendTextCell(excelColumnNames[colInx] + "4", col.ColumnName, headerRow4, true);
+                }
+                  
             }
 
 
@@ -724,7 +732,7 @@ namespace ODPTaxonomyUtility_TT
                     cellValue = dr.ItemArray[colInx].ToString();
 
                     // Create cell with data
-                    if (IsNumericColumn[colInx])
+                    if (/*IsNumericColumn[colInx] &&*/ (colInx > 5 && colInx < 12))
                     {
                         //  For numeric cells, make sure our input data IS a number, then write it out to the Excel file.
                         //  If this numeric value is NULL, then don't write anything to the Excel file.
@@ -732,13 +740,56 @@ namespace ODPTaxonomyUtility_TT
                         if (double.TryParse(cellValue, out cellNumericValue))
                         {
                             cellValue = cellNumericValue.ToString();
-                            AppendNumericCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            //cellValue = string.Format("{0:N4}", cellNumericValue.ToString());                   
                         }
+
+                        if(colInx != 9)
+                        {
+                            if (cellNumericValue < 0.7d && cellNumericValue != 0)
+                            {
+                                AppendNumericCellKappaBelowThreshold(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                            else
+                            {
+                                AppendNumericCellKappaNormal(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                        }
+                        else
+                        {
+                            if (cellNumericValue < 0.8d && cellNumericValue != 0)
+                            {
+                                AppendNumericCellKappaBelowThreshold(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                            else
+                            {
+                                AppendNumericCellKappaNormal(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                        }
+                        
+                        
+
+                       
                     }
                     else
                     {
+                        if ((colInx > 3 && colInx < 6) || colInx == 12)
+                        {
+                            if (colInx == 12)
+                            {
+                                AppendNumericCellKappaNormal(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                            else
+                            {
+                                AppendNumericCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                        }
+                        else
+                        {
+                            AppendTextCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow, false);
+                        }
                         //  For text cells, just write the input data straight out to the Excel file.
-                        AppendTextCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow, false);
+                        //AppendTextCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow, false);AppendTextCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow, false);
+                        //AppendNumericCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
                     }
                 }
             }
@@ -757,6 +808,21 @@ namespace ODPTaxonomyUtility_TT
                 cell = new Cell() { CellReference = cellReference, DataType = CellValues.String };
             }
             
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+
+        private static void AppendTextCellHeaderCenter(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = null;
+
+            cell = new Cell() { CellReference = cellReference, DataType = CellValues.String, StyleIndex = 7 };
+            
+ 
+
             CellValue cellValue = new CellValue();
             cellValue.Text = cellStringValue;
             cell.Append(cellValue);
@@ -793,6 +859,25 @@ namespace ODPTaxonomyUtility_TT
         {
             //  Add a new Excel Cell to our Row 
             Cell cell = new Cell() { CellReference = cellReference };
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+
+        private static void AppendNumericCellKappaNormal(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = new Cell() { CellReference = cellReference, StyleIndex = 9 };
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+        private static void AppendNumericCellKappaBelowThreshold(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = new Cell() { CellReference = cellReference , StyleIndex = 8 };
             CellValue cellValue = new CellValue();
             cellValue.Text = cellStringValue;
             cell.Append(cellValue);
@@ -1012,6 +1097,21 @@ namespace ODPTaxonomyUtility_TT
             Alignment center = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
 
 
+            var numberingFormats = new NumberingFormats();
+            var nformat4Decimal = new NumberingFormat
+            {
+                NumberFormatId = (UInt32Value)1U,
+                FormatCode = StringValue.FromString("#0.0000")
+            };
+            var nformatForcedText = new NumberingFormat
+            {
+                NumberFormatId = (UInt32Value)0U,
+                FormatCode = StringValue.FromString("@")
+            };
+            numberingFormats.Append(nformatForcedText);
+            numberingFormats.Append(nformat4Decimal);
+
+
             // Style Index 7
             CellFormat cellFormat9 = new CellFormat()
             {
@@ -1019,7 +1119,7 @@ namespace ODPTaxonomyUtility_TT
             (UInt32Value)0U,
                 FontId = (UInt32Value)1U,
                 FillId =
-            (UInt32Value)3U,
+            (UInt32Value)0U,
                 BorderId = (UInt32Value)0U,
                 FormatId =
             (UInt32Value)0U,
@@ -1028,7 +1128,36 @@ namespace ODPTaxonomyUtility_TT
                
             };
 
-          
+            // Style Index 8 // Red - Below Threshhold
+            CellFormat cellFormat10 = new CellFormat()
+            {
+                NumberFormatId =
+            (UInt32Value)1U,
+                //FontId = (UInt32Value)1U,
+                FillId =
+            (UInt32Value)5U,
+                BorderId = (UInt32Value)0U,
+                FormatId =
+            (UInt32Value)0U,
+                ApplyFill = true
+
+            };
+            // Style Index 9 // Normal Threshhold
+            CellFormat cellFormat11 = new CellFormat()
+            {
+                NumberFormatId =
+            (UInt32Value)1U,
+                //FontId = (UInt32Value)1U,
+                FillId =
+            (UInt32Value)0U,
+                BorderId = (UInt32Value)0U,
+                FormatId =
+            (UInt32Value)0U,
+                ApplyFill = true
+
+            };
+
+
 
             cellFormats1.Append(cellFormat2);             
             cellFormats1.Append(cellFormat3);             
@@ -1040,6 +1169,10 @@ namespace ODPTaxonomyUtility_TT
 
             //id = 7
             cellFormats1.Append(cellFormat9);
+            //id = 8
+            cellFormats1.Append(cellFormat10);
+            //id = 9
+            cellFormats1.Append(cellFormat11);
 
             CellStyles cellStyles1 = new CellStyles() 
             { Count = (UInt32Value)1U };             
@@ -1053,6 +1186,10 @@ namespace ODPTaxonomyUtility_TT
             { Count = (UInt32Value)0U, DefaultTableStyle = 
             "TableStyleMedium2", DefaultPivotStyle = "PivotStyleMedium9" };
 
+            // https://www.codeproject.com/Articles/97307/Using-C-and-Open-XML-SDK-for-Microsoft-Office
+
+
+            stylesheet1.Append(numberingFormats);
             stylesheet1.Append(fonts1);             
             stylesheet1.Append(fills1);             
             stylesheet1.Append(borders1);             
@@ -1061,6 +1198,8 @@ namespace ODPTaxonomyUtility_TT
             stylesheet1.Append(cellStyles1);             
             stylesheet1.Append(differentialFormats1);             
             stylesheet1.Append(tableStyles1);
+
+           
 
             return stylesheet1;         
         }
