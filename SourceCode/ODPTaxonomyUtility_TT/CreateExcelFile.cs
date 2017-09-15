@@ -644,7 +644,7 @@ namespace ODPTaxonomyUtility_TT
                 {
                     if (colInx == 0)
                     {
-                        AppendTextCell(excelColumnNames[colInx] + "1", "" + dt.TableName, headerRow);
+                        AppendTextCell(excelColumnNames[colInx] + "1", "" + start + " - " + end + " QC Report", headerRow);
 
                     }
                     else
@@ -664,7 +664,7 @@ namespace ODPTaxonomyUtility_TT
                 switch (colInx)
                 {
                     case 0:
-                        AppendTextCell(excelColumnNames[colInx] + "2", "" + start + " - " + end, headerRow2);
+                        AppendTextCell(excelColumnNames[colInx] + "2", "" + dt.TableName.Split('-')[0] + " ", headerRow2);
                         break;
                     case 6:
                     case 7:
@@ -745,7 +745,7 @@ namespace ODPTaxonomyUtility_TT
 
                         if(colInx != 9)
                         {
-                            if (cellNumericValue < 0.7d && cellNumericValue != 0)
+                            if (Math.Round(cellNumericValue,1) < 0.7d && cellNumericValue != 0)
                             {
                                 AppendNumericCellKappaBelowThreshold(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
                             }
@@ -756,7 +756,7 @@ namespace ODPTaxonomyUtility_TT
                         }
                         else
                         {
-                            if (cellNumericValue < 0.8d && cellNumericValue != 0)
+                            if (Math.Round(cellNumericValue, 1) < 0.8d && cellNumericValue != 0)
                             {
                                 AppendNumericCellKappaBelowThreshold(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
                             }
@@ -920,21 +920,14 @@ namespace ODPTaxonomyUtility_TT
             stylesheet1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
             stylesheet1.AddNamespaceDeclaration("x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
 
-            Fonts fonts1 = new Fonts() { Count = (UInt32Value)1U, KnownFonts
-             = true };
+            Fonts fonts1 = new Fonts() { Count = (UInt32Value)2U, KnownFonts= true };
             //Normal Font
-            DocumentFormat.OpenXml.Spreadsheet.Font font1 = 
-            new DocumentFormat.OpenXml.Spreadsheet.Font();
-            DocumentFormat.OpenXml.Spreadsheet.FontSize fontSize1 = 
-            new DocumentFormat.OpenXml.Spreadsheet.FontSize(){ Val = 11D };
-            DocumentFormat.OpenXml.Spreadsheet.Color color1 = 
-            new DocumentFormat.OpenXml.Spreadsheet.Color() 
-            { Theme = (UInt32Value)1U };
+            DocumentFormat.OpenXml.Spreadsheet.Font font1 = new DocumentFormat.OpenXml.Spreadsheet.Font();
+            DocumentFormat.OpenXml.Spreadsheet.FontSize fontSize1 = new DocumentFormat.OpenXml.Spreadsheet.FontSize(){ Val = 11D };
+            DocumentFormat.OpenXml.Spreadsheet.Color color1 = new DocumentFormat.OpenXml.Spreadsheet.Color() { Theme = (UInt32Value)1U };
             FontName fontName1 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering1 = 
-            new FontFamilyNumbering() { Val = 2 };
-            FontScheme fontScheme1 = new FontScheme() 
-            { Val = FontSchemeValues.Minor };
+            FontFamilyNumbering fontFamilyNumbering1 = new FontFamilyNumbering() { Val = 2 };
+            FontScheme fontScheme1 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font1.Append(fontSize1);
             font1.Append(color1);
@@ -942,20 +935,15 @@ namespace ODPTaxonomyUtility_TT
             font1.Append(fontFamilyNumbering1);
             font1.Append(fontScheme1);
             fonts1.Append(font1);
+            //End of Normal Font
 
             //Bold Font
-            DocumentFormat.OpenXml.Spreadsheet.Font bFont = 
-            new DocumentFormat.OpenXml.Spreadsheet.Font();                     
-            DocumentFormat.OpenXml.Spreadsheet.FontSize bfontSize = 
-            new DocumentFormat.OpenXml.Spreadsheet.FontSize(){ Val = 11D };
-            DocumentFormat.OpenXml.Spreadsheet.Color bcolor = 
-            new DocumentFormat.OpenXml.Spreadsheet.Color()
-            { Theme = (UInt32Value)1U };
+            DocumentFormat.OpenXml.Spreadsheet.Font bFont = new DocumentFormat.OpenXml.Spreadsheet.Font();                     
+            DocumentFormat.OpenXml.Spreadsheet.FontSize bfontSize = new DocumentFormat.OpenXml.Spreadsheet.FontSize(){ Val = 11D };
+            DocumentFormat.OpenXml.Spreadsheet.Color bcolor = new DocumentFormat.OpenXml.Spreadsheet.Color() { Theme = (UInt32Value)1U };
             FontName bfontName = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering bfontFamilyNumbering = 
-            new FontFamilyNumbering() { Val = 2 };
-            FontScheme bfontScheme = new FontScheme() 
-            { Val = FontSchemeValues.Minor };
+            FontFamilyNumbering bfontFamilyNumbering = new FontFamilyNumbering() { Val = 2 };
+            FontScheme bfontScheme = new FontScheme() { Val = FontSchemeValues.Minor };
             Bold bFontBold = new Bold();
 
             bFont.Append(bfontSize);
@@ -966,6 +954,26 @@ namespace ODPTaxonomyUtility_TT
             bFont.Append(bFontBold);
 
             fonts1.Append(bFont);
+            // End of Bold Font
+
+            //Text Color Font
+            DocumentFormat.OpenXml.Spreadsheet.Font cFont = new DocumentFormat.OpenXml.Spreadsheet.Font();
+            DocumentFormat.OpenXml.Spreadsheet.FontSize cfontSize = new DocumentFormat.OpenXml.Spreadsheet.FontSize() { Val = 11D };
+            DocumentFormat.OpenXml.Spreadsheet.Color ccolor = new DocumentFormat.OpenXml.Spreadsheet.Color() { Rgb = "FF0000" };
+            FontName cfontName = new FontName() { Val = "Calibri" };
+            FontFamilyNumbering cfontFamilyNumbering = new FontFamilyNumbering() { Val = 2 };
+            FontScheme cfontScheme = new FontScheme() { Val = FontSchemeValues.Minor };
+            Bold cFontBold = new Bold();
+
+            cFont.Append(cfontSize);
+            cFont.Append(ccolor);
+            cFont.Append(cfontName);
+            cFont.Append(cfontFamilyNumbering);
+            cFont.Append(cfontScheme);
+            //cFont.Append(cFontBold);
+
+            fonts1.Append(cFont);
+            // End of Text Color Font
 
             Fills fills1 = new Fills() { Count = (UInt32Value)5U };
 
@@ -1133,9 +1141,9 @@ namespace ODPTaxonomyUtility_TT
             {
                 NumberFormatId =
             (UInt32Value)1U,
-                //FontId = (UInt32Value)1U,
+                FontId = (UInt32Value)2U,
                 FillId =
-            (UInt32Value)5U,
+            (UInt32Value)0U,
                 BorderId = (UInt32Value)0U,
                 FormatId =
             (UInt32Value)0U,
