@@ -27,6 +27,7 @@ namespace ODPTaxonomyDAL_JY
         public string ApplicationID { get; set; }
 
         public string ProjectTitle { get; set; }
+        public string ProjectNumber { get; set; }
         public string PIProjectLeader { get; set; }
         public DateTime? LastExportDate { get; set; }
 

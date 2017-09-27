@@ -158,7 +158,8 @@ namespace ODPTaxonomyDAL_JY
                             CodingType = a.CodingType,
                             FY = a.FY,
                             Activity = a.Activity,
-                            Type = a.Type
+                            Type = a.Type,
+                            ProjectNumber = a.ProjectNumber
                         };
 
             switch (param.filter)
@@ -219,7 +220,8 @@ namespace ODPTaxonomyDAL_JY
                             CodingType = a.CodingType,
                             FY = a.FY,
                             Activity = a.Activity,
-                            Type = a.Type
+                            Type = a.Type,
+                            ProjectNumber = a.ProjectNumber
                         };
 
             switch (param.filter)
@@ -286,7 +288,8 @@ namespace ODPTaxonomyDAL_JY
                             CodingType = a.CodingType,
                             FY = a.FY,
                             Activity = a.Activity,
-                            Type = a.Type
+                            Type = a.Type,
+                            ProjectNumber = a.ProjectNumber
                         };
 
             switch (param.filter)
@@ -333,7 +336,8 @@ namespace ODPTaxonomyDAL_JY
                             CodingType = a.CodingType,
                             FY = a.FY,
                             Activity = a.Activity,
-                            Type = a.Type
+                            Type = a.Type,
+                            ProjectNumber = a.ProjectNumber
                         };
 
             switch (param.filter)
@@ -376,7 +380,8 @@ namespace ODPTaxonomyDAL_JY
                             CodingType = a.CodingType,
                             FY = a.FY,
                             Activity = a.Activity,
-                            Type = a.Type
+                            Type = a.Type,
+                            ProjectNumber = a.ProjectNumber
                         };
 
             switch (param.filter)
@@ -437,7 +442,8 @@ namespace ODPTaxonomyDAL_JY
                             CodingType = a.CodingType,
                             FY = a.FY,
                             Activity = a.Activity,
-                            Type = a.Type
+                            Type = a.Type,
+                            ProjectNumber = a.ProjectNumber
                         };
 
             switch (param.filter)
@@ -492,7 +498,8 @@ namespace ODPTaxonomyDAL_JY
                             CodingType = a.CodingType,
                             FY = a.FY,
                             Activity = a.Activity,
-                            Type = a.Type
+                            Type = a.Type,
+                            ProjectNumber = a.ProjectNumber
                         };
 
             switch (param.filter)
@@ -610,6 +617,7 @@ namespace ODPTaxonomyDAL_JY
                                        AbstractID = a.AbstractID,
                                        ProjectTitle = a.ProjectTitle + " (" + s.AbstractStatusCode + ")",
                                        PIProjectLeader = a.PIProjectLeader,
+                                       ProjectNumber = a.ProjectNumber,
                                        ApplicationID = a.ChrApplicationID,
                                        AbstractStatusID = s.AbstractStatusID,
                                        AbstractStatusCode = s.AbstractStatusCode,
