@@ -1325,7 +1325,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": 10
+                    "targets": 11
                 },
 
                 {
@@ -1339,17 +1339,17 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+                    "targets": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21]
                 },
 
-                { "visible": true, "targets": [8] },
+                { "visible": true, "targets": [9] },
                 {
                     "render": function (data, type, row) {
                         var myDate = new Date(data);
                         return getFormattedDate(myDate);
 
                     },
-                    "targets": 7 //date column
+                    "targets": 8 //date column
                 },
 
                 {
@@ -1368,7 +1368,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         return collink;
 
                     },
-                    "targets": 9 //title column
+                    "targets": 10 //title column
                 },
                 {
                     "render": function (data, type, row) {
@@ -1381,7 +1381,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                         }
 
                     },
-                    "targets": 21 //date column
+                    "targets": 22 //date column
                 }
             ],
             // searchDelay is only applicable for client side. see debounce function for server side delays.
@@ -1398,7 +1398,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                     }
                 }
             },
-            "order": [[7, "desc"]],
+            "order": [[8, "desc"]],
             "columns": [
                 {
                     "class": 'checkbox-control',
@@ -1415,7 +1415,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                 },
                 { "data": "AbstractID", "class": "abstractid hide_column" },
                 { "data": "ApplicationID" },
-
+                { "data": "ProjectNumber" },
                 { "data": "FY" },
                 { "data": "Type" },
                 { "data": "Activity" },
@@ -1434,7 +1434,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                 { "data": "E" },
                 { "data": "F" },
                 { "data": "G" },
-                { "data": "LastExportDate" }
+                { "data": "LastExportDate", "class": "hide_column" }
             ]
         });
         // END: Datatable Definition

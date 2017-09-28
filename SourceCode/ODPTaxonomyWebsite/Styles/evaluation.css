@@ -45,6 +45,10 @@ table.dataTable thead th, table.dataTable thead td { position: relative; padding
 .col_statusdate, .col_exportdate { width: 55px }
 .col_title { width: 195px; max-width: 195px; min-width: 195px; }
 .col_kappa { width: 20px }
+.col_projectnumber { width: 95px;}
+.col_fy { width: 23px; }
+.col_mechanism { width: 20px;}
+.col_type { width: 20px; }
 option:disabled { color: #aaa }
 div.titlebox { width: 153px }
 table.dataTable tbody th, table.dataTable tbody td { padding: 8px 10px; border: 1px solid #ccc; }

@@ -955,6 +955,15 @@ namespace ODPTaxonomyDAL_JY
                     {
                         return Abstracts.OrderByDescending(d => d.ProjectTitle).ToList();
                     }
+                case "ProjectNumber":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.ProjectNumber).ToList();
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.ProjectNumber).ToList();
+                    }
                 case "Date":
                 case "StatusDate":
                     if (SortDirection == SortDirection.Ascending)

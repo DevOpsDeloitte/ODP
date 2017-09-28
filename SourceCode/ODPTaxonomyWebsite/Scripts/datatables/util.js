@@ -366,6 +366,7 @@ function Utility() {
                 '<td class="ccol col_openclose">' + '&nbsp;' + '</td>' + // Col 1a
                 //'<td class="ccol col_abstractid">' + rowData.ChildRows[i].AbstractID + '</td>' + // Col 2
                 '<td class="ccol col_applicationid">' + '&nbsp;' + '</td>' + // Col 3
+                '<td class="ccol col_projectnumber">' + '&nbsp;' + '</td>' + // Col 3
 
                 '<td class="ccol col_fy">' + '&nbsp;' + '</td>' + // Col 3
                 '<td class="ccol col_type">' + '&nbsp;' + '</td>' + // Col 3
@@ -385,7 +386,7 @@ function Utility() {
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].E) + '</td>' + // Col 12
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].F) + '</td>' + // Col 13
                 '<td class="ccol col_kappa">' + this.MaskKappa(rowData.ChildRows[i].G) + '</td>' + // Col 14
-                '<td class="ccol col_exportdate">' + this.coalesceCol(rowData.ChildRows[i].LastExportDate) + '</td>' + // Col 15
+                //'<td class="ccol col_exportdate">' + this.coalesceCol(rowData.ChildRows[i].LastExportDate) + '</td>' + // Col 15
 
                 '</tr>';
 

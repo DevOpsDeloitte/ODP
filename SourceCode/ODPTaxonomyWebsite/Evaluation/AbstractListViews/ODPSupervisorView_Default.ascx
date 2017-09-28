@@ -86,6 +86,8 @@
                     <th class="col_abstractid">Abstract ID</th>
                     <th class="col_applicationid">Application ID</th>
 
+                    <th class="col_projectnumber">Project Number</th>
+
                     <th class="col_fy">FY</th>
                     <th class="col_type">Type</th>
                     <th class="col_mechanism">Mech</th>

@@ -568,6 +568,7 @@ namespace ODPTaxonomyDAL_JY
                                  a.ApplicationID.ToString().ToLower().Contains(param.search.ToLower()) ||
                                  a.PIProjectLeader.ToLower().Contains(param.search.ToLower()) ||
                                  a.ProjectTitle.ToLower().Contains(param.search.ToLower()) ||
+                                 a.ProjectNumber.ToLower().Contains(param.search.ToLower()) ||
                                  a.Activity.ToLower().Contains(param.search.ToLower()) ||
                                  a.Type.ToString().ToLower().Contains(param.search.ToLower()) ||
                                  a.FY.ToString().ToLower().Contains(param.search.ToLower())
