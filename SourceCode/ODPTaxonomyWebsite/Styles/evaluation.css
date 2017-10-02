@@ -34,6 +34,7 @@ div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px
 div#selectionsBox.hidden { display: none }
 div#selectionsBox { font-weight: bold; text-align: right; position: absolute; top: 70px; right: -205px; }
 input[type="checkbox"].hidecheckbox { display: none }
+table.childtable { margin: 0 0 0 -1px; }
 table.childtable > tbody > tr:nth-of-type(even) { background: rgba(245,245,245, 0.43) }
 table.dataTable thead th, table.dataTable thead td { position: relative; padding: 8px 10px; border-left: 1px solid #ccc; border-bottom: 1px solid #111; }
 .col_select, .col_openclose, .col_flags { width: 20px }
@@ -45,7 +46,11 @@ table.dataTable thead th, table.dataTable thead td { position: relative; padding
 .col_statusdate, .col_exportdate { width: 55px }
 .col_title { width: 195px; max-width: 195px; min-width: 195px; }
 .col_kappa { width: 20px }
-.col_projectnumber { width: 95px;}
+.col_projectnumber { width: 95px; overflow-wrap: break-word; }
+table.dataTable td:nth-child(5) {
+    /*overflow-wrap: break-word;*/
+    /*for firefox wrap of project number, targeting via class col_projectnumber. Not used. */
+}
 .col_fy { width: 23px; }
 .col_mechanism { width: 20px;}
 .col_type { width: 20px; }

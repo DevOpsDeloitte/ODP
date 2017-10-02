@@ -1415,7 +1415,7 @@ console.log('/Evaluation/Handlers/AbstractReview.ashx', dataObj);
                 },
                 { "data": "AbstractID", "class": "abstractid hide_column" },
                 { "data": "ApplicationID" },
-                { "data": "ProjectNumber" },
+                { "data": "ProjectNumber", "class": "col_projectnumber" },
                 { "data": "FY" },
                 { "data": "Type" },
                 { "data": "Activity" },
