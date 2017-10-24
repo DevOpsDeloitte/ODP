@@ -102,13 +102,6 @@ namespace ODPTaxonomyDAL_ST
 			return ((ISingleResult<Report_KappaDatapullingResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaAvg_DataDetail_ByQCWeeks_New")]
-		public ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult> Report_KappaAvg_DataDetail_ByQCWeeks_New([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MechanismType", DbType="VarChar(50)")] string mechanismType)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType, mechanismType);
-			return ((ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaAvg_ByQCWeeks_New")]
 		public ISingleResult<Report_KappaAvg_ByQCWeeks_NewResult> Report_KappaAvg_ByQCWeeks_New([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MechanismType", DbType="Int")] System.Nullable<int> mechanismType)
 		{
@@ -135,6 +128,13 @@ namespace ODPTaxonomyDAL_ST
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 			return ((ISingleResult<Report_AbstractSummary_MergeResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_KappaAvg_DataDetail_ByQCWeeks_New")]
+		public ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult> Report_KappaAvg_DataDetail_ByQCWeeks_New([global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCStartWeek", DbType="VarChar(100)")] string qCStartWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="QCEndWeek", DbType="VarChar(100)")] string qCEndWeek, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="KType", DbType="VarChar(10)")] string kType, [global::System.Data.Linq.Mapping.ParameterAttribute(Name="MechanismType", DbType="VarChar(1000)")] string mechanismType)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType, mechanismType);
+			return ((ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1217,266 +1217,6 @@ namespace ODPTaxonomyDAL_ST
 		}
 	}
 	
-	public partial class Report_KappaAvg_DataDetail_ByQCWeeks_NewResult
-	{
-		
-		private string _QC_week;
-		
-		private string _IQ_StartDate;
-		
-		private string _IQ_EndDate;
-		
-		private string _FY;
-		
-		private System.Nullable<int> _Type;
-		
-		private string _Mechanism;
-		
-		private System.Nullable<int> _Appl_ID;
-		
-		private string _PI_Name;
-		
-		private System.Nullable<decimal> _A1;
-		
-		private System.Nullable<decimal> _A2;
-		
-		private System.Nullable<decimal> _A3;
-		
-		private System.Nullable<decimal> _D;
-		
-		private System.Nullable<decimal> _E;
-		
-		private System.Nullable<decimal> _F;
-		
-		public Report_KappaAvg_DataDetail_ByQCWeeks_NewResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_week", DbType="NVarChar(20)")]
-		public string QC_week
-		{
-			get
-			{
-				return this._QC_week;
-			}
-			set
-			{
-				if ((this._QC_week != value))
-				{
-					this._QC_week = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_StartDate", DbType="NVarChar(50)")]
-		public string IQ_StartDate
-		{
-			get
-			{
-				return this._IQ_StartDate;
-			}
-			set
-			{
-				if ((this._IQ_StartDate != value))
-				{
-					this._IQ_StartDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_EndDate", DbType="NVarChar(50)")]
-		public string IQ_EndDate
-		{
-			get
-			{
-				return this._IQ_EndDate;
-			}
-			set
-			{
-				if ((this._IQ_EndDate != value))
-				{
-					this._IQ_EndDate = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
-		public string FY
-		{
-			get
-			{
-				return this._FY;
-			}
-			set
-			{
-				if ((this._FY != value))
-				{
-					this._FY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int")]
-		public System.Nullable<int> Type
-		{
-			get
-			{
-				return this._Type;
-			}
-			set
-			{
-				if ((this._Type != value))
-				{
-					this._Type = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mechanism", DbType="NVarChar(20)")]
-		public string Mechanism
-		{
-			get
-			{
-				return this._Mechanism;
-			}
-			set
-			{
-				if ((this._Mechanism != value))
-				{
-					this._Mechanism = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Appl_ID", DbType="Int")]
-		public System.Nullable<int> Appl_ID
-		{
-			get
-			{
-				return this._Appl_ID;
-			}
-			set
-			{
-				if ((this._Appl_ID != value))
-				{
-					this._Appl_ID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
-		public string PI_Name
-		{
-			get
-			{
-				return this._PI_Name;
-			}
-			set
-			{
-				if ((this._PI_Name != value))
-				{
-					this._PI_Name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> A1
-		{
-			get
-			{
-				return this._A1;
-			}
-			set
-			{
-				if ((this._A1 != value))
-				{
-					this._A1 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> A2
-		{
-			get
-			{
-				return this._A2;
-			}
-			set
-			{
-				if ((this._A2 != value))
-				{
-					this._A2 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> A3
-		{
-			get
-			{
-				return this._A3;
-			}
-			set
-			{
-				if ((this._A3 != value))
-				{
-					this._A3 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> D
-		{
-			get
-			{
-				return this._D;
-			}
-			set
-			{
-				if ((this._D != value))
-				{
-					this._D = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> E
-		{
-			get
-			{
-				return this._E;
-			}
-			set
-			{
-				if ((this._E != value))
-				{
-					this._E = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
-		public System.Nullable<decimal> F
-		{
-			get
-			{
-				return this._F;
-			}
-			set
-			{
-				if ((this._F != value))
-				{
-					this._F = value;
-				}
-			}
-		}
-	}
-	
 	public partial class Report_KappaAvg_ByQCWeeks_NewResult
 	{
 		
@@ -2314,6 +2054,266 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._u0025_of_abstracts_that_are_uncoded != value))
 				{
 					this._u0025_of_abstracts_that_are_uncoded = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Report_KappaAvg_DataDetail_ByQCWeeks_NewResult
+	{
+		
+		private string _QC_week;
+		
+		private string _IQ_StartDate;
+		
+		private string _IQ_EndDate;
+		
+		private string _FY;
+		
+		private System.Nullable<int> _Type;
+		
+		private string _Mechanism;
+		
+		private System.Nullable<int> _Appl_ID;
+		
+		private string _PI_Name;
+		
+		private System.Nullable<decimal> _A1;
+		
+		private System.Nullable<decimal> _A2;
+		
+		private System.Nullable<decimal> _A3;
+		
+		private System.Nullable<decimal> _D;
+		
+		private System.Nullable<decimal> _E;
+		
+		private System.Nullable<decimal> _F;
+		
+		public Report_KappaAvg_DataDetail_ByQCWeeks_NewResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_QC_week", DbType="NVarChar(20)")]
+		public string QC_week
+		{
+			get
+			{
+				return this._QC_week;
+			}
+			set
+			{
+				if ((this._QC_week != value))
+				{
+					this._QC_week = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_StartDate", DbType="NVarChar(50)")]
+		public string IQ_StartDate
+		{
+			get
+			{
+				return this._IQ_StartDate;
+			}
+			set
+			{
+				if ((this._IQ_StartDate != value))
+				{
+					this._IQ_StartDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IQ_EndDate", DbType="NVarChar(50)")]
+		public string IQ_EndDate
+		{
+			get
+			{
+				return this._IQ_EndDate;
+			}
+			set
+			{
+				if ((this._IQ_EndDate != value))
+				{
+					this._IQ_EndDate = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
+		public string FY
+		{
+			get
+			{
+				return this._FY;
+			}
+			set
+			{
+				if ((this._FY != value))
+				{
+					this._FY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="Int")]
+		public System.Nullable<int> Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this._Type = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Mechanism", DbType="NVarChar(20)")]
+		public string Mechanism
+		{
+			get
+			{
+				return this._Mechanism;
+			}
+			set
+			{
+				if ((this._Mechanism != value))
+				{
+					this._Mechanism = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Appl_ID", DbType="Int")]
+		public System.Nullable<int> Appl_ID
+		{
+			get
+			{
+				return this._Appl_ID;
+			}
+			set
+			{
+				if ((this._Appl_ID != value))
+				{
+					this._Appl_ID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PI_Name", DbType="NVarChar(255)")]
+		public string PI_Name
+		{
+			get
+			{
+				return this._PI_Name;
+			}
+			set
+			{
+				if ((this._PI_Name != value))
+				{
+					this._PI_Name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A1", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A1
+		{
+			get
+			{
+				return this._A1;
+			}
+			set
+			{
+				if ((this._A1 != value))
+				{
+					this._A1 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A2", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A2
+		{
+			get
+			{
+				return this._A2;
+			}
+			set
+			{
+				if ((this._A2 != value))
+				{
+					this._A2 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_A3", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> A3
+		{
+			get
+			{
+				return this._A3;
+			}
+			set
+			{
+				if ((this._A3 != value))
+				{
+					this._A3 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_D", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> D
+		{
+			get
+			{
+				return this._D;
+			}
+			set
+			{
+				if ((this._D != value))
+				{
+					this._D = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_E", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> E
+		{
+			get
+			{
+				return this._E;
+			}
+			set
+			{
+				if ((this._E != value))
+				{
+					this._E = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_F", DbType="Decimal(10,6)")]
+		public System.Nullable<decimal> F
+		{
+			get
+			{
+				return this._F;
+			}
+			set
+			{
+				if ((this._F != value))
+				{
+					this._F = value;
 				}
 			}
 		}

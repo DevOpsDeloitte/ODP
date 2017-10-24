@@ -81,28 +81,6 @@
       <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.Report_KappaAvg_DataDetail_ByQCWeeks_New" Method="Report_KappaAvg_DataDetail_ByQCWeeks_New">
-    <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
-    <Parameter Name="KType" Parameter="kType" Type="System.String" DbType="VarChar(10)" />
-    <Parameter Name="MechanismType" Parameter="mechanismType" Type="System.String" DbType="VarChar(50)" />
-    <ElementType Name="Report_KappaAvg_DataDetail_ByQCWeeks_NewResult">
-      <Column Name="QC_week" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="IQ_StartDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IQ_EndDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Mechanism" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Appl_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PI_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
-      <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
-      <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
-      <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
-      <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
-      <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
-      <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.Report_KappaAvg_ByQCWeeks_New" Method="Report_KappaAvg_ByQCWeeks_New">
     <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
     <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
@@ -167,6 +145,28 @@
       <Column Name="[u0025 of IQ coded abtracts coded by ODP]" Member="u0025_of_IQ_coded_abtracts_coded_by_ODP" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="[Total number of uncoded abstracts remaning]" Member="Total_number_of_uncoded_abstracts_remaning" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="[u0025 of abstracts that are uncoded]" Member="u0025_of_abstracts_that_are_uncoded" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.Report_KappaAvg_DataDetail_ByQCWeeks_New" Method="Report_KappaAvg_DataDetail_ByQCWeeks_New">
+    <Parameter Name="QCStartWeek" Parameter="qCStartWeek" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="QCEndWeek" Parameter="qCEndWeek" Type="System.String" DbType="VarChar(100)" />
+    <Parameter Name="KType" Parameter="kType" Type="System.String" DbType="VarChar(10)" />
+    <Parameter Name="MechanismType" Parameter="mechanismType" Type="System.String" DbType="VarChar(1000)" />
+    <ElementType Name="Report_KappaAvg_DataDetail_ByQCWeeks_NewResult">
+      <Column Name="QC_week" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="IQ_StartDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IQ_EndDate" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Mechanism" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="Appl_ID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PI_Name" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="A1" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A2" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="A3" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="D" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="E" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
+      <Column Name="F" Type="System.Decimal" DbType="Decimal(10,6)" CanBeNull="true" />
     </ElementType>
   </Function>
 </Database>
