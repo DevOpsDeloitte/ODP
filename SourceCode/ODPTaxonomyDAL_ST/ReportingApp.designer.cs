@@ -109,13 +109,6 @@ namespace ODPTaxonomyDAL_ST
 			return ((ISingleResult<Report_KappaAvg_ByQCWeeks_NewResult>)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_SelectionDatapulling")]
-		public ISingleResult<Report_SelectionDatapullingResult> Report_SelectionDatapulling([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FY", DbType="VarChar(20)")] string fY)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fY);
-			return ((ISingleResult<Report_SelectionDatapullingResult>)(result.ReturnValue));
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_AbstractSummary")]
 		public ISingleResult<Report_AbstractSummaryResult> Report_AbstractSummary()
 		{
@@ -135,6 +128,13 @@ namespace ODPTaxonomyDAL_ST
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), qCStartWeek, qCEndWeek, kType, mechanismType);
 			return ((ISingleResult<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult>)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.Report_SelectionDatapulling")]
+		public ISingleResult<Report_SelectionDatapullingResult> Report_SelectionDatapulling([global::System.Data.Linq.Mapping.ParameterAttribute(Name="FY", DbType="VarChar(20)")] string fY)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), fY);
+			return ((ISingleResult<Report_SelectionDatapullingResult>)(result.ReturnValue));
 		}
 	}
 	
@@ -1459,212 +1459,6 @@ namespace ODPTaxonomyDAL_ST
 		}
 	}
 	
-	public partial class Report_SelectionDatapullingResult
-	{
-		
-		private string _FY;
-		
-		private System.Nullable<int> _ApplicationID;
-		
-		private string _Category;
-		
-		private string _SubCategory;
-		
-		private string _ML_v1_3_prev_only_03_2017;
-		
-		private string _ML_v1_3_and_RCDC_prev_03_2017;
-		
-		private string _PIProjectLeader;
-		
-		private string _MainSection;
-		
-		private string _SubSection;
-		
-		private string _SectionName;
-		
-		private System.Nullable<short> _Final_Consensus;
-		
-		public Report_SelectionDatapullingResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
-		public string FY
-		{
-			get
-			{
-				return this._FY;
-			}
-			set
-			{
-				if ((this._FY != value))
-				{
-					this._FY = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
-		public System.Nullable<int> ApplicationID
-		{
-			get
-			{
-				return this._ApplicationID;
-			}
-			set
-			{
-				if ((this._ApplicationID != value))
-				{
-					this._ApplicationID = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="NVarChar(255)")]
-		public string Category
-		{
-			get
-			{
-				return this._Category;
-			}
-			set
-			{
-				if ((this._Category != value))
-				{
-					this._Category = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubCategory", DbType="NVarChar(255)")]
-		public string SubCategory
-		{
-			get
-			{
-				return this._SubCategory;
-			}
-			set
-			{
-				if ((this._SubCategory != value))
-				{
-					this._SubCategory = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ML_v1_3_prev_only_03_2017", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ML_v1_3_prev_only_03_2017
-		{
-			get
-			{
-				return this._ML_v1_3_prev_only_03_2017;
-			}
-			set
-			{
-				if ((this._ML_v1_3_prev_only_03_2017 != value))
-				{
-					this._ML_v1_3_prev_only_03_2017 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ML_v1_3_and_RCDC_prev_03_2017", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
-		public string ML_v1_3_and_RCDC_prev_03_2017
-		{
-			get
-			{
-				return this._ML_v1_3_and_RCDC_prev_03_2017;
-			}
-			set
-			{
-				if ((this._ML_v1_3_and_RCDC_prev_03_2017 != value))
-				{
-					this._ML_v1_3_and_RCDC_prev_03_2017 = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
-		public string PIProjectLeader
-		{
-			get
-			{
-				return this._PIProjectLeader;
-			}
-			set
-			{
-				if ((this._PIProjectLeader != value))
-				{
-					this._PIProjectLeader = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainSection", DbType="NVarChar(255)")]
-		public string MainSection
-		{
-			get
-			{
-				return this._MainSection;
-			}
-			set
-			{
-				if ((this._MainSection != value))
-				{
-					this._MainSection = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSection", DbType="NVarChar(255)")]
-		public string SubSection
-		{
-			get
-			{
-				return this._SubSection;
-			}
-			set
-			{
-				if ((this._SubSection != value))
-				{
-					this._SubSection = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionName", DbType="NVarChar(255)")]
-		public string SectionName
-		{
-			get
-			{
-				return this._SectionName;
-			}
-			set
-			{
-				if ((this._SectionName != value))
-				{
-					this._SectionName = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Final Consensus]", Storage="_Final_Consensus", DbType="SmallInt")]
-		public System.Nullable<short> Final_Consensus
-		{
-			get
-			{
-				return this._Final_Consensus;
-			}
-			set
-			{
-				if ((this._Final_Consensus != value))
-				{
-					this._Final_Consensus = value;
-				}
-			}
-		}
-	}
-	
 	public partial class Report_AbstractSummaryResult
 	{
 		
@@ -2314,6 +2108,230 @@ namespace ODPTaxonomyDAL_ST
 				if ((this._F != value))
 				{
 					this._F = value;
+				}
+			}
+		}
+	}
+	
+	public partial class Report_SelectionDatapullingResult
+	{
+		
+		private string _FY;
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _Category;
+		
+		private string _SubCategory;
+		
+		private string _ML_v1_3_prev_only_03_2017;
+		
+		private string _ML_v1_3_and_RCDC_prev_03_2017;
+		
+		private string _ML_v1_3_FY12toFY16_DataSet;
+		
+		private string _PIProjectLeader;
+		
+		private string _MainSection;
+		
+		private string _SubSection;
+		
+		private string _SectionName;
+		
+		private System.Nullable<short> _Final_Consensus;
+		
+		public Report_SelectionDatapullingResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_FY", DbType="NVarChar(20)")]
+		public string FY
+		{
+			get
+			{
+				return this._FY;
+			}
+			set
+			{
+				if ((this._FY != value))
+				{
+					this._FY = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ApplicationID", DbType="Int")]
+		public System.Nullable<int> ApplicationID
+		{
+			get
+			{
+				return this._ApplicationID;
+			}
+			set
+			{
+				if ((this._ApplicationID != value))
+				{
+					this._ApplicationID = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Category", DbType="NVarChar(255)")]
+		public string Category
+		{
+			get
+			{
+				return this._Category;
+			}
+			set
+			{
+				if ((this._Category != value))
+				{
+					this._Category = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubCategory", DbType="NVarChar(255)")]
+		public string SubCategory
+		{
+			get
+			{
+				return this._SubCategory;
+			}
+			set
+			{
+				if ((this._SubCategory != value))
+				{
+					this._SubCategory = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ML_v1_3_prev_only_03_2017", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ML_v1_3_prev_only_03_2017
+		{
+			get
+			{
+				return this._ML_v1_3_prev_only_03_2017;
+			}
+			set
+			{
+				if ((this._ML_v1_3_prev_only_03_2017 != value))
+				{
+					this._ML_v1_3_prev_only_03_2017 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ML_v1_3_and_RCDC_prev_03_2017", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ML_v1_3_and_RCDC_prev_03_2017
+		{
+			get
+			{
+				return this._ML_v1_3_and_RCDC_prev_03_2017;
+			}
+			set
+			{
+				if ((this._ML_v1_3_and_RCDC_prev_03_2017 != value))
+				{
+					this._ML_v1_3_and_RCDC_prev_03_2017 = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ML_v1_3_FY12toFY16_DataSet", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string ML_v1_3_FY12toFY16_DataSet
+		{
+			get
+			{
+				return this._ML_v1_3_FY12toFY16_DataSet;
+			}
+			set
+			{
+				if ((this._ML_v1_3_FY12toFY16_DataSet != value))
+				{
+					this._ML_v1_3_FY12toFY16_DataSet = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PIProjectLeader", DbType="NVarChar(255)")]
+		public string PIProjectLeader
+		{
+			get
+			{
+				return this._PIProjectLeader;
+			}
+			set
+			{
+				if ((this._PIProjectLeader != value))
+				{
+					this._PIProjectLeader = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MainSection", DbType="NVarChar(255)")]
+		public string MainSection
+		{
+			get
+			{
+				return this._MainSection;
+			}
+			set
+			{
+				if ((this._MainSection != value))
+				{
+					this._MainSection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSection", DbType="NVarChar(255)")]
+		public string SubSection
+		{
+			get
+			{
+				return this._SubSection;
+			}
+			set
+			{
+				if ((this._SubSection != value))
+				{
+					this._SubSection = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SectionName", DbType="NVarChar(255)")]
+		public string SectionName
+		{
+			get
+			{
+				return this._SectionName;
+			}
+			set
+			{
+				if ((this._SectionName != value))
+				{
+					this._SectionName = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[Final Consensus]", Storage="_Final_Consensus", DbType="SmallInt")]
+		public System.Nullable<short> Final_Consensus
+		{
+			get
+			{
+				return this._Final_Consensus;
+			}
+			set
+			{
+				if ((this._Final_Consensus != value))
+				{
+					this._Final_Consensus = value;
 				}
 			}
 		}
