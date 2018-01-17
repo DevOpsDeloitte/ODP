@@ -276,11 +276,19 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
     $scope.$on("disableboxes", function () {
         //console.log($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length-1]);
+        // Rule for F. Prevention Research Category
         if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked) {
             for (i = 1; i < $scope.mdata.preventioncategory.length - 1; i++) {
                 $scope.mdata.preventioncategory[i].resetBoxCC();
             }
         }
+        // Adding Rule for E. StudyDesign Purpose
+        if ($scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
+            for (i = 1; i < $scope.mdata.studydesignpurpose.length - 1; i++) {
+                $scope.mdata.studydesignpurpose[i].resetBoxCC();
+            }
+        }
+
 
     });
 
@@ -303,13 +311,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
             return;
         }
-        if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
-            console.log(" new rule :: form is valid :: ");
-            $scope.formIsValid = true;
-            $scope.disallowSave = false;
-            $scope.showSaveButton = true;
-            return;
-        }
+
+        //if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
+        //    console.log(" new rule :: form is valid :: ");
+        //    $scope.formIsValid = true;
+        //    $scope.disallowSave = false;
+        //    $scope.showSaveButton = true;
+        //    return;
+        //}
 
         // For Consensus Mode -- Insert Validate all boxes are dark green or transparent.
         var boxColors = true; // all green
@@ -384,7 +393,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         var studyfocuscol1 = studyfocuscol2 = studyfocuscol3 = entitiesstudiedBox = studysettingBox = populationfocusBox = studydesignpurposeBox = preventioncategoryBox = false;
         for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
-            //console.log(i);
             if ($scope.mdata.studyfocus[1][i].isChecked) {
                 studyfocuscol1 = true;
                 break;
@@ -417,6 +425,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         //        break;
         //    }
         //}
+
         entitiesstudiedBox = true; studysettingBox = true;
 
         for (i = 1; i < $scope.mdata.populationfocus.length; i++) {
@@ -438,8 +447,25 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
         }
 
+        if (studyfocuscol1 || studyfocuscol2 || studyfocuscol3 || populationfocusBox) {
+            //console.log("E7 / F6 only bypassed ");
+            // bypass E7 / F6 Only. As this will now be treated as a regular coding. Another category selection was made.
+
+        }
+        else {
+
+            // Do the E7 / F6 Rule
+            if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
+                //console.log(" new rule :: form is valid :: ");
+                $scope.formIsValid = true;
+                $scope.disallowSave = false;
+                $scope.showSaveButton = true;
+                return;
+            }
+        }
+
         if (studyfocuscol1 && studyfocuscol2 && studyfocuscol3 && entitiesstudiedBox && studysettingBox && populationfocusBox && studydesignpurposeBox && preventioncategoryBox && boxColors) {
-            console.log(" form is valid :: ");
+            //console.log(" form is valid :: ");
             $scope.formIsValid = true;
             $scope.disallowSave = false;
             $scope.showSaveButton = true;
