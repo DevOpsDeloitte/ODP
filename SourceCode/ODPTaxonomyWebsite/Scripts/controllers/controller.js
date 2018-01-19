@@ -51,6 +51,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
 
         $scope.disallowSave = true;
+        $scope.saveButtonClicked = false;
 
         if ($scope.mdata.showconsensusbutton) {
             $scope.showConsensusButton = true;
@@ -455,7 +456,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         else {
 
             // Do the E7 / F6 Rule
-            if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
+            if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked && boxColors) {
                 //console.log(" new rule :: form is valid :: ");
                 $scope.formIsValid = true;
                 $scope.disallowSave = false;
@@ -564,6 +565,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         //var formArray = $("form").serialize();
         //var fa = JSON.stringify(formArray);
         $scope.showSaveButton = false; // for concurrency issue.
+
+        $scope.showResetButton = false;
+        $scope.mdata.displaymode = "View";
+        $rootScope.displaymode = "View";
+
         $http({
             method: 'POST',
             url: 'Handlers/Evaluation.ashx',
@@ -577,6 +583,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                var data = dataRecieved.data;
                if (!data.success) {
                    $scope.showSaveButton = true;
+
+                   $scope.showResetButton = true;
+                   $scope.mdata.displaymode = "Insert";
+                   $rootScope.displaymode = "Insert";
+
                    // Logic for Supervisor User Auth Failure.
                    if (data.supervisorauthfailed != undefined && data.supervisorauthfailed) {
                        $scope.errormessagesdisplay = "Supervisor authentication Failed!";
@@ -607,22 +618,15 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                    // Put the form in View Mode::
                    $scope.showSaveButton = false;
                    $scope.mdata.displaymode = "View";
-                   $scope.mdata.newsubmissionID = data.submissionID;
                    $rootScope.displaymode = "View";
+
+                   $scope.mdata.newsubmissionID = data.submissionID;
                    $scope.showResetButton = false;
+
                    if (data.showConsensusButton) $scope.showConsensusButton = true;
                    if (data.showComparisonButton) $scope.showComparisonButton = true;
 
-                   //$scope.$apply();
-                   //                   $scope.$apply(function () {
-
-                   //                       $scope.mdata.displaymode = "View";
-                   //                   });
-                   //$scope.message = data.message;
-
-
-                   //console.log(" here assignment complete :: ");
-                   //$scope.$apply();
+                   
                }
            });
 
@@ -646,8 +650,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         alertify.confirm("Please confirm save?", function (e) {
             if (e) {
-                //window.location.href = "revise.html";
-                //util.save();
                 window.scrollTo(0, 0);
                 $scope.submitForm();
             } else {
