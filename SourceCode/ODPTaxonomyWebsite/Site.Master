@@ -36,6 +36,13 @@
         window.FIREBASE_CONFIG = '<%= this.firebaseConfig %>';
         window.CONTRACTOR_NAME = ' <%= System.Configuration.ConfigurationManager.AppSettings["contractorName"] %>';
         window.Role = '<%= this.roleDisplay %>'
+        var fconfig = {
+            // apiKey: "AIzaSyAdJz5yry23tXmin9LOALwdbrgbGbyc_Nc",
+            // authDomain: "intense-fire-1108.firebaseapp.com",
+            databaseURL: '<%= this.firebaseConfig %>',
+            // storageBucket: "intense-fire-1108.appspot.com",
+            // messagingSenderId: "101185189193"
+        };
     </script>
     <script src="/Scripts/jquery.js" type="text/javascript"></script>
 </head>
@@ -93,7 +100,8 @@
                         </div>                                    
                        
                         <div runat="server" visible="false" id="pnl_odpSup"><div class="nav-role">Role: ODP Supervisor</div>
-                            <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" /></a>
+                            <%--<asp:LinkButton runat="server" ID="btn_category" Text="Category Abstract Selection" OnClick="btn_category_Click"/>--%>
+                            <asp:LinkButton OnClick="btn_manageTeams_odpSup_Click" runat="server" ID="btn_manageTeams_odpSup" Text="Manage Teams" />
                             <asp:LinkButton runat="server" ID="btn_viewAbstractList_odpSup" Text="View Abstract List" OnClick="btn_viewAbstractList_odpSup_Click" />
                             <asp:LinkButton runat="server" ID="btn_KappaLink" Text="Reports" OnClick="btn_ReportLink_odpSup_Click" />
                         </div>

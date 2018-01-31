@@ -13,20 +13,39 @@
                       method: 'GET',
                       url: root_url + '/ReportingApp/handlers/ReportService.ashx?type=' + 'dates'
                   })
-                    .success(function (response) {
+                    .then(function (response) {
                         //if (response.Success == true) {
                             deferred.resolve({
-                                data: response
+                                data: response.data
                             });
                         //}
-                    }).error(function (msg, code) {
+                    }).catch(function (msg, code) {
                         deferred.reject({ msg: msg, code: code });
                         $log.error(msg, code);
                     });
                   return deferred.promise;
               },
 
-              runReport: function (start, end, ktype) {
+              getMechanismTypes: function () {
+                  var deferred = $q.defer();
+                  $http({
+                      method: 'GET',
+                      url: root_url + '/ReportingApp/handlers/ReportService.ashx?type=' + 'mechanismtypes'
+                  })
+                    .then(function (response) {
+                        //if (response.Success == true) {
+                        deferred.resolve({
+                            data: response.data
+                        });
+                        //}
+                    }).catch(function (msg, code) {
+                        deferred.reject({ msg: msg, code: code });
+                        $log.error(msg, code);
+                    });
+                  return deferred.promise;
+              },
+
+              runReport: function (start, end, ktype, mechanisms) {
                   var deferred = $q.defer();
                   var fileName = "test.csv";
                   //http://stackoverflow.com/questions/20904151/download-text-csv-content-as-files-from-server-in-angular
@@ -41,7 +60,7 @@
                       angular.element(document.body).append(anchor); // Attach to document for FireFox
 
                       anchor.attr({
-                          href: root_url + '/ReportingApp/handlers/ReportService.ashx?type=' + 'run' + '&start=' + start + '&end=' + end + '&ktype=' + ktype
+                          href: root_url + '/ReportingApp/handlers/ReportService.ashx?type=' + 'run' + '&start=' + start + '&end=' + end + '&ktype=' + ktype + '&mechanisms='+mechanisms
                           //target: '_blank'
                           
                       })[0].click();
@@ -50,22 +69,6 @@
                                });
                       //anchor.remove();
                   
-
-
-                  //$http({
-                  //    method: 'GET',
-                  //    url: root_url + '/ReportingApp/handlers/ReportService.ashx?type=' + 'run' + '&start=' + start + '&end=' + end + '&ktype=' + ktype
-                  //})
-                  //  .success(function (response) {
-                  //      //if (response.Success == true) {
-                  //      deferred.resolve({
-                  //          data: response
-                  //      });
-                  //      //}
-                  //  }).error(function (msg, code) {
-                  //      deferred.reject({ msg: msg, code: code });
-                  //      $log.error(msg, code);
-                  //  });
                   return deferred.promise;
               },
 

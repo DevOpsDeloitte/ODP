@@ -22,7 +22,11 @@
         </div>
 
         <div id="basicOnly" class="three columns">
-            <input type="checkbox" id="cbBasicOnly"><label class="bold">Basic Only</label>
+            <input type="checkbox" class="hide_all" id="cbBasicOnly"><label class="bold hide_all">Basic Only</label>
+            <br />
+            <input type="radio" name="basicgroup" value="ExcludeBasic" id="IExcludeBasic" checked><label for="IExcludeBasic" class="bold">Exclude Basic</label><br />
+            <input type="radio" name="basicgroup" value="IncludeBasic" id="IIncludeBasic"><label for="IIncludeBasic" class="bold">Include Basic</label><br />
+            <input type="radio" name="basicgroup" value="OnlyBasic" id="IOnlyBasic"><label for="IOnlyBasic" class="bold">Only Basic</label>
         </div>
 
     </div>
@@ -81,6 +85,13 @@
                     <th class="col_openclose"><input type="checkbox" name="allBox" id="allBox" value="expandall" class="cboxes" style="display: none;" /><label for="allBox"></label></th>
                     <th class="col_abstractid">Abstract ID</th>
                     <th class="col_applicationid">Application ID</th>
+
+                    <th class="col_projectnumber">Project Number</th>
+
+                    <th class="col_fy">FY</th>
+                    <th class="col_type">Type</th>
+                    <th class="col_mechanism">Mech</th>
+
                     <th class="col_statusdate">Status Date</th>
                     <th class="col_piname">PI Name</th>
                     <th class="col_title">Title</th>

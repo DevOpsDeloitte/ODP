@@ -26,6 +26,7 @@ namespace ODPTaxonomyWebsite.Evaluation
         public string populationFocus = string.Empty;
         public string studyDesignPurpose = string.Empty;
         public string preventionCategory = string.Empty;
+        public string appendix = string.Empty;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -41,6 +42,7 @@ namespace ODPTaxonomyWebsite.Evaluation
             populationFocus = RenderCategory("D_PopulationFocus");
             studyDesignPurpose = RenderCategory("E_StudyDesignPurpose");
             preventionCategory = RenderCategory("F_PreventionCategory");
+            appendix = RenderAppendix();
 
         }
 
@@ -157,6 +159,32 @@ namespace ODPTaxonomyWebsite.Evaluation
                 row.AppendLine("<div class=\"topicitem\">");
 
                 row.AppendLine("<div class=\"subtitle\"><a name=\"" + topic.Title.ToLower().Replace(" ","") + "" + "" + "\"> " + topic.Title + "</a></div>");
+
+                row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
+                row.AppendLine("</div>");
+                finalStr.Append(row);
+                //if (count > 0) break;
+                count++;
+            }
+
+            return finalStr.ToString();
+        }
+
+        private string RenderAppendix()
+        {
+
+            var db = DBData.GetDataContext();
+            var topics = db.Protocols.Where(p => p.LookUpTable == "Appendix").OrderBy(p => p.LookUpID).Select(p => p).ToList();
+            StringBuilder finalStr = new StringBuilder();
+            //Response.Write(topics.Count);
+            var count = 1;
+            foreach (var topic in topics)
+            {
+
+                StringBuilder row = new StringBuilder();
+                row.AppendLine("<div class=\"topicitem\">");
+
+                row.AppendLine("<div class=\"subtitle\"><a name=\"" + topic.Title.ToLower().Replace(" ", "") + "" + "" + "\"> " + topic.Title + "</a></div>");
 
                 row.AppendLine("<div class=\"content\">" + topic.Protocol1 + "</div>");
                 row.AppendLine("</div>");

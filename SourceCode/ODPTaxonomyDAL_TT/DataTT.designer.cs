@@ -22,7 +22,7 @@ namespace ODPTaxonomyDAL_TT
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_Dev")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="ODP_Taxonomy_DEV")]
 	public partial class DataDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -48,9 +48,6 @@ namespace ODPTaxonomyDAL_TT
     partial void Inserttbl_aspnet_Membership(tbl_aspnet_Membership instance);
     partial void Updatetbl_aspnet_Membership(tbl_aspnet_Membership instance);
     partial void Deletetbl_aspnet_Membership(tbl_aspnet_Membership instance);
-    partial void Inserttbl_Team(tbl_Team instance);
-    partial void Updatetbl_Team(tbl_Team instance);
-    partial void Deletetbl_Team(tbl_Team instance);
     partial void Inserttbl_Evaluation(tbl_Evaluation instance);
     partial void Updatetbl_Evaluation(tbl_Evaluation instance);
     partial void Deletetbl_Evaluation(tbl_Evaluation instance);
@@ -78,13 +75,22 @@ namespace ODPTaxonomyDAL_TT
     partial void Inserttbl_aspnet_Role(tbl_aspnet_Role instance);
     partial void Updatetbl_aspnet_Role(tbl_aspnet_Role instance);
     partial void Deletetbl_aspnet_Role(tbl_aspnet_Role instance);
+    partial void Inserttbl_Abstract_Text(tbl_Abstract_Text instance);
+    partial void Updatetbl_Abstract_Text(tbl_Abstract_Text instance);
+    partial void Deletetbl_Abstract_Text(tbl_Abstract_Text instance);
     partial void Inserttbl_Abstract(tbl_Abstract instance);
     partial void Updatetbl_Abstract(tbl_Abstract instance);
     partial void Deletetbl_Abstract(tbl_Abstract instance);
+    partial void InsertTeamLabel(TeamLabel instance);
+    partial void UpdateTeamLabel(TeamLabel instance);
+    partial void DeleteTeamLabel(TeamLabel instance);
+    partial void Inserttbl_Team(tbl_Team instance);
+    partial void Updatetbl_Team(tbl_Team instance);
+    partial void Deletetbl_Team(tbl_Team instance);
     #endregion
 		
 		public DataDataContext() : 
-				base(global::ODPTaxonomyDAL_TT.Properties.Settings.Default.ODP_Taxonomy_DevConnectionString3, mappingSource)
+				base(global::ODPTaxonomyDAL_TT.Properties.Settings.Default.ODP_Taxonomy_DEVConnectionString5, mappingSource)
 		{
 			OnCreated();
 		}
@@ -161,14 +167,6 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		public System.Data.Linq.Table<tbl_Team> tbl_Teams
-		{
-			get
-			{
-				return this.GetTable<tbl_Team>();
-			}
-		}
-		
 		public System.Data.Linq.Table<tbl_Evaluation> tbl_Evaluations
 		{
 			get
@@ -241,11 +239,35 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
+		public System.Data.Linq.Table<tbl_Abstract_Text> tbl_Abstract_Texts
+		{
+			get
+			{
+				return this.GetTable<tbl_Abstract_Text>();
+			}
+		}
+		
 		public System.Data.Linq.Table<tbl_Abstract> tbl_Abstracts
 		{
 			get
 			{
 				return this.GetTable<tbl_Abstract>();
+			}
+		}
+		
+		public System.Data.Linq.Table<TeamLabel> TeamLabels
+		{
+			get
+			{
+				return this.GetTable<TeamLabel>();
+			}
+		}
+		
+		public System.Data.Linq.Table<tbl_Team> tbl_Teams
+		{
+			get
+			{
+				return this.GetTable<tbl_Team>();
 			}
 		}
 		
@@ -911,7 +933,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_tbl_Team", Storage="_tbl_Teams", ThisKey="TeamTypeID", OtherKey="TeamTypeID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_Team", Storage="_tbl_Teams", ThisKey="TeamTypeID", OtherKey="TeamTypeID")]
 		public EntitySet<tbl_Team> tbl_Teams
 		{
 			get
@@ -1029,7 +1051,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_tbl_TeamUser", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_tbl_TeamUser", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
 		public tbl_Team tbl_Team
 		{
 			get
@@ -1837,333 +1859,6 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Team")]
-	public partial class tbl_Team : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _TeamID;
-		
-		private string _TeamCode;
-		
-		private System.Nullable<int> _TeamTypeID;
-		
-		private int _StatusID;
-		
-		private System.Nullable<System.DateTime> _CreatedDateTime;
-		
-		private System.Nullable<System.Guid> _Createdby;
-		
-		private System.Nullable<System.Guid> _UpdatedBy;
-		
-		private System.Nullable<System.DateTime> _UpdatedDateTime;
-		
-		private EntitySet<tbl_TeamUser> _tbl_TeamUsers;
-		
-		private EntitySet<tbl_Evaluation> _tbl_Evaluations;
-		
-		private EntityRef<tbl_TeamType> _tbl_TeamType;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnTeamIDChanging(int value);
-    partial void OnTeamIDChanged();
-    partial void OnTeamCodeChanging(string value);
-    partial void OnTeamCodeChanged();
-    partial void OnTeamTypeIDChanging(System.Nullable<int> value);
-    partial void OnTeamTypeIDChanged();
-    partial void OnStatusIDChanging(int value);
-    partial void OnStatusIDChanged();
-    partial void OnCreatedDateTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnCreatedDateTimeChanged();
-    partial void OnCreatedbyChanging(System.Nullable<System.Guid> value);
-    partial void OnCreatedbyChanged();
-    partial void OnUpdatedByChanging(System.Nullable<System.Guid> value);
-    partial void OnUpdatedByChanged();
-    partial void OnUpdatedDateTimeChanging(System.Nullable<System.DateTime> value);
-    partial void OnUpdatedDateTimeChanged();
-    #endregion
-		
-		public tbl_Team()
-		{
-			this._tbl_TeamUsers = new EntitySet<tbl_TeamUser>(new Action<tbl_TeamUser>(this.attach_tbl_TeamUsers), new Action<tbl_TeamUser>(this.detach_tbl_TeamUsers));
-			this._tbl_Evaluations = new EntitySet<tbl_Evaluation>(new Action<tbl_Evaluation>(this.attach_tbl_Evaluations), new Action<tbl_Evaluation>(this.detach_tbl_Evaluations));
-			this._tbl_TeamType = default(EntityRef<tbl_TeamType>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int TeamID
-		{
-			get
-			{
-				return this._TeamID;
-			}
-			set
-			{
-				if ((this._TeamID != value))
-				{
-					this.OnTeamIDChanging(value);
-					this.SendPropertyChanging();
-					this._TeamID = value;
-					this.SendPropertyChanged("TeamID");
-					this.OnTeamIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamCode", DbType="NVarChar(50)")]
-		public string TeamCode
-		{
-			get
-			{
-				return this._TeamCode;
-			}
-			set
-			{
-				if ((this._TeamCode != value))
-				{
-					this.OnTeamCodeChanging(value);
-					this.SendPropertyChanging();
-					this._TeamCode = value;
-					this.SendPropertyChanged("TeamCode");
-					this.OnTeamCodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamTypeID", DbType="Int")]
-		public System.Nullable<int> TeamTypeID
-		{
-			get
-			{
-				return this._TeamTypeID;
-			}
-			set
-			{
-				if ((this._TeamTypeID != value))
-				{
-					if (this._tbl_TeamType.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnTeamTypeIDChanging(value);
-					this.SendPropertyChanging();
-					this._TeamTypeID = value;
-					this.SendPropertyChanged("TeamTypeID");
-					this.OnTeamTypeIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int NOT NULL")]
-		public int StatusID
-		{
-			get
-			{
-				return this._StatusID;
-			}
-			set
-			{
-				if ((this._StatusID != value))
-				{
-					this.OnStatusIDChanging(value);
-					this.SendPropertyChanging();
-					this._StatusID = value;
-					this.SendPropertyChanged("StatusID");
-					this.OnStatusIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDateTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> CreatedDateTime
-		{
-			get
-			{
-				return this._CreatedDateTime;
-			}
-			set
-			{
-				if ((this._CreatedDateTime != value))
-				{
-					this.OnCreatedDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDateTime = value;
-					this.SendPropertyChanged("CreatedDateTime");
-					this.OnCreatedDateTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Createdby", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> Createdby
-		{
-			get
-			{
-				return this._Createdby;
-			}
-			set
-			{
-				if ((this._Createdby != value))
-				{
-					this.OnCreatedbyChanging(value);
-					this.SendPropertyChanging();
-					this._Createdby = value;
-					this.SendPropertyChanged("Createdby");
-					this.OnCreatedbyChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedBy", DbType="UniqueIdentifier")]
-		public System.Nullable<System.Guid> UpdatedBy
-		{
-			get
-			{
-				return this._UpdatedBy;
-			}
-			set
-			{
-				if ((this._UpdatedBy != value))
-				{
-					this.OnUpdatedByChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedBy = value;
-					this.SendPropertyChanged("UpdatedBy");
-					this.OnUpdatedByChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedDateTime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> UpdatedDateTime
-		{
-			get
-			{
-				return this._UpdatedDateTime;
-			}
-			set
-			{
-				if ((this._UpdatedDateTime != value))
-				{
-					this.OnUpdatedDateTimeChanging(value);
-					this.SendPropertyChanging();
-					this._UpdatedDateTime = value;
-					this.SendPropertyChanged("UpdatedDateTime");
-					this.OnUpdatedDateTimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_tbl_TeamUser", Storage="_tbl_TeamUsers", ThisKey="TeamID", OtherKey="TeamID")]
-		public EntitySet<tbl_TeamUser> tbl_TeamUsers
-		{
-			get
-			{
-				return this._tbl_TeamUsers;
-			}
-			set
-			{
-				this._tbl_TeamUsers.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_tbl_Evaluation", Storage="_tbl_Evaluations", ThisKey="TeamID", OtherKey="TeamID")]
-		public EntitySet<tbl_Evaluation> tbl_Evaluations
-		{
-			get
-			{
-				return this._tbl_Evaluations;
-			}
-			set
-			{
-				this._tbl_Evaluations.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_tbl_Team", Storage="_tbl_TeamType", ThisKey="TeamTypeID", OtherKey="TeamTypeID", IsForeignKey=true)]
-		public tbl_TeamType tbl_TeamType
-		{
-			get
-			{
-				return this._tbl_TeamType.Entity;
-			}
-			set
-			{
-				tbl_TeamType previousValue = this._tbl_TeamType.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_TeamType.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_TeamType.Entity = null;
-						previousValue.tbl_Teams.Remove(this);
-					}
-					this._tbl_TeamType.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Teams.Add(this);
-						this._TeamTypeID = value.TeamTypeID;
-					}
-					else
-					{
-						this._TeamTypeID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_TeamType");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbl_TeamUsers(tbl_TeamUser entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Team = this;
-		}
-		
-		private void detach_tbl_TeamUsers(tbl_TeamUser entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Team = null;
-		}
-		
-		private void attach_tbl_Evaluations(tbl_Evaluation entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Team = this;
-		}
-		
-		private void detach_tbl_Evaluations(tbl_Evaluation entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbl_Team = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Evaluation")]
 	public partial class tbl_Evaluation : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -2200,13 +1895,13 @@ namespace ODPTaxonomyDAL_TT
 		
 		private EntitySet<tbL_Submission> _tbl_Submissions;
 		
-		private EntityRef<tbl_Team> _tbl_Team;
-		
 		private EntityRef<tbl_EvaluationType> _tbl_EvaluationType;
 		
 		private EntityRef<tbl_Abstract> _Abstract;
 		
 		private EntityRef<tbl_Abstract> _tbl_Abstract;
+		
+		private EntityRef<tbl_Team> _tbl_Team;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -2242,10 +1937,10 @@ namespace ODPTaxonomyDAL_TT
 			this._AbstractStatusChangeHistories = new EntitySet<tbl_AbstractStatusChangeHistory>(new Action<tbl_AbstractStatusChangeHistory>(this.attach_AbstractStatusChangeHistories), new Action<tbl_AbstractStatusChangeHistory>(this.detach_AbstractStatusChangeHistories));
 			this._tbl_AbstractStatusChangeHistories = new EntitySet<tbl_AbstractStatusChangeHistory>(new Action<tbl_AbstractStatusChangeHistory>(this.attach_tbl_AbstractStatusChangeHistories), new Action<tbl_AbstractStatusChangeHistory>(this.detach_tbl_AbstractStatusChangeHistories));
 			this._tbl_Submissions = new EntitySet<tbL_Submission>(new Action<tbL_Submission>(this.attach_tbl_Submissions), new Action<tbL_Submission>(this.detach_tbl_Submissions));
-			this._tbl_Team = default(EntityRef<tbl_Team>);
 			this._tbl_EvaluationType = default(EntityRef<tbl_EvaluationType>);
 			this._Abstract = default(EntityRef<tbl_Abstract>);
 			this._tbl_Abstract = default(EntityRef<tbl_Abstract>);
+			this._tbl_Team = default(EntityRef<tbl_Team>);
 			OnCreated();
 		}
 		
@@ -2533,40 +2228,6 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Team_tbl_Evaluation", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
-		public tbl_Team tbl_Team
-		{
-			get
-			{
-				return this._tbl_Team.Entity;
-			}
-			set
-			{
-				tbl_Team previousValue = this._tbl_Team.Entity;
-				if (((previousValue != value) 
-							|| (this._tbl_Team.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbl_Team.Entity = null;
-						previousValue.tbl_Evaluations.Remove(this);
-					}
-					this._tbl_Team.Entity = value;
-					if ((value != null))
-					{
-						value.tbl_Evaluations.Add(this);
-						this._TeamID = value.TeamID;
-					}
-					else
-					{
-						this._TeamID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("tbl_Team");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_EvaluationType_tbl_Evaluation", Storage="_tbl_EvaluationType", ThisKey="EvaluationTypeId", OtherKey="EvaluationTypeId", IsForeignKey=true)]
 		public tbl_EvaluationType tbl_EvaluationType
 		{
@@ -2601,7 +2262,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_Evaluation", Storage="_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Evaluation", Storage="_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
 		public tbl_Abstract Abstract
 		{
 			get
@@ -2635,7 +2296,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_Evaluation1", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Evaluation1", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
 		public tbl_Abstract tbl_Abstract
 		{
 			get
@@ -2665,6 +2326,40 @@ namespace ODPTaxonomyDAL_TT
 						this._AbstractID = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("tbl_Abstract");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_tbl_Evaluation", Storage="_tbl_Team", ThisKey="TeamID", OtherKey="TeamID", IsForeignKey=true)]
+		public tbl_Team tbl_Team
+		{
+			get
+			{
+				return this._tbl_Team.Entity;
+			}
+			set
+			{
+				tbl_Team previousValue = this._tbl_Team.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Team.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Team.Entity = null;
+						previousValue.tbl_Evaluations.Remove(this);
+					}
+					this._tbl_Team.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Evaluations.Add(this);
+						this._TeamID = value.TeamID;
+					}
+					else
+					{
+						this._TeamID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_Team");
 				}
 			}
 		}
@@ -3386,7 +3081,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_AbstractStatusChangeHistory", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_AbstractStatusChangeHistory", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
 		public tbl_Abstract tbl_Abstract
 		{
 			get
@@ -4636,61 +4331,25 @@ namespace ODPTaxonomyDAL_TT
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Abstract")]
-	public partial class tbl_Abstract : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Abstract_Text")]
+	public partial class tbl_Abstract_Text : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _AbstractID;
 		
-		private string _AdministeringIC;
-		
-		private string _Abstract1;
+		private string _Abstract;
 		
 		private string _AbstractDescPart;
-		
-		private string _AbstractPublicHeathPart;
 		
 		private string _AbstractNIHPart;
 		
 		private string _AbstractProjTermPart;
 		
-		private string _ProjectTitle;
+		private string _AbstractPublicHeathPart;
 		
-		private System.Nullable<int> _ApplicationID;
-		
-		private string _Activity;
-		
-		private string _ProjectNumber;
-		
-		private System.Nullable<int> _Type;
-		
-		private string _IC;
-		
-		private System.Nullable<int> _SerialNumber;
-		
-		private System.Nullable<int> _SupportYear;
-		
-		private string _Suffix;
-		
-		private string _PIProjectLeader;
-		
-		private string _FY;
-		
-		private string _ChrApplicationID;
-		
-		private System.Nullable<char> _NoPreventionFlag;
-		
-		private string _CodingType;
-		
-		private System.Nullable<System.DateTime> _LastExportDate;
-		
-		private EntitySet<tbl_Evaluation> _tbl_Evaluations;
-		
-		private EntitySet<tbl_Evaluation> _tbl_Evaluations1;
-		
-		private EntitySet<tbl_AbstractStatusChangeHistory> _tbl_AbstractStatusChangeHistories;
+		private EntityRef<tbl_Abstract> _tbl_Abstract;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -4698,59 +4357,25 @@ namespace ODPTaxonomyDAL_TT
     partial void OnCreated();
     partial void OnAbstractIDChanging(int value);
     partial void OnAbstractIDChanged();
-    partial void OnAdministeringICChanging(string value);
-    partial void OnAdministeringICChanged();
-    partial void OnAbstract1Changing(string value);
-    partial void OnAbstract1Changed();
+    partial void OnAbstractChanging(string value);
+    partial void OnAbstractChanged();
     partial void OnAbstractDescPartChanging(string value);
     partial void OnAbstractDescPartChanged();
-    partial void OnAbstractPublicHeathPartChanging(string value);
-    partial void OnAbstractPublicHeathPartChanged();
     partial void OnAbstractNIHPartChanging(string value);
     partial void OnAbstractNIHPartChanged();
     partial void OnAbstractProjTermPartChanging(string value);
     partial void OnAbstractProjTermPartChanged();
-    partial void OnProjectTitleChanging(string value);
-    partial void OnProjectTitleChanged();
-    partial void OnApplicationIDChanging(System.Nullable<int> value);
-    partial void OnApplicationIDChanged();
-    partial void OnActivityChanging(string value);
-    partial void OnActivityChanged();
-    partial void OnProjectNumberChanging(string value);
-    partial void OnProjectNumberChanged();
-    partial void OnTypeChanging(System.Nullable<int> value);
-    partial void OnTypeChanged();
-    partial void OnICChanging(string value);
-    partial void OnICChanged();
-    partial void OnSerialNumberChanging(System.Nullable<int> value);
-    partial void OnSerialNumberChanged();
-    partial void OnSupportYearChanging(System.Nullable<int> value);
-    partial void OnSupportYearChanged();
-    partial void OnSuffixChanging(string value);
-    partial void OnSuffixChanged();
-    partial void OnPIProjectLeaderChanging(string value);
-    partial void OnPIProjectLeaderChanged();
-    partial void OnFYChanging(string value);
-    partial void OnFYChanged();
-    partial void OnChrApplicationIDChanging(string value);
-    partial void OnChrApplicationIDChanged();
-    partial void OnNoPreventionFlagChanging(System.Nullable<char> value);
-    partial void OnNoPreventionFlagChanged();
-    partial void OnCodingTypeChanging(string value);
-    partial void OnCodingTypeChanged();
-    partial void OnLastExportDateChanging(System.Nullable<System.DateTime> value);
-    partial void OnLastExportDateChanged();
+    partial void OnAbstractPublicHeathPartChanging(string value);
+    partial void OnAbstractPublicHeathPartChanged();
     #endregion
 		
-		public tbl_Abstract()
+		public tbl_Abstract_Text()
 		{
-			this._tbl_Evaluations = new EntitySet<tbl_Evaluation>(new Action<tbl_Evaluation>(this.attach_tbl_Evaluations), new Action<tbl_Evaluation>(this.detach_tbl_Evaluations));
-			this._tbl_Evaluations1 = new EntitySet<tbl_Evaluation>(new Action<tbl_Evaluation>(this.attach_tbl_Evaluations1), new Action<tbl_Evaluation>(this.detach_tbl_Evaluations1));
-			this._tbl_AbstractStatusChangeHistories = new EntitySet<tbl_AbstractStatusChangeHistory>(new Action<tbl_AbstractStatusChangeHistory>(this.attach_tbl_AbstractStatusChangeHistories), new Action<tbl_AbstractStatusChangeHistory>(this.detach_tbl_AbstractStatusChangeHistories));
+			this._tbl_Abstract = default(EntityRef<tbl_Abstract>);
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int AbstractID
 		{
 			get
@@ -4761,6 +4386,10 @@ namespace ODPTaxonomyDAL_TT
 			{
 				if ((this._AbstractID != value))
 				{
+					if (this._tbl_Abstract.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
 					this.OnAbstractIDChanging(value);
 					this.SendPropertyChanging();
 					this._AbstractID = value;
@@ -4770,42 +4399,22 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdministeringIC", DbType="NVarChar(20)")]
-		public string AdministeringIC
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Abstract", DbType="NVarChar(MAX)")]
+		public string Abstract
 		{
 			get
 			{
-				return this._AdministeringIC;
+				return this._Abstract;
 			}
 			set
 			{
-				if ((this._AdministeringIC != value))
+				if ((this._Abstract != value))
 				{
-					this.OnAdministeringICChanging(value);
+					this.OnAbstractChanging(value);
 					this.SendPropertyChanging();
-					this._AdministeringIC = value;
-					this.SendPropertyChanged("AdministeringIC");
-					this.OnAdministeringICChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Abstract", Storage="_Abstract1", DbType="NVarChar(MAX)")]
-		public string Abstract1
-		{
-			get
-			{
-				return this._Abstract1;
-			}
-			set
-			{
-				if ((this._Abstract1 != value))
-				{
-					this.OnAbstract1Changing(value);
-					this.SendPropertyChanging();
-					this._Abstract1 = value;
-					this.SendPropertyChanged("Abstract1");
-					this.OnAbstract1Changed();
+					this._Abstract = value;
+					this.SendPropertyChanged("Abstract");
+					this.OnAbstractChanged();
 				}
 			}
 		}
@@ -4826,26 +4435,6 @@ namespace ODPTaxonomyDAL_TT
 					this._AbstractDescPart = value;
 					this.SendPropertyChanged("AbstractDescPart");
 					this.OnAbstractDescPartChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractPublicHeathPart", DbType="NVarChar(MAX)")]
-		public string AbstractPublicHeathPart
-		{
-			get
-			{
-				return this._AbstractPublicHeathPart;
-			}
-			set
-			{
-				if ((this._AbstractPublicHeathPart != value))
-				{
-					this.OnAbstractPublicHeathPartChanging(value);
-					this.SendPropertyChanging();
-					this._AbstractPublicHeathPart = value;
-					this.SendPropertyChanged("AbstractPublicHeathPart");
-					this.OnAbstractPublicHeathPartChanged();
 				}
 			}
 		}
@@ -4886,6 +4475,222 @@ namespace ODPTaxonomyDAL_TT
 					this._AbstractProjTermPart = value;
 					this.SendPropertyChanged("AbstractProjTermPart");
 					this.OnAbstractProjTermPartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractPublicHeathPart", DbType="NVarChar(MAX)")]
+		public string AbstractPublicHeathPart
+		{
+			get
+			{
+				return this._AbstractPublicHeathPart;
+			}
+			set
+			{
+				if ((this._AbstractPublicHeathPart != value))
+				{
+					this.OnAbstractPublicHeathPartChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractPublicHeathPart = value;
+					this.SendPropertyChanged("AbstractPublicHeathPart");
+					this.OnAbstractPublicHeathPartChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Abstract_Text", Storage="_tbl_Abstract", ThisKey="AbstractID", OtherKey="AbstractID", IsForeignKey=true)]
+		public tbl_Abstract tbl_Abstract
+		{
+			get
+			{
+				return this._tbl_Abstract.Entity;
+			}
+			set
+			{
+				tbl_Abstract previousValue = this._tbl_Abstract.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Abstract.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Abstract.Entity = null;
+						previousValue.tbl_Abstract_Text = null;
+					}
+					this._tbl_Abstract.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Abstract_Text = this;
+						this._AbstractID = value.AbstractID;
+					}
+					else
+					{
+						this._AbstractID = default(int);
+					}
+					this.SendPropertyChanged("tbl_Abstract");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Abstract")]
+	public partial class tbl_Abstract : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _AbstractID;
+		
+		private string _AdministeringIC;
+		
+		private string _ProjectTitle;
+		
+		private System.Nullable<int> _ApplicationID;
+		
+		private string _Activity;
+		
+		private string _ProjectNumber;
+		
+		private System.Nullable<int> _Type;
+		
+		private string _IC;
+		
+		private System.Nullable<int> _SerialNumber;
+		
+		private System.Nullable<int> _SupportYear;
+		
+		private string _Suffix;
+		
+		private string _PIProjectLeader;
+		
+		private string _FY;
+		
+		private string _ChrApplicationID;
+		
+		private string _NoPreventionFlag;
+		
+		private string _SubSet;
+		
+		private string _CodingType;
+		
+		private System.Nullable<System.DateTime> _LastExportDate;
+		
+		private EntitySet<tbl_Evaluation> _tbl_Evaluations;
+		
+		private EntitySet<tbl_Evaluation> _tbl_Evaluations1;
+		
+		private EntitySet<tbl_AbstractStatusChangeHistory> _tbl_AbstractStatusChangeHistories;
+		
+		private EntityRef<tbl_Abstract_Text> _tbl_Abstract_Text;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnAbstractIDChanging(int value);
+    partial void OnAbstractIDChanged();
+    partial void OnAdministeringICChanging(string value);
+    partial void OnAdministeringICChanged();
+    partial void OnProjectTitleChanging(string value);
+    partial void OnProjectTitleChanged();
+    partial void OnApplicationIDChanging(System.Nullable<int> value);
+    partial void OnApplicationIDChanged();
+    partial void OnActivityChanging(string value);
+    partial void OnActivityChanged();
+    partial void OnProjectNumberChanging(string value);
+    partial void OnProjectNumberChanged();
+    partial void OnTypeChanging(System.Nullable<int> value);
+    partial void OnTypeChanged();
+    partial void OnICChanging(string value);
+    partial void OnICChanged();
+    partial void OnSerialNumberChanging(System.Nullable<int> value);
+    partial void OnSerialNumberChanged();
+    partial void OnSupportYearChanging(System.Nullable<int> value);
+    partial void OnSupportYearChanged();
+    partial void OnSuffixChanging(string value);
+    partial void OnSuffixChanged();
+    partial void OnPIProjectLeaderChanging(string value);
+    partial void OnPIProjectLeaderChanged();
+    partial void OnFYChanging(string value);
+    partial void OnFYChanged();
+    partial void OnChrApplicationIDChanging(string value);
+    partial void OnChrApplicationIDChanged();
+    partial void OnNoPreventionFlagChanging(string value);
+    partial void OnNoPreventionFlagChanged();
+    partial void OnSubSetChanging(string value);
+    partial void OnSubSetChanged();
+    partial void OnCodingTypeChanging(string value);
+    partial void OnCodingTypeChanged();
+    partial void OnLastExportDateChanging(System.Nullable<System.DateTime> value);
+    partial void OnLastExportDateChanged();
+    #endregion
+		
+		public tbl_Abstract()
+		{
+			this._tbl_Evaluations = new EntitySet<tbl_Evaluation>(new Action<tbl_Evaluation>(this.attach_tbl_Evaluations), new Action<tbl_Evaluation>(this.detach_tbl_Evaluations));
+			this._tbl_Evaluations1 = new EntitySet<tbl_Evaluation>(new Action<tbl_Evaluation>(this.attach_tbl_Evaluations1), new Action<tbl_Evaluation>(this.detach_tbl_Evaluations1));
+			this._tbl_AbstractStatusChangeHistories = new EntitySet<tbl_AbstractStatusChangeHistory>(new Action<tbl_AbstractStatusChangeHistory>(this.attach_tbl_AbstractStatusChangeHistories), new Action<tbl_AbstractStatusChangeHistory>(this.detach_tbl_AbstractStatusChangeHistories));
+			this._tbl_Abstract_Text = default(EntityRef<tbl_Abstract_Text>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AbstractID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int AbstractID
+		{
+			get
+			{
+				return this._AbstractID;
+			}
+			set
+			{
+				if ((this._AbstractID != value))
+				{
+					this.OnAbstractIDChanging(value);
+					this.SendPropertyChanging();
+					this._AbstractID = value;
+					this.SendPropertyChanged("AbstractID");
+					this.OnAbstractIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_AdministeringIC", DbType="NVarChar(20)")]
+		public string AdministeringIC
+		{
+			get
+			{
+				return this._AdministeringIC;
+			}
+			set
+			{
+				if ((this._AdministeringIC != value))
+				{
+					this.OnAdministeringICChanging(value);
+					this.SendPropertyChanging();
+					this._AdministeringIC = value;
+					this.SendPropertyChanged("AdministeringIC");
+					this.OnAdministeringICChanged();
 				}
 			}
 		}
@@ -5110,7 +4915,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrApplicationID", DbType="NVarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ChrApplicationID", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
 		public string ChrApplicationID
 		{
 			get
@@ -5130,8 +4935,8 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPreventionFlag", DbType="NChar(1)")]
-		public System.Nullable<char> NoPreventionFlag
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_NoPreventionFlag", DbType="NVarChar(20)")]
+		public string NoPreventionFlag
 		{
 			get
 			{
@@ -5146,6 +4951,26 @@ namespace ODPTaxonomyDAL_TT
 					this._NoPreventionFlag = value;
 					this.SendPropertyChanged("NoPreventionFlag");
 					this.OnNoPreventionFlagChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SubSet", DbType="NVarChar(100)")]
+		public string SubSet
+		{
+			get
+			{
+				return this._SubSet;
+			}
+			set
+			{
+				if ((this._SubSet != value))
+				{
+					this.OnSubSetChanging(value);
+					this.SendPropertyChanging();
+					this._SubSet = value;
+					this.SendPropertyChanged("SubSet");
+					this.OnSubSetChanged();
 				}
 			}
 		}
@@ -5190,7 +5015,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_Evaluation", Storage="_tbl_Evaluations", ThisKey="AbstractID", OtherKey="AbstractID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Evaluation", Storage="_tbl_Evaluations", ThisKey="AbstractID", OtherKey="AbstractID")]
 		public EntitySet<tbl_Evaluation> tbl_Evaluations
 		{
 			get
@@ -5203,7 +5028,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_Evaluation1", Storage="_tbl_Evaluations1", ThisKey="AbstractID", OtherKey="AbstractID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Evaluation1", Storage="_tbl_Evaluations1", ThisKey="AbstractID", OtherKey="AbstractID")]
 		public EntitySet<tbl_Evaluation> tbl_Evaluations1
 		{
 			get
@@ -5216,7 +5041,7 @@ namespace ODPTaxonomyDAL_TT
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Abstract_tbl_AbstractStatusChangeHistory", Storage="_tbl_AbstractStatusChangeHistories", ThisKey="AbstractID", OtherKey="AbstractID")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_AbstractStatusChangeHistory", Storage="_tbl_AbstractStatusChangeHistories", ThisKey="AbstractID", OtherKey="AbstractID")]
 		public EntitySet<tbl_AbstractStatusChangeHistory> tbl_AbstractStatusChangeHistories
 		{
 			get
@@ -5226,6 +5051,35 @@ namespace ODPTaxonomyDAL_TT
 			set
 			{
 				this._tbl_AbstractStatusChangeHistories.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_Abstract_tbl_Abstract_Text", Storage="_tbl_Abstract_Text", ThisKey="AbstractID", OtherKey="AbstractID", IsUnique=true, IsForeignKey=false)]
+		public tbl_Abstract_Text tbl_Abstract_Text
+		{
+			get
+			{
+				return this._tbl_Abstract_Text.Entity;
+			}
+			set
+			{
+				tbl_Abstract_Text previousValue = this._tbl_Abstract_Text.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_Abstract_Text.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_Abstract_Text.Entity = null;
+						previousValue.tbl_Abstract = null;
+					}
+					this._tbl_Abstract_Text.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Abstract = this;
+					}
+					this.SendPropertyChanged("tbl_Abstract_Text");
+				}
 			}
 		}
 		
@@ -5283,6 +5137,467 @@ namespace ODPTaxonomyDAL_TT
 		{
 			this.SendPropertyChanging();
 			entity.tbl_Abstract = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.TeamLabel")]
+	public partial class TeamLabel : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TeamLabelID;
+		
+		private string _TeamLabel1;
+		
+		private System.Nullable<int> _StatusID;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTeamLabelIDChanging(int value);
+    partial void OnTeamLabelIDChanged();
+    partial void OnTeamLabel1Changing(string value);
+    partial void OnTeamLabel1Changed();
+    partial void OnStatusIDChanging(System.Nullable<int> value);
+    partial void OnStatusIDChanged();
+    #endregion
+		
+		public TeamLabel()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamLabelID", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int TeamLabelID
+		{
+			get
+			{
+				return this._TeamLabelID;
+			}
+			set
+			{
+				if ((this._TeamLabelID != value))
+				{
+					this.OnTeamLabelIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamLabelID = value;
+					this.SendPropertyChanged("TeamLabelID");
+					this.OnTeamLabelIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="TeamLabel", Storage="_TeamLabel1", DbType="NVarChar(10)")]
+		public string TeamLabel1
+		{
+			get
+			{
+				return this._TeamLabel1;
+			}
+			set
+			{
+				if ((this._TeamLabel1 != value))
+				{
+					this.OnTeamLabel1Changing(value);
+					this.SendPropertyChanging();
+					this._TeamLabel1 = value;
+					this.SendPropertyChanged("TeamLabel1");
+					this.OnTeamLabel1Changed();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int")]
+		public System.Nullable<int> StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					this.OnStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._StatusID = value;
+					this.SendPropertyChanged("StatusID");
+					this.OnStatusIDChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Team")]
+	public partial class tbl_Team : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _TeamID;
+		
+		private string _TeamCode;
+		
+		private System.Nullable<int> _TeamTypeID;
+		
+		private int _StatusID;
+		
+		private System.Nullable<System.DateTime> _CreatedDateTime;
+		
+		private System.Nullable<System.Guid> _Createdby;
+		
+		private System.Nullable<System.Guid> _UpdatedBy;
+		
+		private System.Nullable<System.DateTime> _UpdatedDateTime;
+		
+		private System.Nullable<int> _TeamLabelID;
+		
+		private EntitySet<tbl_TeamUser> _tbl_TeamUsers;
+		
+		private EntitySet<tbl_Evaluation> _tbl_Evaluations;
+		
+		private EntityRef<tbl_TeamType> _tbl_TeamType;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnTeamIDChanging(int value);
+    partial void OnTeamIDChanged();
+    partial void OnTeamCodeChanging(string value);
+    partial void OnTeamCodeChanged();
+    partial void OnTeamTypeIDChanging(System.Nullable<int> value);
+    partial void OnTeamTypeIDChanged();
+    partial void OnStatusIDChanging(int value);
+    partial void OnStatusIDChanged();
+    partial void OnCreatedDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnCreatedDateTimeChanged();
+    partial void OnCreatedbyChanging(System.Nullable<System.Guid> value);
+    partial void OnCreatedbyChanged();
+    partial void OnUpdatedByChanging(System.Nullable<System.Guid> value);
+    partial void OnUpdatedByChanged();
+    partial void OnUpdatedDateTimeChanging(System.Nullable<System.DateTime> value);
+    partial void OnUpdatedDateTimeChanged();
+    partial void OnTeamLabelIDChanging(System.Nullable<int> value);
+    partial void OnTeamLabelIDChanged();
+    #endregion
+		
+		public tbl_Team()
+		{
+			this._tbl_TeamUsers = new EntitySet<tbl_TeamUser>(new Action<tbl_TeamUser>(this.attach_tbl_TeamUsers), new Action<tbl_TeamUser>(this.detach_tbl_TeamUsers));
+			this._tbl_Evaluations = new EntitySet<tbl_Evaluation>(new Action<tbl_Evaluation>(this.attach_tbl_Evaluations), new Action<tbl_Evaluation>(this.detach_tbl_Evaluations));
+			this._tbl_TeamType = default(EntityRef<tbl_TeamType>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int TeamID
+		{
+			get
+			{
+				return this._TeamID;
+			}
+			set
+			{
+				if ((this._TeamID != value))
+				{
+					this.OnTeamIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamID = value;
+					this.SendPropertyChanged("TeamID");
+					this.OnTeamIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamCode", DbType="NVarChar(50)")]
+		public string TeamCode
+		{
+			get
+			{
+				return this._TeamCode;
+			}
+			set
+			{
+				if ((this._TeamCode != value))
+				{
+					this.OnTeamCodeChanging(value);
+					this.SendPropertyChanging();
+					this._TeamCode = value;
+					this.SendPropertyChanged("TeamCode");
+					this.OnTeamCodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamTypeID", DbType="Int")]
+		public System.Nullable<int> TeamTypeID
+		{
+			get
+			{
+				return this._TeamTypeID;
+			}
+			set
+			{
+				if ((this._TeamTypeID != value))
+				{
+					if (this._tbl_TeamType.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnTeamTypeIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamTypeID = value;
+					this.SendPropertyChanged("TeamTypeID");
+					this.OnTeamTypeIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_StatusID", DbType="Int NOT NULL")]
+		public int StatusID
+		{
+			get
+			{
+				return this._StatusID;
+			}
+			set
+			{
+				if ((this._StatusID != value))
+				{
+					this.OnStatusIDChanging(value);
+					this.SendPropertyChanging();
+					this._StatusID = value;
+					this.SendPropertyChanged("StatusID");
+					this.OnStatusIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> CreatedDateTime
+		{
+			get
+			{
+				return this._CreatedDateTime;
+			}
+			set
+			{
+				if ((this._CreatedDateTime != value))
+				{
+					this.OnCreatedDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._CreatedDateTime = value;
+					this.SendPropertyChanged("CreatedDateTime");
+					this.OnCreatedDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Createdby", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> Createdby
+		{
+			get
+			{
+				return this._Createdby;
+			}
+			set
+			{
+				if ((this._Createdby != value))
+				{
+					this.OnCreatedbyChanging(value);
+					this.SendPropertyChanging();
+					this._Createdby = value;
+					this.SendPropertyChanged("Createdby");
+					this.OnCreatedbyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UpdatedBy
+		{
+			get
+			{
+				return this._UpdatedBy;
+			}
+			set
+			{
+				if ((this._UpdatedBy != value))
+				{
+					this.OnUpdatedByChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedBy = value;
+					this.SendPropertyChanged("UpdatedBy");
+					this.OnUpdatedByChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UpdatedDateTime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> UpdatedDateTime
+		{
+			get
+			{
+				return this._UpdatedDateTime;
+			}
+			set
+			{
+				if ((this._UpdatedDateTime != value))
+				{
+					this.OnUpdatedDateTimeChanging(value);
+					this.SendPropertyChanging();
+					this._UpdatedDateTime = value;
+					this.SendPropertyChanged("UpdatedDateTime");
+					this.OnUpdatedDateTimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TeamLabelID", DbType="Int")]
+		public System.Nullable<int> TeamLabelID
+		{
+			get
+			{
+				return this._TeamLabelID;
+			}
+			set
+			{
+				if ((this._TeamLabelID != value))
+				{
+					this.OnTeamLabelIDChanging(value);
+					this.SendPropertyChanging();
+					this._TeamLabelID = value;
+					this.SendPropertyChanged("TeamLabelID");
+					this.OnTeamLabelIDChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_tbl_TeamUser", Storage="_tbl_TeamUsers", ThisKey="TeamID", OtherKey="TeamID")]
+		public EntitySet<tbl_TeamUser> tbl_TeamUsers
+		{
+			get
+			{
+				return this._tbl_TeamUsers;
+			}
+			set
+			{
+				this._tbl_TeamUsers.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Team_tbl_Evaluation", Storage="_tbl_Evaluations", ThisKey="TeamID", OtherKey="TeamID")]
+		public EntitySet<tbl_Evaluation> tbl_Evaluations
+		{
+			get
+			{
+				return this._tbl_Evaluations;
+			}
+			set
+			{
+				this._tbl_Evaluations.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbl_TeamType_Team", Storage="_tbl_TeamType", ThisKey="TeamTypeID", OtherKey="TeamTypeID", IsForeignKey=true)]
+		public tbl_TeamType tbl_TeamType
+		{
+			get
+			{
+				return this._tbl_TeamType.Entity;
+			}
+			set
+			{
+				tbl_TeamType previousValue = this._tbl_TeamType.Entity;
+				if (((previousValue != value) 
+							|| (this._tbl_TeamType.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbl_TeamType.Entity = null;
+						previousValue.tbl_Teams.Remove(this);
+					}
+					this._tbl_TeamType.Entity = value;
+					if ((value != null))
+					{
+						value.tbl_Teams.Add(this);
+						this._TeamTypeID = value.TeamTypeID;
+					}
+					else
+					{
+						this._TeamTypeID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("tbl_TeamType");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbl_TeamUsers(tbl_TeamUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Team = this;
+		}
+		
+		private void detach_tbl_TeamUsers(tbl_TeamUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Team = null;
+		}
+		
+		private void attach_tbl_Evaluations(tbl_Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Team = this;
+		}
+		
+		private void detach_tbl_Evaluations(tbl_Evaluation entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbl_Team = null;
 		}
 	}
 	

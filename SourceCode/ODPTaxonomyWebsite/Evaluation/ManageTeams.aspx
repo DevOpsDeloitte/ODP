@@ -55,6 +55,21 @@
 
     <asp:Button runat="server" ID="Button1" Text="Save Team" 
         onclick="btn_saveteam_Click" class="button yes" />
+    <br />
+
+    <asp:Panel ID="TeamPanel" Visible="false" runat="server">
+    <asp:Label ID="TeamLabel" runat="server">Team Label :</asp:Label><br />
+    <asp:DropDownList id="TeamLabelDropDown" Visible="false"
+                    AutoPostBack="False"
+                    DataTextField="TeamLabel1"
+                    DataValueField="TeamLabelID"
+                    runat="server">
+
+    </asp:DropDownList>
+    </asp:Panel>
+    <asp:Label ID="TeamLabelMessage"  Visible="false" runat="server"  CssClass="errorMessage"></asp:Label>
+    <br />
+    
 
     <asp:Repeater runat="server" ID="rpt_users">
         <HeaderTemplate>
@@ -97,6 +112,7 @@
         <ItemTemplate>
             <tr>
                 <td><!--<%# DataBinder.Eval(Container.DataItem, "TeamCode")%>:<br />-->
+                    <%# DataBinder.Eval(Container.DataItem, "TeamLabel") %>
                     <asp:Repeater runat="server" ID="rpt_teamMembers">
                         <ItemTemplate>
                             <%# DataBinder.Eval(Container.DataItem, "UserFirstName")%>&nbsp;<%# DataBinder.Eval(Container.DataItem, "UserLastName")%><br />

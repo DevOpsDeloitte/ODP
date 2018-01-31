@@ -1,5 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_Dev" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235;Initial Catalog=ODP_Taxonomy_Dev;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_TT.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DevConnectionString3" Provider="System.Data.SqlClient" />
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ODP_Taxonomy_DEV" Class="DataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=2sql235.iq.iqsolutions.com;Initial Catalog=ODP_Taxonomy_DEV;Persist Security Info=True;User ID=odpTaxonomy" SettingsObjectName="ODPTaxonomyDAL_TT.Properties.Settings" SettingsPropertyName="ODP_Taxonomy_DEVConnectionString5" Provider="System.Data.SqlClient" />
   <Table Name="dbo.aspnet_Users" Member="tbl_aspnet_Users">
     <Type Name="tbl_aspnet_User">
       <Column Name="ApplicationId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
@@ -27,14 +27,14 @@
     <Type Name="tbl_TeamType">
       <Column Name="TeamTypeID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="TeamType" Member="TeamType1" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
-      <Association Name="tbl_TeamType_tbl_Team" Member="tbl_Teams" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="tbl_Team" />
+      <Association Name="tbl_TeamType_Team" Member="tbl_Teams" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="tbl_Team" />
     </Type>
   </Table>
   <Table Name="dbo.TeamUser" Member="tbl_TeamUsers">
     <Type Name="tbl_TeamUser">
       <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="UserId" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="tbl_Team_tbl_TeamUser" Member="tbl_Team" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Team" IsForeignKey="true" />
+      <Association Name="Team_tbl_TeamUser" Member="tbl_Team" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Team" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Status" Member="tbl_Status">
@@ -72,21 +72,6 @@
       <Association Name="tbl_aspnet_User_tbl_aspnet_Membership" Member="tbl_aspnet_User" ThisKey="UserId" OtherKey="UserId" Type="tbl_aspnet_User" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Team" Member="tbl_Teams">
-    <Type Name="tbl_Team">
-      <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TeamCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="TeamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Createdby" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="UpdatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
-      <Column Name="UpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbl_Team_tbl_TeamUser" Member="tbl_TeamUsers" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_TeamUser" />
-      <Association Name="tbl_Team_tbl_Evaluation" Member="tbl_Evaluations" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Evaluation" />
-      <Association Name="tbl_TeamType_tbl_Team" Member="tbl_TeamType" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="tbl_TeamType" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.Evaluation" Member="tbl_Evaluations">
     <Type Name="tbl_Evaluation">
       <Column Name="EvaluationId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -104,10 +89,10 @@
       <Association Name="tbl_Evaluation_tbl_AbstractStatusChangeHistory" Member="AbstractStatusChangeHistories" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_AbstractStatusChangeHistory" />
       <Association Name="tbl_Evaluation_tbl_AbstractStatusChangeHistory1" Member="tbl_AbstractStatusChangeHistories" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_AbstractStatusChangeHistory" />
       <Association Name="tbl_Evaluation_tbL_Submission" Member="tbL_Submissions" Storage="_tbl_Submissions" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbL_Submission" />
-      <Association Name="tbl_Team_tbl_Evaluation" Member="tbl_Team" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Team" IsForeignKey="true" />
       <Association Name="tbl_EvaluationType_tbl_Evaluation" Member="tbl_EvaluationType" ThisKey="EvaluationTypeId" OtherKey="EvaluationTypeId" Type="tbl_EvaluationType" IsForeignKey="true" />
-      <Association Name="Abstract_tbl_Evaluation" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
-      <Association Name="Abstract_tbl_Evaluation1" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+      <Association Name="tbl_Abstract_tbl_Evaluation" Member="Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+      <Association Name="tbl_Abstract_tbl_Evaluation1" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+      <Association Name="Team_tbl_Evaluation" Member="tbl_Team" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Team" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AbstractStatus" Member="tbl_AbstractStatus">
@@ -140,7 +125,7 @@
       <Association Name="tbl_AbstractStatus_tbl_AbstractStatusChangeHistory" Member="tbl_AbstractStatus" ThisKey="AbstractStatusID" OtherKey="AbstractStatusID" Type="tbl_AbstractStatus" IsForeignKey="true" />
       <Association Name="tbl_Evaluation_tbl_AbstractStatusChangeHistory" Member="tbl_Evaluation" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_Evaluation" IsForeignKey="true" />
       <Association Name="tbl_Evaluation_tbl_AbstractStatusChangeHistory1" Member="tbl_Evaluation1" ThisKey="EvaluationId" OtherKey="EvaluationId" Type="tbl_Evaluation" IsForeignKey="true" />
-      <Association Name="Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+      <Association Name="tbl_Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.AbstractTopic" Member="tbl_AbstractTopics">
@@ -201,15 +186,21 @@
       <Association Name="tbl_aspnet_Role_tbl_aspnet_UsersInRole" Member="tbl_aspnet_UsersInRoles" ThisKey="RoleId" OtherKey="RoleId" Type="tbl_aspnet_UsersInRole" />
     </Type>
   </Table>
+  <Table Name="dbo.Abstract_Text" Member="tbl_Abstract_Texts">
+    <Type Name="tbl_Abstract_Text">
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Abstract" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractProjTermPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="tbl_Abstract_tbl_Abstract_Text" Member="tbl_Abstract" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.Abstract" Member="tbl_Abstracts">
     <Type Name="tbl_Abstract">
       <Column Name="AbstractID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="AdministeringIC" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="Abstract" Member="Abstract1" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractDescPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractPublicHeathPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractNIHPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="AbstractProjTermPart" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="ProjectTitle" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
       <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Activity" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
@@ -221,13 +212,38 @@
       <Column Name="Suffix" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="PIProjectLeader" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="ChrApplicationID" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="NoPreventionFlag" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="ChrApplicationID" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="NoPreventionFlag" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="SubSet" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="CodingType" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
       <Column Name="LastExportDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="Abstract_tbl_Evaluation" Member="tbl_Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
-      <Association Name="Abstract_tbl_Evaluation1" Member="tbl_Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
-      <Association Name="Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_AbstractStatusChangeHistory" />
+      <Association Name="tbl_Abstract_tbl_Evaluation" Member="tbl_Evaluations" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
+      <Association Name="tbl_Abstract_tbl_Evaluation1" Member="tbl_Evaluations1" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Evaluation" />
+      <Association Name="tbl_Abstract_tbl_AbstractStatusChangeHistory" Member="tbl_AbstractStatusChangeHistories" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_AbstractStatusChangeHistory" />
+      <Association Name="tbl_Abstract_tbl_Abstract_Text" Member="tbl_Abstract_Text" ThisKey="AbstractID" OtherKey="AbstractID" Type="tbl_Abstract_Text" Cardinality="One" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TeamLabel" Member="TeamLabels">
+    <Type Name="TeamLabel">
+      <Column Name="TeamLabelID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="TeamLabel" Member="TeamLabel1" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Team" Member="tbl_Teams">
+    <Type Name="tbl_Team">
+      <Column Name="TeamID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TeamCode" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TeamTypeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StatusID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Createdby" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedBy" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="UpdatedDateTime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="TeamLabelID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Team_tbl_TeamUser" Member="tbl_TeamUsers" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_TeamUser" />
+      <Association Name="Team_tbl_Evaluation" Member="tbl_Evaluations" ThisKey="TeamID" OtherKey="TeamID" Type="tbl_Evaluation" />
+      <Association Name="tbl_TeamType_Team" Member="tbl_TeamType" ThisKey="TeamTypeID" OtherKey="TeamTypeID" Type="tbl_TeamType" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.select_abstract_status_tt" Method="select_abstract_status_tt">

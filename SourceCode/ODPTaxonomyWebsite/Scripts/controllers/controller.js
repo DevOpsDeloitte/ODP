@@ -51,6 +51,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
 
         $scope.disallowSave = true;
+        $scope.saveButtonClicked = false;
 
         if ($scope.mdata.showconsensusbutton) {
             $scope.showConsensusButton = true;
@@ -186,73 +187,51 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
     $scope.turnOnSyncing = function () {
 
-        var FIREBASE_LOCATION;
-        FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
-
         if (($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) && $scope.displaymode == "Insert") {
-
             // Add ourselves to presence list when online.
-            var listRef = new Firebase(FIREBASE_LOCATION + "/presence/" + $scope.mdata.teamid);
-            var presenceRef = new Firebase(FIREBASE_LOCATION + "/.info/connected");
+            var listRef = firebase.database().ref().child("/presence/" + $scope.mdata.teamid);
+            var presenceRef = firebase.database().ref().child("/.info/connected");
             listRef.onDisconnect().remove();
-            //var userRef = listRef.push();
 
             presenceRef.on("value", function (snap) {
                 if (snap.val()) {
-                    //userRef.set({ teamid: $scope.mdata.teamid, abstractid: $scope.mdata.abstractid, mode: $scope.mode });
                     listRef.remove();
                     var teamPushed = listRef.push({ teamid: $scope.mdata.teamid, abstractid: $scope.mdata.abstractid, mode: $scope.mode, datetime: new Date().toLocaleString() });
                     // Remove ourselves when we disconnect.
-                    //userRef.onDisconnect().remove();
                     listRef.onDisconnect().remove();
-
-
                 }
                 else {
-                    //console.log(" presence ref dis-connected :: " + snap.val());
 
                 }
             });
 
-            var firebaseURL = FIREBASE_LOCATION + "/teams" + "/" + $scope.mdata.teamid;
-            var teamRef = new Firebase(firebaseURL);
+            var teamRef = firebase.database().ref().child("/teams" + "/" + $scope.mdata.teamid);
             teamRef.onDisconnect().remove();
 
             var sync = $firebaseObject(teamRef);
-            //var syncObject = sync.$asObject();
-
             sync.$bindTo($scope, "data").then(function () {
                 $scope.mdata.firebaseOn = true;
                 $scope.data = $scope.syncObjects($scope.mdata);
             });
-
-
         }
 
     };
 
-
-
     $scope.checkForConsensusProgress2 = function () {
-
-        var FIREBASE_LOCATION;
-        FIREBASE_LOCATION = $scope.FIREBASE_LOCATION;
 
         // check for team consensus in progress
         $scope.showWatchConsensusButton = false;
-        //var firebasedetectURL = FIREBASE_LOCATION + "/presence"; //  +"/" + $scope.mdata.teamid;
-        var firebasedetectURL = FIREBASE_LOCATION + "/presence" + "/" + $scope.mdata.teamid;
-        var teamdetectObj = new Firebase(firebasedetectURL);
+        var teamdetectObj = firebase.database().ref().child("/presence" + "/" + $scope.mdata.teamid);
         $timeout(function () {
             //Check for team id existence and show consensus & show comparison button in view/insert individual evaluation.
             if ($scope.mode.indexOf("Evaluation") != -1) {
 
-
-                teamdetectObj.on("value", function (snap) {
+                teamdetectObj.on('value',function (snap) {
                     var teamexists = false;
                     var modeval = "";
+                 
                     if (snap.val()) {
-                        console.log(" Function 2 team detect object :: value change " + snap.val());
+                        console.log(" checkForConsensusProgress2 team detect object :: value change " + snap.val());
                         $globdata = snap.val();
                         if (snap.val() !== undefined) {
                             $team.keys = Object.keys(snap.val());
@@ -272,15 +251,12 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                         teamexists = false;
                     }
 
-                    //console.log(" checkForConsensusProgress2 :: modeval :: " + modeval);
-
+                    console.log(" team exists :: " + teamexists);
                     $scope.$apply(function () {
-
                         if (modeval == "") {
                             $scope.showWatchConsensusButton = false;
                             $scope.showWatchComparisonButton = false;
                         }
-
                         if (modeval.indexOf("Consensus") != -1) {
                             $scope.showWatchConsensusButton = teamexists;
                         }
@@ -301,11 +277,19 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
     $scope.$on("disableboxes", function () {
         //console.log($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length-1]);
+        // Rule for F. Prevention Research Category
         if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked) {
             for (i = 1; i < $scope.mdata.preventioncategory.length - 1; i++) {
                 $scope.mdata.preventioncategory[i].resetBoxCC();
             }
         }
+        // Adding Rule for E. StudyDesign Purpose
+        if ($scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
+            for (i = 1; i < $scope.mdata.studydesignpurpose.length - 1; i++) {
+                $scope.mdata.studydesignpurpose[i].resetBoxCC();
+            }
+        }
+
 
     });
 
@@ -328,13 +312,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
             return;
         }
-        if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
-            console.log(" new rule :: form is valid :: ");
-            $scope.formIsValid = true;
-            $scope.disallowSave = false;
-            $scope.showSaveButton = true;
-            return;
-        }
+
+        //if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked) {
+        //    console.log(" new rule :: form is valid :: ");
+        //    $scope.formIsValid = true;
+        //    $scope.disallowSave = false;
+        //    $scope.showSaveButton = true;
+        //    return;
+        //}
 
         // For Consensus Mode -- Insert Validate all boxes are dark green or transparent.
         var boxColors = true; // all green
@@ -409,7 +394,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         var studyfocuscol1 = studyfocuscol2 = studyfocuscol3 = entitiesstudiedBox = studysettingBox = populationfocusBox = studydesignpurposeBox = preventioncategoryBox = false;
         for (i = 1; i < $scope.mdata.studyfocus[1].length; i++) {
-            //console.log(i);
             if ($scope.mdata.studyfocus[1][i].isChecked) {
                 studyfocuscol1 = true;
                 break;
@@ -442,6 +426,7 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         //        break;
         //    }
         //}
+
         entitiesstudiedBox = true; studysettingBox = true;
 
         for (i = 1; i < $scope.mdata.populationfocus.length; i++) {
@@ -463,8 +448,25 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
         }
 
+        if (studyfocuscol1 || studyfocuscol2 || studyfocuscol3 || populationfocusBox) {
+            //console.log("E7 / F6 only bypassed ");
+            // bypass E7 / F6 Only. As this will now be treated as a regular coding. Another category selection was made.
+
+        }
+        else {
+
+            // Do the E7 / F6 Rule
+            if ($scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked && boxColors) {
+                //console.log(" new rule :: form is valid :: ");
+                $scope.formIsValid = true;
+                $scope.disallowSave = false;
+                $scope.showSaveButton = true;
+                return;
+            }
+        }
+
         if (studyfocuscol1 && studyfocuscol2 && studyfocuscol3 && entitiesstudiedBox && studysettingBox && populationfocusBox && studydesignpurposeBox && preventioncategoryBox && boxColors) {
-            console.log(" form is valid :: ");
+            //console.log(" form is valid :: ");
             $scope.formIsValid = true;
             $scope.disallowSave = false;
             $scope.showSaveButton = true;
@@ -563,6 +565,11 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         //var formArray = $("form").serialize();
         //var fa = JSON.stringify(formArray);
         $scope.showSaveButton = false; // for concurrency issue.
+
+        $scope.showResetButton = false;
+        $scope.mdata.displaymode = "View";
+        $rootScope.displaymode = "View";
+
         $http({
             method: 'POST',
             url: 'Handlers/Evaluation.ashx',
@@ -571,11 +578,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             data: formArray,
             headers: { 'Content-Type': 'application/x-www-form-urlencoded'}  // set the headers so angular passing info as form data (not request payload)
         })
-           .success(function (data) {
-               //console.log("response received : " + data.success);
-
+           .then(function (dataRecieved) {
+               //console.log("response received : " + JSON.stringify(dataRecieved));
+               var data = dataRecieved.data;
                if (!data.success) {
                    $scope.showSaveButton = true;
+
+                   $scope.showResetButton = true;
+                   $scope.mdata.displaymode = "Insert";
+                   $rootScope.displaymode = "Insert";
+
                    // Logic for Supervisor User Auth Failure.
                    if (data.supervisorauthfailed != undefined && data.supervisorauthfailed) {
                        $scope.errormessagesdisplay = "Supervisor authentication Failed!";
@@ -588,6 +600,16 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                        return;
                    }
 
+                   if (data.submissionexists != undefined && data.submissionexists) {
+                       $scope.errormessagesdisplay = "Submission record already exists. Save Failed!";
+                       return;
+                   }
+
+                   if (data.unabletocreatesubmission != undefined && data.unabletocreatesubmission) {
+                       $scope.errormessagesdisplay = "Unable to create submission. Save Failed, Try Again!";
+                       return;
+                   }
+
                } else {
 
 
@@ -596,22 +618,15 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
                    // Put the form in View Mode::
                    $scope.showSaveButton = false;
                    $scope.mdata.displaymode = "View";
-                   $scope.mdata.newsubmissionID = data.submissionID;
                    $rootScope.displaymode = "View";
+
+                   $scope.mdata.newsubmissionID = data.submissionID;
                    $scope.showResetButton = false;
+
                    if (data.showConsensusButton) $scope.showConsensusButton = true;
                    if (data.showComparisonButton) $scope.showComparisonButton = true;
 
-                   //$scope.$apply();
-                   //                   $scope.$apply(function () {
-
-                   //                       $scope.mdata.displaymode = "View";
-                   //                   });
-                   //$scope.message = data.message;
-
-
-                   //console.log(" here assignment complete :: ");
-                   //$scope.$apply();
+                   
                }
            });
 
@@ -635,8 +650,6 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
 
         alertify.confirm("Please confirm save?", function (e) {
             if (e) {
-                //window.location.href = "revise.html";
-                //util.save();
                 window.scrollTo(0, 0);
                 $scope.submitForm();
             } else {

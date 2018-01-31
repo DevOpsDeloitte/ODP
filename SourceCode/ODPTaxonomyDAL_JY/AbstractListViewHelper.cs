@@ -955,6 +955,15 @@ namespace ODPTaxonomyDAL_JY
                     {
                         return Abstracts.OrderByDescending(d => d.ProjectTitle).ToList();
                     }
+                case "ProjectNumber":
+                    if (SortDirection == SortDirection.Ascending)
+                    {
+                        return Abstracts.OrderBy(d => d.ProjectNumber).ToList();
+                    }
+                    else
+                    {
+                        return Abstracts.OrderByDescending(d => d.ProjectNumber).ToList();
+                    }
                 case "Date":
                 case "StatusDate":
                     if (SortDirection == SortDirection.Ascending)
@@ -978,7 +987,18 @@ namespace ODPTaxonomyDAL_JY
                     return SortDirection == SortDirection.Ascending ?
                         Abstracts.OrderBy(a => a.PIProjectLeader).ToList() :
                         Abstracts.OrderByDescending(a => a.PIProjectLeader).ToList();
-
+                case "FY":
+                    return SortDirection == SortDirection.Ascending ?
+                        Abstracts.OrderBy(a => a.FY).ToList() :
+                        Abstracts.OrderByDescending(a => a.FY).ToList();
+                case "Type":
+                    return SortDirection == SortDirection.Ascending ?
+                        Abstracts.OrderBy(a => a.Type).ToList() :
+                        Abstracts.OrderByDescending(a => a.Type).ToList();
+                case "Activity":
+                    return SortDirection == SortDirection.Ascending ?
+                        Abstracts.OrderBy(a => a.Activity).ToList() :
+                        Abstracts.OrderByDescending(a => a.Activity).ToList();
                 case "Flags":
                 case "A1":
                 case "A2":

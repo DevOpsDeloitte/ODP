@@ -149,9 +149,11 @@
     <Content Include="Scripts\angular\angular-csp.css" />
     <Content Include="Scripts\angular\angular-latest.min.js" />
     <Content Include="Scripts\angular\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular\angular-old.js" />
     <Content Include="Scripts\angular\angular.js" />
     <Content Include="Scripts\angular\angular.min.js" />
     <Content Include="Scripts\angular\angularfire.min.js" />
+    <Content Include="Scripts\angular\firebase-config.js" />
     <Content Include="Scripts\angular\firebase.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\classie.js" />
@@ -214,6 +216,7 @@
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
     <Content Include="Styles\skeleton.css" />
+    <Content Include="SwitchCategories\Category.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -355,7 +358,6 @@
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
@@ -533,7 +535,6 @@
     <Compile Include="ReportingApp\default.aspx.designer.cs">
       <DependentUpon>default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ReportingApp\handlers\ReportingService.cs" />
     <Compile Include="ReportingApp\handlers\ReportService.ashx.cs">
       <DependentUpon>ReportService.ashx</DependentUpon>
     </Compile>
@@ -543,6 +544,13 @@
     </Compile>
     <Compile Include="Site.Master.designer.cs">
       <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+    <Compile Include="SwitchCategories\Category.aspx.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SwitchCategories\Category.aspx.designer.cs">
+      <DependentUpon>Category.aspx</DependentUpon>
     </Compile>
     <Compile Include="WeeklyIQCoderConsensusReport.aspx.cs">
       <DependentUpon>WeeklyIQCoderConsensusReport.aspx</DependentUpon>

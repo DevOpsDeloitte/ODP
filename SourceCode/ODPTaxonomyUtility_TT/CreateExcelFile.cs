@@ -187,28 +187,7 @@ namespace ODPTaxonomyUtility_TT
                 {
                     WriteExcelFile(ds, document);
                 }
-                /* Code for POST Back button option: START */
-                //stream.Flush();
-                //stream.Position = 0;
 
-                //Response.ClearContent();
-                //Response.Clear();
-                //Response.Buffer = true;
-                //Response.Charset = "";
-
-                ////  NOTE: If you get an "HttpCacheability does not exist" error on the following line, make sure you have
-                ////  manually added System.Web to this project's References.
-
-                //Response.Cache.SetCacheability(System.Web.HttpCacheability.NoCache);
-                //Response.AddHeader("content-disposition", "attachment; filename=" + filename);
-                //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                //byte[] data1 = new byte[stream.Length];
-                //stream.Read(data1, 0, data1.Length);
-                //stream.Close();
-                //Response.BinaryWrite(data1);
-                //Response.Flush();
-                //Response.End();
-                /* Code for POST Back button option:END */
 
                 /* Code for client-side option: START */
                 Response.AppendHeader("Content-Disposition", "attachment;filename=" + filename);
@@ -226,6 +205,34 @@ namespace ODPTaxonomyUtility_TT
             {
                 throw ex;
                 
+            }
+        }
+
+        public static void CreateExcelDocumentAsStreamSpecialHeaders(DataSet ds, string filename, System.Web.HttpResponse Response, string start, string end)
+        {
+            try
+            {
+                System.IO.MemoryStream stream = new System.IO.MemoryStream();
+                using (SpreadsheetDocument document = SpreadsheetDocument.Create(stream, SpreadsheetDocumentType.Workbook, true))
+                {
+                    WriteExcelFileSpecialHeaders(ds, document, start, end);
+                }
+
+                Response.AppendHeader("Content-Disposition", "attachment;filename=" + filename);
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                stream.WriteTo(Response.OutputStream);
+                //Response.End();
+                /* Use 3 lines below instead of Response.End() which always throws an exception */
+                Response.Flush(); // Sends all currently buffered output to the client.
+                Response.SuppressContent = true;  // Gets or sets a value indicating whether to send HTTP content to the client.
+                System.Web.HttpContext.Current.ApplicationInstance.CompleteRequest(); // Causes ASP.NET to bypass all 
+                                                                                      /* Code for client-side option: START */
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+
             }
         }
 #endif      //  End of "INCLUDE_WEB_FUNCTIONS" section
@@ -441,7 +448,71 @@ namespace ODPTaxonomyUtility_TT
                 newWorksheetPart.Worksheet.AppendChild(new DocumentFormat.OpenXml.Spreadsheet.SheetData());
 
                 // save worksheet
+               
                 WriteDataTableToExcelWorksheet(dt, newWorksheetPart);
+                
+              
+                //WriteDataTableToExcelWorksheet_KappaHeaders(dt, newWorksheetPart);
+                //newWorksheetPart.Worksheet.Save(); 
+
+                // create the worksheet to workbook relation
+                if (worksheetNumber == 1)
+                    spreadsheet.WorkbookPart.Workbook.AppendChild(new DocumentFormat.OpenXml.Spreadsheet.Sheets());
+
+                spreadsheet.WorkbookPart.Workbook.GetFirstChild<DocumentFormat.OpenXml.Spreadsheet.Sheets>().AppendChild(new DocumentFormat.OpenXml.Spreadsheet.Sheet()
+                {
+                    Id = spreadsheet.WorkbookPart.GetIdOfPart(newWorksheetPart),
+                    SheetId = (uint)worksheetNumber,
+                    Name = dt.TableName
+                });
+
+                worksheetNumber++;
+                dt.Clear();
+            }
+
+            spreadsheet.WorkbookPart.Workbook.Save();
+        }
+        private static void WriteExcelFileSpecialHeaders(DataSet ds, SpreadsheetDocument spreadsheet, string start, string end)
+        {
+            //  Create the Excel file contents.  This function is used when creating an Excel file either writing 
+            //  to a file, or writing to a MemoryStream.
+            spreadsheet.AddWorkbookPart();
+            spreadsheet.WorkbookPart.Workbook = new DocumentFormat.OpenXml.Spreadsheet.Workbook();
+
+            //  The following line of code prevents crashes in Excel 2010
+            spreadsheet.WorkbookPart.Workbook.Append(new BookViews(new WorkbookView()));
+
+            //  If we don't add a "WorkbookStylesPart", OLEDB will refuse to connect to this .xlsx file !
+            WorkbookStylesPart workbookStylesPart = spreadsheet.WorkbookPart.AddNewPart<WorkbookStylesPart>("rIdStyles");
+            //Stylesheet stylesheet = new Stylesheet();
+            workbookStylesPart.Stylesheet = CreateStylesheet();
+            workbookStylesPart.Stylesheet.Save();
+
+            //  Loop through each of the DataTables in our DataSet, and create a new Excel Worksheet for each.
+            uint worksheetNumber = 1;
+            foreach (DataTable dt in ds.Tables)
+            {
+                //  For each worksheet you want to create
+                string workSheetID = "rId" + worksheetNumber.ToString();
+                string worksheetName = dt.TableName;
+
+                WorksheetPart newWorksheetPart = spreadsheet.WorkbookPart.AddNewPart<WorksheetPart>();
+                newWorksheetPart.Worksheet = new DocumentFormat.OpenXml.Spreadsheet.Worksheet();
+
+                // create sheet data
+                newWorksheetPart.Worksheet.AppendChild(new DocumentFormat.OpenXml.Spreadsheet.SheetData());
+
+                // save worksheet
+                if (!dt.TableName.Contains("AvgDetail"))
+                {
+                    WriteDataTableToExcelWorksheet_KappaHeaders(dt, newWorksheetPart, start, end);
+                }
+                else
+                {
+                    WriteDataTableToExcelWorksheet(dt, newWorksheetPart);
+                }
+
+                //WriteDataTableToExcelWorksheet_KappaHeaders(dt, newWorksheetPart);
                 //newWorksheetPart.Worksheet.Save(); 
 
                 // create the worksheet to workbook relation
@@ -496,6 +567,7 @@ namespace ODPTaxonomyUtility_TT
                 IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
             }
 
+
             //
             //  Now, step through each row of data in our DataTable...
             //
@@ -532,6 +604,197 @@ namespace ODPTaxonomyUtility_TT
             }
         }
 
+        // specialized kappa report formats
+        private static void WriteDataTableToExcelWorksheet_KappaHeaders(DataTable dt, WorksheetPart worksheetPart, string start, string end)
+        {
+            var worksheet = worksheetPart.Worksheet;
+            var sheetData = worksheet.GetFirstChild<SheetData>();
+
+            string cellValue = "";
+
+            //  Create a Header Row in our Excel file, containing one header for each Column of data in our DataTable.
+            //
+            //  We'll also create an array, showing which type each column of data is (Text or Numeric), so when we come to write the actual
+            //  cells of data, we'll know if to write Text values or Numeric cell values.
+            int numberOfColumns = dt.Columns.Count;
+            bool[] IsNumericColumn = new bool[numberOfColumns];
+
+            string[] excelColumnNames = new string[numberOfColumns];
+            for (int n = 0; n < numberOfColumns; n++)
+                excelColumnNames[n] = GetExcelColumnName(n);
+
+            //
+            //  Create the Header row in our Excel Worksheet
+            //
+            uint rowIndex = 1;
+
+            var headerRow = new Row { RowIndex = rowIndex };  // add a row at the top of spreadsheet
+            sheetData.Append(headerRow);
+
+            for (int colInx = 0; colInx < numberOfColumns; colInx++)
+            {
+                DataColumn col = dt.Columns[colInx];
+                
+
+                if (colInx > 5 && colInx < 12)
+                {
+                    AppendTextCellHeaderCenter(excelColumnNames[colInx] + "1", col.ColumnName, headerRow);
+                }
+                else
+                {
+                    if (colInx == 0)
+                    {
+                        AppendTextCell(excelColumnNames[colInx] + "1", "" + start + " - " + end + " QC Report", headerRow);
+
+                    }
+                    else
+                    {
+                        AppendTextCell(excelColumnNames[colInx] + "1", "", headerRow);
+                    }
+                }
+                IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
+            }
+
+            var headerRow2 = new Row { RowIndex = ++rowIndex };  // add a row at the top of spreadsheet
+            sheetData.Append(headerRow2);
+
+            for (int colInx = 0; colInx < numberOfColumns; colInx++)
+            {
+                DataColumn col = dt.Columns[colInx];
+                switch (colInx)
+                {
+                    case 0:
+                        AppendTextCell(excelColumnNames[colInx] + "2", "" + dt.TableName.Split('-')[0] + " ", headerRow2);
+                        break;
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 10:
+                    case 11:
+                        AppendNumericCellKappaHeader(excelColumnNames[colInx] + "2", "0.7", headerRow2);
+                        break;
+                    case 9:
+                        AppendNumericCellKappaHeader(excelColumnNames[colInx] + "2", "0.8", headerRow2);
+                        break;
+                    case 5:
+                        AppendTextCell(excelColumnNames[colInx] + "2", "Threshold", headerRow2);
+                        break;
+                    default:
+                        AppendTextCell(excelColumnNames[colInx] + "2", " ", headerRow2);
+                        break;
+
+                }
+                //AppendTextCellYellow(excelColumnNames[colInx] + "2", col.ColumnName, headerRow2);
+               // IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
+            }
+
+            var headerRow3 = new Row { RowIndex = ++rowIndex };  // add a row at the top of spreadsheet
+            sheetData.Append(headerRow3);
+
+            for (int colInx = 0; colInx < numberOfColumns; colInx++)
+            {
+                DataColumn col = dt.Columns[colInx];
+                AppendTextCell(excelColumnNames[colInx] + "3","", headerRow3, true);
+              //  IsNumericColumn[colInx] = (col.DataType.FullName == "System.Decimal") || (col.DataType.FullName == "System.Int32");
+            }
+
+            var headerRow4 = new Row { RowIndex = ++rowIndex };  // add a row at the top of spreadsheet
+            sheetData.Append(headerRow4);
+
+            for (int colInx = 0; colInx < numberOfColumns; colInx++)
+            {
+                DataColumn col = dt.Columns[colInx];
+                if ((colInx > 5 && colInx < 12))
+                {
+                    AppendTextCellHeaderCenter(excelColumnNames[colInx] + "4", col.ColumnName, headerRow4);
+                }
+                else
+                {
+                    AppendTextCell(excelColumnNames[colInx] + "4", col.ColumnName, headerRow4, true);
+                }
+                  
+            }
+
+
+            //
+            //  Now, step through each row of data in our DataTable...
+            //
+            double cellNumericValue = 0;
+            foreach (DataRow dr in dt.Rows)
+            {
+                // ...create a new row, and append a set of this row's data to it.
+                ++rowIndex;
+                var newExcelRow = new Row { RowIndex = rowIndex };  // add a row at the top of spreadsheet
+                sheetData.Append(newExcelRow);
+
+                for (int colInx = 0; colInx < numberOfColumns; colInx++)
+                {
+                    cellValue = dr.ItemArray[colInx].ToString();
+
+                    // Create cell with data
+                    if (/*IsNumericColumn[colInx] &&*/ (colInx > 5 && colInx < 12))
+                    {
+                        //  For numeric cells, make sure our input data IS a number, then write it out to the Excel file.
+                        //  If this numeric value is NULL, then don't write anything to the Excel file.
+                        cellNumericValue = 0;
+                        if (double.TryParse(cellValue, out cellNumericValue))
+                        {
+                            cellValue = cellNumericValue.ToString();
+                            //cellValue = string.Format("{0:N4}", cellNumericValue.ToString());                   
+                        }
+
+                        if(colInx != 9)
+                        {
+                            if (Math.Round(cellNumericValue,1) < 0.7d && cellNumericValue != 0)
+                            {
+                                AppendNumericCellKappaBelowThreshold(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                            else
+                            {
+                                AppendNumericCellKappaNormal(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                        }
+                        else
+                        {
+                            if (Math.Round(cellNumericValue, 1) < 0.8d && cellNumericValue != 0)
+                            {
+                                AppendNumericCellKappaBelowThreshold(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                            else
+                            {
+                                AppendNumericCellKappaNormal(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                        }
+                        
+                        
+
+                       
+                    }
+                    else
+                    {
+                        if ((colInx > 3 && colInx < 6) || colInx == 12)
+                        {
+                            if (colInx == 12)
+                            {
+                                AppendNumericCellKappaNormal(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                            else
+                            {
+                                AppendNumericCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                            }
+                        }
+                        else
+                        {
+                            AppendTextCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow, false);
+                        }
+                        //  For text cells, just write the input data straight out to the Excel file.
+                        //AppendTextCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow, false);AppendTextCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow, false);
+                        //AppendNumericCell(excelColumnNames[colInx] + rowIndex.ToString(), cellValue, newExcelRow);
+                    }
+                }
+            }
+        }
+
         private static void AppendTextCell(string cellReference, string cellStringValue, Row excelRow, bool isHeaderRow)
         {
             //  Add a new Excel Cell to our Row 
@@ -551,10 +814,79 @@ namespace ODPTaxonomyUtility_TT
             excelRow.Append(cell);
         }
 
+        private static void AppendTextCellHeaderCenter(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = null;
+
+            cell = new Cell() { CellReference = cellReference, DataType = CellValues.String, StyleIndex = 7 };
+            
+ 
+
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+
+        private static void AppendTextCellYellow(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = null;
+
+            cell = new Cell() { CellReference = cellReference, DataType = CellValues.String, StyleIndex = 6 };
+        
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+
+        private static void AppendTextCell(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = null;
+
+            cell = new Cell() { CellReference = cellReference, DataType = CellValues.String, StyleIndex = 4 };
+
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+
         private static void AppendNumericCell(string cellReference, string cellStringValue, Row excelRow)
         {
             //  Add a new Excel Cell to our Row 
             Cell cell = new Cell() { CellReference = cellReference };
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+
+        private static void AppendNumericCellKappaNormal(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = new Cell() { CellReference = cellReference, StyleIndex = 9 };
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+        private static void AppendNumericCellKappaBelowThreshold(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row 
+            Cell cell = new Cell() { CellReference = cellReference , StyleIndex = 8 };
+            CellValue cellValue = new CellValue();
+            cellValue.Text = cellStringValue;
+            cell.Append(cellValue);
+            excelRow.Append(cell);
+        }
+        private static void AppendNumericCellKappaHeader(string cellReference, string cellStringValue, Row excelRow)
+        {
+            //  Add a new Excel Cell to our Row - center alignment.
+            Cell cell = new Cell() { CellReference = cellReference, StyleIndex = 7 };
             CellValue cellValue = new CellValue();
             cellValue.Text = cellStringValue;
             cell.Append(cellValue);
@@ -588,21 +920,14 @@ namespace ODPTaxonomyUtility_TT
             stylesheet1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
             stylesheet1.AddNamespaceDeclaration("x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
 
-            Fonts fonts1 = new Fonts() { Count = (UInt32Value)1U, KnownFonts
-             = true };
+            Fonts fonts1 = new Fonts() { Count = (UInt32Value)2U, KnownFonts= true };
             //Normal Font
-            DocumentFormat.OpenXml.Spreadsheet.Font font1 = 
-            new DocumentFormat.OpenXml.Spreadsheet.Font();
-            DocumentFormat.OpenXml.Spreadsheet.FontSize fontSize1 = 
-            new DocumentFormat.OpenXml.Spreadsheet.FontSize(){ Val = 11D };
-            DocumentFormat.OpenXml.Spreadsheet.Color color1 = 
-            new DocumentFormat.OpenXml.Spreadsheet.Color() 
-            { Theme = (UInt32Value)1U };
+            DocumentFormat.OpenXml.Spreadsheet.Font font1 = new DocumentFormat.OpenXml.Spreadsheet.Font();
+            DocumentFormat.OpenXml.Spreadsheet.FontSize fontSize1 = new DocumentFormat.OpenXml.Spreadsheet.FontSize(){ Val = 11D };
+            DocumentFormat.OpenXml.Spreadsheet.Color color1 = new DocumentFormat.OpenXml.Spreadsheet.Color() { Theme = (UInt32Value)1U };
             FontName fontName1 = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering fontFamilyNumbering1 = 
-            new FontFamilyNumbering() { Val = 2 };
-            FontScheme fontScheme1 = new FontScheme() 
-            { Val = FontSchemeValues.Minor };
+            FontFamilyNumbering fontFamilyNumbering1 = new FontFamilyNumbering() { Val = 2 };
+            FontScheme fontScheme1 = new FontScheme() { Val = FontSchemeValues.Minor };
 
             font1.Append(fontSize1);
             font1.Append(color1);
@@ -610,20 +935,15 @@ namespace ODPTaxonomyUtility_TT
             font1.Append(fontFamilyNumbering1);
             font1.Append(fontScheme1);
             fonts1.Append(font1);
+            //End of Normal Font
 
             //Bold Font
-            DocumentFormat.OpenXml.Spreadsheet.Font bFont = 
-            new DocumentFormat.OpenXml.Spreadsheet.Font();                     
-            DocumentFormat.OpenXml.Spreadsheet.FontSize bfontSize = 
-            new DocumentFormat.OpenXml.Spreadsheet.FontSize(){ Val = 11D };
-            DocumentFormat.OpenXml.Spreadsheet.Color bcolor = 
-            new DocumentFormat.OpenXml.Spreadsheet.Color()
-            { Theme = (UInt32Value)1U };
+            DocumentFormat.OpenXml.Spreadsheet.Font bFont = new DocumentFormat.OpenXml.Spreadsheet.Font();                     
+            DocumentFormat.OpenXml.Spreadsheet.FontSize bfontSize = new DocumentFormat.OpenXml.Spreadsheet.FontSize(){ Val = 11D };
+            DocumentFormat.OpenXml.Spreadsheet.Color bcolor = new DocumentFormat.OpenXml.Spreadsheet.Color() { Theme = (UInt32Value)1U };
             FontName bfontName = new FontName() { Val = "Calibri" };
-            FontFamilyNumbering bfontFamilyNumbering = 
-            new FontFamilyNumbering() { Val = 2 };
-            FontScheme bfontScheme = new FontScheme() 
-            { Val = FontSchemeValues.Minor };
+            FontFamilyNumbering bfontFamilyNumbering = new FontFamilyNumbering() { Val = 2 };
+            FontScheme bfontScheme = new FontScheme() { Val = FontSchemeValues.Minor };
             Bold bFontBold = new Bold();
 
             bFont.Append(bfontSize);
@@ -634,6 +954,26 @@ namespace ODPTaxonomyUtility_TT
             bFont.Append(bFontBold);
 
             fonts1.Append(bFont);
+            // End of Bold Font
+
+            //Text Color Font
+            DocumentFormat.OpenXml.Spreadsheet.Font cFont = new DocumentFormat.OpenXml.Spreadsheet.Font();
+            DocumentFormat.OpenXml.Spreadsheet.FontSize cfontSize = new DocumentFormat.OpenXml.Spreadsheet.FontSize() { Val = 11D };
+            DocumentFormat.OpenXml.Spreadsheet.Color ccolor = new DocumentFormat.OpenXml.Spreadsheet.Color() { Rgb = "FF0000" };
+            FontName cfontName = new FontName() { Val = "Calibri" };
+            FontFamilyNumbering cfontFamilyNumbering = new FontFamilyNumbering() { Val = 2 };
+            FontScheme cfontScheme = new FontScheme() { Val = FontSchemeValues.Minor };
+            Bold cFontBold = new Bold();
+
+            cFont.Append(cfontSize);
+            cFont.Append(ccolor);
+            cFont.Append(cfontName);
+            cFont.Append(cfontFamilyNumbering);
+            cFont.Append(cfontScheme);
+            //cFont.Append(cFontBold);
+
+            fonts1.Append(cFont);
+            // End of Text Color Font
 
             Fills fills1 = new Fills() { Count = (UInt32Value)5U };
 
@@ -722,8 +1062,10 @@ namespace ODPTaxonomyUtility_TT
 
             borders1.Append(border1);
 
+
             CellStyleFormats cellStyleFormats1 = new CellStyleFormats() 
-            { Count = (UInt32Value)1U };             
+            { Count = (UInt32Value)1U }; 
+                        
             CellFormat cellFormat1 = new CellFormat() { NumberFormatId = (UInt32Value)0U, 
                 FontId = (UInt32Value)0U, FillId = (UInt32Value)0U, BorderId = (UInt32Value)0U };
 
@@ -760,6 +1102,71 @@ namespace ODPTaxonomyUtility_TT
             (UInt32Value)4U, BorderId = (UInt32Value)0U, FormatId = 
             (UInt32Value)0U, ApplyFill = true };
 
+            Alignment center = new Alignment() { Horizontal = HorizontalAlignmentValues.Center, Vertical = VerticalAlignmentValues.Center };
+
+
+            var numberingFormats = new NumberingFormats();
+            var nformat4Decimal = new NumberingFormat
+            {
+                NumberFormatId = (UInt32Value)1U,
+                FormatCode = StringValue.FromString("#0.0000")
+            };
+            var nformatForcedText = new NumberingFormat
+            {
+                NumberFormatId = (UInt32Value)0U,
+                FormatCode = StringValue.FromString("@")
+            };
+            numberingFormats.Append(nformatForcedText);
+            numberingFormats.Append(nformat4Decimal);
+
+
+            // Style Index 7
+            CellFormat cellFormat9 = new CellFormat()
+            {
+                NumberFormatId =
+            (UInt32Value)0U,
+                FontId = (UInt32Value)1U,
+                FillId =
+            (UInt32Value)0U,
+                BorderId = (UInt32Value)0U,
+                FormatId =
+            (UInt32Value)0U,
+                ApplyFill = true,
+               Alignment = center
+               
+            };
+
+            // Style Index 8 // Red - Below Threshhold
+            CellFormat cellFormat10 = new CellFormat()
+            {
+                NumberFormatId =
+            (UInt32Value)1U,
+                FontId = (UInt32Value)2U,
+                FillId =
+            (UInt32Value)0U,
+                BorderId = (UInt32Value)0U,
+                FormatId =
+            (UInt32Value)0U,
+                ApplyFill = true
+
+            };
+            // Style Index 9 // Normal Threshhold
+            CellFormat cellFormat11 = new CellFormat()
+            {
+                NumberFormatId =
+            (UInt32Value)1U,
+                //FontId = (UInt32Value)1U,
+                FillId =
+            (UInt32Value)0U,
+                BorderId = (UInt32Value)0U,
+                FormatId =
+            (UInt32Value)0U,
+                ApplyFill = true
+
+            };
+
+
+
             cellFormats1.Append(cellFormat2);             
             cellFormats1.Append(cellFormat3);             
             cellFormats1.Append(cellFormat4);             
@@ -767,6 +1174,13 @@ namespace ODPTaxonomyUtility_TT
             cellFormats1.Append(cellFormat6);             
             cellFormats1.Append(cellFormat7);             
             cellFormats1.Append(cellFormat8);
+
+            //id = 7
+            cellFormats1.Append(cellFormat9);
+            //id = 8
+            cellFormats1.Append(cellFormat10);
+            //id = 9
+            cellFormats1.Append(cellFormat11);
 
             CellStyles cellStyles1 = new CellStyles() 
             { Count = (UInt32Value)1U };             
@@ -780,6 +1194,10 @@ namespace ODPTaxonomyUtility_TT
             { Count = (UInt32Value)0U, DefaultTableStyle = 
             "TableStyleMedium2", DefaultPivotStyle = "PivotStyleMedium9" };
 
+            // https://www.codeproject.com/Articles/97307/Using-C-and-Open-XML-SDK-for-Microsoft-Office
+
+
+            stylesheet1.Append(numberingFormats);
             stylesheet1.Append(fonts1);             
             stylesheet1.Append(fills1);             
             stylesheet1.Append(borders1);             
@@ -788,6 +1206,8 @@ namespace ODPTaxonomyUtility_TT
             stylesheet1.Append(cellStyles1);             
             stylesheet1.Append(differentialFormats1);             
             stylesheet1.Append(tableStyles1);
+
+           
 
             return stylesheet1;         
         }

@@ -27,6 +27,7 @@ namespace ODPTaxonomyDAL_JY
         public string ApplicationID { get; set; }
 
         public string ProjectTitle { get; set; }
+        public string ProjectNumber { get; set; }
         public string PIProjectLeader { get; set; }
         public DateTime? LastExportDate { get; set; }
 
@@ -75,7 +76,9 @@ namespace ODPTaxonomyDAL_JY
         public bool UnableToCode { get; set; }
 
         public string CodingType { get; set; }
-
+        public string FY { get; set; }
+        public string Activity { get; set; }
+        public int? Type { get; set; }
         public string KappaCoderAlias { get; set; }
         public KappaTypeEnum KappaType { get; set; }
         public string A1 { get; set; }

@@ -38,15 +38,10 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 case "dates":
                     context.Response.Write(getTimePeriods());
                     break;
+                case "mechanismtypes":
+                    context.Response.Write(getMechanismTypes());
+                    break;
                 case "run":
-                    //string csvPath = context.Server.MapPath("Book1.csv");
-                    //context.Response.Clear();
-                    //context.Response.ContentType = "application/csv";
-                    //context.Response.AppendHeader("content-disposition",
-                    //        "attachment; filename=" + csvPath);
-                    //context.Response.TransmitFile(csvPath);
-                    //context.Response.End();
-
                     getReport(context);
 
 
@@ -69,16 +64,38 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
             string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
             using (ReportingAppDataContext db = new ReportingAppDataContext(connString))
             {
+                db.CommandTimeout = 0;
                 string start = context.Request["start"] ?? "";
                 string end = context.Request["end"] ?? "";
                 string ktype = context.Request["ktype"] ?? "";
-                List<Report_KappaAvg_ByQCWeeksResult> reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
-                List<Report_KappaAvg_DataDetail_ByQCWeeksResult> reportvalsdetail = db.Report_KappaAvg_DataDetail_ByQCWeeks(start, end, ktype).ToList();
-
+                string mechanisms = context.Request["mechanisms"] ?? "";
+                string[] allmechanisms = mechanisms.Split(',');
+                List<int> selectedMechanisms = new List<int>();
                 DataSet ds = new DataSet();
-                CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-"+ktype, ds);
-                CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_DataDetail_ByQCWeeksResult>(reportvalsdetail, context.Response, "KappaAvgDetail-" + ktype, ds);
-                CreateExcelFile.CreateExcelDocumentAsStream(ds, "KappaAvg-"+start+"-"+end+"-"+ktype+".xlsx", context.Response);
+                int mechCount = allmechanisms.Length;
+                List<List<Report_KappaAvg_ByQCWeeks_NewResult>> reports = new List<List<Report_KappaAvg_ByQCWeeks_NewResult>>();
+                foreach (string mechanism in allmechanisms)
+                {
+                    var m = mechanism.Split('-');
+                    int? mechanism_id = Convert.ToInt32(m[0]);
+                    var mechanism_name = m[1];
+                    selectedMechanisms.Add(mechanism_id ?? 0);
+                    List<Report_KappaAvg_ByQCWeeks_NewResult> reportvals = db.Report_KappaAvg_ByQCWeeks_New(start, end, ktype, mechanism_id).ToList();
+                    CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeks_NewResult>(reportvals, context.Response, mechanism_name + "-" + ktype, ds);
+                    
+
+                }
+           
+                List<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult> reportvalsdetail = db.Report_KappaAvg_DataDetail_ByQCWeeks_New(start, end, ktype, String.Join(",",selectedMechanisms.ToArray())).ToList();
+                CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult>(reportvalsdetail, context.Response, "KappaAvgDetail-" + ktype, ds);
+                CreateExcelFile.CreateExcelDocumentAsStreamSpecialHeaders(ds, "KappaAvg-" + start + "-" + end + "-" + ktype + ".xlsx", context.Response, start, end);
+
+                //List<Report_KappaAvg_ByQCWeeksResult> reportvals = db.Report_KappaAvg_ByQCWeeks(start, end, ktype).ToList();
+                //CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-"+ktype, ds);
+                //CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-2" + ktype, ds);
+                //CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeksResult>(reportvals, context.Response, "KappaAvg-3" + ktype, ds);
+                //CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_DataDetail_ByQCWeeksResult>(reportvalsdetail, context.Response, "KappaAvgDetail-" + ktype, ds);
+                //CreateExcelFile.CreateExcelDocumentAsStreamSpecialHeaders(ds, "KappaAvg-"+start+"-"+end+"-"+ktype+".xlsx", context.Response, start, end);
                 //return JsonConvert.SerializeObject(reportvals);
             }
         }
@@ -90,12 +107,24 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
             {
 
                 List<Report_AbstractSummaryResult> reportvals = db.Report_AbstractSummary().ToList();
+                List<Report_AbstractSummary_MergeResult> reportvalsAB = db.Report_AbstractSummary_Merge().ToList();
                 DataSet ds = new DataSet();
-                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "AbstractSummary" , ds);
-                //CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "AbstractSummary2", ds);
+                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummary_MergeResult>(reportvalsAB, context.Response, "Abstract Summary", ds);
+                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "Abstract Summary Details" , ds);
                 string format = "-dd_MM_yyyy_h_mm_ss_tt";
                 CreateExcelFile.CreateExcelDocumentAsStream(ds, "AbstractSummary" + DateTime.Now.ToString(format) + ".xlsx", context.Response);
  
+            }
+        }
+
+
+        private string getMechanismTypes()
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            using (ReportingAppDataContext db = new ReportingAppDataContext(connString))
+            {
+                var mechanismTypes = db.Mechanism_Types.Where(q => q.StatusID == 1).OrderBy(q => q.Sorting).ToList();
+                return JsonConvert.SerializeObject(mechanismTypes);
             }
         }
 
@@ -122,7 +151,7 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                     {
                         //qcWeeks.RemoveRange(getcurrentIdx, qcWeeks.Count - getcurrentIdx);
                         // or
-                        qcWeeks = qcWeeks.Where(qc => qc.QC_ID.Value < getcurrentId).ToList();
+                        qcWeeks = qcWeeks.Where(qc => qc.QC_ID.Value < getcurrentId).OrderByDescending(qc=> qc.QC_ID).ToList();
                     }
                 }
                 catch

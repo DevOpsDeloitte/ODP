@@ -210,23 +210,16 @@ namespace ODPTaxonomyWebsite
 
             if (userCurrent != null)
             {
-                if (Roles.IsUserInRole(userCurrent.UserName, role_coder))
+
+
+                if (Roles.IsUserInRole(userCurrent.UserName, role_admin))
                 {
-                    //Coder
-                    pnl_coder.Visible = true;
-                    //Checking Abstract Coding Option Evailuability
-                    teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.Coder;
-                    bool userIsInTeam = Common.UserIsInTeam(connString, teamTypeID, userId);
-                    if (userIsInTeam)
+                    //Admin
+                    pnl_admin.Visible = true;
+                    // assigning default role.
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
                     {
-                        btn_viewAbstract_coder.Visible = true;
-                        lbl_messCoder.Visible = false;
-                    }
-                    else
-                    {
-                        btn_viewAbstract_coder.Visible = false;
-                        lbl_messCoder.Visible = true;
-                        lbl_messCoder.Text = messUserNotInTeam;
+                        Session["CurrentRole"] = this.role_admin;
                     }
                 }
 
@@ -248,22 +241,79 @@ namespace ODPTaxonomyWebsite
                         //lbl_messageUsers.Visible = true;
                         //lbl_messageUsers.Text = messUserNotInTeam;
                     }
+
+                    // assigning default role.
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_coderSup;
+                    }
+
                 }
-                if (Roles.IsUserInRole(userCurrent.UserName, role_odp))
+
+                if (Roles.IsUserInRole(userCurrent.UserName, role_coder))
                 {
-                    //ODP Staff
-                    pnl_odp.Visible = true;
+                    //Coder
+                    pnl_coder.Visible = true;
+                    //Checking Abstract Coding Option Evailuability
+                    teamTypeID = (int)ODPTaxonomyDAL_TT.TeamType.Coder;
+                    bool userIsInTeam = Common.UserIsInTeam(connString, teamTypeID, userId);
+                    if (userIsInTeam)
+                    {
+                        btn_viewAbstract_coder.Visible = true;
+                        lbl_messCoder.Visible = false;
+                    }
+                    else
+                    {
+                        btn_viewAbstract_coder.Visible = false;
+                        lbl_messCoder.Visible = true;
+                        lbl_messCoder.Text = messUserNotInTeam;
+                    }
+
+                    // assigning default role.
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_coder;
+                    }
+
                 }
+
+
+
+
                 if (Roles.IsUserInRole(userCurrent.UserName, role_odpSup))
                 {
                     //ODP Supervisor
                     pnl_odpSup.Visible = true;
+                    // assigning default role.
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_odpSup;
+                    }
                 }
-                if (Roles.IsUserInRole(userCurrent.UserName, role_admin))
+
+
+                if (Roles.IsUserInRole(userCurrent.UserName, role_odp))
                 {
-                    //Admin
-                    pnl_admin.Visible = true;
+                    //ODP Staff
+                    pnl_odp.Visible = true;
+                    // assigning default role.
+                    if (String.IsNullOrEmpty((string)Session["CurrentRole"]))
+                    {
+                        Session["CurrentRole"] = this.role_odp;
+                    }
+
                 }
+
+
+
+
+
+
+               
+
+
+
+
 
             }
 

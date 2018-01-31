@@ -11,6 +11,8 @@ div#downloadProgressBox div#downloadText { width: 220px; -webkit-animation: blin
 
 div#generalProgressBox { display: none; margin-top: 24px;  no-repeat 2px 0px; padding-top: 0px; position: relative; -webkit-animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate; }
 
+th.hide_column, td.hide_column {display: none;}
+
 .waitingForConnection { animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate }
 @-webkit-keyframes blinker { 
     from { opacity: 1 }
@@ -32,6 +34,7 @@ div#filtersContainer { position: absolute; height: 56px; top: 80px; left: -100px
 div#selectionsBox.hidden { display: none }
 div#selectionsBox { font-weight: bold; text-align: right; position: absolute; top: 70px; right: -205px; }
 input[type="checkbox"].hidecheckbox { display: none }
+table.childtable { margin: 0 0 0 -1px; }
 table.childtable > tbody > tr:nth-of-type(even) { background: rgba(245,245,245, 0.43) }
 table.dataTable thead th, table.dataTable thead td { position: relative; padding: 8px 10px; border-left: 1px solid #ccc; border-bottom: 1px solid #111; }
 .col_select, .col_openclose, .col_flags { width: 20px }
@@ -43,6 +46,14 @@ table.dataTable thead th, table.dataTable thead td { position: relative; padding
 .col_statusdate, .col_exportdate { width: 55px }
 .col_title { width: 195px; max-width: 195px; min-width: 195px; }
 .col_kappa { width: 20px }
+.col_projectnumber { width: 95px; overflow-wrap: break-word; }
+table.dataTable td:nth-child(5) {
+    /*overflow-wrap: break-word;*/
+    /*for firefox wrap of project number, targeting via class col_projectnumber. Not used. */
+}
+.col_fy { width: 23px; }
+.col_mechanism { width: 20px;}
+.col_type { width: 20px; }
 option:disabled { color: #aaa }
 div.titlebox { width: 153px }
 table.dataTable tbody th, table.dataTable tbody td { padding: 8px 10px; border: 1px solid #ccc; }
@@ -136,8 +147,11 @@ div#DTable_info { /*display: none !important; */}
 /* Styles added during work on Abstract table */
 div#basicOnly {
     position: relative;
-    top: 26px;
+    /*top: 26px;*/
     display: inline;
+}
+.hide_all{
+    display: none !important;
 }
 
 .bold {
