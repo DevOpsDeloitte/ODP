@@ -43,4 +43,176 @@
       <Column Name="Coding" Type="System.String" DbType="VarChar(12) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.Report_SelectionDatapulling_PIVOT" Method="Report_SelectionDatapulling_PIVOT">
+    <Parameter Name="FY" Parameter="fY" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="Report_SelectionDatapulling_PIVOTResult">
+      <Column Name="FY" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="AbstractID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApplicationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="[A.1.1 (R-Alcohol)]" Member="A_1_1__R_Alcohol_" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="[A.1.2 (R-Alzheimer’s disease)]" Member="A_1_2__R_Alzheimer_s_disease_" Type="System.String" DbType="NVarChar(1)" CanBeNull="true" />
+      <Column Name="[A.1.3 (R-Blank)]" Member="A_1_3__R_Blank_" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="[A.1.4 (R-Blood disorder)]" Member="A_1_4__R_Blood_disorder_" Type="System.String" DbType="VarChar(1)" CanBeNull="true" />
+      <Column Name="[A.1.5 (R-Blood pressure)]" Member="A_1_5__R_Blood_pressure_" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="[A.1.6 (R-Cancer)]" Member="A_1_6__R_Cancer_" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="[A.1.7 (R-Chemical/toxin)]" Member="A_1_7__R_Chemical_toxin_" Type="System.String" DbType="Char(30)" CanBeNull="true" />
+      <Column Name="[A.1.8 (R-Cholesterol)]" Member="A_1_8__R_Cholesterol_" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Column Name="[A.1.9 (R-Diabetes)]" Member="A_1_9__R_Diabetes_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.10 (R-Diet/nutrition)]" Member="A_1_10__R_Diet_nutrition_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.11 (R-Education/counseling)]" Member="A_1_11__R_Education_counseling_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.12 (R-Firearms)]" Member="A_1_12__R_Firearms_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.13 (R-Gastrointestinal disease)]" Member="A_1_13__R_Gastrointestinal_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.14 (R-Genetics)]" Member="A_1_14__R_Genetics_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.15 (R-Healthcare delivery)]" Member="A_1_15__R_Healthcare_delivery_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.16 (R-Heart disease)]" Member="A_1_16__R_Heart_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.17 (R-HRQOL (Health-related quality of life))]" Member="A_1_17__R_HRQOL__Health_related_quality_of_life__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.18 (R-Infectious disease)]" Member="A_1_18__R_Infectious_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.19 (R-Kidney disease)]" Member="A_1_19__R_Kidney_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.20 (R-Lung disease)]" Member="A_1_20__R_Lung_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.21 (R-Maternal/paternal/child health)]" Member="A_1_21__R_Maternal_paternal_child_health_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.22 (R-Medication/device)]" Member="A_1_22__R_Medication_device_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.23 (R-Mental health)]" Member="A_1_23__R_Mental_health_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.24 (R-Microbiome)]" Member="A_1_24__R_Microbiome_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.25 (R-Mortality)]" Member="A_1_25__R_Mortality_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.26 (R-Motor vehicle crash)]" Member="A_1_26__R_Motor_vehicle_crash_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.27 (R-Musculoskeletal disease)]" Member="A_1_27__R_Musculoskeletal_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.28 (R-Neurological disease (not Alzheimer’s))]" Member="A_1_28__R_Neurological_disease__not_Alzheimer_s__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.29 (R-Obesity)]" Member="A_1_29__R_Obesity_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.30 (R-Physical activity)]" Member="A_1_30__R_Physical_activity_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.31 (R-Policy/built environment)]" Member="A_1_31__R_Policy_built_environment_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.32 (R-Pneumonia/influenza)]" Member="A_1_32__R_Pneumonia_influenza_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.33 (R-Sexual behavior)]" Member="A_1_33__R_Sexual_behavior_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.34 (R-Stress)]" Member="A_1_34__R_Stress_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.35 (R-Stroke)]" Member="A_1_35__R_Stroke_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.36 (R-Substance abuse)]" Member="A_1_36__R_Substance_abuse_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.37 (R-Suicide)]" Member="A_1_37__R_Suicide_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.38 (R-Surgery)]" Member="A_1_38__R_Surgery_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.39 (R-Tobacco)]" Member="A_1_39__R_Tobacco_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.40 (R-Unintentional injuries)]" Member="A_1_40__R_Unintentional_injuries_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.41 (R-Vaccine)]" Member="A_1_41__R_Vaccine_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.42 (R-Violence)]" Member="A_1_42__R_Violence_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.1.43 (R-Other or unclear)]" Member="A_1_43__R_Other_or_unclear_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.1 (E-Alcohol)]" Member="A_2_1__E_Alcohol_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.2 (E-Alzheimer’s disease)]" Member="A_2_2__E_Alzheimer_s_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.3 (E-Blank)]" Member="A_2_3__E_Blank_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.4 (E-Blood disorder)]" Member="A_2_4__E_Blood_disorder_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.5 (E-Blood pressure)]" Member="A_2_5__E_Blood_pressure_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.6 (E-Cancer)]" Member="A_2_6__E_Cancer_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.7 (E-Chemical/toxin)]" Member="A_2_7__E_Chemical_toxin_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.8 (E-Cholesterol)]" Member="A_2_8__E_Cholesterol_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.9 (E-Diabetes)]" Member="A_2_9__E_Diabetes_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.10 (E-Diet/nutrition)]" Member="A_2_10__E_Diet_nutrition_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.11 (E-Education/counseling)]" Member="A_2_11__E_Education_counseling_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.12 (E-Firearms)]" Member="A_2_12__E_Firearms_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.13 (E-Gastrointestinal disease)]" Member="A_2_13__E_Gastrointestinal_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.14 (E-Genetics)]" Member="A_2_14__E_Genetics_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.15 (E-Healthcare delivery)]" Member="A_2_15__E_Healthcare_delivery_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.16 (E-Heart disease)]" Member="A_2_16__E_Heart_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.17 (E-HRQOL (Health-related quality of life))]" Member="A_2_17__E_HRQOL__Health_related_quality_of_life__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.18 (E-Infectious disease)]" Member="A_2_18__E_Infectious_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.19 (E-Kidney disease)]" Member="A_2_19__E_Kidney_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.20 (E-Lung disease)]" Member="A_2_20__E_Lung_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.21 (E-Maternal/paternal/child health)]" Member="A_2_21__E_Maternal_paternal_child_health_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.22 (E-Medication/device)]" Member="A_2_22__E_Medication_device_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.23 (E-Mental health)]" Member="A_2_23__E_Mental_health_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.24 (E-Microbiome)]" Member="A_2_24__E_Microbiome_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.25 (E-Mortality)]" Member="A_2_25__E_Mortality_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.26 (E-Motor vehicle crash)]" Member="A_2_26__E_Motor_vehicle_crash_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.27 (E-Musculoskeletal disease)]" Member="A_2_27__E_Musculoskeletal_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.28 (E-Neurological disease (not Alzheimer’s))]" Member="A_2_28__E_Neurological_disease__not_Alzheimer_s__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.29 (E-Obesity)]" Member="A_2_29__E_Obesity_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.30 (E-Physical activity)]" Member="A_2_30__E_Physical_activity_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.31 (E-Policy/built environment)]" Member="A_2_31__E_Policy_built_environment_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.32 (E-Pneumonia/influenza)]" Member="A_2_32__E_Pneumonia_influenza_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.33 (E-Sexual behavior)]" Member="A_2_33__E_Sexual_behavior_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.34 (E-Stress)]" Member="A_2_34__E_Stress_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.35 (E-Stroke)]" Member="A_2_35__E_Stroke_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.36 (E-Substance abuse)]" Member="A_2_36__E_Substance_abuse_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.37 (E-Suicide)]" Member="A_2_37__E_Suicide_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.38 (E-Surgery)]" Member="A_2_38__E_Surgery_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.39 (E-Tobacco)]" Member="A_2_39__E_Tobacco_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.40 (E-Unintentional injuries)]" Member="A_2_40__E_Unintentional_injuries_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.41 (E-Vaccine)]" Member="A_2_41__E_Vaccine_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.42 (E-Violence)]" Member="A_2_42__E_Violence_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.2.43 (E-Other or unclear)]" Member="A_2_43__E_Other_or_unclear_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.1 (O-Alcohol)]" Member="A_3_1__O_Alcohol_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.2 (O-Alzheimer’s disease)]" Member="A_3_2__O_Alzheimer_s_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.3 (O-Blank)]" Member="A_3_3__O_Blank_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.4 (O-Blood disorder)]" Member="A_3_4__O_Blood_disorder_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.5 (O-Blood pressure)]" Member="A_3_5__O_Blood_pressure_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.6 (O-Cancer)]" Member="A_3_6__O_Cancer_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.7 (O-Chemical/toxin)]" Member="A_3_7__O_Chemical_toxin_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.8 (O-Cholesterol)]" Member="A_3_8__O_Cholesterol_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.9 (O-Diabetes)]" Member="A_3_9__O_Diabetes_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.10 (O-Diet/nutrition)]" Member="A_3_10__O_Diet_nutrition_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.11 (O-Education/counseling)]" Member="A_3_11__O_Education_counseling_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.12 (O-Firearms)]" Member="A_3_12__O_Firearms_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.13 (O-Gastrointestinal disease)]" Member="A_3_13__O_Gastrointestinal_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.14 (O-Genetics)]" Member="A_3_14__O_Genetics_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.15 (O-Healthcare delivery)]" Member="A_3_15__O_Healthcare_delivery_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.16 (O-Heart disease)]" Member="A_3_16__O_Heart_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.17 (O-HRQOL (Health-related quality of life))]" Member="A_3_17__O_HRQOL__Health_related_quality_of_life__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.18 (O-Infectious disease)]" Member="A_3_18__O_Infectious_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.19 (O-Kidney disease)]" Member="A_3_19__O_Kidney_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.20 (O-Lung disease)]" Member="A_3_20__O_Lung_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.21 (O-Maternal/paternal/child health)]" Member="A_3_21__O_Maternal_paternal_child_health_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.22 (O-Medication/device)]" Member="A_3_22__O_Medication_device_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.23 (O-Mental health)]" Member="A_3_23__O_Mental_health_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.24 (O-Microbiome)]" Member="A_3_24__O_Microbiome_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.25 (O-Mortality)]" Member="A_3_25__O_Mortality_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.26 (O-Motor vehicle crash)]" Member="A_3_26__O_Motor_vehicle_crash_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.27 (O-Musculoskeletal disease)]" Member="A_3_27__O_Musculoskeletal_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.28 (O-Neurological disease (not Alzheimer’s))]" Member="A_3_28__O_Neurological_disease__not_Alzheimer_s__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.29 (O-Obesity)]" Member="A_3_29__O_Obesity_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.30 (O-Physical activity)]" Member="A_3_30__O_Physical_activity_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.31 (O-Policy/built environment)]" Member="A_3_31__O_Policy_built_environment_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.32 (O-Pneumonia/influenza)]" Member="A_3_32__O_Pneumonia_influenza_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.33 (O-Sexual behavior)]" Member="A_3_33__O_Sexual_behavior_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.34 (O-Stress)]" Member="A_3_34__O_Stress_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.35 (O-Stroke)]" Member="A_3_35__O_Stroke_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.36 (O-Substance abuse)]" Member="A_3_36__O_Substance_abuse_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.37 (O-Suicide)]" Member="A_3_37__O_Suicide_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.38 (O-Surgery)]" Member="A_3_38__O_Surgery_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.39 (O-Tobacco)]" Member="A_3_39__O_Tobacco_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.40 (O-Unintentional injuries)]" Member="A_3_40__O_Unintentional_injuries_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.41 (O-Vaccine)]" Member="A_3_41__O_Vaccine_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.42 (O-Violence)]" Member="A_3_42__O_Violence_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[A.3.43 (O-Other or unclear)]" Member="A_3_43__O_Other_or_unclear_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[B.1 (Animals)]" Member="B_1__Animals_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[B.2 (Cells/cell lines)]" Member="B_2__Cells_cell_lines_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[B.3 (Blank)]" Member="B_3__Blank_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[B.4 (Human subjects)]" Member="B_4__Human_subjects_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[B.5 (Blank)]" Member="B_5__Blank_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[B.6 (Tissues/organs)]" Member="B_6__Tissues_organs_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[B.7 (Other or unclear)]" Member="B_7__Other_or_unclear_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[C.1 (Community (including home, school, worksite, community organizations))]" Member="C_1__Community__including_home__school__worksite__community_organizations__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[C.2 (Healthcare (e.g., clinic, hospital))]" Member="C_2__Healthcare__e_g___clinic__hospital__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[C.3 (Research clinic or laboratory)]" Member="C_3__Research_clinic_or_laboratory_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[C.4 (Other or unclear)]" Member="C_4__Other_or_unclear_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.1 (Incarcerated/institutionalized)]" Member="D_1__Incarcerated_institutionalized_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.2 (LGBTI)]" Member="D_2__LGBTI_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.3 (Low income)]" Member="D_3__Low_income_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.4 (Military/veterans)]" Member="D_4__Military_veterans_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.5 (Older adults/elderly)]" Member="D_5__Older_adults_elderly_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.6 (People with disabilities)]" Member="D_6__People_with_disabilities_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.7 (Pregnant and/or post-partum women)]" Member="D_7__Pregnant_and_or_post_partum_women_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.8 (Rural)]" Member="D_8__Rural_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.9 (Urban)]" Member="D_9__Urban_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.10 (Youth (infants, children, adolescents))]" Member="D_10__Youth__infants__children__adolescents__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[D.11 (Other or unclear)]" Member="D_11__Other_or_unclear_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[E.1 (Analysis of existing data)]" Member="E_1__Analysis_of_existing_data_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[E.2 (Methods research)]" Member="E_2__Methods_research_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[E.3 (Non-randomized intervention study)]" Member="E_3__Non_randomized_intervention_study_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[E.4 (Observational study)]" Member="E_4__Observational_study_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[E.5 (Pilot/feasibility/proof-of-concept/safety)]" Member="E_5__Pilot_feasibility_proof_of_concept_safety_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[E.6 (Randomized intervention study)]" Member="E_6__Randomized_intervention_study_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[E.7 (Other or unclear)]" Member="E_7__Other_or_unclear_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[F.1 (Preventing new health condition..]" Member="F_1__Preventing_new_health_condition__" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[F.2 (Screening for risk factor)]" Member="F_2__Screening_for_risk_factor_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[F.3 (Screening for early disease)]" Member="F_3__Screening_for_early_disease_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[F.4 (Preventing progression of disease..)]" Member="F_4__Preventing_progression_of_disease___" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[F.5 (Methods research)]" Member="F_5__Methods_research_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="[F.6 (Other or unclear)]" Member="F_6__Other_or_unclear_" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

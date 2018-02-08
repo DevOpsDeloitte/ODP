@@ -127,6 +127,7 @@
     <Content Include="Libraries\Newtonsoft.Json.xml" />
     <Content Include="Login.aspx" />
     <Content Include="notes\notesFor_16_CoderEvaluation_10.xml" />
+    <Content Include="PACTAbstractValuesReport.aspx" />
     <Content Include="ReportingApp\css\report.css" />
     <Content Include="ReportingApp\css\report.min.css">
       <DependentUpon>report.css</DependentUpon>
@@ -358,6 +359,7 @@
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Evaluation\Controls\EvaluationControl.ascx.designer.cs">
       <DependentUpon>EvaluationControl.ascx</DependentUpon>
@@ -519,6 +521,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PACTAbstractValuesReport.aspx.cs">
+      <DependentUpon>PACTAbstractValuesReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PACTAbstractValuesReport.aspx.designer.cs">
+      <DependentUpon>PACTAbstractValuesReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="Print.Master.cs">
       <DependentUpon>Print.Master</DependentUpon>
