@@ -610,333 +610,333 @@ namespace ODPTaxonomyReportDAL
 		
 		private System.Nullable<int> _ApplicationID;
 		
-		private System.Nullable<char> _A_1_1__R_Alcohol_;
+		private string _A_1_1_R_Alcohol;
 		
-		private string _A_1_2__R_Alzheimer_s_disease_;
+		private string _A_1_2_R_Alzheimer_disease;
 		
-		private System.Nullable<char> _A_1_3__R_Blank_;
+		private string _A_1_3_R_Blank;
 		
-		private string _A_1_4__R_Blood_disorder_;
+		private string _A_1_4_R_Blood_disorder;
 		
-		private string _A_1_5__R_Blood_pressure_;
+		private string _A_1_5_R_Blood_pressure;
 		
-		private string _A_1_6__R_Cancer_;
+		private string _A_1_6_R_Cancer;
 		
-		private string _A_1_7__R_Chemical_toxin_;
+		private string _A_1_7_R_Chemical_toxin;
 		
-		private string _A_1_8__R_Cholesterol_;
+		private string _A_1_8_R_Cholesterol;
 		
-		private System.Nullable<short> _A_1_9__R_Diabetes_;
+		private string _A_1_9_R_Diabetes;
 		
-		private System.Nullable<short> _A_1_10__R_Diet_nutrition_;
+		private string _A_1_10_R_Diet_nutrition;
 		
-		private System.Nullable<short> _A_1_11__R_Education_counseling_;
+		private string _A_1_11_R_Education_counseling;
 		
-		private System.Nullable<short> _A_1_12__R_Firearms_;
+		private string _A_1_12_R_Firearms;
 		
-		private System.Nullable<short> _A_1_13__R_Gastrointestinal_disease_;
+		private string _A_1_13_R_Gastrointestinal_disease;
 		
-		private System.Nullable<short> _A_1_14__R_Genetics_;
+		private string _A_1_14_R_Genetics;
 		
-		private System.Nullable<short> _A_1_15__R_Healthcare_delivery_;
+		private string _A_1_15_R_Healthcare_delivery;
 		
-		private System.Nullable<short> _A_1_16__R_Heart_disease_;
+		private string _A_1_16_R_Heart_disease;
 		
-		private System.Nullable<short> _A_1_17__R_HRQOL__Health_related_quality_of_life__;
+		private string _A_1_17_R_HRQOL_Health_related_quality_of_life;
 		
-		private System.Nullable<short> _A_1_18__R_Infectious_disease_;
+		private string _A_1_18_R_Infectious_disease;
 		
-		private System.Nullable<short> _A_1_19__R_Kidney_disease_;
+		private string _A_1_19_R_Kidney_disease;
 		
-		private System.Nullable<short> _A_1_20__R_Lung_disease_;
+		private string _A_1_20_R_Lung_disease;
 		
-		private System.Nullable<short> _A_1_21__R_Maternal_paternal_child_health_;
+		private string _A_1_21_R_Maternal_paternal_child_health;
 		
-		private System.Nullable<short> _A_1_22__R_Medication_device_;
+		private string _A_1_22_R_Medication_device;
 		
-		private System.Nullable<short> _A_1_23__R_Mental_health_;
+		private string _A_1_23_R_Mental_health;
 		
-		private System.Nullable<short> _A_1_24__R_Microbiome_;
+		private string _A_1_24_R_Microbiome;
 		
-		private System.Nullable<short> _A_1_25__R_Mortality_;
+		private string _A_1_25_R_Mortality;
 		
-		private System.Nullable<short> _A_1_26__R_Motor_vehicle_crash_;
+		private string _A_1_26_R_Motor_vehicle_crash;
 		
-		private System.Nullable<short> _A_1_27__R_Musculoskeletal_disease_;
+		private string _A_1_27_R_Musculoskeletal_disease;
 		
-		private System.Nullable<short> _A_1_28__R_Neurological_disease__not_Alzheimer_s__;
+		private string _A_1_28_R_Neurological_disease_not_Alzheimer;
 		
-		private System.Nullable<short> _A_1_29__R_Obesity_;
+		private string _A_1_29_R_Obesity;
 		
-		private System.Nullable<short> _A_1_30__R_Physical_activity_;
+		private string _A_1_30_R_Physical_activity;
 		
-		private System.Nullable<short> _A_1_31__R_Policy_built_environment_;
+		private string _A_1_31_R_Policy_built_environment;
 		
-		private System.Nullable<short> _A_1_32__R_Pneumonia_influenza_;
+		private string _A_1_32_R_Pneumonia_influenza;
 		
-		private System.Nullable<short> _A_1_33__R_Sexual_behavior_;
+		private string _A_1_33_R_Sexual_behavior;
 		
-		private System.Nullable<short> _A_1_34__R_Stress_;
+		private string _A_1_34_R_Stress;
 		
-		private System.Nullable<short> _A_1_35__R_Stroke_;
+		private string _A_1_35_R_Stroke;
 		
-		private System.Nullable<short> _A_1_36__R_Substance_abuse_;
+		private string _A_1_36_R_Substance_abuse;
 		
-		private System.Nullable<short> _A_1_37__R_Suicide_;
+		private string _A_1_37_R_Suicide;
 		
-		private System.Nullable<short> _A_1_38__R_Surgery_;
+		private string _A_1_38_R_Surgery;
 		
-		private System.Nullable<short> _A_1_39__R_Tobacco_;
+		private string _A_1_39_R_Tobacco;
 		
-		private System.Nullable<short> _A_1_40__R_Unintentional_injuries_;
+		private string _A_1_40_R_Unintentional_injuries;
 		
-		private System.Nullable<short> _A_1_41__R_Vaccine_;
+		private string _A_1_41_R_Vaccine;
 		
-		private System.Nullable<short> _A_1_42__R_Violence_;
+		private string _A_1_42_R_Violence;
 		
-		private System.Nullable<short> _A_1_43__R_Other_or_unclear_;
+		private string _A_1_43_R_Other_or_unclear;
 		
-		private System.Nullable<short> _A_2_1__E_Alcohol_;
+		private string _A_2_1_E_Alcohol;
 		
-		private System.Nullable<short> _A_2_2__E_Alzheimer_s_disease_;
+		private string _A_2_2_E_Alzheimer_disease;
 		
-		private System.Nullable<short> _A_2_3__E_Blank_;
+		private string _A_2_3_E_Blank;
 		
-		private System.Nullable<short> _A_2_4__E_Blood_disorder_;
+		private string _A_2_4_E_Blood_disorder;
 		
-		private System.Nullable<short> _A_2_5__E_Blood_pressure_;
+		private string _A_2_5_E_Blood_pressure;
 		
-		private System.Nullable<short> _A_2_6__E_Cancer_;
+		private string _A_2_6_E_Cancer;
 		
-		private System.Nullable<short> _A_2_7__E_Chemical_toxin_;
+		private string _A_2_7_E_Chemical_toxin;
 		
-		private System.Nullable<short> _A_2_8__E_Cholesterol_;
+		private string _A_2_8_E_Cholesterol;
 		
-		private System.Nullable<short> _A_2_9__E_Diabetes_;
+		private string _A_2_9_E_Diabetes;
 		
-		private System.Nullable<short> _A_2_10__E_Diet_nutrition_;
+		private string _A_2_10_E_Diet_nutrition;
 		
-		private System.Nullable<short> _A_2_11__E_Education_counseling_;
+		private string _A_2_11_E_Education_counseling;
 		
-		private System.Nullable<short> _A_2_12__E_Firearms_;
+		private string _A_2_12_E_Firearms;
 		
-		private System.Nullable<short> _A_2_13__E_Gastrointestinal_disease_;
+		private string _A_2_13_E_Gastrointestinal_disease;
 		
-		private System.Nullable<short> _A_2_14__E_Genetics_;
+		private string _A_2_14_E_Genetics;
 		
-		private System.Nullable<short> _A_2_15__E_Healthcare_delivery_;
+		private string _A_2_15_E_Healthcare_delivery;
 		
-		private System.Nullable<short> _A_2_16__E_Heart_disease_;
+		private string _A_2_16_E_Heart_disease;
 		
-		private System.Nullable<short> _A_2_17__E_HRQOL__Health_related_quality_of_life__;
+		private string _A_2_17_E_HRQOL_Health_related_quality_of_life;
 		
-		private System.Nullable<short> _A_2_18__E_Infectious_disease_;
+		private string _A_2_18_E_Infectious_disease;
 		
-		private System.Nullable<short> _A_2_19__E_Kidney_disease_;
+		private string _A_2_19_E_Kidney_disease;
 		
-		private System.Nullable<short> _A_2_20__E_Lung_disease_;
+		private string _A_2_20_E_Lung_disease;
 		
-		private System.Nullable<short> _A_2_21__E_Maternal_paternal_child_health_;
+		private string _A_2_21_E_Maternal_paternal_child_health;
 		
-		private System.Nullable<short> _A_2_22__E_Medication_device_;
+		private string _A_2_22_E_Medication_device;
 		
-		private System.Nullable<short> _A_2_23__E_Mental_health_;
+		private string _A_2_23_E_Mental_health;
 		
-		private System.Nullable<short> _A_2_24__E_Microbiome_;
+		private string _A_2_24_E_Microbiome;
 		
-		private System.Nullable<short> _A_2_25__E_Mortality_;
+		private string _A_2_25_E_Mortality;
 		
-		private System.Nullable<short> _A_2_26__E_Motor_vehicle_crash_;
+		private string _A_2_26_E_Motor_vehicle_crash;
 		
-		private System.Nullable<short> _A_2_27__E_Musculoskeletal_disease_;
+		private string _A_2_27_E_Musculoskeletal_disease;
 		
-		private System.Nullable<short> _A_2_28__E_Neurological_disease__not_Alzheimer_s__;
+		private string _A_2_28_E_Neurological_disease_not_Alzheimer;
 		
-		private System.Nullable<short> _A_2_29__E_Obesity_;
+		private string _A_2_29_E_Obesity;
 		
-		private System.Nullable<short> _A_2_30__E_Physical_activity_;
+		private string _A_2_30_E_Physical_activity;
 		
-		private System.Nullable<short> _A_2_31__E_Policy_built_environment_;
+		private string _A_2_31_E_Policy_built_environment;
 		
-		private System.Nullable<short> _A_2_32__E_Pneumonia_influenza_;
+		private string _A_2_32_E_Pneumonia_influenza;
 		
-		private System.Nullable<short> _A_2_33__E_Sexual_behavior_;
+		private string _A_2_33_E_Sexual_behavior;
 		
-		private System.Nullable<short> _A_2_34__E_Stress_;
+		private string _A_2_34_E_Stress;
 		
-		private System.Nullable<short> _A_2_35__E_Stroke_;
+		private string _A_2_35_E_Stroke;
 		
-		private System.Nullable<short> _A_2_36__E_Substance_abuse_;
+		private string _A_2_36_E_Substance_abuse;
 		
-		private System.Nullable<short> _A_2_37__E_Suicide_;
+		private string _A_2_37_E_Suicide;
 		
-		private System.Nullable<short> _A_2_38__E_Surgery_;
+		private string _A_2_38_E_Surgery;
 		
-		private System.Nullable<short> _A_2_39__E_Tobacco_;
+		private string _A_2_39_E_Tobacco;
 		
-		private System.Nullable<short> _A_2_40__E_Unintentional_injuries_;
+		private string _A_2_40_E_Unintentional_injuries;
 		
-		private System.Nullable<short> _A_2_41__E_Vaccine_;
+		private string _A_2_41_E_Vaccine;
 		
-		private System.Nullable<short> _A_2_42__E_Violence_;
+		private string _A_2_42_E_Violence;
 		
-		private System.Nullable<short> _A_2_43__E_Other_or_unclear_;
+		private string _A_2_43_E_Other_or_unclear;
 		
-		private System.Nullable<short> _A_3_1__O_Alcohol_;
+		private string _A_3_1_O_Alcohol;
 		
-		private System.Nullable<short> _A_3_2__O_Alzheimer_s_disease_;
+		private string _A_3_2_O_Alzheimer_disease;
 		
-		private System.Nullable<short> _A_3_3__O_Blank_;
+		private string _A_3_3_O_Blank;
 		
-		private System.Nullable<short> _A_3_4__O_Blood_disorder_;
+		private string _A_3_4_O_Blood_disorder;
 		
-		private System.Nullable<short> _A_3_5__O_Blood_pressure_;
+		private string _A_3_5_O_Blood_pressure;
 		
-		private System.Nullable<short> _A_3_6__O_Cancer_;
+		private string _A_3_6_O_Cancer;
 		
-		private System.Nullable<short> _A_3_7__O_Chemical_toxin_;
+		private string _A_3_7_O_Chemical_toxin;
 		
-		private System.Nullable<short> _A_3_8__O_Cholesterol_;
+		private string _A_3_8_O_Cholesterol;
 		
-		private System.Nullable<short> _A_3_9__O_Diabetes_;
+		private string _A_3_9_O_Diabetes;
 		
-		private System.Nullable<short> _A_3_10__O_Diet_nutrition_;
+		private string _A_3_10_O_Diet_nutrition;
 		
-		private System.Nullable<short> _A_3_11__O_Education_counseling_;
+		private string _A_3_11_O_Education_counseling;
 		
-		private System.Nullable<short> _A_3_12__O_Firearms_;
+		private string _A_3_12_O_Firearms;
 		
-		private System.Nullable<short> _A_3_13__O_Gastrointestinal_disease_;
+		private string _A_3_13_O_Gastrointestinal_disease;
 		
-		private System.Nullable<short> _A_3_14__O_Genetics_;
+		private string _A_3_14_O_Genetics;
 		
-		private System.Nullable<short> _A_3_15__O_Healthcare_delivery_;
+		private string _A_3_15_O_Healthcare_delivery;
 		
-		private System.Nullable<short> _A_3_16__O_Heart_disease_;
+		private string _A_3_16_O_Heart_disease;
 		
-		private System.Nullable<short> _A_3_17__O_HRQOL__Health_related_quality_of_life__;
+		private string _A_3_17_O_HRQOL_Health_related_quality_of_life;
 		
-		private System.Nullable<short> _A_3_18__O_Infectious_disease_;
+		private string _A_3_18_O_Infectious_disease;
 		
-		private System.Nullable<short> _A_3_19__O_Kidney_disease_;
+		private string _A_3_19_O_Kidney_disease;
 		
-		private System.Nullable<short> _A_3_20__O_Lung_disease_;
+		private string _A_3_20_O_Lung_disease;
 		
-		private System.Nullable<short> _A_3_21__O_Maternal_paternal_child_health_;
+		private string _A_3_21_O_Maternal_paternal_child_health;
 		
-		private System.Nullable<short> _A_3_22__O_Medication_device_;
+		private string _A_3_22_O_Medication_device;
 		
-		private System.Nullable<short> _A_3_23__O_Mental_health_;
+		private string _A_3_23_O_Mental_health;
 		
-		private System.Nullable<short> _A_3_24__O_Microbiome_;
+		private string _A_3_24_O_Microbiome;
 		
-		private System.Nullable<short> _A_3_25__O_Mortality_;
+		private string _A_3_25_O_Mortality;
 		
-		private System.Nullable<short> _A_3_26__O_Motor_vehicle_crash_;
+		private string _A_3_26_O_Motor_vehicle_crash;
 		
-		private System.Nullable<short> _A_3_27__O_Musculoskeletal_disease_;
+		private string _A_3_27_O_Musculoskeletal_disease;
 		
-		private System.Nullable<short> _A_3_28__O_Neurological_disease__not_Alzheimer_s__;
+		private string _A_3_28_O_Neurological_disease_not_Alzheimer;
 		
-		private System.Nullable<short> _A_3_29__O_Obesity_;
+		private string _A_3_29_O_Obesity;
 		
-		private System.Nullable<short> _A_3_30__O_Physical_activity_;
+		private string _A_3_30_O_Physical_activity;
 		
-		private System.Nullable<short> _A_3_31__O_Policy_built_environment_;
+		private string _A_3_31_O_Policy_built_environment;
 		
-		private System.Nullable<short> _A_3_32__O_Pneumonia_influenza_;
+		private string _A_3_32_O_Pneumonia_influenza;
 		
-		private System.Nullable<short> _A_3_33__O_Sexual_behavior_;
+		private string _A_3_33_O_Sexual_behavior;
 		
-		private System.Nullable<short> _A_3_34__O_Stress_;
+		private string _A_3_34_O_Stress;
 		
-		private System.Nullable<short> _A_3_35__O_Stroke_;
+		private string _A_3_35_O_Stroke;
 		
-		private System.Nullable<short> _A_3_36__O_Substance_abuse_;
+		private string _A_3_36_O_Substance_abuse;
 		
-		private System.Nullable<short> _A_3_37__O_Suicide_;
+		private string _A_3_37_O_Suicide;
 		
-		private System.Nullable<short> _A_3_38__O_Surgery_;
+		private string _A_3_38_O_Surgery;
 		
-		private System.Nullable<short> _A_3_39__O_Tobacco_;
+		private string _A_3_39_O_Tobacco;
 		
-		private System.Nullable<short> _A_3_40__O_Unintentional_injuries_;
+		private string _A_3_40_O_Unintentional_injuries;
 		
-		private System.Nullable<short> _A_3_41__O_Vaccine_;
+		private string _A_3_41_O_Vaccine;
 		
-		private System.Nullable<short> _A_3_42__O_Violence_;
+		private string _A_3_42_O_Violence;
 		
-		private System.Nullable<short> _A_3_43__O_Other_or_unclear_;
+		private string _A_3_43_O_Other_or_unclear;
 		
-		private System.Nullable<short> _B_1__Animals_;
+		private string _B_1_Animals;
 		
-		private System.Nullable<short> _B_2__Cells_cell_lines_;
+		private string _B_2_Cells_cell_lines;
 		
-		private System.Nullable<short> _B_3__Blank_;
+		private string _B_3_Blank;
 		
-		private System.Nullable<short> _B_4__Human_subjects_;
+		private string _B_4_Human_subjects;
 		
-		private System.Nullable<short> _B_5__Blank_;
+		private string _B_5_Blank;
 		
-		private System.Nullable<short> _B_6__Tissues_organs_;
+		private string _B_6_Tissues_organs;
 		
-		private System.Nullable<short> _B_7__Other_or_unclear_;
+		private string _B_7_Other_or_unclear;
 		
-		private System.Nullable<short> _C_1__Community__including_home__school__worksite__community_organizations__;
+		private string _C_1_Community;
 		
-		private System.Nullable<short> _C_2__Healthcare__e_g___clinic__hospital__;
+		private string _C_2_Healthcare;
 		
-		private System.Nullable<short> _C_3__Research_clinic_or_laboratory_;
+		private string _C_3_Research_clinic_or_laboratory;
 		
-		private System.Nullable<short> _C_4__Other_or_unclear_;
+		private string _C_4_Other_or_unclear;
 		
-		private System.Nullable<short> _D_1__Incarcerated_institutionalized_;
+		private string _D_1_Incarcerated_institutionalized;
 		
-		private System.Nullable<short> _D_2__LGBTI_;
+		private string _D_2_LGBTI;
 		
-		private System.Nullable<short> _D_3__Low_income_;
+		private string _D_3_Low_income;
 		
-		private System.Nullable<short> _D_4__Military_veterans_;
+		private string _D_4_Military_veterans;
 		
-		private System.Nullable<short> _D_5__Older_adults_elderly_;
+		private string _D_5_Older_adults_elderly;
 		
-		private System.Nullable<short> _D_6__People_with_disabilities_;
+		private string _D_6_People_with_disabilities;
 		
-		private System.Nullable<short> _D_7__Pregnant_and_or_post_partum_women_;
+		private string _D_7_Pregnant_and_or_post_partum_women;
 		
-		private System.Nullable<short> _D_8__Rural_;
+		private string _D_8_Rural;
 		
-		private System.Nullable<short> _D_9__Urban_;
+		private string _D_9_Urban;
 		
-		private System.Nullable<short> _D_10__Youth__infants__children__adolescents__;
+		private string _D_10_Youth_infants_children_adolescents;
 		
-		private System.Nullable<short> _D_11__Other_or_unclear_;
+		private string _D_11_Other_or_unclear;
 		
-		private System.Nullable<short> _E_1__Analysis_of_existing_data_;
+		private string _E_1_Analysis_of_existing_data;
 		
-		private System.Nullable<short> _E_2__Methods_research_;
+		private string _E_2_Methods_research;
 		
-		private System.Nullable<short> _E_3__Non_randomized_intervention_study_;
+		private string _E_3_Non_randomized_intervention_study;
 		
-		private System.Nullable<short> _E_4__Observational_study_;
+		private string _E_4_Observational_study;
 		
-		private System.Nullable<short> _E_5__Pilot_feasibility_proof_of_concept_safety_;
+		private string _E_5_Pilot_feasibility_proof_of_concept_safety;
 		
-		private System.Nullable<short> _E_6__Randomized_intervention_study_;
+		private string _E_6_Randomized_intervention_study;
 		
-		private System.Nullable<short> _E_7__Other_or_unclear_;
+		private string _E_7_Other_or_unclear;
 		
-		private System.Nullable<short> _F_1__Preventing_new_health_condition__;
+		private string _F_1_Preventing_new_health_condition;
 		
-		private System.Nullable<short> _F_2__Screening_for_risk_factor_;
+		private string _F_2_Screening_for_risk_factor;
 		
-		private System.Nullable<short> _F_3__Screening_for_early_disease_;
+		private string _F_3_Screening_for_early_disease;
 		
-		private System.Nullable<short> _F_4__Preventing_progression_of_disease___;
+		private string _F_4_Preventing_progression_of_disease;
 		
-		private System.Nullable<short> _F_5__Methods_research_;
+		private string _F_5_Methods_research;
 		
-		private System.Nullable<short> _F_6__Other_or_unclear_;
+		private string _F_6_Other_or_unclear;
 		
 		public Report_SelectionDatapulling_PIVOTResult()
 		{
@@ -990,2626 +990,2626 @@ namespace ODPTaxonomyReportDAL
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.1 (R-Alcohol)]", Storage="_A_1_1__R_Alcohol_", DbType="NChar(1)")]
-		public System.Nullable<char> A_1_1__R_Alcohol_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-1-R-Alcohol]", Storage="_A_1_1_R_Alcohol", DbType="NVarChar(30)")]
+		public string A_1_1_R_Alcohol
 		{
 			get
 			{
-				return this._A_1_1__R_Alcohol_;
+				return this._A_1_1_R_Alcohol;
 			}
 			set
 			{
-				if ((this._A_1_1__R_Alcohol_ != value))
+				if ((this._A_1_1_R_Alcohol != value))
 				{
-					this._A_1_1__R_Alcohol_ = value;
+					this._A_1_1_R_Alcohol = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.2 (R-Alzheimer’s disease)]", Storage="_A_1_2__R_Alzheimer_s_disease_", DbType="NVarChar(1)")]
-		public string A_1_2__R_Alzheimer_s_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-2-R-Alzheimer-disease]", Storage="_A_1_2_R_Alzheimer_disease", DbType="NVarChar(30)")]
+		public string A_1_2_R_Alzheimer_disease
 		{
 			get
 			{
-				return this._A_1_2__R_Alzheimer_s_disease_;
+				return this._A_1_2_R_Alzheimer_disease;
 			}
 			set
 			{
-				if ((this._A_1_2__R_Alzheimer_s_disease_ != value))
+				if ((this._A_1_2_R_Alzheimer_disease != value))
 				{
-					this._A_1_2__R_Alzheimer_s_disease_ = value;
+					this._A_1_2_R_Alzheimer_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.3 (R-Blank)]", Storage="_A_1_3__R_Blank_", DbType="Char(1)")]
-		public System.Nullable<char> A_1_3__R_Blank_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-3-R-Blank]", Storage="_A_1_3_R_Blank", DbType="NVarChar(30)")]
+		public string A_1_3_R_Blank
 		{
 			get
 			{
-				return this._A_1_3__R_Blank_;
+				return this._A_1_3_R_Blank;
 			}
 			set
 			{
-				if ((this._A_1_3__R_Blank_ != value))
+				if ((this._A_1_3_R_Blank != value))
 				{
-					this._A_1_3__R_Blank_ = value;
+					this._A_1_3_R_Blank = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.4 (R-Blood disorder)]", Storage="_A_1_4__R_Blood_disorder_", DbType="VarChar(1)")]
-		public string A_1_4__R_Blood_disorder_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-4-R-Blood-disorder]", Storage="_A_1_4_R_Blood_disorder", DbType="NVarChar(30)")]
+		public string A_1_4_R_Blood_disorder
 		{
 			get
 			{
-				return this._A_1_4__R_Blood_disorder_;
+				return this._A_1_4_R_Blood_disorder;
 			}
 			set
 			{
-				if ((this._A_1_4__R_Blood_disorder_ != value))
+				if ((this._A_1_4_R_Blood_disorder != value))
 				{
-					this._A_1_4__R_Blood_disorder_ = value;
+					this._A_1_4_R_Blood_disorder = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.5 (R-Blood pressure)]", Storage="_A_1_5__R_Blood_pressure_", DbType="NChar(30)")]
-		public string A_1_5__R_Blood_pressure_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-5-R-Blood-pressure]", Storage="_A_1_5_R_Blood_pressure", DbType="NVarChar(30)")]
+		public string A_1_5_R_Blood_pressure
 		{
 			get
 			{
-				return this._A_1_5__R_Blood_pressure_;
+				return this._A_1_5_R_Blood_pressure;
 			}
 			set
 			{
-				if ((this._A_1_5__R_Blood_pressure_ != value))
+				if ((this._A_1_5_R_Blood_pressure != value))
 				{
-					this._A_1_5__R_Blood_pressure_ = value;
+					this._A_1_5_R_Blood_pressure = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.6 (R-Cancer)]", Storage="_A_1_6__R_Cancer_", DbType="NVarChar(30)")]
-		public string A_1_6__R_Cancer_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-6-R-Cancer]", Storage="_A_1_6_R_Cancer", DbType="NVarChar(30)")]
+		public string A_1_6_R_Cancer
 		{
 			get
 			{
-				return this._A_1_6__R_Cancer_;
+				return this._A_1_6_R_Cancer;
 			}
 			set
 			{
-				if ((this._A_1_6__R_Cancer_ != value))
+				if ((this._A_1_6_R_Cancer != value))
 				{
-					this._A_1_6__R_Cancer_ = value;
+					this._A_1_6_R_Cancer = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.7 (R-Chemical/toxin)]", Storage="_A_1_7__R_Chemical_toxin_", DbType="Char(30)")]
-		public string A_1_7__R_Chemical_toxin_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-7-R-Chemical/toxin]", Storage="_A_1_7_R_Chemical_toxin", DbType="NVarChar(30)")]
+		public string A_1_7_R_Chemical_toxin
 		{
 			get
 			{
-				return this._A_1_7__R_Chemical_toxin_;
+				return this._A_1_7_R_Chemical_toxin;
 			}
 			set
 			{
-				if ((this._A_1_7__R_Chemical_toxin_ != value))
+				if ((this._A_1_7_R_Chemical_toxin != value))
 				{
-					this._A_1_7__R_Chemical_toxin_ = value;
+					this._A_1_7_R_Chemical_toxin = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.8 (R-Cholesterol)]", Storage="_A_1_8__R_Cholesterol_", DbType="VarChar(30)")]
-		public string A_1_8__R_Cholesterol_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-8-R-Cholesterol]", Storage="_A_1_8_R_Cholesterol", DbType="NVarChar(30)")]
+		public string A_1_8_R_Cholesterol
 		{
 			get
 			{
-				return this._A_1_8__R_Cholesterol_;
+				return this._A_1_8_R_Cholesterol;
 			}
 			set
 			{
-				if ((this._A_1_8__R_Cholesterol_ != value))
+				if ((this._A_1_8_R_Cholesterol != value))
 				{
-					this._A_1_8__R_Cholesterol_ = value;
+					this._A_1_8_R_Cholesterol = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.9 (R-Diabetes)]", Storage="_A_1_9__R_Diabetes_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_9__R_Diabetes_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-9-R-Diabetes]", Storage="_A_1_9_R_Diabetes", DbType="NVarChar(30)")]
+		public string A_1_9_R_Diabetes
 		{
 			get
 			{
-				return this._A_1_9__R_Diabetes_;
+				return this._A_1_9_R_Diabetes;
 			}
 			set
 			{
-				if ((this._A_1_9__R_Diabetes_ != value))
+				if ((this._A_1_9_R_Diabetes != value))
 				{
-					this._A_1_9__R_Diabetes_ = value;
+					this._A_1_9_R_Diabetes = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.10 (R-Diet/nutrition)]", Storage="_A_1_10__R_Diet_nutrition_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_10__R_Diet_nutrition_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-10-R-Diet/nutrition]", Storage="_A_1_10_R_Diet_nutrition", DbType="NVarChar(30)")]
+		public string A_1_10_R_Diet_nutrition
 		{
 			get
 			{
-				return this._A_1_10__R_Diet_nutrition_;
+				return this._A_1_10_R_Diet_nutrition;
 			}
 			set
 			{
-				if ((this._A_1_10__R_Diet_nutrition_ != value))
+				if ((this._A_1_10_R_Diet_nutrition != value))
 				{
-					this._A_1_10__R_Diet_nutrition_ = value;
+					this._A_1_10_R_Diet_nutrition = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.11 (R-Education/counseling)]", Storage="_A_1_11__R_Education_counseling_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_11__R_Education_counseling_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-11-R-Education/counseling]", Storage="_A_1_11_R_Education_counseling", DbType="NVarChar(30)")]
+		public string A_1_11_R_Education_counseling
 		{
 			get
 			{
-				return this._A_1_11__R_Education_counseling_;
+				return this._A_1_11_R_Education_counseling;
 			}
 			set
 			{
-				if ((this._A_1_11__R_Education_counseling_ != value))
+				if ((this._A_1_11_R_Education_counseling != value))
 				{
-					this._A_1_11__R_Education_counseling_ = value;
+					this._A_1_11_R_Education_counseling = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.12 (R-Firearms)]", Storage="_A_1_12__R_Firearms_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_12__R_Firearms_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-12-R-Firearms]", Storage="_A_1_12_R_Firearms", DbType="NVarChar(30)")]
+		public string A_1_12_R_Firearms
 		{
 			get
 			{
-				return this._A_1_12__R_Firearms_;
+				return this._A_1_12_R_Firearms;
 			}
 			set
 			{
-				if ((this._A_1_12__R_Firearms_ != value))
+				if ((this._A_1_12_R_Firearms != value))
 				{
-					this._A_1_12__R_Firearms_ = value;
+					this._A_1_12_R_Firearms = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.13 (R-Gastrointestinal disease)]", Storage="_A_1_13__R_Gastrointestinal_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_13__R_Gastrointestinal_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-13-R-Gastrointestinal-disease]", Storage="_A_1_13_R_Gastrointestinal_disease", DbType="NVarChar(30)")]
+		public string A_1_13_R_Gastrointestinal_disease
 		{
 			get
 			{
-				return this._A_1_13__R_Gastrointestinal_disease_;
+				return this._A_1_13_R_Gastrointestinal_disease;
 			}
 			set
 			{
-				if ((this._A_1_13__R_Gastrointestinal_disease_ != value))
+				if ((this._A_1_13_R_Gastrointestinal_disease != value))
 				{
-					this._A_1_13__R_Gastrointestinal_disease_ = value;
+					this._A_1_13_R_Gastrointestinal_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.14 (R-Genetics)]", Storage="_A_1_14__R_Genetics_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_14__R_Genetics_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-14-R-Genetics]", Storage="_A_1_14_R_Genetics", DbType="NVarChar(30)")]
+		public string A_1_14_R_Genetics
 		{
 			get
 			{
-				return this._A_1_14__R_Genetics_;
+				return this._A_1_14_R_Genetics;
 			}
 			set
 			{
-				if ((this._A_1_14__R_Genetics_ != value))
+				if ((this._A_1_14_R_Genetics != value))
 				{
-					this._A_1_14__R_Genetics_ = value;
+					this._A_1_14_R_Genetics = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.15 (R-Healthcare delivery)]", Storage="_A_1_15__R_Healthcare_delivery_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_15__R_Healthcare_delivery_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-15-R-Healthcare-delivery]", Storage="_A_1_15_R_Healthcare_delivery", DbType="NVarChar(30)")]
+		public string A_1_15_R_Healthcare_delivery
 		{
 			get
 			{
-				return this._A_1_15__R_Healthcare_delivery_;
+				return this._A_1_15_R_Healthcare_delivery;
 			}
 			set
 			{
-				if ((this._A_1_15__R_Healthcare_delivery_ != value))
+				if ((this._A_1_15_R_Healthcare_delivery != value))
 				{
-					this._A_1_15__R_Healthcare_delivery_ = value;
+					this._A_1_15_R_Healthcare_delivery = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.16 (R-Heart disease)]", Storage="_A_1_16__R_Heart_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_16__R_Heart_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-16-R-Heart-disease]", Storage="_A_1_16_R_Heart_disease", DbType="NVarChar(30)")]
+		public string A_1_16_R_Heart_disease
 		{
 			get
 			{
-				return this._A_1_16__R_Heart_disease_;
+				return this._A_1_16_R_Heart_disease;
 			}
 			set
 			{
-				if ((this._A_1_16__R_Heart_disease_ != value))
+				if ((this._A_1_16_R_Heart_disease != value))
 				{
-					this._A_1_16__R_Heart_disease_ = value;
+					this._A_1_16_R_Heart_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.17 (R-HRQOL (Health-related quality of life))]", Storage="_A_1_17__R_HRQOL__Health_related_quality_of_life__", DbType="SmallInt")]
-		public System.Nullable<short> A_1_17__R_HRQOL__Health_related_quality_of_life__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-17-R-HRQOL-Health-related-quality-of-life]", Storage="_A_1_17_R_HRQOL_Health_related_quality_of_life", DbType="NVarChar(30)")]
+		public string A_1_17_R_HRQOL_Health_related_quality_of_life
 		{
 			get
 			{
-				return this._A_1_17__R_HRQOL__Health_related_quality_of_life__;
+				return this._A_1_17_R_HRQOL_Health_related_quality_of_life;
 			}
 			set
 			{
-				if ((this._A_1_17__R_HRQOL__Health_related_quality_of_life__ != value))
+				if ((this._A_1_17_R_HRQOL_Health_related_quality_of_life != value))
 				{
-					this._A_1_17__R_HRQOL__Health_related_quality_of_life__ = value;
+					this._A_1_17_R_HRQOL_Health_related_quality_of_life = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.18 (R-Infectious disease)]", Storage="_A_1_18__R_Infectious_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_18__R_Infectious_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-18-R-Infectious-disease]", Storage="_A_1_18_R_Infectious_disease", DbType="NVarChar(30)")]
+		public string A_1_18_R_Infectious_disease
 		{
 			get
 			{
-				return this._A_1_18__R_Infectious_disease_;
+				return this._A_1_18_R_Infectious_disease;
 			}
 			set
 			{
-				if ((this._A_1_18__R_Infectious_disease_ != value))
+				if ((this._A_1_18_R_Infectious_disease != value))
 				{
-					this._A_1_18__R_Infectious_disease_ = value;
+					this._A_1_18_R_Infectious_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.19 (R-Kidney disease)]", Storage="_A_1_19__R_Kidney_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_19__R_Kidney_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-19-R-Kidney-disease]", Storage="_A_1_19_R_Kidney_disease", DbType="NVarChar(30)")]
+		public string A_1_19_R_Kidney_disease
 		{
 			get
 			{
-				return this._A_1_19__R_Kidney_disease_;
+				return this._A_1_19_R_Kidney_disease;
 			}
 			set
 			{
-				if ((this._A_1_19__R_Kidney_disease_ != value))
+				if ((this._A_1_19_R_Kidney_disease != value))
 				{
-					this._A_1_19__R_Kidney_disease_ = value;
+					this._A_1_19_R_Kidney_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.20 (R-Lung disease)]", Storage="_A_1_20__R_Lung_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_20__R_Lung_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-20-R-Lung-disease]", Storage="_A_1_20_R_Lung_disease", DbType="NVarChar(30)")]
+		public string A_1_20_R_Lung_disease
 		{
 			get
 			{
-				return this._A_1_20__R_Lung_disease_;
+				return this._A_1_20_R_Lung_disease;
 			}
 			set
 			{
-				if ((this._A_1_20__R_Lung_disease_ != value))
+				if ((this._A_1_20_R_Lung_disease != value))
 				{
-					this._A_1_20__R_Lung_disease_ = value;
+					this._A_1_20_R_Lung_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.21 (R-Maternal/paternal/child health)]", Storage="_A_1_21__R_Maternal_paternal_child_health_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_21__R_Maternal_paternal_child_health_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-21-R-Maternal/paternal/child-health]", Storage="_A_1_21_R_Maternal_paternal_child_health", DbType="NVarChar(30)")]
+		public string A_1_21_R_Maternal_paternal_child_health
 		{
 			get
 			{
-				return this._A_1_21__R_Maternal_paternal_child_health_;
+				return this._A_1_21_R_Maternal_paternal_child_health;
 			}
 			set
 			{
-				if ((this._A_1_21__R_Maternal_paternal_child_health_ != value))
+				if ((this._A_1_21_R_Maternal_paternal_child_health != value))
 				{
-					this._A_1_21__R_Maternal_paternal_child_health_ = value;
+					this._A_1_21_R_Maternal_paternal_child_health = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.22 (R-Medication/device)]", Storage="_A_1_22__R_Medication_device_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_22__R_Medication_device_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-22-R-Medication/device]", Storage="_A_1_22_R_Medication_device", DbType="NVarChar(30)")]
+		public string A_1_22_R_Medication_device
 		{
 			get
 			{
-				return this._A_1_22__R_Medication_device_;
+				return this._A_1_22_R_Medication_device;
 			}
 			set
 			{
-				if ((this._A_1_22__R_Medication_device_ != value))
+				if ((this._A_1_22_R_Medication_device != value))
 				{
-					this._A_1_22__R_Medication_device_ = value;
+					this._A_1_22_R_Medication_device = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.23 (R-Mental health)]", Storage="_A_1_23__R_Mental_health_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_23__R_Mental_health_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-23-R-Mental-health]", Storage="_A_1_23_R_Mental_health", DbType="NVarChar(30)")]
+		public string A_1_23_R_Mental_health
 		{
 			get
 			{
-				return this._A_1_23__R_Mental_health_;
+				return this._A_1_23_R_Mental_health;
 			}
 			set
 			{
-				if ((this._A_1_23__R_Mental_health_ != value))
+				if ((this._A_1_23_R_Mental_health != value))
 				{
-					this._A_1_23__R_Mental_health_ = value;
+					this._A_1_23_R_Mental_health = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.24 (R-Microbiome)]", Storage="_A_1_24__R_Microbiome_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_24__R_Microbiome_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-24-R-Microbiome]", Storage="_A_1_24_R_Microbiome", DbType="NVarChar(30)")]
+		public string A_1_24_R_Microbiome
 		{
 			get
 			{
-				return this._A_1_24__R_Microbiome_;
+				return this._A_1_24_R_Microbiome;
 			}
 			set
 			{
-				if ((this._A_1_24__R_Microbiome_ != value))
+				if ((this._A_1_24_R_Microbiome != value))
 				{
-					this._A_1_24__R_Microbiome_ = value;
+					this._A_1_24_R_Microbiome = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.25 (R-Mortality)]", Storage="_A_1_25__R_Mortality_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_25__R_Mortality_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-25-R-Mortality]", Storage="_A_1_25_R_Mortality", DbType="NVarChar(30)")]
+		public string A_1_25_R_Mortality
 		{
 			get
 			{
-				return this._A_1_25__R_Mortality_;
+				return this._A_1_25_R_Mortality;
 			}
 			set
 			{
-				if ((this._A_1_25__R_Mortality_ != value))
+				if ((this._A_1_25_R_Mortality != value))
 				{
-					this._A_1_25__R_Mortality_ = value;
+					this._A_1_25_R_Mortality = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.26 (R-Motor vehicle crash)]", Storage="_A_1_26__R_Motor_vehicle_crash_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_26__R_Motor_vehicle_crash_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-26-R-Motor-vehicle-crash]", Storage="_A_1_26_R_Motor_vehicle_crash", DbType="NVarChar(30)")]
+		public string A_1_26_R_Motor_vehicle_crash
 		{
 			get
 			{
-				return this._A_1_26__R_Motor_vehicle_crash_;
+				return this._A_1_26_R_Motor_vehicle_crash;
 			}
 			set
 			{
-				if ((this._A_1_26__R_Motor_vehicle_crash_ != value))
+				if ((this._A_1_26_R_Motor_vehicle_crash != value))
 				{
-					this._A_1_26__R_Motor_vehicle_crash_ = value;
+					this._A_1_26_R_Motor_vehicle_crash = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.27 (R-Musculoskeletal disease)]", Storage="_A_1_27__R_Musculoskeletal_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_27__R_Musculoskeletal_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-27-R-Musculoskeletal-disease]", Storage="_A_1_27_R_Musculoskeletal_disease", DbType="NVarChar(30)")]
+		public string A_1_27_R_Musculoskeletal_disease
 		{
 			get
 			{
-				return this._A_1_27__R_Musculoskeletal_disease_;
+				return this._A_1_27_R_Musculoskeletal_disease;
 			}
 			set
 			{
-				if ((this._A_1_27__R_Musculoskeletal_disease_ != value))
+				if ((this._A_1_27_R_Musculoskeletal_disease != value))
 				{
-					this._A_1_27__R_Musculoskeletal_disease_ = value;
+					this._A_1_27_R_Musculoskeletal_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.28 (R-Neurological disease (not Alzheimer’s))]", Storage="_A_1_28__R_Neurological_disease__not_Alzheimer_s__", DbType="SmallInt")]
-		public System.Nullable<short> A_1_28__R_Neurological_disease__not_Alzheimer_s__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-28-R-Neurological-disease-not-Alzheimer]", Storage="_A_1_28_R_Neurological_disease_not_Alzheimer", DbType="NVarChar(30)")]
+		public string A_1_28_R_Neurological_disease_not_Alzheimer
 		{
 			get
 			{
-				return this._A_1_28__R_Neurological_disease__not_Alzheimer_s__;
+				return this._A_1_28_R_Neurological_disease_not_Alzheimer;
 			}
 			set
 			{
-				if ((this._A_1_28__R_Neurological_disease__not_Alzheimer_s__ != value))
+				if ((this._A_1_28_R_Neurological_disease_not_Alzheimer != value))
 				{
-					this._A_1_28__R_Neurological_disease__not_Alzheimer_s__ = value;
+					this._A_1_28_R_Neurological_disease_not_Alzheimer = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.29 (R-Obesity)]", Storage="_A_1_29__R_Obesity_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_29__R_Obesity_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-29-R-Obesity]", Storage="_A_1_29_R_Obesity", DbType="NVarChar(30)")]
+		public string A_1_29_R_Obesity
 		{
 			get
 			{
-				return this._A_1_29__R_Obesity_;
+				return this._A_1_29_R_Obesity;
 			}
 			set
 			{
-				if ((this._A_1_29__R_Obesity_ != value))
+				if ((this._A_1_29_R_Obesity != value))
 				{
-					this._A_1_29__R_Obesity_ = value;
+					this._A_1_29_R_Obesity = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.30 (R-Physical activity)]", Storage="_A_1_30__R_Physical_activity_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_30__R_Physical_activity_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-30-R-Physical-activity]", Storage="_A_1_30_R_Physical_activity", DbType="NVarChar(30)")]
+		public string A_1_30_R_Physical_activity
 		{
 			get
 			{
-				return this._A_1_30__R_Physical_activity_;
+				return this._A_1_30_R_Physical_activity;
 			}
 			set
 			{
-				if ((this._A_1_30__R_Physical_activity_ != value))
+				if ((this._A_1_30_R_Physical_activity != value))
 				{
-					this._A_1_30__R_Physical_activity_ = value;
+					this._A_1_30_R_Physical_activity = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.31 (R-Policy/built environment)]", Storage="_A_1_31__R_Policy_built_environment_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_31__R_Policy_built_environment_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-31-R-Policy/built-environment]", Storage="_A_1_31_R_Policy_built_environment", DbType="NVarChar(30)")]
+		public string A_1_31_R_Policy_built_environment
 		{
 			get
 			{
-				return this._A_1_31__R_Policy_built_environment_;
+				return this._A_1_31_R_Policy_built_environment;
 			}
 			set
 			{
-				if ((this._A_1_31__R_Policy_built_environment_ != value))
+				if ((this._A_1_31_R_Policy_built_environment != value))
 				{
-					this._A_1_31__R_Policy_built_environment_ = value;
+					this._A_1_31_R_Policy_built_environment = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.32 (R-Pneumonia/influenza)]", Storage="_A_1_32__R_Pneumonia_influenza_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_32__R_Pneumonia_influenza_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-32-R-Pneumonia/influenza]", Storage="_A_1_32_R_Pneumonia_influenza", DbType="NVarChar(30)")]
+		public string A_1_32_R_Pneumonia_influenza
 		{
 			get
 			{
-				return this._A_1_32__R_Pneumonia_influenza_;
+				return this._A_1_32_R_Pneumonia_influenza;
 			}
 			set
 			{
-				if ((this._A_1_32__R_Pneumonia_influenza_ != value))
+				if ((this._A_1_32_R_Pneumonia_influenza != value))
 				{
-					this._A_1_32__R_Pneumonia_influenza_ = value;
+					this._A_1_32_R_Pneumonia_influenza = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.33 (R-Sexual behavior)]", Storage="_A_1_33__R_Sexual_behavior_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_33__R_Sexual_behavior_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-33-R-Sexual-behavior]", Storage="_A_1_33_R_Sexual_behavior", DbType="NVarChar(30)")]
+		public string A_1_33_R_Sexual_behavior
 		{
 			get
 			{
-				return this._A_1_33__R_Sexual_behavior_;
+				return this._A_1_33_R_Sexual_behavior;
 			}
 			set
 			{
-				if ((this._A_1_33__R_Sexual_behavior_ != value))
+				if ((this._A_1_33_R_Sexual_behavior != value))
 				{
-					this._A_1_33__R_Sexual_behavior_ = value;
+					this._A_1_33_R_Sexual_behavior = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.34 (R-Stress)]", Storage="_A_1_34__R_Stress_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_34__R_Stress_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-34-R-Stress]", Storage="_A_1_34_R_Stress", DbType="NVarChar(30)")]
+		public string A_1_34_R_Stress
 		{
 			get
 			{
-				return this._A_1_34__R_Stress_;
+				return this._A_1_34_R_Stress;
 			}
 			set
 			{
-				if ((this._A_1_34__R_Stress_ != value))
+				if ((this._A_1_34_R_Stress != value))
 				{
-					this._A_1_34__R_Stress_ = value;
+					this._A_1_34_R_Stress = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.35 (R-Stroke)]", Storage="_A_1_35__R_Stroke_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_35__R_Stroke_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-35-R-Stroke]", Storage="_A_1_35_R_Stroke", DbType="NVarChar(30)")]
+		public string A_1_35_R_Stroke
 		{
 			get
 			{
-				return this._A_1_35__R_Stroke_;
+				return this._A_1_35_R_Stroke;
 			}
 			set
 			{
-				if ((this._A_1_35__R_Stroke_ != value))
+				if ((this._A_1_35_R_Stroke != value))
 				{
-					this._A_1_35__R_Stroke_ = value;
+					this._A_1_35_R_Stroke = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.36 (R-Substance abuse)]", Storage="_A_1_36__R_Substance_abuse_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_36__R_Substance_abuse_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-36-R-Substance-abuse]", Storage="_A_1_36_R_Substance_abuse", DbType="NVarChar(30)")]
+		public string A_1_36_R_Substance_abuse
 		{
 			get
 			{
-				return this._A_1_36__R_Substance_abuse_;
+				return this._A_1_36_R_Substance_abuse;
 			}
 			set
 			{
-				if ((this._A_1_36__R_Substance_abuse_ != value))
+				if ((this._A_1_36_R_Substance_abuse != value))
 				{
-					this._A_1_36__R_Substance_abuse_ = value;
+					this._A_1_36_R_Substance_abuse = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.37 (R-Suicide)]", Storage="_A_1_37__R_Suicide_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_37__R_Suicide_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-37-R-Suicide]", Storage="_A_1_37_R_Suicide", DbType="NVarChar(30)")]
+		public string A_1_37_R_Suicide
 		{
 			get
 			{
-				return this._A_1_37__R_Suicide_;
+				return this._A_1_37_R_Suicide;
 			}
 			set
 			{
-				if ((this._A_1_37__R_Suicide_ != value))
+				if ((this._A_1_37_R_Suicide != value))
 				{
-					this._A_1_37__R_Suicide_ = value;
+					this._A_1_37_R_Suicide = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.38 (R-Surgery)]", Storage="_A_1_38__R_Surgery_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_38__R_Surgery_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-38-R-Surgery]", Storage="_A_1_38_R_Surgery", DbType="NVarChar(30)")]
+		public string A_1_38_R_Surgery
 		{
 			get
 			{
-				return this._A_1_38__R_Surgery_;
+				return this._A_1_38_R_Surgery;
 			}
 			set
 			{
-				if ((this._A_1_38__R_Surgery_ != value))
+				if ((this._A_1_38_R_Surgery != value))
 				{
-					this._A_1_38__R_Surgery_ = value;
+					this._A_1_38_R_Surgery = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.39 (R-Tobacco)]", Storage="_A_1_39__R_Tobacco_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_39__R_Tobacco_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-39-R-Tobacco]", Storage="_A_1_39_R_Tobacco", DbType="NVarChar(30)")]
+		public string A_1_39_R_Tobacco
 		{
 			get
 			{
-				return this._A_1_39__R_Tobacco_;
+				return this._A_1_39_R_Tobacco;
 			}
 			set
 			{
-				if ((this._A_1_39__R_Tobacco_ != value))
+				if ((this._A_1_39_R_Tobacco != value))
 				{
-					this._A_1_39__R_Tobacco_ = value;
+					this._A_1_39_R_Tobacco = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.40 (R-Unintentional injuries)]", Storage="_A_1_40__R_Unintentional_injuries_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_40__R_Unintentional_injuries_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-40-R-Unintentional-injuries]", Storage="_A_1_40_R_Unintentional_injuries", DbType="NVarChar(30)")]
+		public string A_1_40_R_Unintentional_injuries
 		{
 			get
 			{
-				return this._A_1_40__R_Unintentional_injuries_;
+				return this._A_1_40_R_Unintentional_injuries;
 			}
 			set
 			{
-				if ((this._A_1_40__R_Unintentional_injuries_ != value))
+				if ((this._A_1_40_R_Unintentional_injuries != value))
 				{
-					this._A_1_40__R_Unintentional_injuries_ = value;
+					this._A_1_40_R_Unintentional_injuries = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.41 (R-Vaccine)]", Storage="_A_1_41__R_Vaccine_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_41__R_Vaccine_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-41-R-Vaccine]", Storage="_A_1_41_R_Vaccine", DbType="NVarChar(30)")]
+		public string A_1_41_R_Vaccine
 		{
 			get
 			{
-				return this._A_1_41__R_Vaccine_;
+				return this._A_1_41_R_Vaccine;
 			}
 			set
 			{
-				if ((this._A_1_41__R_Vaccine_ != value))
+				if ((this._A_1_41_R_Vaccine != value))
 				{
-					this._A_1_41__R_Vaccine_ = value;
+					this._A_1_41_R_Vaccine = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.42 (R-Violence)]", Storage="_A_1_42__R_Violence_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_42__R_Violence_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-42-R-Violence]", Storage="_A_1_42_R_Violence", DbType="NVarChar(30)")]
+		public string A_1_42_R_Violence
 		{
 			get
 			{
-				return this._A_1_42__R_Violence_;
+				return this._A_1_42_R_Violence;
 			}
 			set
 			{
-				if ((this._A_1_42__R_Violence_ != value))
+				if ((this._A_1_42_R_Violence != value))
 				{
-					this._A_1_42__R_Violence_ = value;
+					this._A_1_42_R_Violence = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.1.43 (R-Other or unclear)]", Storage="_A_1_43__R_Other_or_unclear_", DbType="SmallInt")]
-		public System.Nullable<short> A_1_43__R_Other_or_unclear_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-1-43-R-Other-or-unclear]", Storage="_A_1_43_R_Other_or_unclear", DbType="NVarChar(30)")]
+		public string A_1_43_R_Other_or_unclear
 		{
 			get
 			{
-				return this._A_1_43__R_Other_or_unclear_;
+				return this._A_1_43_R_Other_or_unclear;
 			}
 			set
 			{
-				if ((this._A_1_43__R_Other_or_unclear_ != value))
+				if ((this._A_1_43_R_Other_or_unclear != value))
 				{
-					this._A_1_43__R_Other_or_unclear_ = value;
+					this._A_1_43_R_Other_or_unclear = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.1 (E-Alcohol)]", Storage="_A_2_1__E_Alcohol_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_1__E_Alcohol_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-1-E-Alcohol]", Storage="_A_2_1_E_Alcohol", DbType="NVarChar(30)")]
+		public string A_2_1_E_Alcohol
 		{
 			get
 			{
-				return this._A_2_1__E_Alcohol_;
+				return this._A_2_1_E_Alcohol;
 			}
 			set
 			{
-				if ((this._A_2_1__E_Alcohol_ != value))
+				if ((this._A_2_1_E_Alcohol != value))
 				{
-					this._A_2_1__E_Alcohol_ = value;
+					this._A_2_1_E_Alcohol = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.2 (E-Alzheimer’s disease)]", Storage="_A_2_2__E_Alzheimer_s_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_2__E_Alzheimer_s_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-2-E-Alzheimer-disease]", Storage="_A_2_2_E_Alzheimer_disease", DbType="NVarChar(30)")]
+		public string A_2_2_E_Alzheimer_disease
 		{
 			get
 			{
-				return this._A_2_2__E_Alzheimer_s_disease_;
+				return this._A_2_2_E_Alzheimer_disease;
 			}
 			set
 			{
-				if ((this._A_2_2__E_Alzheimer_s_disease_ != value))
+				if ((this._A_2_2_E_Alzheimer_disease != value))
 				{
-					this._A_2_2__E_Alzheimer_s_disease_ = value;
+					this._A_2_2_E_Alzheimer_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.3 (E-Blank)]", Storage="_A_2_3__E_Blank_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_3__E_Blank_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-3-E-Blank]", Storage="_A_2_3_E_Blank", DbType="NVarChar(30)")]
+		public string A_2_3_E_Blank
 		{
 			get
 			{
-				return this._A_2_3__E_Blank_;
+				return this._A_2_3_E_Blank;
 			}
 			set
 			{
-				if ((this._A_2_3__E_Blank_ != value))
+				if ((this._A_2_3_E_Blank != value))
 				{
-					this._A_2_3__E_Blank_ = value;
+					this._A_2_3_E_Blank = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.4 (E-Blood disorder)]", Storage="_A_2_4__E_Blood_disorder_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_4__E_Blood_disorder_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-4-E-Blood-disorder]", Storage="_A_2_4_E_Blood_disorder", DbType="NVarChar(30)")]
+		public string A_2_4_E_Blood_disorder
 		{
 			get
 			{
-				return this._A_2_4__E_Blood_disorder_;
+				return this._A_2_4_E_Blood_disorder;
 			}
 			set
 			{
-				if ((this._A_2_4__E_Blood_disorder_ != value))
+				if ((this._A_2_4_E_Blood_disorder != value))
 				{
-					this._A_2_4__E_Blood_disorder_ = value;
+					this._A_2_4_E_Blood_disorder = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.5 (E-Blood pressure)]", Storage="_A_2_5__E_Blood_pressure_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_5__E_Blood_pressure_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-5-E-Blood-pressure]", Storage="_A_2_5_E_Blood_pressure", DbType="NVarChar(30)")]
+		public string A_2_5_E_Blood_pressure
 		{
 			get
 			{
-				return this._A_2_5__E_Blood_pressure_;
+				return this._A_2_5_E_Blood_pressure;
 			}
 			set
 			{
-				if ((this._A_2_5__E_Blood_pressure_ != value))
+				if ((this._A_2_5_E_Blood_pressure != value))
 				{
-					this._A_2_5__E_Blood_pressure_ = value;
+					this._A_2_5_E_Blood_pressure = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.6 (E-Cancer)]", Storage="_A_2_6__E_Cancer_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_6__E_Cancer_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-6-E-Cancer]", Storage="_A_2_6_E_Cancer", DbType="NVarChar(30)")]
+		public string A_2_6_E_Cancer
 		{
 			get
 			{
-				return this._A_2_6__E_Cancer_;
+				return this._A_2_6_E_Cancer;
 			}
 			set
 			{
-				if ((this._A_2_6__E_Cancer_ != value))
+				if ((this._A_2_6_E_Cancer != value))
 				{
-					this._A_2_6__E_Cancer_ = value;
+					this._A_2_6_E_Cancer = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.7 (E-Chemical/toxin)]", Storage="_A_2_7__E_Chemical_toxin_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_7__E_Chemical_toxin_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-7-E-Chemical/toxin]", Storage="_A_2_7_E_Chemical_toxin", DbType="NVarChar(30)")]
+		public string A_2_7_E_Chemical_toxin
 		{
 			get
 			{
-				return this._A_2_7__E_Chemical_toxin_;
+				return this._A_2_7_E_Chemical_toxin;
 			}
 			set
 			{
-				if ((this._A_2_7__E_Chemical_toxin_ != value))
+				if ((this._A_2_7_E_Chemical_toxin != value))
 				{
-					this._A_2_7__E_Chemical_toxin_ = value;
+					this._A_2_7_E_Chemical_toxin = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.8 (E-Cholesterol)]", Storage="_A_2_8__E_Cholesterol_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_8__E_Cholesterol_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-8-E-Cholesterol]", Storage="_A_2_8_E_Cholesterol", DbType="NVarChar(30)")]
+		public string A_2_8_E_Cholesterol
 		{
 			get
 			{
-				return this._A_2_8__E_Cholesterol_;
+				return this._A_2_8_E_Cholesterol;
 			}
 			set
 			{
-				if ((this._A_2_8__E_Cholesterol_ != value))
+				if ((this._A_2_8_E_Cholesterol != value))
 				{
-					this._A_2_8__E_Cholesterol_ = value;
+					this._A_2_8_E_Cholesterol = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.9 (E-Diabetes)]", Storage="_A_2_9__E_Diabetes_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_9__E_Diabetes_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-9-E-Diabetes]", Storage="_A_2_9_E_Diabetes", DbType="NVarChar(30)")]
+		public string A_2_9_E_Diabetes
 		{
 			get
 			{
-				return this._A_2_9__E_Diabetes_;
+				return this._A_2_9_E_Diabetes;
 			}
 			set
 			{
-				if ((this._A_2_9__E_Diabetes_ != value))
+				if ((this._A_2_9_E_Diabetes != value))
 				{
-					this._A_2_9__E_Diabetes_ = value;
+					this._A_2_9_E_Diabetes = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.10 (E-Diet/nutrition)]", Storage="_A_2_10__E_Diet_nutrition_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_10__E_Diet_nutrition_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-10-E-Diet/nutrition]", Storage="_A_2_10_E_Diet_nutrition", DbType="NVarChar(30)")]
+		public string A_2_10_E_Diet_nutrition
 		{
 			get
 			{
-				return this._A_2_10__E_Diet_nutrition_;
+				return this._A_2_10_E_Diet_nutrition;
 			}
 			set
 			{
-				if ((this._A_2_10__E_Diet_nutrition_ != value))
+				if ((this._A_2_10_E_Diet_nutrition != value))
 				{
-					this._A_2_10__E_Diet_nutrition_ = value;
+					this._A_2_10_E_Diet_nutrition = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.11 (E-Education/counseling)]", Storage="_A_2_11__E_Education_counseling_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_11__E_Education_counseling_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-11-E-Education/counseling]", Storage="_A_2_11_E_Education_counseling", DbType="NVarChar(30)")]
+		public string A_2_11_E_Education_counseling
 		{
 			get
 			{
-				return this._A_2_11__E_Education_counseling_;
+				return this._A_2_11_E_Education_counseling;
 			}
 			set
 			{
-				if ((this._A_2_11__E_Education_counseling_ != value))
+				if ((this._A_2_11_E_Education_counseling != value))
 				{
-					this._A_2_11__E_Education_counseling_ = value;
+					this._A_2_11_E_Education_counseling = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.12 (E-Firearms)]", Storage="_A_2_12__E_Firearms_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_12__E_Firearms_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-12-E-Firearms]", Storage="_A_2_12_E_Firearms", DbType="NVarChar(30)")]
+		public string A_2_12_E_Firearms
 		{
 			get
 			{
-				return this._A_2_12__E_Firearms_;
+				return this._A_2_12_E_Firearms;
 			}
 			set
 			{
-				if ((this._A_2_12__E_Firearms_ != value))
+				if ((this._A_2_12_E_Firearms != value))
 				{
-					this._A_2_12__E_Firearms_ = value;
+					this._A_2_12_E_Firearms = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.13 (E-Gastrointestinal disease)]", Storage="_A_2_13__E_Gastrointestinal_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_13__E_Gastrointestinal_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-13-E-Gastrointestinal-disease]", Storage="_A_2_13_E_Gastrointestinal_disease", DbType="NVarChar(30)")]
+		public string A_2_13_E_Gastrointestinal_disease
 		{
 			get
 			{
-				return this._A_2_13__E_Gastrointestinal_disease_;
+				return this._A_2_13_E_Gastrointestinal_disease;
 			}
 			set
 			{
-				if ((this._A_2_13__E_Gastrointestinal_disease_ != value))
+				if ((this._A_2_13_E_Gastrointestinal_disease != value))
 				{
-					this._A_2_13__E_Gastrointestinal_disease_ = value;
+					this._A_2_13_E_Gastrointestinal_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.14 (E-Genetics)]", Storage="_A_2_14__E_Genetics_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_14__E_Genetics_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-14-E-Genetics]", Storage="_A_2_14_E_Genetics", DbType="NVarChar(30)")]
+		public string A_2_14_E_Genetics
 		{
 			get
 			{
-				return this._A_2_14__E_Genetics_;
+				return this._A_2_14_E_Genetics;
 			}
 			set
 			{
-				if ((this._A_2_14__E_Genetics_ != value))
+				if ((this._A_2_14_E_Genetics != value))
 				{
-					this._A_2_14__E_Genetics_ = value;
+					this._A_2_14_E_Genetics = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.15 (E-Healthcare delivery)]", Storage="_A_2_15__E_Healthcare_delivery_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_15__E_Healthcare_delivery_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-15-E-Healthcare-delivery]", Storage="_A_2_15_E_Healthcare_delivery", DbType="NVarChar(30)")]
+		public string A_2_15_E_Healthcare_delivery
 		{
 			get
 			{
-				return this._A_2_15__E_Healthcare_delivery_;
+				return this._A_2_15_E_Healthcare_delivery;
 			}
 			set
 			{
-				if ((this._A_2_15__E_Healthcare_delivery_ != value))
+				if ((this._A_2_15_E_Healthcare_delivery != value))
 				{
-					this._A_2_15__E_Healthcare_delivery_ = value;
+					this._A_2_15_E_Healthcare_delivery = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.16 (E-Heart disease)]", Storage="_A_2_16__E_Heart_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_16__E_Heart_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-16-E-Heart-disease]", Storage="_A_2_16_E_Heart_disease", DbType="NVarChar(30)")]
+		public string A_2_16_E_Heart_disease
 		{
 			get
 			{
-				return this._A_2_16__E_Heart_disease_;
+				return this._A_2_16_E_Heart_disease;
 			}
 			set
 			{
-				if ((this._A_2_16__E_Heart_disease_ != value))
+				if ((this._A_2_16_E_Heart_disease != value))
 				{
-					this._A_2_16__E_Heart_disease_ = value;
+					this._A_2_16_E_Heart_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.17 (E-HRQOL (Health-related quality of life))]", Storage="_A_2_17__E_HRQOL__Health_related_quality_of_life__", DbType="SmallInt")]
-		public System.Nullable<short> A_2_17__E_HRQOL__Health_related_quality_of_life__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-17-E-HRQOL-Health-related-quality-of-life]", Storage="_A_2_17_E_HRQOL_Health_related_quality_of_life", DbType="NVarChar(30)")]
+		public string A_2_17_E_HRQOL_Health_related_quality_of_life
 		{
 			get
 			{
-				return this._A_2_17__E_HRQOL__Health_related_quality_of_life__;
+				return this._A_2_17_E_HRQOL_Health_related_quality_of_life;
 			}
 			set
 			{
-				if ((this._A_2_17__E_HRQOL__Health_related_quality_of_life__ != value))
+				if ((this._A_2_17_E_HRQOL_Health_related_quality_of_life != value))
 				{
-					this._A_2_17__E_HRQOL__Health_related_quality_of_life__ = value;
+					this._A_2_17_E_HRQOL_Health_related_quality_of_life = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.18 (E-Infectious disease)]", Storage="_A_2_18__E_Infectious_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_18__E_Infectious_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-18-E-Infectious-disease]", Storage="_A_2_18_E_Infectious_disease", DbType="NVarChar(30)")]
+		public string A_2_18_E_Infectious_disease
 		{
 			get
 			{
-				return this._A_2_18__E_Infectious_disease_;
+				return this._A_2_18_E_Infectious_disease;
 			}
 			set
 			{
-				if ((this._A_2_18__E_Infectious_disease_ != value))
+				if ((this._A_2_18_E_Infectious_disease != value))
 				{
-					this._A_2_18__E_Infectious_disease_ = value;
+					this._A_2_18_E_Infectious_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.19 (E-Kidney disease)]", Storage="_A_2_19__E_Kidney_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_19__E_Kidney_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-19-E-Kidney-disease]", Storage="_A_2_19_E_Kidney_disease", DbType="NVarChar(30)")]
+		public string A_2_19_E_Kidney_disease
 		{
 			get
 			{
-				return this._A_2_19__E_Kidney_disease_;
+				return this._A_2_19_E_Kidney_disease;
 			}
 			set
 			{
-				if ((this._A_2_19__E_Kidney_disease_ != value))
+				if ((this._A_2_19_E_Kidney_disease != value))
 				{
-					this._A_2_19__E_Kidney_disease_ = value;
+					this._A_2_19_E_Kidney_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.20 (E-Lung disease)]", Storage="_A_2_20__E_Lung_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_20__E_Lung_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-20-E-Lung-disease]", Storage="_A_2_20_E_Lung_disease", DbType="NVarChar(30)")]
+		public string A_2_20_E_Lung_disease
 		{
 			get
 			{
-				return this._A_2_20__E_Lung_disease_;
+				return this._A_2_20_E_Lung_disease;
 			}
 			set
 			{
-				if ((this._A_2_20__E_Lung_disease_ != value))
+				if ((this._A_2_20_E_Lung_disease != value))
 				{
-					this._A_2_20__E_Lung_disease_ = value;
+					this._A_2_20_E_Lung_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.21 (E-Maternal/paternal/child health)]", Storage="_A_2_21__E_Maternal_paternal_child_health_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_21__E_Maternal_paternal_child_health_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-21-E-Maternal/paternal/child-health]", Storage="_A_2_21_E_Maternal_paternal_child_health", DbType="NVarChar(30)")]
+		public string A_2_21_E_Maternal_paternal_child_health
 		{
 			get
 			{
-				return this._A_2_21__E_Maternal_paternal_child_health_;
+				return this._A_2_21_E_Maternal_paternal_child_health;
 			}
 			set
 			{
-				if ((this._A_2_21__E_Maternal_paternal_child_health_ != value))
+				if ((this._A_2_21_E_Maternal_paternal_child_health != value))
 				{
-					this._A_2_21__E_Maternal_paternal_child_health_ = value;
+					this._A_2_21_E_Maternal_paternal_child_health = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.22 (E-Medication/device)]", Storage="_A_2_22__E_Medication_device_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_22__E_Medication_device_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-22-E-Medication/device]", Storage="_A_2_22_E_Medication_device", DbType="NVarChar(30)")]
+		public string A_2_22_E_Medication_device
 		{
 			get
 			{
-				return this._A_2_22__E_Medication_device_;
+				return this._A_2_22_E_Medication_device;
 			}
 			set
 			{
-				if ((this._A_2_22__E_Medication_device_ != value))
+				if ((this._A_2_22_E_Medication_device != value))
 				{
-					this._A_2_22__E_Medication_device_ = value;
+					this._A_2_22_E_Medication_device = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.23 (E-Mental health)]", Storage="_A_2_23__E_Mental_health_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_23__E_Mental_health_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-23-E-Mental-health]", Storage="_A_2_23_E_Mental_health", DbType="NVarChar(30)")]
+		public string A_2_23_E_Mental_health
 		{
 			get
 			{
-				return this._A_2_23__E_Mental_health_;
+				return this._A_2_23_E_Mental_health;
 			}
 			set
 			{
-				if ((this._A_2_23__E_Mental_health_ != value))
+				if ((this._A_2_23_E_Mental_health != value))
 				{
-					this._A_2_23__E_Mental_health_ = value;
+					this._A_2_23_E_Mental_health = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.24 (E-Microbiome)]", Storage="_A_2_24__E_Microbiome_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_24__E_Microbiome_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-24-E-Microbiome]", Storage="_A_2_24_E_Microbiome", DbType="NVarChar(30)")]
+		public string A_2_24_E_Microbiome
 		{
 			get
 			{
-				return this._A_2_24__E_Microbiome_;
+				return this._A_2_24_E_Microbiome;
 			}
 			set
 			{
-				if ((this._A_2_24__E_Microbiome_ != value))
+				if ((this._A_2_24_E_Microbiome != value))
 				{
-					this._A_2_24__E_Microbiome_ = value;
+					this._A_2_24_E_Microbiome = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.25 (E-Mortality)]", Storage="_A_2_25__E_Mortality_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_25__E_Mortality_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-25-E-Mortality]", Storage="_A_2_25_E_Mortality", DbType="NVarChar(30)")]
+		public string A_2_25_E_Mortality
 		{
 			get
 			{
-				return this._A_2_25__E_Mortality_;
+				return this._A_2_25_E_Mortality;
 			}
 			set
 			{
-				if ((this._A_2_25__E_Mortality_ != value))
+				if ((this._A_2_25_E_Mortality != value))
 				{
-					this._A_2_25__E_Mortality_ = value;
+					this._A_2_25_E_Mortality = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.26 (E-Motor vehicle crash)]", Storage="_A_2_26__E_Motor_vehicle_crash_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_26__E_Motor_vehicle_crash_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-26-E-Motor-vehicle-crash]", Storage="_A_2_26_E_Motor_vehicle_crash", DbType="NVarChar(30)")]
+		public string A_2_26_E_Motor_vehicle_crash
 		{
 			get
 			{
-				return this._A_2_26__E_Motor_vehicle_crash_;
+				return this._A_2_26_E_Motor_vehicle_crash;
 			}
 			set
 			{
-				if ((this._A_2_26__E_Motor_vehicle_crash_ != value))
+				if ((this._A_2_26_E_Motor_vehicle_crash != value))
 				{
-					this._A_2_26__E_Motor_vehicle_crash_ = value;
+					this._A_2_26_E_Motor_vehicle_crash = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.27 (E-Musculoskeletal disease)]", Storage="_A_2_27__E_Musculoskeletal_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_27__E_Musculoskeletal_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-27-E-Musculoskeletal-disease]", Storage="_A_2_27_E_Musculoskeletal_disease", DbType="NVarChar(30)")]
+		public string A_2_27_E_Musculoskeletal_disease
 		{
 			get
 			{
-				return this._A_2_27__E_Musculoskeletal_disease_;
+				return this._A_2_27_E_Musculoskeletal_disease;
 			}
 			set
 			{
-				if ((this._A_2_27__E_Musculoskeletal_disease_ != value))
+				if ((this._A_2_27_E_Musculoskeletal_disease != value))
 				{
-					this._A_2_27__E_Musculoskeletal_disease_ = value;
+					this._A_2_27_E_Musculoskeletal_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.28 (E-Neurological disease (not Alzheimer’s))]", Storage="_A_2_28__E_Neurological_disease__not_Alzheimer_s__", DbType="SmallInt")]
-		public System.Nullable<short> A_2_28__E_Neurological_disease__not_Alzheimer_s__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-28-E-Neurological-disease-not-Alzheimer]", Storage="_A_2_28_E_Neurological_disease_not_Alzheimer", DbType="NVarChar(30)")]
+		public string A_2_28_E_Neurological_disease_not_Alzheimer
 		{
 			get
 			{
-				return this._A_2_28__E_Neurological_disease__not_Alzheimer_s__;
+				return this._A_2_28_E_Neurological_disease_not_Alzheimer;
 			}
 			set
 			{
-				if ((this._A_2_28__E_Neurological_disease__not_Alzheimer_s__ != value))
+				if ((this._A_2_28_E_Neurological_disease_not_Alzheimer != value))
 				{
-					this._A_2_28__E_Neurological_disease__not_Alzheimer_s__ = value;
+					this._A_2_28_E_Neurological_disease_not_Alzheimer = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.29 (E-Obesity)]", Storage="_A_2_29__E_Obesity_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_29__E_Obesity_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-29-E-Obesity]", Storage="_A_2_29_E_Obesity", DbType="NVarChar(30)")]
+		public string A_2_29_E_Obesity
 		{
 			get
 			{
-				return this._A_2_29__E_Obesity_;
+				return this._A_2_29_E_Obesity;
 			}
 			set
 			{
-				if ((this._A_2_29__E_Obesity_ != value))
+				if ((this._A_2_29_E_Obesity != value))
 				{
-					this._A_2_29__E_Obesity_ = value;
+					this._A_2_29_E_Obesity = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.30 (E-Physical activity)]", Storage="_A_2_30__E_Physical_activity_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_30__E_Physical_activity_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-30-E-Physical-activity]", Storage="_A_2_30_E_Physical_activity", DbType="NVarChar(30)")]
+		public string A_2_30_E_Physical_activity
 		{
 			get
 			{
-				return this._A_2_30__E_Physical_activity_;
+				return this._A_2_30_E_Physical_activity;
 			}
 			set
 			{
-				if ((this._A_2_30__E_Physical_activity_ != value))
+				if ((this._A_2_30_E_Physical_activity != value))
 				{
-					this._A_2_30__E_Physical_activity_ = value;
+					this._A_2_30_E_Physical_activity = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.31 (E-Policy/built environment)]", Storage="_A_2_31__E_Policy_built_environment_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_31__E_Policy_built_environment_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-31-E-Policy/built-environment]", Storage="_A_2_31_E_Policy_built_environment", DbType="NVarChar(30)")]
+		public string A_2_31_E_Policy_built_environment
 		{
 			get
 			{
-				return this._A_2_31__E_Policy_built_environment_;
+				return this._A_2_31_E_Policy_built_environment;
 			}
 			set
 			{
-				if ((this._A_2_31__E_Policy_built_environment_ != value))
+				if ((this._A_2_31_E_Policy_built_environment != value))
 				{
-					this._A_2_31__E_Policy_built_environment_ = value;
+					this._A_2_31_E_Policy_built_environment = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.32 (E-Pneumonia/influenza)]", Storage="_A_2_32__E_Pneumonia_influenza_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_32__E_Pneumonia_influenza_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-32-E-Pneumonia/influenza]", Storage="_A_2_32_E_Pneumonia_influenza", DbType="NVarChar(30)")]
+		public string A_2_32_E_Pneumonia_influenza
 		{
 			get
 			{
-				return this._A_2_32__E_Pneumonia_influenza_;
+				return this._A_2_32_E_Pneumonia_influenza;
 			}
 			set
 			{
-				if ((this._A_2_32__E_Pneumonia_influenza_ != value))
+				if ((this._A_2_32_E_Pneumonia_influenza != value))
 				{
-					this._A_2_32__E_Pneumonia_influenza_ = value;
+					this._A_2_32_E_Pneumonia_influenza = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.33 (E-Sexual behavior)]", Storage="_A_2_33__E_Sexual_behavior_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_33__E_Sexual_behavior_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-33-E-Sexual-behavior]", Storage="_A_2_33_E_Sexual_behavior", DbType="NVarChar(30)")]
+		public string A_2_33_E_Sexual_behavior
 		{
 			get
 			{
-				return this._A_2_33__E_Sexual_behavior_;
+				return this._A_2_33_E_Sexual_behavior;
 			}
 			set
 			{
-				if ((this._A_2_33__E_Sexual_behavior_ != value))
+				if ((this._A_2_33_E_Sexual_behavior != value))
 				{
-					this._A_2_33__E_Sexual_behavior_ = value;
+					this._A_2_33_E_Sexual_behavior = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.34 (E-Stress)]", Storage="_A_2_34__E_Stress_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_34__E_Stress_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-34-E-Stress]", Storage="_A_2_34_E_Stress", DbType="NVarChar(30)")]
+		public string A_2_34_E_Stress
 		{
 			get
 			{
-				return this._A_2_34__E_Stress_;
+				return this._A_2_34_E_Stress;
 			}
 			set
 			{
-				if ((this._A_2_34__E_Stress_ != value))
+				if ((this._A_2_34_E_Stress != value))
 				{
-					this._A_2_34__E_Stress_ = value;
+					this._A_2_34_E_Stress = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.35 (E-Stroke)]", Storage="_A_2_35__E_Stroke_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_35__E_Stroke_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-35-E-Stroke]", Storage="_A_2_35_E_Stroke", DbType="NVarChar(30)")]
+		public string A_2_35_E_Stroke
 		{
 			get
 			{
-				return this._A_2_35__E_Stroke_;
+				return this._A_2_35_E_Stroke;
 			}
 			set
 			{
-				if ((this._A_2_35__E_Stroke_ != value))
+				if ((this._A_2_35_E_Stroke != value))
 				{
-					this._A_2_35__E_Stroke_ = value;
+					this._A_2_35_E_Stroke = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.36 (E-Substance abuse)]", Storage="_A_2_36__E_Substance_abuse_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_36__E_Substance_abuse_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-36-E-Substance-abuse]", Storage="_A_2_36_E_Substance_abuse", DbType="NVarChar(30)")]
+		public string A_2_36_E_Substance_abuse
 		{
 			get
 			{
-				return this._A_2_36__E_Substance_abuse_;
+				return this._A_2_36_E_Substance_abuse;
 			}
 			set
 			{
-				if ((this._A_2_36__E_Substance_abuse_ != value))
+				if ((this._A_2_36_E_Substance_abuse != value))
 				{
-					this._A_2_36__E_Substance_abuse_ = value;
+					this._A_2_36_E_Substance_abuse = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.37 (E-Suicide)]", Storage="_A_2_37__E_Suicide_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_37__E_Suicide_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-37-E-Suicide]", Storage="_A_2_37_E_Suicide", DbType="NVarChar(30)")]
+		public string A_2_37_E_Suicide
 		{
 			get
 			{
-				return this._A_2_37__E_Suicide_;
+				return this._A_2_37_E_Suicide;
 			}
 			set
 			{
-				if ((this._A_2_37__E_Suicide_ != value))
+				if ((this._A_2_37_E_Suicide != value))
 				{
-					this._A_2_37__E_Suicide_ = value;
+					this._A_2_37_E_Suicide = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.38 (E-Surgery)]", Storage="_A_2_38__E_Surgery_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_38__E_Surgery_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-38-E-Surgery]", Storage="_A_2_38_E_Surgery", DbType="NVarChar(30)")]
+		public string A_2_38_E_Surgery
 		{
 			get
 			{
-				return this._A_2_38__E_Surgery_;
+				return this._A_2_38_E_Surgery;
 			}
 			set
 			{
-				if ((this._A_2_38__E_Surgery_ != value))
+				if ((this._A_2_38_E_Surgery != value))
 				{
-					this._A_2_38__E_Surgery_ = value;
+					this._A_2_38_E_Surgery = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.39 (E-Tobacco)]", Storage="_A_2_39__E_Tobacco_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_39__E_Tobacco_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-39-E-Tobacco]", Storage="_A_2_39_E_Tobacco", DbType="NVarChar(30)")]
+		public string A_2_39_E_Tobacco
 		{
 			get
 			{
-				return this._A_2_39__E_Tobacco_;
+				return this._A_2_39_E_Tobacco;
 			}
 			set
 			{
-				if ((this._A_2_39__E_Tobacco_ != value))
+				if ((this._A_2_39_E_Tobacco != value))
 				{
-					this._A_2_39__E_Tobacco_ = value;
+					this._A_2_39_E_Tobacco = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.40 (E-Unintentional injuries)]", Storage="_A_2_40__E_Unintentional_injuries_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_40__E_Unintentional_injuries_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-40-E-Unintentional-injuries]", Storage="_A_2_40_E_Unintentional_injuries", DbType="NVarChar(30)")]
+		public string A_2_40_E_Unintentional_injuries
 		{
 			get
 			{
-				return this._A_2_40__E_Unintentional_injuries_;
+				return this._A_2_40_E_Unintentional_injuries;
 			}
 			set
 			{
-				if ((this._A_2_40__E_Unintentional_injuries_ != value))
+				if ((this._A_2_40_E_Unintentional_injuries != value))
 				{
-					this._A_2_40__E_Unintentional_injuries_ = value;
+					this._A_2_40_E_Unintentional_injuries = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.41 (E-Vaccine)]", Storage="_A_2_41__E_Vaccine_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_41__E_Vaccine_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-41-E-Vaccine]", Storage="_A_2_41_E_Vaccine", DbType="NVarChar(30)")]
+		public string A_2_41_E_Vaccine
 		{
 			get
 			{
-				return this._A_2_41__E_Vaccine_;
+				return this._A_2_41_E_Vaccine;
 			}
 			set
 			{
-				if ((this._A_2_41__E_Vaccine_ != value))
+				if ((this._A_2_41_E_Vaccine != value))
 				{
-					this._A_2_41__E_Vaccine_ = value;
+					this._A_2_41_E_Vaccine = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.42 (E-Violence)]", Storage="_A_2_42__E_Violence_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_42__E_Violence_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-42-E-Violence]", Storage="_A_2_42_E_Violence", DbType="NVarChar(30)")]
+		public string A_2_42_E_Violence
 		{
 			get
 			{
-				return this._A_2_42__E_Violence_;
+				return this._A_2_42_E_Violence;
 			}
 			set
 			{
-				if ((this._A_2_42__E_Violence_ != value))
+				if ((this._A_2_42_E_Violence != value))
 				{
-					this._A_2_42__E_Violence_ = value;
+					this._A_2_42_E_Violence = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.2.43 (E-Other or unclear)]", Storage="_A_2_43__E_Other_or_unclear_", DbType="SmallInt")]
-		public System.Nullable<short> A_2_43__E_Other_or_unclear_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-2-43-E-Other-or-unclear]", Storage="_A_2_43_E_Other_or_unclear", DbType="NVarChar(30)")]
+		public string A_2_43_E_Other_or_unclear
 		{
 			get
 			{
-				return this._A_2_43__E_Other_or_unclear_;
+				return this._A_2_43_E_Other_or_unclear;
 			}
 			set
 			{
-				if ((this._A_2_43__E_Other_or_unclear_ != value))
+				if ((this._A_2_43_E_Other_or_unclear != value))
 				{
-					this._A_2_43__E_Other_or_unclear_ = value;
+					this._A_2_43_E_Other_or_unclear = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.1 (O-Alcohol)]", Storage="_A_3_1__O_Alcohol_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_1__O_Alcohol_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-1-O-Alcohol]", Storage="_A_3_1_O_Alcohol", DbType="NVarChar(30)")]
+		public string A_3_1_O_Alcohol
 		{
 			get
 			{
-				return this._A_3_1__O_Alcohol_;
+				return this._A_3_1_O_Alcohol;
 			}
 			set
 			{
-				if ((this._A_3_1__O_Alcohol_ != value))
+				if ((this._A_3_1_O_Alcohol != value))
 				{
-					this._A_3_1__O_Alcohol_ = value;
+					this._A_3_1_O_Alcohol = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.2 (O-Alzheimer’s disease)]", Storage="_A_3_2__O_Alzheimer_s_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_2__O_Alzheimer_s_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-2-O-Alzheimer-disease]", Storage="_A_3_2_O_Alzheimer_disease", DbType="NVarChar(30)")]
+		public string A_3_2_O_Alzheimer_disease
 		{
 			get
 			{
-				return this._A_3_2__O_Alzheimer_s_disease_;
+				return this._A_3_2_O_Alzheimer_disease;
 			}
 			set
 			{
-				if ((this._A_3_2__O_Alzheimer_s_disease_ != value))
+				if ((this._A_3_2_O_Alzheimer_disease != value))
 				{
-					this._A_3_2__O_Alzheimer_s_disease_ = value;
+					this._A_3_2_O_Alzheimer_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.3 (O-Blank)]", Storage="_A_3_3__O_Blank_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_3__O_Blank_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-3-O-Blank]", Storage="_A_3_3_O_Blank", DbType="NVarChar(30)")]
+		public string A_3_3_O_Blank
 		{
 			get
 			{
-				return this._A_3_3__O_Blank_;
+				return this._A_3_3_O_Blank;
 			}
 			set
 			{
-				if ((this._A_3_3__O_Blank_ != value))
+				if ((this._A_3_3_O_Blank != value))
 				{
-					this._A_3_3__O_Blank_ = value;
+					this._A_3_3_O_Blank = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.4 (O-Blood disorder)]", Storage="_A_3_4__O_Blood_disorder_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_4__O_Blood_disorder_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-4-O-Blood-disorder]", Storage="_A_3_4_O_Blood_disorder", DbType="NVarChar(30)")]
+		public string A_3_4_O_Blood_disorder
 		{
 			get
 			{
-				return this._A_3_4__O_Blood_disorder_;
+				return this._A_3_4_O_Blood_disorder;
 			}
 			set
 			{
-				if ((this._A_3_4__O_Blood_disorder_ != value))
+				if ((this._A_3_4_O_Blood_disorder != value))
 				{
-					this._A_3_4__O_Blood_disorder_ = value;
+					this._A_3_4_O_Blood_disorder = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.5 (O-Blood pressure)]", Storage="_A_3_5__O_Blood_pressure_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_5__O_Blood_pressure_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-5-O-Blood-pressure]", Storage="_A_3_5_O_Blood_pressure", DbType="NVarChar(30)")]
+		public string A_3_5_O_Blood_pressure
 		{
 			get
 			{
-				return this._A_3_5__O_Blood_pressure_;
+				return this._A_3_5_O_Blood_pressure;
 			}
 			set
 			{
-				if ((this._A_3_5__O_Blood_pressure_ != value))
+				if ((this._A_3_5_O_Blood_pressure != value))
 				{
-					this._A_3_5__O_Blood_pressure_ = value;
+					this._A_3_5_O_Blood_pressure = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.6 (O-Cancer)]", Storage="_A_3_6__O_Cancer_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_6__O_Cancer_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-6-O-Cancer]", Storage="_A_3_6_O_Cancer", DbType="NVarChar(30)")]
+		public string A_3_6_O_Cancer
 		{
 			get
 			{
-				return this._A_3_6__O_Cancer_;
+				return this._A_3_6_O_Cancer;
 			}
 			set
 			{
-				if ((this._A_3_6__O_Cancer_ != value))
+				if ((this._A_3_6_O_Cancer != value))
 				{
-					this._A_3_6__O_Cancer_ = value;
+					this._A_3_6_O_Cancer = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.7 (O-Chemical/toxin)]", Storage="_A_3_7__O_Chemical_toxin_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_7__O_Chemical_toxin_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-7-O-Chemical/toxin]", Storage="_A_3_7_O_Chemical_toxin", DbType="NVarChar(30)")]
+		public string A_3_7_O_Chemical_toxin
 		{
 			get
 			{
-				return this._A_3_7__O_Chemical_toxin_;
+				return this._A_3_7_O_Chemical_toxin;
 			}
 			set
 			{
-				if ((this._A_3_7__O_Chemical_toxin_ != value))
+				if ((this._A_3_7_O_Chemical_toxin != value))
 				{
-					this._A_3_7__O_Chemical_toxin_ = value;
+					this._A_3_7_O_Chemical_toxin = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.8 (O-Cholesterol)]", Storage="_A_3_8__O_Cholesterol_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_8__O_Cholesterol_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-8-O-Cholesterol]", Storage="_A_3_8_O_Cholesterol", DbType="NVarChar(30)")]
+		public string A_3_8_O_Cholesterol
 		{
 			get
 			{
-				return this._A_3_8__O_Cholesterol_;
+				return this._A_3_8_O_Cholesterol;
 			}
 			set
 			{
-				if ((this._A_3_8__O_Cholesterol_ != value))
+				if ((this._A_3_8_O_Cholesterol != value))
 				{
-					this._A_3_8__O_Cholesterol_ = value;
+					this._A_3_8_O_Cholesterol = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.9 (O-Diabetes)]", Storage="_A_3_9__O_Diabetes_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_9__O_Diabetes_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-9-O-Diabetes]", Storage="_A_3_9_O_Diabetes", DbType="NVarChar(30)")]
+		public string A_3_9_O_Diabetes
 		{
 			get
 			{
-				return this._A_3_9__O_Diabetes_;
+				return this._A_3_9_O_Diabetes;
 			}
 			set
 			{
-				if ((this._A_3_9__O_Diabetes_ != value))
+				if ((this._A_3_9_O_Diabetes != value))
 				{
-					this._A_3_9__O_Diabetes_ = value;
+					this._A_3_9_O_Diabetes = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.10 (O-Diet/nutrition)]", Storage="_A_3_10__O_Diet_nutrition_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_10__O_Diet_nutrition_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-10-O-Diet/nutrition]", Storage="_A_3_10_O_Diet_nutrition", DbType="NVarChar(30)")]
+		public string A_3_10_O_Diet_nutrition
 		{
 			get
 			{
-				return this._A_3_10__O_Diet_nutrition_;
+				return this._A_3_10_O_Diet_nutrition;
 			}
 			set
 			{
-				if ((this._A_3_10__O_Diet_nutrition_ != value))
+				if ((this._A_3_10_O_Diet_nutrition != value))
 				{
-					this._A_3_10__O_Diet_nutrition_ = value;
+					this._A_3_10_O_Diet_nutrition = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.11 (O-Education/counseling)]", Storage="_A_3_11__O_Education_counseling_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_11__O_Education_counseling_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-11-O-Education/counseling]", Storage="_A_3_11_O_Education_counseling", DbType="NVarChar(30)")]
+		public string A_3_11_O_Education_counseling
 		{
 			get
 			{
-				return this._A_3_11__O_Education_counseling_;
+				return this._A_3_11_O_Education_counseling;
 			}
 			set
 			{
-				if ((this._A_3_11__O_Education_counseling_ != value))
+				if ((this._A_3_11_O_Education_counseling != value))
 				{
-					this._A_3_11__O_Education_counseling_ = value;
+					this._A_3_11_O_Education_counseling = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.12 (O-Firearms)]", Storage="_A_3_12__O_Firearms_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_12__O_Firearms_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-12-O-Firearms]", Storage="_A_3_12_O_Firearms", DbType="NVarChar(30)")]
+		public string A_3_12_O_Firearms
 		{
 			get
 			{
-				return this._A_3_12__O_Firearms_;
+				return this._A_3_12_O_Firearms;
 			}
 			set
 			{
-				if ((this._A_3_12__O_Firearms_ != value))
+				if ((this._A_3_12_O_Firearms != value))
 				{
-					this._A_3_12__O_Firearms_ = value;
+					this._A_3_12_O_Firearms = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.13 (O-Gastrointestinal disease)]", Storage="_A_3_13__O_Gastrointestinal_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_13__O_Gastrointestinal_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-13-O-Gastrointestinal-disease]", Storage="_A_3_13_O_Gastrointestinal_disease", DbType="NVarChar(30)")]
+		public string A_3_13_O_Gastrointestinal_disease
 		{
 			get
 			{
-				return this._A_3_13__O_Gastrointestinal_disease_;
+				return this._A_3_13_O_Gastrointestinal_disease;
 			}
 			set
 			{
-				if ((this._A_3_13__O_Gastrointestinal_disease_ != value))
+				if ((this._A_3_13_O_Gastrointestinal_disease != value))
 				{
-					this._A_3_13__O_Gastrointestinal_disease_ = value;
+					this._A_3_13_O_Gastrointestinal_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.14 (O-Genetics)]", Storage="_A_3_14__O_Genetics_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_14__O_Genetics_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-14-O-Genetics]", Storage="_A_3_14_O_Genetics", DbType="NVarChar(30)")]
+		public string A_3_14_O_Genetics
 		{
 			get
 			{
-				return this._A_3_14__O_Genetics_;
+				return this._A_3_14_O_Genetics;
 			}
 			set
 			{
-				if ((this._A_3_14__O_Genetics_ != value))
+				if ((this._A_3_14_O_Genetics != value))
 				{
-					this._A_3_14__O_Genetics_ = value;
+					this._A_3_14_O_Genetics = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.15 (O-Healthcare delivery)]", Storage="_A_3_15__O_Healthcare_delivery_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_15__O_Healthcare_delivery_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-15-O-Healthcare-delivery]", Storage="_A_3_15_O_Healthcare_delivery", DbType="NVarChar(30)")]
+		public string A_3_15_O_Healthcare_delivery
 		{
 			get
 			{
-				return this._A_3_15__O_Healthcare_delivery_;
+				return this._A_3_15_O_Healthcare_delivery;
 			}
 			set
 			{
-				if ((this._A_3_15__O_Healthcare_delivery_ != value))
+				if ((this._A_3_15_O_Healthcare_delivery != value))
 				{
-					this._A_3_15__O_Healthcare_delivery_ = value;
+					this._A_3_15_O_Healthcare_delivery = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.16 (O-Heart disease)]", Storage="_A_3_16__O_Heart_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_16__O_Heart_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-16-O-Heart-disease]", Storage="_A_3_16_O_Heart_disease", DbType="NVarChar(30)")]
+		public string A_3_16_O_Heart_disease
 		{
 			get
 			{
-				return this._A_3_16__O_Heart_disease_;
+				return this._A_3_16_O_Heart_disease;
 			}
 			set
 			{
-				if ((this._A_3_16__O_Heart_disease_ != value))
+				if ((this._A_3_16_O_Heart_disease != value))
 				{
-					this._A_3_16__O_Heart_disease_ = value;
+					this._A_3_16_O_Heart_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.17 (O-HRQOL (Health-related quality of life))]", Storage="_A_3_17__O_HRQOL__Health_related_quality_of_life__", DbType="SmallInt")]
-		public System.Nullable<short> A_3_17__O_HRQOL__Health_related_quality_of_life__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-17-O-HRQOL-Health-related-quality-of-life]", Storage="_A_3_17_O_HRQOL_Health_related_quality_of_life", DbType="NVarChar(30)")]
+		public string A_3_17_O_HRQOL_Health_related_quality_of_life
 		{
 			get
 			{
-				return this._A_3_17__O_HRQOL__Health_related_quality_of_life__;
+				return this._A_3_17_O_HRQOL_Health_related_quality_of_life;
 			}
 			set
 			{
-				if ((this._A_3_17__O_HRQOL__Health_related_quality_of_life__ != value))
+				if ((this._A_3_17_O_HRQOL_Health_related_quality_of_life != value))
 				{
-					this._A_3_17__O_HRQOL__Health_related_quality_of_life__ = value;
+					this._A_3_17_O_HRQOL_Health_related_quality_of_life = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.18 (O-Infectious disease)]", Storage="_A_3_18__O_Infectious_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_18__O_Infectious_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-18-O-Infectious-disease]", Storage="_A_3_18_O_Infectious_disease", DbType="NVarChar(30)")]
+		public string A_3_18_O_Infectious_disease
 		{
 			get
 			{
-				return this._A_3_18__O_Infectious_disease_;
+				return this._A_3_18_O_Infectious_disease;
 			}
 			set
 			{
-				if ((this._A_3_18__O_Infectious_disease_ != value))
+				if ((this._A_3_18_O_Infectious_disease != value))
 				{
-					this._A_3_18__O_Infectious_disease_ = value;
+					this._A_3_18_O_Infectious_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.19 (O-Kidney disease)]", Storage="_A_3_19__O_Kidney_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_19__O_Kidney_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-19-O-Kidney-disease]", Storage="_A_3_19_O_Kidney_disease", DbType="NVarChar(30)")]
+		public string A_3_19_O_Kidney_disease
 		{
 			get
 			{
-				return this._A_3_19__O_Kidney_disease_;
+				return this._A_3_19_O_Kidney_disease;
 			}
 			set
 			{
-				if ((this._A_3_19__O_Kidney_disease_ != value))
+				if ((this._A_3_19_O_Kidney_disease != value))
 				{
-					this._A_3_19__O_Kidney_disease_ = value;
+					this._A_3_19_O_Kidney_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.20 (O-Lung disease)]", Storage="_A_3_20__O_Lung_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_20__O_Lung_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-20-O-Lung-disease]", Storage="_A_3_20_O_Lung_disease", DbType="NVarChar(30)")]
+		public string A_3_20_O_Lung_disease
 		{
 			get
 			{
-				return this._A_3_20__O_Lung_disease_;
+				return this._A_3_20_O_Lung_disease;
 			}
 			set
 			{
-				if ((this._A_3_20__O_Lung_disease_ != value))
+				if ((this._A_3_20_O_Lung_disease != value))
 				{
-					this._A_3_20__O_Lung_disease_ = value;
+					this._A_3_20_O_Lung_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.21 (O-Maternal/paternal/child health)]", Storage="_A_3_21__O_Maternal_paternal_child_health_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_21__O_Maternal_paternal_child_health_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-21-O-Maternal/paternal/child-health]", Storage="_A_3_21_O_Maternal_paternal_child_health", DbType="NVarChar(30)")]
+		public string A_3_21_O_Maternal_paternal_child_health
 		{
 			get
 			{
-				return this._A_3_21__O_Maternal_paternal_child_health_;
+				return this._A_3_21_O_Maternal_paternal_child_health;
 			}
 			set
 			{
-				if ((this._A_3_21__O_Maternal_paternal_child_health_ != value))
+				if ((this._A_3_21_O_Maternal_paternal_child_health != value))
 				{
-					this._A_3_21__O_Maternal_paternal_child_health_ = value;
+					this._A_3_21_O_Maternal_paternal_child_health = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.22 (O-Medication/device)]", Storage="_A_3_22__O_Medication_device_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_22__O_Medication_device_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-22-O-Medication/device]", Storage="_A_3_22_O_Medication_device", DbType="NVarChar(30)")]
+		public string A_3_22_O_Medication_device
 		{
 			get
 			{
-				return this._A_3_22__O_Medication_device_;
+				return this._A_3_22_O_Medication_device;
 			}
 			set
 			{
-				if ((this._A_3_22__O_Medication_device_ != value))
+				if ((this._A_3_22_O_Medication_device != value))
 				{
-					this._A_3_22__O_Medication_device_ = value;
+					this._A_3_22_O_Medication_device = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.23 (O-Mental health)]", Storage="_A_3_23__O_Mental_health_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_23__O_Mental_health_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-23-O-Mental-health]", Storage="_A_3_23_O_Mental_health", DbType="NVarChar(30)")]
+		public string A_3_23_O_Mental_health
 		{
 			get
 			{
-				return this._A_3_23__O_Mental_health_;
+				return this._A_3_23_O_Mental_health;
 			}
 			set
 			{
-				if ((this._A_3_23__O_Mental_health_ != value))
+				if ((this._A_3_23_O_Mental_health != value))
 				{
-					this._A_3_23__O_Mental_health_ = value;
+					this._A_3_23_O_Mental_health = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.24 (O-Microbiome)]", Storage="_A_3_24__O_Microbiome_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_24__O_Microbiome_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-24-O-Microbiome]", Storage="_A_3_24_O_Microbiome", DbType="NVarChar(30)")]
+		public string A_3_24_O_Microbiome
 		{
 			get
 			{
-				return this._A_3_24__O_Microbiome_;
+				return this._A_3_24_O_Microbiome;
 			}
 			set
 			{
-				if ((this._A_3_24__O_Microbiome_ != value))
+				if ((this._A_3_24_O_Microbiome != value))
 				{
-					this._A_3_24__O_Microbiome_ = value;
+					this._A_3_24_O_Microbiome = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.25 (O-Mortality)]", Storage="_A_3_25__O_Mortality_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_25__O_Mortality_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-25-O-Mortality]", Storage="_A_3_25_O_Mortality", DbType="NVarChar(30)")]
+		public string A_3_25_O_Mortality
 		{
 			get
 			{
-				return this._A_3_25__O_Mortality_;
+				return this._A_3_25_O_Mortality;
 			}
 			set
 			{
-				if ((this._A_3_25__O_Mortality_ != value))
+				if ((this._A_3_25_O_Mortality != value))
 				{
-					this._A_3_25__O_Mortality_ = value;
+					this._A_3_25_O_Mortality = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.26 (O-Motor vehicle crash)]", Storage="_A_3_26__O_Motor_vehicle_crash_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_26__O_Motor_vehicle_crash_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-26-O-Motor-vehicle-crash]", Storage="_A_3_26_O_Motor_vehicle_crash", DbType="NVarChar(30)")]
+		public string A_3_26_O_Motor_vehicle_crash
 		{
 			get
 			{
-				return this._A_3_26__O_Motor_vehicle_crash_;
+				return this._A_3_26_O_Motor_vehicle_crash;
 			}
 			set
 			{
-				if ((this._A_3_26__O_Motor_vehicle_crash_ != value))
+				if ((this._A_3_26_O_Motor_vehicle_crash != value))
 				{
-					this._A_3_26__O_Motor_vehicle_crash_ = value;
+					this._A_3_26_O_Motor_vehicle_crash = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.27 (O-Musculoskeletal disease)]", Storage="_A_3_27__O_Musculoskeletal_disease_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_27__O_Musculoskeletal_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-27-O-Musculoskeletal-disease]", Storage="_A_3_27_O_Musculoskeletal_disease", DbType="NVarChar(30)")]
+		public string A_3_27_O_Musculoskeletal_disease
 		{
 			get
 			{
-				return this._A_3_27__O_Musculoskeletal_disease_;
+				return this._A_3_27_O_Musculoskeletal_disease;
 			}
 			set
 			{
-				if ((this._A_3_27__O_Musculoskeletal_disease_ != value))
+				if ((this._A_3_27_O_Musculoskeletal_disease != value))
 				{
-					this._A_3_27__O_Musculoskeletal_disease_ = value;
+					this._A_3_27_O_Musculoskeletal_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.28 (O-Neurological disease (not Alzheimer’s))]", Storage="_A_3_28__O_Neurological_disease__not_Alzheimer_s__", DbType="SmallInt")]
-		public System.Nullable<short> A_3_28__O_Neurological_disease__not_Alzheimer_s__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-28-O-Neurological-disease-not-Alzheimer]", Storage="_A_3_28_O_Neurological_disease_not_Alzheimer", DbType="NVarChar(30)")]
+		public string A_3_28_O_Neurological_disease_not_Alzheimer
 		{
 			get
 			{
-				return this._A_3_28__O_Neurological_disease__not_Alzheimer_s__;
+				return this._A_3_28_O_Neurological_disease_not_Alzheimer;
 			}
 			set
 			{
-				if ((this._A_3_28__O_Neurological_disease__not_Alzheimer_s__ != value))
+				if ((this._A_3_28_O_Neurological_disease_not_Alzheimer != value))
 				{
-					this._A_3_28__O_Neurological_disease__not_Alzheimer_s__ = value;
+					this._A_3_28_O_Neurological_disease_not_Alzheimer = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.29 (O-Obesity)]", Storage="_A_3_29__O_Obesity_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_29__O_Obesity_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-29-O-Obesity]", Storage="_A_3_29_O_Obesity", DbType="NVarChar(30)")]
+		public string A_3_29_O_Obesity
 		{
 			get
 			{
-				return this._A_3_29__O_Obesity_;
+				return this._A_3_29_O_Obesity;
 			}
 			set
 			{
-				if ((this._A_3_29__O_Obesity_ != value))
+				if ((this._A_3_29_O_Obesity != value))
 				{
-					this._A_3_29__O_Obesity_ = value;
+					this._A_3_29_O_Obesity = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.30 (O-Physical activity)]", Storage="_A_3_30__O_Physical_activity_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_30__O_Physical_activity_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-30-O-Physical-activity]", Storage="_A_3_30_O_Physical_activity", DbType="NVarChar(30)")]
+		public string A_3_30_O_Physical_activity
 		{
 			get
 			{
-				return this._A_3_30__O_Physical_activity_;
+				return this._A_3_30_O_Physical_activity;
 			}
 			set
 			{
-				if ((this._A_3_30__O_Physical_activity_ != value))
+				if ((this._A_3_30_O_Physical_activity != value))
 				{
-					this._A_3_30__O_Physical_activity_ = value;
+					this._A_3_30_O_Physical_activity = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.31 (O-Policy/built environment)]", Storage="_A_3_31__O_Policy_built_environment_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_31__O_Policy_built_environment_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-31-O-Policy/built-environment]", Storage="_A_3_31_O_Policy_built_environment", DbType="NVarChar(30)")]
+		public string A_3_31_O_Policy_built_environment
 		{
 			get
 			{
-				return this._A_3_31__O_Policy_built_environment_;
+				return this._A_3_31_O_Policy_built_environment;
 			}
 			set
 			{
-				if ((this._A_3_31__O_Policy_built_environment_ != value))
+				if ((this._A_3_31_O_Policy_built_environment != value))
 				{
-					this._A_3_31__O_Policy_built_environment_ = value;
+					this._A_3_31_O_Policy_built_environment = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.32 (O-Pneumonia/influenza)]", Storage="_A_3_32__O_Pneumonia_influenza_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_32__O_Pneumonia_influenza_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-32-O-Pneumonia/influenza]", Storage="_A_3_32_O_Pneumonia_influenza", DbType="NVarChar(30)")]
+		public string A_3_32_O_Pneumonia_influenza
 		{
 			get
 			{
-				return this._A_3_32__O_Pneumonia_influenza_;
+				return this._A_3_32_O_Pneumonia_influenza;
 			}
 			set
 			{
-				if ((this._A_3_32__O_Pneumonia_influenza_ != value))
+				if ((this._A_3_32_O_Pneumonia_influenza != value))
 				{
-					this._A_3_32__O_Pneumonia_influenza_ = value;
+					this._A_3_32_O_Pneumonia_influenza = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.33 (O-Sexual behavior)]", Storage="_A_3_33__O_Sexual_behavior_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_33__O_Sexual_behavior_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-33-O-Sexual-behavior]", Storage="_A_3_33_O_Sexual_behavior", DbType="NVarChar(30)")]
+		public string A_3_33_O_Sexual_behavior
 		{
 			get
 			{
-				return this._A_3_33__O_Sexual_behavior_;
+				return this._A_3_33_O_Sexual_behavior;
 			}
 			set
 			{
-				if ((this._A_3_33__O_Sexual_behavior_ != value))
+				if ((this._A_3_33_O_Sexual_behavior != value))
 				{
-					this._A_3_33__O_Sexual_behavior_ = value;
+					this._A_3_33_O_Sexual_behavior = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.34 (O-Stress)]", Storage="_A_3_34__O_Stress_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_34__O_Stress_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-34-O-Stress]", Storage="_A_3_34_O_Stress", DbType="NVarChar(30)")]
+		public string A_3_34_O_Stress
 		{
 			get
 			{
-				return this._A_3_34__O_Stress_;
+				return this._A_3_34_O_Stress;
 			}
 			set
 			{
-				if ((this._A_3_34__O_Stress_ != value))
+				if ((this._A_3_34_O_Stress != value))
 				{
-					this._A_3_34__O_Stress_ = value;
+					this._A_3_34_O_Stress = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.35 (O-Stroke)]", Storage="_A_3_35__O_Stroke_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_35__O_Stroke_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-35-O-Stroke]", Storage="_A_3_35_O_Stroke", DbType="NVarChar(30)")]
+		public string A_3_35_O_Stroke
 		{
 			get
 			{
-				return this._A_3_35__O_Stroke_;
+				return this._A_3_35_O_Stroke;
 			}
 			set
 			{
-				if ((this._A_3_35__O_Stroke_ != value))
+				if ((this._A_3_35_O_Stroke != value))
 				{
-					this._A_3_35__O_Stroke_ = value;
+					this._A_3_35_O_Stroke = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.36 (O-Substance abuse)]", Storage="_A_3_36__O_Substance_abuse_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_36__O_Substance_abuse_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-36-O-Substance-abuse]", Storage="_A_3_36_O_Substance_abuse", DbType="NVarChar(30)")]
+		public string A_3_36_O_Substance_abuse
 		{
 			get
 			{
-				return this._A_3_36__O_Substance_abuse_;
+				return this._A_3_36_O_Substance_abuse;
 			}
 			set
 			{
-				if ((this._A_3_36__O_Substance_abuse_ != value))
+				if ((this._A_3_36_O_Substance_abuse != value))
 				{
-					this._A_3_36__O_Substance_abuse_ = value;
+					this._A_3_36_O_Substance_abuse = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.37 (O-Suicide)]", Storage="_A_3_37__O_Suicide_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_37__O_Suicide_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-37-O-Suicide]", Storage="_A_3_37_O_Suicide", DbType="NVarChar(30)")]
+		public string A_3_37_O_Suicide
 		{
 			get
 			{
-				return this._A_3_37__O_Suicide_;
+				return this._A_3_37_O_Suicide;
 			}
 			set
 			{
-				if ((this._A_3_37__O_Suicide_ != value))
+				if ((this._A_3_37_O_Suicide != value))
 				{
-					this._A_3_37__O_Suicide_ = value;
+					this._A_3_37_O_Suicide = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.38 (O-Surgery)]", Storage="_A_3_38__O_Surgery_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_38__O_Surgery_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-38-O-Surgery]", Storage="_A_3_38_O_Surgery", DbType="NVarChar(30)")]
+		public string A_3_38_O_Surgery
 		{
 			get
 			{
-				return this._A_3_38__O_Surgery_;
+				return this._A_3_38_O_Surgery;
 			}
 			set
 			{
-				if ((this._A_3_38__O_Surgery_ != value))
+				if ((this._A_3_38_O_Surgery != value))
 				{
-					this._A_3_38__O_Surgery_ = value;
+					this._A_3_38_O_Surgery = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.39 (O-Tobacco)]", Storage="_A_3_39__O_Tobacco_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_39__O_Tobacco_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-39-O-Tobacco]", Storage="_A_3_39_O_Tobacco", DbType="NVarChar(30)")]
+		public string A_3_39_O_Tobacco
 		{
 			get
 			{
-				return this._A_3_39__O_Tobacco_;
+				return this._A_3_39_O_Tobacco;
 			}
 			set
 			{
-				if ((this._A_3_39__O_Tobacco_ != value))
+				if ((this._A_3_39_O_Tobacco != value))
 				{
-					this._A_3_39__O_Tobacco_ = value;
+					this._A_3_39_O_Tobacco = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.40 (O-Unintentional injuries)]", Storage="_A_3_40__O_Unintentional_injuries_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_40__O_Unintentional_injuries_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-40-O-Unintentional-injuries]", Storage="_A_3_40_O_Unintentional_injuries", DbType="NVarChar(30)")]
+		public string A_3_40_O_Unintentional_injuries
 		{
 			get
 			{
-				return this._A_3_40__O_Unintentional_injuries_;
+				return this._A_3_40_O_Unintentional_injuries;
 			}
 			set
 			{
-				if ((this._A_3_40__O_Unintentional_injuries_ != value))
+				if ((this._A_3_40_O_Unintentional_injuries != value))
 				{
-					this._A_3_40__O_Unintentional_injuries_ = value;
+					this._A_3_40_O_Unintentional_injuries = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.41 (O-Vaccine)]", Storage="_A_3_41__O_Vaccine_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_41__O_Vaccine_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-41-O-Vaccine]", Storage="_A_3_41_O_Vaccine", DbType="NVarChar(30)")]
+		public string A_3_41_O_Vaccine
 		{
 			get
 			{
-				return this._A_3_41__O_Vaccine_;
+				return this._A_3_41_O_Vaccine;
 			}
 			set
 			{
-				if ((this._A_3_41__O_Vaccine_ != value))
+				if ((this._A_3_41_O_Vaccine != value))
 				{
-					this._A_3_41__O_Vaccine_ = value;
+					this._A_3_41_O_Vaccine = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.42 (O-Violence)]", Storage="_A_3_42__O_Violence_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_42__O_Violence_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-42-O-Violence]", Storage="_A_3_42_O_Violence", DbType="NVarChar(30)")]
+		public string A_3_42_O_Violence
 		{
 			get
 			{
-				return this._A_3_42__O_Violence_;
+				return this._A_3_42_O_Violence;
 			}
 			set
 			{
-				if ((this._A_3_42__O_Violence_ != value))
+				if ((this._A_3_42_O_Violence != value))
 				{
-					this._A_3_42__O_Violence_ = value;
+					this._A_3_42_O_Violence = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A.3.43 (O-Other or unclear)]", Storage="_A_3_43__O_Other_or_unclear_", DbType="SmallInt")]
-		public System.Nullable<short> A_3_43__O_Other_or_unclear_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[A-3-43-O-Other-or-unclear]", Storage="_A_3_43_O_Other_or_unclear", DbType="NVarChar(30)")]
+		public string A_3_43_O_Other_or_unclear
 		{
 			get
 			{
-				return this._A_3_43__O_Other_or_unclear_;
+				return this._A_3_43_O_Other_or_unclear;
 			}
 			set
 			{
-				if ((this._A_3_43__O_Other_or_unclear_ != value))
+				if ((this._A_3_43_O_Other_or_unclear != value))
 				{
-					this._A_3_43__O_Other_or_unclear_ = value;
+					this._A_3_43_O_Other_or_unclear = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B.1 (Animals)]", Storage="_B_1__Animals_", DbType="SmallInt")]
-		public System.Nullable<short> B_1__Animals_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B-1-Animals]", Storage="_B_1_Animals", DbType="NVarChar(30)")]
+		public string B_1_Animals
 		{
 			get
 			{
-				return this._B_1__Animals_;
+				return this._B_1_Animals;
 			}
 			set
 			{
-				if ((this._B_1__Animals_ != value))
+				if ((this._B_1_Animals != value))
 				{
-					this._B_1__Animals_ = value;
+					this._B_1_Animals = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B.2 (Cells/cell lines)]", Storage="_B_2__Cells_cell_lines_", DbType="SmallInt")]
-		public System.Nullable<short> B_2__Cells_cell_lines_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B-2-Cells/cell lines]", Storage="_B_2_Cells_cell_lines", DbType="NVarChar(30)")]
+		public string B_2_Cells_cell_lines
 		{
 			get
 			{
-				return this._B_2__Cells_cell_lines_;
+				return this._B_2_Cells_cell_lines;
 			}
 			set
 			{
-				if ((this._B_2__Cells_cell_lines_ != value))
+				if ((this._B_2_Cells_cell_lines != value))
 				{
-					this._B_2__Cells_cell_lines_ = value;
+					this._B_2_Cells_cell_lines = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B.3 (Blank)]", Storage="_B_3__Blank_", DbType="SmallInt")]
-		public System.Nullable<short> B_3__Blank_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B-3-Blank]", Storage="_B_3_Blank", DbType="NVarChar(30)")]
+		public string B_3_Blank
 		{
 			get
 			{
-				return this._B_3__Blank_;
+				return this._B_3_Blank;
 			}
 			set
 			{
-				if ((this._B_3__Blank_ != value))
+				if ((this._B_3_Blank != value))
 				{
-					this._B_3__Blank_ = value;
+					this._B_3_Blank = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B.4 (Human subjects)]", Storage="_B_4__Human_subjects_", DbType="SmallInt")]
-		public System.Nullable<short> B_4__Human_subjects_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B-4-Human subjects]", Storage="_B_4_Human_subjects", DbType="NVarChar(30)")]
+		public string B_4_Human_subjects
 		{
 			get
 			{
-				return this._B_4__Human_subjects_;
+				return this._B_4_Human_subjects;
 			}
 			set
 			{
-				if ((this._B_4__Human_subjects_ != value))
+				if ((this._B_4_Human_subjects != value))
 				{
-					this._B_4__Human_subjects_ = value;
+					this._B_4_Human_subjects = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B.5 (Blank)]", Storage="_B_5__Blank_", DbType="SmallInt")]
-		public System.Nullable<short> B_5__Blank_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B-5-Blank]", Storage="_B_5_Blank", DbType="NVarChar(30)")]
+		public string B_5_Blank
 		{
 			get
 			{
-				return this._B_5__Blank_;
+				return this._B_5_Blank;
 			}
 			set
 			{
-				if ((this._B_5__Blank_ != value))
+				if ((this._B_5_Blank != value))
 				{
-					this._B_5__Blank_ = value;
+					this._B_5_Blank = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B.6 (Tissues/organs)]", Storage="_B_6__Tissues_organs_", DbType="SmallInt")]
-		public System.Nullable<short> B_6__Tissues_organs_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B-6-Tissues/organs]", Storage="_B_6_Tissues_organs", DbType="NVarChar(30)")]
+		public string B_6_Tissues_organs
 		{
 			get
 			{
-				return this._B_6__Tissues_organs_;
+				return this._B_6_Tissues_organs;
 			}
 			set
 			{
-				if ((this._B_6__Tissues_organs_ != value))
+				if ((this._B_6_Tissues_organs != value))
 				{
-					this._B_6__Tissues_organs_ = value;
+					this._B_6_Tissues_organs = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B.7 (Other or unclear)]", Storage="_B_7__Other_or_unclear_", DbType="SmallInt")]
-		public System.Nullable<short> B_7__Other_or_unclear_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[B-7-Other-or-unclear]", Storage="_B_7_Other_or_unclear", DbType="NVarChar(30)")]
+		public string B_7_Other_or_unclear
 		{
 			get
 			{
-				return this._B_7__Other_or_unclear_;
+				return this._B_7_Other_or_unclear;
 			}
 			set
 			{
-				if ((this._B_7__Other_or_unclear_ != value))
+				if ((this._B_7_Other_or_unclear != value))
 				{
-					this._B_7__Other_or_unclear_ = value;
+					this._B_7_Other_or_unclear = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[C.1 (Community (including home, school, worksite, community organizations))]", Storage="_C_1__Community__including_home__school__worksite__community_organizations__", DbType="SmallInt")]
-		public System.Nullable<short> C_1__Community__including_home__school__worksite__community_organizations__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[C-1-Community]", Storage="_C_1_Community", DbType="NVarChar(30)")]
+		public string C_1_Community
 		{
 			get
 			{
-				return this._C_1__Community__including_home__school__worksite__community_organizations__;
+				return this._C_1_Community;
 			}
 			set
 			{
-				if ((this._C_1__Community__including_home__school__worksite__community_organizations__ != value))
+				if ((this._C_1_Community != value))
 				{
-					this._C_1__Community__including_home__school__worksite__community_organizations__ = value;
+					this._C_1_Community = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[C.2 (Healthcare (e.g., clinic, hospital))]", Storage="_C_2__Healthcare__e_g___clinic__hospital__", DbType="SmallInt")]
-		public System.Nullable<short> C_2__Healthcare__e_g___clinic__hospital__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[C-2-Healthcare]", Storage="_C_2_Healthcare", DbType="NVarChar(30)")]
+		public string C_2_Healthcare
 		{
 			get
 			{
-				return this._C_2__Healthcare__e_g___clinic__hospital__;
+				return this._C_2_Healthcare;
 			}
 			set
 			{
-				if ((this._C_2__Healthcare__e_g___clinic__hospital__ != value))
+				if ((this._C_2_Healthcare != value))
 				{
-					this._C_2__Healthcare__e_g___clinic__hospital__ = value;
+					this._C_2_Healthcare = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[C.3 (Research clinic or laboratory)]", Storage="_C_3__Research_clinic_or_laboratory_", DbType="SmallInt")]
-		public System.Nullable<short> C_3__Research_clinic_or_laboratory_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[C-3-Research-clinic-or-laboratory]", Storage="_C_3_Research_clinic_or_laboratory", DbType="NVarChar(30)")]
+		public string C_3_Research_clinic_or_laboratory
 		{
 			get
 			{
-				return this._C_3__Research_clinic_or_laboratory_;
+				return this._C_3_Research_clinic_or_laboratory;
 			}
 			set
 			{
-				if ((this._C_3__Research_clinic_or_laboratory_ != value))
+				if ((this._C_3_Research_clinic_or_laboratory != value))
 				{
-					this._C_3__Research_clinic_or_laboratory_ = value;
+					this._C_3_Research_clinic_or_laboratory = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[C.4 (Other or unclear)]", Storage="_C_4__Other_or_unclear_", DbType="SmallInt")]
-		public System.Nullable<short> C_4__Other_or_unclear_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[C-4-Other-or-unclear]", Storage="_C_4_Other_or_unclear", DbType="NVarChar(30)")]
+		public string C_4_Other_or_unclear
 		{
 			get
 			{
-				return this._C_4__Other_or_unclear_;
+				return this._C_4_Other_or_unclear;
 			}
 			set
 			{
-				if ((this._C_4__Other_or_unclear_ != value))
+				if ((this._C_4_Other_or_unclear != value))
 				{
-					this._C_4__Other_or_unclear_ = value;
+					this._C_4_Other_or_unclear = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.1 (Incarcerated/institutionalized)]", Storage="_D_1__Incarcerated_institutionalized_", DbType="SmallInt")]
-		public System.Nullable<short> D_1__Incarcerated_institutionalized_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-1-Incarcerated/institutionalized]", Storage="_D_1_Incarcerated_institutionalized", DbType="NVarChar(30)")]
+		public string D_1_Incarcerated_institutionalized
 		{
 			get
 			{
-				return this._D_1__Incarcerated_institutionalized_;
+				return this._D_1_Incarcerated_institutionalized;
 			}
 			set
 			{
-				if ((this._D_1__Incarcerated_institutionalized_ != value))
+				if ((this._D_1_Incarcerated_institutionalized != value))
 				{
-					this._D_1__Incarcerated_institutionalized_ = value;
+					this._D_1_Incarcerated_institutionalized = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.2 (LGBTI)]", Storage="_D_2__LGBTI_", DbType="SmallInt")]
-		public System.Nullable<short> D_2__LGBTI_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-2-LGBTI]", Storage="_D_2_LGBTI", DbType="NVarChar(30)")]
+		public string D_2_LGBTI
 		{
 			get
 			{
-				return this._D_2__LGBTI_;
+				return this._D_2_LGBTI;
 			}
 			set
 			{
-				if ((this._D_2__LGBTI_ != value))
+				if ((this._D_2_LGBTI != value))
 				{
-					this._D_2__LGBTI_ = value;
+					this._D_2_LGBTI = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.3 (Low income)]", Storage="_D_3__Low_income_", DbType="SmallInt")]
-		public System.Nullable<short> D_3__Low_income_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-3-Low-income]", Storage="_D_3_Low_income", DbType="NVarChar(30)")]
+		public string D_3_Low_income
 		{
 			get
 			{
-				return this._D_3__Low_income_;
+				return this._D_3_Low_income;
 			}
 			set
 			{
-				if ((this._D_3__Low_income_ != value))
+				if ((this._D_3_Low_income != value))
 				{
-					this._D_3__Low_income_ = value;
+					this._D_3_Low_income = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.4 (Military/veterans)]", Storage="_D_4__Military_veterans_", DbType="SmallInt")]
-		public System.Nullable<short> D_4__Military_veterans_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-4-Military/veterans]", Storage="_D_4_Military_veterans", DbType="NVarChar(30)")]
+		public string D_4_Military_veterans
 		{
 			get
 			{
-				return this._D_4__Military_veterans_;
+				return this._D_4_Military_veterans;
 			}
 			set
 			{
-				if ((this._D_4__Military_veterans_ != value))
+				if ((this._D_4_Military_veterans != value))
 				{
-					this._D_4__Military_veterans_ = value;
+					this._D_4_Military_veterans = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.5 (Older adults/elderly)]", Storage="_D_5__Older_adults_elderly_", DbType="SmallInt")]
-		public System.Nullable<short> D_5__Older_adults_elderly_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-5-Older-adults/elderly]", Storage="_D_5_Older_adults_elderly", DbType="NVarChar(30)")]
+		public string D_5_Older_adults_elderly
 		{
 			get
 			{
-				return this._D_5__Older_adults_elderly_;
+				return this._D_5_Older_adults_elderly;
 			}
 			set
 			{
-				if ((this._D_5__Older_adults_elderly_ != value))
+				if ((this._D_5_Older_adults_elderly != value))
 				{
-					this._D_5__Older_adults_elderly_ = value;
+					this._D_5_Older_adults_elderly = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.6 (People with disabilities)]", Storage="_D_6__People_with_disabilities_", DbType="SmallInt")]
-		public System.Nullable<short> D_6__People_with_disabilities_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-6-People-with-disabilities]", Storage="_D_6_People_with_disabilities", DbType="NVarChar(30)")]
+		public string D_6_People_with_disabilities
 		{
 			get
 			{
-				return this._D_6__People_with_disabilities_;
+				return this._D_6_People_with_disabilities;
 			}
 			set
 			{
-				if ((this._D_6__People_with_disabilities_ != value))
+				if ((this._D_6_People_with_disabilities != value))
 				{
-					this._D_6__People_with_disabilities_ = value;
+					this._D_6_People_with_disabilities = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.7 (Pregnant and/or post-partum women)]", Storage="_D_7__Pregnant_and_or_post_partum_women_", DbType="SmallInt")]
-		public System.Nullable<short> D_7__Pregnant_and_or_post_partum_women_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-7-Pregnant-and/or-post-partum-women]", Storage="_D_7_Pregnant_and_or_post_partum_women", DbType="NVarChar(30)")]
+		public string D_7_Pregnant_and_or_post_partum_women
 		{
 			get
 			{
-				return this._D_7__Pregnant_and_or_post_partum_women_;
+				return this._D_7_Pregnant_and_or_post_partum_women;
 			}
 			set
 			{
-				if ((this._D_7__Pregnant_and_or_post_partum_women_ != value))
+				if ((this._D_7_Pregnant_and_or_post_partum_women != value))
 				{
-					this._D_7__Pregnant_and_or_post_partum_women_ = value;
+					this._D_7_Pregnant_and_or_post_partum_women = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.8 (Rural)]", Storage="_D_8__Rural_", DbType="SmallInt")]
-		public System.Nullable<short> D_8__Rural_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-8-Rural]", Storage="_D_8_Rural", DbType="NVarChar(30)")]
+		public string D_8_Rural
 		{
 			get
 			{
-				return this._D_8__Rural_;
+				return this._D_8_Rural;
 			}
 			set
 			{
-				if ((this._D_8__Rural_ != value))
+				if ((this._D_8_Rural != value))
 				{
-					this._D_8__Rural_ = value;
+					this._D_8_Rural = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.9 (Urban)]", Storage="_D_9__Urban_", DbType="SmallInt")]
-		public System.Nullable<short> D_9__Urban_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-9-Urban]", Storage="_D_9_Urban", DbType="NVarChar(30)")]
+		public string D_9_Urban
 		{
 			get
 			{
-				return this._D_9__Urban_;
+				return this._D_9_Urban;
 			}
 			set
 			{
-				if ((this._D_9__Urban_ != value))
+				if ((this._D_9_Urban != value))
 				{
-					this._D_9__Urban_ = value;
+					this._D_9_Urban = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.10 (Youth (infants, children, adolescents))]", Storage="_D_10__Youth__infants__children__adolescents__", DbType="SmallInt")]
-		public System.Nullable<short> D_10__Youth__infants__children__adolescents__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-10-Youth-infants-children-adolescents]", Storage="_D_10_Youth_infants_children_adolescents", DbType="NVarChar(30)")]
+		public string D_10_Youth_infants_children_adolescents
 		{
 			get
 			{
-				return this._D_10__Youth__infants__children__adolescents__;
+				return this._D_10_Youth_infants_children_adolescents;
 			}
 			set
 			{
-				if ((this._D_10__Youth__infants__children__adolescents__ != value))
+				if ((this._D_10_Youth_infants_children_adolescents != value))
 				{
-					this._D_10__Youth__infants__children__adolescents__ = value;
+					this._D_10_Youth_infants_children_adolescents = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D.11 (Other or unclear)]", Storage="_D_11__Other_or_unclear_", DbType="SmallInt")]
-		public System.Nullable<short> D_11__Other_or_unclear_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[D-11-Other-or-unclear]", Storage="_D_11_Other_or_unclear", DbType="NVarChar(30)")]
+		public string D_11_Other_or_unclear
 		{
 			get
 			{
-				return this._D_11__Other_or_unclear_;
+				return this._D_11_Other_or_unclear;
 			}
 			set
 			{
-				if ((this._D_11__Other_or_unclear_ != value))
+				if ((this._D_11_Other_or_unclear != value))
 				{
-					this._D_11__Other_or_unclear_ = value;
+					this._D_11_Other_or_unclear = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E.1 (Analysis of existing data)]", Storage="_E_1__Analysis_of_existing_data_", DbType="SmallInt")]
-		public System.Nullable<short> E_1__Analysis_of_existing_data_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E-1-Analysis-of-existing-data]", Storage="_E_1_Analysis_of_existing_data", DbType="NVarChar(30)")]
+		public string E_1_Analysis_of_existing_data
 		{
 			get
 			{
-				return this._E_1__Analysis_of_existing_data_;
+				return this._E_1_Analysis_of_existing_data;
 			}
 			set
 			{
-				if ((this._E_1__Analysis_of_existing_data_ != value))
+				if ((this._E_1_Analysis_of_existing_data != value))
 				{
-					this._E_1__Analysis_of_existing_data_ = value;
+					this._E_1_Analysis_of_existing_data = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E.2 (Methods research)]", Storage="_E_2__Methods_research_", DbType="SmallInt")]
-		public System.Nullable<short> E_2__Methods_research_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E-2-Methods-research]", Storage="_E_2_Methods_research", DbType="NVarChar(30)")]
+		public string E_2_Methods_research
 		{
 			get
 			{
-				return this._E_2__Methods_research_;
+				return this._E_2_Methods_research;
 			}
 			set
 			{
-				if ((this._E_2__Methods_research_ != value))
+				if ((this._E_2_Methods_research != value))
 				{
-					this._E_2__Methods_research_ = value;
+					this._E_2_Methods_research = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E.3 (Non-randomized intervention study)]", Storage="_E_3__Non_randomized_intervention_study_", DbType="SmallInt")]
-		public System.Nullable<short> E_3__Non_randomized_intervention_study_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E-3-Non-randomized-intervention study]", Storage="_E_3_Non_randomized_intervention_study", DbType="NVarChar(30)")]
+		public string E_3_Non_randomized_intervention_study
 		{
 			get
 			{
-				return this._E_3__Non_randomized_intervention_study_;
+				return this._E_3_Non_randomized_intervention_study;
 			}
 			set
 			{
-				if ((this._E_3__Non_randomized_intervention_study_ != value))
+				if ((this._E_3_Non_randomized_intervention_study != value))
 				{
-					this._E_3__Non_randomized_intervention_study_ = value;
+					this._E_3_Non_randomized_intervention_study = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E.4 (Observational study)]", Storage="_E_4__Observational_study_", DbType="SmallInt")]
-		public System.Nullable<short> E_4__Observational_study_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E-4-Observational-study]", Storage="_E_4_Observational_study", DbType="NVarChar(30)")]
+		public string E_4_Observational_study
 		{
 			get
 			{
-				return this._E_4__Observational_study_;
+				return this._E_4_Observational_study;
 			}
 			set
 			{
-				if ((this._E_4__Observational_study_ != value))
+				if ((this._E_4_Observational_study != value))
 				{
-					this._E_4__Observational_study_ = value;
+					this._E_4_Observational_study = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E.5 (Pilot/feasibility/proof-of-concept/safety)]", Storage="_E_5__Pilot_feasibility_proof_of_concept_safety_", DbType="SmallInt")]
-		public System.Nullable<short> E_5__Pilot_feasibility_proof_of_concept_safety_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E-5-Pilot/feasibility/proof-of-concept/safety]", Storage="_E_5_Pilot_feasibility_proof_of_concept_safety", DbType="NVarChar(30)")]
+		public string E_5_Pilot_feasibility_proof_of_concept_safety
 		{
 			get
 			{
-				return this._E_5__Pilot_feasibility_proof_of_concept_safety_;
+				return this._E_5_Pilot_feasibility_proof_of_concept_safety;
 			}
 			set
 			{
-				if ((this._E_5__Pilot_feasibility_proof_of_concept_safety_ != value))
+				if ((this._E_5_Pilot_feasibility_proof_of_concept_safety != value))
 				{
-					this._E_5__Pilot_feasibility_proof_of_concept_safety_ = value;
+					this._E_5_Pilot_feasibility_proof_of_concept_safety = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E.6 (Randomized intervention study)]", Storage="_E_6__Randomized_intervention_study_", DbType="SmallInt")]
-		public System.Nullable<short> E_6__Randomized_intervention_study_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E-6-Randomized-intervention-study]", Storage="_E_6_Randomized_intervention_study", DbType="NVarChar(30)")]
+		public string E_6_Randomized_intervention_study
 		{
 			get
 			{
-				return this._E_6__Randomized_intervention_study_;
+				return this._E_6_Randomized_intervention_study;
 			}
 			set
 			{
-				if ((this._E_6__Randomized_intervention_study_ != value))
+				if ((this._E_6_Randomized_intervention_study != value))
 				{
-					this._E_6__Randomized_intervention_study_ = value;
+					this._E_6_Randomized_intervention_study = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E.7 (Other or unclear)]", Storage="_E_7__Other_or_unclear_", DbType="SmallInt")]
-		public System.Nullable<short> E_7__Other_or_unclear_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[E-7-Other-or-unclear]", Storage="_E_7_Other_or_unclear", DbType="NVarChar(30)")]
+		public string E_7_Other_or_unclear
 		{
 			get
 			{
-				return this._E_7__Other_or_unclear_;
+				return this._E_7_Other_or_unclear;
 			}
 			set
 			{
-				if ((this._E_7__Other_or_unclear_ != value))
+				if ((this._E_7_Other_or_unclear != value))
 				{
-					this._E_7__Other_or_unclear_ = value;
+					this._E_7_Other_or_unclear = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F.1 (Preventing new health condition..]", Storage="_F_1__Preventing_new_health_condition__", DbType="SmallInt")]
-		public System.Nullable<short> F_1__Preventing_new_health_condition__
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F-1-Preventing-new-health-condition]", Storage="_F_1_Preventing_new_health_condition", DbType="NVarChar(30)")]
+		public string F_1_Preventing_new_health_condition
 		{
 			get
 			{
-				return this._F_1__Preventing_new_health_condition__;
+				return this._F_1_Preventing_new_health_condition;
 			}
 			set
 			{
-				if ((this._F_1__Preventing_new_health_condition__ != value))
+				if ((this._F_1_Preventing_new_health_condition != value))
 				{
-					this._F_1__Preventing_new_health_condition__ = value;
+					this._F_1_Preventing_new_health_condition = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F.2 (Screening for risk factor)]", Storage="_F_2__Screening_for_risk_factor_", DbType="SmallInt")]
-		public System.Nullable<short> F_2__Screening_for_risk_factor_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F-2-Screening-for-risk-factor]", Storage="_F_2_Screening_for_risk_factor", DbType="NVarChar(30)")]
+		public string F_2_Screening_for_risk_factor
 		{
 			get
 			{
-				return this._F_2__Screening_for_risk_factor_;
+				return this._F_2_Screening_for_risk_factor;
 			}
 			set
 			{
-				if ((this._F_2__Screening_for_risk_factor_ != value))
+				if ((this._F_2_Screening_for_risk_factor != value))
 				{
-					this._F_2__Screening_for_risk_factor_ = value;
+					this._F_2_Screening_for_risk_factor = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F.3 (Screening for early disease)]", Storage="_F_3__Screening_for_early_disease_", DbType="SmallInt")]
-		public System.Nullable<short> F_3__Screening_for_early_disease_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F-3-Screening-for-early-disease]", Storage="_F_3_Screening_for_early_disease", DbType="NVarChar(30)")]
+		public string F_3_Screening_for_early_disease
 		{
 			get
 			{
-				return this._F_3__Screening_for_early_disease_;
+				return this._F_3_Screening_for_early_disease;
 			}
 			set
 			{
-				if ((this._F_3__Screening_for_early_disease_ != value))
+				if ((this._F_3_Screening_for_early_disease != value))
 				{
-					this._F_3__Screening_for_early_disease_ = value;
+					this._F_3_Screening_for_early_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F.4 (Preventing progression of disease..)]", Storage="_F_4__Preventing_progression_of_disease___", DbType="SmallInt")]
-		public System.Nullable<short> F_4__Preventing_progression_of_disease___
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F-4-Preventing-progression-of-disease]", Storage="_F_4_Preventing_progression_of_disease", DbType="NVarChar(30)")]
+		public string F_4_Preventing_progression_of_disease
 		{
 			get
 			{
-				return this._F_4__Preventing_progression_of_disease___;
+				return this._F_4_Preventing_progression_of_disease;
 			}
 			set
 			{
-				if ((this._F_4__Preventing_progression_of_disease___ != value))
+				if ((this._F_4_Preventing_progression_of_disease != value))
 				{
-					this._F_4__Preventing_progression_of_disease___ = value;
+					this._F_4_Preventing_progression_of_disease = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F.5 (Methods research)]", Storage="_F_5__Methods_research_", DbType="SmallInt")]
-		public System.Nullable<short> F_5__Methods_research_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F-5-Methods-research]", Storage="_F_5_Methods_research", DbType="NVarChar(30)")]
+		public string F_5_Methods_research
 		{
 			get
 			{
-				return this._F_5__Methods_research_;
+				return this._F_5_Methods_research;
 			}
 			set
 			{
-				if ((this._F_5__Methods_research_ != value))
+				if ((this._F_5_Methods_research != value))
 				{
-					this._F_5__Methods_research_ = value;
+					this._F_5_Methods_research = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F.6 (Other or unclear)]", Storage="_F_6__Other_or_unclear_", DbType="SmallInt")]
-		public System.Nullable<short> F_6__Other_or_unclear_
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[F-6-Other-or-unclear]", Storage="_F_6_Other_or_unclear", DbType="NVarChar(30)")]
+		public string F_6_Other_or_unclear
 		{
 			get
 			{
-				return this._F_6__Other_or_unclear_;
+				return this._F_6_Other_or_unclear;
 			}
 			set
 			{
-				if ((this._F_6__Other_or_unclear_ != value))
+				if ((this._F_6_Other_or_unclear != value))
 				{
-					this._F_6__Other_or_unclear_ = value;
+					this._F_6_Other_or_unclear = value;
 				}
 			}
 		}
