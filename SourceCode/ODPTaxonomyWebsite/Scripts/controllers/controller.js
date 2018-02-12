@@ -125,8 +125,10 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
         $scope.$watch("mdata", function () {
             //console.log("form data changed :: " + $scope.mdata);
             if ($scope.displaymode != "View") {
-                $scope.$broadcast("disableboxes");
+
                 $scope.$broadcast("validate.formdata");
+                $scope.$broadcast("disableboxes");
+                
 
                 // sync mdata with data - remove all function properties
                 if ($scope.mode.indexOf("Consensus") != -1 || $scope.mode.indexOf("Comparison") != -1) {
@@ -284,8 +286,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
         }
         // Adding Rule for E. StudyDesign Purpose
-        var checkF = $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked;
-        if ($scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked && checkF) {
+        //var checkF = $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked;
+        //if ($scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked && !$scope.fullyCoded) {
+        if ($scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked && !$scope.fullyCoded) {
             for (i = 1; i < $scope.mdata.studydesignpurpose.length - 1; i++) {
                 $scope.mdata.studydesignpurpose[i].resetBoxCC();
             }
@@ -449,10 +452,14 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
         }
 
+        $scope.fullyCoded = false;
+
         if (studyfocuscol1 || studyfocuscol2 || studyfocuscol3 || populationfocusBox) {
             //console.log("E7 / F6 only bypassed ");
             // bypass E7 / F6 Only. As this will now be treated as a regular coding. Another category selection was made.
-
+            if (studyfocuscol1 && studyfocuscol2 && studyfocuscol3 && populationfocusBox) {
+                $scope.fullyCoded = true;
+            }
         }
         else {
 
