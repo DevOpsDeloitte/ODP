@@ -286,9 +286,9 @@ app.controller("ODPFormCtrl", function ($rootScope, $scope, $http, $firebase, $f
             }
         }
         // Adding Rule for E. StudyDesign Purpose
-        //var checkF = $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked;
+        var checkF = $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1] != undefined && $scope.mdata.preventioncategory[$scope.mdata.preventioncategory.length - 1].isChecked;
         //if ($scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked && !$scope.fullyCoded) {
-        if ($scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked && !$scope.fullyCoded) {
+        if ($scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1] != undefined && $scope.mdata.studydesignpurpose[$scope.mdata.studydesignpurpose.length - 1].isChecked && !$scope.fullyCoded && checkF) {
             for (i = 1; i < $scope.mdata.studydesignpurpose.length - 1; i++) {
                 $scope.mdata.studydesignpurpose[i].resetBoxCC();
             }
