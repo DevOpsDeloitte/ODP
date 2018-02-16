@@ -46,6 +46,7 @@
 <script type="text/javascript" src="scripts/controllers/MainReportController.js"></script>
 <script type="text/javascript" src="scripts/controllers/ReportController.js"></script>
 <script type="text/javascript" src="scripts/controllers/AbstractSummaryReportController.js"></script>
+<script type="text/javascript" src="scripts/controllers/AbstractValuesController.js"></script>
 
 <%--<script src="../scripts/angular/firebase.js"></script>
 <script src="../scripts/angular/angularfire.min.js"></script>--%>
