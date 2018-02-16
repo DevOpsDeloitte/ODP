@@ -13,7 +13,8 @@
         vm.tabs = [
 
             { "type": "kappa", title: "Kappa Report", panestate: "kappareport" },
-            { "type": "summary", title: "Abstract Summary Report", panestate: "summaryreport" }
+            { "type": "summary", title: "Abstract Summary Report", panestate: "summaryreport" },
+            { "type": "values", title: "Abstract Values Download", panestate: "abstractvalues" }
         ];
 
         vm.Go = function (state) {

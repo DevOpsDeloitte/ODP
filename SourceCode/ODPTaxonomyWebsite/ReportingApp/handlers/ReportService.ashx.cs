@@ -8,6 +8,7 @@ using System.Web.UI.WebControls;
 using System.Configuration;
 using ODPTaxonomyDAL_ST;
 using ODPTaxonomyDAL_TT;
+using ODPTaxonomyReportDAL;
 using ODPTaxonomyUtility_TT;
 using System.Globalization;
 
@@ -51,11 +52,15 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                     getAvgReport(context);
                     break;
 
+                case "valuesreport":
+                    getAbsValuesReport(context);
+                    break;
+
                 default:
                     context.Response.Write("NA");
                     break;
             }
-           
+
 
         }
 
@@ -82,11 +87,11 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                     selectedMechanisms.Add(mechanism_id ?? 0);
                     List<Report_KappaAvg_ByQCWeeks_NewResult> reportvals = db.Report_KappaAvg_ByQCWeeks_New(start, end, ktype, mechanism_id).ToList();
                     CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_ByQCWeeks_NewResult>(reportvals, context.Response, mechanism_name + "-" + ktype, ds);
-                    
+
 
                 }
-           
-                List<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult> reportvalsdetail = db.Report_KappaAvg_DataDetail_ByQCWeeks_New(start, end, ktype, String.Join(",",selectedMechanisms.ToArray())).ToList();
+
+                List<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult> reportvalsdetail = db.Report_KappaAvg_DataDetail_ByQCWeeks_New(start, end, ktype, String.Join(",", selectedMechanisms.ToArray())).ToList();
                 CreateExcelFile.CreateExcelDocumentPrecision<Report_KappaAvg_DataDetail_ByQCWeeks_NewResult>(reportvalsdetail, context.Response, "KappaAvgDetail-" + ktype, ds);
                 CreateExcelFile.CreateExcelDocumentAsStreamSpecialHeaders(ds, "KappaAvg-" + start + "-" + end + "-" + ktype + ".xlsx", context.Response, start, end);
 
@@ -110,10 +115,10 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 List<Report_AbstractSummary_MergeResult> reportvalsAB = db.Report_AbstractSummary_Merge().ToList();
                 DataSet ds = new DataSet();
                 CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummary_MergeResult>(reportvalsAB, context.Response, "Abstract Summary", ds);
-                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "Abstract Summary Details" , ds);
+                CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "Abstract Summary Details", ds);
                 string format = "-dd_MM_yyyy_h_mm_ss_tt";
                 CreateExcelFile.CreateExcelDocumentAsStream(ds, "AbstractSummary" + DateTime.Now.ToString(format) + ".xlsx", context.Response);
- 
+
             }
         }
 
@@ -134,7 +139,7 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
             using (ReportingAppDataContext db = new ReportingAppDataContext(connString))
             {
                 var qcWeeks = db.Report_QC_Weeks.ToList();
-                
+
                 qcWeeks.RemoveRange(0, 9);
                 CultureInfo cul = CultureInfo.CurrentCulture;
                 int weekNum = cul.Calendar.GetWeekOfYear(
@@ -144,14 +149,15 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 var cyear = DateTime.Now.Year.ToString();
                 var cweek = weekNum.ToString();
                 var maxid = qcWeeks.Max(x => x.QC_ID);
-                try {
+                try
+                {
                     //var getcurrentIdx = qcWeeks.FindIndex(q => q.QC_week == cyear + '-' + cweek);
-                    var getcurrentId = qcWeeks.Where(q => q.QC_week == cyear + '-' + cweek).Select(q=> q.QC_ID).FirstOrDefault();
-                    if (getcurrentId.Value>0)
+                    var getcurrentId = qcWeeks.Where(q => q.QC_week == cyear + '-' + cweek).Select(q => q.QC_ID).FirstOrDefault();
+                    if (getcurrentId.Value > 0)
                     {
                         //qcWeeks.RemoveRange(getcurrentIdx, qcWeeks.Count - getcurrentIdx);
                         // or
-                        qcWeeks = qcWeeks.Where(qc => qc.QC_ID.Value < getcurrentId).OrderByDescending(qc=> qc.QC_ID).ToList();
+                        qcWeeks = qcWeeks.Where(qc => qc.QC_ID.Value < getcurrentId).OrderByDescending(qc => qc.QC_ID).ToList();
                     }
                 }
                 catch
@@ -160,6 +166,22 @@ namespace ODPTaxonomyWebsite.ReportingApp.handlers
                 }
 
                 return JsonConvert.SerializeObject(qcWeeks);
+            }
+        }
+
+        private void getAbsValuesReport(HttpContext context)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["ODPTaxonomy"].ConnectionString;
+            using (ReportDataLinqDataContext db = new ReportDataLinqDataContext(connString))
+            {
+                db.CommandTimeout = 0;
+                string l_year = context.Request["fy"] ?? "";
+                List<Report_SelectionDatapulling_PIVOTResult> reportvals = db.Report_SelectionDatapulling_PIVOT(l_year).ToList<Report_SelectionDatapulling_PIVOTResult>();
+                DataSet ds = new DataSet();
+                CreateExcelFile.CreateExcelDocumentPrecision<Report_SelectionDatapulling_PIVOTResult>(reportvals, context.Response, "Abstract Values", ds);
+                // CreateExcelFile.CreateExcelDocumentPrecision<Report_AbstractSummaryResult>(reportvals, context.Response, "Abstract Summary Details", ds);
+                string format = "-dd_MM_yyyy_h_mm_ss_tt";
+                CreateExcelFile.CreateExcelDocumentAsStream(ds, "PACT Abstract Values" + DateTime.Now.ToString(format) + ".xlsx", context.Response);
             }
         }
 

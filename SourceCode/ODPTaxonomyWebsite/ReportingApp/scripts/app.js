@@ -30,6 +30,14 @@
             controller: 'AbstractSummaryReportController',
             controllerAs: 'vm'
         });
+
+
+        $stateProvider.state('abstractvalues', {
+            url: '/abstractvaluesreport',
+            templateUrl: 'scripts/templates/abstractvalues.html',
+            controller: 'AbstractValuesController',
+            controllerAs: 'vm'
+        });
     }
 
     //runFunction.$inject = ['$rootScope', '$location'];
